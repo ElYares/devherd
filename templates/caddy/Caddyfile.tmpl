@@ -1,0 +1,23 @@
+{
+    admin {{ .AdminAddress }}
+    auto_https off
+    http_port {{ .HTTPPort }}
+}
+
+{{ range .Sites -}}
+{{ .Domain }} {
+{{- range $index, $route := .Routes }}
+{{- if eq $route.Matcher "/*" }}
+    handle {
+        reverse_proxy {{ $route.Target }}
+    }
+{{- else }}
+    @route{{ $index }} path {{ $route.Matcher }}
+    handle @route{{ $index }} {
+        reverse_proxy {{ $route.Target }}
+    }
+{{- end }}
+{{- end }}
+}
+
+{{ end -}}
