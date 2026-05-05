@@ -18,7 +18,23 @@ func newUpCmd() *cobra.Command {
 				targetPath = args[0]
 			}
 
-			output, err := compose.Up(cmd.Context(), targetPath)
+			app, err := loadAppContext(cmd.Context())
+			if err != nil {
+				output, fallbackErr := compose.Up(cmd.Context(), targetPath)
+				if output != "" {
+					fmt.Fprintln(cmd.OutOrStdout(), output)
+				}
+
+				return fallbackErr
+			}
+			defer app.DB.Close()
+
+			project, err := prepareComposeProject(cmd.Context(), app, targetPath)
+			if err != nil {
+				return err
+			}
+
+			output, err := compose.UpProject(cmd.Context(), project)
 			if output != "" {
 				fmt.Fprintln(cmd.OutOrStdout(), output)
 			}

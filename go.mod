@@ -3,6 +3,7 @@ module github.com/devherd/devherd
 go 1.25.0
 
 require (
+	gopkg.in/yaml.v3 v3.0.1
 	github.com/spf13/cobra v1.10.2
 	modernc.org/sqlite v1.50.0
 )

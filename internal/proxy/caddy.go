@@ -8,7 +8,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"text/template"
 
@@ -156,14 +155,6 @@ func runInteractive(name string, args ...string) error {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
-}
-
-func URLForDomain(cfg config.Config, domain string) string {
-	if cfg.Proxy.HTTPPort == 80 {
-		return "http://" + domain
-	}
-
-	return "http://" + domain + ":" + strconv.Itoa(cfg.Proxy.HTTPPort)
 }
 
 func SelectProjects(projects []database.ProjectRecord, projectName string) ([]database.ProjectRecord, error) {

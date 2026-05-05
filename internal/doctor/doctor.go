@@ -32,15 +32,30 @@ type Report struct {
 }
 
 func Run(ctx context.Context) Report {
+	return RunWithConfig(ctx, config.Default())
+}
+
+func RunWithConfig(ctx context.Context, cfg config.Config) Report {
 	checks := []Check{
 		checkLocalPaths(),
 		checkBinary("docker", "Docker CLI"),
 		checkDockerDaemon(ctx),
 		checkDockerCompose(ctx),
-		checkBinary("caddy", "Caddy"),
-		checkOptionalBinary("dnsmasq", "dnsmasq", "optional in the current proxy cut; /etc/hosts is used for local resolution"),
-		checkTCPPort(80),
-		checkTCPPort(443),
+	}
+
+	if cfg.Proxy.Driver == "caddy-docker-external" {
+		checks = append(checks,
+			checkFile(filepath.Join("/home/elyarestark/infra/local_proxy", "docker-compose.yml"), "local_proxy compose"),
+			checkFile(filepath.Join("/home/elyarestark/infra/local_proxy", "Caddyfile"), "local_proxy Caddyfile"),
+			checkTCPPort(80),
+		)
+	} else {
+		checks = append(checks,
+			checkBinary("caddy", "Caddy"),
+			checkOptionalBinary("dnsmasq", "dnsmasq", "optional in the current proxy cut; /etc/hosts is used for local resolution"),
+			checkTCPPort(80),
+			checkTCPPort(443),
+		)
 	}
 
 	return Report{Checks: checks}
@@ -127,6 +142,31 @@ func checkOptionalBinary(binary, label, missingMessage string) Check {
 			Name:    label,
 			Status:  StatusWarn,
 			Message: missingMessage,
+		}
+	}
+
+	return Check{
+		Name:    label,
+		Status:  StatusOK,
+		Message: fmt.Sprintf("found at %s", path),
+	}
+}
+
+func checkFile(path, label string) Check {
+	info, err := os.Stat(path)
+	if err != nil {
+		return Check{
+			Name:    label,
+			Status:  StatusFail,
+			Message: err.Error(),
+		}
+	}
+
+	if info.IsDir() {
+		return Check{
+			Name:    label,
+			Status:  StatusFail,
+			Message: "expected a file, found a directory",
 		}
 	}
 

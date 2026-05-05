@@ -51,6 +51,36 @@ func newProxyApplyCmd() *cobra.Command {
 				return err
 			}
 
+			if proxy.UsesDockerExternal(app.Config) {
+				externalProjects := make([]proxy.ExternalProject, 0, len(selectedProjects))
+				for _, project := range selectedProjects {
+					externalProject, err := proxy.BuildExternalProject(app.Config, project)
+					if err != nil {
+						return err
+					}
+
+					if _, err := proxy.EnsureComposeOverride(externalProject); err != nil {
+						return err
+					}
+					if err := proxy.ConnectProject(cmd.Context(), externalProject); err != nil {
+						return err
+					}
+
+					externalProjects = append(externalProjects, externalProject)
+				}
+
+				configPath, domains, err := proxy.ApplyExternalProxy(cmd.Context(), externalProjects)
+				if err != nil {
+					return err
+				}
+
+				out := cmd.OutOrStdout()
+				fmt.Fprintf(out, "caddyfile: %s\n", configPath)
+				fmt.Fprintf(out, "domains: %s\n", strings.Join(domains, ", "))
+				fmt.Fprintln(out, "proxy status: applied")
+				return nil
+			}
+
 			renderer := proxy.NewRenderer(app.Paths, app.Config)
 			renderedConfig, domains, err := renderer.Render(selectedProjects)
 			if err != nil {

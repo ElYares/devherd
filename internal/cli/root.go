@@ -29,6 +29,7 @@ func newRootCmd() *cobra.Command {
 		newListCmd(),
 		newDomainCmd(),
 		newProxyCmd(),
+		newPlanCmd(),
 		newUpCmd(),
 		newDownCmd(),
 		newOpenCmd(),

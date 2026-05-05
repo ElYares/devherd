@@ -41,7 +41,7 @@ func Discover(root string) ([]Project, error) {
 	}
 
 	for _, entry := range entries {
-		if !entry.IsDir() || strings.HasPrefix(entry.Name(), ".") {
+		if !entry.IsDir() || strings.HasPrefix(entry.Name(), ".") || shouldSkipDirectory(entry.Name()) {
 			continue
 		}
 
@@ -101,7 +101,7 @@ func DetectProject(path string) (Project, bool, error) {
 	}
 
 	for _, child := range children {
-		if !child.IsDir() || strings.HasPrefix(child.Name(), ".") {
+		if !child.IsDir() || strings.HasPrefix(child.Name(), ".") || shouldSkipDirectory(child.Name()) {
 			continue
 		}
 
@@ -196,6 +196,15 @@ func inspectDirectory(path string, isRoot bool, features *featureSet) error {
 
 func hasAnyFeature(features featureSet) bool {
 	return features.laravel || features.node || features.vue || features.python || features.flask || features.goLang || features.docker
+}
+
+func shouldSkipDirectory(name string) bool {
+	switch name {
+	case "node_modules":
+		return true
+	default:
+		return false
+	}
 }
 
 func describeStack(features featureSet) string {

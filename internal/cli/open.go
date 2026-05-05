@@ -31,7 +31,12 @@ func newOpenCmd() *cobra.Command {
 				return err
 			}
 
-			url := proxy.URLForDomain(app.Config, selectedProjects[0].Domain)
+			domain := selectedProjects[0].Domain
+			if resolvedDomain, err := proxy.ProjectDomain(app.Config, selectedProjects[0]); err == nil && resolvedDomain != "" {
+				domain = resolvedDomain
+			}
+
+			url := proxy.URLForDomain(app.Config, domain)
 			if _, err := exec.LookPath("xdg-open"); err != nil {
 				fmt.Fprintln(cmd.OutOrStdout(), url)
 				return nil

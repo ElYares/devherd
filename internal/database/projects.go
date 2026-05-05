@@ -140,6 +140,44 @@ func ListProjects(ctx context.Context, db *sql.DB) ([]ProjectRecord, error) {
 	return projects, nil
 }
 
+func FindProjectByPath(ctx context.Context, db *sql.DB, path string) (ProjectRecord, bool, error) {
+	var project ProjectRecord
+	err := db.QueryRowContext(ctx, `
+		SELECT
+			p.id,
+			p.name,
+			p.path,
+			p.stack,
+			p.framework,
+			p.runtime,
+			p.status,
+			COALESCE(d.domain, '')
+		FROM projects p
+		LEFT JOIN project_domains d
+			ON d.project_id = p.id
+			AND d.is_primary = 1
+		WHERE p.path = ?
+		LIMIT 1
+	`, path).Scan(
+		&project.ID,
+		&project.Name,
+		&project.Path,
+		&project.Stack,
+		&project.Framework,
+		&project.Runtime,
+		&project.Status,
+		&project.Domain,
+	)
+	if errors.Is(err, sql.ErrNoRows) {
+		return ProjectRecord{}, false, nil
+	}
+	if err != nil {
+		return ProjectRecord{}, false, fmt.Errorf("find project by path: %w", err)
+	}
+
+	return project, true, nil
+}
+
 func SetPrimaryDomain(ctx context.Context, db *sql.DB, projectName, domain string) error {
 	tx, err := db.BeginTx(ctx, nil)
 	if err != nil {

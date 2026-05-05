@@ -8,6 +8,7 @@ import (
 
 	"github.com/devherd/devherd/internal/config"
 	"github.com/devherd/devherd/internal/database"
+	"github.com/devherd/devherd/internal/proxy"
 	"github.com/spf13/cobra"
 )
 
@@ -80,7 +81,7 @@ func newInitCmd() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&proxyDriver, "proxy", "caddy", "Reverse proxy driver: caddy or nginx")
+	cmd.Flags().StringVar(&proxyDriver, "proxy", proxy.DriverCaddy, "Reverse proxy driver: caddy, nginx or caddy-docker-external")
 	cmd.Flags().StringVar(&localTLD, "tld", "test", "Local top-level domain")
 	cmd.Flags().StringVar(&runtimeManager, "runtime-manager", "mise", "Runtime manager: mise or asdf")
 
@@ -90,10 +91,15 @@ func newInitCmd() *cobra.Command {
 func applyInitOverrides(cmd *cobra.Command, cfg *config.Config, proxyDriver, localTLD, runtimeManager string) error {
 	if cmd.Flags().Changed("proxy") {
 		switch proxyDriver {
-		case "caddy", "nginx":
+		case proxy.DriverCaddy, proxy.DriverNginx, proxy.DriverCaddyDockerExternal:
 			cfg.Proxy.Driver = proxyDriver
 		default:
 			return fmt.Errorf("unsupported proxy driver %q", proxyDriver)
+		}
+
+		if !cmd.Flags().Changed("tld") {
+			cfg.LocalTLD = proxy.DefaultTLDForDriver(proxyDriver)
+			cfg.DNS.ManagedSuffix = cfg.LocalTLD
 		}
 	}
 
@@ -104,6 +110,7 @@ func applyInitOverrides(cmd *cobra.Command, cfg *config.Config, proxyDriver, loc
 		}
 
 		cfg.LocalTLD = localTLD
+		cfg.DNS.ManagedSuffix = localTLD
 	}
 
 	if cmd.Flags().Changed("runtime-manager") {
