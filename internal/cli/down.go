@@ -61,7 +61,7 @@ func newDownCmd() *cobra.Command {
 				}
 
 				if externalProject.Domain != "" {
-					if _, err := proxy.RemoveExternalProxy(cmd.Context(), []string{externalProject.Domain}); err != nil {
+					if _, err := proxy.RemoveExternalProxy(cmd.Context(), app.Config, []string{externalProject.Domain}); err != nil {
 						return err
 					}
 				}

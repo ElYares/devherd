@@ -5,6 +5,8 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/devherd/devherd/internal/detector"
 )
@@ -87,6 +89,30 @@ func UpsertProject(ctx context.Context, db *sql.DB, project detector.Project, do
 
 	if err := tx.Commit(); err != nil {
 		return fmt.Errorf("commit transaction: %w", err)
+	}
+
+	return nil
+}
+
+func PruneDetectedProjectsUnderPath(ctx context.Context, db *sql.DB, root string, keepPaths []string) error {
+	args := []any{root, root + string(os.PathSeparator) + "%"}
+	query := `
+		DELETE FROM projects
+		WHERE status = 'detected'
+			AND (path = ? OR path LIKE ?)
+	`
+
+	if len(keepPaths) > 0 {
+		query += `
+			AND path NOT IN (` + placeholders(len(keepPaths)) + `)
+		`
+		for _, path := range keepPaths {
+			args = append(args, path)
+		}
+	}
+
+	if _, err := db.ExecContext(ctx, query, args...); err != nil {
+		return fmt.Errorf("prune detected projects under %s: %w", root, err)
 	}
 
 	return nil
@@ -234,6 +260,14 @@ func currentPrimaryDomain(ctx context.Context, tx *sql.Tx, projectID int64) (str
 	}
 
 	return domain, nil
+}
+
+func placeholders(count int) string {
+	if count <= 0 {
+		return ""
+	}
+
+	return strings.TrimSuffix(strings.Repeat("?,", count), ",")
 }
 
 func ensureDomainAvailable(ctx context.Context, tx *sql.Tx, projectID int64, domain string) error {

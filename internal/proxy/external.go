@@ -21,13 +21,10 @@ const (
 	DriverNginx               = "nginx"
 	DriverCaddyDockerExternal = "caddy-docker-external"
 
-	ExternalProxyDir              = "/home/elyarestark/infra/local_proxy"
-	ExternalProxyCaddyfile        = "Caddyfile"
-	ExternalProxyComposeFile      = "docker-compose.yml"
-	ExternalProxyEnvFile          = ".env"
-	ExternalProxyNetwork          = "infra_web"
-	DefaultExternalProxyContainer = "infra_caddy"
-	ManagedComposeOverrideFile    = ".devherd.proxy.override.yml"
+	ExternalProxyCaddyfile     = "Caddyfile"
+	ExternalProxyComposeFile   = "docker-compose.yml"
+	ExternalProxyEnvFile       = ".env"
+	ManagedComposeOverrideFile = ".devherd.proxy.override.yml"
 )
 
 type Alias struct {
@@ -43,8 +40,34 @@ type ExternalProject struct {
 	Aliases []Alias
 }
 
+type externalSettingsConfig struct {
+	Dir           string
+	Network       string
+	ContainerName string
+}
+
 func UsesDockerExternal(cfg config.Config) bool {
 	return cfg.Proxy.Driver == DriverCaddyDockerExternal
+}
+
+func externalSettings(cfg config.Config) externalSettingsConfig {
+	settings := externalSettingsConfig{
+		Dir:           cfg.Proxy.ExternalDir,
+		Network:       cfg.Proxy.ExternalNetwork,
+		ContainerName: cfg.Proxy.ExternalContainerName,
+	}
+
+	if settings.Dir == "" {
+		settings.Dir = config.Default().Proxy.ExternalDir
+	}
+	if settings.Network == "" {
+		settings.Network = "infra_web"
+	}
+	if settings.ContainerName == "" {
+		settings.ContainerName = "infra_caddy"
+	}
+
+	return settings
 }
 
 func DefaultTLDForDriver(driver string) string {
@@ -106,7 +129,9 @@ func BuildExternalProject(cfg config.Config, project database.ProjectRecord) (Ex
 	}
 }
 
-func EnsureComposeOverride(project ExternalProject) (string, error) {
+func EnsureComposeOverride(cfg config.Config, project ExternalProject) (string, error) {
+	settings := externalSettings(cfg)
+
 	if len(project.Aliases) == 0 {
 		return "", errors.New("external proxy project has no service aliases to manage")
 	}
@@ -119,7 +144,7 @@ func EnsureComposeOverride(project ExternalProject) (string, error) {
 		builder.WriteString(":\n")
 		builder.WriteString("    networks:\n")
 		builder.WriteString("      ")
-		builder.WriteString(ExternalProxyNetwork)
+		builder.WriteString(settings.Network)
 		builder.WriteString(":\n")
 		builder.WriteString("        aliases:\n")
 		builder.WriteString("          - ")
@@ -128,7 +153,7 @@ func EnsureComposeOverride(project ExternalProject) (string, error) {
 	}
 	builder.WriteString("\nnetworks:\n")
 	builder.WriteString("  ")
-	builder.WriteString(ExternalProxyNetwork)
+	builder.WriteString(settings.Network)
 	builder.WriteString(":\n")
 	builder.WriteString("    external: true\n")
 
@@ -140,8 +165,10 @@ func EnsureComposeOverride(project ExternalProject) (string, error) {
 	return overridePath, nil
 }
 
-func ConnectProject(ctx context.Context, project ExternalProject) error {
-	if err := ensureExternalProxyNetwork(ctx); err != nil {
+func ConnectProject(ctx context.Context, cfg config.Config, project ExternalProject) error {
+	settings := externalSettings(cfg)
+
+	if err := ensureExternalProxyNetwork(ctx, settings); err != nil {
 		return err
 	}
 
@@ -151,25 +178,27 @@ func ConnectProject(ctx context.Context, project ExternalProject) error {
 			continue
 		}
 
-		if _, err := runCommand(ctx, "", "docker", "network", "connect", "--alias", alias.Name, ExternalProxyNetwork, containerName); err != nil {
+		if _, err := runCommand(ctx, "", "docker", "network", "connect", "--alias", alias.Name, settings.Network, containerName); err != nil {
 			message := err.Error()
 			if strings.Contains(message, "already exists") || strings.Contains(message, "already connected") {
 				continue
 			}
 
-			return fmt.Errorf("connect %s to %s with alias %s: %w", containerName, ExternalProxyNetwork, alias.Name, err)
+			return fmt.Errorf("connect %s to %s with alias %s: %w", containerName, settings.Network, alias.Name, err)
 		}
 	}
 
 	return nil
 }
 
-func ApplyExternalProxy(ctx context.Context, projects []ExternalProject) (string, []string, error) {
-	if err := ensureExternalProxyFiles(); err != nil {
+func ApplyExternalProxy(ctx context.Context, cfg config.Config, projects []ExternalProject) (string, []string, error) {
+	settings := externalSettings(cfg)
+
+	if _, err := BootstrapExternalProxy(cfg); err != nil {
 		return "", nil, err
 	}
 
-	configPath := filepath.Join(ExternalProxyDir, ExternalProxyCaddyfile)
+	configPath := filepath.Join(settings.Dir, ExternalProxyCaddyfile)
 	content, domains, err := mergeExternalProxyConfig(configPath, projects)
 	if err != nil {
 		return "", nil, err
@@ -179,11 +208,11 @@ func ApplyExternalProxy(ctx context.Context, projects []ExternalProject) (string
 		return "", nil, fmt.Errorf("write local_proxy Caddyfile: %w", err)
 	}
 
-	if err := ensureExternalProxyReady(ctx); err != nil {
+	if err := ensureExternalProxyReady(ctx, settings); err != nil {
 		return "", nil, err
 	}
 
-	containerName := externalProxyContainerName()
+	containerName := externalProxyContainerName(cfg)
 	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", nil, fmt.Errorf("validate local_proxy Caddyfile: %w", err)
 	}
@@ -195,16 +224,17 @@ func ApplyExternalProxy(ctx context.Context, projects []ExternalProject) (string
 	return configPath, domains, nil
 }
 
-func RemoveExternalProxy(ctx context.Context, domains []string) (string, error) {
+func RemoveExternalProxy(ctx context.Context, cfg config.Config, domains []string) (string, error) {
 	if len(domains) == 0 {
 		return "", nil
 	}
 
-	if err := ensureExternalProxyFiles(); err != nil {
+	settings := externalSettings(cfg)
+	if _, err := BootstrapExternalProxy(cfg); err != nil {
 		return "", err
 	}
 
-	configPath := filepath.Join(ExternalProxyDir, ExternalProxyCaddyfile)
+	configPath := filepath.Join(settings.Dir, ExternalProxyCaddyfile)
 	existing, err := os.ReadFile(configPath)
 	if err != nil {
 		return "", fmt.Errorf("read local_proxy Caddyfile: %w", err)
@@ -216,11 +246,11 @@ func RemoveExternalProxy(ctx context.Context, domains []string) (string, error) 
 		return "", fmt.Errorf("write local_proxy Caddyfile: %w", err)
 	}
 
-	if err := ensureExternalProxyReady(ctx); err != nil {
+	if err := ensureExternalProxyReady(ctx, settings); err != nil {
 		return "", err
 	}
 
-	containerName := externalProxyContainerName()
+	containerName := externalProxyContainerName(cfg)
 	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", fmt.Errorf("validate local_proxy Caddyfile: %w", err)
 	}
@@ -395,64 +425,47 @@ func composeServiceContainer(ctx context.Context, project compose.Project, servi
 	return strings.TrimPrefix(strings.TrimSpace(name), "/"), nil
 }
 
-func ensureExternalProxyFiles() error {
-	for _, name := range []string{ExternalProxyComposeFile, ExternalProxyCaddyfile} {
-		path := filepath.Join(ExternalProxyDir, name)
-		if _, err := os.Stat(path); err != nil {
-			return fmt.Errorf("missing local_proxy file %s: %w", path, err)
-		}
-	}
-
-	return nil
-}
-
-func ensureExternalProxyReady(ctx context.Context) error {
-	if err := ensureExternalProxyNetwork(ctx); err != nil {
+func ensureExternalProxyReady(ctx context.Context, settings externalSettingsConfig) error {
+	if err := ensureExternalProxyNetwork(ctx, settings); err != nil {
 		return err
 	}
 
-	if _, err := runCommand(ctx, ExternalProxyDir, "docker", "compose", "up", "-d"); err != nil {
+	if _, err := runCommand(ctx, settings.Dir, "docker", "compose", "up", "-d"); err != nil {
 		return fmt.Errorf("start local_proxy: %w", err)
 	}
 
 	return nil
 }
 
-func ensureExternalProxyNetwork(ctx context.Context) error {
-	if _, err := runCommand(ctx, "", "docker", "network", "inspect", ExternalProxyNetwork); err != nil {
-		if _, createErr := runCommand(ctx, "", "docker", "network", "create", ExternalProxyNetwork); createErr != nil {
-			return fmt.Errorf("ensure docker network %s: %w", ExternalProxyNetwork, createErr)
+func ensureExternalProxyNetwork(ctx context.Context, settings externalSettingsConfig) error {
+	if _, err := runCommand(ctx, "", "docker", "network", "inspect", settings.Network); err != nil {
+		if _, createErr := runCommand(
+			ctx,
+			"",
+			"docker",
+			"network",
+			"create",
+			"--driver",
+			"bridge",
+			"--label",
+			"devherd.managed=true",
+			"--label",
+			"devherd.role=shared-proxy",
+			settings.Network,
+		); createErr != nil {
+			if strings.Contains(createErr.Error(), "already exists") {
+				return nil
+			}
+
+			return fmt.Errorf("ensure docker network %s: %w", settings.Network, createErr)
 		}
 	}
 
 	return nil
 }
 
-func externalProxyContainerName() string {
-	envPath := filepath.Join(ExternalProxyDir, ExternalProxyEnvFile)
-	payload, err := os.ReadFile(envPath)
-	if err != nil {
-		return DefaultExternalProxyContainer
-	}
-
-	for _, line := range strings.Split(string(payload), "\n") {
-		line = strings.TrimSpace(line)
-		if line == "" || strings.HasPrefix(line, "#") {
-			continue
-		}
-
-		key, value, ok := strings.Cut(line, "=")
-		if !ok || strings.TrimSpace(key) != "CADDY_CONTAINER_NAME" {
-			continue
-		}
-
-		value = strings.TrimSpace(strings.Trim(value, `"'`))
-		if value != "" {
-			return value
-		}
-	}
-
-	return DefaultExternalProxyContainer
+func externalProxyContainerName(cfg config.Config) string {
+	return externalSettings(cfg).ContainerName
 }
 
 func runCommand(ctx context.Context, workdir string, name string, args ...string) (string, error) {

@@ -16,7 +16,10 @@ func newProxyCmd() *cobra.Command {
 		Short: "Manage reverse proxy configuration",
 	}
 
-	cmd.AddCommand(newProxyApplyCmd())
+	cmd.AddCommand(
+		newProxyApplyCmd(),
+		newProxyBootstrapCmd(),
+	)
 
 	return cmd
 }
@@ -59,17 +62,17 @@ func newProxyApplyCmd() *cobra.Command {
 						return err
 					}
 
-					if _, err := proxy.EnsureComposeOverride(externalProject); err != nil {
+					if _, err := proxy.EnsureComposeOverride(app.Config, externalProject); err != nil {
 						return err
 					}
-					if err := proxy.ConnectProject(cmd.Context(), externalProject); err != nil {
+					if err := proxy.ConnectProject(cmd.Context(), app.Config, externalProject); err != nil {
 						return err
 					}
 
 					externalProjects = append(externalProjects, externalProject)
 				}
 
-				configPath, domains, err := proxy.ApplyExternalProxy(cmd.Context(), externalProjects)
+				configPath, domains, err := proxy.ApplyExternalProxy(cmd.Context(), app.Config, externalProjects)
 				if err != nil {
 					return err
 				}
@@ -119,4 +122,44 @@ func collectDomains(projects []database.ProjectRecord) []string {
 	}
 
 	return domains
+}
+
+func newProxyBootstrapCmd() *cobra.Command {
+	var force bool
+
+	cmd := &cobra.Command{
+		Use:   "bootstrap",
+		Short: "Create or refresh the managed external proxy assets",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			app, err := loadAppContext(cmd.Context())
+			if err != nil {
+				return err
+			}
+			defer app.DB.Close()
+
+			if !proxy.UsesDockerExternal(app.Config) {
+				return fmt.Errorf("proxy bootstrap requires proxy driver %q", proxy.DriverCaddyDockerExternal)
+			}
+
+			result, err := proxy.BootstrapExternalProxyWithOptions(app.Config, proxy.BootstrapOptions{
+				Force: force,
+			})
+			if err != nil {
+				return err
+			}
+
+			out := cmd.OutOrStdout()
+			fmt.Fprintf(out, "external proxy dir: %s\n", result.ExternalDir)
+			fmt.Fprintf(out, "external proxy compose: %s\n", result.ComposeFileStatus)
+			fmt.Fprintf(out, "external proxy caddyfile: %s\n", result.CaddyfileStatus)
+			fmt.Fprintf(out, "external proxy env: %s\n", result.EnvFileStatus)
+			fmt.Fprintf(out, "external proxy env example: %s\n", result.EnvExampleStatus)
+			fmt.Fprintln(out, "proxy bootstrap: complete")
+			return nil
+		},
+	}
+
+	cmd.Flags().BoolVar(&force, "force", false, "Rewrite managed compose/Caddyfile templates to match current config")
+
+	return cmd
 }

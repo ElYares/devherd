@@ -43,9 +43,18 @@ func newInitCmd() *cobra.Command {
 			default:
 				return fmt.Errorf("load config: %w", err)
 			}
+			cfg.ApplyPathDefaults(paths)
 
 			if err := applyInitOverrides(cmd, &cfg, proxyDriver, localTLD, runtimeManager); err != nil {
 				return err
+			}
+
+			var bootstrapResult proxy.BootstrapResult
+			if proxy.UsesDockerExternal(cfg) {
+				bootstrapResult, err = proxy.BootstrapExternalProxy(cfg)
+				if err != nil {
+					return err
+				}
 			}
 
 			if err := store.Save(cfg); err != nil {
@@ -64,6 +73,13 @@ func newInitCmd() *cobra.Command {
 			fmt.Fprintf(out, "proxy driver: %s\n", cfg.Proxy.Driver)
 			fmt.Fprintf(out, "local tld: .%s\n", cfg.LocalTLD)
 			fmt.Fprintf(out, "runtime manager: %s\n", cfg.RuntimeManager)
+			if proxy.UsesDockerExternal(cfg) {
+				fmt.Fprintf(out, "external proxy dir: %s\n", bootstrapResult.ExternalDir)
+				fmt.Fprintf(out, "external proxy compose: %s\n", bootstrapResult.ComposeFileStatus)
+				fmt.Fprintf(out, "external proxy caddyfile: %s\n", bootstrapResult.CaddyfileStatus)
+				fmt.Fprintf(out, "external proxy env: %s\n", bootstrapResult.EnvFileStatus)
+				fmt.Fprintf(out, "external proxy env example: %s\n", bootstrapResult.EnvExampleStatus)
+			}
 
 			if configCreated {
 				fmt.Fprintln(out, "config status: created")

@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"os/exec"
+	"runtime"
 
 	"github.com/devherd/devherd/internal/database"
 	"github.com/devherd/devherd/internal/proxy"
@@ -37,12 +38,18 @@ func newOpenCmd() *cobra.Command {
 			}
 
 			url := proxy.URLForDomain(app.Config, domain)
-			if _, err := exec.LookPath("xdg-open"); err != nil {
+			name, args, ok := browserCommand(runtime.GOOS, url)
+			if !ok {
 				fmt.Fprintln(cmd.OutOrStdout(), url)
 				return nil
 			}
 
-			openCmd := exec.Command("xdg-open", url)
+			if _, err := exec.LookPath(name); err != nil {
+				fmt.Fprintln(cmd.OutOrStdout(), url)
+				return nil
+			}
+
+			openCmd := exec.Command(name, args...)
 			if err := openCmd.Start(); err != nil {
 				return fmt.Errorf("open browser: %w", err)
 			}
@@ -50,5 +57,18 @@ func newOpenCmd() *cobra.Command {
 			fmt.Fprintln(cmd.OutOrStdout(), url)
 			return nil
 		},
+	}
+}
+
+func browserCommand(goos, url string) (string, []string, bool) {
+	switch goos {
+	case "linux":
+		return "xdg-open", []string{url}, true
+	case "darwin":
+		return "open", []string{url}, true
+	case "windows":
+		return "cmd", []string{"/c", "start", "", url}, true
+	default:
+		return "", nil, false
 	}
 }

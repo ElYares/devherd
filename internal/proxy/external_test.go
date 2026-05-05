@@ -68,7 +68,11 @@ func TestBuildExternalProjectUsesVueFlaskFallback(t *testing.T) {
 
 func TestEnsureComposeOverrideWritesAliases(t *testing.T) {
 	dir := t.TempDir()
-	overridePath, err := EnsureComposeOverride(ExternalProject{
+	overridePath, err := EnsureComposeOverride(config.Config{
+		Proxy: config.ProxyConfig{
+			ExternalNetwork: "shared_proxy",
+		},
+	}, ExternalProject{
 		Compose: compose.Project{Root: dir},
 		Aliases: []Alias{
 			{Service: "backend", Name: "mi-demo-backend"},
@@ -88,7 +92,7 @@ func TestEnsureComposeOverrideWritesAliases(t *testing.T) {
 	for _, fragment := range []string{
 		"backend:",
 		"frontend:",
-		"infra_web:",
+		"shared_proxy:",
 		"mi-demo-backend",
 		"mi-demo-frontend",
 	} {
@@ -118,6 +122,91 @@ http://other.localhost {
 
 	if !strings.Contains(updated, "other.localhost") {
 		t.Fatalf("expected unrelated block to remain\n%s", updated)
+	}
+}
+
+func TestBootstrapExternalProxyCreatesAndReusesFiles(t *testing.T) {
+	dir := t.TempDir()
+	cfg := config.Config{
+		Proxy: config.ProxyConfig{
+			ExternalDir:           dir,
+			ExternalNetwork:       "portable_net",
+			ExternalContainerName: "portable_caddy",
+		},
+	}
+
+	first, err := BootstrapExternalProxy(cfg)
+	if err != nil {
+		t.Fatalf("BootstrapExternalProxy returned error: %v", err)
+	}
+
+	if first.ComposeFileStatus != "created" || first.CaddyfileStatus != "created" || first.EnvFileStatus != "created" {
+		t.Fatalf("expected created statuses on first bootstrap: %#v", first)
+	}
+
+	composePayload, err := os.ReadFile(filepath.Join(dir, ExternalProxyComposeFile))
+	if err != nil {
+		t.Fatalf("read compose file: %v", err)
+	}
+	if !strings.Contains(string(composePayload), "portable_caddy") || !strings.Contains(string(composePayload), "portable_net") {
+		t.Fatalf("unexpected compose template output:\n%s", string(composePayload))
+	}
+
+	second, err := BootstrapExternalProxy(cfg)
+	if err != nil {
+		t.Fatalf("BootstrapExternalProxy second run returned error: %v", err)
+	}
+
+	if second.ComposeFileStatus != "reused" || second.CaddyfileStatus != "reused" || second.EnvFileStatus != "reused" {
+		t.Fatalf("expected reused statuses on second bootstrap: %#v", second)
+	}
+}
+
+func TestBootstrapExternalProxyWithForceUpdatesManagedFilesButPreservesEnv(t *testing.T) {
+	dir := t.TempDir()
+	cfg := config.Config{
+		Proxy: config.ProxyConfig{
+			ExternalDir:           dir,
+			ExternalNetwork:       "portable_net",
+			ExternalContainerName: "portable_caddy",
+		},
+	}
+
+	if _, err := BootstrapExternalProxy(cfg); err != nil {
+		t.Fatalf("BootstrapExternalProxy returned error: %v", err)
+	}
+
+	writeTestFile(t, filepath.Join(dir, ExternalProxyComposeFile), "services:\n  broken:\n")
+	writeTestFile(t, filepath.Join(dir, ExternalProxyCaddyfile), "broken.localhost {\n\treverse_proxy broken:80\n}\n")
+	writeTestFile(t, filepath.Join(dir, ExternalProxyEnvFile), "CADDY_IMAGE=custom:caddy\n")
+	writeTestFile(t, filepath.Join(dir, ".env.example"), "CADDY_IMAGE=broken:caddy\n")
+
+	result, err := BootstrapExternalProxyWithOptions(cfg, BootstrapOptions{Force: true})
+	if err != nil {
+		t.Fatalf("BootstrapExternalProxyWithOptions returned error: %v", err)
+	}
+
+	if result.ComposeFileStatus != "updated" || result.CaddyfileStatus != "updated" || result.EnvExampleStatus != "updated" {
+		t.Fatalf("expected updated statuses for managed templates: %#v", result)
+	}
+	if result.EnvFileStatus != "reused" {
+		t.Fatalf("expected .env to be preserved, got %#v", result)
+	}
+
+	composePayload, err := os.ReadFile(filepath.Join(dir, ExternalProxyComposeFile))
+	if err != nil {
+		t.Fatalf("read compose file: %v", err)
+	}
+	if !strings.Contains(string(composePayload), "portable_caddy") || !strings.Contains(string(composePayload), "portable_net") {
+		t.Fatalf("expected forced bootstrap to restore managed compose template:\n%s", string(composePayload))
+	}
+
+	envPayload, err := os.ReadFile(filepath.Join(dir, ExternalProxyEnvFile))
+	if err != nil {
+		t.Fatalf("read env file: %v", err)
+	}
+	if string(envPayload) != "CADDY_IMAGE=custom:caddy\n" {
+		t.Fatalf("expected .env to remain unchanged, got:\n%s", string(envPayload))
 	}
 }
 

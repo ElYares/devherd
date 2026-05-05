@@ -25,7 +25,7 @@ func prepareComposeProject(ctx context.Context, app *appContext, targetPath stri
 		return project, nil
 	}
 
-	overridePath, err := proxy.EnsureComposeOverride(externalProject)
+	overridePath, err := proxy.EnsureComposeOverride(app.Config, externalProject)
 	if err != nil {
 		return compose.Project{}, err
 	}
