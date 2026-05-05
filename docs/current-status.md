@@ -11,11 +11,14 @@ La CLI ya tiene estos comandos funcionales:
 - `devherd park <path>`
 - `devherd list`
 - `devherd domain set <project> --domain <name>`
+- `devherd plan [path]`
 - `devherd up [path]`
 - `devherd down [path]`
 - `devherd proxy apply [project]`
 - `devherd open <project>`
 - `devherd sentry init <project> --stack <stack> --dry-run`
+
+Ademas, `plan`, `up` y `down` ya soportan proyectos con manifiesto `.devherd.yml` para definir multiples archivos Compose y un `env_file` opcional.
 
 ## 2. Que hace hoy DevHerd
 
@@ -31,9 +34,9 @@ La CLI ya tiene estos comandos funcionales:
 - valida Docker CLI
 - valida acceso al daemon Docker
 - valida `docker compose`
-- valida `caddy`
-- valida `dnsmasq`
-- valida disponibilidad de puertos `80` y `443`
+- adapta chequeos al driver de proxy configurado
+- en modo `caddy` valida `caddy`, `dnsmasq` y puertos `80` y `443`
+- en modo `caddy-docker-external` valida `local_proxy`, `Caddyfile` y puerto `80`
 
 ### Registro y deteccion de proyectos
 
@@ -59,8 +62,25 @@ La CLI ya tiene estos comandos funcionales:
 
 ### Proyectos Docker Compose
 
+- inspecciona proyectos con `devherd plan`
 - levanta proyectos con `devherd up`
 - baja proyectos con `devherd down`
+- soporta `.devherd.yml` con:
+  - `compose.files`
+  - `compose.env_file`
+  - `proxy.domain`
+  - `proxy.service`
+  - `proxy.port`
+
+### Proxy local
+
+- soporta `caddy` local en host como flujo clasico
+- soporta `caddy-docker-external` reutilizando `/home/elyarestark/infra/local_proxy`
+- genera `.devherd.proxy.override.yml` para conectar servicios a `infra_web`
+- asigna aliases estables por dominio y servicio
+- actualiza `/home/elyarestark/infra/local_proxy/Caddyfile`
+- recarga el contenedor `infra_caddy`
+- `open` usa el dominio efectivo del proyecto o del manifiesto
 
 ### Sentry
 
@@ -95,6 +115,15 @@ Tambien se valido que:
 - el proyecto se detecta como `vue+flask`
 - el stack se registra como `node+python+docker`
 
+Ademas, ya se valido que:
+
+- `devherd plan /home/elyarestark/develop-work/aang-server`
+- resuelve un proyecto sensible con `docker-compose.yml` y `docker-compose.shared.yml`
+- detecta `.env` local correctamente
+- no requiere levantar contenedores para inspeccionar el stack
+- `devherd plan /home/elyarestark/develop-neura/landing-page-neura`
+- corrige la autodeteccion y fija `docker-compose.dev.yml` como stack local canonico
+
 ## 4. Que ya validamos manualmente con `local_proxy`
 
 Tambien ya se comprobo manualmente el flujo con:
@@ -118,34 +147,62 @@ Con eso ya quedo validado end-to-end que:
 - el navegador puede abrir la app
 - el frontend puede consumir la API por el dominio del proxy
 
-## 5. Lo que todavia no esta automatizado
+## 5. Lo que ya quedo automatizado en `2026-05-04`
 
-Aunque el flujo con `local_proxy` ya funciona manualmente, DevHerd todavia no lo automatiza.
+Sobre la base del flujo manual anterior, DevHerd ya automatiza:
 
-Hoy todavia falta:
+- usar `local_proxy` como driver oficial via `caddy-docker-external`
+- usar `.localhost` como TLD por defecto en ese modo
+- generar `.devherd.proxy.override.yml`
+- conectar servicios a `infra_web`
+- crear aliases estables para routing dentro de la red compartida
+- escribir y refrescar bloques para dominios administrados dentro del `Caddyfile` externo
+- recargar Caddy dentro del contenedor
+- resolver `open` contra el dominio efectivo del manifiesto
+- leer metadatos `proxy` desde `.devherd.yml`
 
-- usar `local_proxy` como driver oficial de proxy
-- usar `.localhost` como TLD natural en ese modo
-- generar automaticamente un `docker-compose.override.yml`
-- conectar automaticamente el proyecto a `infra_web`
-- crear aliases estables para frontend y backend
-- escribir un bloque administrado dentro del `Caddyfile` externo
-- recargar automaticamente el contenedor `caddy`
+## 6. Lo que ya validamos en un stack sensible real el `2026-05-04`
 
-## 6. Limitaciones actuales
+Sobre:
 
-### Proxy actual de DevHerd
+```text
+/home/elyarestark/develop-work/aang-server
+```
 
-El `proxy apply` actual esta pensado para:
+ya se valido en real:
 
-- Caddy instalado en el host
-- sincronizacion de dominios en `/etc/hosts`
-- recarga de `caddy` local con `sudo`
+- `devherd init --proxy caddy-docker-external`
+- `devherd doctor`
+- `devherd plan /home/elyarestark/develop-work/aang-server`
+- `devherd up /home/elyarestark/develop-work/aang-server`
+- `devherd park /home/elyarestark/develop-work/aang-server`
+- `devherd proxy apply aang-server`
+- `devherd open aang-server`
+- `devherd down /home/elyarestark/develop-work/aang-server`
 
-Eso significa que hoy:
+Y durante esa validacion se corrigieron dos huecos:
 
-- `devherd proxy apply` no usa tu `local_proxy` en Docker
-- `devherd open` depende del dominio registrado, pero no resuelve por si solo el flujo Docker externo
+- `down` dejaba el bloque del dominio en `local_proxy` y el override generado
+- `park` podia detectar `node_modules` como proyecto falso
+
+## 7. Limitaciones actuales
+
+### Validacion operativa pendiente
+
+Aunque la implementacion y tests ya estan en verde, todavia falta validar en stacks reales sensibles:
+
+- aclarar la discrepancia del puerto observado de Vite en `aang-server`
+- validar el mismo flujo sobre `Uniformes`
+- validar el mismo flujo sobre `poderygozo-landing-page`
+- validar el entrypoint real de `RetailDataOps`
+
+### Alcance actual del proxy externo
+
+- el flujo externo esta orientado a:
+  - proyectos con `proxy.service` y `proxy.port` en `.devherd.yml`
+  - fallback `vue+flask` con `backend:8000` y `frontend:5173`
+- todavia no existe un contrato universal por framework para generar rutas complejas sin metadatos
+- no hay un comando dedicado para auditar colisiones de puertos antes de `up`
 
 ### Comandos aun no implementados
 
@@ -156,25 +213,26 @@ Siguen pendientes:
 - `devherd sentry set-dsn`
 - `devherd sentry test`
 
-## 7. En que punto estamos
+## 8. En que punto estamos
 
 En este momento DevHerd ya es capaz de:
 
 - inicializar su entorno local
 - detectar y registrar proyectos reales
 - persistir configuracion y dominios
+- inspeccionar stacks Compose sin side effects
 - levantar proyectos Docker Compose
+- integrar `local_proxy` Docker externo en el flujo CLI
 - preparar la integracion con Sentry en modo seguro
 
-Y ademas ya sabemos que el flujo objetivo con proxy Docker externo funciona en la practica, aunque hoy siga siendo manual.
+El punto que sigue ya no es diseno del feature. Es ampliacion de validacion operativa sobre proyectos reales y luego compatibilidad por stack.
 
-## 8. Siguiente bloque recomendado
+## 9. Siguiente bloque recomendado
 
 El siguiente bloque de trabajo con mas valor es:
 
-1. integrar `local_proxy` como driver `caddy-docker-external`
-2. soportar `.localhost` como TLD por defecto en ese modo
-3. generar un override de Compose administrado por DevHerd
-4. escribir y mantener un bloque administrado en el `Caddyfile` externo
-5. recargar automaticamente el contenedor `caddy`
-6. hacer que `devherd open` abra directamente `http://mi-demo.localhost`
+1. validar el mismo flujo sobre `Uniformes` y `poderygozo-landing-page`
+2. confirmar el entrypoint final de `RetailDataOps`
+3. documentar patrones de manifiesto por tipo de proyecto
+4. definir si hace falta un comando `doctor ports` o `proxy inspect`
+5. ampliar compatibilidad de routing externo para stacks no `vue+flask`

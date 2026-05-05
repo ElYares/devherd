@@ -28,6 +28,7 @@ El directorio padre que se registra con `park` es:
 - `devherd park <path>`
 - `devherd list`
 - `devherd domain set <project> --domain <name>`
+- `devherd plan [path]`
 - `devherd up [path]`
 - `devherd down [path]`
 - `devherd proxy apply [project]`
@@ -151,6 +152,22 @@ devherd list
 
 ### Paso 6. Levantar el proyecto
 
+Antes de levantar un stack real, puedes inspeccionarlo sin side effects:
+
+```bash
+devherd plan /home/elyarestark/develop/examples/hello-vue-flask-docker
+```
+
+Si ya estas dentro del proyecto:
+
+```bash
+devherd plan
+```
+
+Esto imprime la raiz resuelta, los archivos Compose activos, el `.env` detectado y el comando base de `docker compose`.
+
+Despues ya puedes levantar el proyecto:
+
 Si estas fuera de la carpeta del proyecto:
 
 ```bash
@@ -164,6 +181,18 @@ devherd up
 ```
 
 Esto ejecuta `docker compose up` sobre ese proyecto.
+
+Si el proyecto define un archivo `.devherd.yml`, DevHerd usa los archivos listados en `compose.files` en lugar de asumir un unico `docker-compose.yml`.
+
+Ejemplo:
+
+```yaml
+version: 1
+compose:
+  files:
+    - docker-compose.yml
+    - docker-compose.shared.yml
+```
 
 ### Paso 7. Validar la app por puertos directos
 
@@ -269,7 +298,7 @@ devherd open hello-vue-flask-docker
 
 ## 7. Flujo objetivo con `local_proxy`
 
-Esta es la direccion recomendada para tu entorno, pero todavia no esta integrada en el codigo actual.
+Este flujo ya esta integrado en el codigo actual cuando el driver es `caddy-docker-external`.
 
 Objetivo:
 
@@ -283,9 +312,10 @@ Objetivo:
 El flujo final deberia verse asi:
 
 ```bash
-devherd init
+devherd init --proxy caddy-docker-external
 devherd doctor
 devherd park /home/elyarestark/develop/examples
+devherd plan /home/elyarestark/develop/examples/hello-vue-flask-docker
 devherd domain set hello-vue-flask-docker --domain mi-demo
 devherd up /home/elyarestark/develop/examples/hello-vue-flask-docker
 devherd proxy apply hello-vue-flask-docker
@@ -298,7 +328,7 @@ Y el dominio esperado deberia ser:
 http://mi-demo.localhost
 ```
 
-### Que tendria que hacer DevHerd en ese modo
+### Que hace DevHerd en ese modo
 
 - detectar que el driver de proxy es `caddy-docker-external`
 - generar un override de Compose administrado por DevHerd
@@ -307,6 +337,12 @@ http://mi-demo.localhost
 - escribir un bloque administrado dentro de `/home/elyarestark/infra/local_proxy/Caddyfile`
 - recargar el contenedor `caddy`
 - abrir `http://mi-demo.localhost`
+
+Nombre actual del override:
+
+```text
+.devherd.proxy.override.yml
+```
 
 ### Regla de proxy esperada para este proyecto
 
@@ -337,21 +373,22 @@ Para que esa integracion funcione bien, el proyecto deberia poder:
 - exponer frontend y backend como servicios separados
 - aceptar una red Docker externa compartida
 - tolerar un archivo Compose override generado por DevHerd
+- o bien declarar `proxy.service` y `proxy.port` dentro de `.devherd.yml`
 
 ## 8. Recomendacion practica
 
-Mientras no se cierre la integracion con `local_proxy`, usa este criterio:
+Mientras validas stacks reales, usa este criterio:
 
-- para validar DevHerd hoy: `init`, `doctor`, `park`, `list`, `domain set`, `up`, `down`, `sentry --dry-run`
+- para validar DevHerd hoy: `init`, `doctor`, `park`, `list`, `plan`, `domain set`, `up`, `proxy apply`, `open`, `down`, `sentry --dry-run`
 - para validar la app real: entra por `127.0.0.1:5173` y `127.0.0.1:8000`
-- para publicar dominios `.test` hoy: usa Caddy local en host
-- para tu entorno definitivo: migrar DevHerd al modo `local_proxy` con `.localhost`
+- para publicar dominios `.test`: usa Caddy local en host
+- para tu entorno definitivo: usa `caddy-docker-external` con `.localhost`
 
 ## 9. Siguiente iteracion recomendada
 
 El siguiente bloque de trabajo con mas valor para tu caso es:
 
-1. integrar `local_proxy` como driver externo de Caddy
-2. soportar `.localhost` como TLD por defecto en ese modo
-3. generar un Compose override administrado por DevHerd
-4. recargar Caddy dentro del contenedor, no en el host
+1. validar `aang-server` con `up`, `proxy apply`, `open` y `down`
+2. extender la validacion a `Uniformes`, `poderygozo-landing-page` y `RetailDataOps`
+3. ampliar el contrato de proxy para mas frameworks o perfiles
+4. agregar diagnostico previo de puertos y conflictos

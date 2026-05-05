@@ -13,6 +13,7 @@ Esta guia describe la CLI actual de DevHerd, su alcance en el MVP y el estado re
 - `devherd list --json`
 - `devherd domain set <project> --domain <name>`
 - `devherd proxy apply [project]`
+- `devherd plan [path]`
 - `devherd up [path]`
 - `devherd down [path]`
 - `devherd open <project>`
@@ -87,10 +88,11 @@ export GOCACHE=/tmp/devherd-gocache
 Flujo minimo:
 
 ```bash
-go run ./cmd/devherd init
+go run ./cmd/devherd init --proxy caddy-docker-external
 go run ./cmd/devherd doctor
 go run ./cmd/devherd park /home/elyarestark/develop/examples
-go run ./cmd/devherd domain set hello-vue-flask-docker --domain mi-demo.test
+go run ./cmd/devherd plan /home/elyarestark/develop/examples/hello-vue-flask-docker
+go run ./cmd/devherd domain set hello-vue-flask-docker --domain mi-demo
 go run ./cmd/devherd up /home/elyarestark/develop/examples/hello-vue-flask-docker
 go run ./cmd/devherd proxy apply hello-vue-flask-docker
 go run ./cmd/devherd open hello-vue-flask-docker
@@ -110,7 +112,7 @@ devherd init [flags]
 
 Flags:
 
-- `--proxy string`: driver de proxy. Valores soportados hoy: `caddy`, `nginx`.
+- `--proxy string`: driver de proxy. Valores soportados hoy: `caddy`, `nginx`, `caddy-docker-external`.
 - `--tld string`: TLD local. Default: `test`.
 - `--runtime-manager string`: gestor de runtimes. Valores soportados hoy: `mise`, `asdf`.
 
@@ -119,6 +121,7 @@ Ejemplos:
 ```bash
 devherd init
 devherd init --proxy caddy --tld test --runtime-manager mise
+devherd init --proxy caddy-docker-external
 ```
 
 Salida esperada:
@@ -134,6 +137,7 @@ Notas:
 
 - Es idempotente.
 - Si la config ya existe, la reutiliza y actualiza segun flags.
+- Si eliges `--proxy caddy-docker-external` y no pasas `--tld`, DevHerd cambia el TLD default a `localhost`.
 
 ### `devherd doctor`
 
@@ -151,16 +155,16 @@ Chequeos actuales:
 - Binario `docker`.
 - Acceso al daemon Docker.
 - `docker compose`.
-- Binario `caddy`.
-- Binario `dnsmasq`.
-- Disponibilidad de puertos TCP `80` y `443`.
+- Segun el driver configurado:
+  - modo `caddy`: binario `caddy`, `dnsmasq` y puertos TCP `80` y `443`
+  - modo `caddy-docker-external`: `/home/elyarestark/infra/local_proxy/docker-compose.yml`, `/home/elyarestark/infra/local_proxy/Caddyfile` y puerto TCP `80`
 
 Comportamiento:
 
 - Imprime una linea por chequeo.
 - Devuelve exit code distinto de cero si hay fallos.
 - Usa `WARN` para condiciones no bloqueantes como puertos ocupados.
-- En el corte actual, `dnsmasq` es opcional porque `proxy apply` sincroniza un bloque en `/etc/hosts`.
+- En el modo `caddy`, `dnsmasq` es opcional porque `proxy apply` sincroniza un bloque en `/etc/hosts`.
 
 Ejemplo:
 
@@ -298,12 +302,26 @@ devherd proxy apply [project]
 
 Comportamiento actual:
 
+- Soporta dos modos segun el driver configurado.
+
+Modo `caddy`:
+
 - Renderiza un `Caddyfile` administrado por DevHerd.
 - Sincroniza dominios registrados en un bloque administrado de `/etc/hosts`.
 - Valida la configuracion de Caddy.
 - Si Caddy ya esta corriendo, intenta `reload`.
 - Si no esta corriendo, intenta `start`.
 - Pide privilegios `sudo` para actualizar `/etc/hosts` y levantar o recargar Caddy.
+
+Modo `caddy-docker-external`:
+
+- Reutiliza `/home/elyarestark/infra/local_proxy`.
+- Lee `proxy.domain`, `proxy.service` y `proxy.port` desde `.devherd.yml` cuando existen.
+- Genera `.devherd.proxy.override.yml` dentro del proyecto.
+- Conecta los servicios necesarios a la red externa `infra_web`.
+- Escribe o reemplaza el bloque del dominio administrado en `/home/elyarestark/infra/local_proxy/Caddyfile`.
+- Levanta `local_proxy` con `docker compose up -d` si hace falta.
+- Valida y recarga Caddy dentro del contenedor `infra_caddy`.
 
 Alcance actual del routing:
 
@@ -315,6 +333,17 @@ Alcance actual del routing:
 - `vue`
 - `/` -> `127.0.0.1:5173`
 
+En modo `caddy-docker-external`, si el manifiesto trae:
+
+```yaml
+proxy:
+  domain: aang.localhost
+  service: web
+  port: 80
+```
+
+DevHerd enruta `http://aang.localhost` al alias administrado para el servicio `web`.
+
 Ejemplos:
 
 ```bash
@@ -324,9 +353,41 @@ devherd proxy apply hello-vue-flask-docker
 
 Notas:
 
-- Requiere `caddy` instalado.
 - Si tu proyecto esta servido por Docker, conviene levantarlo antes con `devherd up`.
-- En este primer corte la resolucion local usa `/etc/hosts`; la integracion con `dnsmasq` queda despues.
+- En modo `caddy`, requiere `caddy` instalado en host.
+- En modo `caddy-docker-external`, requiere que exista `/home/elyarestark/infra/local_proxy`.
+- Si pasas un nombre de proyecto como `aang-server`, ese proyecto debe estar registrado en SQLite via `devherd park`.
+
+### `devherd plan`
+
+Inspecciona el stack Compose resuelto sin iniciar contenedores.
+
+Sintaxis:
+
+```bash
+devherd plan [path]
+```
+
+Comportamiento actual:
+
+- Si no pasas `path`, usa el directorio actual.
+- Si existe `.devherd.yml`, usa `compose.files` y `compose.env_file` desde ese manifiesto.
+- Si no existe manifiesto, autodetecta un unico archivo Compose soportado.
+- Imprime:
+  - raiz del proyecto
+  - fuente de resolucion
+  - archivo `.env` detectado
+  - archivos Compose incluidos
+  - comando base de `docker compose`
+  - ejemplos de `config`, `up` y `down`
+- No ejecuta Docker ni modifica archivos.
+
+Ejemplos:
+
+```bash
+devherd plan
+devherd plan /home/elyarestark/develop-work/aang-server
+```
 
 ### `devherd up`
 
@@ -342,7 +403,26 @@ Comportamiento actual:
 
 - Si no pasas `path`, usa el directorio actual.
 - Busca `docker-compose.yml`, `docker-compose.yaml`, `compose.yml` o `compose.yaml`.
+- Si existe `.devherd.yml`, usa `compose.files` y `compose.env_file` desde ese manifiesto.
+- Si el driver es `caddy-docker-external`, puede agregar `.devherd.proxy.override.yml` al levantar el proyecto.
 - Ejecuta `docker compose up --build -d`.
+
+Manifiesto opcional:
+
+```yaml
+version: 1
+compose:
+  files:
+    - docker-compose.yml
+    - docker-compose.shared.yml
+  env_file: .env.devherd
+```
+
+Notas del manifiesto:
+
+- `compose.files` debe usar rutas relativas al proyecto.
+- `compose.env_file` es opcional.
+- Si el manifiesto existe y es valido, reemplaza la autodeteccion simple de un solo archivo Compose.
 
 Ejemplos:
 
@@ -365,6 +445,9 @@ Comportamiento actual:
 
 - Si no pasas `path`, usa el directorio actual.
 - Busca un archivo Compose soportado.
+- Si existe `.devherd.yml`, usa los mismos `compose.files` y `compose.env_file` definidos ahi.
+- Si existe `.devherd.proxy.override.yml`, lo reutiliza para bajar el mismo stack que se levanto en modo externo.
+- En modo `caddy-docker-external`, tambien elimina el override generado y remueve el bloque del dominio del `Caddyfile` externo.
 - Ejecuta `docker compose down`.
 
 Ejemplos:
