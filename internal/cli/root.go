@@ -31,6 +31,7 @@ func newRootCmd() *cobra.Command {
 		newProxyCmd(),
 		newPlanCmd(),
 		newUpCmd(),
+		newStopCmd(),
 		newDownCmd(),
 		newOpenCmd(),
 		newLogsCmd(),

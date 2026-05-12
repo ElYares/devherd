@@ -45,6 +45,7 @@ devherd init --proxy caddy-docker-external
 devherd proxy bootstrap
 devherd proxy bootstrap --force
 devherd doctor
+devherd stop /ruta/proyecto
 ```
 
 Comportamiento:
@@ -54,6 +55,7 @@ Comportamiento:
 - `proxy bootstrap --force` reescribe `docker-compose.yml`, `Caddyfile` y `.env.example` para alinearlos con la config actual.
 - `proxy bootstrap --force` preserva `.env` para no romper overrides locales del usuario.
 - `proxy apply` y `down` ya pueden autocrear los archivos base si faltan.
+- `stop` detiene el stack Compose sin quitar el dominio del proxy ni limpiar el override administrado.
 
 ## Evidencia
 

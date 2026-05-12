@@ -136,3 +136,25 @@ func TestPlanReturnsDockerCommand(t *testing.T) {
 		t.Fatalf("unexpected command: got %#v want %#v", command, want)
 	}
 }
+
+func TestStopProjectUsesComposeStop(t *testing.T) {
+	project := Project{
+		Root:         "/tmp/project",
+		ComposeFiles: []string{"/tmp/project/docker-compose.yml", "/tmp/project/docker-compose.shared.yml"},
+		EnvFile:      "/tmp/project/.env.devherd",
+	}
+
+	got := composeArgs(project)
+	got = append(got, "stop")
+	want := []string{
+		"compose",
+		"--env-file", "/tmp/project/.env.devherd",
+		"-f", "/tmp/project/docker-compose.yml",
+		"-f", "/tmp/project/docker-compose.shared.yml",
+		"stop",
+	}
+
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("unexpected stop args: got %#v want %#v", got, want)
+	}
+}

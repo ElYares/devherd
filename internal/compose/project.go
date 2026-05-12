@@ -118,6 +118,15 @@ func Down(ctx context.Context, projectPath string) (string, error) {
 	return DownProject(ctx, project)
 }
 
+func Stop(ctx context.Context, projectPath string) (string, error) {
+	project, err := ResolveProject(projectPath)
+	if err != nil {
+		return "", err
+	}
+
+	return StopProject(ctx, project)
+}
+
 func UpProject(ctx context.Context, project Project) (string, error) {
 	args := composeArgs(project)
 	args = append(args, "up", "--build", "-d")
@@ -127,6 +136,12 @@ func UpProject(ctx context.Context, project Project) (string, error) {
 func DownProject(ctx context.Context, project Project) (string, error) {
 	args := composeArgs(project)
 	args = append(args, "down")
+	return run(ctx, project.Root, "docker", args...)
+}
+
+func StopProject(ctx context.Context, project Project) (string, error) {
+	args := composeArgs(project)
+	args = append(args, "stop")
 	return run(ctx, project.Root, "docker", args...)
 }
 
