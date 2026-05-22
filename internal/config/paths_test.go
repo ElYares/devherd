@@ -8,6 +8,7 @@ import (
 func TestDefaultDataRootForOS(t *testing.T) {
 	home := "/home/devherd"
 	configRoot := "/config/root"
+	cacheRoot := "/cache/root"
 
 	cases := []struct {
 		goos string
@@ -15,11 +16,11 @@ func TestDefaultDataRootForOS(t *testing.T) {
 	}{
 		{goos: "linux", want: filepath.Join(home, ".local", "share")},
 		{goos: "darwin", want: configRoot},
-		{goos: "windows", want: configRoot},
+		{goos: "windows", want: cacheRoot},
 	}
 
 	for _, tc := range cases {
-		if got := defaultDataRootForOS(tc.goos, home, configRoot); got != tc.want {
+		if got := defaultDataRootForOS(tc.goos, home, configRoot, cacheRoot); got != tc.want {
 			t.Fatalf("defaultDataRootForOS(%q) = %q, want %q", tc.goos, got, tc.want)
 		}
 	}

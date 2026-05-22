@@ -33,7 +33,7 @@ func ResolvePaths() (Paths, error) {
 		cacheRoot = filepath.Join(homeDir, ".cache")
 	}
 
-	dataRoot := envOrDefault("XDG_DATA_HOME", defaultDataRootForOS(runtime.GOOS, homeDir, configRoot))
+	dataRoot := envOrDefault("XDG_DATA_HOME", defaultDataRootForOS(runtime.GOOS, homeDir, configRoot, cacheRoot))
 	stateRoot := envOrDefault("XDG_STATE_HOME", defaultStateRootForOS(runtime.GOOS, homeDir, cacheRoot))
 
 	configDir := filepath.Join(configRoot, "devherd")
@@ -70,10 +70,12 @@ func envOrDefault(key, fallback string) string {
 	return fallback
 }
 
-func defaultDataRootForOS(goos, homeDir, configRoot string) string {
+func defaultDataRootForOS(goos, homeDir, configRoot, cacheRoot string) string {
 	switch goos {
-	case "darwin", "windows":
+	case "darwin":
 		return configRoot
+	case "windows":
+		return cacheRoot
 	default:
 		return filepath.Join(homeDir, ".local", "share")
 	}

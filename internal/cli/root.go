@@ -14,8 +14,8 @@ func Execute() error {
 func newRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:           "devherd",
-		Short:         "Ubuntu-first local development platform",
-		Long:          "DevHerd administra proyectos locales, dominios .test, servicios compartidos y bootstrap de Sentry.",
+		Short:         "Local development platform for Docker-based projects",
+		Long:          "DevHerd administra proyectos locales, dominios .test/.localhost, servicios compartidos y observabilidad local.",
 		Version:       version.String(),
 		SilenceErrors: true,
 		SilenceUsage:  true,

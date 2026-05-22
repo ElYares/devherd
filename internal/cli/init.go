@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io/fs"
+	"runtime"
 	"strings"
 
 	"github.com/devherd/devherd/internal/config"
@@ -13,9 +14,10 @@ import (
 )
 
 func newInitCmd() *cobra.Command {
-	var proxyDriver string
-	var localTLD string
-	var runtimeManager string
+	defaults := config.DefaultForOS(runtime.GOOS)
+	proxyDriver := defaults.Proxy.Driver
+	localTLD := defaults.LocalTLD
+	runtimeManager := defaults.RuntimeManager
 
 	cmd := &cobra.Command{
 		Use:   "init",
@@ -97,9 +99,9 @@ func newInitCmd() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&proxyDriver, "proxy", proxy.DriverCaddy, "Reverse proxy driver: caddy, nginx or caddy-docker-external")
-	cmd.Flags().StringVar(&localTLD, "tld", "test", "Local top-level domain")
-	cmd.Flags().StringVar(&runtimeManager, "runtime-manager", "mise", "Runtime manager: mise or asdf")
+	cmd.Flags().StringVar(&proxyDriver, "proxy", defaults.Proxy.Driver, "Reverse proxy driver: caddy, nginx or caddy-docker-external")
+	cmd.Flags().StringVar(&localTLD, "tld", defaults.LocalTLD, "Local top-level domain")
+	cmd.Flags().StringVar(&runtimeManager, "runtime-manager", defaults.RuntimeManager, "Runtime manager: mise or asdf")
 
 	return cmd
 }

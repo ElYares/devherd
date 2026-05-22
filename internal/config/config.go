@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 type Config struct {
@@ -36,15 +37,25 @@ type ObservabilityConfig struct {
 }
 
 func Default() Config {
+	return DefaultForOS(runtime.GOOS)
+}
+
+func DefaultForOS(goos string) Config {
 	externalDir := defaultExternalProxyDir()
+	proxyDriver := "caddy"
+	localTLD := "test"
+	if goos == "windows" {
+		proxyDriver = "caddy-docker-external"
+		localTLD = "localhost"
+	}
 
 	return Config{
 		SchemaVersion:  1,
-		AppName:        "DevHerd Ubuntu",
-		LocalTLD:       "test",
+		AppName:        "DevHerd",
+		LocalTLD:       localTLD,
 		RuntimeManager: "mise",
 		Proxy: ProxyConfig{
-			Driver:                "caddy",
+			Driver:                proxyDriver,
 			HTTPPort:              80,
 			HTTPSPort:             443,
 			ExternalDir:           externalDir,
@@ -54,7 +65,7 @@ func Default() Config {
 		DNS: DNSConfig{
 			Driver:        "dnsmasq",
 			ResolverIP:    "127.0.0.1",
-			ManagedSuffix: "test",
+			ManagedSuffix: localTLD,
 		},
 		Observability: ObservabilityConfig{
 			Provider: "sentry-cloud",

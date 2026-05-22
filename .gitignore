@@ -1,8 +1,8 @@
 bin/
 dist/
+devherd
 coverage.out
 *.db
 *.log
 .DS_Store
 apps/desktop/node_modules/
-

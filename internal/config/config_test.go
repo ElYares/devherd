@@ -3,7 +3,7 @@ package config
 import "testing"
 
 func TestDefaultConfig(t *testing.T) {
-	cfg := Default()
+	cfg := DefaultForOS("linux")
 
 	if cfg.Proxy.Driver != "caddy" {
 		t.Fatalf("expected caddy proxy, got %q", cfg.Proxy.Driver)
@@ -27,5 +27,21 @@ func TestDefaultConfig(t *testing.T) {
 
 	if cfg.Proxy.ExternalContainerName != "infra_caddy" {
 		t.Fatalf("expected infra_caddy container name, got %q", cfg.Proxy.ExternalContainerName)
+	}
+}
+
+func TestDefaultConfigForWindowsUsesExternalProxy(t *testing.T) {
+	cfg := DefaultForOS("windows")
+
+	if cfg.Proxy.Driver != "caddy-docker-external" {
+		t.Fatalf("expected caddy-docker-external proxy, got %q", cfg.Proxy.Driver)
+	}
+
+	if cfg.LocalTLD != "localhost" {
+		t.Fatalf("expected localhost TLD, got %q", cfg.LocalTLD)
+	}
+
+	if cfg.DNS.ManagedSuffix != "localhost" {
+		t.Fatalf("expected localhost managed suffix, got %q", cfg.DNS.ManagedSuffix)
 	}
 }

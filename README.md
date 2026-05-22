@@ -1,11 +1,11 @@
 # DevHerd
 
-DevHerd es una plataforma local de desarrollo para Ubuntu inspirada en el flujo de herramientas como Herd, pero diseñada como un producto propio centrado en Linux, servicios compartidos con Docker y observabilidad con Sentry.
+DevHerd es una plataforma local de desarrollo inspirada en el flujo de herramientas como Herd, pero diseñada como un producto propio centrado en Docker, servicios compartidos y observabilidad local. Linux sigue siendo el entorno principal; Windows nativo y WSL2 usan el proxy Docker externo.
 
 ## Estado actual
 
 - CLI inicial en Go con Cobra.
-- Configuracion local basada en XDG.
+- Configuracion local portable basada en directorios del usuario.
 - Base SQLite inicial para proyectos, dominios, servicios y configuracion de Sentry.
 - Comando `devherd init` implementado.
 - Comando `devherd doctor` implementado para validar prerequisitos del MVP.
@@ -68,6 +68,16 @@ Si quieres usar `devherd` desde cualquier carpeta:
 devherd --help
 ```
 
+En Windows nativo, desde PowerShell:
+
+```powershell
+.\scripts\install-windows.ps1 -AddToPath
+devherd init
+devherd doctor
+```
+
+En Windows, `devherd init` usa `caddy-docker-external` y dominios `.localhost` por defecto.
+
 Una vez instalado en `~/.local/bin/devherd`, puedes ejecutar la CLI desde cualquier directorio. Los comandos que operan sobre proyectos aceptan ruta explicita, por ejemplo:
 
 ```bash
@@ -81,6 +91,7 @@ devherd open hello-vue-flask-docker
 
 El plan tecnico completo vive en [docs/technical-plan.md](docs/technical-plan.md).
 La referencia de comandos vive en [docs/cli-commands.md](docs/cli-commands.md).
+La guia de Windows vive en [docs/windows.md](docs/windows.md).
 El flujo de uso por proyecto vive en [docs/project-workflow.md](docs/project-workflow.md).
 El estado actual del proyecto vive en [docs/current-status.md](docs/current-status.md).
 El plan de observabilidad local vive en [docs/observe.md](docs/observe.md).
