@@ -3,6 +3,7 @@ package config
 import (
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 type Paths struct {
@@ -27,8 +28,13 @@ func ResolvePaths() (Paths, error) {
 		return Paths{}, err
 	}
 
-	dataRoot := envOrDefault("XDG_DATA_HOME", filepath.Join(homeDir, ".local", "share"))
-	stateRoot := envOrDefault("XDG_STATE_HOME", filepath.Join(homeDir, ".local", "state"))
+	cacheRoot, err := os.UserCacheDir()
+	if err != nil {
+		cacheRoot = filepath.Join(homeDir, ".cache")
+	}
+
+	dataRoot := envOrDefault("XDG_DATA_HOME", defaultDataRootForOS(runtime.GOOS, homeDir, configRoot))
+	stateRoot := envOrDefault("XDG_STATE_HOME", defaultStateRootForOS(runtime.GOOS, homeDir, cacheRoot))
 
 	configDir := filepath.Join(configRoot, "devherd")
 	dataDir := filepath.Join(dataRoot, "devherd")
@@ -62,4 +68,22 @@ func envOrDefault(key, fallback string) string {
 	}
 
 	return fallback
+}
+
+func defaultDataRootForOS(goos, homeDir, configRoot string) string {
+	switch goos {
+	case "darwin", "windows":
+		return configRoot
+	default:
+		return filepath.Join(homeDir, ".local", "share")
+	}
+}
+
+func defaultStateRootForOS(goos, homeDir, cacheRoot string) string {
+	switch goos {
+	case "darwin", "windows":
+		return cacheRoot
+	default:
+		return filepath.Join(homeDir, ".local", "state")
+	}
 }

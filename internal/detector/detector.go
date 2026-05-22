@@ -68,6 +68,8 @@ func Discover(root string) ([]Project, error) {
 		projects = append(projects, project)
 	}
 
+	projects = filterNestedProjects(root, projects)
+
 	sort.Slice(projects, func(i, j int) bool {
 		return projects[i].Name < projects[j].Name
 	})
@@ -121,6 +123,23 @@ func DetectProject(path string) (Project, bool, error) {
 		Framework: describeFramework(features),
 		Runtime:   describeRuntime(features),
 	}, true, nil
+}
+
+func filterNestedProjects(root string, projects []Project) []Project {
+	if len(projects) <= 1 || !projectRootOwnsChildren(root) {
+		return projects
+	}
+
+	var filtered []Project
+	for _, project := range projects {
+		if project.Path != root && isDescendantPath(root, project.Path) {
+			continue
+		}
+
+		filtered = append(filtered, project)
+	}
+
+	return filtered
 }
 
 func inspectDirectory(path string, isRoot bool, features *featureSet) error {
@@ -196,6 +215,36 @@ func inspectDirectory(path string, isRoot bool, features *featureSet) error {
 
 func hasAnyFeature(features featureSet) bool {
 	return features.laravel || features.node || features.vue || features.python || features.flask || features.goLang || features.docker
+}
+
+func projectRootOwnsChildren(path string) bool {
+	for _, name := range []string{
+		".devherd.yml",
+		"docker-compose.yml",
+		"docker-compose.yaml",
+		"compose.yml",
+		"compose.yaml",
+		"Dockerfile",
+	} {
+		if fileExists(filepath.Join(path, name)) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func isDescendantPath(parent, child string) bool {
+	relative, err := filepath.Rel(parent, child)
+	if err != nil {
+		return false
+	}
+
+	if relative == "." || relative == "" {
+		return false
+	}
+
+	return !strings.HasPrefix(relative, "..")
 }
 
 func shouldSkipDirectory(name string) bool {

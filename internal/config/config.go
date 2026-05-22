@@ -17,9 +17,12 @@ type Config struct {
 }
 
 type ProxyConfig struct {
-	Driver    string `json:"driver"`
-	HTTPPort  int    `json:"http_port"`
-	HTTPSPort int    `json:"https_port"`
+	Driver                string `json:"driver"`
+	HTTPPort              int    `json:"http_port"`
+	HTTPSPort             int    `json:"https_port"`
+	ExternalDir           string `json:"external_dir"`
+	ExternalNetwork       string `json:"external_network"`
+	ExternalContainerName string `json:"external_container_name"`
 }
 
 type DNSConfig struct {
@@ -33,15 +36,20 @@ type ObservabilityConfig struct {
 }
 
 func Default() Config {
+	externalDir := defaultExternalProxyDir()
+
 	return Config{
 		SchemaVersion:  1,
 		AppName:        "DevHerd Ubuntu",
 		LocalTLD:       "test",
 		RuntimeManager: "mise",
 		Proxy: ProxyConfig{
-			Driver:    "caddy",
-			HTTPPort:  80,
-			HTTPSPort: 443,
+			Driver:                "caddy",
+			HTTPPort:              80,
+			HTTPSPort:             443,
+			ExternalDir:           externalDir,
+			ExternalNetwork:       "infra_web",
+			ExternalContainerName: "infra_caddy",
 		},
 		DNS: DNSConfig{
 			Driver:        "dnsmasq",
@@ -52,6 +60,38 @@ func Default() Config {
 			Provider: "sentry-cloud",
 		},
 	}
+}
+
+func (c *Config) ApplyPathDefaults(paths Paths) {
+	if c.Proxy.ExternalDir == "" {
+		c.Proxy.ExternalDir = filepath.Join(paths.DataDir, "local_proxy")
+	}
+
+	if c.Proxy.ExternalNetwork == "" {
+		c.Proxy.ExternalNetwork = "infra_web"
+	}
+
+	if c.Proxy.ExternalContainerName == "" {
+		c.Proxy.ExternalContainerName = "infra_caddy"
+	}
+
+	if c.DNS.ManagedSuffix == "" && c.LocalTLD != "" {
+		c.DNS.ManagedSuffix = c.LocalTLD
+	}
+}
+
+func defaultExternalProxyDir() string {
+	paths, err := ResolvePaths()
+	if err == nil {
+		return filepath.Join(paths.DataDir, "local_proxy")
+	}
+
+	homeDir, homeErr := os.UserHomeDir()
+	if homeErr != nil || homeDir == "" {
+		return filepath.Join(".local", "share", "devherd", "local_proxy")
+	}
+
+	return filepath.Join(homeDir, ".local", "share", "devherd", "local_proxy")
 }
 
 type Store struct {

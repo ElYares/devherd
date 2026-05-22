@@ -29,6 +29,7 @@ El directorio padre que se registra con `park` es:
 - `devherd list`
 - `devherd domain set <project> --domain <name>`
 - `devherd plan [path]`
+- `devherd inspect [path]`
 - `devherd up [path]`
 - `devherd down [path]`
 - `devherd proxy apply [project]`
@@ -165,6 +166,14 @@ devherd plan
 ```
 
 Esto imprime la raiz resuelta, los archivos Compose activos, el `.env` detectado y el comando base de `docker compose`.
+
+Para auditar colisiones reales antes de levantar o despues de levantar, usa:
+
+```bash
+devherd inspect /home/elyarestark/develop/examples/hello-vue-flask-docker
+```
+
+`inspect` revisa puertos, `container_name`, estado del proxy, variables de sesion/cache/Redis y volumenes externos.
 
 Despues ya puedes levantar el proyecto:
 
@@ -375,20 +384,233 @@ Para que esa integracion funcione bien, el proyecto deberia poder:
 - tolerar un archivo Compose override generado por DevHerd
 - o bien declarar `proxy.service` y `proxy.port` dentro de `.devherd.yml`
 
-## 8. Recomendacion practica
+### Aislamiento recomendado para multiples proyectos
+
+Cuando un proyecto define `container_name`, debe parametrizarlo para permitir clones o variantes paralelas:
+
+```yaml
+services:
+  app:
+    container_name: ${COMPOSE_NAME_PREFIX:-aang}_app
+  web:
+    container_name: ${COMPOSE_NAME_PREFIX:-aang}_web
+```
+
+En `.env`, cada instancia local debe tener identidad propia:
+
+```env
+COMPOSE_NAME_PREFIX=aang
+APP_URL=http://aang.localhost
+SESSION_COOKIE=aang_session
+CACHE_PREFIX=aang_cache_
+REDIS_PREFIX=aang_database_
+REDIS_DB=7
+REDIS_CACHE_DB=8
+APP_PORT=8083
+FORWARD_DB_PORT=3310
+```
+
+Para una segunda copia del mismo proyecto:
+
+```env
+COMPOSE_NAME_PREFIX=aang-v2
+APP_URL=http://aang-v2.localhost
+SESSION_COOKIE=aang_v2_session
+CACHE_PREFIX=aang_v2_cache_
+REDIS_PREFIX=aang_v2_database_
+APP_PORT=8084
+FORWARD_DB_PORT=3311
+```
+
+Este patron ya se aplico y valido en `aang-server` y `Uniformes`: ambos pueden quedar arriba con dominios `.localhost`, cookies separadas y puertos propios.
+
+### Project-name estable por ruta
+
+DevHerd ejecuta Compose con un project-name estable por ruta:
+
+```text
+devherd-<slug-del-proyecto>-<hash-de-ruta>
+```
+
+Ejemplos reales:
+
+```text
+devherd-aang-server-7b54ffae
+devherd-uniformes-e2102970
+```
+
+Esto evita que dos carpetas con el mismo basename compartan el project-name de Compose. Tambien hace que `plan`, `up`, `down`, `stop`, `inspect` y proxy usen la misma identidad.
+
+Cuando se cambia el project-name, Compose tambien cambia los nombres default de los volumenes internos. Para preservar datos, los volumenes importantes deben tener `name:` parametrizado:
+
+```yaml
+volumes:
+  db_data:
+    name: ${DB_VOLUME_NAME:-mi_proyecto_db_data}
+    external: ${DB_VOLUME_EXTERNAL:-false}
+```
+
+En `.env`:
+
+```env
+DB_VOLUME_NAME=mi_proyecto_db_data
+DB_VOLUME_EXTERNAL=false
+```
+
+En `aang-server`, durante la migracion se fijo `DB_VOLUME_NAME=aang-server_aang_db_data` y `DB_VOLUME_EXTERNAL=true` para seguir usando el volumen MySQL legado. `Uniformes` ya usaba un volumen externo explicito (`uniformes_db_data`).
+
+## 8. Flujo completo para proyectos reales
+
+Este es el flujo recomendado para trabajar con proyectos reales ya integrados con `.devherd.yml`, `caddy-docker-external` y dominios `.localhost`.
+
+### Primera vez en una maquina
+
+Inicializa DevHerd con el proxy Docker externo:
+
+```bash
+devherd init --proxy caddy-docker-external
+devherd doctor
+```
+
+Registra la carpeta donde viven los proyectos:
+
+```bash
+devherd park /home/elyares/develop/work
+devherd list
+```
+
+Antes de levantar un proyecto, revisa su stack y posibles choques:
+
+```bash
+devherd plan /home/elyares/develop/work/aang-server
+devherd inspect /home/elyares/develop/work/aang-server
+```
+
+Levanta el proyecto, aplica proxy y abre el dominio:
+
+```bash
+devherd up /home/elyares/develop/work/aang-server
+devherd proxy apply aang-server
+devherd open aang-server
+```
+
+`devherd up` ejecuta preflight automaticamente. Si hay warnings, los imprime y continua. Si hay fallos, se detiene antes de levantar contenedores.
+
+Valida por HTTP:
+
+```bash
+curl -I http://aang.localhost
+```
+
+Para `Uniformes`, el flujo equivalente es:
+
+```bash
+devherd plan /home/elyares/develop/work/Uniformes
+devherd inspect /home/elyares/develop/work/Uniformes
+devherd up /home/elyares/develop/work/Uniformes
+devherd proxy apply Uniformes
+devherd open Uniformes
+curl -I http://uniformes.localhost
+```
+
+### Ciclo diario si el proyecto ya esta levantado
+
+Primero revisa que esta registrado y que el proxy sigue sano:
+
+```bash
+devherd list
+devherd inspect /home/elyares/develop/work/aang-server
+```
+
+Si el proyecto ya esta arriba y solo quieres seguir trabajando, no necesitas volver a correr `up`. Abre el dominio:
+
+```bash
+devherd open aang-server
+```
+
+Si cambiaste `.env`, `docker-compose.yml`, dependencias de imagen o necesitas recrear contenedores, vuelve a ejecutar:
+
+```bash
+devherd up /home/elyares/develop/work/aang-server
+devherd proxy apply aang-server
+```
+
+`up` es idempotente: Compose reutiliza lo que ya esta arriba y recrea solo lo que necesite segun cambios.
+
+Si necesitas saltarte el preflight por una razon puntual:
+
+```bash
+devherd up --no-inspect /home/elyares/develop/work/aang-server
+```
+
+Si el preflight marca `FAIL` pero sabes que quieres continuar:
+
+```bash
+devherd up --force /home/elyares/develop/work/aang-server
+```
+
+### Bajar limpio para que no quede todo arriba
+
+Cuando termines de trabajar en un proyecto, bajalo con DevHerd:
+
+```bash
+devherd down /home/elyares/develop/work/aang-server
+```
+
+En modo `caddy-docker-external`, esto hace tres cosas importantes:
+
+- ejecuta `docker compose down` con los mismos compose files del proyecto
+- elimina `.devherd.proxy.override.yml`
+- remueve el bloque del dominio del `local_proxy/Caddyfile`
+
+Despues puedes validar que ya no quedo publicado:
+
+```bash
+devherd inspect /home/elyares/develop/work/aang-server
+```
+
+Para levantarlo de nuevo:
+
+```bash
+devherd up /home/elyares/develop/work/aang-server
+devherd proxy apply aang-server
+devherd inspect /home/elyares/develop/work/aang-server
+devherd open aang-server
+```
+
+### Bajar varios proyectos
+
+Si tienes ambos arriba y quieres dejar limpio el entorno:
+
+```bash
+devherd down /home/elyares/develop/work/aang-server
+devherd down /home/elyares/develop/work/Uniformes
+```
+
+Los servicios compartidos administrados por DevHerd, como `infra_redis`, viven aparte. Si tambien quieres apagarlos:
+
+```bash
+devherd service stop redis
+devherd service stop mailpit
+```
+
+No uses `docker compose down` manualmente salvo que estes depurando algo puntual: si lo haces, puedes dejar bloques stale en Caddy o archivos override generados por DevHerd. El camino normal es `devherd down`.
+
+## 9. Recomendacion practica
 
 Mientras validas stacks reales, usa este criterio:
 
 - para validar DevHerd hoy: `init`, `doctor`, `park`, `list`, `plan`, `domain set`, `up`, `proxy apply`, `open`, `down`, `sentry --dry-run`
+- para auditar manualmente: `inspect`
 - para validar la app real: entra por `127.0.0.1:5173` y `127.0.0.1:8000`
 - para publicar dominios `.test`: usa Caddy local en host
 - para tu entorno definitivo: usa `caddy-docker-external` con `.localhost`
 
-## 9. Siguiente iteracion recomendada
+## 10. Siguiente iteracion recomendada
 
 El siguiente bloque de trabajo con mas valor para tu caso es:
 
-1. validar `aang-server` con `up`, `proxy apply`, `open` y `down`
-2. extender la validacion a `Uniformes`, `poderygozo-landing-page` y `RetailDataOps`
+1. extender la validacion a `poderygozo-landing-page` y `RetailDataOps`
+2. reducir la dependencia de `container_name` en proyectos reales
 3. ampliar el contrato de proxy para mas frameworks o perfiles
-4. agregar diagnostico previo de puertos y conflictos
+4. validar clones paralelos del mismo proyecto

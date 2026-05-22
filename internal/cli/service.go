@@ -1,6 +1,12 @@
 package cli
 
-import "github.com/spf13/cobra"
+import (
+	"fmt"
+
+	"github.com/devherd/devherd/internal/config"
+	"github.com/devherd/devherd/internal/services"
+	"github.com/spf13/cobra"
+)
 
 func newServiceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -28,8 +34,41 @@ func newServiceActionCmd(action string) *cobra.Command {
 		Short: serviceActionShort(action),
 		Args:  args,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return notImplemented("service " + action)
+			paths, err := config.ResolvePaths()
+			if err != nil {
+				return err
+			}
+
+			if err := paths.Ensure(); err != nil {
+				return fmt.Errorf("create local directories: %w", err)
+			}
+
+			manager := services.NewManager(paths)
+			service := ""
+			if len(args) == 1 {
+				service = args[0]
+			}
+
+			output, err := runServiceAction(cmd, manager, action, service)
+			if output != "" {
+				fmt.Fprintln(cmd.OutOrStdout(), output)
+			}
+
+			return err
 		},
+	}
+}
+
+func runServiceAction(cmd *cobra.Command, manager services.Manager, action, service string) (string, error) {
+	switch action {
+	case "start":
+		return manager.Start(cmd.Context(), service)
+	case "stop":
+		return manager.Stop(cmd.Context(), service)
+	case "status":
+		return manager.Status(cmd.Context(), service)
+	default:
+		return "", fmt.Errorf("unsupported service action %q", action)
 	}
 }
 

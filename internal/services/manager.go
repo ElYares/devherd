@@ -1,0 +1,210 @@
+package services
+
+import (
+	"context"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"slices"
+	"strings"
+
+	"github.com/devherd/devherd/internal/config"
+)
+
+const (
+	NetworkName = "infra_net"
+	stackDir    = "shared-services"
+	composeFile = "docker-compose.yml"
+)
+
+var supportedServices = []string{"redis", "mailpit"}
+
+type Manager struct {
+	dir         string
+	composeFile string
+}
+
+func NewManager(paths config.Paths) Manager {
+	dir := filepath.Join(paths.ComposeDir, stackDir)
+	return Manager{
+		dir:         dir,
+		composeFile: filepath.Join(dir, composeFile),
+	}
+}
+
+func SupportedServices() []string {
+	return append([]string{}, supportedServices...)
+}
+
+func (m Manager) Start(ctx context.Context, service string) (string, error) {
+	if err := validateService(service); err != nil {
+		return "", err
+	}
+
+	if err := m.bootstrap(); err != nil {
+		return "", err
+	}
+
+	if err := ensureNetwork(ctx); err != nil {
+		return "", err
+	}
+
+	return m.compose(ctx, "up", "-d", service)
+}
+
+func (m Manager) Stop(ctx context.Context, service string) (string, error) {
+	if err := validateService(service); err != nil {
+		return "", err
+	}
+
+	if err := m.bootstrap(); err != nil {
+		return "", err
+	}
+
+	return m.compose(ctx, "stop", service)
+}
+
+func (m Manager) Status(ctx context.Context, service string) (string, error) {
+	if service != "" {
+		if err := validateService(service); err != nil {
+			return "", err
+		}
+	}
+
+	if err := m.bootstrap(); err != nil {
+		return "", err
+	}
+
+	args := []string{"ps"}
+	if service != "" {
+		args = append(args, service)
+	}
+
+	return m.compose(ctx, args...)
+}
+
+func (m Manager) bootstrap() error {
+	if err := os.MkdirAll(m.dir, 0o755); err != nil {
+		return fmt.Errorf("create shared services directory: %w", err)
+	}
+
+	if err := os.WriteFile(m.composeFile, []byte(composeContent), 0o644); err != nil {
+		return fmt.Errorf("write shared services compose: %w", err)
+	}
+
+	return nil
+}
+
+func (m Manager) compose(ctx context.Context, args ...string) (string, error) {
+	baseArgs := []string{"compose", "-f", m.composeFile, "--project-name", "devherd_shared"}
+	baseArgs = append(baseArgs, args...)
+
+	cmd := exec.CommandContext(ctx, "docker", baseArgs...)
+	cmd.Dir = m.dir
+
+	output, err := cmd.CombinedOutput()
+	trimmed := strings.TrimSpace(string(output))
+	if err != nil {
+		if trimmed == "" {
+			return "", err
+		}
+
+		return "", fmt.Errorf("%s", trimmed)
+	}
+
+	return trimmed, nil
+}
+
+func validateService(service string) error {
+	if slices.Contains(supportedServices, service) {
+		return nil
+	}
+
+	return fmt.Errorf("unsupported shared service %q; supported services: %s", service, strings.Join(supportedServices, ", "))
+}
+
+func ensureNetwork(ctx context.Context) error {
+	if _, err := runDocker(ctx, "network", "inspect", NetworkName); err == nil {
+		return nil
+	}
+
+	if _, err := runDocker(
+		ctx,
+		"network",
+		"create",
+		"--driver",
+		"bridge",
+		"--label",
+		"devherd.managed=true",
+		"--label",
+		"devherd.role=shared-services",
+		NetworkName,
+	); err != nil {
+		if strings.Contains(err.Error(), "already exists") {
+			return nil
+		}
+
+		return fmt.Errorf("ensure docker network %s: %w", NetworkName, err)
+	}
+
+	return nil
+}
+
+func runDocker(ctx context.Context, args ...string) (string, error) {
+	cmd := exec.CommandContext(ctx, "docker", args...)
+	output, err := cmd.CombinedOutput()
+	trimmed := strings.TrimSpace(string(output))
+	if err != nil {
+		if trimmed == "" {
+			return "", err
+		}
+
+		return "", fmt.Errorf("%s", trimmed)
+	}
+
+	return trimmed, nil
+}
+
+const composeContent = `services:
+  redis:
+    image: redis:7-alpine
+    container_name: infra_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      infra_net:
+        aliases:
+          - redis
+    labels:
+      devherd.managed: "true"
+      devherd.role: "shared-service"
+      devherd.service: "redis"
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: infra_mailpit
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:1025:1025"
+      - "127.0.0.1:8025:8025"
+    networks:
+      infra_net:
+        aliases:
+          - mailpit
+    labels:
+      devherd.managed: "true"
+      devherd.role: "shared-service"
+      devherd.service: "mailpit"
+
+volumes:
+  redis_data:
+
+networks:
+  infra_net:
+    external: true
+`

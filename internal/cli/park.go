@@ -49,15 +49,24 @@ func newParkCmd() *cobra.Command {
 			out := cmd.OutOrStdout()
 			fmt.Fprintf(out, "parked: %s\n", targetPath)
 			if len(projects) == 0 {
+				if err := database.PruneDetectedProjectsUnderPath(cmd.Context(), app.DB, targetPath, nil); err != nil {
+					return err
+				}
 				fmt.Fprintln(out, "detected projects: 0")
 				return nil
 			}
 
+			keepPaths := make([]string, 0, len(projects))
 			for _, project := range projects {
+				keepPaths = append(keepPaths, project.Path)
 				domain := primaryDomain(project.Name, app.Config.LocalTLD)
 				if err := database.UpsertProject(cmd.Context(), app.DB, project, domain); err != nil {
 					return err
 				}
+			}
+
+			if err := database.PruneDetectedProjectsUnderPath(cmd.Context(), app.DB, targetPath, keepPaths); err != nil {
+				return err
 			}
 
 			fmt.Fprintf(out, "detected projects: %d\n\n", len(projects))

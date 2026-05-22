@@ -35,6 +35,7 @@ func loadAppContext(ctx context.Context) (*appContext, error) {
 	if err != nil {
 		return nil, fmt.Errorf("load config: %w", err)
 	}
+	cfg.ApplyPathDefaults(paths)
 
 	manager := database.NewManager(paths.DBFile)
 	if _, err := manager.Ensure(ctx); err != nil {

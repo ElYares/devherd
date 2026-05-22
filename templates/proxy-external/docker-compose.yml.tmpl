@@ -1,0 +1,23 @@
+services:
+  caddy:
+    image: ${CADDY_IMAGE:-caddy:2.8-alpine}
+    container_name: {{ .ContainerName }}
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - {{ .Network }}
+
+volumes:
+  caddy_data:
+    name: ${CADDY_DATA_VOLUME:-{{ .ContainerName }}_data}
+  caddy_config:
+    name: ${CADDY_CONFIG_VOLUME:-{{ .ContainerName }}_config}
+
+networks:
+  {{ .Network }}:
+    external: true

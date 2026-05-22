@@ -12,6 +12,9 @@ DevHerd es una plataforma local de desarrollo para Ubuntu inspirada en el flujo 
 - Comandos `park` y `list` implementados con deteccion basica de proyectos.
 - Comando `domain set` implementado para personalizar el dominio principal.
 - Comando `plan` implementado para inspeccionar stacks Compose sin side effects.
+- Comando `inspect` implementado para detectar colisiones locales antes o despues de levantar un stack.
+- `devherd up` ejecuta preflight automaticamente y soporta `--force` y `--no-inspect`.
+- Los comandos Compose usan `--project-name` estable por ruta para aislar clones con el mismo nombre de carpeta.
 - Comando `proxy apply` implementado tanto para Caddy local en host como para `local_proxy` Docker externo.
 - Comandos `up` y `down` implementados para proyectos con `docker-compose`, incluyendo manifiesto `.devherd.yml`.
 - `devherd sentry init <project> --stack <stack> --dry-run` implementado.
@@ -40,6 +43,7 @@ go run ./cmd/devherd init --proxy caddy-docker-external
 go run ./cmd/devherd doctor
 go run ./cmd/devherd park /home/elyarestark/develop/examples
 go run ./cmd/devherd plan /home/elyarestark/develop/examples/hello-vue-flask-docker
+go run ./cmd/devherd inspect /home/elyarestark/develop/examples/hello-vue-flask-docker
 go run ./cmd/devherd domain set hello-vue-flask-docker --domain mi-demo
 go run ./cmd/devherd up /home/elyarestark/develop/examples/hello-vue-flask-docker
 go run ./cmd/devherd proxy apply hello-vue-flask-docker
