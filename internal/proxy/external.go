@@ -165,6 +165,10 @@ func EnsureComposeOverride(cfg config.Config, project ExternalProject) (string, 
 	return overridePath, nil
 }
 
+func EnsureExternalNetwork(ctx context.Context, cfg config.Config) error {
+	return ensureExternalProxyNetwork(ctx, externalSettings(cfg))
+}
+
 func ConnectProject(ctx context.Context, cfg config.Config, project ExternalProject) error {
 	settings := externalSettings(cfg)
 

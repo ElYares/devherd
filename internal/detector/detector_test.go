@@ -114,3 +114,43 @@ func TestDiscoverPrefersManagedRootOverNestedChildren(t *testing.T) {
 		t.Fatalf("expected merged framework vue+flask, got %q", projects[0].Framework)
 	}
 }
+
+func TestDiscoverPrefersManifestOnlyRootOverNestedAppsDirectory(t *testing.T) {
+	root := t.TempDir()
+	if err := os.WriteFile(filepath.Join(root, ".devherd.yml"), []byte("version: 1\ncompose:\n  files:\n    - infra/compose/docker-compose.yml\n"), 0o644); err != nil {
+		t.Fatalf("write manifest: %v", err)
+	}
+
+	apiDir := filepath.Join(root, "apps", "api")
+	if err := os.MkdirAll(apiDir, 0o755); err != nil {
+		t.Fatalf("mkdir api: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(apiDir, "requirements.txt"), []byte("fastapi==0.116.1\n"), 0o644); err != nil {
+		t.Fatalf("write api requirements.txt: %v", err)
+	}
+
+	webDir := filepath.Join(root, "apps", "web")
+	if err := os.MkdirAll(webDir, 0o755); err != nil {
+		t.Fatalf("mkdir web: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(webDir, "package.json"), []byte(`{"dependencies":{"next":"15.3.0"}}`), 0o644); err != nil {
+		t.Fatalf("write web package.json: %v", err)
+	}
+
+	projects, err := Discover(root)
+	if err != nil {
+		t.Fatalf("discover projects: %v", err)
+	}
+
+	if len(projects) != 1 {
+		t.Fatalf("expected exactly one manifest root project, got %d: %#v", len(projects), projects)
+	}
+
+	if projects[0].Path != root {
+		t.Fatalf("expected root project path %s, got %s", root, projects[0].Path)
+	}
+
+	if projects[0].Name != filepath.Base(root) {
+		t.Fatalf("expected root project name %s, got %s", filepath.Base(root), projects[0].Name)
+	}
+}

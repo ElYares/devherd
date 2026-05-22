@@ -202,7 +202,8 @@ func inspectDirectory(path string, isRoot bool, features *featureSet) error {
 		features.goLang = true
 	}
 
-	if isRoot && (fileExists(filepath.Join(path, "docker-compose.yml")) ||
+	if isRoot && (fileExists(filepath.Join(path, ".devherd.yml")) ||
+		fileExists(filepath.Join(path, "docker-compose.yml")) ||
 		fileExists(filepath.Join(path, "docker-compose.yaml")) ||
 		fileExists(filepath.Join(path, "compose.yml")) ||
 		fileExists(filepath.Join(path, "compose.yaml")) ||
