@@ -43,6 +43,7 @@ func newStopCmd() *cobra.Command {
 					project.ComposeFiles = append(project.ComposeFiles, overridePath)
 				}
 			}
+			project = appendObserveOverride(project)
 
 			output, err := compose.StopProject(cmd.Context(), project)
 			if output != "" {

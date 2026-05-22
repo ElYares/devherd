@@ -2,11 +2,13 @@ package cli
 
 import (
 	"context"
+	"os"
 	"path/filepath"
 
 	"github.com/devherd/devherd/internal/compose"
 	"github.com/devherd/devherd/internal/database"
 	"github.com/devherd/devherd/internal/detector"
+	"github.com/devherd/devherd/internal/observe"
 	"github.com/devherd/devherd/internal/proxy"
 )
 
@@ -17,7 +19,7 @@ func prepareComposeProject(ctx context.Context, app *appContext, targetPath stri
 	}
 
 	if app == nil || !proxy.UsesDockerExternal(app.Config) {
-		return project, nil
+		return appendObserveOverride(project), nil
 	}
 
 	externalProject, err := resolveExternalProject(ctx, app, project.Root)
@@ -31,7 +33,7 @@ func prepareComposeProject(ctx context.Context, app *appContext, targetPath stri
 	}
 
 	project.ComposeFiles = append(project.ComposeFiles, overridePath)
-	return project, nil
+	return appendObserveOverride(project), nil
 }
 
 func resolveExternalProject(ctx context.Context, app *appContext, root string) (proxy.ExternalProject, error) {
@@ -60,4 +62,13 @@ func resolveExternalProject(ctx context.Context, app *appContext, root string) (
 	}
 
 	return proxy.BuildExternalProject(app.Config, record)
+}
+
+func appendObserveOverride(project compose.Project) compose.Project {
+	overridePath := filepath.Join(project.Root, observe.ManagedComposeOverrideFile)
+	if _, err := os.Stat(overridePath); err == nil {
+		project.ComposeFiles = append(project.ComposeFiles, overridePath)
+	}
+
+	return project
 }
