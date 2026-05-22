@@ -48,6 +48,7 @@ func newDownCmd() *cobra.Command {
 					project.ComposeFiles = append(project.ComposeFiles, overridePath)
 				}
 			}
+			project = appendObserveOverride(project)
 
 			output, err := compose.DownProject(cmd.Context(), project)
 			if output != "" {
