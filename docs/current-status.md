@@ -13,13 +13,34 @@ La CLI ya tiene estos comandos funcionales:
 - `devherd domain set <project> --domain <name>`
 - `devherd plan [path]`
 - `devherd up [path]`
+- `devherd stop [path]`
 - `devherd down [path]`
 - `devherd proxy apply [project]`
+- `devherd proxy bootstrap`
 - `devherd open <project>`
 - `devherd inspect [path]`
+- `devherd service start <service>`
+- `devherd service stop <service>`
+- `devherd service status [service]`
+- `devherd observe start`
+- `devherd observe status`
+- `devherd observe open`
+- `devherd observe dsn <project>`
+- `devherd observe attach <project-or-path> --stack <stack> [--dry-run]`
+- `devherd observe detach <project-or-path>`
+- `devherd observe scan [project]`
+- `devherd observe containers [project]`
+- `devherd observe issues [project]`
+- `devherd observe events [project]`
+- `devherd observe timeline <event-id>`
+- `devherd observe cleanup --days <days>`
+- `devherd observe alert add --project <project> --on <kind>`
+- `devherd observe alert list [project]`
+- `devherd observe alert deliveries [project]`
+- `devherd observe alert remove <id>`
 - `devherd sentry init <project> --stack <stack> --dry-run`
 
-Ademas, `plan`, `up` y `down` ya soportan proyectos con manifiesto `.devherd.yml` para definir multiples archivos Compose y un `env_file` opcional.
+Ademas, `plan`, `up`, `stop` y `down` ya soportan proyectos con manifiesto `.devherd.yml` para definir multiples archivos Compose y un `env_file` opcional.
 
 ## 2. Que hace hoy DevHerd
 
@@ -37,7 +58,7 @@ Ademas, `plan`, `up` y `down` ya soportan proyectos con manifiesto `.devherd.yml
 - valida `docker compose`
 - adapta chequeos al driver de proxy configurado
 - en modo `caddy` valida `caddy`, `dnsmasq` y puertos `80` y `443`
-- en modo `caddy-docker-external` valida `local_proxy`, `Caddyfile` y puerto `80`
+- en modo `caddy-docker-external` valida el directorio externo configurado, `docker-compose.yml`, `Caddyfile`, redes Docker compartidas, sufijo local y puerto `80`
 
 ### Registro y deteccion de proyectos
 
@@ -77,18 +98,42 @@ Ademas, `plan`, `up` y `down` ya soportan proyectos con manifiesto `.devherd.yml
 ### Proxy local
 
 - soporta `caddy` local en host como flujo clasico
-- soporta `caddy-docker-external` reutilizando `/home/elyarestark/infra/local_proxy`
+- soporta `caddy-docker-external` con `local_proxy` administrado por DevHerd bajo el data dir XDG
 - genera `.devherd.proxy.override.yml` para conectar servicios a `infra_web`
 - asigna aliases estables por dominio y servicio
-- actualiza `/home/elyarestark/infra/local_proxy/Caddyfile`
+- actualiza el `Caddyfile` del proxy externo configurado
 - recarga el contenedor `infra_caddy`
 - `open` usa el dominio efectivo del proyecto o del manifiesto
+- `proxy bootstrap` crea o repara `docker-compose.yml`, `Caddyfile`, `.env` y `.env.example` del proxy externo
 
 ### Sentry
 
 - reconoce el stack indicado
 - muestra el plan de integracion con `--dry-run`
 - no modifica archivos todavia en ese modo
+
+### Observe
+
+- crea una base SQLite separada en `~/.local/share/devherd/observability/devherd-observe.db`
+- levanta un collector local con `devherd observe start`
+- expone healthcheck para `devherd observe status`
+- expone panel local con `devherd observe open`
+- genera DSN local con `devherd observe dsn <project>`
+- genera `.devherd.observe.override.yml` con `devherd observe attach`
+- elimina `.devherd.observe.override.yml` con `devherd observe detach`
+- `devherd up`, `devherd stop` y `devherd down` incluyen el override de Observe cuando existe
+- correlaciona eventos con contenedores etiquetados `devherd.observe=true`
+- guarda snapshots de contenedores observados
+- registra cambios de status y restart count de contenedores
+- captura logs cercanos al timestamp del evento cuando Docker esta disponible
+- muestra contenedores observados y timeline por evento
+- recibe eventos JSON simples en `POST /api/<project>/event`
+- recibe un primer corte de envelopes tipo Sentry en `POST /api/<project>/envelope/`
+- normaliza eventos y agrupa ocurrencias en issues
+- lista issues y eventos desde CLI
+- crea alertas locales por `new-issue`, `error-rate`, `container-exit` y `container-restart`
+- lista reglas y entregas de alerta desde CLI
+- limpia datos viejos con `devherd observe cleanup`
 
 ## 3. Que ya validamos en un host real
 
@@ -128,7 +173,7 @@ Ademas, ya se valido que:
 
 ## 4. Que ya validamos manualmente con `local_proxy`
 
-Tambien ya se comprobo manualmente el flujo con:
+Tambien ya se comprobo manualmente el flujo con la ruta legacy:
 
 ```text
 /home/elyarestark/infra/local_proxy
@@ -149,11 +194,14 @@ Con eso ya quedo validado end-to-end que:
 - el navegador puede abrir la app
 - el frontend puede consumir la API por el dominio del proxy
 
+El runtime actual ya no depende de esa ruta personal: `caddy-docker-external` usa `proxy.external_dir` desde la config, con default portable bajo `~/.local/share/devherd/local_proxy`.
+
 ## 5. Lo que ya quedo automatizado en `2026-05-04`
 
 Sobre la base del flujo manual anterior, DevHerd ya automatiza:
 
 - usar `local_proxy` como driver oficial via `caddy-docker-external`
+- crear o reparar el `local_proxy` portable con `devherd init --proxy caddy-docker-external` o `devherd proxy bootstrap`
 - usar `.localhost` como TLD por defecto en ese modo
 - generar `.devherd.proxy.override.yml`
 - conectar servicios a `infra_web`
@@ -254,6 +302,7 @@ Aunque la implementacion y tests ya estan en verde, todavia falta validar en sta
 - `devherd up --force` permite continuar aunque haya fallos
 - `devherd up --no-inspect` permite omitir la auditoria
 - DevHerd calcula `--project-name devherd-<slug>-<hash>` desde la ruta absoluta del proyecto
+- `stop` detiene el stack Compose sin limpiar el dominio ni el override administrado
 - `down` intenta limpiar tanto el project-name estable como el project-name legado derivado del basename
 
 ### Comandos aun no implementados
@@ -278,7 +327,10 @@ En este momento DevHerd ya es capaz de:
 - ejecutar preflight automatico antes de `devherd up`
 - usar project-name estable por ruta en comandos Compose
 - levantar proyectos Docker Compose
+- detener proyectos sin limpiar proxy con `devherd stop`
 - integrar `local_proxy` Docker externo en el flujo CLI
+- crear o reparar el proxy externo con `devherd proxy bootstrap`
+- registrar errores locales con `devherd observe`
 - preparar la integracion con Sentry en modo seguro
 
 El punto que sigue ya no es diseno del feature. Es ampliacion de validacion operativa sobre proyectos reales y luego compatibilidad por stack.

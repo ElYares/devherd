@@ -15,18 +15,21 @@ DevHerd es una plataforma local de desarrollo para Ubuntu inspirada en el flujo 
 - Comando `inspect` implementado para detectar colisiones locales antes o despues de levantar un stack.
 - `devherd up` ejecuta preflight automaticamente y soporta `--force` y `--no-inspect`.
 - Los comandos Compose usan `--project-name` estable por ruta para aislar clones con el mismo nombre de carpeta.
-- Comando `proxy apply` implementado tanto para Caddy local en host como para `local_proxy` Docker externo.
-- Comandos `up` y `down` implementados para proyectos con `docker-compose`, incluyendo manifiesto `.devherd.yml`.
+- Comando `proxy apply` implementado tanto para Caddy local en host como para `local_proxy` Docker externo administrado por DevHerd.
+- Comando `proxy bootstrap` implementado para crear o reparar los assets del proxy externo.
+- Comandos `up`, `stop` y `down` implementados para proyectos con `docker-compose`, incluyendo manifiesto `.devherd.yml`.
+- Comandos `service start|stop|status` implementados para Redis y Mailpit compartidos.
+- `devherd observe` implementado con collector local, panel web, SQLite separada, DSN local, attach/detach por proyecto, correlacion Docker, logs cercanos, issues/eventos, alertas locales y limpieza de datos viejos.
 - `devherd sentry init <project> --stack <stack> --dry-run` implementado.
 - Comando `open` implementado para abrir el dominio del proyecto en el navegador.
-- `logs`, `service`, `sentry set-dsn` y `sentry test` siguen como siguiente iteracion.
+- `logs`, `sentry set-dsn` y `sentry test` siguen como siguiente iteracion.
 
 ## Enfoque del MVP 1
 
 - `doctor` temprano para validar Docker, proxy activo y escritura local.
 - Proxy soportado hoy:
   - `caddy` en host con resolucion local via `/etc/hosts`
-  - `caddy-docker-external` reutilizando `/home/elyarestark/infra/local_proxy`
+  - `caddy-docker-external` usando un `local_proxy` administrado bajo el data dir de DevHerd, por defecto `~/.local/share/devherd/local_proxy`
 - Dominio principal por proyecto:
   - `proyecto.test` en modo host
   - `proyecto.localhost` en modo `caddy-docker-external`
@@ -80,3 +83,4 @@ El plan tecnico completo vive en [docs/technical-plan.md](docs/technical-plan.md
 La referencia de comandos vive en [docs/cli-commands.md](docs/cli-commands.md).
 El flujo de uso por proyecto vive en [docs/project-workflow.md](docs/project-workflow.md).
 El estado actual del proyecto vive en [docs/current-status.md](docs/current-status.md).
+El plan de observabilidad local vive en [docs/observe.md](docs/observe.md).

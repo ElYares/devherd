@@ -13,17 +13,37 @@ Esta guia describe la CLI actual de DevHerd, su alcance en el MVP y el estado re
 - `devherd list --json`
 - `devherd domain set <project> --domain <name>`
 - `devherd proxy apply [project]`
+- `devherd proxy bootstrap`
 - `devherd plan [path]`
 - `devherd inspect [path]`
 - `devherd up [path]`
+- `devherd stop [path]`
 - `devherd down [path]`
 - `devherd open <project>`
+- `devherd service start <service>`
+- `devherd service stop <service>`
+- `devherd service status [service]`
+- `devherd observe start`
+- `devherd observe status`
+- `devherd observe open`
+- `devherd observe dsn <project>`
+- `devherd observe attach <project-or-path> --stack <stack> [--dry-run]`
+- `devherd observe detach <project-or-path>`
+- `devherd observe scan [project]`
+- `devherd observe containers [project]`
+- `devherd observe issues [project]`
+- `devherd observe events [project]`
+- `devherd observe timeline <event-id>`
+- `devherd observe cleanup --days <days>`
+- `devherd observe alert add --project <project> --on <kind>`
+- `devherd observe alert list [project]`
+- `devherd observe alert deliveries [project]`
+- `devherd observe alert remove <id>`
 - `devherd sentry init <project> --stack <stack> --dry-run`
 
 ### Existe pero aun no esta implementado
 
 - `devherd logs`
-- `devherd service start|stop|status`
 - `devherd sentry set-dsn`
 - `devherd sentry test`
 
@@ -134,12 +154,14 @@ Salida esperada:
 - TLD local.
 - Runtime manager configurado.
 - Estado de creacion o reutilizacion de config y base.
+- En modo `caddy-docker-external`, estado de los assets del proxy externo.
 
 Notas:
 
 - Es idempotente.
 - Si la config ya existe, la reutiliza y actualiza segun flags.
 - Si eliges `--proxy caddy-docker-external` y no pasas `--tld`, DevHerd cambia el TLD default a `localhost`.
+- En modo `caddy-docker-external`, `init` tambien asegura `docker-compose.yml`, `Caddyfile`, `.env` y `.env.example` del proxy externo administrado.
 
 ### `devherd doctor`
 
@@ -156,10 +178,11 @@ Chequeos actuales:
 - Escritura en rutas XDG locales.
 - Binario `docker`.
 - Acceso al daemon Docker.
+- Modo Linux containers del engine Docker.
 - `docker compose`.
 - Segun el driver configurado:
   - modo `caddy`: binario `caddy`, `dnsmasq` y puertos TCP `80` y `443`
-  - modo `caddy-docker-external`: `/home/elyarestark/infra/local_proxy/docker-compose.yml`, `/home/elyarestark/infra/local_proxy/Caddyfile` y puerto TCP `80`
+  - modo `caddy-docker-external`: `proxy.external_dir`, `docker-compose.yml`, `Caddyfile`, red del proxy, red de servicios compartidos, sufijo local y puerto TCP `80`
 
 Comportamiento:
 
@@ -317,11 +340,11 @@ Modo `caddy`:
 
 Modo `caddy-docker-external`:
 
-- Reutiliza `/home/elyarestark/infra/local_proxy`.
+- Usa el directorio configurado en `proxy.external_dir`; por defecto, `~/.local/share/devherd/local_proxy`.
 - Lee `proxy.domain`, `proxy.service` y `proxy.port` desde `.devherd.yml` cuando existen.
 - Genera `.devherd.proxy.override.yml` dentro del proyecto.
 - Conecta los servicios necesarios a la red externa `infra_web`.
-- Escribe o reemplaza el bloque del dominio administrado en `/home/elyarestark/infra/local_proxy/Caddyfile`.
+- Escribe o reemplaza el bloque del dominio administrado en el `Caddyfile` del proxy externo.
 - Levanta `local_proxy` con `docker compose up -d` si hace falta.
 - Valida y recarga Caddy dentro del contenedor `infra_caddy`.
 
@@ -357,8 +380,27 @@ Notas:
 
 - Si tu proyecto esta servido por Docker, conviene levantarlo antes con `devherd up`.
 - En modo `caddy`, requiere `caddy` instalado en host.
-- En modo `caddy-docker-external`, requiere que exista `/home/elyarestark/infra/local_proxy`.
+- En modo `caddy-docker-external`, `init` y `proxy bootstrap` pueden crear los assets base del proxy externo.
 - Si pasas un nombre de proyecto como `aang-server`, ese proyecto debe estar registrado en SQLite via `devherd park`.
+
+#### `devherd proxy bootstrap`
+
+Crea o refresca los assets administrados del proxy Docker externo.
+
+Sintaxis:
+
+```bash
+devherd proxy bootstrap
+devherd proxy bootstrap --force
+```
+
+Comportamiento actual:
+
+- Requiere que el driver configurado sea `caddy-docker-external`.
+- Asegura que exista el directorio `proxy.external_dir`.
+- Crea `docker-compose.yml`, `Caddyfile`, `.env` y `.env.example` si faltan.
+- Con `--force`, reescribe `docker-compose.yml`, `Caddyfile` y `.env.example` desde los templates actuales.
+- Preserva `.env` para no pisar overrides locales.
 
 ### `devherd plan`
 
@@ -591,6 +633,24 @@ devherd down
 devherd down /home/elyarestark/develop/examples/hello-vue-flask-docker
 ```
 
+### `devherd stop`
+
+Detiene un proyecto Compose sin limpiar el proxy ni eliminar el override administrado.
+
+Sintaxis:
+
+```bash
+devherd stop [path]
+```
+
+Comportamiento actual:
+
+- Si no pasas `path`, usa el directorio actual.
+- Resuelve el mismo stack que `devherd up` y `devherd down`.
+- Si existe `.devherd.proxy.override.yml` en modo `caddy-docker-external`, lo incluye para detener el mismo stack.
+- Ejecuta `docker compose stop` con el project-name estable y tambien intenta detener el project-name legado.
+- Mantiene el bloque del dominio en el proxy externo para permitir reanudar el proyecto sin republicarlo.
+
 ### `devherd open`
 
 Abre un proyecto en el navegador.
@@ -611,8 +671,8 @@ Comportamiento actual:
 
 - Lee el dominio principal guardado en SQLite.
 - Construye la URL HTTP usando la configuracion actual del proxy.
-- Intenta abrirla con `xdg-open`.
-- Si `xdg-open` no existe, imprime la URL.
+- Intenta abrirla con el launcher del sistema: `xdg-open` en Linux, `open` en macOS o `cmd /c start` en Windows.
+- Si el launcher no existe, imprime la URL.
 
 ### `devherd logs`
 
@@ -636,7 +696,7 @@ Estado actual:
 
 ### `devherd service`
 
-Administrara servicios compartidos del entorno local.
+Administra servicios compartidos del entorno local.
 
 Subcomandos:
 
@@ -651,7 +711,7 @@ Alcance del MVP:
 - `redis`
 - `mailpit`
 
-Ejemplos objetivo:
+Ejemplos:
 
 ```bash
 devherd service start redis
@@ -659,18 +719,327 @@ devherd service start mailpit
 devherd service status redis
 ```
 
-Comportamiento esperado:
+Comportamiento actual:
 
 - Levantar contenedores Compose administrados por DevHerd.
 - Crear la red Docker compartida `infra_net` cuando haga falta.
 - Conectar servicios compartidos a `infra_net` con aliases estables (`redis`, `mailpit`).
 - Exponer puertos conocidos.
 
-Estado actual:
-
 - `redis` levanta `infra_redis` con `redis:7-alpine`, volumen persistente y puerto host `127.0.0.1:6379`.
 - `mailpit` levanta `infra_mailpit` con puertos host `127.0.0.1:1025` y `127.0.0.1:8025`.
 - `status` consulta el stack Compose administrado por DevHerd.
+
+### `devherd observe`
+
+Administra la observabilidad local de DevHerd.
+
+Observe incluye:
+
+- collector HTTP local en `127.0.0.1:9777`
+- panel web local en `http://127.0.0.1:9777/observe`
+- base SQLite separada en `~/.local/share/devherd/observability/devherd-observe.db`
+- ingest de eventos JSON simples
+- ingest inicial de envelopes tipo Sentry
+- normalizacion basica
+- agrupacion en issues por fingerprint
+- attach/detach por proyecto mediante `.devherd.observe.override.yml`
+- correlacion Docker por labels `devherd.*`
+- captura de logs cercanos a la falla cuando Docker esta disponible
+- timeline local por evento
+- listado de issues y eventos desde CLI
+- alertas locales por nuevo issue, error-rate, container-exit y container-restart
+- limpieza de datos viejos
+
+#### `devherd observe start`
+
+Arranca el collector local en foreground.
+
+Sintaxis:
+
+```bash
+devherd observe start
+devherd observe start --addr 127.0.0.1:9777
+```
+
+Endpoints:
+
+- `GET /health`
+- `GET /observe`
+- `GET /api/observe/issues`
+- `GET /api/observe/events`
+- `GET /api/observe/containers`
+- `GET /api/observe/alerts`
+- `GET /api/observe/timeline?event_id=<event-id>`
+- `POST /api/<project>/event`
+- `POST /api/<project>/envelope/`
+
+Nota: en esta fase todavia no hay daemon ni `stop`; para detenerlo se interrumpe el proceso.
+
+#### `devherd observe status`
+
+Valida si el collector local esta respondiendo.
+
+Sintaxis:
+
+```bash
+devherd observe status
+devherd observe status --addr 127.0.0.1:9777
+```
+
+#### `devherd observe open`
+
+Abre el panel local de Observe.
+
+Sintaxis:
+
+```bash
+devherd observe open
+devherd observe open --addr 127.0.0.1:9777
+```
+
+Funcionamiento:
+
+- intenta abrir `http://127.0.0.1:9777/observe` con el launcher del sistema
+- si no puede abrir navegador, imprime la URL
+- requiere que `devherd observe start` este corriendo para que el panel responda
+
+#### `devherd observe dsn`
+
+Imprime el DSN local que se usara en fases posteriores para configurar SDKs por proyecto.
+
+Sintaxis:
+
+```bash
+devherd observe dsn <project>
+```
+
+Ejemplo:
+
+```text
+http://devherd@127.0.0.1:9777/aang-server
+```
+
+#### `devherd observe attach`
+
+Genera un override Compose local para inyectar Observe en uno o varios servicios del proyecto.
+
+Sintaxis:
+
+```bash
+devherd observe attach <project-or-path> --stack <stack> [flags]
+```
+
+Flags:
+
+- `--stack string`: requerido. Valores actuales: `laravel`, `node`, `python`, `go`, `docker`, `generic`.
+- `--service string`: servicio Compose a observar. Puede repetirse o recibir una lista separada por comas. Si se omite, observa todos los servicios.
+- `--environment string`: ambiente enviado a los SDKs. Default: `local`.
+- `--addr string`: direccion del collector usada para generar el DSN. Default: `127.0.0.1:9777`.
+- `--dsn string`: DSN explicito si no quieres usar el generado.
+- `--dry-run`: imprime el override sin escribir archivos.
+
+Archivo generado:
+
+```text
+.devherd.observe.override.yml
+```
+
+Contenido administrado:
+
+- `SENTRY_DSN`
+- `SENTRY_ENVIRONMENT`
+- `DEVHERD_OBSERVE`
+- `DEVHERD_PROJECT`
+- `DEVHERD_OBSERVE_STACK`
+- labels `devherd.observe`, `devherd.project`, `devherd.service` y `devherd.stack`
+
+Ejemplos:
+
+```bash
+devherd observe attach aang-server --stack laravel --dry-run
+devherd observe attach aang-server --stack laravel --service web
+devherd observe attach /home/elyares/develop/work/aang-server --stack laravel
+```
+
+`devherd up`, `devherd stop` y `devherd down` incluyen este override automaticamente cuando existe en la raiz del proyecto.
+
+#### `devherd observe detach`
+
+Elimina el override local de Observe.
+
+Sintaxis:
+
+```bash
+devherd observe detach <project-or-path>
+```
+
+#### `devherd observe scan`
+
+Inspecciona contenedores Docker etiquetados por Observe y guarda snapshots en la base local.
+
+Sintaxis:
+
+```bash
+devherd observe scan
+devherd observe scan <project>
+```
+
+Busca contenedores con:
+
+```text
+devherd.observe=true
+devherd.project=<project>
+```
+
+Durante el scan registra:
+
+- contenedor visto por primera vez
+- cambios de status
+- cambios de restart count
+
+#### `devherd observe containers`
+
+Lista los contenedores observados guardados en la base local.
+
+Sintaxis:
+
+```bash
+devherd observe containers
+devherd observe containers <project>
+devherd observe containers <project> --limit 50
+```
+
+#### `devherd observe issues`
+
+Lista issues agrupados.
+
+Sintaxis:
+
+```bash
+devherd observe issues
+devherd observe issues <project>
+devherd observe issues <project> --limit 50
+```
+
+#### `devherd observe events`
+
+Lista eventos recientes.
+
+Sintaxis:
+
+```bash
+devherd observe events
+devherd observe events <project>
+devherd observe events <project> --limit 50
+```
+
+La salida incluye el `EVENT` ID completo para usarlo con `timeline`.
+
+#### `devherd observe timeline`
+
+Muestra la trayectoria local de una falla capturada.
+
+Sintaxis:
+
+```bash
+devherd observe timeline <event-id>
+```
+
+Incluye:
+
+- datos normalizados del evento
+- contenedor y servicio asociados
+- eventos recientes del contenedor
+- logs del contenedor alrededor del timestamp de la falla, si fueron capturados
+
+#### `devherd observe cleanup`
+
+Elimina datos locales viejos de Observe.
+
+Sintaxis:
+
+```bash
+devherd observe cleanup
+devherd observe cleanup --days 14
+```
+
+Elimina registros con fecha anterior al corte indicado en:
+
+- `events`
+- `container_logs`
+- `container_events`
+- `alert_deliveries`
+- `issues`
+
+No elimina reglas de alerta ni archivos del proyecto.
+
+#### `devherd observe alert`
+
+Administra reglas de alerta locales.
+
+Tipos soportados:
+
+- `new-issue`: dispara cuando se crea un nuevo issue agrupado.
+- `error-rate`: dispara cuando el proyecto alcanza `--threshold` eventos dentro de `--window`.
+- `container-exit`: dispara cuando un contenedor observado cambia a `exited`.
+- `container-restart`: dispara cuando aumenta el restart count de un contenedor observado.
+
+##### `devherd observe alert add`
+
+Crea una regla de alerta.
+
+Sintaxis:
+
+```bash
+devherd observe alert add --project <project> --on <kind>
+devherd observe alert add --project <project> --on error-rate --threshold 10 --window 5m
+devherd observe alert add --on new-issue
+```
+
+Flags:
+
+- `--project string`: nombre del proyecto. Si se omite, la regla aplica a todos los proyectos.
+- `--on string`: requerido. Tipo de alerta.
+- `--threshold int`: umbral para `error-rate`. Default: `1`.
+- `--window duration`: ventana para `error-rate`. Default: `5m`.
+
+##### `devherd observe alert list`
+
+Lista reglas de alerta.
+
+Sintaxis:
+
+```bash
+devherd observe alert list
+devherd observe alert list <project>
+```
+
+Cuando se pasa un proyecto, muestra reglas especificas del proyecto y reglas globales.
+
+##### `devherd observe alert deliveries`
+
+Lista alertas disparadas.
+
+Sintaxis:
+
+```bash
+devherd observe alert deliveries
+devherd observe alert deliveries <project>
+devherd observe alert deliveries <project> --limit 50
+```
+
+Estas entregas son locales: se guardan en SQLite y se muestran tambien en el panel.
+
+##### `devherd observe alert remove`
+
+Elimina una regla de alerta por id.
+
+Sintaxis:
+
+```bash
+devherd observe alert remove <id>
+```
 
 ### `devherd sentry`
 
