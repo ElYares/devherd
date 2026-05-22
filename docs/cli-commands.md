@@ -14,6 +14,7 @@ Esta guia describe la CLI actual de DevHerd, su alcance en el MVP y el estado re
 - `devherd domain set <project> --domain <name>`
 - `devherd proxy apply [project]`
 - `devherd plan [path]`
+- `devherd inspect [path]`
 - `devherd up [path]`
 - `devherd down [path]`
 - `devherd open <project>`
@@ -92,6 +93,7 @@ go run ./cmd/devherd init --proxy caddy-docker-external
 go run ./cmd/devherd doctor
 go run ./cmd/devherd park /home/elyarestark/develop/examples
 go run ./cmd/devherd plan /home/elyarestark/develop/examples/hello-vue-flask-docker
+go run ./cmd/devherd inspect /home/elyarestark/develop/examples/hello-vue-flask-docker
 go run ./cmd/devherd domain set hello-vue-flask-docker --domain mi-demo
 go run ./cmd/devherd up /home/elyarestark/develop/examples/hello-vue-flask-docker
 go run ./cmd/devherd proxy apply hello-vue-flask-docker
@@ -373,8 +375,10 @@ Comportamiento actual:
 - Si no pasas `path`, usa el directorio actual.
 - Si existe `.devherd.yml`, usa `compose.files` y `compose.env_file` desde ese manifiesto.
 - Si no existe manifiesto, autodetecta un unico archivo Compose soportado.
+- Calcula un project-name estable por ruta, con forma `devherd-<slug>-<hash>`.
 - Imprime:
   - raiz del proyecto
+  - project-name de Compose
   - fuente de resolucion
   - archivo `.env` detectado
   - archivos Compose incluidos
@@ -389,6 +393,85 @@ devherd plan
 devherd plan /home/elyarestark/develop-work/aang-server
 ```
 
+### `devherd inspect`
+
+Audita un proyecto Compose para detectar colisiones locales y riesgos de aislamiento.
+
+Sintaxis:
+
+```bash
+devherd inspect [path]
+```
+
+Comportamiento actual:
+
+- Si no pasas `path`, usa el directorio actual.
+- Resuelve el mismo stack que `devherd plan`.
+- Lee el `.env` efectivo del proyecto.
+- Consulta Docker cuando esta disponible.
+- Revisa puertos publicados y quien los ocupa.
+- Revisa `container_name` fijos o parametrizados.
+- Revisa si el dominio del proxy externo esta publicado y si el servicio objetivo esta corriendo.
+- Revisa señales comunes de mezcla local en Laravel: `APP_URL`, `SESSION_COOKIE`, `CACHE_PREFIX`, `REDIS_PREFIX`, `REDIS_DB` y `REDIS_CACHE_DB`.
+- Revisa volumenes externos declarados por Compose.
+
+Ejemplos:
+
+```bash
+devherd inspect
+devherd inspect /home/elyares/develop/work/aang-server
+devherd inspect /home/elyares/develop/work/Uniformes
+```
+
+Salida tipo:
+
+```text
+Project root: /home/elyares/develop/work/aang-server
+Findings:
+WARN  shared-service   project can reach shared Redis on infra_net; namespace Redis keys per project
+OK    container_name   app uses parameterized name "aang_app"
+OK    port             web publishes 127.0.0.1:8083 and it is already owned by this project
+OK    proxy            aang.localhost is published and web is running
+```
+
+### Patron recomendado para proyectos Compose
+
+Para evitar choques al levantar clones o variantes paralelas, los proyectos deben parametrizar `container_name` con `COMPOSE_NAME_PREFIX` y mantener defaults compatibles:
+
+```yaml
+services:
+  app:
+    container_name: ${COMPOSE_NAME_PREFIX:-aang}_app
+  web:
+    container_name: ${COMPOSE_NAME_PREFIX:-aang}_web
+```
+
+En `.env`:
+
+```env
+COMPOSE_NAME_PREFIX=aang
+APP_URL=http://aang.localhost
+SESSION_COOKIE=aang_session
+CACHE_PREFIX=aang_cache_
+REDIS_PREFIX=aang_database_
+REDIS_DB=7
+REDIS_CACHE_DB=8
+APP_PORT=8083
+FORWARD_DB_PORT=3310
+```
+
+Para un clone paralelo, cambia el prefijo, dominio, puertos, cookie y prefijos de cache/Redis:
+
+```env
+COMPOSE_NAME_PREFIX=aang-v2
+APP_URL=http://aang-v2.localhost
+SESSION_COOKIE=aang_v2_session
+CACHE_PREFIX=aang_v2_cache_
+REDIS_PREFIX=aang_v2_database_
+APP_PORT=8084
+FORWARD_DB_PORT=3311
+```
+
 ### `devherd up`
 
 Levanta un proyecto basado en Docker Compose.
@@ -399,13 +482,43 @@ Sintaxis:
 devherd up [path]
 ```
 
+Flags:
+
+- `--force`: continua aunque el preflight detecte fallos.
+- `--no-inspect`: omite el preflight antes de levantar el proyecto.
+
 Comportamiento actual:
 
 - Si no pasas `path`, usa el directorio actual.
 - Busca `docker-compose.yml`, `docker-compose.yaml`, `compose.yml` o `compose.yaml`.
 - Si existe `.devherd.yml`, usa `compose.files` y `compose.env_file` desde ese manifiesto.
+- Ejecuta un preflight equivalente a `devherd inspect` antes de levantar.
+- Si el preflight detecta `FAIL`, aborta antes de tocar Docker.
+- Si pasas `--force`, imprime los fallos y continua.
+- Si pasas `--no-inspect`, levanta sin auditar.
+- Ejecuta Compose con `--project-name devherd-<slug>-<hash>` para que clones con el mismo basename no compartan project-name.
 - Si el driver es `caddy-docker-external`, puede agregar `.devherd.proxy.override.yml` al levantar el proyecto.
 - Ejecuta `docker compose up --build -d`.
+
+Salida de preflight con warnings:
+
+```text
+preflight: warnings found
+Project root: /home/elyares/develop/work/aang-server
+Findings:
+WARN  shared-service   project can reach shared Redis on infra_net; namespace Redis keys per project
+
+continuing...
+```
+
+Salida de preflight con fallos:
+
+```text
+preflight: failures found
+Project root: /home/elyares/develop/work/demo
+Findings:
+FAIL  port             web wants 8082 but other_container owns it
+```
 
 Manifiesto opcional:
 
@@ -424,11 +537,31 @@ Notas del manifiesto:
 - `compose.env_file` es opcional.
 - Si el manifiesto existe y es valido, reemplaza la autodeteccion simple de un solo archivo Compose.
 
+Notas de volumenes:
+
+- Cambiar el project-name de Compose tambien cambia el nombre default de los volumenes internos.
+- Para preservar datos entre cambios de project-name o clones, define `name:` en el volumen y parametrizalo desde `.env`.
+- Ejemplo:
+
+```yaml
+volumes:
+  db_data:
+    name: ${DB_VOLUME_NAME:-mi_proyecto_db_data}
+    external: ${DB_VOLUME_EXTERNAL:-false}
+```
+
+```env
+DB_VOLUME_NAME=mi_proyecto_db_data
+DB_VOLUME_EXTERNAL=false
+```
+
 Ejemplos:
 
 ```bash
 devherd up
 devherd up /home/elyarestark/develop/examples/hello-vue-flask-docker
+devherd up --force /home/elyares/develop/work/aang-server
+devherd up --no-inspect /home/elyares/develop/work/aang-server
 ```
 
 ### `devherd down`
@@ -447,6 +580,7 @@ Comportamiento actual:
 - Busca un archivo Compose soportado.
 - Si existe `.devherd.yml`, usa los mismos `compose.files` y `compose.env_file` definidos ahi.
 - Si existe `.devherd.proxy.override.yml`, lo reutiliza para bajar el mismo stack que se levanto en modo externo.
+- Ejecuta `down` con el project-name estable y tambien intenta limpiar el project-name legado derivado de la carpeta.
 - En modo `caddy-docker-external`, tambien elimina el override generado y remueve el bloque del dominio del `Caddyfile` externo.
 - Ejecuta `docker compose down`.
 
@@ -528,13 +662,15 @@ devherd service status redis
 Comportamiento esperado:
 
 - Levantar contenedores Compose administrados por DevHerd.
-- Persistir estado del servicio en SQLite.
+- Crear la red Docker compartida `infra_net` cuando haga falta.
+- Conectar servicios compartidos a `infra_net` con aliases estables (`redis`, `mailpit`).
 - Exponer puertos conocidos.
 
 Estado actual:
 
-- Comandos disponibles.
-- Aun devuelven `not implemented yet`.
+- `redis` levanta `infra_redis` con `redis:7-alpine`, volumen persistente y puerto host `127.0.0.1:6379`.
+- `mailpit` levanta `infra_mailpit` con puertos host `127.0.0.1:1025` y `127.0.0.1:8025`.
+- `status` consulta el stack Compose administrado por DevHerd.
 
 ### `devherd sentry`
 

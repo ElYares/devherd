@@ -16,6 +16,7 @@ La CLI ya tiene estos comandos funcionales:
 - `devherd down [path]`
 - `devherd proxy apply [project]`
 - `devherd open <project>`
+- `devherd inspect [path]`
 - `devherd sentry init <project> --stack <stack> --dry-run`
 
 Ademas, `plan`, `up` y `down` ya soportan proyectos con manifiesto `.devherd.yml` para definir multiples archivos Compose y un `env_file` opcional.
@@ -63,6 +64,7 @@ Ademas, `plan`, `up` y `down` ya soportan proyectos con manifiesto `.devherd.yml
 ### Proyectos Docker Compose
 
 - inspecciona proyectos con `devherd plan`
+- audita colisiones locales con `devherd inspect`
 - levanta proyectos con `devherd up`
 - baja proyectos con `devherd down`
 - soporta `.devherd.yml` con:
@@ -185,14 +187,58 @@ Y durante esa validacion se corrigieron dos huecos:
 - `down` dejaba el bloque del dominio en `local_proxy` y el override generado
 - `park` podia detectar `node_modules` como proyecto falso
 
-## 7. Limitaciones actuales
+## 7. Validacion operativa de `aang-server` y `Uniformes`
+
+En el entorno real actual se valido el flujo con dos proyectos Laravel dentro de:
+
+```text
+/home/elyares/develop/work
+```
+
+Proyectos:
+
+- `aang-server`
+- `Uniformes`
+
+Quedo validado que:
+
+- ambos proyectos pueden estar arriba al mismo tiempo
+- `http://aang.localhost` responde `200 OK`
+- `http://uniformes.localhost` responde `200 OK`
+- cada proyecto publica su propio bloque en `local_proxy`
+- `aang-server` usa `aang_session`
+- `Uniformes` usa `uniformes_session`
+- `aang-server` usa `CACHE_PREFIX=aang_cache_` y `REDIS_PREFIX=aang_database_`
+- `aang-server` conserva su volumen MySQL legado con `DB_VOLUME_NAME=aang-server_aang_db_data` y `DB_VOLUME_EXTERNAL=true`
+- `Uniformes` usa `CACHE_PREFIX=uniformes_cache_` y `REDIS_PREFIX=uniformes_database_`
+- `devherd inspect` detecta puertos, proxy, `container_name`, Redis/cache/session y volumenes externos
+
+Tambien se aplico el patron de aislamiento inicial en ambos proyectos:
+
+```yaml
+container_name: ${COMPOSE_NAME_PREFIX:-aang}_app
+```
+
+Y en `.env`:
+
+```env
+COMPOSE_NAME_PREFIX=aang
+```
+
+Para `Uniformes`, el mismo patron usa:
+
+```env
+COMPOSE_NAME_PREFIX=uniformes
+```
+
+Esto mantiene los nombres actuales (`aang_app`, `uniformes_app`) pero permite levantar clones cambiando el prefijo y los puertos en `.env`.
+
+## 8. Limitaciones actuales
 
 ### Validacion operativa pendiente
 
 Aunque la implementacion y tests ya estan en verde, todavia falta validar en stacks reales sensibles:
 
-- aclarar la discrepancia del puerto observado de Vite en `aang-server`
-- validar el mismo flujo sobre `Uniformes`
 - validar el mismo flujo sobre `poderygozo-landing-page`
 - validar el entrypoint real de `RetailDataOps`
 
@@ -202,37 +248,47 @@ Aunque la implementacion y tests ya estan en verde, todavia falta validar en sta
   - proyectos con `proxy.service` y `proxy.port` en `.devherd.yml`
   - fallback `vue+flask` con `backend:8000` y `frontend:5173`
 - todavia no existe un contrato universal por framework para generar rutas complejas sin metadatos
-- no hay un comando dedicado para auditar colisiones de puertos antes de `up`
+- `devherd inspect` ya cubre un primer corte de auditoria de puertos, proxy, `container_name`, Redis/cache/session y volumenes externos
+- `devherd up` ejecuta preflight antes de levantar
+- `devherd up` aborta si el preflight detecta `FAIL`
+- `devherd up --force` permite continuar aunque haya fallos
+- `devherd up --no-inspect` permite omitir la auditoria
+- DevHerd calcula `--project-name devherd-<slug>-<hash>` desde la ruta absoluta del proyecto
+- `down` intenta limpiar tanto el project-name estable como el project-name legado derivado del basename
 
 ### Comandos aun no implementados
 
 Siguen pendientes:
 
 - `devherd logs`
-- `devherd service start|stop|status`
 - `devherd sentry set-dsn`
 - `devherd sentry test`
 
-## 8. En que punto estamos
+## 9. En que punto estamos
 
 En este momento DevHerd ya es capaz de:
 
 - inicializar su entorno local
 - detectar y registrar proyectos reales
 - persistir configuracion y dominios
+- levantar servicios compartidos `redis` y `mailpit` via `devherd service`
+- crear y validar la red interna compartida `infra_net`
 - inspeccionar stacks Compose sin side effects
+- auditar colisiones locales con `devherd inspect`
+- ejecutar preflight automatico antes de `devherd up`
+- usar project-name estable por ruta en comandos Compose
 - levantar proyectos Docker Compose
 - integrar `local_proxy` Docker externo en el flujo CLI
 - preparar la integracion con Sentry en modo seguro
 
 El punto que sigue ya no es diseno del feature. Es ampliacion de validacion operativa sobre proyectos reales y luego compatibilidad por stack.
 
-## 9. Siguiente bloque recomendado
+## 10. Siguiente bloque recomendado
 
 El siguiente bloque de trabajo con mas valor es:
 
-1. validar el mismo flujo sobre `Uniformes` y `poderygozo-landing-page`
+1. validar el mismo flujo sobre `poderygozo-landing-page`
 2. confirmar el entrypoint final de `RetailDataOps`
 3. documentar patrones de manifiesto por tipo de proyecto
-4. definir si hace falta un comando `doctor ports` o `proxy inspect`
+4. reducir dependencia de `container_name` en proyectos reales ahora que el project-name es estable
 5. ampliar compatibilidad de routing externo para stacks no `vue+flask`
