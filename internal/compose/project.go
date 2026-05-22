@@ -2,6 +2,8 @@ package compose
 
 import (
 	"context"
+	"crypto/sha1"
+	"encoding/hex"
 	"fmt"
 	"os"
 	"os/exec"
@@ -26,11 +28,13 @@ const (
 )
 
 type Project struct {
-	Root         string
-	ComposeFiles []string
-	EnvFile      string
-	Source       string
-	Proxy        ProjectProxy
+	Root              string
+	ComposeFiles      []string
+	EnvFile           string
+	Source            string
+	ProjectName       string
+	LegacyProjectName string
+	Proxy             ProjectProxy
 }
 
 type manifest struct {
@@ -83,7 +87,7 @@ func ResolveProject(input string) (Project, error) {
 	if project, ok, err := resolveManifestProject(absoluteTarget); err != nil {
 		return Project{}, err
 	} else if ok {
-		return project, nil
+		return withProjectNames(project), nil
 	}
 
 	for _, candidate := range supportedComposeFiles {
@@ -93,7 +97,7 @@ func ResolveProject(input string) (Project, error) {
 				Root:         absoluteTarget,
 				ComposeFiles: []string{composeFile},
 				Source:       ProjectSourceAutodetect,
-			}, nil
+			}.withProjectNames(), nil
 		}
 	}
 
@@ -136,13 +140,55 @@ func UpProject(ctx context.Context, project Project) (string, error) {
 func DownProject(ctx context.Context, project Project) (string, error) {
 	args := composeArgs(project)
 	args = append(args, "down")
-	return run(ctx, project.Root, "docker", args...)
+	output, err := run(ctx, project.Root, "docker", args...)
+	if err != nil {
+		return output, err
+	}
+
+	if project.LegacyProjectName == "" || project.LegacyProjectName == project.ProjectName {
+		return output, nil
+	}
+
+	legacyProject := project
+	legacyProject.ProjectName = project.LegacyProjectName
+	legacyArgs := composeArgs(legacyProject)
+	legacyArgs = append(legacyArgs, "down")
+	legacyOutput, legacyErr := run(ctx, project.Root, "docker", legacyArgs...)
+	if legacyOutput != "" {
+		output = joinOutput(output, legacyOutput)
+	}
+	if legacyErr != nil {
+		return output, legacyErr
+	}
+
+	return output, nil
 }
 
 func StopProject(ctx context.Context, project Project) (string, error) {
 	args := composeArgs(project)
 	args = append(args, "stop")
-	return run(ctx, project.Root, "docker", args...)
+	output, err := run(ctx, project.Root, "docker", args...)
+	if err != nil {
+		return output, err
+	}
+
+	if project.LegacyProjectName == "" || project.LegacyProjectName == project.ProjectName {
+		return output, nil
+	}
+
+	legacyProject := project
+	legacyProject.ProjectName = project.LegacyProjectName
+	legacyArgs := composeArgs(legacyProject)
+	legacyArgs = append(legacyArgs, "stop")
+	legacyOutput, legacyErr := run(ctx, project.Root, "docker", legacyArgs...)
+	if legacyOutput != "" {
+		output = joinOutput(output, legacyOutput)
+	}
+	if legacyErr != nil {
+		return output, legacyErr
+	}
+
+	return output, nil
 }
 
 func resolveManifestProject(root string) (Project, bool, error) {
@@ -226,6 +272,10 @@ func resolveRelativeFile(root string, value string) (string, error) {
 func composeArgs(project Project) []string {
 	args := []string{"compose"}
 
+	if project.ProjectName != "" {
+		args = append(args, "--project-name", project.ProjectName)
+	}
+
 	if project.EnvFile != "" {
 		args = append(args, "--env-file", project.EnvFile)
 	}
@@ -270,4 +320,83 @@ func run(ctx context.Context, workdir string, name string, args ...string) (stri
 	}
 
 	return strings.TrimSpace(string(output)), nil
+}
+
+func (project Project) withProjectNames() Project {
+	return withProjectNames(project)
+}
+
+func withProjectNames(project Project) Project {
+	if project.Root == "" {
+		return project
+	}
+
+	if project.ProjectName == "" {
+		project.ProjectName = ProjectNameForPath(project.Root)
+	}
+	if project.LegacyProjectName == "" {
+		project.LegacyProjectName = LegacyProjectNameForPath(project.Root)
+	}
+
+	return project
+}
+
+func ProjectNameForPath(path string) string {
+	absolutePath, err := filepath.Abs(path)
+	if err != nil {
+		absolutePath = filepath.Clean(path)
+	}
+
+	sum := sha1.Sum([]byte(absolutePath))
+	hash := hex.EncodeToString(sum[:])[:8]
+	slug := composeProjectLabel(filepath.Base(absolutePath))
+	if len(slug) > 32 {
+		slug = strings.Trim(slug[:32], "-")
+	}
+	if slug == "" {
+		slug = "project"
+	}
+
+	return "devherd-" + slug + "-" + hash
+}
+
+func LegacyProjectNameForPath(path string) string {
+	return composeProjectLabel(filepath.Base(filepath.Clean(path)))
+}
+
+func composeProjectLabel(value string) string {
+	value = strings.ToLower(strings.TrimSpace(value))
+	var builder strings.Builder
+	lastHyphen := false
+	for _, r := range value {
+		switch {
+		case r >= 'a' && r <= 'z':
+			builder.WriteRune(r)
+			lastHyphen = false
+		case r >= '0' && r <= '9':
+			builder.WriteRune(r)
+			lastHyphen = false
+		case !lastHyphen:
+			builder.WriteRune('-')
+			lastHyphen = true
+		}
+	}
+
+	label := strings.Trim(builder.String(), "-")
+	if label == "" {
+		return "project"
+	}
+
+	return label
+}
+
+func joinOutput(left, right string) string {
+	switch {
+	case left == "":
+		return right
+	case right == "":
+		return left
+	default:
+		return left + "\n" + right
+	}
 }

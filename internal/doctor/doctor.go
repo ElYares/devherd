@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/devherd/devherd/internal/config"
+	"github.com/devherd/devherd/internal/services"
 )
 
 type Status string
@@ -68,7 +69,8 @@ func RunWithConfig(ctx context.Context, cfg config.Config) Report {
 			checkDirectory(cfg.Proxy.ExternalDir, "local_proxy dir"),
 			checkFile(filepath.Join(cfg.Proxy.ExternalDir, "docker-compose.yml"), "local_proxy compose"),
 			checkFile(filepath.Join(cfg.Proxy.ExternalDir, "Caddyfile"), "local_proxy Caddyfile"),
-			checkDockerNetwork(ctx, cfg.Proxy.ExternalNetwork),
+			checkDockerNetwork(ctx, cfg.Proxy.ExternalNetwork, "proxy network"),
+			checkDockerNetwork(ctx, services.NetworkName, "services network"),
 			checkManagedSuffix(cfg.LocalTLD),
 			checkExternalProxyPort(ctx, cfg.Proxy.ExternalContainerName),
 		)
@@ -225,12 +227,12 @@ func checkFile(path, label string) Check {
 	}
 }
 
-func checkDockerNetwork(ctx context.Context, network string) Check {
+func checkDockerNetwork(ctx context.Context, network string, label string) Check {
 	if network == "" {
 		return Check{
-			Name:    "shared network",
+			Name:    label,
 			Status:  StatusFail,
-			Message: "external proxy network is not configured",
+			Message: "docker network is not configured",
 		}
 	}
 
@@ -239,7 +241,7 @@ func checkDockerNetwork(ctx context.Context, network string) Check {
 		info, parseErr := parseDockerNetworkInfo(output)
 		if parseErr != nil {
 			return Check{
-				Name:    "shared network",
+				Name:    label,
 				Status:  StatusWarn,
 				Message: fmt.Sprintf("docker network %s exists but could not be inspected fully: %s", network, parseErr.Error()),
 			}
@@ -247,7 +249,7 @@ func checkDockerNetwork(ctx context.Context, network string) Check {
 
 		if !strings.EqualFold(info.Driver, "bridge") {
 			return Check{
-				Name:    "shared network",
+				Name:    label,
 				Status:  StatusWarn,
 				Message: fmt.Sprintf("docker network %s uses driver %s; bridge is recommended for local DevHerd stacks", network, info.Driver),
 			}
@@ -255,7 +257,7 @@ func checkDockerNetwork(ctx context.Context, network string) Check {
 
 		if !strings.EqualFold(info.Scope, "local") {
 			return Check{
-				Name:    "shared network",
+				Name:    label,
 				Status:  StatusWarn,
 				Message: fmt.Sprintf("docker network %s uses scope %s; local scope is recommended", network, info.Scope),
 			}
@@ -263,21 +265,21 @@ func checkDockerNetwork(ctx context.Context, network string) Check {
 
 		if info.Internal {
 			return Check{
-				Name:    "shared network",
+				Name:    label,
 				Status:  StatusWarn,
 				Message: fmt.Sprintf("docker network %s is internal; shared local stacks usually need a non-internal bridge network", network),
 			}
 		}
 
 		return Check{
-			Name:    "shared network",
+			Name:    label,
 			Status:  StatusOK,
 			Message: fmt.Sprintf("docker network %s is ready (%s/%s)", network, info.Driver, info.Scope),
 		}
 	}
 
 	return Check{
-		Name:    "shared network",
+		Name:    label,
 		Status:  StatusWarn,
 		Message: fmt.Sprintf("docker network %s is missing; DevHerd can create it on first use", network),
 	}

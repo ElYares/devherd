@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -33,6 +34,14 @@ func TestResolveProjectDefaultsToSingleComposeFile(t *testing.T) {
 
 	if project.Source != ProjectSourceAutodetect {
 		t.Fatalf("unexpected source: got %q want %q", project.Source, ProjectSourceAutodetect)
+	}
+
+	if project.ProjectName != ProjectNameForPath(dir) {
+		t.Fatalf("unexpected project name: got %q want %q", project.ProjectName, ProjectNameForPath(dir))
+	}
+
+	if project.LegacyProjectName != LegacyProjectNameForPath(dir) {
+		t.Fatalf("unexpected legacy project name: got %q want %q", project.LegacyProjectName, LegacyProjectNameForPath(dir))
 	}
 }
 
@@ -79,6 +88,10 @@ func TestResolveProjectUsesManifestComposeFiles(t *testing.T) {
 	if project.Proxy.Service != "web" || project.Proxy.Port != 80 {
 		t.Fatalf("unexpected proxy config: %#v", project.Proxy)
 	}
+
+	if project.ProjectName != ProjectNameForPath(dir) {
+		t.Fatalf("unexpected project name: got %q want %q", project.ProjectName, ProjectNameForPath(dir))
+	}
 }
 
 func TestResolveProjectErrorsWhenManifestComposeFileMissing(t *testing.T) {
@@ -100,11 +113,13 @@ func TestComposeArgsIncludesEnvFileAndAllComposeFiles(t *testing.T) {
 		Root:         "/tmp/project",
 		ComposeFiles: []string{"/tmp/project/docker-compose.yml", "/tmp/project/docker-compose.shared.yml"},
 		EnvFile:      "/tmp/project/.env.devherd",
+		ProjectName:  "devherd-project-abc12345",
 	}
 
 	got := composeArgs(project)
 	want := []string{
 		"compose",
+		"--project-name", "devherd-project-abc12345",
 		"--env-file", "/tmp/project/.env.devherd",
 		"-f", "/tmp/project/docker-compose.yml",
 		"-f", "/tmp/project/docker-compose.shared.yml",
@@ -131,7 +146,7 @@ func TestPlanReturnsDockerCommand(t *testing.T) {
 		t.Fatalf("unexpected root: got %q want %q", project.Root, dir)
 	}
 
-	want := []string{"docker", "compose", "-f", composeFile}
+	want := []string{"docker", "compose", "--project-name", ProjectNameForPath(dir), "-f", composeFile}
 	if !reflect.DeepEqual(command, want) {
 		t.Fatalf("unexpected command: got %#v want %#v", command, want)
 	}
@@ -142,12 +157,14 @@ func TestStopProjectUsesComposeStop(t *testing.T) {
 		Root:         "/tmp/project",
 		ComposeFiles: []string{"/tmp/project/docker-compose.yml", "/tmp/project/docker-compose.shared.yml"},
 		EnvFile:      "/tmp/project/.env.devherd",
+		ProjectName:  "devherd-project-abc12345",
 	}
 
 	got := composeArgs(project)
 	got = append(got, "stop")
 	want := []string{
 		"compose",
+		"--project-name", "devherd-project-abc12345",
 		"--env-file", "/tmp/project/.env.devherd",
 		"-f", "/tmp/project/docker-compose.yml",
 		"-f", "/tmp/project/docker-compose.shared.yml",
@@ -156,5 +173,23 @@ func TestStopProjectUsesComposeStop(t *testing.T) {
 
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("unexpected stop args: got %#v want %#v", got, want)
+	}
+}
+
+func TestProjectNameForPathIsStableAndPathScoped(t *testing.T) {
+	first := ProjectNameForPath("/tmp/work/aang-server")
+	second := ProjectNameForPath("/tmp/work/aang-server")
+	other := ProjectNameForPath("/tmp/other/aang-server")
+
+	if first != second {
+		t.Fatalf("expected stable project name, got %q and %q", first, second)
+	}
+
+	if first == other {
+		t.Fatalf("expected path-scoped project names to differ, got %q", first)
+	}
+
+	if !strings.HasPrefix(first, "devherd-aang-server-") {
+		t.Fatalf("unexpected project name: %q", first)
 	}
 }

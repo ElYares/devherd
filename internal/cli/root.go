@@ -30,6 +30,7 @@ func newRootCmd() *cobra.Command {
 		newDomainCmd(),
 		newProxyCmd(),
 		newPlanCmd(),
+		newInspectCmd(),
 		newUpCmd(),
 		newStopCmd(),
 		newDownCmd(),

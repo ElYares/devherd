@@ -28,6 +28,7 @@ func newPlanCmd() *cobra.Command {
 
 			out := cmd.OutOrStdout()
 			fmt.Fprintf(out, "Project root: %s\n", project.Root)
+			fmt.Fprintf(out, "Compose project: %s\n", project.ProjectName)
 			fmt.Fprintf(out, "Resolution: %s\n", describeProjectSource(project))
 			fmt.Fprintf(out, "Env file: %s\n", describeEnvFile(project))
 			fmt.Fprintln(out, "Compose files:")
