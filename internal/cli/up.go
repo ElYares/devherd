@@ -15,7 +15,12 @@ func newUpCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "up [path]",
 		Short: "Start a compose-based project from the given path or current directory",
-		Args:  cobra.MaximumNArgs(1),
+		Example: `  # Levantar el proyecto del directorio actual
+  devherd up
+
+  # Saltar el preflight de colisiones
+  devherd up ~/dev/mi-app --no-inspect`,
+		Args: cobra.MaximumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			targetPath := ""
 			if len(args) == 1 {

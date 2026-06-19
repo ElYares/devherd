@@ -18,7 +18,12 @@ func newLogsCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logs [path]",
 		Short: "Tail logs for a project",
-		Args:  cobra.MaximumNArgs(1),
+		Example: `  # Últimas 100 líneas
+  devherd logs ~/dev/mi-app --tail 100
+
+  # Seguir en vivo
+  devherd logs ~/dev/mi-app -f`,
+		Args: cobra.MaximumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			targetPath := ""
 			if len(args) == 1 {

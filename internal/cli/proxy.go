@@ -30,7 +30,12 @@ func newProxyApplyCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "apply [project]",
 		Short: "Render proxy configuration, sync local hosts, and reload Caddy",
-		Args:  cobra.MaximumNArgs(1),
+		Example: `  # Aplica el proxy para todos los proyectos registrados
+  devherd proxy apply
+
+  # Solo para un proyecto
+  devherd proxy apply mi-app`,
+		Args: cobra.MaximumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			projectName := ""
 			if len(args) == 1 {

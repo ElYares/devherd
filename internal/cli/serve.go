@@ -13,7 +13,12 @@ func newServeCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "serve [path]",
 		Short: "Start a project, apply the proxy and open it (up + proxy apply + open)",
-		Args:  cobra.MaximumNArgs(1),
+		Example: `  # Levanta el proyecto del directorio actual, aplica el proxy y lo abre
+  devherd serve
+
+  # Por ruta explícita
+  devherd serve ~/dev/mi-app`,
+		Args: cobra.MaximumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			targetPath := ""
 			if len(args) == 1 {
