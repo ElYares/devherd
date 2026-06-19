@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io/fs"
+	"log/slog"
 
 	"github.com/devherd/devherd/internal/config"
 	"github.com/devherd/devherd/internal/database"
@@ -46,6 +47,14 @@ func loadAppContext(ctx context.Context) (*appContext, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	slog.Debug("app context loaded",
+		"config_file", paths.ConfigFile,
+		"db_file", paths.DBFile,
+		"compose_dir", paths.ComposeDir,
+		"runtime_manager", cfg.RuntimeManager,
+		"tld", cfg.LocalTLD,
+	)
 
 	return &appContext{
 		Paths:  paths,

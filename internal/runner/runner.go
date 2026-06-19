@@ -7,6 +7,7 @@ package runner
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"os/exec"
 	"strings"
 	"time"
@@ -39,7 +40,12 @@ func (c Cmd) Run(ctx context.Context, dir, name string, args ...string) (string,
 		cmd.Dir = dir
 	}
 
+	slog.Debug("runner: exec", "dir", dir, "cmd", name, "args", args)
+
+	start := time.Now()
 	output, err := cmd.CombinedOutput()
+	slog.Debug("runner: done", "cmd", name, "elapsed", time.Since(start).String(), "err", err)
+
 	trimmed := strings.TrimSpace(string(output))
 	if err != nil {
 		if trimmed == "" {
