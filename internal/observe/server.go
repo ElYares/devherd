@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"strings"
 	"time"
@@ -134,7 +135,11 @@ func (s Server) handleAPI(w http.ResponseWriter, r *http.Request) {
 	var logs []ContainerLog
 	if s.docker != nil {
 		correlator := NewCorrelator(s.store, s.docker)
-		logs, _ = correlator.CorrelateEvent(r.Context(), &event)
+		logs, err = correlator.CorrelateEvent(r.Context(), &event)
+		if err != nil {
+			slog.Warn("observe: correlate event with container logs failed",
+				"project", project, "container", event.Container, "error", err)
+		}
 	}
 
 	stored, err := s.store.StoreEvent(r.Context(), event)
@@ -143,7 +148,10 @@ func (s Server) handleAPI(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if len(logs) > 0 {
-		_ = s.store.StoreContainerLogs(r.Context(), stored.EventID, logs)
+		if err := s.store.StoreContainerLogs(r.Context(), stored.EventID, logs); err != nil {
+			slog.Warn("observe: store container logs failed",
+				"event_id", stored.EventID, "log_count", len(logs), "error", err)
+		}
 	}
 
 	writeJSON(w, http.StatusAccepted, map[string]any{
@@ -176,11 +184,18 @@ func (s Server) snapshotObservedContainers(ctx context.Context, project string) 
 	}
 
 	containers, err := s.docker.ObservedContainers(ctx, project)
-	if err != nil || len(containers) == 0 {
+	if err != nil {
+		slog.Warn("observe: list observed containers failed", "project", project, "error", err)
+		return
+	}
+	if len(containers) == 0 {
 		return
 	}
 
-	_, _ = s.store.StoreContainers(ctx, containers)
+	if _, err := s.store.StoreContainers(ctx, containers); err != nil {
+		slog.Warn("observe: store observed containers failed",
+			"project", project, "count", len(containers), "error", err)
+	}
 }
 
 func parseAPIPath(path string) (string, string, bool) {
