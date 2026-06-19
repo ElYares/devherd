@@ -15,7 +15,7 @@ repo sin Docker  →  devherd scaffold  →  detecta stack
 | Layout | Imagen base | Puerto por defecto |
 |---|---|---|
 | `vue+flask` (hijo Flask + hijo Vue) | `python:3.12-slim` + `node:20-alpine` | 8000 / 5173 (fijos, contrato del proxy) |
-| `laravel` (artisan + composer.json) | `php:8.3-cli` | 8000 |
+| `laravel` (artisan + composer.json) | `php:8.3-cli` (+ extensiones, composer, vite) | 8000 |
 | `vue` | `node:20-alpine` | 5173 |
 | `flask` | `python:3.12-slim` | 8000 |
 | `node` | `node:20-alpine` | 3000 |
@@ -30,6 +30,25 @@ Para stacks de un solo servicio, DevHerd respeta lo que el repo ya declara:
 - **Puerto**: lo lee del `.env` (`PORT`, `APP_PORT`, `FLASK_RUN_PORT`); si no, usa el default del stack.
 - **Comando**: elige el script real de `package.json` (`dev` > `serve` > `start`).
 - El `.devherd.yml` generado declara `proxy.service`/`port` para que el proxy enrute correctamente.
+
+## Laravel (soporte completo)
+
+Para proyectos Laravel, `scaffold` genera un plan listo para producir, derivando
+todo del repo (no pregunta la base de datos):
+
+- **`app`** (`php:8.3-cli`): instala extensiones (`pdo_mysql`/`pdo_pgsql`, `gd`,
+  `bcmath`, `intl`, `redis`), instala Composer y dependencias, copia `.env` desde
+  `.env.example`, ejecuta `php artisan key:generate`, espera a la base de datos y
+  corre `php artisan migrate`, y finalmente `php artisan serve`.
+- **`vite`** (`node:20-alpine`): `npm install && npm run dev` para los assets.
+- **`db`**: el motor y las credenciales se **detectan del `.env`** del proyecto
+  (`DB_CONNECTION`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`). Si usa `root` con
+  password vacío, se configura `MYSQL_ALLOW_EMPTY_PASSWORD`.
+- **`redis`** interno.
+
+> Nota: el arranque sin Dockerfile instala extensiones/Composer en cada `up` (más
+> lento). Features que requieran binarios extra (p. ej. Chromium para PDFs) deben
+> añadirse aparte. Para algo estable, conviene un `Dockerfile`.
 
 ## Bases de datos y Redis
 

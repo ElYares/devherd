@@ -218,6 +218,90 @@ func TestManifestOmitsProxyForVueFlask(t *testing.T) {
 	}
 }
 
+func laravelFixture(t *testing.T, env string, extra map[string]string) string {
+	root := t.TempDir()
+	mustWrite(t, filepath.Join(root, "artisan"), "#!/usr/bin/env php\n")
+	mustWrite(t, filepath.Join(root, "composer.json"), "{}")
+	if env != "" {
+		mustWrite(t, filepath.Join(root, ".env.example"), env)
+	}
+	for f, c := range extra {
+		mustWrite(t, filepath.Join(root, f), c)
+	}
+	return root
+}
+
+func TestLaravelPlanIsCompleteWithBacking(t *testing.T) {
+	root := laravelFixture(t, "DB_CONNECTION=mysql\nDB_DATABASE=cvboost\nDB_USERNAME=root\nDB_PASSWORD=\n",
+		map[string]string{"vite.config.js": "export default {}\n", "package.json": `{"scripts":{"dev":"vite"}}`})
+
+	plan, err := Detect(root)
+	if err != nil {
+		t.Fatalf("Detect: %v", err)
+	}
+	if !plan.Complete {
+		t.Error("laravel plan debería ser Complete")
+	}
+
+	names := map[string]Service{}
+	for _, s := range plan.Services {
+		names[s.Name] = s
+	}
+	for _, want := range []string{"app", "vite", "db", "redis"} {
+		if _, ok := names[want]; !ok {
+			t.Errorf("falta servicio %q (tengo %v)", want, names)
+		}
+	}
+
+	app := names["app"]
+	for _, frag := range []string{"composer install", "key:generate", "artisan migrate", "docker-php-ext-install pdo_mysql", "artisan serve"} {
+		if !strings.Contains(app.Command, frag) {
+			t.Errorf("comando laravel sin %q", frag)
+		}
+	}
+	if app.Env["DB_DATABASE"] != "cvboost" || app.Env["DB_HOST"] != "db" {
+		t.Errorf("app env DB mal cableado: %+v", app.Env)
+	}
+	// root + password vacío → MYSQL_ALLOW_EMPTY_PASSWORD
+	if names["db"].Env["MYSQL_ALLOW_EMPTY_PASSWORD"] != "yes" || names["db"].Env["MYSQL_DATABASE"] != "cvboost" {
+		t.Errorf("db env mal derivado del .env: %+v", names["db"].Env)
+	}
+}
+
+func TestLaravelDetectsPostgresFromEnv(t *testing.T) {
+	root := laravelFixture(t, "DB_CONNECTION=pgsql\nDB_DATABASE=app\nDB_USERNAME=app\nDB_PASSWORD=secret\n", nil)
+	plan, _ := Detect(root)
+
+	var db Service
+	for _, s := range plan.Services {
+		if s.Name == "db" {
+			db = s
+		}
+	}
+	if db.Image != "postgres:16" {
+		t.Errorf("db image = %q, want postgres:16", db.Image)
+	}
+	if !strings.Contains(plan.Services[0].Command, "pdo_pgsql") {
+		t.Errorf("comando laravel postgres debe instalar pdo_pgsql")
+	}
+}
+
+func TestLaravelCompletePlanRendersValidStructure(t *testing.T) {
+	root := laravelFixture(t, "DB_CONNECTION=mysql\nDB_DATABASE=app\nDB_USERNAME=app\nDB_PASSWORD=secret\n", nil)
+	plan, _ := Detect(root)
+	plan.AssignHostPorts()
+
+	yaml := RenderCompose(plan)
+	// el comando va en forma exec (lista) por las comillas internas
+	if !strings.Contains(yaml, `command: ["sh", "-c",`) {
+		t.Errorf("comando debería renderizarse en forma exec:\n%s", yaml)
+	}
+	// db (mysql user app) usa MYSQL_USER, no debe publicar puerto
+	if strings.Contains(yaml, "3306:3306") {
+		t.Errorf("la db no debe publicar puerto:\n%s", yaml)
+	}
+}
+
 func contains(s []string, v string) bool {
 	for _, x := range s {
 		if x == v {

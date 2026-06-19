@@ -45,22 +45,26 @@ func newScaffoldCmd() *cobra.Command {
 			}
 
 			out := cmd.OutOrStdout()
-			fmt.Fprintf(out, "detectado: %s (%d servicio(s) de app)\n", plan.Framework, len(plan.Services))
+			fmt.Fprintf(out, "detectado: %s (%d servicio(s))\n", plan.Framework, len(plan.Services))
 
-			// Base de datos: por flag, o menú interactivo si no se indicó.
-			if dbKind == "" {
-				dbKind = promptDatabase(cmd)
-			}
-			dbKind = strings.ToLower(dbKind)
-			if !slices.Contains(scaffold.SupportedDatabases, dbKind) {
-				return fmt.Errorf("base de datos no soportada %q (opciones: %s)", dbKind, strings.Join(scaffold.SupportedDatabases, ", "))
-			}
-			if err := plan.AddDatabase(dbKind); err != nil {
-				return err
-			}
-
-			if redis {
-				plan.AddRedis()
+			if plan.Complete {
+				// Laravel: DB (del .env del proyecto) y Redis ya incluidos por la detección.
+				fmt.Fprintln(out, "base de datos y Redis derivados del .env del proyecto")
+			} else {
+				// Base de datos: por flag, o menú interactivo si no se indicó.
+				if dbKind == "" {
+					dbKind = promptDatabase(cmd)
+				}
+				dbKind = strings.ToLower(dbKind)
+				if !slices.Contains(scaffold.SupportedDatabases, dbKind) {
+					return fmt.Errorf("base de datos no soportada %q (opciones: %s)", dbKind, strings.Join(scaffold.SupportedDatabases, ", "))
+				}
+				if err := plan.AddDatabase(dbKind); err != nil {
+					return err
+				}
+				if redis {
+					plan.AddRedis()
+				}
 			}
 
 			plan.AssignHostPorts()

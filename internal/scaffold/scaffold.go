@@ -22,7 +22,8 @@ const (
 	ManifestFile       = ".devherd.yml"
 )
 
-// Service es un servicio del compose generado.
+// Service es un servicio del compose generado. Command es el script de shell
+// (sin envoltura sh -c), que se renderiza en forma exec ["sh","-c",script].
 type Service struct {
 	Name          string
 	Image         string
@@ -31,23 +32,25 @@ type Service struct {
 	Command       string
 	Env           map[string]string
 	DependsOn     []string
-	ContainerPort int  // puerto dentro del contenedor
-	HostPort      int  // puerto de host asignado (0 = sin asignar / no publicado)
-	Publish       bool // si true, se publica en un puerto de host libre
-	Backing       bool // servicio de respaldo (db/redis), no de aplicación
+	ContainerPort int
+	HostPort      int
+	Publish       bool
+	Backing       bool
 }
 
-// Plan es el resultado de analizar un proyecto.
+// Plan es el resultado de analizar un proyecto. Complete indica que la detección
+// ya incluyó los servicios de respaldo (caso Laravel, que los deriva del .env).
 type Plan struct {
 	Root      string
 	Framework string
+	Complete  bool
 	Services  []Service
 }
 
 // SupportedDatabases lista las opciones de base de datos del menú.
 var SupportedDatabases = []string{"mysql", "mariadb", "postgres", "mongodb", "none"}
 
-// Detect analiza el proyecto y produce un Plan con los servicios de aplicación.
+// Detect analiza el proyecto y produce un Plan.
 func Detect(root string) (Plan, error) {
 	abs, err := filepath.Abs(root)
 	if err != nil {
@@ -72,7 +75,7 @@ func Detect(root string) (Plan, error) {
 	// 2) Stacks de un solo servicio en la raíz (puerto/comando detectados del repo).
 	switch {
 	case isLaravelDir(abs):
-		return single(abs, "laravel", laravelService("app", ".", detectPort(abs, 8000, "APP_PORT", "PORT"))), nil
+		return laravelPlan(abs), nil
 	case isVueDir(abs):
 		return single(abs, "vue", vueService("app", ".", detectPort(abs, 5173, "PORT"), pickScript(abs, "dev", "serve", "start"))), nil
 	case isFlaskDir(abs):
@@ -98,7 +101,7 @@ func flaskService(name, dir string, port int) Service {
 		Image:         "python:3.12-slim",
 		WorkingDir:    "/app",
 		Volumes:       []string{mount(dir)},
-		Command:       fmt.Sprintf(`sh -c "pip install -r requirements.txt && flask run --host 0.0.0.0 --port %d"`, port),
+		Command:       fmt.Sprintf("pip install -r requirements.txt && flask run --host 0.0.0.0 --port %d", port),
 		Env:           map[string]string{"FLASK_APP": "app.py", "FLASK_RUN_PORT": strconv.Itoa(port)},
 		ContainerPort: port,
 		Publish:       true,
@@ -111,7 +114,7 @@ func vueService(name, dir string, port int, script string) Service {
 		Image:         "node:20-alpine",
 		WorkingDir:    "/app",
 		Volumes:       []string{mount(dir)},
-		Command:       fmt.Sprintf(`sh -c "npm install && npm run %s -- --host 0.0.0.0 --port %d"`, script, port),
+		Command:       fmt.Sprintf("npm install && npm run %s -- --host 0.0.0.0 --port %d", script, port),
 		ContainerPort: port,
 		Publish:       true,
 	}
@@ -123,7 +126,7 @@ func nodeService(dir string, port int, script string) Service {
 		Image:         "node:20-alpine",
 		WorkingDir:    "/app",
 		Volumes:       []string{mount(".")},
-		Command:       fmt.Sprintf(`sh -c "npm install && npm run %s"`, script),
+		Command:       fmt.Sprintf("npm install && npm run %s", script),
 		Env:           map[string]string{"PORT": strconv.Itoa(port)},
 		ContainerPort: port,
 		Publish:       true,
@@ -136,67 +139,22 @@ func goService(port int) Service {
 		Image:         "golang:1.25",
 		WorkingDir:    "/app",
 		Volumes:       []string{mount(".")},
-		Command:       `sh -c "go run ./..."`,
+		Command:       "go run ./...",
 		ContainerPort: port,
 		Publish:       true,
 	}
 }
 
-func laravelService(name, dir string, port int) Service {
+func viteService() Service {
 	return Service{
-		Name:          name,
-		Image:         "php:8.3-cli",
+		Name:          "vite",
+		Image:         "node:20-alpine",
 		WorkingDir:    "/app",
-		Volumes:       []string{mount(dir)},
-		Command:       fmt.Sprintf(`sh -c "php artisan serve --host 0.0.0.0 --port %d"`, port),
-		ContainerPort: port,
+		Volumes:       []string{mount(".")},
+		Command:       "npm install && npm run dev -- --host 0.0.0.0 --port 5173",
+		ContainerPort: 5173,
 		Publish:       true,
 	}
-}
-
-// detectPort devuelve el puerto declarado en el .env del repo (primera clave que
-// exista) o el valor por defecto del stack.
-func detectPort(dir string, def int, keys ...string) int {
-	env := readDotEnv(dir)
-	for _, k := range keys {
-		if v, ok := env[k]; ok {
-			if n, err := strconv.Atoi(v); err == nil && n > 0 {
-				return n
-			}
-		}
-	}
-	return def
-}
-
-func readDotEnv(dir string) map[string]string {
-	out := map[string]string{}
-	data, err := os.ReadFile(filepath.Join(dir, ".env"))
-	if err != nil {
-		return out
-	}
-	for _, line := range strings.Split(string(data), "\n") {
-		line = strings.TrimSpace(line)
-		if line == "" || strings.HasPrefix(line, "#") {
-			continue
-		}
-		k, v, ok := strings.Cut(line, "=")
-		if !ok {
-			continue
-		}
-		out[strings.TrimSpace(k)] = strings.Trim(strings.TrimSpace(v), `"'`)
-	}
-	return out
-}
-
-// pickScript elige el primer script de package.json que exista entre prefs; si
-// ninguno existe, devuelve el último (fallback).
-func pickScript(dir string, prefs ...string) string {
-	for _, p := range prefs {
-		if packageJSONHasScript(filepath.Join(dir, "package.json"), p) {
-			return p
-		}
-	}
-	return prefs[len(prefs)-1]
 }
 
 func mount(dir string) string {
@@ -206,7 +164,150 @@ func mount(dir string) string {
 	return "./" + dir + ":/app"
 }
 
-// --- servicios de respaldo ---
+// --- Laravel (plan completo: app php + vite + db del .env + redis) ---
+
+func laravelPlan(root string) Plan {
+	env := projectEnv(root)
+	dbKind := laravelDBKind(env["DB_CONNECTION"])
+	port := detectPort(root, 8000, "APP_PORT", "PORT")
+
+	app := Service{
+		Name:          "app",
+		Image:         "php:8.3-cli",
+		WorkingDir:    "/app",
+		Volumes:       []string{mount(".")},
+		Command:       laravelCommand(dbKind, port),
+		Env:           map[string]string{},
+		ContainerPort: port,
+		Publish:       true,
+	}
+
+	plan := Plan{Root: root, Framework: "laravel", Complete: true, Services: []Service{app}}
+
+	if hasVite(root) {
+		plan.Services = append(plan.Services, viteService())
+	}
+
+	if dbKind != "none" {
+		db, appEnv := laravelDBService(dbKind, env)
+		plan.Services = append(plan.Services, db)
+		for k, v := range appEnv {
+			plan.Services[0].Env[k] = v
+		}
+		plan.Services[0].DependsOn = append(plan.Services[0].DependsOn, "db")
+	}
+
+	plan.Services = append(plan.Services, Service{Name: "redis", Image: "redis:7-alpine", ContainerPort: 6379, Backing: true})
+	plan.Services[0].Env["REDIS_HOST"] = "redis"
+	plan.Services[0].Env["REDIS_PORT"] = "6379"
+	plan.Services[0].DependsOn = append(plan.Services[0].DependsOn, "redis")
+
+	return plan
+}
+
+func laravelDBKind(connection string) string {
+	switch strings.ToLower(strings.TrimSpace(connection)) {
+	case "pgsql", "postgres", "postgresql":
+		return "postgres"
+	case "sqlite":
+		return "none"
+	case "mariadb":
+		return "mariadb"
+	default:
+		return "mysql"
+	}
+}
+
+// laravelCommand arma el arranque sin Dockerfile: extensiones + composer + .env +
+// key + migrate (esperando a la DB) + artisan serve. Las extensiones dependen
+// del motor de base de datos.
+func laravelCommand(dbKind string, port int) string {
+	ext := "pdo_mysql"
+	libs := "libzip-dev libpng-dev libicu-dev unzip git"
+	if dbKind == "postgres" {
+		ext = "pdo_pgsql"
+		libs += " libpq-dev"
+	}
+
+	steps := []string{
+		"apt-get update",
+		"apt-get install -y -q " + libs,
+		"docker-php-ext-install " + ext + " zip gd bcmath intl",
+		"(pecl install redis && docker-php-ext-enable redis)",
+		"curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer",
+		"composer install --no-interaction --no-progress",
+		"([ -f .env ] || cp .env.example .env)",
+		"php artisan key:generate --force",
+		"until php artisan migrate --force; do echo 'esperando a la base de datos...'; sleep 3; done",
+		fmt.Sprintf("php artisan serve --host 0.0.0.0 --port %d", port),
+	}
+	return strings.Join(steps, " && ")
+}
+
+func laravelDBService(kind string, env map[string]string) (Service, map[string]string) {
+	name := orDefault(env["DB_DATABASE"], "app")
+	user := orDefault(env["DB_USERNAME"], "app")
+	pass := env["DB_PASSWORD"]
+
+	if kind == "postgres" {
+		if pass == "" {
+			pass = "secret"
+		}
+		svc := Service{
+			Name:  "db",
+			Image: "postgres:16",
+			Env: map[string]string{
+				"POSTGRES_DB": name, "POSTGRES_USER": user, "POSTGRES_PASSWORD": pass,
+			},
+			Volumes:       []string{"db_data:/var/lib/postgresql/data"},
+			ContainerPort: 5432,
+			Backing:       true,
+		}
+		appEnv := map[string]string{
+			"DB_CONNECTION": "pgsql", "DB_HOST": "db", "DB_PORT": "5432",
+			"DB_DATABASE": name, "DB_USERNAME": user, "DB_PASSWORD": pass,
+		}
+		return svc, appEnv
+	}
+
+	image := "mysql:8"
+	if kind == "mariadb" {
+		image = "mariadb:11"
+	}
+	dbEnv := map[string]string{"MYSQL_DATABASE": name}
+	if user == "root" {
+		if pass == "" {
+			dbEnv["MYSQL_ALLOW_EMPTY_PASSWORD"] = "yes"
+		} else {
+			dbEnv["MYSQL_ROOT_PASSWORD"] = pass
+		}
+	} else {
+		dbEnv["MYSQL_ROOT_PASSWORD"] = orDefault(pass, "secret")
+		dbEnv["MYSQL_USER"] = user
+		dbEnv["MYSQL_PASSWORD"] = pass
+	}
+	svc := Service{
+		Name:          "db",
+		Image:         image,
+		Env:           dbEnv,
+		Volumes:       []string{"db_data:/var/lib/mysql"},
+		ContainerPort: 3306,
+		Backing:       true,
+	}
+	appEnv := map[string]string{
+		"DB_CONNECTION": "mysql", "DB_HOST": "db", "DB_PORT": "3306",
+		"DB_DATABASE": name, "DB_USERNAME": user, "DB_PASSWORD": pass,
+	}
+	return svc, appEnv
+}
+
+func hasVite(root string) bool {
+	return fileExists(filepath.Join(root, "vite.config.js")) ||
+		fileExists(filepath.Join(root, "vite.config.ts")) ||
+		fileExists(filepath.Join(root, "package.json"))
+}
+
+// --- servicios de respaldo (stacks no-Laravel, vía flags/menú) ---
 
 // AddDatabase añade un servicio de base de datos (interno) y cablea las
 // variables de entorno de conexión en los servicios de aplicación.
@@ -259,10 +360,8 @@ func databaseService(kind string) (Service, map[string]string, bool) {
 			Image:   image,
 			Volumes: []string{"db_data:/var/lib/mysql"},
 			Env: map[string]string{
-				"MYSQL_ROOT_PASSWORD": "devherd",
-				"MYSQL_DATABASE":      "app",
-				"MYSQL_USER":          "app",
-				"MYSQL_PASSWORD":      "devherd",
+				"MYSQL_ROOT_PASSWORD": "devherd", "MYSQL_DATABASE": "app",
+				"MYSQL_USER": "app", "MYSQL_PASSWORD": "devherd",
 			},
 			ContainerPort: 3306,
 			Backing:       true,
@@ -374,7 +473,8 @@ func RenderCompose(plan Plan) string {
 			}
 		}
 		if svc.Command != "" {
-			fmt.Fprintf(&b, "    command: %s\n", svc.Command)
+			// Forma exec con script en sh -c; %q evita problemas de comillas/escapes.
+			fmt.Fprintf(&b, "    command: [\"sh\", \"-c\", %q]\n", svc.Command)
 		}
 		if len(svc.Env) > 0 {
 			b.WriteString("    environment:\n")
@@ -404,9 +504,8 @@ func RenderCompose(plan Plan) string {
 	return b.String()
 }
 
-// RenderManifest genera el .devherd.yml que apunta al compose gestionado. Para
-// stacks de un solo servicio declara proxy.service/port (vue+flask lo resuelve
-// el framework en proxy.BuildExternalProject, así que ahí se omite).
+// RenderManifest genera el .devherd.yml. Para stacks de un solo servicio de app
+// declara proxy.service/port (vue+flask lo resuelve el framework).
 func RenderManifest(plan Plan) string {
 	var b strings.Builder
 	b.WriteString("# Generado por DevHerd (devherd scaffold).\n")
@@ -424,11 +523,18 @@ func RenderManifest(plan Plan) string {
 	return b.String()
 }
 
-// primaryAppService devuelve el único servicio de aplicación, para enrutar el
-// proxy. En layouts multi-servicio (vue+flask) no aplica.
+// primaryAppService devuelve el servicio web principal para enrutar el proxy.
+// En vue+flask no aplica (lo resuelve el framework). En Laravel es "app".
 func primaryAppService(plan Plan) (Service, bool) {
 	if plan.Framework == "vue+flask" {
 		return Service{}, false
+	}
+	if plan.Framework == "laravel" {
+		for _, s := range plan.Services {
+			if s.Name == "app" {
+				return s, true
+			}
+		}
 	}
 	var apps []Service
 	for _, s := range plan.Services {
@@ -594,6 +700,64 @@ func readPackageJSON(path string) (packageJSON, bool) {
 		return packageJSON{}, false
 	}
 	return raw, true
+}
+
+// detectPort devuelve el puerto declarado en el .env del repo o el default.
+func detectPort(dir string, def int, keys ...string) int {
+	env := projectEnv(dir)
+	for _, k := range keys {
+		if v, ok := env[k]; ok {
+			if n, err := strconv.Atoi(v); err == nil && n > 0 {
+				return n
+			}
+		}
+	}
+	return def
+}
+
+// projectEnv lee .env.example y luego .env (el .env real tiene prioridad).
+func projectEnv(dir string) map[string]string {
+	env := readDotEnv(filepath.Join(dir, ".env.example"))
+	for k, v := range readDotEnv(filepath.Join(dir, ".env")) {
+		env[k] = v
+	}
+	return env
+}
+
+func readDotEnv(path string) map[string]string {
+	out := map[string]string{}
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return out
+	}
+	for _, line := range strings.Split(string(data), "\n") {
+		line = strings.TrimSpace(line)
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		k, v, ok := strings.Cut(line, "=")
+		if !ok {
+			continue
+		}
+		out[strings.TrimSpace(k)] = strings.Trim(strings.TrimSpace(v), `"'`)
+	}
+	return out
+}
+
+func pickScript(dir string, prefs ...string) string {
+	for _, p := range prefs {
+		if packageJSONHasScript(filepath.Join(dir, "package.json"), p) {
+			return p
+		}
+	}
+	return prefs[len(prefs)-1]
+}
+
+func orDefault(v, def string) string {
+	if strings.TrimSpace(v) == "" {
+		return def
+	}
+	return v
 }
 
 func sortedKeys(m map[string]string) []string {
