@@ -219,8 +219,9 @@ func laravelDBKind(connection string) string {
 }
 
 // laravelCommand arma el arranque sin Dockerfile: extensiones + composer + .env +
-// key + migrate (esperando a la DB) + artisan serve. Las extensiones dependen
-// del motor de base de datos.
+// key + migrate (esperando a la DB) + artisan serve. Es IDEMPOTENTE: salta cada
+// paso que ya esté hecho, para sobrevivir reinicios (un `docker restart` re-corre
+// todo el comando). Las extensiones dependen del motor de base de datos.
 func laravelCommand(dbKind string, port int) string {
 	ext := "pdo_mysql"
 	libs := "libzip-dev libpng-dev libicu-dev unzip git"
@@ -228,17 +229,20 @@ func laravelCommand(dbKind string, port int) string {
 		ext = "pdo_pgsql"
 		libs += " libpq-dev"
 	}
+	exts := ext + " zip gd bcmath intl"
 
 	steps := []string{
 		"apt-get update",
 		"apt-get install -y -q " + libs,
-		"docker-php-ext-install " + ext + " zip gd bcmath intl",
-		"(pecl install redis && docker-php-ext-enable redis)",
-		"curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer",
+		// instala solo las extensiones que falten (php -m lista las cargadas)
+		"(for e in " + exts + "; do php -m | grep -qix \"$e\" || docker-php-ext-install \"$e\"; done)",
+		"(php -m | grep -qix redis || (pecl install redis && docker-php-ext-enable redis))",
+		"(command -v composer >/dev/null || (curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer))",
 		"composer install --no-interaction --no-progress",
-		"([ -f .env ] || cp .env.example .env)",
-		"php artisan key:generate --force",
-		"until php artisan migrate --force; do echo 'esperando a la base de datos...'; sleep 3; done",
+		// crea el .env apuntando los hosts a los servicios del compose (db/redis)
+		"([ -f .env ] || (cp .env.example .env && sed -i 's/^DB_HOST=.*/DB_HOST=db/; s/^REDIS_HOST=.*/REDIS_HOST=redis/' .env))",
+		"(grep -q '^APP_KEY=base64' .env || php artisan key:generate --force)",
+		"(until php artisan migrate --force; do echo 'esperando a la base de datos...'; sleep 3; done)",
 		fmt.Sprintf("php artisan serve --host 0.0.0.0 --port %d", port),
 	}
 	return strings.Join(steps, " && ")

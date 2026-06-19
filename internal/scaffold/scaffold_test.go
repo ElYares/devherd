@@ -254,10 +254,14 @@ func TestLaravelPlanIsCompleteWithBacking(t *testing.T) {
 	}
 
 	app := names["app"]
-	for _, frag := range []string{"composer install", "key:generate", "artisan migrate", "docker-php-ext-install pdo_mysql", "artisan serve"} {
+	for _, frag := range []string{"composer install", "key:generate", "artisan migrate", "pdo_mysql", "docker-php-ext-install", "artisan serve"} {
 		if !strings.Contains(app.Command, frag) {
 			t.Errorf("comando laravel sin %q", frag)
 		}
+	}
+	// idempotencia: no debe reinstalar redis a ciegas (debe consultar php -m)
+	if !strings.Contains(app.Command, "php -m | grep -qix redis") {
+		t.Errorf("comando laravel debería instalar redis solo si falta")
 	}
 	if app.Env["DB_DATABASE"] != "cvboost" || app.Env["DB_HOST"] != "db" {
 		t.Errorf("app env DB mal cableado: %+v", app.Env)
