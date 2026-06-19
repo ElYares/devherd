@@ -10,6 +10,7 @@ import (
 	"log/slog"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -64,8 +65,19 @@ func (s Server) ListenAndServe(ctx context.Context, addr string) error {
 	go func() {
 		errc <- server.ListenAndServe()
 	}()
+
+	// El poller corre en su propio contexto para poder cancelarlo y esperar su
+	// drenado tanto si el ctx padre termina como si el server muere por su cuenta.
+	pollCtx, cancelPoll := context.WithCancel(ctx)
+	defer cancelPoll()
+
+	var wg sync.WaitGroup
 	if s.pollDocker && s.docker != nil {
-		go s.pollObservedContainers(ctx)
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			s.pollObservedContainers(pollCtx)
+		}()
 	}
 
 	select {
@@ -73,8 +85,12 @@ func (s Server) ListenAndServe(ctx context.Context, addr string) error {
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		_ = server.Shutdown(shutdownCtx)
+		cancelPoll()
+		wg.Wait()
 		return ctx.Err()
 	case err := <-errc:
+		cancelPoll()
+		wg.Wait()
 		if err == http.ErrServerClosed {
 			return nil
 		}

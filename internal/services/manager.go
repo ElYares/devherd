@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	_ "embed"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -11,6 +12,13 @@ import (
 	"github.com/devherd/devherd/internal/config"
 	"github.com/devherd/devherd/internal/runner"
 )
+
+// composeContent es el manifiesto de los servicios compartidos (redis, mailpit).
+// Se embebe desde un .yml real para que editores y linters de YAML lo validen,
+// igual que database/schema.sql.
+//
+//go:embed shared-services.compose.yml
+var composeContent string
 
 const (
 	NetworkName = "infra_net"
@@ -147,45 +155,3 @@ func (m Manager) ensureNetwork(ctx context.Context) error {
 	return nil
 }
 
-const composeContent = `services:
-  redis:
-    image: redis:7-alpine
-    container_name: infra_redis
-    restart: unless-stopped
-    command: redis-server --appendonly yes
-    ports:
-      - "127.0.0.1:6379:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      infra_net:
-        aliases:
-          - redis
-    labels:
-      devherd.managed: "true"
-      devherd.role: "shared-service"
-      devherd.service: "redis"
-
-  mailpit:
-    image: axllent/mailpit:latest
-    container_name: infra_mailpit
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:1025:1025"
-      - "127.0.0.1:8025:8025"
-    networks:
-      infra_net:
-        aliases:
-          - mailpit
-    labels:
-      devherd.managed: "true"
-      devherd.role: "shared-service"
-      devherd.service: "mailpit"
-
-volumes:
-  redis_data:
-
-networks:
-  infra_net:
-    external: true
-`
