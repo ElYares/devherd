@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log/slog"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -176,10 +177,12 @@ func ConnectProject(ctx context.Context, cfg config.Config, project ExternalProj
 	for _, alias := range project.Aliases {
 		containerName, err := composeServiceContainer(ctx, project.Compose, alias.Service)
 		if err != nil {
+			slog.Warn("proxy: skipping alias; compose service container not found",
+				"service", alias.Service, "alias", alias.Name, "error", err)
 			continue
 		}
 
-		if _, err := runCommand(ctx, "", "docker", "network", "connect", "--alias", alias.Name, settings.Network, containerName); err != nil {
+		if _, err := runCmd(ctx, "", "docker", "network", "connect", "--alias", alias.Name, settings.Network, containerName); err != nil {
 			message := err.Error()
 			if strings.Contains(message, "already exists") || strings.Contains(message, "already connected") {
 				continue
@@ -214,11 +217,11 @@ func ApplyExternalProxy(ctx context.Context, cfg config.Config, projects []Exter
 	}
 
 	containerName := externalProxyContainerName(cfg)
-	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
+	if _, err := runCmd(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", nil, fmt.Errorf("validate local_proxy Caddyfile: %w", err)
 	}
 
-	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "reload", "--config", "/etc/caddy/Caddyfile"); err != nil {
+	if _, err := runCmd(ctx, "", "docker", "exec", containerName, "caddy", "reload", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", nil, fmt.Errorf("reload local_proxy Caddyfile: %w", err)
 	}
 
@@ -252,11 +255,11 @@ func RemoveExternalProxy(ctx context.Context, cfg config.Config, domains []strin
 	}
 
 	containerName := externalProxyContainerName(cfg)
-	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
+	if _, err := runCmd(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", fmt.Errorf("validate local_proxy Caddyfile: %w", err)
 	}
 
-	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "reload", "--config", "/etc/caddy/Caddyfile"); err != nil {
+	if _, err := runCmd(ctx, "", "docker", "exec", containerName, "caddy", "reload", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", fmt.Errorf("reload local_proxy Caddyfile: %w", err)
 	}
 
@@ -408,7 +411,7 @@ func stripManagedDomains(content string, domains []string) string {
 
 func composeServiceContainer(ctx context.Context, project compose.Project, service string) (string, error) {
 	args := append(compose.Command(project), "ps", "-q", service)
-	output, err := runCommand(ctx, project.Root, args[0], args[1:]...)
+	output, err := runCmd(ctx, project.Root, args[0], args[1:]...)
 	if err != nil {
 		return "", err
 	}
@@ -418,7 +421,7 @@ func composeServiceContainer(ctx context.Context, project compose.Project, servi
 		return "", errors.New("service is not running")
 	}
 
-	name, err := runCommand(ctx, "", "docker", "inspect", "--format", "{{.Name}}", containerID)
+	name, err := runCmd(ctx, "", "docker", "inspect", "--format", "{{.Name}}", containerID)
 	if err != nil {
 		return "", err
 	}
@@ -431,7 +434,7 @@ func ensureExternalProxyReady(ctx context.Context, settings externalSettingsConf
 		return err
 	}
 
-	if _, err := runCommand(ctx, settings.Dir, "docker", "compose", "up", "-d"); err != nil {
+	if _, err := runCmd(ctx, settings.Dir, "docker", "compose", "up", "-d"); err != nil {
 		return fmt.Errorf("start local_proxy: %w", err)
 	}
 
@@ -439,8 +442,8 @@ func ensureExternalProxyReady(ctx context.Context, settings externalSettingsConf
 }
 
 func ensureExternalProxyNetwork(ctx context.Context, settings externalSettingsConfig) error {
-	if _, err := runCommand(ctx, "", "docker", "network", "inspect", settings.Network); err != nil {
-		if _, createErr := runCommand(
+	if _, err := runCmd(ctx, "", "docker", "network", "inspect", settings.Network); err != nil {
+		if _, createErr := runCmd(
 			ctx,
 			"",
 			"docker",
@@ -468,6 +471,11 @@ func ensureExternalProxyNetwork(ctx context.Context, settings externalSettingsCo
 func externalProxyContainerName(cfg config.Config) string {
 	return externalSettings(cfg).ContainerName
 }
+
+// runCmd es el seam de ejecución de comandos del proxy: en producción apunta a
+// runCommand (workdir resuelto + timeout 10s + firstLine), y los tests lo
+// sustituyen por un doble para ejercitar la lógica sin docker.
+var runCmd = runCommand
 
 func runCommand(ctx context.Context, workdir string, name string, args ...string) (string, error) {
 	commandCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
