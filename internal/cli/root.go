@@ -41,6 +41,7 @@ func newRootCmd() *cobra.Command {
 		newPlanCmd(),
 		newInspectCmd(),
 		newUpCmd(),
+		newServeCmd(),
 		newStopCmd(),
 		newDownCmd(),
 		newOpenCmd(),
