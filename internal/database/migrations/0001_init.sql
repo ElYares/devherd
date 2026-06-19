@@ -85,4 +85,3 @@ CREATE INDEX IF NOT EXISTS idx_projects_framework ON projects(framework);
 CREATE INDEX IF NOT EXISTS idx_domains_project_id ON project_domains(project_id);
 CREATE INDEX IF NOT EXISTS idx_services_status ON services(status);
 CREATE INDEX IF NOT EXISTS idx_events_scope ON events(scope, scope_id);
-

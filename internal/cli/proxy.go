@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var syncHosts = dns.SyncHosts
+
 func newProxyCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "proxy",
@@ -28,7 +30,12 @@ func newProxyApplyCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "apply [project]",
 		Short: "Render proxy configuration, sync local hosts, and reload Caddy",
-		Args:  cobra.MaximumNArgs(1),
+		Example: `  # Aplica el proxy para todos los proyectos registrados
+  devherd proxy apply
+
+  # Solo para un proyecto
+  devherd proxy apply mi-app`,
+		Args: cobra.MaximumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			projectName := ""
 			if len(args) == 1 {
@@ -77,6 +84,10 @@ func newProxyApplyCmd() *cobra.Command {
 					return err
 				}
 
+				if err := syncManagedDomains(projects); err != nil {
+					return err
+				}
+
 				out := cmd.OutOrStdout()
 				fmt.Fprintf(out, "caddyfile: %s\n", configPath)
 				fmt.Fprintf(out, "domains: %s\n", strings.Join(domains, ", "))
@@ -96,7 +107,7 @@ func newProxyApplyCmd() *cobra.Command {
 			}
 
 			allDomains := collectDomains(projects)
-			if err := dns.SyncHosts(allDomains); err != nil {
+			if err := syncHosts(allDomains); err != nil {
 				return err
 			}
 
@@ -111,6 +122,10 @@ func newProxyApplyCmd() *cobra.Command {
 			return nil
 		},
 	}
+}
+
+func syncManagedDomains(projects []database.ProjectRecord) error {
+	return syncHosts(collectDomains(projects))
 }
 
 func collectDomains(projects []database.ProjectRecord) []string {

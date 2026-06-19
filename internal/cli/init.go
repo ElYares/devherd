@@ -20,6 +20,11 @@ func newInitCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "init",
 		Short: "Bootstrap local DevHerd directories, config and database",
+		Example: `  # Inicializa con el proxy Docker externo y TLD .localhost
+  devherd init --proxy caddy-docker-external
+
+  # Inicializa con Caddy en host (.test)
+  devherd init --proxy caddy --tld test`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			paths, err := config.ResolvePaths()
 			if err != nil {

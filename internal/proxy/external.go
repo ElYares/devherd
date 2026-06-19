@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log/slog"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -25,7 +26,15 @@ const (
 	ExternalProxyComposeFile   = "docker-compose.yml"
 	ExternalProxyEnvFile       = ".env"
 	ManagedComposeOverrideFile = ".devherd.proxy.override.yml"
+
+	// Marcadores explícitos que delimitan cada site administrado en el Caddyfile,
+	// para no depender del conteo de llaves (frágil ante edición manual).
+	managedSiteStartPrefix = "# devherd managed start "
+	managedSiteEndPrefix   = "# devherd managed end "
 )
+
+func managedSiteStart(domain string) string { return managedSiteStartPrefix + domain }
+func managedSiteEnd(domain string) string   { return managedSiteEndPrefix + domain }
 
 type Alias struct {
 	Service string
@@ -143,6 +152,7 @@ func EnsureComposeOverride(cfg config.Config, project ExternalProject) (string, 
 		builder.WriteString(alias.Service)
 		builder.WriteString(":\n")
 		builder.WriteString("    networks:\n")
+		builder.WriteString("      default: {}\n")
 		builder.WriteString("      ")
 		builder.WriteString(settings.Network)
 		builder.WriteString(":\n")
@@ -175,10 +185,12 @@ func ConnectProject(ctx context.Context, cfg config.Config, project ExternalProj
 	for _, alias := range project.Aliases {
 		containerName, err := composeServiceContainer(ctx, project.Compose, alias.Service)
 		if err != nil {
+			slog.Warn("proxy: skipping alias; compose service container not found",
+				"service", alias.Service, "alias", alias.Name, "error", err)
 			continue
 		}
 
-		if _, err := runCommand(ctx, "", "docker", "network", "connect", "--alias", alias.Name, settings.Network, containerName); err != nil {
+		if _, err := runCmd(ctx, "", "docker", "network", "connect", "--alias", alias.Name, settings.Network, containerName); err != nil {
 			message := err.Error()
 			if strings.Contains(message, "already exists") || strings.Contains(message, "already connected") {
 				continue
@@ -213,11 +225,11 @@ func ApplyExternalProxy(ctx context.Context, cfg config.Config, projects []Exter
 	}
 
 	containerName := externalProxyContainerName(cfg)
-	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
+	if _, err := runCmd(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", nil, fmt.Errorf("validate local_proxy Caddyfile: %w", err)
 	}
 
-	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "reload", "--config", "/etc/caddy/Caddyfile"); err != nil {
+	if _, err := runCmd(ctx, "", "docker", "exec", containerName, "caddy", "reload", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", nil, fmt.Errorf("reload local_proxy Caddyfile: %w", err)
 	}
 
@@ -251,11 +263,11 @@ func RemoveExternalProxy(ctx context.Context, cfg config.Config, domains []strin
 	}
 
 	containerName := externalProxyContainerName(cfg)
-	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
+	if _, err := runCmd(ctx, "", "docker", "exec", containerName, "caddy", "validate", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", fmt.Errorf("validate local_proxy Caddyfile: %w", err)
 	}
 
-	if _, err := runCommand(ctx, "", "docker", "exec", containerName, "caddy", "reload", "--config", "/etc/caddy/Caddyfile"); err != nil {
+	if _, err := runCmd(ctx, "", "docker", "exec", containerName, "caddy", "reload", "--config", "/etc/caddy/Caddyfile"); err != nil {
 		return "", fmt.Errorf("reload local_proxy Caddyfile: %w", err)
 	}
 
@@ -344,6 +356,8 @@ func renderExternalSites(projects []ExternalProject) string {
 
 func renderExternalSite(project ExternalProject) string {
 	var builder strings.Builder
+	builder.WriteString(managedSiteStart(project.Domain))
+	builder.WriteString("\n")
 	builder.WriteString("http://")
 	builder.WriteString(project.Domain)
 	builder.WriteString(" {\n")
@@ -363,11 +377,50 @@ func renderExternalSite(project ExternalProject) string {
 		builder.WriteString(route.Target)
 		builder.WriteString("\n\t}\n")
 	}
-	builder.WriteString("}")
+	builder.WriteString("}\n")
+	builder.WriteString(managedSiteEnd(project.Domain))
 	return builder.String()
 }
 
+// stripManagedDomains elimina los bloques administrados de los dominios dados.
+// Pasada 1: quita los bloques delimitados por marcadores (formato nuevo).
+// Pasada 2: fallback por conteo de llaves para bloques antiguos sin marcadores,
+// de modo que la primera aplicación tras actualizar migre sin duplicar sites.
 func stripManagedDomains(content string, domains []string) string {
+	content = stripMarkedDomains(content, domains)
+	return stripBraceDomains(content, domains)
+}
+
+func stripMarkedDomains(content string, domains []string) string {
+	starts := make(map[string]struct{}, len(domains))
+	ends := make(map[string]struct{}, len(domains))
+	for _, domain := range domains {
+		starts[managedSiteStart(domain)] = struct{}{}
+		ends[managedSiteEnd(domain)] = struct{}{}
+	}
+
+	var output []string
+	skipping := false
+	for _, line := range strings.Split(content, "\n") {
+		trimmed := strings.TrimSpace(line)
+		if !skipping {
+			if _, ok := starts[trimmed]; ok {
+				skipping = true
+				continue
+			}
+			output = append(output, line)
+			continue
+		}
+
+		if _, ok := ends[trimmed]; ok {
+			skipping = false
+		}
+	}
+
+	return strings.TrimRight(strings.Join(output, "\n"), "\n")
+}
+
+func stripBraceDomains(content string, domains []string) string {
 	lines := strings.Split(content, "\n")
 	domainHeaders := make(map[string]struct{}, len(domains)*2)
 	for _, domain := range domains {
@@ -407,7 +460,7 @@ func stripManagedDomains(content string, domains []string) string {
 
 func composeServiceContainer(ctx context.Context, project compose.Project, service string) (string, error) {
 	args := append(compose.Command(project), "ps", "-q", service)
-	output, err := runCommand(ctx, project.Root, args[0], args[1:]...)
+	output, err := runCmd(ctx, project.Root, args[0], args[1:]...)
 	if err != nil {
 		return "", err
 	}
@@ -417,7 +470,7 @@ func composeServiceContainer(ctx context.Context, project compose.Project, servi
 		return "", errors.New("service is not running")
 	}
 
-	name, err := runCommand(ctx, "", "docker", "inspect", "--format", "{{.Name}}", containerID)
+	name, err := runCmd(ctx, "", "docker", "inspect", "--format", "{{.Name}}", containerID)
 	if err != nil {
 		return "", err
 	}
@@ -430,7 +483,7 @@ func ensureExternalProxyReady(ctx context.Context, settings externalSettingsConf
 		return err
 	}
 
-	if _, err := runCommand(ctx, settings.Dir, "docker", "compose", "up", "-d"); err != nil {
+	if _, err := runCmd(ctx, settings.Dir, "docker", "compose", "up", "-d"); err != nil {
 		return fmt.Errorf("start local_proxy: %w", err)
 	}
 
@@ -438,8 +491,8 @@ func ensureExternalProxyReady(ctx context.Context, settings externalSettingsConf
 }
 
 func ensureExternalProxyNetwork(ctx context.Context, settings externalSettingsConfig) error {
-	if _, err := runCommand(ctx, "", "docker", "network", "inspect", settings.Network); err != nil {
-		if _, createErr := runCommand(
+	if _, err := runCmd(ctx, "", "docker", "network", "inspect", settings.Network); err != nil {
+		if _, createErr := runCmd(
 			ctx,
 			"",
 			"docker",
@@ -467,6 +520,11 @@ func ensureExternalProxyNetwork(ctx context.Context, settings externalSettingsCo
 func externalProxyContainerName(cfg config.Config) string {
 	return externalSettings(cfg).ContainerName
 }
+
+// runCmd es el seam de ejecución de comandos del proxy: en producción apunta a
+// runCommand (workdir resuelto + timeout 10s + firstLine), y los tests lo
+// sustituyen por un doble para ejercitar la lógica sin docker.
+var runCmd = runCommand
 
 func runCommand(ctx context.Context, workdir string, name string, args ...string) (string, error) {
 	commandCtx, cancel := context.WithTimeout(ctx, 10*time.Second)

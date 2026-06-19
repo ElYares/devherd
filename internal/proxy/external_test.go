@@ -92,6 +92,7 @@ func TestEnsureComposeOverrideWritesAliases(t *testing.T) {
 	for _, fragment := range []string{
 		"backend:",
 		"frontend:",
+		"default: {}",
 		"shared_proxy:",
 		"mi-demo-backend",
 		"mi-demo-frontend",

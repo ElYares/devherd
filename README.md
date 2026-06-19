@@ -22,7 +22,10 @@ DevHerd es una plataforma local de desarrollo para Ubuntu inspirada en el flujo 
 - `devherd observe` implementado con collector local, panel web, SQLite separada, DSN local, attach/detach por proyecto, correlacion Docker, logs cercanos, issues/eventos, alertas locales y limpieza de datos viejos.
 - `devherd sentry init <project> --stack <stack> --dry-run` implementado.
 - Comando `open` implementado para abrir el dominio del proyecto en el navegador.
-- `logs`, `sentry set-dsn` y `sentry test` siguen como siguiente iteracion.
+- Comando `logs` implementado (`devherd logs [path]` con `-f/--follow` y `--tail`).
+- Comando `serve` implementado: encadena `up` + `proxy apply` + `open`.
+- Flags globales `--verbose` y `--log-json` para diagnostico estructurado (slog) en stderr.
+- `sentry set-dsn` y `sentry test` siguen como siguiente iteracion (ocultos en la CLI).
 
 ## Enfoque del MVP 1
 
@@ -83,4 +86,5 @@ El plan tecnico completo vive en [docs/technical-plan.md](docs/technical-plan.md
 La referencia de comandos vive en [docs/cli-commands.md](docs/cli-commands.md).
 El flujo de uso por proyecto vive en [docs/project-workflow.md](docs/project-workflow.md).
 El estado actual del proyecto vive en [docs/current-status.md](docs/current-status.md).
+La guia de Vikunja vive en [docs/guides/vikunja.md](docs/guides/vikunja.md).
 El plan de observabilidad local vive en [docs/observe.md](docs/observe.md).

@@ -2,15 +2,23 @@ package services
 
 import (
 	"context"
+	_ "embed"
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"slices"
 	"strings"
 
 	"github.com/devherd/devherd/internal/config"
+	"github.com/devherd/devherd/internal/runner"
 )
+
+// composeContent es el manifiesto de los servicios compartidos (redis, mailpit).
+// Se embebe desde un .yml real para que editores y linters de YAML lo validen,
+// igual que database/schema.sql.
+//
+//go:embed shared-services.compose.yml
+var composeContent string
 
 const (
 	NetworkName = "infra_net"
@@ -23,13 +31,20 @@ var supportedServices = []string{"redis", "mailpit"}
 type Manager struct {
 	dir         string
 	composeFile string
+	run         runner.Runner
 }
 
 func NewManager(paths config.Paths) Manager {
+	return NewManagerWithRunner(paths, runner.Cmd{})
+}
+
+// NewManagerWithRunner permite inyectar un Runner (útil para tests sin Docker).
+func NewManagerWithRunner(paths config.Paths, r runner.Runner) Manager {
 	dir := filepath.Join(paths.ComposeDir, stackDir)
 	return Manager{
 		dir:         dir,
 		composeFile: filepath.Join(dir, composeFile),
+		run:         r,
 	}
 }
 
@@ -46,7 +61,7 @@ func (m Manager) Start(ctx context.Context, service string) (string, error) {
 		return "", err
 	}
 
-	if err := ensureNetwork(ctx); err != nil {
+	if err := m.ensureNetwork(ctx); err != nil {
 		return "", err
 	}
 
@@ -100,20 +115,7 @@ func (m Manager) compose(ctx context.Context, args ...string) (string, error) {
 	baseArgs := []string{"compose", "-f", m.composeFile, "--project-name", "devherd_shared"}
 	baseArgs = append(baseArgs, args...)
 
-	cmd := exec.CommandContext(ctx, "docker", baseArgs...)
-	cmd.Dir = m.dir
-
-	output, err := cmd.CombinedOutput()
-	trimmed := strings.TrimSpace(string(output))
-	if err != nil {
-		if trimmed == "" {
-			return "", err
-		}
-
-		return "", fmt.Errorf("%s", trimmed)
-	}
-
-	return trimmed, nil
+	return m.run.Run(ctx, m.dir, "docker", baseArgs...)
 }
 
 func validateService(service string) error {
@@ -124,13 +126,15 @@ func validateService(service string) error {
 	return fmt.Errorf("unsupported shared service %q; supported services: %s", service, strings.Join(supportedServices, ", "))
 }
 
-func ensureNetwork(ctx context.Context) error {
-	if _, err := runDocker(ctx, "network", "inspect", NetworkName); err == nil {
+func (m Manager) ensureNetwork(ctx context.Context) error {
+	if _, err := m.run.Run(ctx, "", "docker", "network", "inspect", NetworkName); err == nil {
 		return nil
 	}
 
-	if _, err := runDocker(
+	if _, err := m.run.Run(
 		ctx,
+		"",
+		"docker",
 		"network",
 		"create",
 		"--driver",
@@ -151,60 +155,3 @@ func ensureNetwork(ctx context.Context) error {
 	return nil
 }
 
-func runDocker(ctx context.Context, args ...string) (string, error) {
-	cmd := exec.CommandContext(ctx, "docker", args...)
-	output, err := cmd.CombinedOutput()
-	trimmed := strings.TrimSpace(string(output))
-	if err != nil {
-		if trimmed == "" {
-			return "", err
-		}
-
-		return "", fmt.Errorf("%s", trimmed)
-	}
-
-	return trimmed, nil
-}
-
-const composeContent = `services:
-  redis:
-    image: redis:7-alpine
-    container_name: infra_redis
-    restart: unless-stopped
-    command: redis-server --appendonly yes
-    ports:
-      - "127.0.0.1:6379:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      infra_net:
-        aliases:
-          - redis
-    labels:
-      devherd.managed: "true"
-      devherd.role: "shared-service"
-      devherd.service: "redis"
-
-  mailpit:
-    image: axllent/mailpit:latest
-    container_name: infra_mailpit
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:1025:1025"
-      - "127.0.0.1:8025:8025"
-    networks:
-      infra_net:
-        aliases:
-          - mailpit
-    labels:
-      devherd.managed: "true"
-      devherd.role: "shared-service"
-      devherd.service: "mailpit"
-
-volumes:
-  redis_data:
-
-networks:
-  infra_net:
-    external: true
-`

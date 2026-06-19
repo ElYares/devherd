@@ -6,12 +6,16 @@ import (
 	"encoding/hex"
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"strings"
 
+	"github.com/devherd/devherd/internal/runner"
 	"gopkg.in/yaml.v3"
 )
+
+// defaultRunner ejecuta los comandos docker del paquete. Es una variable para
+// que los tests puedan inyectar un doble.
+var defaultRunner runner.Runner = runner.Cmd{}
 
 var supportedComposeFiles = []string{
 	"docker-compose.yml",
@@ -306,20 +310,7 @@ func Command(project Project) []string {
 }
 
 func run(ctx context.Context, workdir string, name string, args ...string) (string, error) {
-	cmd := exec.CommandContext(ctx, name, args...)
-	cmd.Dir = workdir
-
-	output, err := cmd.CombinedOutput()
-	if err != nil {
-		trimmed := strings.TrimSpace(string(output))
-		if trimmed == "" {
-			return "", err
-		}
-
-		return "", fmt.Errorf("%s", trimmed)
-	}
-
-	return strings.TrimSpace(string(output)), nil
+	return defaultRunner.Run(ctx, workdir, name, args...)
 }
 
 func (project Project) withProjectNames() Project {
