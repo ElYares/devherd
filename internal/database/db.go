@@ -37,11 +37,71 @@ func (m *Manager) Ensure(ctx context.Context) (bool, error) {
 		return false, fmt.Errorf("ping database: %w", err)
 	}
 
-	if _, err := db.ExecContext(ctx, schemaSQL); err != nil {
-		return false, fmt.Errorf("apply schema: %w", err)
+	if err := migrate(ctx, db); err != nil {
+		return false, err
 	}
 
 	return created, nil
+}
+
+// migrate aplica, en orden, las migraciones pendientes registrándolas en la
+// tabla schema_migrations. Las migraciones deben ser idempotentes.
+func migrate(ctx context.Context, db *sql.DB) error {
+	if _, err := db.ExecContext(ctx, `CREATE TABLE IF NOT EXISTS schema_migrations (
+		version INTEGER PRIMARY KEY,
+		name TEXT NOT NULL,
+		applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+	);`); err != nil {
+		return fmt.Errorf("create schema_migrations: %w", err)
+	}
+
+	applied, err := appliedVersions(ctx, db)
+	if err != nil {
+		return err
+	}
+
+	migrations, err := loadMigrations()
+	if err != nil {
+		return fmt.Errorf("load migrations: %w", err)
+	}
+
+	for _, mig := range migrations {
+		if applied[mig.Version] {
+			continue
+		}
+
+		if _, err := db.ExecContext(ctx, mig.SQL); err != nil {
+			return fmt.Errorf("apply migration %s: %w", mig.Name, err)
+		}
+
+		if _, err := db.ExecContext(ctx,
+			`INSERT INTO schema_migrations (version, name) VALUES (?, ?)`,
+			mig.Version, mig.Name,
+		); err != nil {
+			return fmt.Errorf("record migration %s: %w", mig.Name, err)
+		}
+	}
+
+	return nil
+}
+
+func appliedVersions(ctx context.Context, db *sql.DB) (map[int]bool, error) {
+	rows, err := db.QueryContext(ctx, `SELECT version FROM schema_migrations`)
+	if err != nil {
+		return nil, fmt.Errorf("read schema_migrations: %w", err)
+	}
+	defer rows.Close()
+
+	applied := make(map[int]bool)
+	for rows.Next() {
+		var version int
+		if err := rows.Scan(&version); err != nil {
+			return nil, err
+		}
+		applied[version] = true
+	}
+
+	return applied, rows.Err()
 }
 
 func (m *Manager) Open() (*sql.DB, error) {
