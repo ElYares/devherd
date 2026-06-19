@@ -6,6 +6,7 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/devherd/devherd/internal/compose"
 	"github.com/devherd/devherd/internal/scaffold"
 	"github.com/spf13/cobra"
 )
@@ -98,6 +99,46 @@ func newScaffoldCmd() *cobra.Command {
 	cmd.Flags().BoolVar(&redis, "redis", true, "Incluir Redis (--redis=false para omitirlo)")
 
 	return cmd
+}
+
+// ensureComposeOrScaffold se invoca desde `up`: si el proyecto no tiene compose
+// pero el stack es detectable, ofrece generarlo con scaffold en el acto.
+func ensureComposeOrScaffold(cmd *cobra.Command, targetPath string) error {
+	_, err := compose.ResolveProject(targetPath)
+	if err == nil {
+		return nil // ya hay compose/manifiesto
+	}
+	if !strings.Contains(err.Error(), "no supported compose file") {
+		return nil // otro problema: que lo maneje el flujo normal de up
+	}
+	if _, derr := scaffold.Detect(targetPath); derr != nil {
+		return nil // stack no detectable → up devolverá el error original
+	}
+
+	fmt.Fprintln(cmd.OutOrStdout(), "No encontré un docker-compose en este proyecto.")
+	if !confirm(cmd, "¿Genero uno con scaffold?") {
+		return nil
+	}
+
+	args := []string{"scaffold"}
+	if targetPath != "" {
+		args = append(args, targetPath)
+	}
+	return runSiblingCommand(cmd, args)
+}
+
+func confirm(cmd *cobra.Command, question string) bool {
+	fmt.Fprintf(cmd.OutOrStdout(), "%s [Y/n] ", question)
+	scanner := bufio.NewScanner(cmd.InOrStdin())
+	if !scanner.Scan() {
+		return false
+	}
+	switch strings.ToLower(strings.TrimSpace(scanner.Text())) {
+	case "", "y", "yes", "s", "si", "sí":
+		return true
+	default:
+		return false
+	}
 }
 
 func promptDatabase(cmd *cobra.Command) string {
