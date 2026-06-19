@@ -26,7 +26,15 @@ const (
 	ExternalProxyComposeFile   = "docker-compose.yml"
 	ExternalProxyEnvFile       = ".env"
 	ManagedComposeOverrideFile = ".devherd.proxy.override.yml"
+
+	// Marcadores explícitos que delimitan cada site administrado en el Caddyfile,
+	// para no depender del conteo de llaves (frágil ante edición manual).
+	managedSiteStartPrefix = "# devherd managed start "
+	managedSiteEndPrefix   = "# devherd managed end "
 )
+
+func managedSiteStart(domain string) string { return managedSiteStartPrefix + domain }
+func managedSiteEnd(domain string) string   { return managedSiteEndPrefix + domain }
 
 type Alias struct {
 	Service string
@@ -348,6 +356,8 @@ func renderExternalSites(projects []ExternalProject) string {
 
 func renderExternalSite(project ExternalProject) string {
 	var builder strings.Builder
+	builder.WriteString(managedSiteStart(project.Domain))
+	builder.WriteString("\n")
 	builder.WriteString("http://")
 	builder.WriteString(project.Domain)
 	builder.WriteString(" {\n")
@@ -367,11 +377,50 @@ func renderExternalSite(project ExternalProject) string {
 		builder.WriteString(route.Target)
 		builder.WriteString("\n\t}\n")
 	}
-	builder.WriteString("}")
+	builder.WriteString("}\n")
+	builder.WriteString(managedSiteEnd(project.Domain))
 	return builder.String()
 }
 
+// stripManagedDomains elimina los bloques administrados de los dominios dados.
+// Pasada 1: quita los bloques delimitados por marcadores (formato nuevo).
+// Pasada 2: fallback por conteo de llaves para bloques antiguos sin marcadores,
+// de modo que la primera aplicación tras actualizar migre sin duplicar sites.
 func stripManagedDomains(content string, domains []string) string {
+	content = stripMarkedDomains(content, domains)
+	return stripBraceDomains(content, domains)
+}
+
+func stripMarkedDomains(content string, domains []string) string {
+	starts := make(map[string]struct{}, len(domains))
+	ends := make(map[string]struct{}, len(domains))
+	for _, domain := range domains {
+		starts[managedSiteStart(domain)] = struct{}{}
+		ends[managedSiteEnd(domain)] = struct{}{}
+	}
+
+	var output []string
+	skipping := false
+	for _, line := range strings.Split(content, "\n") {
+		trimmed := strings.TrimSpace(line)
+		if !skipping {
+			if _, ok := starts[trimmed]; ok {
+				skipping = true
+				continue
+			}
+			output = append(output, line)
+			continue
+		}
+
+		if _, ok := ends[trimmed]; ok {
+			skipping = false
+		}
+	}
+
+	return strings.TrimRight(strings.Join(output, "\n"), "\n")
+}
+
+func stripBraceDomains(content string, domains []string) string {
 	lines := strings.Split(content, "\n")
 	domainHeaders := make(map[string]struct{}, len(domains)*2)
 	for _, domain := range domains {
