@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 )
 
@@ -14,13 +15,46 @@ const (
 	loopbackLine = "127.0.0.1"
 )
 
+// domainPattern admite únicamente hostnames seguros (minúsculas, dígitos,
+// guiones y puntos). Rechaza espacios, saltos de línea y metacaracteres que
+// podrían inyectar entradas adicionales en /etc/hosts.
+var domainPattern = regexp.MustCompile(`^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$`)
+
+// validateDomains normaliza (trim + minúsculas), deduplica y valida cada dominio.
+// Devuelve error ante cualquier dominio inválido en vez de escribirlo en /etc/hosts.
+func validateDomains(domains []string) ([]string, error) {
+	seen := make(map[string]bool, len(domains))
+	clean := make([]string, 0, len(domains))
+	for _, d := range domains {
+		normalized := strings.ToLower(strings.TrimSpace(d))
+		if normalized == "" {
+			continue
+		}
+		if !domainPattern.MatchString(normalized) {
+			return nil, fmt.Errorf("invalid domain %q: only lowercase letters, digits, hyphens and dots are allowed", d)
+		}
+		if seen[normalized] {
+			continue
+		}
+		seen[normalized] = true
+		clean = append(clean, normalized)
+	}
+
+	return clean, nil
+}
+
 func SyncHosts(domains []string) error {
+	clean, err := validateDomains(domains)
+	if err != nil {
+		return err
+	}
+
 	content, err := os.ReadFile(hostsPath)
 	if err != nil {
 		return fmt.Errorf("read hosts file: %w", err)
 	}
 
-	updated := mergeManagedBlock(string(content), domains)
+	updated := mergeManagedBlock(string(content), clean)
 	tempFile, err := os.CreateTemp("", "devherd-hosts-*")
 	if err != nil {
 		return fmt.Errorf("create temp hosts file: %w", err)
@@ -35,6 +69,8 @@ func SyncHosts(domains []string) error {
 	if err := tempFile.Close(); err != nil {
 		return fmt.Errorf("close temp hosts file: %w", err)
 	}
+
+	fmt.Fprintf(os.Stderr, "DevHerd necesita permisos de sudo para actualizar %s con %d dominio(s) administrados.\n", hostsPath, len(clean))
 
 	if err := runInteractive("sudo", "-v"); err != nil {
 		return err
