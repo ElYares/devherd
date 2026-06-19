@@ -1,0 +1,13 @@
+.git
+.github
+bin
+dist
+devherd
+*.db
+*.log
+coverage.out
+graphify-out
+apps/desktop/node_modules
+docs
+testdata
+.claude

@@ -1,0 +1,52 @@
+version: 2
+
+project_name: devherd
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: devherd
+    main: ./cmd/devherd
+    binary: devherd
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X github.com/devherd/devherd/internal/version.Version={{ .Version }}
+      - -X github.com/devherd/devherd/internal/version.Commit={{ .ShortCommit }}
+      - -X github.com/devherd/devherd/internal/version.Date={{ .Date }}
+
+archives:
+  - id: devherd
+    formats:
+      - tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+# Paquete .deb (foco Ubuntu-first).
+nfpms:
+  - id: devherd
+    package_name: devherd
+    formats:
+      - deb
+    maintainer: "DevHerd"
+    description: "Ubuntu-first local development platform"
+    license: "MIT"
+    bindir: /usr/bin
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  use: git
+  sort: asc
+
+release:
+  draft: true
