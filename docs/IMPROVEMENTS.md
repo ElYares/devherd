@@ -300,17 +300,17 @@ El resto de los items siguen pendientes segun la tabla de abajo.
 | 4 | ✅ Configurar `.golangci.yml` (errcheck, staticcheck, gocritic, revive) | **Alta** | S | **Hecho.** Captura los errores ignorados de observe |
 | 5 | 🔶 Alinear README con la realidad y ocultar/etiquetar comandos `notImplemented` | **Alta** | S | **Parcial:** `sentry set-dsn`/`test` ya estan `Hidden`. Falta alinear el README |
 | 6 | 🔶 Introducir `slog` global + flags `--verbose`/`--json`; reemplazar `fmt` de diagnóstico | **Alta** | M | **Parcial:** infra slog + flags `--verbose`/`--log-json` + errores de observe hechos. Falta migrar `fmt` de diagnostico en `cli` y `ConnectProject` |
-| 7 | Extraer interfaz `Runner`/`Executor` y unificar `runCommand/run/runDocker` | **Media** | M | Habilita tests sin Docker; sube cobertura services/proxy/compose |
-| 8 | Subir cobertura de `cli` (5%), `services` (12%), `preflight` (18%), `doctor` (19%) tras #7 | **Media** | M | Tests de tabla con fake Runner |
+| 7 | 🔶 Extraer interfaz `Runner`/`Executor` y unificar `runCommand/run/runDocker` | **Media** | M | **Parcial:** `internal/runner` creado y adoptado en `services` y `compose` (+ seam en `doctor`). Falta `proxy/external.go` (WIP) |
+| 8 | 🔶 Subir cobertura de `cli` (5%), `services` (12%), `preflight` (18%), `doctor` (19%) tras #7 | **Media** | M | **Parcial:** services 12→67%, doctor 19→39%, preflight 18→38%, dns 31→44%. Falta `cli` (5%) |
 | 9 | ✅ Implementar `devherd logs` (ya hay `compose.Command`) | **Media** | S | **Hecho** (`internal/compose/logs.go`): flags `-f/--follow` y `--tail`, streaming sin buffer |
 | 10 | Marcadores explícitos en Caddyfile administrado (en vez de conteo de llaves) | **Media** | S | Robustez ante edición manual; reusar patrón de `dns/hosts` |
-| 11 | Embeber compose de servicios compartidos desde `.yml` real (`//go:embed`) | **Media** | XS | Consistencia con `schema.sql`/templates |
-| 12 | Mensaje proactivo antes de operaciones `sudo` + validación regex de dominios | **Media** | S | UX + seguridad de `/etc/hosts` |
+| 11 | ✅ Embeber compose de servicios compartidos desde `.yml` real (`//go:embed`) | **Media** | XS | **Hecho** (`shared-services.compose.yml`) |
+| 12 | ✅ Mensaje proactivo antes de operaciones `sudo` + validación regex de dominios | **Media** | S | **Hecho** (`dns.validateDomains` + aviso por stderr) |
 | 13 | `Dockerfile` (build multi-stage) + `Example:` en comandos Cobra + completion docs | **Media** | M | DX/onboarding |
 | 14 | Comando compuesto `serve` (up + proxy apply + open) | **Baja** | S | Reduce fricción del flujo diario |
 | 15 | GoReleaser + paquete `.deb` (Ubuntu-first) | **Baja** | M | Distribución sin exigir toolchain Go |
 | 16 | Migraciones versionadas (tabla `schema_migrations`) | **Baja** | M | Antes de tener usuarios con datos persistentes |
-| 17 | `WaitGroup` para apagado limpio del poller en `observe.Server` | **Baja** | XS | Corrección de ciclo de vida |
+| 17 | ✅ `WaitGroup` para apagado limpio del poller en `observe.Server` | **Baja** | XS | **Hecho** (poller en contexto cancelable + `wg.Wait()` en shutdown) |
 | 18 | Implementar `sentry set-dsn`/`test` con manejo seguro de secretos (`0o600`) | **Baja** | M | Depende de roadmap de producto |
 
 **Leyenda de esfuerzo:** XS < 1h · S ≈ medio día · M ≈ 1-3 días.
