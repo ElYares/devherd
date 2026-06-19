@@ -182,6 +182,42 @@ func TestWriteIsNonDestructive(t *testing.T) {
 	}
 }
 
+func TestDetectPortAndScriptFromRepo(t *testing.T) {
+	root := t.TempDir()
+	mustWrite(t, filepath.Join(root, "package.json"), `{"scripts":{"dev":"vite"},"dependencies":{}}`)
+	mustWrite(t, filepath.Join(root, ".env"), "PORT=4000\n# comment\n")
+
+	plan, err := Detect(root)
+	if err != nil {
+		t.Fatalf("Detect: %v", err)
+	}
+	svc := plan.Services[0]
+	if svc.ContainerPort != 4000 {
+		t.Errorf("port = %d, want 4000 (del .env)", svc.ContainerPort)
+	}
+	if !strings.Contains(svc.Command, "npm run dev") {
+		t.Errorf("command = %q, want script dev", svc.Command)
+	}
+}
+
+func TestManifestDeclaresProxyForSingleStack(t *testing.T) {
+	root := t.TempDir()
+	mustWrite(t, filepath.Join(root, "go.mod"), "module x\n")
+	plan, _ := Detect(root)
+
+	manifest := RenderManifest(plan)
+	if !strings.Contains(manifest, "proxy:") || !strings.Contains(manifest, "service: app") || !strings.Contains(manifest, "port: 8080") {
+		t.Errorf("manifest single-stack debe declarar proxy:\n%s", manifest)
+	}
+}
+
+func TestManifestOmitsProxyForVueFlask(t *testing.T) {
+	plan, _ := Detect(vueFlaskFixture(t))
+	if strings.Contains(RenderManifest(plan), "proxy:") {
+		t.Errorf("vue+flask no debe declarar proxy (lo resuelve el framework):\n%s", RenderManifest(plan))
+	}
+}
+
 func contains(s []string, v string) bool {
 	for _, x := range s {
 		if x == v {

@@ -61,25 +61,26 @@ func Detect(root string) (Plan, error) {
 				Root:      abs,
 				Framework: "vue+flask",
 				Services: []Service{
-					flaskService("backend", filepath.Base(backend)),
-					vueService("frontend", filepath.Base(frontend)),
+					// Puertos fijos: contrato de proxy.BuildExternalProject para vue+flask.
+					flaskService("backend", filepath.Base(backend), 8000),
+					vueService("frontend", filepath.Base(frontend), 5173, "dev"),
 				},
 			}, nil
 		}
 	}
 
-	// 2) Stacks de un solo servicio en la raíz.
+	// 2) Stacks de un solo servicio en la raíz (puerto/comando detectados del repo).
 	switch {
 	case isLaravelDir(abs):
-		return single(abs, "laravel", laravelService(abs)), nil
+		return single(abs, "laravel", laravelService("app", ".", detectPort(abs, 8000, "APP_PORT", "PORT"))), nil
 	case isVueDir(abs):
-		return single(abs, "vue", vueService("app", ".")), nil
+		return single(abs, "vue", vueService("app", ".", detectPort(abs, 5173, "PORT"), pickScript(abs, "dev", "serve", "start"))), nil
 	case isFlaskDir(abs):
-		return single(abs, "flask", flaskService("app", ".")), nil
+		return single(abs, "flask", flaskService("app", ".", detectPort(abs, 8000, "FLASK_RUN_PORT", "PORT"))), nil
 	case isNodeDir(abs):
-		return single(abs, "node", nodeService(abs)), nil
+		return single(abs, "node", nodeService(abs, detectPort(abs, 3000, "PORT"), pickScript(abs, "dev", "start"))), nil
 	case isGoDir(abs):
-		return single(abs, "go", goService(abs)), nil
+		return single(abs, "go", goService(detectPort(abs, 8080, "PORT"))), nil
 	}
 
 	return Plan{}, fmt.Errorf("scaffold: no reconozco el stack en %s (soportados: vue+flask, laravel, vue, flask, node, go)", abs)
@@ -91,70 +92,111 @@ func single(root, framework string, svc Service) Plan {
 
 // --- servicios de aplicación por stack ---
 
-func flaskService(name, dir string) Service {
+func flaskService(name, dir string, port int) Service {
 	return Service{
 		Name:          name,
 		Image:         "python:3.12-slim",
 		WorkingDir:    "/app",
 		Volumes:       []string{mount(dir)},
-		Command:       `sh -c "pip install -r requirements.txt && flask run --host 0.0.0.0 --port 8000"`,
-		Env:           map[string]string{"FLASK_APP": "app.py", "FLASK_RUN_PORT": "8000"},
-		ContainerPort: 8000,
+		Command:       fmt.Sprintf(`sh -c "pip install -r requirements.txt && flask run --host 0.0.0.0 --port %d"`, port),
+		Env:           map[string]string{"FLASK_APP": "app.py", "FLASK_RUN_PORT": strconv.Itoa(port)},
+		ContainerPort: port,
 		Publish:       true,
 	}
 }
 
-func vueService(name, dir string) Service {
+func vueService(name, dir string, port int, script string) Service {
 	return Service{
 		Name:          name,
 		Image:         "node:20-alpine",
 		WorkingDir:    "/app",
 		Volumes:       []string{mount(dir)},
-		Command:       `sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"`,
-		ContainerPort: 5173,
+		Command:       fmt.Sprintf(`sh -c "npm install && npm run %s -- --host 0.0.0.0 --port %d"`, script, port),
+		ContainerPort: port,
 		Publish:       true,
 	}
 }
 
-func nodeService(dir string) Service {
-	script := "start"
-	if packageJSONHasScript(filepath.Join(dir, "package.json"), "dev") {
-		script = "dev"
-	}
+func nodeService(dir string, port int, script string) Service {
 	return Service{
 		Name:          "app",
 		Image:         "node:20-alpine",
 		WorkingDir:    "/app",
 		Volumes:       []string{mount(".")},
 		Command:       fmt.Sprintf(`sh -c "npm install && npm run %s"`, script),
-		Env:           map[string]string{"PORT": "3000"},
-		ContainerPort: 3000,
+		Env:           map[string]string{"PORT": strconv.Itoa(port)},
+		ContainerPort: port,
 		Publish:       true,
 	}
 }
 
-func goService(_ string) Service {
+func goService(port int) Service {
 	return Service{
 		Name:          "app",
 		Image:         "golang:1.25",
 		WorkingDir:    "/app",
 		Volumes:       []string{mount(".")},
 		Command:       `sh -c "go run ./..."`,
-		ContainerPort: 8080,
+		ContainerPort: port,
 		Publish:       true,
 	}
 }
 
-func laravelService(_ string) Service {
+func laravelService(name, dir string, port int) Service {
 	return Service{
-		Name:          "app",
+		Name:          name,
 		Image:         "php:8.3-cli",
 		WorkingDir:    "/app",
-		Volumes:       []string{mount(".")},
-		Command:       `sh -c "php artisan serve --host 0.0.0.0 --port 8000"`,
-		ContainerPort: 8000,
+		Volumes:       []string{mount(dir)},
+		Command:       fmt.Sprintf(`sh -c "php artisan serve --host 0.0.0.0 --port %d"`, port),
+		ContainerPort: port,
 		Publish:       true,
 	}
+}
+
+// detectPort devuelve el puerto declarado en el .env del repo (primera clave que
+// exista) o el valor por defecto del stack.
+func detectPort(dir string, def int, keys ...string) int {
+	env := readDotEnv(dir)
+	for _, k := range keys {
+		if v, ok := env[k]; ok {
+			if n, err := strconv.Atoi(v); err == nil && n > 0 {
+				return n
+			}
+		}
+	}
+	return def
+}
+
+func readDotEnv(dir string) map[string]string {
+	out := map[string]string{}
+	data, err := os.ReadFile(filepath.Join(dir, ".env"))
+	if err != nil {
+		return out
+	}
+	for _, line := range strings.Split(string(data), "\n") {
+		line = strings.TrimSpace(line)
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		k, v, ok := strings.Cut(line, "=")
+		if !ok {
+			continue
+		}
+		out[strings.TrimSpace(k)] = strings.Trim(strings.TrimSpace(v), `"'`)
+	}
+	return out
+}
+
+// pickScript elige el primer script de package.json que exista entre prefs; si
+// ninguno existe, devuelve el último (fallback).
+func pickScript(dir string, prefs ...string) string {
+	for _, p := range prefs {
+		if packageJSONHasScript(filepath.Join(dir, "package.json"), p) {
+			return p
+		}
+	}
+	return prefs[len(prefs)-1]
 }
 
 func mount(dir string) string {
@@ -362,7 +404,9 @@ func RenderCompose(plan Plan) string {
 	return b.String()
 }
 
-// RenderManifest genera el .devherd.yml que apunta al compose gestionado.
+// RenderManifest genera el .devherd.yml que apunta al compose gestionado. Para
+// stacks de un solo servicio declara proxy.service/port (vue+flask lo resuelve
+// el framework en proxy.BuildExternalProject, así que ahí se omite).
 func RenderManifest(plan Plan) string {
 	var b strings.Builder
 	b.WriteString("# Generado por DevHerd (devherd scaffold).\n")
@@ -370,7 +414,32 @@ func RenderManifest(plan Plan) string {
 	b.WriteString("compose:\n")
 	b.WriteString("  files:\n")
 	fmt.Fprintf(&b, "    - %s\n", ManagedComposeFile)
+
+	if svc, ok := primaryAppService(plan); ok {
+		b.WriteString("proxy:\n")
+		fmt.Fprintf(&b, "  service: %s\n", svc.Name)
+		fmt.Fprintf(&b, "  port: %d\n", svc.ContainerPort)
+	}
+
 	return b.String()
+}
+
+// primaryAppService devuelve el único servicio de aplicación, para enrutar el
+// proxy. En layouts multi-servicio (vue+flask) no aplica.
+func primaryAppService(plan Plan) (Service, bool) {
+	if plan.Framework == "vue+flask" {
+		return Service{}, false
+	}
+	var apps []Service
+	for _, s := range plan.Services {
+		if !s.Backing {
+			apps = append(apps, s)
+		}
+	}
+	if len(apps) == 1 {
+		return apps[0], true
+	}
+	return Service{}, false
 }
 
 func namedVolumes(plan Plan) []string {
