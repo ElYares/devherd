@@ -16,7 +16,7 @@ func newRootCmd() *cobra.Command {
 		Use:           "devherd",
 		Short:         "Ubuntu-first local development platform",
 		Long:          "DevHerd administra proyectos locales, dominios .test, servicios compartidos y bootstrap de Sentry.",
-		Version:       version.String(),
+		Version:       version.Long(),
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
