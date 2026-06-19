@@ -143,6 +143,7 @@ func EnsureComposeOverride(cfg config.Config, project ExternalProject) (string, 
 		builder.WriteString(alias.Service)
 		builder.WriteString(":\n")
 		builder.WriteString("    networks:\n")
+		builder.WriteString("      default: {}\n")
 		builder.WriteString("      ")
 		builder.WriteString(settings.Network)
 		builder.WriteString(":\n")
