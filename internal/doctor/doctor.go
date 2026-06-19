@@ -236,7 +236,7 @@ func checkDockerNetwork(ctx context.Context, network string, label string) Check
 		}
 	}
 
-	output, err := runCommand(ctx, "docker", "network", "inspect", "--format", "{{.Driver}}\t{{.Scope}}\t{{.Internal}}", network)
+	output, err := runCmd(ctx, "docker", "network", "inspect", "--format", "{{.Driver}}\t{{.Scope}}\t{{.Internal}}", network)
 	if err == nil {
 		info, parseErr := parseDockerNetworkInfo(output)
 		if parseErr != nil {
@@ -313,7 +313,7 @@ func checkExternalProxyPort(ctx context.Context, containerName string) Check {
 		}
 	}
 
-	output, err := runCommand(ctx, "docker", "ps", "--filter", "name=^/"+containerName+"$", "--format", "{{.Names}}\t{{.Ports}}")
+	output, err := runCmd(ctx, "docker", "ps", "--filter", "name=^/"+containerName+"$", "--format", "{{.Names}}\t{{.Ports}}")
 	if err == nil && strings.Contains(output, containerName) {
 		return Check{
 			Name:    "TCP port 80",
@@ -338,7 +338,7 @@ func checkDockerDaemon(ctx context.Context) Check {
 		}
 	}
 
-	output, err := runCommand(ctx, "docker", "info", "--format", "{{.ServerVersion}}")
+	output, err := runCmd(ctx, "docker", "info", "--format", "{{.ServerVersion}}")
 	if err != nil {
 		return Check{
 			Name:    "Docker daemon",
@@ -368,7 +368,7 @@ func checkDockerCompose(ctx context.Context) Check {
 		}
 	}
 
-	output, err := runCommand(ctx, "docker", "compose", "version")
+	output, err := runCmd(ctx, "docker", "compose", "version")
 	if err != nil {
 		return Check{
 			Name:    "Docker Compose",
@@ -393,7 +393,7 @@ func checkDockerEngineMode(ctx context.Context) Check {
 		}
 	}
 
-	output, err := runCommand(ctx, "docker", "info", "--format", "{{.OSType}}\t{{.OperatingSystem}}\t{{.Name}}")
+	output, err := runCmd(ctx, "docker", "info", "--format", "{{.OSType}}\t{{.OperatingSystem}}\t{{.Name}}")
 	if err != nil {
 		return Check{
 			Name:    "Docker engine mode",
@@ -451,6 +451,11 @@ func checkTCPPort(ctx context.Context, port int) Check {
 		Message: "available",
 	}
 }
+
+// runCmd es el seam de ejecución de comandos del doctor: en producción apunta a
+// runCommand (timeout 3s + firstLine), y los tests lo sustituyen por un doble
+// para ejercitar los checks que dependen de docker sin necesitar el daemon.
+var runCmd = runCommand
 
 func runCommand(ctx context.Context, name string, args ...string) (string, error) {
 	commandCtx, cancel := context.WithTimeout(ctx, 3*time.Second)
@@ -563,7 +568,7 @@ func windowsNetstatPortListening(ctx context.Context, port int) (bool, error) {
 		return false, fmt.Errorf("netstat not found in PATH")
 	}
 
-	output, err := runCommand(ctx, "netstat", "-ano", "-p", "tcp")
+	output, err := runCmd(ctx, "netstat", "-ano", "-p", "tcp")
 	if err != nil {
 		return false, err
 	}
