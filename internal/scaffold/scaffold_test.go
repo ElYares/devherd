@@ -272,6 +272,17 @@ func TestLaravelPlanIsCompleteWithBacking(t *testing.T) {
 	}
 }
 
+func TestRenderEscapesDollarForCompose(t *testing.T) {
+	root := laravelFixture(t, "DB_CONNECTION=mysql\n", nil)
+	plan, _ := Detect(root)
+	yaml := RenderCompose(plan)
+
+	// el for-loop usa $e; debe salir como $$e para que compose no lo interpole
+	if strings.Contains(yaml, `"$e"`) || !strings.Contains(yaml, `$$e`) {
+		t.Errorf("el $e del comando debe escaparse a $$e en el YAML:\n%s", yaml)
+	}
+}
+
 func TestLaravelDetectsPostgresFromEnv(t *testing.T) {
 	root := laravelFixture(t, "DB_CONNECTION=pgsql\nDB_DATABASE=app\nDB_USERNAME=app\nDB_PASSWORD=secret\n", nil)
 	plan, _ := Detect(root)

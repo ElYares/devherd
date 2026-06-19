@@ -478,12 +478,14 @@ func RenderCompose(plan Plan) string {
 		}
 		if svc.Command != "" {
 			// Forma exec con script en sh -c; %q evita problemas de comillas/escapes.
-			fmt.Fprintf(&b, "    command: [\"sh\", \"-c\", %q]\n", svc.Command)
+			// composeEscape protege los `$` para que docker compose no interpole
+			// variables del shell (p. ej. $e de un for-loop) al leer el YAML.
+			fmt.Fprintf(&b, "    command: [\"sh\", \"-c\", %q]\n", composeEscape(svc.Command))
 		}
 		if len(svc.Env) > 0 {
 			b.WriteString("    environment:\n")
 			for _, k := range sortedKeys(svc.Env) {
-				fmt.Fprintf(&b, "      %s: %q\n", k, svc.Env[k])
+				fmt.Fprintf(&b, "      %s: %q\n", k, composeEscape(svc.Env[k]))
 			}
 		}
 		if len(svc.DependsOn) > 0 {
@@ -550,6 +552,12 @@ func primaryAppService(plan Plan) (Service, bool) {
 		return apps[0], true
 	}
 	return Service{}, false
+}
+
+// composeEscape duplica los `$` para que docker compose los trate como literales
+// (compose interpola `$VAR`/`${VAR}` en el YAML; `$$` se convierte en `$`).
+func composeEscape(s string) string {
+	return strings.ReplaceAll(s, "$", "$$")
 }
 
 func namedVolumes(plan Plan) []string {
