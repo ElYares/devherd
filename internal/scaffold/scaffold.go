@@ -146,14 +146,15 @@ func goService(port int) Service {
 }
 
 func viteService() Service {
+	// build --watch compila los assets a public/build y los recompila al cambiar
+	// (Laravel los sirve desde ahí). Evita el dev server, public/hot y la colisión
+	// de puertos, y no exige correr npm en el host (node_modules queda en root).
 	return Service{
-		Name:          "vite",
-		Image:         "node:20-alpine",
-		WorkingDir:    "/app",
-		Volumes:       []string{mount(".")},
-		Command:       "npm install && npm run dev -- --host 0.0.0.0 --port 5173",
-		ContainerPort: 5173,
-		Publish:       true,
+		Name:       "vite",
+		Image:      "node:20-alpine",
+		WorkingDir: "/app",
+		Volumes:    []string{mount(".")},
+		Command:    "npm install && npm run build -- --watch",
 	}
 }
 
