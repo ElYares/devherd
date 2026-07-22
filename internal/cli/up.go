@@ -38,6 +38,10 @@ func newUpCmd() *cobra.Command {
 			}
 			defer app.DB.Close()
 
+			if err := ensureComposeOrScaffold(cmd, targetPath); err != nil {
+				return err
+			}
+
 			if !noInspect {
 				if err := runUpPreflight(cmd, targetPath, app, force); err != nil {
 					return err

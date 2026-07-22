@@ -24,6 +24,7 @@ DevHerd es una plataforma local de desarrollo para Ubuntu inspirada en el flujo 
 - Comando `open` implementado para abrir el dominio del proyecto en el navegador.
 - Comando `logs` implementado (`devherd logs [path]` con `-f/--follow` y `--tail`).
 - Comando `serve` implementado: encadena `up` + `proxy apply` + `open`.
+- Comando `scaffold` implementado: genera `docker-compose` y manifiesto para repos sin contenedores (vue+flask, laravel, vue, flask, node, go), con menu de base de datos, Redis y puertos sin colision. `up` lo ofrece automaticamente cuando no hay compose. Ver [docs/guides/scaffold.md](docs/guides/scaffold.md).
 - Flags globales `--verbose` y `--log-json` para diagnostico estructurado (slog) en stderr.
 - `sentry set-dsn` y `sentry test` siguen como siguiente iteracion (ocultos en la CLI).
 

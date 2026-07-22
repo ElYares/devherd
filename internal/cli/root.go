@@ -40,6 +40,7 @@ func newRootCmd() *cobra.Command {
 		newProxyCmd(),
 		newPlanCmd(),
 		newInspectCmd(),
+		newScaffoldCmd(),
 		newUpCmd(),
 		newServeCmd(),
 		newStopCmd(),
