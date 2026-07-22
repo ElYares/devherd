@@ -408,10 +408,12 @@ evitar ese fallo.
 
 ### Alertas: sin silenciamiento, ruido garantizado
 
-**O3. `new-issue` notifica por cada issue nuevo.**
-Como el fingerprint no enmascara numeros ni identificadores (ver Arquitectura), un mismo
-bug con mensajes variables (`user 42`, `user 43`, ...) genera un issue y por tanto una
-alerta por cada variante.
+**O3. `new-issue` notifica por cada issue nuevo.** *(Mitigado.)*
+Un mismo bug con mensajes variables (`user 42`, `user 43`, ...) generaba un issue —y por
+tanto una alerta— por cada variante.
+> El enmascarado del fingerprint (correos, UUIDs, hashes y numeros) elimina la causa mas
+> comun, y un `fingerprint` explicito da control fino. Queda pendiente el cooldown por regla:
+> un issue que reaparece muchas veces sigue sin silenciarse.
 
 **O4. `error-rate` notifica en cada evento posterior al umbral, no una vez por ventana.**
 Verificado: con umbral 3 y ventana 5m, el 3.er evento y **todos** los siguientes dentro de

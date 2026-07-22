@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -224,6 +225,8 @@ func newObserveAttachCmd() *cobra.Command {
 	var addr string
 	var dsn string
 	var dryRun bool
+	var reporter bool
+	var force bool
 
 	cmd := &cobra.Command{
 		Use:   "attach [project-or-path]",
@@ -293,6 +296,13 @@ func newObserveAttachCmd() *cobra.Command {
 			fmt.Fprintf(out, "stack: %s\n", strings.ToLower(stack))
 			fmt.Fprintf(out, "services: %s\n", strings.Join(result.Services, ", "))
 			fmt.Fprintf(out, "override: %s\n", result.Path)
+
+			if reporter {
+				if err := writeObserveReporter(cmd, target.Compose.Root, stack, force); err != nil {
+					return err
+				}
+			}
+
 			fmt.Fprintln(out, "observe attach: complete")
 			return nil
 		},
@@ -304,8 +314,32 @@ func newObserveAttachCmd() *cobra.Command {
 	cmd.Flags().StringVar(&addr, "addr", observe.DefaultAddr, "Collector address used to build the default DSN. Defaults to the shared network gateway so containers can reach the host")
 	cmd.Flags().StringVar(&dsn, "dsn", "", "Override the generated local DSN")
 	cmd.Flags().BoolVar(&dryRun, "dry-run", false, "Preview the generated override without writing files")
+	cmd.Flags().BoolVar(&reporter, "reporter", false, "Also write the reporter that sends events to the collector")
+	cmd.Flags().BoolVar(&force, "force", false, "Overwrite an existing reporter file")
 
 	return cmd
+}
+
+// writeObserveReporter escribe el reporter dentro del proyecto. El override solo
+// inyecta el DSN: sin algo que hable con el collector, no sale ni un evento.
+func writeObserveReporter(cmd *cobra.Command, root, stack string, force bool) error {
+	out := cmd.OutOrStdout()
+
+	result, err := observe.EnsureReporter(root, stack, force)
+	switch {
+	case errors.Is(err, observe.ErrReporterExists):
+		fmt.Fprintf(out, "reporter: %s (kept; pass --force to overwrite)\n", result.Path)
+		return nil
+	case err != nil:
+		return err
+	}
+
+	fmt.Fprintf(out, "reporter: %s\n", result.Path)
+	if result.Wiring != "" {
+		fmt.Fprintf(out, "  wire it up in %s\n", result.Wiring)
+	}
+
+	return nil
 }
 
 func newObserveDetachCmd() *cobra.Command {

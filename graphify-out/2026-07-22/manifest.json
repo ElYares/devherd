@@ -105,8 +105,8 @@
     "semantic_hash": "7207c210f6946dfe10665208cc118bdc"
   },
   "internal/cli/observe.go": {
-    "mtime": 1784734070.8811855,
-    "ast_hash": "129526fe7a0bff91fa49cb3f4882ab69",
+    "mtime": 1784751686.0291708,
+    "ast_hash": "4677ec0caa40f3f2f19041419c54f657",
     "semantic_hash": ""
   },
   "internal/cli/observe_test.go": {
@@ -455,13 +455,13 @@
     "semantic_hash": ""
   },
   "docs/IMPROVEMENTS.md": {
-    "mtime": 1784734308.6752799,
-    "ast_hash": "23b9091c932a8e436e43abe991d2671b",
+    "mtime": 1784751945.541712,
+    "ast_hash": "824de3eae27f1c3bf50854b58f5d3372",
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1784734287.0502713,
-    "ast_hash": "b92302de08cf6cf0d5f4f621283dd8e2",
+    "mtime": 1784751933.5738277,
+    "ast_hash": "e049561042dbe31f4162898476842219",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "docs/current-status.md": {
-    "mtime": 1784734320.7912846,
-    "ast_hash": "2a7ad4c045becba7a0150c69cb4828c6",
+    "mtime": 1784751947.093697,
+    "ast_hash": "c2034a1fe209eba35ab91807a1d3fdf9",
     "semantic_hash": ""
   },
   "docs/guides/vikunja.md": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "docs/observe.md": {
-    "mtime": 1784734223.7382462,
-    "ast_hash": "21e0f52d84cb42c27777716cd4676056",
+    "mtime": 1784751903.405119,
+    "ast_hash": "1ba4b536a7cb6d0bfc0157fbd4d8e16a",
     "semantic_hash": ""
   },
   "docs/project-workflow.md": {
@@ -680,8 +680,8 @@
     "semantic_hash": ""
   },
   "internal/observe/network.go": {
-    "mtime": 1784734020.1761656,
-    "ast_hash": "063b926eac282d3fb33a7bfac43bcd47",
+    "mtime": 1784751834.7947757,
+    "ast_hash": "34930d6a2dffca858b94ac32c5de1d7e",
     "semantic_hash": ""
   },
   "internal/observe/network_test.go": {
@@ -690,8 +690,8 @@
     "semantic_hash": ""
   },
   "internal/observe/reachability.go": {
-    "mtime": 1784733958.036141,
-    "ast_hash": "5d575476100080f0279a810d41abc241",
+    "mtime": 1784751495.8098786,
+    "ast_hash": "11f6b0e3862c582a62536adb0fd2d794",
     "semantic_hash": ""
   },
   "internal/observe/reachability_test.go": {
@@ -702,6 +702,41 @@
   "docs/guides/observe-laravel.md": {
     "mtime": 1784734318.3352835,
     "ast_hash": "b1d8200f3698f649da2c5f82624771a1",
+    "semantic_hash": ""
+  },
+  "internal/cli/observe_daemon.go": {
+    "mtime": 1784751464.5001495,
+    "ast_hash": "bc09ff0668b6a9a5fd47e727a1ca7ba5",
+    "semantic_hash": ""
+  },
+  "internal/cli/observe_firewall.go": {
+    "mtime": 1784751455.2032292,
+    "ast_hash": "ad6637f5e2aee57d5c9ef4c5661ec4d6",
+    "semantic_hash": ""
+  },
+  "internal/observe/daemon.go": {
+    "mtime": 1784751352.155091,
+    "ast_hash": "885516294a888af51cb9ba45ceb5a20a",
+    "semantic_hash": ""
+  },
+  "internal/observe/daemon_test.go": {
+    "mtime": 1784751512.722731,
+    "ast_hash": "7fba032f45b3ee42fcc6b755f931027b",
+    "semantic_hash": ""
+  },
+  "internal/observe/firewall.go": {
+    "mtime": 1784751767.7084103,
+    "ast_hash": "c2d046514ed960dcbc78837c1b3be23b",
+    "semantic_hash": ""
+  },
+  "internal/observe/firewall_test.go": {
+    "mtime": 1784751506.085789,
+    "ast_hash": "ea7fdebaa2919ca17f0126754e6fd195",
+    "semantic_hash": ""
+  },
+  "internal/observe/project_network_test.go": {
+    "mtime": 1784751850.925622,
+    "ast_hash": "8d35da50e9f66c6e1c94a7a7fe35167d",
     "semantic_hash": ""
   }
 }

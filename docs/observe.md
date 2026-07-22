@@ -335,17 +335,45 @@ Un emisor que quiera adjuntar contexto propio solo tiene que incluirlo en el JSO
 
 ## 6. Agrupacion de issues
 
-El fingerprint es un **SHA-1** de cinco componentes unidos por salto de linea:
+Hay dos formas de agrupar: la derivada del evento y la que fija el cliente.
+
+### Fingerprint derivado
+
+Es un **SHA-1** de cinco componentes unidos por salto de linea:
 
 ```text
 project + exception_type + normalized_message + culprit + service
 ```
 
-`normalized_message` solo aplica trim, minusculas y colapso de espacios.
+`normalized_message` aplica trim, minusculas, colapso de espacios y **enmascara lo que
+cambia en cada ocurrencia**, en este orden:
 
-> **Limitacion importante**: la normalizacion **no enmascara numeros, UUIDs, rutas ni
-> identificadores**. Eso significa que `"user 42 not found"` y `"user 43 not found"`
-> generan dos issues distintos. Es el principal limitante practico del agrupamiento.
+| Patron | Se sustituye por | Ejemplo |
+|---|---|---|
+| Correos | `<email>` | `no account for ana@x.mx` → `no account for <email>` |
+| UUIDs | `<uuid>` | `order 550e8400-...-446655440000` → `order <uuid>` |
+| Hexadecimales de 12+ | `<hash>` | `token 9f86d081884c` → `token <hash>` |
+| Numeros sueltos | `<n>` | `user 42 not found` → `user <n> not found` |
+
+Asi `"user 42 not found"` y `"user 43 not found"` comparten issue, que era el principal
+limitante practico del agrupamiento.
+
+> **Contrapartida asumida**: mensajes que solo difieren en un numero se agrupan juntos, asi
+> que `"http 404"` y `"http 500"` caen en el mismo issue. Cuando esa distincion importa,
+> separalas por `exception_type` o manda un fingerprint explicito.
+
+### Fingerprint explicito
+
+El evento puede traer un campo `fingerprint` y entonces manda el cliente: mensaje y culprit
+dejan de influir en la agrupacion.
+
+```json
+{"exception_type": "LoginLocked", "message": "Blocked after 5 tries", "fingerprint": "login-lockout"}
+```
+
+Se acepta como string o como lista (que es el formato de los SDK tipo Sentry, y se une con
+`|`). La clave se mezcla con el proyecto antes de hashear, asi que dos proyectos con el mismo
+`fingerprint` **no** comparten issue.
 
 Otro detalle a tener en cuenta: el fingerprint se calcula **antes** de enriquecer el evento
 con los datos del contenedor, asi que el `service` inferido desde Docker no participa en la

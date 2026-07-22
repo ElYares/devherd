@@ -681,6 +681,23 @@ observabilidad en los servicios del proyecto.
 | `--addr` | gateway de la red compartida | Direccion usada para construir el DSN por defecto. Si la pasas explicita y es loopback, avisa. |
 | `--dsn` | — | Sobrescribe el DSN generado. |
 | `--dry-run` | `false` | Previsualiza el override sin escribir archivos. |
+| `--reporter` | `false` | Escribe tambien el reporter del proyecto (hoy solo `laravel`). |
+| `--force` | `false` | Permite sobrescribir un reporter existente. |
+
+**El override solo inyecta el DSN.** Sin algo que hable con el collector no sale ni un
+evento, y esa pieza es codigo dentro de tu proyecto. `--reporter` la genera:
+
+```bash
+devherd observe attach mi-app --stack laravel --reporter
+# reporter: /ruta/app/Exceptions/DevherdObserveReporter.php
+#   wire it up in bootstrap/app.php: ->withExceptions(...)
+```
+
+Nunca pisa un archivo existente —es codigo tuyo y puede estar editado— salvo con `--force`.
+El reporter expone dos entradas: `report(Throwable $e)` para excepciones y
+`capture($type, $message, $context, $level, $fingerprint)` para eventos de dominio que no son
+excepciones (un login rechazado, un pago denegado). Detalle en
+[guides/observe-laravel.md](guides/observe-laravel.md).
 
 ```bash
 devherd observe attach mi-app --stack laravel

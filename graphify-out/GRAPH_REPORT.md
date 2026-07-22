@@ -1,16 +1,16 @@
 # Graph Report - devherd  (2026-07-22)
 
 ## Corpus Check
-- 141 files · ~85,397 words
+- 146 files · ~88,735 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1443 nodes · 2688 edges · 89 communities (81 shown, 8 thin omitted)
-- Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 429 edges (avg confidence: 0.8)
+- 1488 nodes · 2764 edges · 92 communities (83 shown, 9 thin omitted)
+- Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 439 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d923127f`
+- Built from commit: `ee114312`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -91,17 +91,19 @@
 - [[_COMMUNITY_Community 86|Community 86]]
 - [[_COMMUNITY_Community 87|Community 87]]
 - [[_COMMUNITY_Community 88|Community 88]]
+- [[_COMMUNITY_Community 89|Community 89]]
+- [[_COMMUNITY_Community 90|Community 90]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `String()` - 37 edges
+1. `String()` - 40 edges
 2. `contains()` - 35 edges
 3. `Store` - 34 edges
 4. `Detect()` - 33 edges
 5. `Project` - 26 edges
 6. `newRootCmd()` - 23 edges
 7. `loadAppContext()` - 21 edges
-8. `Context` - 21 edges
-9. `Command` - 20 edges
+8. `Command` - 21 edges
+9. `Context` - 21 edges
 10. `ResolveProject()` - 20 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -124,19 +126,19 @@
 - **Observe Error Pipeline** — observe_collector, observe_issue_fingerprint, observe_separate_db, observe_docker_correlation, observe_local_alerts [EXTRACTED 1.00]
 - **Infra/Quality Improvement Cluster** — improvements_runner_interface, improvements_slog_logging, improvements_docker_runtime, improvements_not_implemented [INFERRED 0.75]
 
-## Communities (89 total, 8 thin omitted)
+## Communities (92 total, 9 thin omitted)
 
 ### Community 0 - "Preflight & Inspection"
 Cohesion: 0.08
 Nodes (57): Config, Context, Paths, Project, T, T, composeDoc, dockerContainer (+49 more)
 
 ### Community 1 - "Compose Runtime & Project Naming"
-Cohesion: 0.08
-Nodes (50): appendObserveOverride(), prepareComposeProject(), resolveExternalProject(), newDownCmd(), newStopCmd(), newUpCmd(), runUpPreflight(), manifest (+42 more)
+Cohesion: 0.20
+Nodes (14): manifest, manifestCompose, manifestProxy, Project, composeProjectLabel(), LegacyProjectNameForPath(), ProjectNameForPath(), resolveManifestProject() (+6 more)
 
 ### Community 2 - "Init/Config & Paths"
-Cohesion: 0.21
-Nodes (10): Config, NewStore(), DNSConfig, ObservabilityConfig, ProxyConfig, Store, DNSConfig, Paths (+2 more)
+Cohesion: 0.20
+Nodes (16): T, T, T, TestBootstrapExternalProxyCreatesAndReusesFiles(), TestBootstrapExternalProxyWithForceUpdatesManagedFilesButPreservesEnv(), TestBuildExternalProjectUsesManifestProxy(), TestBuildExternalProjectUsesVueFlaskFallback(), TestEnsureComposeOverrideWritesAliases() (+8 more)
 
 ### Community 3 - "Doctor Host Checks"
 Cohesion: 0.10
@@ -144,11 +146,11 @@ Nodes (51): Check, dockerEngineInfo, dockerNetworkInfo, checkBinary(), checkDire
 
 ### Community 4 - "CLI Commands & Root"
 Cohesion: 0.07
-Nodes (68): confirm(), ensureComposeOrScaffold(), newScaffoldCmd(), promptDatabase(), Command, T, packageJSON, Plan (+60 more)
+Nodes (69): confirm(), ensureComposeOrScaffold(), newScaffoldCmd(), promptDatabase(), Command, T, packageJSON, Plan (+61 more)
 
 ### Community 5 - "Observe Store & SQLite Models"
-Cohesion: 0.11
-Nodes (27): ContainerEvent, ContainerLog, Context, DB, Event, ObservedContainer, Paths, Tx (+19 more)
+Cohesion: 0.07
+Nodes (52): ContainerEvent, T, ContainerLog, Context, DB, Event, ObservedContainer, Paths (+44 more)
 
 ### Community 6 - "Observe HTTP Server & Panel"
 Cohesion: 0.09
@@ -156,19 +158,19 @@ Nodes (31): Handler, Server, Request, ResponseWriter, Context, DockerRuntime, Se
 
 ### Community 7 - "Observe CLI Commands"
 Cohesion: 0.09
-Nodes (56): loadAppContext(), appContext, emptyAsAll(), newObserveFirewallCmd(), formatObservePayloadValue(), newObserveAlertAddCmd(), newObserveAlertCmd(), newObserveAlertDeliveriesCmd() (+48 more)
+Nodes (57): loadAppContext(), appContext, emptyAsAll(), newObserveFirewallCmd(), formatObservePayloadValue(), newObserveAlertAddCmd(), newObserveAlertCmd(), newObserveAlertDeliveriesCmd() (+49 more)
 
 ### Community 8 - "External Proxy Connection"
-Cohesion: 0.06
-Nodes (70): externalSettingsConfig, Config, Config, Context, Project, ProjectRecord, T, T (+62 more)
+Cohesion: 0.24
+Nodes (25): Config, Context, Project, ProjectRecord, Alias, aliasName(), ApplyExternalProxy(), BuildExternalProject() (+17 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.53
 Nodes (5): T, TestCmdRunCapturesOutput(), TestCmdRunRespectsTimeout(), TestCmdRunSetsWorkingDir(), TestCmdRunUsesOutputAsErrorMessage()
 
 ### Community 10 - "Proxy Apply (Caddy/Hosts)"
-Cohesion: 0.06
-Nodes (38): browserCommand(), newOpenCmd(), TestBrowserCommand(), collectDomains(), newProxyApplyCmd(), newProxyBootstrapCmd(), newProxyCmd(), syncManagedDomains() (+30 more)
+Cohesion: 0.08
+Nodes (33): collectDomains(), newProxyApplyCmd(), newProxyBootstrapCmd(), newProxyCmd(), syncManagedDomains(), TestSyncManagedDomainsUsesCollectedDomains(), buildManagedBlock(), mergeManagedBlock() (+25 more)
 
 ### Community 11 - "Domain & Projects DB"
 Cohesion: 0.12
@@ -199,8 +201,8 @@ Cohesion: 0.26
 Nodes (12): Project, AttachOptions, AttachResult, composeServicesDoc, observeOverrideDoc, observeOverrideService, BuildComposeOverride(), ComposeServices() (+4 more)
 
 ### Community 18 - "Docs: Architecture & Decisions"
-Cohesion: 0.21
-Nodes (12): loadAppContext (config + SQLite), DevHerd Architecture, Graphify Knowledge Graph Workflow, Cobra newXxxCmd Command Pattern, Domain Logic Outside cli Package, DevHerd Contributing Guide, Observe Separate SQLite DB, Desktop App (Tauri + Vue 3 + Tailwind) (+4 more)
+Cohesion: 0.14
+Nodes (18): loadAppContext (config + SQLite), DevHerd Architecture, Graphify Knowledge Graph Workflow, Cobra newXxxCmd Command Pattern, Domain Logic Outside cli Package, DevHerd Contributing Guide, Committed 21MB Binary Finding, DockerRuntime Dependency Injection (+10 more)
 
 ### Community 19 - "Docs: Proxy Drivers & Manifest"
 Cohesion: 0.22
@@ -256,7 +258,7 @@ Nodes (33): 10. Siguiente iteracion recomendada, 1. Alcance, 2. Estado de la CLI
 
 ### Community 49 - "Community 49"
 Cohesion: 0.05
-Nodes (37): 10. Desactivar Observe en el proyecto, 10. Flujo de uso en un proyecto, 11. Comandos y como funcionan, 12. Criterio de exito del MVP, 1. Arrancar el collector local, 1. Objetivo, 2. Principio de aislamiento, 2. Revisar el DSN local del proyecto (+29 more)
+Nodes (39): 10. Desactivar Observe en el proyecto, 10. Flujo de uso en un proyecto, 11. Comandos y como funcionan, 12. Criterio de exito del MVP, 1. Arrancar el collector local, 1. Objetivo, 2. Principio de aislamiento, 2. Revisar el DSN local del proyecto (+31 more)
 
 ### Community 50 - "Community 50"
 Cohesion: 0.07
@@ -275,12 +277,12 @@ Cohesion: 0.12
 Nodes (14): Comandos nuevos o ajustados, Contrato portable actual, devherd-v1-app, Evidencia, Fases cerradas en esta rama, Objetivo, Pendiente, Alcance (+6 more)
 
 ### Community 54 - "Community 54"
-Cohesion: 0.22
-Nodes (8): 2. Comando `devherd logs [path]`, 3. Manejo de errores en el colector `observe`, Cómo funciona, Cómo ver los logs de diagnóstico, Ejemplos, El helper en `internal/compose/logs.go`, Flags, Logging de diagnóstico y comando `logs`
+Cohesion: 0.13
+Nodes (14): 1. Logging estructurado con `slog`, 2. Comando `devherd logs [path]`, 3. Manejo de errores en el colector `observe`, Cómo funciona, Cómo funciona, Cómo ver los logs de diagnóstico, Ejemplos, Ejemplos (+6 more)
 
 ### Community 55 - "Community 55"
-Cohesion: 0.67
-Nodes (6): notImplemented(), newSentryCmd(), newSentryInitCmd(), newSentrySetDSNCmd(), newSentryTestCmd(), Command
+Cohesion: 0.23
+Nodes (13): newListCmd(), Command, T, EnsureReporter(), SupportedReporterStacks(), TestEnsureReporterKeepsExistingFile(), TestEnsureReporterOverwritesWithForce(), TestEnsureReporterRejectsUnsupportedStack() (+5 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.18
@@ -316,19 +318,15 @@ Nodes (11): ContainerLog, Context, DockerRuntime, Event, ObservedContainer, Stor
 
 ### Community 68 - "Community 68"
 Cohesion: 0.18
-Nodes (8): newListCmd(), newLogsCmd(), Execute(), newRootCmd(), main(), Command, Command, Command
+Nodes (13): newLogsCmd(), Execute(), newRootCmd(), notImplemented(), newSentryCmd(), newSentryInitCmd(), newSentrySetDSNCmd(), newSentryTestCmd() (+5 more)
 
 ### Community 69 - "Community 69"
-Cohesion: 0.17
-Nodes (12): 10. Trampas conocidas, 1. Requisitos de red (leelo antes que nada), 2. Aplicar el attach, 3. El reporter, 4. Cablearlo (Laravel 11+), 5. Que se captura solo, 6. Que NO se captura, 7. Reportar a proposito (+4 more)
-
-### Community 70 - "Community 70"
-Cohesion: 0.16
-Nodes (24): T, T, Event, compactJSON(), eventTitle(), exceptionDetails(), ExtraPayload(), Fingerprint() (+16 more)
+Cohesion: 0.14
+Nodes (14): 10. Trampas conocidas, 1. Requisitos de red (leelo antes que nada), 2. Aplicar el attach, 3. El reporter, 4. Cablearlo (Laravel 11+), 5. Que se captura solo, 6. Que NO se captura, 7. Reportar a proposito (+6 more)
 
 ### Community 71 - "Community 71"
-Cohesion: 0.40
-Nodes (5): newInspectCmd(), writePreflightReport(), Command, Writer, Report
+Cohesion: 0.24
+Nodes (9): newInspectCmd(), writePreflightReport(), newUpCmd(), runUpPreflight(), Command, Writer, appContext, Command (+1 more)
 
 ### Community 72 - "Community 72"
 Cohesion: 0.22
@@ -347,8 +345,8 @@ Cohesion: 0.33
 Nodes (6): 6.1 Modo proxy en Docker externo (recomendado), 6.2 Modo proxy en host (Caddy + /etc/hosts), 6.3 Repositorio sin Docker, 6.4 Servicios compartidos + observabilidad, 6.5 Bajar todo, 6. Flujos de trabajo
 
 ### Community 76 - "Community 76"
-Cohesion: 0.33
-Nodes (6): 1. Logging estructurado con `slog`, Cómo funciona, Ejemplos, Flags, Modelo: diagnósticos a stderr, producto a stdout, Por qué `--log-json` y no `--json`
+Cohesion: 0.29
+Nodes (12): newDownCmd(), Down(), DownProject(), joinOutput(), ResolveProject(), run(), Stop(), StopProject() (+4 more)
 
 ### Community 77 - "Community 77"
 Cohesion: 0.40
@@ -371,52 +369,60 @@ Cohesion: 0.67
 Nodes (3): 4.6 `devherd proxy`, `devherd proxy apply [project]`, `devherd proxy bootstrap`
 
 ### Community 82 - "Community 82"
-Cohesion: 0.19
-Nodes (12): applyInitOverrides(), newInitCmd(), TestApplyInitOverridesKeepsExplicitTLD(), TestApplyInitOverridesSetsLocalhostForExternalProxy(), Default(), defaultExternalProxyDir(), TestDefaultConfig(), Command (+4 more)
+Cohesion: 0.05
+Nodes (45): newDoctorCmd(), statusLabel(), applyInitOverrides(), newInitCmd(), TestApplyInitOverridesKeepsExplicitTLD(), TestApplyInitOverridesSetsLocalhostForExternalProxy(), setupLogging(), TestSetupLoggingDoesNotPanic() (+37 more)
 
 ### Community 83 - "Community 83"
-Cohesion: 0.33
-Nodes (8): Paths, defaultDataRootForOS(), defaultStateRootForOS(), envOrDefault(), ResolvePaths(), TestDefaultDataRootForOS(), TestDefaultStateRootForOS(), T
+Cohesion: 0.24
+Nodes (12): T, managedSiteEnd(), managedSiteStart(), TestRenderExternalSiteWrapsWithMarkers(), TestStripManagedDomainsMigratesLegacyUnmarkedBlock(), TestStripManagedDomainsRemovesMarkedBlockKeepingOthers(), mergeExternalProxyConfig(), renderExternalSite() (+4 more)
 
 ### Community 84 - "Community 84"
 Cohesion: 0.56
 Nodes (8): T, freeLoopbackPort(), newTestServer(), TestListenAndServeOnFailsWhenThePrimaryAddressIsTaken(), TestListenAndServeOnServesEveryAddress(), TestListenAndServeOnToleratesAnUnavailableExtraAddress(), waitForHealth(), Server
 
 ### Community 85 - "Community 85"
-Cohesion: 0.40
-Nodes (6): Committed 21MB Binary Finding, DockerRuntime Dependency Injection, Announced-but-Unimplemented Commands, Architecture & Infra Review, Proposed Runner/Executor Interface, Structured slog Logging Gap
+Cohesion: 0.27
+Nodes (11): Command(), composeArgs(), Plan(), PlanProject(), TestComposeArgsIncludesEnvFileAndAllComposeFiles(), TestPlanReturnsDockerCommand(), TestProjectNameForPathIsStableAndPathScoped(), TestResolveProjectErrorsWhenManifestComposeFileMissing() (+3 more)
 
 ### Community 86 - "Community 86"
-Cohesion: 0.43
-Nodes (5): setupLogging(), TestSetupLoggingDoesNotPanic(), TestVerboseEnablesDebugLevel(), logOptions, T
+Cohesion: 0.27
+Nodes (9): appendObserveOverride(), prepareComposeProject(), resolveExternalProject(), newStopCmd(), ExternalProject, appContext, Context, Project (+1 more)
 
 ### Community 87 - "Community 87"
-Cohesion: 0.52
-Nodes (6): newServiceActionCmd(), newServiceCmd(), runServiceAction(), serviceActionShort(), Command, Manager
+Cohesion: 0.42
+Nodes (10): Event, T, fingerprintOf(), quote(), TestEmptyFingerprintFallsBackToTheDerivedOne(), TestExplicitFingerprintAcceptsSDKLists(), TestExplicitFingerprintIsScopedByProject(), TestExplicitFingerprintWins() (+2 more)
 
 ### Community 88 - "Community 88"
+Cohesion: 0.44
+Nodes (9): externalSettingsConfig, Config, BootstrapExternalProxy(), bootstrapExternalProxySettings(), BootstrapExternalProxyWithOptions(), ensureManagedFile(), renderEmbeddedTemplate(), BootstrapOptions (+1 more)
+
+### Community 89 - "Community 89"
+Cohesion: 0.29
+Nodes (6): browserCommand(), newOpenCmd(), TestBrowserCommand(), Command, T, URLForDomain()
+
+### Community 90 - "Community 90"
 Cohesion: 0.50
-Nodes (4): newDoctorCmd(), statusLabel(), Command, Status
+Nodes (4): Context, Duration, Cmd, Runner
 
 ## Knowledge Gaps
-- **436 isolated node(s):** `name`, `version`, `minAppVersion`, `description`, `author` (+431 more)
+- **440 isolated node(s):** `name`, `version`, `minAppVersion`, `description`, `author` (+435 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `String()` connect `External Proxy Connection` to `Preflight & Inspection`, `Compose Runtime & Project Naming`, `Doctor Host Checks`, `CLI Commands & Root`, `Observe Store & SQLite Models`, `Observe HTTP Server & Panel`, `Observe CLI Commands`, `Proxy Apply (Caddy/Hosts)`, `Domain & Projects DB`, `Project Stack Detector`, `Docker CLI Runtime`, `Compose Observe Override`, `Observe DB Manager`, `observe migrations`, `Community 47`, `Community 68`, `Community 70`, `Community 71`, `Community 78`?**
-  _High betweenness centrality (0.418) - this node is a cross-community bridge._
+- **Why does `String()` connect `Community 55` to `Preflight & Inspection`, `Init/Config & Paths`, `Doctor Host Checks`, `CLI Commands & Root`, `Observe Store & SQLite Models`, `Observe HTTP Server & Panel`, `Observe CLI Commands`, `External Proxy Connection`, `Proxy Apply (Caddy/Hosts)`, `Domain & Projects DB`, `Project Stack Detector`, `Docker CLI Runtime`, `Compose Observe Override`, `Observe DB Manager`, `observe migrations`, `Community 47`, `Community 68`, `Community 71`, `Community 76`, `Community 78`, `Community 83`, `Community 88`, `Community 90`?**
+  _High betweenness centrality (0.426) - this node is a cross-community bridge._
 - **Why does `DevHerd Observe Module` connect `Embedded Templates & Services` to `Compose Observe Override`, `Docs: Architecture & Decisions`, `Docs: Proxy Drivers & Manifest`, `Docs: Platform & Observe`?**
-  _High betweenness centrality (0.387) - this node is a cross-community bridge._
-- **Why does `DevHerd` connect `Docs: Platform & Observe` to `Embedded Templates & Services`, `Docs: Architecture & Decisions`, `Docs: Proxy Drivers & Manifest`, `Community 61`?**
-  _High betweenness centrality (0.376) - this node is a cross-community bridge._
-- **Are the 36 inferred relationships involving `String()` (e.g. with `writePreflightReport()` and `newListCmd()`) actually correct?**
-  _`String()` has 36 INFERRED edges - model-reasoned connections that need verification._
+  _High betweenness centrality (0.374) - this node is a cross-community bridge._
+- **Why does `BuildComposeOverride()` connect `Compose Observe Override` to `Compose Override Tests`, `Community 55`, `Observe CLI Commands`?**
+  _High betweenness centrality (0.368) - this node is a cross-community bridge._
+- **Are the 39 inferred relationships involving `String()` (e.g. with `writePreflightReport()` and `newListCmd()`) actually correct?**
+  _`String()` has 39 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 32 inferred relationships involving `contains()` (e.g. with `TestVerboseEnablesDebugLevel()` and `normalizeDomain()`) actually correct?**
   _`contains()` has 32 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 17 inferred relationships involving `Detect()` (e.g. with `ensureComposeOrScaffold()` and `newScaffoldCmd()`) actually correct?**
   _`Detect()` has 17 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `version`, `minAppVersion` to the rest of the system?**
-  _441 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _445 weakly-connected nodes found - possible documentation gaps or missing edges._

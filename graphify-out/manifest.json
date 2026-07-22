@@ -105,8 +105,8 @@
     "semantic_hash": "7207c210f6946dfe10665208cc118bdc"
   },
   "internal/cli/observe.go": {
-    "mtime": 1784751686.0291708,
-    "ast_hash": "4677ec0caa40f3f2f19041419c54f657",
+    "mtime": 1784752757.9830542,
+    "ast_hash": "c989a795eee98481553de6e13c94b5d4",
     "semantic_hash": ""
   },
   "internal/cli/observe_test.go": {
@@ -280,8 +280,8 @@
     "semantic_hash": "c81956ba3cf5d5443a71e3b6759f9398"
   },
   "internal/observe/event.go": {
-    "mtime": 1784707252.4753258,
-    "ast_hash": "997d8c4dcf55b58a22ebc3e9b94ff18b",
+    "mtime": 1784752631.4158525,
+    "ast_hash": "64afc6dd55bc454aa244b4a4f7ffb47a",
     "semantic_hash": ""
   },
   "internal/observe/migrations.go": {
@@ -455,13 +455,13 @@
     "semantic_hash": ""
   },
   "docs/IMPROVEMENTS.md": {
-    "mtime": 1784751945.541712,
-    "ast_hash": "824de3eae27f1c3bf50854b58f5d3372",
+    "mtime": 1784752972.0813558,
+    "ast_hash": "54f32cd81ab7d1c918dd3c83c8a65be6",
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1784751933.5738277,
-    "ast_hash": "e049561042dbe31f4162898476842219",
+    "mtime": 1784752923.8168564,
+    "ast_hash": "b01bfb596b7fac8da670f4b542f294e7",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "docs/current-status.md": {
-    "mtime": 1784751947.093697,
-    "ast_hash": "c2034a1fe209eba35ab91807a1d3fdf9",
+    "mtime": 1784752915.0339465,
+    "ast_hash": "a2e84dd0cafc171ed2c45d9b448ae74a",
     "semantic_hash": ""
   },
   "docs/guides/vikunja.md": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "docs/observe.md": {
-    "mtime": 1784751903.405119,
-    "ast_hash": "1ba4b536a7cb6d0bfc0157fbd4d8e16a",
+    "mtime": 1784752907.5350237,
+    "ast_hash": "8c055dcb821fa11ef35ed32cd07ee3aa",
     "semantic_hash": ""
   },
   "docs/project-workflow.md": {
@@ -700,8 +700,8 @@
     "semantic_hash": ""
   },
   "docs/guides/observe-laravel.md": {
-    "mtime": 1784734318.3352835,
-    "ast_hash": "b1d8200f3698f649da2c5f82624771a1",
+    "mtime": 1784752967.19541,
+    "ast_hash": "5251c6ff1eedad063b05e5c52006ae3d",
     "semantic_hash": ""
   },
   "internal/cli/observe_daemon.go": {
@@ -737,6 +737,31 @@
   "internal/observe/project_network_test.go": {
     "mtime": 1784751850.925622,
     "ast_hash": "8d35da50e9f66c6e1c94a7a7fe35167d",
+    "semantic_hash": ""
+  },
+  "internal/observe/fingerprint_test.go": {
+    "mtime": 1784752657.6005852,
+    "ast_hash": "9a782561d950b0d02e4eb7dbe5a105e9",
+    "semantic_hash": ""
+  },
+  "internal/observe/reporter.go": {
+    "mtime": 1784752738.1897612,
+    "ast_hash": "a039e6e1f54c32eab13331ad43e2ded3",
+    "semantic_hash": ""
+  },
+  "internal/observe/reporter_test.go": {
+    "mtime": 1784752781.4093184,
+    "ast_hash": "db6006703e79136da4d3f58f137dd30d",
+    "semantic_hash": ""
+  },
+  "templates/observe/embed.go": {
+    "mtime": 1784752723.8879075,
+    "ast_hash": "e300f2ce19cc81328c066dff2ba28fa6",
+    "semantic_hash": ""
+  },
+  "templates/observe/reporter-laravel.php": {
+    "mtime": 1784752721.2759342,
+    "ast_hash": "bc9aabe66eacc0ff628b6826c58cdcb4",
     "semantic_hash": ""
   }
 }

@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -61,7 +62,7 @@ func NormalizeEvent(project string, payload []byte) (Event, error) {
 	event.Message = firstNonEmpty(event.Message, exceptionMessage)
 	event.Culprit = firstNonEmpty(event.Culprit, exceptionCulprit)
 	event.Title = eventTitle(event)
-	event.Fingerprint = Fingerprint(event)
+	event.Fingerprint = firstNonEmpty(explicitFingerprint(project, raw), Fingerprint(event))
 
 	compacted, err := compactJSON(payload)
 	if err != nil {
@@ -94,6 +95,7 @@ var payloadColumns = map[string]bool{
 	"transaction":    true,
 	"environment":    true,
 	"release":        true,
+	"fingerprint":    true,
 }
 
 // ExtraPayload devuelve las claves del payload crudo que no tienen columna
@@ -168,13 +170,64 @@ func compactJSON(payload []byte) (string, error) {
 	return string(compacted), nil
 }
 
+var (
+	emailPattern  = regexp.MustCompile(`[\p{L}\p{N}._%+\-]+@[\p{L}\p{N}.\-]+\.[\p{L}]{2,}`)
+	uuidPattern   = regexp.MustCompile(`\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b`)
+	hashPattern   = regexp.MustCompile(`\b[0-9a-f]{12,}\b`)
+	numberPattern = regexp.MustCompile(`\b\d+\b`)
+)
+
+// normalizeMessage reduce el mensaje a la forma con la que se agrupa. Enmascara
+// lo que cambia en cada ocurrencia —correos, identificadores, numeros— porque si
+// no un mismo bug con "user 42" y "user 43" abre un issue por cada usuario.
+//
+// El orden importa: el correo primero, porque contiene digitos y letras que los
+// otros patrones se llevarian por delante; luego el UUID, que el patron de hash
+// partiria; y los numeros sueltos al final.
+//
+// Contrapartida asumida: mensajes que solo difieren en un numero se agrupan
+// juntos ("http 404" y "http 500" comparten issue). Cuando eso no interesa, el
+// cliente puede mandar un `fingerprint` explicito.
 func normalizeMessage(message string) string {
-	fields := strings.Fields(strings.ToLower(strings.TrimSpace(message)))
+	normalized := strings.ToLower(strings.TrimSpace(message))
+	normalized = emailPattern.ReplaceAllString(normalized, "<email>")
+	normalized = uuidPattern.ReplaceAllString(normalized, "<uuid>")
+	normalized = hashPattern.ReplaceAllString(normalized, "<hash>")
+	normalized = numberPattern.ReplaceAllString(normalized, "<n>")
+
+	fields := strings.Fields(normalized)
 	if len(fields) == 0 {
 		return ""
 	}
 
 	return strings.Join(fields, " ")
+}
+
+// explicitFingerprint respeta el fingerprint que mande el cliente, que es como
+// se controla la agrupacion desde la aplicacion. Se mezcla con el proyecto para
+// que dos proyectos con la misma clave no compartan issue, y se acepta tanto un
+// string como la lista que usan los SDK tipo Sentry.
+func explicitFingerprint(project string, raw map[string]any) string {
+	var parts []string
+
+	switch value := raw["fingerprint"].(type) {
+	case string:
+		parts = []string{value}
+	case []any:
+		for _, item := range value {
+			if text, ok := item.(string); ok {
+				parts = append(parts, text)
+			}
+		}
+	}
+
+	key := strings.TrimSpace(strings.Join(parts, "|"))
+	if key == "" {
+		return ""
+	}
+
+	sum := sha1.Sum([]byte(strings.ToLower(strings.TrimSpace(project)) + "\n" + key))
+	return hex.EncodeToString(sum[:])
 }
 
 func newEventID() string {

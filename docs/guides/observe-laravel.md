@@ -66,8 +66,17 @@ genera `devherd scaffold`. Si tu repo no lo tiene, agregalo.
 
 ## 3. El reporter
 
-Copia esto en `app/Exceptions/DevherdObserveReporter.php`. Es generico: deriva el proyecto
-del DSN, asi que sirve igual en cualquier repo.
+**Ya no hace falta copiarlo a mano**: lo genera DevHerd, que embebe esta misma clase.
+
+```bash
+devherd observe attach <proyecto> --stack laravel --reporter
+# reporter: /ruta/app/Exceptions/DevherdObserveReporter.php
+```
+
+No pisa un archivo existente salvo con `--force`, asi que puedes editarlo sin miedo a
+perderlo en el siguiente `attach`. Lo que sigue es el contenido, por si prefieres pegarlo o
+quieres entender que hace: es generico, deriva el proyecto del DSN y sirve igual en
+cualquier repo.
 
 ```php
 <?php
@@ -330,16 +339,51 @@ try {
 }
 ```
 
-Tambien sirve para senalar algo que no es una excepcion real:
-
-```php
-if ($factura->total !== $suma) {
-    report(new DomainException("Descuadre en factura {$factura->id}"));
-}
-```
-
 Donde rinde mas: transiciones de estado y todo lo que hable con un tercero (pasarelas de
 pago, APIs fiscales), porque son los fallos que no reproduces en local.
+
+### Eventos que no son excepciones
+
+Para un login rechazado o un pago denegado no necesitas fabricar una excepcion: usa
+`capture()`.
+
+```php
+DevherdObserveReporter::capture(
+    'LoginUnknownAccount',                  // agrupa como exception_type
+    'Login rejected: unknown account',      // mensaje CONSTANTE
+    ['email_domain' => $domain, 'ip' => $request->ip()],   // lo que cambia
+    'warning',                              // nivel: no ensucia entre errores reales
+);
+```
+
+Tres reglas que salen de como agrupa el collector:
+
+1. **El mensaje constante, los datos en `$context`.** El collector enmascara correos,
+   UUIDs, hashes y numeros antes de agrupar, asi que aunque se te cuele un correo en el
+   mensaje sigue siendo un issue; pero un mensaje estable se lee mucho mejor en el listado.
+2. **El `$context` no entra en el fingerprint**, asi que puede variar en cada ocurrencia. Se
+   ve en `observe timeline` bajo `Payload:` y resumido en la columna del listado de eventos.
+3. **No metas datos personales.** La base local no tiene autenticacion: manda
+   `email_domain` o un hash, no el correo completo.
+
+Cada punto de llamada distinto genera su propio issue, porque el `culprit` es la linea que
+llama. Si quieres unir varias llamadas en un mismo issue —o desacoplarte de la linea para
+que refactorizar no parta el historial— pasa un fingerprint explicito:
+
+```php
+DevherdObserveReporter::capture(
+    'LoginLocked', 'Too many attempts', ['ip' => $ip], 'warning',
+    fingerprint: 'login-lockout',
+);
+```
+
+Verificado: 6 llamadas con contexto, correos y mensajes distintos producen **3 issues** con
+`COUNT=2` cada uno.
+
+### Excepciones que afinan su evento
+
+Si prefieres excepciones de dominio, el reporter lee tres metodos opcionales:
+`context(): array` (convencion de Laravel), `level(): string` y `fingerprint(): string`.
 
 > **Livewire.** Los errores dentro de un componente suelen convertirse en respuesta HTTP y
 > pueden no llegar al handler. Si un flujo Livewire te importa, envuelvelo en `try/catch`
@@ -395,7 +439,9 @@ sin partir el issue. Verificado: tres errores con contexto distinto lanzados des
 linea agrupan en un unico issue con `COUNT=3`.
 
 > **Cuidado con `culprit`.** Ese si entra en el fingerprint. Lanzar la *misma* excepcion
-> desde lineas distintas produce issues distintos, aunque el mensaje sea identico.
+> desde lineas distintas produce issues distintos, aunque el mensaje sea identico. Para
+> unirlos, define `fingerprint(): string` en la excepcion o pasa `fingerprint:` a
+> `capture()`.
 
 ## 9. Verificar la instalacion
 

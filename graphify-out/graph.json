@@ -248,7 +248,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_compose_runtime",
-      "community": 1,
+      "community": 86,
       "norm_label": "compose_runtime.go"
     },
     {
@@ -258,7 +258,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "cli_compose_runtime_preparecomposeproject",
-      "community": 1,
+      "community": 86,
       "norm_label": "preparecomposeproject()"
     },
     {
@@ -268,7 +268,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_cli_compose_runtime_go_context",
-      "community": 1,
+      "community": 86,
       "norm_label": "context"
     },
     {
@@ -278,7 +278,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_cli_compose_runtime_go_appcontext",
-      "community": 1,
+      "community": 86,
       "norm_label": "appcontext"
     },
     {
@@ -288,7 +288,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_cli_compose_runtime_go_project",
-      "community": 1,
+      "community": 86,
       "norm_label": "project"
     },
     {
@@ -298,7 +298,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "cli_compose_runtime_resolveexternalproject",
-      "community": 1,
+      "community": 86,
       "norm_label": "resolveexternalproject()"
     },
     {
@@ -308,7 +308,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "externalproject",
-      "community": 1,
+      "community": 86,
       "norm_label": "externalproject"
     },
     {
@@ -318,7 +318,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "cli_compose_runtime_appendobserveoverride",
-      "community": 1,
+      "community": 86,
       "norm_label": "appendobserveoverride()"
     },
     {
@@ -328,7 +328,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_doctor",
-      "community": 88,
+      "community": 82,
       "norm_label": "doctor.go"
     },
     {
@@ -338,7 +338,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_doctor_newdoctorcmd",
-      "community": 88,
+      "community": 82,
       "norm_label": "newdoctorcmd()"
     },
     {
@@ -348,7 +348,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_doctor_go_command",
-      "community": 88,
+      "community": 82,
       "norm_label": "command"
     },
     {
@@ -358,7 +358,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "cli_doctor_statuslabel",
-      "community": 88,
+      "community": 82,
       "norm_label": "statuslabel()"
     },
     {
@@ -368,7 +368,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "status",
-      "community": 88,
+      "community": 82,
       "norm_label": "status"
     },
     {
@@ -418,7 +418,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_down",
-      "community": 1,
+      "community": 76,
       "norm_label": "down.go"
     },
     {
@@ -428,7 +428,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_down_newdowncmd",
-      "community": 1,
+      "community": 76,
       "norm_label": "newdowncmd()"
     },
     {
@@ -438,7 +438,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_down_go_command",
-      "community": 1,
+      "community": 76,
       "norm_label": "command"
     },
     {
@@ -598,7 +598,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_list",
-      "community": 68,
+      "community": 55,
       "norm_label": "list.go"
     },
     {
@@ -608,7 +608,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_list_newlistcmd",
-      "community": 68,
+      "community": 55,
       "norm_label": "newlistcmd()"
     },
     {
@@ -618,7 +618,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_list_go_command",
-      "community": 68,
+      "community": 55,
       "norm_label": "command"
     },
     {
@@ -628,7 +628,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_logging",
-      "community": 86,
+      "community": 82,
       "norm_label": "logging.go"
     },
     {
@@ -638,7 +638,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "cli_logoptions",
-      "community": 86,
+      "community": 82,
       "norm_label": "logoptions"
     },
     {
@@ -648,7 +648,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "cli_logging_setuplogging",
-      "community": 86,
+      "community": 82,
       "norm_label": "setuplogging()"
     },
     {
@@ -658,7 +658,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_logging_test",
-      "community": 86,
+      "community": 82,
       "norm_label": "logging_test.go"
     },
     {
@@ -668,7 +668,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_logging_test_testsetuploggingdoesnotpanic",
-      "community": 86,
+      "community": 82,
       "norm_label": "testsetuploggingdoesnotpanic()"
     },
     {
@@ -678,7 +678,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_cli_logging_test_go_t",
-      "community": 86,
+      "community": 82,
       "norm_label": "t"
     },
     {
@@ -688,7 +688,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "cli_logging_test_testverboseenablesdebuglevel",
-      "community": 86,
+      "community": 82,
       "norm_label": "testverboseenablesdebuglevel()"
     },
     {
@@ -805,7 +805,7 @@
       "label": "newObserveCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "cli_observe_newobservecmd",
       "community": 7,
@@ -815,7 +815,7 @@
       "label": "Command",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "internal_cli_observe_go_command",
       "community": 7,
@@ -825,7 +825,7 @@
       "label": "newObserveStartCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L53",
+      "source_location": "L54",
       "_origin": "ast",
       "id": "cli_observe_newobservestartcmd",
       "community": 7,
@@ -835,7 +835,7 @@
       "label": "newObserveStatusCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L92",
+      "source_location": "L93",
       "_origin": "ast",
       "id": "cli_observe_newobservestatuscmd",
       "community": 7,
@@ -845,7 +845,7 @@
       "label": "newObserveOpenCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L160",
+      "source_location": "L161",
       "_origin": "ast",
       "id": "cli_observe_newobserveopencmd",
       "community": 7,
@@ -855,7 +855,7 @@
       "label": "newObserveDSNCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L194",
+      "source_location": "L195",
       "_origin": "ast",
       "id": "cli_observe_newobservedsncmd",
       "community": 7,
@@ -865,17 +865,27 @@
       "label": "newObserveAttachCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L220",
+      "source_location": "L221",
       "_origin": "ast",
       "id": "cli_observe_newobserveattachcmd",
       "community": 7,
       "norm_label": "newobserveattachcmd()"
     },
     {
+      "label": "writeObserveReporter()",
+      "file_type": "code",
+      "source_file": "internal/cli/observe.go",
+      "source_location": "L325",
+      "_origin": "ast",
+      "id": "cli_observe_writeobservereporter",
+      "community": 7,
+      "norm_label": "writeobservereporter()"
+    },
+    {
       "label": "newObserveDetachCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L311",
+      "source_location": "L345",
       "_origin": "ast",
       "id": "cli_observe_newobservedetachcmd",
       "community": 7,
@@ -885,7 +895,7 @@
       "label": "newObserveScanCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L346",
+      "source_location": "L380",
       "_origin": "ast",
       "id": "cli_observe_newobservescancmd",
       "community": 7,
@@ -895,7 +905,7 @@
       "label": "newObserveContainersCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L381",
+      "source_location": "L415",
       "_origin": "ast",
       "id": "cli_observe_newobservecontainerscmd",
       "community": 7,
@@ -905,7 +915,7 @@
       "label": "newObserveTimelineCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L431",
+      "source_location": "L465",
       "_origin": "ast",
       "id": "cli_observe_newobservetimelinecmd",
       "community": 7,
@@ -915,7 +925,7 @@
       "label": "newObserveAlertCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L454",
+      "source_location": "L488",
       "_origin": "ast",
       "id": "cli_observe_newobservealertcmd",
       "community": 7,
@@ -925,7 +935,7 @@
       "label": "newObserveAlertAddCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L468",
+      "source_location": "L502",
       "_origin": "ast",
       "id": "cli_observe_newobservealertaddcmd",
       "community": 7,
@@ -935,7 +945,7 @@
       "label": "newObserveAlertListCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L527",
+      "source_location": "L561",
       "_origin": "ast",
       "id": "cli_observe_newobservealertlistcmd",
       "community": 7,
@@ -945,7 +955,7 @@
       "label": "newObserveAlertRemoveCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L563",
+      "source_location": "L597",
       "_origin": "ast",
       "id": "cli_observe_newobservealertremovecmd",
       "community": 7,
@@ -955,7 +965,7 @@
       "label": "newObserveAlertDeliveriesCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L594",
+      "source_location": "L628",
       "_origin": "ast",
       "id": "cli_observe_newobservealertdeliveriescmd",
       "community": 7,
@@ -965,7 +975,7 @@
       "label": "newObserveCleanupCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L636",
+      "source_location": "L670",
       "_origin": "ast",
       "id": "cli_observe_newobservecleanupcmd",
       "community": 7,
@@ -975,7 +985,7 @@
       "label": "newObserveIssuesCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L669",
+      "source_location": "L703",
       "_origin": "ast",
       "id": "cli_observe_newobserveissuescmd",
       "community": 7,
@@ -985,7 +995,7 @@
       "label": "newObserveEventsCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L721",
+      "source_location": "L755",
       "_origin": "ast",
       "id": "cli_observe_newobserveeventscmd",
       "community": 7,
@@ -995,7 +1005,7 @@
       "label": "writeObserveTimeline()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L774",
+      "source_location": "L808",
       "_origin": "ast",
       "id": "cli_observe_writeobservetimeline",
       "community": 7,
@@ -1005,7 +1015,7 @@
       "label": "Writer",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L774",
+      "source_location": "L808",
       "_origin": "ast",
       "id": "internal_cli_observe_go_writer",
       "community": 7,
@@ -1015,7 +1025,7 @@
       "label": "Timeline",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L774",
+      "source_location": "L808",
       "_origin": "ast",
       "id": "timeline",
       "community": 7,
@@ -1025,7 +1035,7 @@
       "label": "writeObservePayload()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L819",
+      "source_location": "L853",
       "_origin": "ast",
       "id": "cli_observe_writeobservepayload",
       "community": 7,
@@ -1035,7 +1045,7 @@
       "label": "formatObservePayloadValue()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L838",
+      "source_location": "L872",
       "_origin": "ast",
       "id": "cli_observe_formatobservepayloadvalue",
       "community": 7,
@@ -1045,7 +1055,7 @@
       "label": "observeTarget",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L851",
+      "source_location": "L885",
       "_origin": "ast",
       "id": "cli_observetarget",
       "community": 7,
@@ -1055,7 +1065,7 @@
       "label": "Project",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L853",
+      "source_location": "L887",
       "_origin": "ast",
       "id": "internal_cli_observe_go_project",
       "community": 7,
@@ -1065,7 +1075,7 @@
       "label": "resolveObserveTarget()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L856",
+      "source_location": "L890",
       "_origin": "ast",
       "id": "cli_observe_resolveobservetarget",
       "community": 7,
@@ -1075,7 +1085,7 @@
       "label": "Context",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L856",
+      "source_location": "L890",
       "_origin": "ast",
       "id": "internal_cli_observe_go_context",
       "community": 7,
@@ -1085,7 +1095,7 @@
       "label": "appContext",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L856",
+      "source_location": "L890",
       "_origin": "ast",
       "id": "internal_cli_observe_go_appcontext",
       "community": 7,
@@ -1095,7 +1105,7 @@
       "label": "openObserveStore()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L885",
+      "source_location": "L919",
       "_origin": "ast",
       "id": "cli_observe_openobservestore",
       "community": 7,
@@ -1105,7 +1115,7 @@
       "label": "DB",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L885",
+      "source_location": "L919",
       "_origin": "ast",
       "id": "internal_cli_observe_go_db",
       "community": 7,
@@ -1115,7 +1125,7 @@
       "label": "Store",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L885",
+      "source_location": "L919",
       "_origin": "ast",
       "id": "internal_cli_observe_go_store",
       "community": 7,
@@ -1125,7 +1135,7 @@
       "label": "observeDSN()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L906",
+      "source_location": "L940",
       "_origin": "ast",
       "id": "cli_observe_observedsn",
       "community": 7,
@@ -1135,7 +1145,7 @@
       "label": "observeAddrPlan",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L913",
+      "source_location": "L947",
       "_origin": "ast",
       "id": "cli_observeaddrplan",
       "community": 7,
@@ -1145,7 +1155,7 @@
       "label": "NetworkInfo",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L916",
+      "source_location": "L950",
       "_origin": "ast",
       "id": "internal_cli_observe_go_networkinfo",
       "community": 7,
@@ -1155,7 +1165,7 @@
       "label": "observeAddrOptions",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L923",
+      "source_location": "L957",
       "_origin": "ast",
       "id": "cli_observeaddroptions",
       "community": 7,
@@ -1165,7 +1175,7 @@
       "label": "planObserveAddrs()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L934",
+      "source_location": "L968",
       "_origin": "ast",
       "id": "cli_observe_planobserveaddrs",
       "community": 7,
@@ -1175,7 +1185,7 @@
       "label": ".selectMatch()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L975",
+      "source_location": "L1009",
       "_origin": "ast",
       "id": "cli_observeaddrplan_selectmatch",
       "community": 7,
@@ -1185,7 +1195,7 @@
       "label": ".networkNames()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1009",
+      "source_location": "L1043",
       "_origin": "ast",
       "id": "cli_observeaddrplan_networknames",
       "community": 7,
@@ -1195,7 +1205,7 @@
       "label": "observeSharedNetwork()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1020",
+      "source_location": "L1054",
       "_origin": "ast",
       "id": "cli_observe_observesharednetwork",
       "community": 7,
@@ -1205,7 +1215,7 @@
       "label": "observeNetworkName()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1030",
+      "source_location": "L1064",
       "_origin": "ast",
       "id": "cli_observe_observenetworkname",
       "community": 7,
@@ -1215,7 +1225,7 @@
       "label": "warnObserveLoopbackDSN()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1038",
+      "source_location": "L1072",
       "_origin": "ast",
       "id": "cli_observe_warnobserveloopbackdsn",
       "community": 7,
@@ -1225,7 +1235,7 @@
       "label": "reportObserveReachability()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1062",
+      "source_location": "L1096",
       "_origin": "ast",
       "id": "cli_observe_reportobservereachability",
       "community": 7,
@@ -1235,7 +1245,7 @@
       "label": "truncateObserveText()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1098",
+      "source_location": "L1132",
       "_origin": "ast",
       "id": "cli_observe_truncateobservetext",
       "community": 7,
@@ -1245,7 +1255,7 @@
       "label": "supportedAlertKind()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1111",
+      "source_location": "L1145",
       "_origin": "ast",
       "id": "cli_observe_supportedalertkind",
       "community": 7,
@@ -1255,7 +1265,7 @@
       "label": "parseObserveDurationSeconds()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1120",
+      "source_location": "L1154",
       "_origin": "ast",
       "id": "cli_observe_parseobservedurationseconds",
       "community": 7,
@@ -1265,7 +1275,7 @@
       "label": "emptyAsAll()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1137",
+      "source_location": "L1171",
       "_origin": "ast",
       "id": "cli_observe_emptyasall",
       "community": 7,
@@ -1398,7 +1408,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_open",
-      "community": 10,
+      "community": 89,
       "norm_label": "open.go"
     },
     {
@@ -1408,7 +1418,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_open_newopencmd",
-      "community": 10,
+      "community": 89,
       "norm_label": "newopencmd()"
     },
     {
@@ -1418,7 +1428,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_open_go_command",
-      "community": 10,
+      "community": 89,
       "norm_label": "command"
     },
     {
@@ -1428,7 +1438,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "cli_open_browsercommand",
-      "community": 10,
+      "community": 89,
       "norm_label": "browsercommand()"
     },
     {
@@ -1438,7 +1448,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_open_test",
-      "community": 10,
+      "community": 89,
       "norm_label": "open_test.go"
     },
     {
@@ -1448,7 +1458,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "cli_open_test_testbrowsercommand",
-      "community": 10,
+      "community": 89,
       "norm_label": "testbrowsercommand()"
     },
     {
@@ -1458,7 +1468,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_cli_open_test_go_t",
-      "community": 10,
+      "community": 89,
       "norm_label": "t"
     },
     {
@@ -1708,7 +1718,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "cli_root_notimplemented",
-      "community": 55,
+      "community": 68,
       "norm_label": "notimplemented()"
     },
     {
@@ -1778,7 +1788,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_sentry",
-      "community": 55,
+      "community": 68,
       "norm_label": "sentry.go"
     },
     {
@@ -1788,7 +1798,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "cli_sentry_newsentrycmd",
-      "community": 55,
+      "community": 68,
       "norm_label": "newsentrycmd()"
     },
     {
@@ -1798,7 +1808,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_cli_sentry_go_command",
-      "community": 55,
+      "community": 68,
       "norm_label": "command"
     },
     {
@@ -1808,7 +1818,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "cli_sentry_newsentryinitcmd",
-      "community": 55,
+      "community": 68,
       "norm_label": "newsentryinitcmd()"
     },
     {
@@ -1818,7 +1828,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "cli_sentry_newsentrysetdsncmd",
-      "community": 55,
+      "community": 68,
       "norm_label": "newsentrysetdsncmd()"
     },
     {
@@ -1828,7 +1838,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "cli_sentry_newsentrytestcmd",
-      "community": 55,
+      "community": 68,
       "norm_label": "newsentrytestcmd()"
     },
     {
@@ -1958,7 +1968,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_service",
-      "community": 87,
+      "community": 82,
       "norm_label": "service.go"
     },
     {
@@ -1968,7 +1978,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_service_newservicecmd",
-      "community": 87,
+      "community": 82,
       "norm_label": "newservicecmd()"
     },
     {
@@ -1978,7 +1988,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_service_go_command",
-      "community": 87,
+      "community": 82,
       "norm_label": "command"
     },
     {
@@ -1988,7 +1998,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "cli_service_newserviceactioncmd",
-      "community": 87,
+      "community": 82,
       "norm_label": "newserviceactioncmd()"
     },
     {
@@ -1998,7 +2008,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "cli_service_runserviceaction",
-      "community": 87,
+      "community": 82,
       "norm_label": "runserviceaction()"
     },
     {
@@ -2008,7 +2018,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "internal_cli_service_go_manager",
-      "community": 87,
+      "community": 82,
       "norm_label": "manager"
     },
     {
@@ -2018,7 +2028,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "cli_service_serviceactionshort",
-      "community": 87,
+      "community": 82,
       "norm_label": "serviceactionshort()"
     },
     {
@@ -2028,7 +2038,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_stop",
-      "community": 1,
+      "community": 86,
       "norm_label": "stop.go"
     },
     {
@@ -2038,7 +2048,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_stop_newstopcmd",
-      "community": 1,
+      "community": 86,
       "norm_label": "newstopcmd()"
     },
     {
@@ -2048,7 +2058,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_stop_go_command",
-      "community": 1,
+      "community": 86,
       "norm_label": "command"
     },
     {
@@ -2058,7 +2068,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_up",
-      "community": 1,
+      "community": 71,
       "norm_label": "up.go"
     },
     {
@@ -2068,7 +2078,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_up_newupcmd",
-      "community": 1,
+      "community": 71,
       "norm_label": "newupcmd()"
     },
     {
@@ -2078,7 +2088,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_up_go_command",
-      "community": 1,
+      "community": 71,
       "norm_label": "command"
     },
     {
@@ -2088,7 +2098,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "cli_up_runuppreflight",
-      "community": 1,
+      "community": 71,
       "norm_label": "runuppreflight()"
     },
     {
@@ -2098,7 +2108,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "internal_cli_up_go_appcontext",
-      "community": 1,
+      "community": 71,
       "norm_label": "appcontext"
     },
     {
@@ -2308,7 +2318,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "compose_project_resolveproject",
-      "community": 1,
+      "community": 76,
       "norm_label": "resolveproject()"
     },
     {
@@ -2318,7 +2328,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "compose_project_up",
-      "community": 1,
+      "community": 76,
       "norm_label": "up()"
     },
     {
@@ -2328,7 +2338,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "internal_compose_project_go_context",
-      "community": 1,
+      "community": 76,
       "norm_label": "context"
     },
     {
@@ -2338,7 +2348,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "compose_project_down",
-      "community": 1,
+      "community": 76,
       "norm_label": "down()"
     },
     {
@@ -2348,7 +2358,7 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "compose_project_stop",
-      "community": 1,
+      "community": 76,
       "norm_label": "stop()"
     },
     {
@@ -2358,7 +2368,7 @@
       "source_location": "L138",
       "_origin": "ast",
       "id": "compose_project_upproject",
-      "community": 1,
+      "community": 76,
       "norm_label": "upproject()"
     },
     {
@@ -2368,7 +2378,7 @@
       "source_location": "L144",
       "_origin": "ast",
       "id": "compose_project_downproject",
-      "community": 1,
+      "community": 76,
       "norm_label": "downproject()"
     },
     {
@@ -2378,7 +2388,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "compose_project_stopproject",
-      "community": 1,
+      "community": 76,
       "norm_label": "stopproject()"
     },
     {
@@ -2408,7 +2418,7 @@
       "source_location": "L276",
       "_origin": "ast",
       "id": "compose_project_composeargs",
-      "community": 1,
+      "community": 85,
       "norm_label": "composeargs()"
     },
     {
@@ -2418,7 +2428,7 @@
       "source_location": "L294",
       "_origin": "ast",
       "id": "compose_project_plan",
-      "community": 1,
+      "community": 85,
       "norm_label": "plan()"
     },
     {
@@ -2428,7 +2438,7 @@
       "source_location": "L303",
       "_origin": "ast",
       "id": "compose_project_planproject",
-      "community": 1,
+      "community": 85,
       "norm_label": "planproject()"
     },
     {
@@ -2438,7 +2448,7 @@
       "source_location": "L307",
       "_origin": "ast",
       "id": "compose_project_command",
-      "community": 1,
+      "community": 85,
       "norm_label": "command()"
     },
     {
@@ -2448,7 +2458,7 @@
       "source_location": "L312",
       "_origin": "ast",
       "id": "compose_project_run",
-      "community": 1,
+      "community": 76,
       "norm_label": "run()"
     },
     {
@@ -2498,7 +2508,7 @@
       "source_location": "L384",
       "_origin": "ast",
       "id": "compose_project_joinoutput",
-      "community": 1,
+      "community": 76,
       "norm_label": "joinoutput()"
     },
     {
@@ -2508,7 +2518,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_project_test",
-      "community": 1,
+      "community": 85,
       "norm_label": "project_test.go"
     },
     {
@@ -2528,7 +2538,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_compose_project_test_go_t",
-      "community": 1,
+      "community": 85,
       "norm_label": "t"
     },
     {
@@ -2538,7 +2548,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectusesmanifestcomposefiles",
-      "community": 1,
+      "community": 85,
       "norm_label": "testresolveprojectusesmanifestcomposefiles()"
     },
     {
@@ -2548,7 +2558,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojecterrorswhenmanifestcomposefilemissing",
-      "community": 1,
+      "community": 85,
       "norm_label": "testresolveprojecterrorswhenmanifestcomposefilemissing()"
     },
     {
@@ -2558,7 +2568,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "compose_project_test_testcomposeargsincludesenvfileandallcomposefiles",
-      "community": 1,
+      "community": 85,
       "norm_label": "testcomposeargsincludesenvfileandallcomposefiles()"
     },
     {
@@ -2568,7 +2578,7 @@
       "source_location": "L133",
       "_origin": "ast",
       "id": "compose_project_test_testplanreturnsdockercommand",
-      "community": 1,
+      "community": 85,
       "norm_label": "testplanreturnsdockercommand()"
     },
     {
@@ -2578,7 +2588,7 @@
       "source_location": "L155",
       "_origin": "ast",
       "id": "compose_project_test_teststopprojectusescomposestop",
-      "community": 1,
+      "community": 85,
       "norm_label": "teststopprojectusescomposestop()"
     },
     {
@@ -2588,7 +2598,7 @@
       "source_location": "L179",
       "_origin": "ast",
       "id": "compose_project_test_testprojectnameforpathisstableandpathscoped",
-      "community": 1,
+      "community": 85,
       "norm_label": "testprojectnameforpathisstableandpathscoped()"
     },
     {
@@ -2598,7 +2608,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "config_config",
-      "community": 2,
+      "community": 82,
       "norm_label": "config"
     },
     {
@@ -2608,7 +2618,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxyconfig",
-      "community": 2,
+      "community": 82,
       "norm_label": "proxyconfig"
     },
     {
@@ -2618,7 +2628,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "dnsconfig",
-      "community": 2,
+      "community": 82,
       "norm_label": "dnsconfig"
     },
     {
@@ -2628,7 +2638,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "observabilityconfig",
-      "community": 2,
+      "community": 82,
       "norm_label": "observabilityconfig"
     },
     {
@@ -2638,7 +2648,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "config_proxyconfig",
-      "community": 2,
+      "community": 82,
       "norm_label": "proxyconfig"
     },
     {
@@ -2648,7 +2658,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "config_dnsconfig",
-      "community": 2,
+      "community": 82,
       "norm_label": "dnsconfig"
     },
     {
@@ -2658,7 +2668,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "config_observabilityconfig",
-      "community": 2,
+      "community": 82,
       "norm_label": "observabilityconfig"
     },
     {
@@ -2678,7 +2688,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "config_config_applypathdefaults",
-      "community": 2,
+      "community": 82,
       "norm_label": ".applypathdefaults()"
     },
     {
@@ -2688,7 +2698,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "internal_config_config_go_paths",
-      "community": 2,
+      "community": 82,
       "norm_label": "paths"
     },
     {
@@ -2708,7 +2718,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "config_store",
-      "community": 2,
+      "community": 82,
       "norm_label": "store"
     },
     {
@@ -2718,7 +2728,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "config_config_newstore",
-      "community": 2,
+      "community": 82,
       "norm_label": "newstore()"
     },
     {
@@ -2728,7 +2738,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "config_store_load",
-      "community": 2,
+      "community": 82,
       "norm_label": ".load()"
     },
     {
@@ -2738,7 +2748,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "config_store_save",
-      "community": 2,
+      "community": 82,
       "norm_label": ".save()"
     },
     {
@@ -2778,7 +2788,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "config_paths",
-      "community": 83,
+      "community": 82,
       "norm_label": "paths"
     },
     {
@@ -2788,7 +2798,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "config_paths_resolvepaths",
-      "community": 83,
+      "community": 82,
       "norm_label": "resolvepaths()"
     },
     {
@@ -2798,7 +2808,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "config_paths_ensure",
-      "community": 83,
+      "community": 82,
       "norm_label": ".ensure()"
     },
     {
@@ -2808,7 +2818,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "config_paths_envordefault",
-      "community": 83,
+      "community": 82,
       "norm_label": "envordefault()"
     },
     {
@@ -2818,7 +2828,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "config_paths_defaultdatarootforos",
-      "community": 83,
+      "community": 82,
       "norm_label": "defaultdatarootforos()"
     },
     {
@@ -2828,7 +2838,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "config_paths_defaultstaterootforos",
-      "community": 83,
+      "community": 82,
       "norm_label": "defaultstaterootforos()"
     },
     {
@@ -2838,7 +2848,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "config_paths_test",
-      "community": 83,
+      "community": 82,
       "norm_label": "paths_test.go"
     },
     {
@@ -2848,7 +2858,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "config_paths_test_testdefaultdatarootforos",
-      "community": 83,
+      "community": 82,
       "norm_label": "testdefaultdatarootforos()"
     },
     {
@@ -2858,7 +2868,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_config_paths_test_go_t",
-      "community": 83,
+      "community": 82,
       "norm_label": "t"
     },
     {
@@ -2868,7 +2878,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "config_paths_test_testdefaultstaterootforos",
-      "community": 83,
+      "community": 82,
       "norm_label": "testdefaultstaterootforos()"
     },
     {
@@ -4715,160 +4725,170 @@
       "label": "Event",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L13",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "observe_event",
-      "community": 70,
+      "community": 5,
       "norm_label": "event"
     },
     {
       "label": "NormalizeEvent()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L32",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "observe_event_normalizeevent",
-      "community": 70,
+      "community": 5,
       "norm_label": "normalizeevent()"
     },
     {
       "label": "ExtraPayload()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L103",
+      "source_location": "L105",
       "_origin": "ast",
       "id": "observe_event_extrapayload",
-      "community": 70,
+      "community": 5,
       "norm_label": "extrapayload()"
     },
     {
       "label": "Fingerprint()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L129",
+      "source_location": "L131",
       "_origin": "ast",
       "id": "observe_event_fingerprint",
-      "community": 70,
+      "community": 5,
       "norm_label": "fingerprint()"
     },
     {
       "label": "eventTitle()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L141",
+      "source_location": "L143",
       "_origin": "ast",
       "id": "observe_event_eventtitle",
-      "community": 70,
+      "community": 5,
       "norm_label": "eventtitle()"
     },
     {
       "label": "compactJSON()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L157",
+      "source_location": "L159",
       "_origin": "ast",
       "id": "observe_event_compactjson",
-      "community": 70,
+      "community": 5,
       "norm_label": "compactjson()"
     },
     {
       "label": "normalizeMessage()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L171",
+      "source_location": "L191",
       "_origin": "ast",
       "id": "observe_event_normalizemessage",
-      "community": 70,
+      "community": 5,
       "norm_label": "normalizemessage()"
+    },
+    {
+      "label": "explicitFingerprint()",
+      "file_type": "code",
+      "source_file": "internal/observe/event.go",
+      "source_location": "L210",
+      "_origin": "ast",
+      "id": "observe_event_explicitfingerprint",
+      "community": 5,
+      "norm_label": "explicitfingerprint()"
     },
     {
       "label": "newEventID()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L180",
+      "source_location": "L233",
       "_origin": "ast",
       "id": "observe_event_neweventid",
-      "community": 70,
+      "community": 5,
       "norm_label": "neweventid()"
     },
     {
       "label": "stringValue()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L190",
+      "source_location": "L243",
       "_origin": "ast",
       "id": "observe_event_stringvalue",
-      "community": 70,
+      "community": 5,
       "norm_label": "stringvalue()"
     },
     {
       "label": "timestampValue()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L204",
+      "source_location": "L257",
       "_origin": "ast",
       "id": "observe_event_timestampvalue",
-      "community": 70,
+      "community": 5,
       "norm_label": "timestampvalue()"
     },
     {
       "label": "logEntryMessage()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L217",
+      "source_location": "L270",
       "_origin": "ast",
       "id": "observe_event_logentrymessage",
-      "community": 70,
+      "community": 5,
       "norm_label": "logentrymessage()"
     },
     {
       "label": "exceptionDetails()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L231",
+      "source_location": "L284",
       "_origin": "ast",
       "id": "observe_event_exceptiondetails",
-      "community": 70,
+      "community": 5,
       "norm_label": "exceptiondetails()"
     },
     {
       "label": "stackCulprit()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L254",
+      "source_location": "L307",
       "_origin": "ast",
       "id": "observe_event_stackculprit",
-      "community": 70,
+      "community": 5,
       "norm_label": "stackculprit()"
     },
     {
       "label": "tagValue()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L288",
+      "source_location": "L341",
       "_origin": "ast",
       "id": "observe_event_tagvalue",
-      "community": 70,
+      "community": 5,
       "norm_label": "tagvalue()"
     },
     {
       "label": "mapString()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L312",
+      "source_location": "L365",
       "_origin": "ast",
       "id": "observe_event_mapstring",
-      "community": 70,
+      "community": 5,
       "norm_label": "mapstring()"
     },
     {
       "label": "firstNonEmpty()",
       "file_type": "code",
       "source_file": "internal/observe/event.go",
-      "source_location": "L326",
+      "source_location": "L379",
       "_origin": "ast",
       "id": "observe_event_firstnonempty",
-      "community": 70,
+      "community": 5,
       "norm_label": "firstnonempty()"
     },
     {
@@ -4878,7 +4898,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_event_test",
-      "community": 70,
+      "community": 5,
       "norm_label": "event_test.go"
     },
     {
@@ -4888,7 +4908,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayload",
-      "community": 70,
+      "community": 5,
       "norm_label": "testextrapayload()"
     },
     {
@@ -4898,7 +4918,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_event_test_go_t",
-      "community": 70,
+      "community": 5,
       "norm_label": "t"
     },
     {
@@ -4908,8 +4928,118 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayloadovernormalizedevent",
-      "community": 70,
+      "community": 5,
       "norm_label": "testextrapayloadovernormalizedevent()"
+    },
+    {
+      "label": "fingerprint_test.go",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test",
+      "community": 87,
+      "norm_label": "fingerprint_test.go"
+    },
+    {
+      "label": "fingerprintOf()",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test_fingerprintof",
+      "community": 87,
+      "norm_label": "fingerprintof()"
+    },
+    {
+      "label": "T",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "internal_observe_fingerprint_test_go_t",
+      "community": 87,
+      "norm_label": "t"
+    },
+    {
+      "label": "Event",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "internal_observe_fingerprint_test_go_event",
+      "community": 87,
+      "norm_label": "event"
+    },
+    {
+      "label": "TestFingerprintMasksVariableData()",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test_testfingerprintmasksvariabledata",
+      "community": 87,
+      "norm_label": "testfingerprintmasksvariabledata()"
+    },
+    {
+      "label": "TestFingerprintStillSeparatesDifferentFailures()",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test_testfingerprintstillseparatesdifferentfailures",
+      "community": 87,
+      "norm_label": "testfingerprintstillseparatesdifferentfailures()"
+    },
+    {
+      "label": "TestExplicitFingerprintWins()",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test_testexplicitfingerprintwins",
+      "community": 87,
+      "norm_label": "testexplicitfingerprintwins()"
+    },
+    {
+      "label": "TestExplicitFingerprintIsScopedByProject()",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test_testexplicitfingerprintisscopedbyproject",
+      "community": 87,
+      "norm_label": "testexplicitfingerprintisscopedbyproject()"
+    },
+    {
+      "label": "TestExplicitFingerprintAcceptsSDKLists()",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test_testexplicitfingerprintacceptssdklists",
+      "community": 87,
+      "norm_label": "testexplicitfingerprintacceptssdklists()"
+    },
+    {
+      "label": "TestEmptyFingerprintFallsBackToTheDerivedOne()",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L87",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test_testemptyfingerprintfallsbacktothederivedone",
+      "community": 87,
+      "norm_label": "testemptyfingerprintfallsbacktothederivedone()"
+    },
+    {
+      "label": "quote()",
+      "file_type": "code",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L96",
+      "_origin": "ast",
+      "id": "observe_fingerprint_test_quote",
+      "community": 87,
+      "norm_label": "quote()"
     },
     {
       "label": "firewall.go",
@@ -6012,6 +6142,126 @@
       "norm_label": "testprobecommandmirrorstheprobe()"
     },
     {
+      "label": "reporter.go",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "observe_reporter",
+      "community": 55,
+      "norm_label": "reporter.go"
+    },
+    {
+      "label": "reporterTemplate",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "observe_reportertemplate",
+      "community": 55,
+      "norm_label": "reportertemplate"
+    },
+    {
+      "label": "ReporterResult",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "observe_reporterresult",
+      "community": 55,
+      "norm_label": "reporterresult"
+    },
+    {
+      "label": "SupportedReporterStacks()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "observe_reporter_supportedreporterstacks",
+      "community": 55,
+      "norm_label": "supportedreporterstacks()"
+    },
+    {
+      "label": "EnsureReporter()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L56",
+      "_origin": "ast",
+      "id": "observe_reporter_ensurereporter",
+      "community": 55,
+      "norm_label": "ensurereporter()"
+    },
+    {
+      "label": "reporter_test.go",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "observe_reporter_test",
+      "community": 55,
+      "norm_label": "reporter_test.go"
+    },
+    {
+      "label": "TestEnsureReporterWritesTheLaravelFile()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "observe_reporter_test_testensurereporterwritesthelaravelfile",
+      "community": 55,
+      "norm_label": "testensurereporterwritesthelaravelfile()"
+    },
+    {
+      "label": "T",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "internal_observe_reporter_test_go_t",
+      "community": 55,
+      "norm_label": "t"
+    },
+    {
+      "label": "TestEnsureReporterKeepsExistingFile()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "observe_reporter_test_testensurereporterkeepsexistingfile",
+      "community": 55,
+      "norm_label": "testensurereporterkeepsexistingfile()"
+    },
+    {
+      "label": "TestEnsureReporterOverwritesWithForce()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "observe_reporter_test_testensurereporteroverwriteswithforce",
+      "community": 55,
+      "norm_label": "testensurereporteroverwriteswithforce()"
+    },
+    {
+      "label": "TestEnsureReporterRejectsUnsupportedStack()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L92",
+      "_origin": "ast",
+      "id": "observe_reporter_test_testensurereporterrejectsunsupportedstack",
+      "community": 55,
+      "norm_label": "testensurereporterrejectsunsupportedstack()"
+    },
+    {
+      "label": "TestEnsureReporterRequiresRoot()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L102",
+      "_origin": "ast",
+      "id": "observe_reporter_test_testensurereporterrequiresroot",
+      "community": 55,
+      "norm_label": "testensurereporterrequiresroot()"
+    },
+    {
       "label": "Server",
       "file_type": "code",
       "source_file": "internal/observe/server.go",
@@ -6808,7 +7058,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_store_test",
-      "community": 70,
+      "community": 5,
       "norm_label": "store_test.go"
     },
     {
@@ -6818,7 +7068,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_store_test_teststoreeventgroupsissues",
-      "community": 70,
+      "community": 5,
       "norm_label": "teststoreeventgroupsissues()"
     },
     {
@@ -6828,7 +7078,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_store_test_go_t",
-      "community": 70,
+      "community": 5,
       "norm_label": "t"
     },
     {
@@ -6838,7 +7088,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_store_test_teststorecontainersrecordsstatusandrestartevents",
-      "community": 70,
+      "community": 5,
       "norm_label": "teststorecontainersrecordsstatusandrestartevents()"
     },
     {
@@ -6848,7 +7098,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_store_test_teststorecreatesalertdeliveries",
-      "community": 70,
+      "community": 5,
       "norm_label": "teststorecreatesalertdeliveries()"
     },
     {
@@ -6858,7 +7108,7 @@
       "source_location": "L206",
       "_origin": "ast",
       "id": "observe_store_test_testlisteventsandtimelinereturnrawpayload",
-      "community": 70,
+      "community": 5,
       "norm_label": "testlisteventsandtimelinereturnrawpayload()"
     },
     {
@@ -6918,7 +7168,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "preflight_report_hasfailures",
-      "community": 8,
+      "community": 0,
       "norm_label": ".hasfailures()"
     },
     {
@@ -6928,7 +7178,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "preflight_report_haswarnings",
-      "community": 8,
+      "community": 0,
       "norm_label": ".haswarnings()"
     },
     {
@@ -6938,7 +7188,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "preflight_report_count",
-      "community": 8,
+      "community": 0,
       "norm_label": ".count()"
     },
     {
@@ -7508,7 +7758,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_bootstrap",
-      "community": 8,
+      "community": 88,
       "norm_label": "bootstrap.go"
     },
     {
@@ -7518,7 +7768,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxy_bootstrapresult",
-      "community": 8,
+      "community": 88,
       "norm_label": "bootstrapresult"
     },
     {
@@ -7528,7 +7778,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "proxy_bootstrapoptions",
-      "community": 8,
+      "community": 88,
       "norm_label": "bootstrapoptions"
     },
     {
@@ -7538,7 +7788,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxy",
-      "community": 8,
+      "community": 88,
       "norm_label": "bootstrapexternalproxy()"
     },
     {
@@ -7548,7 +7798,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_proxy_bootstrap_go_config",
-      "community": 8,
+      "community": 88,
       "norm_label": "config"
     },
     {
@@ -7558,7 +7808,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxywithoptions",
-      "community": 8,
+      "community": 88,
       "norm_label": "bootstrapexternalproxywithoptions()"
     },
     {
@@ -7568,7 +7818,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxysettings",
-      "community": 8,
+      "community": 88,
       "norm_label": "bootstrapexternalproxysettings()"
     },
     {
@@ -7578,7 +7828,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "externalsettingsconfig",
-      "community": 8,
+      "community": 88,
       "norm_label": "externalsettingsconfig"
     },
     {
@@ -7588,7 +7838,7 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "proxy_bootstrap_ensuremanagedfile",
-      "community": 8,
+      "community": 88,
       "norm_label": "ensuremanagedfile()"
     },
     {
@@ -7598,7 +7848,7 @@
       "source_location": "L117",
       "_origin": "ast",
       "id": "proxy_bootstrap_renderembeddedtemplate",
-      "community": 8,
+      "community": 88,
       "norm_label": "renderembeddedtemplate()"
     },
     {
@@ -7808,7 +8058,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "proxy_external_managedsitestart",
-      "community": 8,
+      "community": 83,
       "norm_label": "managedsitestart()"
     },
     {
@@ -7818,7 +8068,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "proxy_external_managedsiteend",
-      "community": 8,
+      "community": 83,
       "norm_label": "managedsiteend()"
     },
     {
@@ -8038,7 +8288,7 @@
       "source_location": "L328",
       "_origin": "ast",
       "id": "proxy_external_mergeexternalproxyconfig",
-      "community": 8,
+      "community": 83,
       "norm_label": "mergeexternalproxyconfig()"
     },
     {
@@ -8048,7 +8298,7 @@
       "source_location": "L348",
       "_origin": "ast",
       "id": "proxy_external_renderexternalsites",
-      "community": 8,
+      "community": 83,
       "norm_label": "renderexternalsites()"
     },
     {
@@ -8058,7 +8308,7 @@
       "source_location": "L357",
       "_origin": "ast",
       "id": "proxy_external_renderexternalsite",
-      "community": 8,
+      "community": 83,
       "norm_label": "renderexternalsite()"
     },
     {
@@ -8068,7 +8318,7 @@
       "source_location": "L389",
       "_origin": "ast",
       "id": "proxy_external_stripmanageddomains",
-      "community": 8,
+      "community": 83,
       "norm_label": "stripmanageddomains()"
     },
     {
@@ -8078,7 +8328,7 @@
       "source_location": "L394",
       "_origin": "ast",
       "id": "proxy_external_stripmarkeddomains",
-      "community": 8,
+      "community": 83,
       "norm_label": "stripmarkeddomains()"
     },
     {
@@ -8088,7 +8338,7 @@
       "source_location": "L423",
       "_origin": "ast",
       "id": "proxy_external_stripbracedomains",
-      "community": 8,
+      "community": 83,
       "norm_label": "stripbracedomains()"
     },
     {
@@ -8158,7 +8408,7 @@
       "source_location": "L568",
       "_origin": "ast",
       "id": "proxy_external_urlfordomain",
-      "community": 8,
+      "community": 89,
       "norm_label": "urlfordomain()"
     },
     {
@@ -8168,7 +8418,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_external_markers_test",
-      "community": 8,
+      "community": 83,
       "norm_label": "external_markers_test.go"
     },
     {
@@ -8178,7 +8428,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "proxy_external_markers_test_testrenderexternalsitewrapswithmarkers",
-      "community": 8,
+      "community": 83,
       "norm_label": "testrenderexternalsitewrapswithmarkers()"
     },
     {
@@ -8188,7 +8438,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_proxy_external_markers_test_go_t",
-      "community": 8,
+      "community": 83,
       "norm_label": "t"
     },
     {
@@ -8198,7 +8448,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "proxy_external_markers_test_teststripmanageddomainsremovesmarkedblockkeepingothers",
-      "community": 8,
+      "community": 83,
       "norm_label": "teststripmanageddomainsremovesmarkedblockkeepingothers()"
     },
     {
@@ -8208,7 +8458,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "proxy_external_markers_test_teststripmanageddomainsmigrateslegacyunmarkedblock",
-      "community": 8,
+      "community": 83,
       "norm_label": "teststripmanageddomainsmigrateslegacyunmarkedblock()"
     },
     {
@@ -8218,7 +8468,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_external_test",
-      "community": 8,
+      "community": 2,
       "norm_label": "external_test.go"
     },
     {
@@ -8228,7 +8478,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxy_external_test_testbuildexternalprojectusesmanifestproxy",
-      "community": 8,
+      "community": 2,
       "norm_label": "testbuildexternalprojectusesmanifestproxy()"
     },
     {
@@ -8238,7 +8488,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_proxy_external_test_go_t",
-      "community": 8,
+      "community": 2,
       "norm_label": "t"
     },
     {
@@ -8248,7 +8498,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "proxy_external_test_testbuildexternalprojectusesvueflaskfallback",
-      "community": 8,
+      "community": 2,
       "norm_label": "testbuildexternalprojectusesvueflaskfallback()"
     },
     {
@@ -8258,7 +8508,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "proxy_external_test_testensurecomposeoverridewritesaliases",
-      "community": 8,
+      "community": 2,
       "norm_label": "testensurecomposeoverridewritesaliases()"
     },
     {
@@ -8268,7 +8518,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "proxy_external_test_teststripmanageddomainsreplacesselectedsites",
-      "community": 8,
+      "community": 2,
       "norm_label": "teststripmanageddomainsreplacesselectedsites()"
     },
     {
@@ -8278,7 +8528,7 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "proxy_external_test_testbootstrapexternalproxycreatesandreusesfiles",
-      "community": 8,
+      "community": 2,
       "norm_label": "testbootstrapexternalproxycreatesandreusesfiles()"
     },
     {
@@ -8288,7 +8538,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "proxy_external_test_testbootstrapexternalproxywithforceupdatesmanagedfilesbutpreservesenv",
-      "community": 8,
+      "community": 2,
       "norm_label": "testbootstrapexternalproxywithforceupdatesmanagedfilesbutpreservesenv()"
     },
     {
@@ -8298,7 +8548,7 @@
       "source_location": "L214",
       "_origin": "ast",
       "id": "proxy_external_test_writetestfile",
-      "community": 8,
+      "community": 2,
       "norm_label": "writetestfile()"
     },
     {
@@ -8308,7 +8558,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "runner_runner",
-      "community": 8,
+      "community": 90,
       "norm_label": "runner"
     },
     {
@@ -8318,7 +8568,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "runner_cmd",
-      "community": 8,
+      "community": 90,
       "norm_label": "cmd"
     },
     {
@@ -8328,7 +8578,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_runner_runner_go_duration",
-      "community": 8,
+      "community": 90,
       "norm_label": "duration"
     },
     {
@@ -8338,7 +8588,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "runner_cmd_run",
-      "community": 8,
+      "community": 90,
       "norm_label": ".run()"
     },
     {
@@ -8348,7 +8598,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "internal_runner_runner_go_context",
-      "community": 8,
+      "community": 90,
       "norm_label": "context"
     },
     {
@@ -8798,7 +9048,7 @@
       "source_location": "L671",
       "_origin": "ast",
       "id": "scaffold_scaffold_filecontains",
-      "community": 8,
+      "community": 4,
       "norm_label": "filecontains()"
     },
     {
@@ -9408,7 +9658,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_manager_test",
-      "community": 8,
+      "community": 2,
       "norm_label": "manager_test.go"
     },
     {
@@ -9418,7 +9668,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "services_manager_test_testbootstrapwritessharedservicescompose",
-      "community": 8,
+      "community": 2,
       "norm_label": "testbootstrapwritessharedservicescompose()"
     },
     {
@@ -9428,7 +9678,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_services_manager_test_go_t",
-      "community": 8,
+      "community": 2,
       "norm_label": "t"
     },
     {
@@ -9438,7 +9688,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "services_manager_test_testvalidateservicerejectsunknownservice",
-      "community": 8,
+      "community": 2,
       "norm_label": "testvalidateservicerejectsunknownservice()"
     },
     {
@@ -9448,7 +9698,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version",
-      "community": 8,
+      "community": 68,
       "norm_label": "version.go"
     },
     {
@@ -9458,7 +9708,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "version_version_string",
-      "community": 8,
+      "community": 55,
       "norm_label": "string()"
     },
     {
@@ -9468,7 +9718,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "version_version_long",
-      "community": 8,
+      "community": 68,
       "norm_label": "long()"
     },
     {
@@ -9478,7 +9728,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version_test",
-      "community": 8,
+      "community": 2,
       "norm_label": "version_test.go"
     },
     {
@@ -9488,7 +9738,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "version_version_test_teststringreturnsversion",
-      "community": 8,
+      "community": 2,
       "norm_label": "teststringreturnsversion()"
     },
     {
@@ -9498,7 +9748,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_version_version_test_go_t",
-      "community": 8,
+      "community": 2,
       "norm_label": "t"
     },
     {
@@ -9508,7 +9758,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "version_version_test_testlongincludesversioncommitanddate",
-      "community": 8,
+      "community": 2,
       "norm_label": "testlongincludesversioncommitanddate()"
     },
     {
@@ -9518,7 +9768,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "version_version_test_contains",
-      "community": 8,
+      "community": 2,
       "norm_label": "contains()"
     },
     {
@@ -9528,7 +9778,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "version_version_test_indexof",
-      "community": 8,
+      "community": 2,
       "norm_label": "indexof()"
     },
     {
@@ -9614,6 +9864,166 @@
       "id": "home_elyares_develop_personal_devherd_scripts_uninstall_sh__entry",
       "community": 29,
       "norm_label": "uninstall.sh script"
+    },
+    {
+      "label": "embed.go",
+      "file_type": "code",
+      "source_file": "templates/observe/embed.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "observe_embed",
+      "community": 91,
+      "norm_label": "embed.go"
+    },
+    {
+      "label": "reporter-laravel.php",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel",
+      "community": 70,
+      "norm_label": "reporter-laravel.php"
+    },
+    {
+      "label": "DevherdObserveReporter",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter",
+      "community": 70,
+      "norm_label": "devherdobservereporter"
+    },
+    {
+      "label": ".report()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_report",
+      "community": 70,
+      "norm_label": ".report()"
+    },
+    {
+      "label": "Throwable",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "throwable",
+      "community": 70,
+      "norm_label": "throwable"
+    },
+    {
+      "label": ".capture()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_capture",
+      "community": 70,
+      "norm_label": ".capture()"
+    },
+    {
+      "label": ".send()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_send",
+      "community": 70,
+      "norm_label": ".send()"
+    },
+    {
+      "label": ".endpoint()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L132",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_endpoint",
+      "community": 70,
+      "norm_label": ".endpoint()"
+    },
+    {
+      "label": ".payload()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L164",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_payload",
+      "community": 70,
+      "norm_label": ".payload()"
+    },
+    {
+      "label": ".optionalArray()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L203",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_optionalarray",
+      "community": 70,
+      "norm_label": ".optionalarray()"
+    },
+    {
+      "label": ".optionalString()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L218",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_optionalstring",
+      "community": 70,
+      "norm_label": ".optionalstring()"
+    },
+    {
+      "label": ".caller()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L237",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_caller",
+      "community": 70,
+      "norm_label": ".caller()"
+    },
+    {
+      "label": ".relativePath()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L254",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_relativepath",
+      "community": 70,
+      "norm_label": ".relativepath()"
+    },
+    {
+      "label": ".transaction()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L272",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_transaction",
+      "community": 70,
+      "norm_label": ".transaction()"
+    },
+    {
+      "label": ".stringify()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L291",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_stringify",
+      "community": 70,
+      "norm_label": ".stringify()"
+    },
+    {
+      "label": ".shortName()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L303",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_shortname",
+      "community": 70,
+      "norm_label": ".shortname()"
     },
     {
       "label": "embed.go",
@@ -10519,7 +10929,7 @@
       "label": "Captura de logs: modelo de una sola foto",
       "file_type": "document",
       "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L421",
+      "source_location": "L423",
       "_origin": "ast",
       "id": "docs_improvements_captura_de_logs_modelo_de_una_sola_foto",
       "community": 51,
@@ -10529,7 +10939,7 @@
       "label": "Perdida de datos y cosmetica",
       "file_type": "document",
       "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L435",
+      "source_location": "L437",
       "_origin": "ast",
       "id": "docs_improvements_perdida_de_datos_y_cosmetica",
       "community": 51,
@@ -10539,7 +10949,7 @@
       "label": "Roadmap de mejoras priorizado",
       "file_type": "document",
       "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L459",
+      "source_location": "L461",
       "_origin": "ast",
       "id": "docs_improvements_roadmap_de_mejoras_priorizado",
       "community": 51,
@@ -10549,7 +10959,7 @@
       "label": "Orden sugerido de ataque",
       "file_type": "document",
       "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L486",
+      "source_location": "L488",
       "_origin": "ast",
       "id": "docs_improvements_orden_sugerido_de_ataque",
       "community": 51,
@@ -11319,7 +11729,7 @@
       "label": "`observe detach <project-or-path>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L710",
+      "source_location": "L727",
       "_origin": "ast",
       "id": "docs_usage_observe_detach_project_or_path",
       "community": 45,
@@ -11329,7 +11739,7 @@
       "label": "`observe scan [project]` / `observe containers [project]`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L718",
+      "source_location": "L735",
       "_origin": "ast",
       "id": "docs_usage_observe_scan_project_observe_containers_project",
       "community": 45,
@@ -11339,7 +11749,7 @@
       "label": "`observe issues [project]` / `observe events [project]` / `observe timeline <event-id>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L732",
+      "source_location": "L749",
       "_origin": "ast",
       "id": "docs_usage_observe_issues_project_observe_events_project_observe_timeline_event_id",
       "community": 45,
@@ -11349,7 +11759,7 @@
       "label": "`observe alert <add|list|remove|deliveries>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L764",
+      "source_location": "L781",
       "_origin": "ast",
       "id": "docs_usage_observe_alert_add_list_remove_deliveries",
       "community": 45,
@@ -11359,7 +11769,7 @@
       "label": "`observe cleanup`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L792",
+      "source_location": "L809",
       "_origin": "ast",
       "id": "docs_usage_observe_cleanup",
       "community": 45,
@@ -11369,7 +11779,7 @@
       "label": "4.18 `devherd sentry ...`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L808",
+      "source_location": "L825",
       "_origin": "ast",
       "id": "docs_usage_4_18_devherd_sentry",
       "community": 80,
@@ -11379,7 +11789,7 @@
       "label": "`sentry init <project> --stack <stack>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L814",
+      "source_location": "L831",
       "_origin": "ast",
       "id": "docs_usage_sentry_init_project_stack_stack",
       "community": 80,
@@ -11389,7 +11799,7 @@
       "label": "`sentry set-dsn <project> --dsn <dsn>` / `sentry test <project>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L828",
+      "source_location": "L845",
       "_origin": "ast",
       "id": "docs_usage_sentry_set_dsn_project_dsn_dsn_sentry_test_project",
       "community": 80,
@@ -11399,7 +11809,7 @@
       "label": "5. El manifiesto `.devherd.yml`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L833",
+      "source_location": "L850",
       "_origin": "ast",
       "id": "docs_usage_5_el_manifiesto_devherd_yml",
       "community": 72,
@@ -11409,7 +11819,7 @@
       "label": "6. Flujos de trabajo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L866",
+      "source_location": "L883",
       "_origin": "ast",
       "id": "docs_usage_6_flujos_de_trabajo",
       "community": 75,
@@ -11419,7 +11829,7 @@
       "label": "6.1 Modo proxy en Docker externo (recomendado)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L868",
+      "source_location": "L885",
       "_origin": "ast",
       "id": "docs_usage_6_1_modo_proxy_en_docker_externo_recomendado",
       "community": 75,
@@ -11429,7 +11839,7 @@
       "label": "6.2 Modo proxy en host (Caddy + /etc/hosts)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L891",
+      "source_location": "L908",
       "_origin": "ast",
       "id": "docs_usage_6_2_modo_proxy_en_host_caddy_etc_hosts",
       "community": 75,
@@ -11439,7 +11849,7 @@
       "label": "6.3 Repositorio sin Docker",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L907",
+      "source_location": "L924",
       "_origin": "ast",
       "id": "docs_usage_6_3_repositorio_sin_docker",
       "community": 75,
@@ -11449,7 +11859,7 @@
       "label": "6.4 Servicios compartidos + observabilidad",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L916",
+      "source_location": "L933",
       "_origin": "ast",
       "id": "docs_usage_6_4_servicios_compartidos_observabilidad",
       "community": 75,
@@ -11459,7 +11869,7 @@
       "label": "6.5 Bajar todo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L930",
+      "source_location": "L947",
       "_origin": "ast",
       "id": "docs_usage_6_5_bajar_todo",
       "community": 75,
@@ -11469,7 +11879,7 @@
       "label": "7. Donde vive el estado",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L940",
+      "source_location": "L957",
       "_origin": "ast",
       "id": "docs_usage_7_donde_vive_el_estado",
       "community": 72,
@@ -11479,7 +11889,7 @@
       "label": "8. Patrones recomendados para proyectos Compose",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L961",
+      "source_location": "L978",
       "_origin": "ast",
       "id": "docs_usage_8_patrones_recomendados_para_proyectos_compose",
       "community": 72,
@@ -11489,7 +11899,7 @@
       "label": "8.1 Aislamiento de nombres de contenedor",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L963",
+      "source_location": "L980",
       "_origin": "ast",
       "id": "docs_usage_8_1_aislamiento_de_nombres_de_contenedor",
       "community": 72,
@@ -11499,7 +11909,7 @@
       "label": "8.2 Volumenes que sobreviven a cambios de project-name",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1006",
+      "source_location": "L1023",
       "_origin": "ast",
       "id": "docs_usage_8_2_volumenes_que_sobreviven_a_cambios_de_project_name",
       "community": 72,
@@ -11509,7 +11919,7 @@
       "label": "8.3 Probar sin tocar tu configuracion real",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1027",
+      "source_location": "L1044",
       "_origin": "ast",
       "id": "docs_usage_8_3_probar_sin_tocar_tu_configuracion_real",
       "community": 72,
@@ -11949,7 +12359,7 @@
       "label": "3. Estado de ingenieria (medido)",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L124",
+      "source_location": "L127",
       "_origin": "ast",
       "id": "docs_current_status_3_estado_de_ingenieria_medido",
       "community": 23,
@@ -11959,7 +12369,7 @@
       "label": "4. Limitaciones actuales",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L157",
+      "source_location": "L160",
       "_origin": "ast",
       "id": "docs_current_status_4_limitaciones_actuales",
       "community": 23,
@@ -11969,7 +12379,7 @@
       "label": "Cobertura y verificacion",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L159",
+      "source_location": "L162",
       "_origin": "ast",
       "id": "docs_current_status_cobertura_y_verificacion",
       "community": 23,
@@ -11979,7 +12389,7 @@
       "label": "Proxy",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L165",
+      "source_location": "L168",
       "_origin": "ast",
       "id": "docs_current_status_proxy",
       "community": 23,
@@ -11989,7 +12399,7 @@
       "label": "DNS",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L179",
+      "source_location": "L182",
       "_origin": "ast",
       "id": "docs_current_status_dns",
       "community": 23,
@@ -11999,7 +12409,7 @@
       "label": "Ciclo de vida",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L187",
+      "source_location": "L190",
       "_origin": "ast",
       "id": "docs_current_status_ciclo_de_vida",
       "community": 23,
@@ -12009,7 +12419,7 @@
       "label": "Deteccion",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L195",
+      "source_location": "L198",
       "_origin": "ast",
       "id": "docs_current_status_deteccion",
       "community": 23,
@@ -12019,7 +12429,7 @@
       "label": "Scaffold",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L203",
+      "source_location": "L206",
       "_origin": "ast",
       "id": "docs_current_status_scaffold",
       "community": 23,
@@ -12029,7 +12439,7 @@
       "label": "Observabilidad",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L213",
+      "source_location": "L216",
       "_origin": "ast",
       "id": "docs_current_status_observabilidad",
       "community": 23,
@@ -12039,7 +12449,7 @@
       "label": "Distribucion",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L228",
+      "source_location": "L231",
       "_origin": "ast",
       "id": "docs_current_status_distribucion",
       "community": 23,
@@ -12049,7 +12459,7 @@
       "label": "Codigo muerto",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L234",
+      "source_location": "L237",
       "_origin": "ast",
       "id": "docs_current_status_codigo_muerto",
       "community": 23,
@@ -12059,7 +12469,7 @@
       "label": "5. Siguiente bloque recomendado",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L244",
+      "source_location": "L247",
       "_origin": "ast",
       "id": "docs_current_status_5_siguiente_bloque_recomendado",
       "community": 23,
@@ -12069,7 +12479,7 @@
       "label": "Historial de validaciones",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L260",
+      "source_location": "L263",
       "_origin": "ast",
       "id": "docs_current_status_historial_de_validaciones",
       "community": 73,
@@ -12079,7 +12489,7 @@
       "label": "Validacion inicial (proyecto de ejemplo)",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L265",
+      "source_location": "L268",
       "_origin": "ast",
       "id": "docs_current_status_validacion_inicial_proyecto_de_ejemplo",
       "community": 73,
@@ -12089,7 +12499,7 @@
       "label": "Flujo manual con `local_proxy` (previo a la automatizacion)",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L280",
+      "source_location": "L283",
       "_origin": "ast",
       "id": "docs_current_status_flujo_manual_con_local_proxy_previo_a_la_automatizacion",
       "community": 73,
@@ -12099,7 +12509,7 @@
       "label": "Automatizado en `2026-05-04`",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L291",
+      "source_location": "L294",
       "_origin": "ast",
       "id": "docs_current_status_automatizado_en_2026_05_04",
       "community": 73,
@@ -12109,7 +12519,7 @@
       "label": "Stack sensible real (`2026-05-04`)",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L299",
+      "source_location": "L302",
       "_origin": "ast",
       "id": "docs_current_status_stack_sensible_real_2026_05_04",
       "community": 73,
@@ -12119,7 +12529,7 @@
       "label": "Validacion operativa de `aang-server` y `Uniformes`",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L309",
+      "source_location": "L312",
       "_origin": "ast",
       "id": "docs_current_status_validacion_operativa_de_aang_server_y_uniformes",
       "community": 73,
@@ -12129,7 +12539,7 @@
       "label": "Validacion operativa pendiente",
       "file_type": "document",
       "source_file": "docs/current-status.md",
-      "source_location": "L322",
+      "source_location": "L325",
       "_origin": "ast",
       "id": "docs_current_status_validacion_operativa_pendiente",
       "community": 73,
@@ -12162,7 +12572,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "guides_logging_and_logs_1_logging_estructurado_con_slog",
-      "community": 76,
+      "community": 54,
       "norm_label": "1. logging estructurado con `slog`"
     },
     {
@@ -12172,7 +12582,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "guides_logging_and_logs_c\u00f3mo_funciona",
-      "community": 76,
+      "community": 54,
       "norm_label": "como funciona"
     },
     {
@@ -12182,7 +12592,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "guides_logging_and_logs_modelo_diagn\u00f3sticos_a_stderr_producto_a_stdout",
-      "community": 76,
+      "community": 54,
       "norm_label": "modelo: diagnosticos a stderr, producto a stdout"
     },
     {
@@ -12192,7 +12602,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "guides_logging_and_logs_por_qu\u00e9_log_json_y_no_json",
-      "community": 76,
+      "community": 54,
       "norm_label": "por que `--log-json` y no `--json`"
     },
     {
@@ -12202,7 +12612,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "guides_logging_and_logs_flags",
-      "community": 76,
+      "community": 54,
       "norm_label": "flags"
     },
     {
@@ -12212,7 +12622,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "guides_logging_and_logs_ejemplos",
-      "community": 76,
+      "community": 54,
       "norm_label": "ejemplos"
     },
     {
@@ -12339,7 +12749,7 @@
       "label": "4. Cablearlo (Laravel 11+)",
       "file_type": "document",
       "source_file": "docs/guides/observe-laravel.md",
-      "source_location": "L279",
+      "source_location": "L288",
       "_origin": "ast",
       "id": "guides_observe_laravel_4_cablearlo_laravel_11",
       "community": 69,
@@ -12349,7 +12759,7 @@
       "label": "5. Que se captura solo",
       "file_type": "document",
       "source_file": "docs/guides/observe-laravel.md",
-      "source_location": "L301",
+      "source_location": "L310",
       "_origin": "ast",
       "id": "guides_observe_laravel_5_que_se_captura_solo",
       "community": 69,
@@ -12359,7 +12769,7 @@
       "label": "6. Que NO se captura",
       "file_type": "document",
       "source_file": "docs/guides/observe-laravel.md",
-      "source_location": "L306",
+      "source_location": "L315",
       "_origin": "ast",
       "id": "guides_observe_laravel_6_que_no_se_captura",
       "community": 69,
@@ -12369,17 +12779,37 @@
       "label": "7. Reportar a proposito",
       "file_type": "document",
       "source_file": "docs/guides/observe-laravel.md",
-      "source_location": "L320",
+      "source_location": "L329",
       "_origin": "ast",
       "id": "guides_observe_laravel_7_reportar_a_proposito",
       "community": 69,
       "norm_label": "7. reportar a proposito"
     },
     {
+      "label": "Eventos que no son excepciones",
+      "file_type": "document",
+      "source_file": "docs/guides/observe-laravel.md",
+      "source_location": "L345",
+      "_origin": "ast",
+      "id": "guides_observe_laravel_eventos_que_no_son_excepciones",
+      "community": 69,
+      "norm_label": "eventos que no son excepciones"
+    },
+    {
+      "label": "Excepciones que afinan su evento",
+      "file_type": "document",
+      "source_file": "docs/guides/observe-laravel.md",
+      "source_location": "L383",
+      "_origin": "ast",
+      "id": "guides_observe_laravel_excepciones_que_afinan_su_evento",
+      "community": 69,
+      "norm_label": "excepciones que afinan su evento"
+    },
+    {
       "label": "8. Contexto por excepcion",
       "file_type": "document",
       "source_file": "docs/guides/observe-laravel.md",
-      "source_location": "L348",
+      "source_location": "L392",
       "_origin": "ast",
       "id": "guides_observe_laravel_8_contexto_por_excepcion",
       "community": 69,
@@ -12389,7 +12819,7 @@
       "label": "9. Verificar la instalacion",
       "file_type": "document",
       "source_file": "docs/guides/observe-laravel.md",
-      "source_location": "L400",
+      "source_location": "L446",
       "_origin": "ast",
       "id": "guides_observe_laravel_9_verificar_la_instalacion",
       "community": 69,
@@ -12399,7 +12829,7 @@
       "label": "10. Trampas conocidas",
       "file_type": "document",
       "source_file": "docs/guides/observe-laravel.md",
-      "source_location": "L419",
+      "source_location": "L465",
       "_origin": "ast",
       "id": "guides_observe_laravel_10_trampas_conocidas",
       "community": 69,
@@ -12409,7 +12839,7 @@
       "label": "Referencias",
       "file_type": "document",
       "source_file": "docs/guides/observe-laravel.md",
-      "source_location": "L437",
+      "source_location": "L483",
       "_origin": "ast",
       "id": "guides_observe_laravel_referencias",
       "community": 69,
@@ -12896,10 +13326,30 @@
       "norm_label": "6. agrupacion de issues"
     },
     {
+      "label": "Fingerprint derivado",
+      "file_type": "document",
+      "source_file": "docs/observe.md",
+      "source_location": "L340",
+      "_origin": "ast",
+      "id": "docs_observe_fingerprint_derivado",
+      "community": 49,
+      "norm_label": "fingerprint derivado"
+    },
+    {
+      "label": "Fingerprint explicito",
+      "file_type": "document",
+      "source_file": "docs/observe.md",
+      "source_location": "L365",
+      "_origin": "ast",
+      "id": "docs_observe_fingerprint_explicito",
+      "community": 49,
+      "norm_label": "fingerprint explicito"
+    },
+    {
       "label": "7. Correlacion con contenedores",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L370",
+      "source_location": "L398",
       "_origin": "ast",
       "id": "docs_observe_7_correlacion_con_contenedores",
       "community": 49,
@@ -12909,7 +13359,7 @@
       "label": "Cadencias: cada cosa se registra en un momento distinto",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L397",
+      "source_location": "L425",
       "_origin": "ast",
       "id": "docs_observe_cadencias_cada_cosa_se_registra_en_un_momento_distinto",
       "community": 49,
@@ -12919,7 +13369,7 @@
       "label": "8. Trayectoria de la falla",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L417",
+      "source_location": "L445",
       "_origin": "ast",
       "id": "docs_observe_8_trayectoria_de_la_falla",
       "community": 49,
@@ -12929,7 +13379,7 @@
       "label": "9. Fases de implementacion",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L448",
+      "source_location": "L476",
       "_origin": "ast",
       "id": "docs_observe_9_fases_de_implementacion",
       "community": 49,
@@ -12939,7 +13389,7 @@
       "label": "Fase 1: Collector y persistencia local",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L450",
+      "source_location": "L478",
       "_origin": "ast",
       "id": "docs_observe_fase_1_collector_y_persistencia_local",
       "community": 49,
@@ -12949,7 +13399,7 @@
       "label": "Fase 2: Attach por proyecto",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L463",
+      "source_location": "L491",
       "_origin": "ast",
       "id": "docs_observe_fase_2_attach_por_proyecto",
       "community": 49,
@@ -12959,7 +13409,7 @@
       "label": "Fase 3: Correlacion con Docker",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L472",
+      "source_location": "L500",
       "_origin": "ast",
       "id": "docs_observe_fase_3_correlacion_con_docker",
       "community": 49,
@@ -12969,7 +13419,7 @@
       "label": "Fase 4: Panel local",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L489",
+      "source_location": "L517",
       "_origin": "ast",
       "id": "docs_observe_fase_4_panel_local",
       "community": 49,
@@ -12979,7 +13429,7 @@
       "label": "Fase 5: Alertas",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L500",
+      "source_location": "L528",
       "_origin": "ast",
       "id": "docs_observe_fase_5_alertas",
       "community": 49,
@@ -12989,7 +13439,7 @@
       "label": "10. Flujo de uso en un proyecto",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L510",
+      "source_location": "L538",
       "_origin": "ast",
       "id": "docs_observe_10_flujo_de_uso_en_un_proyecto",
       "community": 49,
@@ -12999,7 +13449,7 @@
       "label": "1. Arrancar el collector local",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L512",
+      "source_location": "L540",
       "_origin": "ast",
       "id": "docs_observe_1_arrancar_el_collector_local",
       "community": 49,
@@ -13009,7 +13459,7 @@
       "label": "2. Revisar el DSN local del proyecto",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L534",
+      "source_location": "L562",
       "_origin": "ast",
       "id": "docs_observe_2_revisar_el_dsn_local_del_proyecto",
       "community": 49,
@@ -13019,7 +13469,7 @@
       "label": "3. Generar el override Compose local",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L548",
+      "source_location": "L576",
       "_origin": "ast",
       "id": "docs_observe_3_generar_el_override_compose_local",
       "community": 49,
@@ -13029,7 +13479,7 @@
       "label": "4. Levantar el proyecto",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L582",
+      "source_location": "L610",
       "_origin": "ast",
       "id": "docs_observe_4_levantar_el_proyecto",
       "community": 49,
@@ -13039,7 +13489,7 @@
       "label": "5. Capturar una falla",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L590",
+      "source_location": "L618",
       "_origin": "ast",
       "id": "docs_observe_5_capturar_una_falla",
       "community": 49,
@@ -13049,7 +13499,7 @@
       "label": "6. Inspeccionar desde CLI",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L600",
+      "source_location": "L628",
       "_origin": "ast",
       "id": "docs_observe_6_inspeccionar_desde_cli",
       "community": 49,
@@ -13059,7 +13509,7 @@
       "label": "7. Correlacionar contenedores",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L610",
+      "source_location": "L638",
       "_origin": "ast",
       "id": "docs_observe_7_correlacionar_contenedores",
       "community": 49,
@@ -13069,7 +13519,7 @@
       "label": "8. Crear alertas locales",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L621",
+      "source_location": "L649",
       "_origin": "ast",
       "id": "docs_observe_8_crear_alertas_locales",
       "community": 49,
@@ -13079,7 +13529,7 @@
       "label": "9. Limpiar datos viejos",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L653",
+      "source_location": "L681",
       "_origin": "ast",
       "id": "docs_observe_9_limpiar_datos_viejos",
       "community": 49,
@@ -13089,7 +13539,7 @@
       "label": "10. Desactivar Observe en el proyecto",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L673",
+      "source_location": "L701",
       "_origin": "ast",
       "id": "docs_observe_10_desactivar_observe_en_el_proyecto",
       "community": 49,
@@ -13099,7 +13549,7 @@
       "label": "11. Comandos y como funcionan",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L681",
+      "source_location": "L709",
       "_origin": "ast",
       "id": "docs_observe_11_comandos_y_como_funcionan",
       "community": 49,
@@ -13109,7 +13559,7 @@
       "label": "12. Criterio de exito del MVP",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L701",
+      "source_location": "L729",
       "_origin": "ast",
       "id": "docs_observe_12_criterio_de_exito_del_mvp",
       "community": 49,
@@ -14243,7 +14693,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 85,
+      "community": 18,
       "norm_label": "architecture & infra review",
       "id": "improvements_review"
     },
@@ -14256,7 +14706,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 85,
+      "community": 18,
       "norm_label": "proposed runner/executor interface",
       "id": "improvements_runner_interface"
     },
@@ -14269,7 +14719,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 85,
+      "community": 18,
       "norm_label": "committed 21mb binary finding",
       "id": "improvements_committed_binary"
     },
@@ -14282,7 +14732,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 85,
+      "community": 18,
       "norm_label": "structured slog logging gap",
       "id": "improvements_slog_logging"
     },
@@ -14295,7 +14745,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 85,
+      "community": 18,
       "norm_label": "dockerruntime dependency injection",
       "id": "improvements_docker_runtime"
     },
@@ -14308,7 +14758,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 85,
+      "community": 18,
       "norm_label": "announced-but-unimplemented commands",
       "id": "improvements_not_implemented"
     },
@@ -16575,6 +17025,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/observe.go",
+      "source_location": "L325",
+      "weight": 1.0,
+      "source": "cli_observe",
+      "target": "cli_observe_writeobservereporter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/observe.go",
       "source_location": "L737",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16587,9 +17047,9 @@
       "source_file": "internal/cli/observe.go",
       "source_location": "L923",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe",
-      "target": "cli_observeaddroptions",
-      "confidence_score": 1.0
+      "target": "cli_observeaddroptions"
     },
     {
       "relation": "contains",
@@ -17008,6 +17468,17 @@
       "target": "internal_cli_observe_go_command"
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/observe.go",
+      "source_location": "L325",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_observe_writeobservereporter",
+      "target": "internal_cli_observe_go_command",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -17058,9 +17529,9 @@
       "source_file": "internal/cli/observe.go",
       "source_location": "L78",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_newobservestartcmd",
-      "target": "cli_observeaddrplan_networknames",
-      "confidence_score": 1.0
+      "target": "cli_observeaddrplan_networknames"
     },
     {
       "relation": "calls",
@@ -17254,6 +17725,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/observe.go",
+      "source_location": "L301",
+      "weight": 1.0,
+      "source": "cli_observe_newobserveattachcmd",
+      "target": "cli_observe_writeobservereporter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/observe.go",
       "source_location": "L207",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -17270,6 +17752,17 @@
       "weight": 1.0,
       "source": "cli_observe_newobserveattachcmd",
       "target": "observe_override_buildcomposeoverride"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/observe.go",
+      "source_location": "L328",
+      "weight": 1.0,
+      "source": "cli_observe_writeobservereporter",
+      "target": "observe_reporter_ensurereporter"
     },
     {
       "relation": "calls",
@@ -17872,9 +18365,9 @@
       "source_location": "L975",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observeaddrplan_selectmatch",
-      "target": "internal_cli_observe_go_context",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_go_context"
     },
     {
       "relation": "references",
@@ -17959,9 +18452,9 @@
       "source_file": "internal/cli/observe.go",
       "source_location": "L1009",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observeaddrplan",
-      "target": "cli_observeaddrplan_networknames",
-      "confidence_score": 1.0
+      "target": "cli_observeaddrplan_networknames"
     },
     {
       "relation": "method",
@@ -17969,9 +18462,9 @@
       "source_file": "internal/cli/observe.go",
       "source_location": "L975",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observeaddrplan",
-      "target": "cli_observeaddrplan_selectmatch",
-      "confidence_score": 1.0
+      "target": "cli_observeaddrplan_selectmatch"
     },
     {
       "relation": "references",
@@ -17991,9 +18484,9 @@
       "source_location": "L975",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_observeaddrplan_selectmatch",
-      "target": "internal_cli_observe_go_networkinfo",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_go_networkinfo"
     },
     {
       "relation": "references",
@@ -18002,9 +18495,9 @@
       "source_location": "L934",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_planobserveaddrs",
-      "target": "cli_observeaddroptions",
-      "confidence_score": 1.0
+      "target": "cli_observeaddroptions"
     },
     {
       "relation": "calls",
@@ -18035,9 +18528,9 @@
       "source_file": "internal/cli/observe.go",
       "source_location": "L957",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_planobserveaddrs",
-      "target": "cli_observeaddrplan_selectmatch",
-      "confidence_score": 1.0
+      "target": "cli_observeaddrplan_selectmatch"
     },
     {
       "relation": "calls",
@@ -18210,9 +18703,9 @@
       "source_file": "internal/cli/observe_daemon.go",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon",
-      "target": "cli_observe_daemon_newobservedaemoncmd",
-      "confidence_score": 1.0
+      "target": "cli_observe_daemon_newobservedaemoncmd"
     },
     {
       "relation": "contains",
@@ -18220,9 +18713,9 @@
       "source_file": "internal/cli/observe_daemon.go",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon",
-      "target": "cli_observe_daemon_newobservedaemoninstallcmd",
-      "confidence_score": 1.0
+      "target": "cli_observe_daemon_newobservedaemoninstallcmd"
     },
     {
       "relation": "contains",
@@ -18230,9 +18723,9 @@
       "source_file": "internal/cli/observe_daemon.go",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon",
-      "target": "cli_observe_daemon_newobservedaemonstatuscmd",
-      "confidence_score": 1.0
+      "target": "cli_observe_daemon_newobservedaemonstatuscmd"
     },
     {
       "relation": "contains",
@@ -18240,9 +18733,9 @@
       "source_file": "internal/cli/observe_daemon.go",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon",
-      "target": "cli_observe_daemon_newobservedaemonuninstallcmd",
-      "confidence_score": 1.0
+      "target": "cli_observe_daemon_newobservedaemonuninstallcmd"
     },
     {
       "relation": "calls",
@@ -18251,9 +18744,9 @@
       "source_file": "internal/cli/observe_daemon.go",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon_newobservedaemoncmd",
-      "target": "cli_observe_daemon_newobservedaemoninstallcmd",
-      "confidence_score": 1.0
+      "target": "cli_observe_daemon_newobservedaemoninstallcmd"
     },
     {
       "relation": "calls",
@@ -18262,9 +18755,9 @@
       "source_file": "internal/cli/observe_daemon.go",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon_newobservedaemoncmd",
-      "target": "cli_observe_daemon_newobservedaemonstatuscmd",
-      "confidence_score": 1.0
+      "target": "cli_observe_daemon_newobservedaemonstatuscmd"
     },
     {
       "relation": "calls",
@@ -18273,9 +18766,9 @@
       "source_file": "internal/cli/observe_daemon.go",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon_newobservedaemoncmd",
-      "target": "cli_observe_daemon_newobservedaemonuninstallcmd",
-      "confidence_score": 1.0
+      "target": "cli_observe_daemon_newobservedaemonuninstallcmd"
     },
     {
       "relation": "references",
@@ -18284,9 +18777,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon_newobservedaemoncmd",
-      "target": "internal_cli_observe_daemon_go_command",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_daemon_go_command"
     },
     {
       "relation": "references",
@@ -18295,9 +18788,9 @@
       "source_location": "L28",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon_newobservedaemoninstallcmd",
-      "target": "internal_cli_observe_daemon_go_command",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_daemon_go_command"
     },
     {
       "relation": "references",
@@ -18306,9 +18799,9 @@
       "source_location": "L79",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon_newobservedaemonstatuscmd",
-      "target": "internal_cli_observe_daemon_go_command",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_daemon_go_command"
     },
     {
       "relation": "references",
@@ -18317,9 +18810,9 @@
       "source_location": "L63",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_daemon_newobservedaemonuninstallcmd",
-      "target": "internal_cli_observe_daemon_go_command",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_daemon_go_command"
     },
     {
       "relation": "calls",
@@ -18360,9 +18853,9 @@
       "source_file": "internal/cli/observe_firewall.go",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_firewall",
-      "target": "cli_observe_firewall_newobservefirewallcmd",
-      "confidence_score": 1.0
+      "target": "cli_observe_firewall_newobservefirewallcmd"
     },
     {
       "relation": "references",
@@ -18371,9 +18864,9 @@
       "source_file": "internal/cli/observe_firewall.go",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_firewall_newobservefirewallcmd",
-      "target": "internal_cli_observe_firewall_go_command",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_firewall_go_command"
     },
     {
       "relation": "calls",
@@ -25273,9 +25766,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L128",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon",
-      "target": "observe_daemon_daemonstatus",
-      "confidence_score": 1.0
+      "target": "observe_daemon_daemonstatus"
     },
     {
       "relation": "contains",
@@ -25283,9 +25776,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon",
-      "target": "observe_daemon_installdaemon",
-      "confidence_score": 1.0
+      "target": "observe_daemon_installdaemon"
     },
     {
       "relation": "contains",
@@ -25293,9 +25786,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon",
-      "target": "observe_daemon_renderunit",
-      "confidence_score": 1.0
+      "target": "observe_daemon_renderunit"
     },
     {
       "relation": "contains",
@@ -25303,9 +25796,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L139",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon",
-      "target": "observe_daemon_systemctl",
-      "confidence_score": 1.0
+      "target": "observe_daemon_systemctl"
     },
     {
       "relation": "contains",
@@ -25313,9 +25806,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon",
-      "target": "observe_daemon_uninstalldaemon",
-      "confidence_score": 1.0
+      "target": "observe_daemon_uninstalldaemon"
     },
     {
       "relation": "contains",
@@ -25323,9 +25816,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon",
-      "target": "observe_daemon_unitpath",
-      "confidence_score": 1.0
+      "target": "observe_daemon_unitpath"
     },
     {
       "relation": "contains",
@@ -25333,9 +25826,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon",
-      "target": "observe_unitdata",
-      "confidence_score": 1.0
+      "target": "observe_unitdata"
     },
     {
       "relation": "calls",
@@ -25344,9 +25837,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_installdaemon",
-      "target": "observe_daemon_unitpath",
-      "confidence_score": 1.0
+      "target": "observe_daemon_unitpath"
     },
     {
       "relation": "calls",
@@ -25366,9 +25859,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_uninstalldaemon",
-      "target": "observe_daemon_unitpath",
-      "confidence_score": 1.0
+      "target": "observe_daemon_unitpath"
     },
     {
       "relation": "calls",
@@ -25377,9 +25870,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_installdaemon",
-      "target": "observe_daemon_renderunit",
-      "confidence_score": 1.0
+      "target": "observe_daemon_renderunit"
     },
     {
       "relation": "calls",
@@ -25421,9 +25914,9 @@
       "source_location": "L79",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_daemon_installdaemon",
-      "target": "internal_observe_daemon_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_daemon_go_context"
     },
     {
       "relation": "calls",
@@ -25432,9 +25925,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L97",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_installdaemon",
-      "target": "observe_daemon_systemctl",
-      "confidence_score": 1.0
+      "target": "observe_daemon_systemctl"
     },
     {
       "relation": "references",
@@ -25443,9 +25936,9 @@
       "source_location": "L128",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_daemon_daemonstatus",
-      "target": "internal_observe_daemon_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_daemon_go_context"
     },
     {
       "relation": "references",
@@ -25454,9 +25947,9 @@
       "source_location": "L139",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_daemon_systemctl",
-      "target": "internal_observe_daemon_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_daemon_go_context"
     },
     {
       "relation": "references",
@@ -25465,9 +25958,9 @@
       "source_location": "L108",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_daemon_uninstalldaemon",
-      "target": "internal_observe_daemon_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_daemon_go_context"
     },
     {
       "relation": "calls",
@@ -25476,9 +25969,9 @@
       "source_file": "internal/observe/daemon.go",
       "source_location": "L116",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_uninstalldaemon",
-      "target": "observe_daemon_systemctl",
-      "confidence_score": 1.0
+      "target": "observe_daemon_systemctl"
     },
     {
       "relation": "calls",
@@ -25508,9 +26001,9 @@
       "source_file": "internal/observe/daemon_test.go",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_test",
-      "target": "observe_daemon_test_testrenderunitrequiresbinary",
-      "confidence_score": 1.0
+      "target": "observe_daemon_test_testrenderunitrequiresbinary"
     },
     {
       "relation": "contains",
@@ -25518,9 +26011,9 @@
       "source_file": "internal/observe/daemon_test.go",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_test",
-      "target": "observe_daemon_test_testrenderunitwithaddr",
-      "confidence_score": 1.0
+      "target": "observe_daemon_test_testrenderunitwithaddr"
     },
     {
       "relation": "contains",
@@ -25528,9 +26021,9 @@
       "source_file": "internal/observe/daemon_test.go",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_test",
-      "target": "observe_daemon_test_testrenderunitwithoutaddr",
-      "confidence_score": 1.0
+      "target": "observe_daemon_test_testrenderunitwithoutaddr"
     },
     {
       "relation": "contains",
@@ -25538,9 +26031,9 @@
       "source_file": "internal/observe/daemon_test.go",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_daemon_test",
-      "target": "observe_daemon_test_testunitpathfollowsxdg",
-      "confidence_score": 1.0
+      "target": "observe_daemon_test_testunitpathfollowsxdg"
     },
     {
       "relation": "references",
@@ -25549,9 +26042,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_daemon_test_testrenderunitwithoutaddr",
-      "target": "internal_observe_daemon_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_daemon_test_go_t"
     },
     {
       "relation": "references",
@@ -25560,9 +26053,9 @@
       "source_location": "L37",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_daemon_test_testrenderunitrequiresbinary",
-      "target": "internal_observe_daemon_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_daemon_test_go_t"
     },
     {
       "relation": "references",
@@ -25571,9 +26064,9 @@
       "source_location": "L26",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_daemon_test_testrenderunitwithaddr",
-      "target": "internal_observe_daemon_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_daemon_test_go_t"
     },
     {
       "relation": "references",
@@ -25582,9 +26075,9 @@
       "source_location": "L43",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_daemon_test_testunitpathfollowsxdg",
-      "target": "internal_observe_daemon_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_daemon_test_go_t"
     },
     {
       "relation": "contains",
@@ -25971,7 +26464,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/event.go",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "observe_event",
       "target": "observe_event",
@@ -26007,6 +26500,16 @@
       "confidence_score": 1.0,
       "source": "observe_event",
       "target": "observe_event_exceptiondetails"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/event.go",
+      "source_location": "L210",
+      "weight": 1.0,
+      "source": "observe_event",
+      "target": "observe_event_explicitfingerprint",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -26168,6 +26671,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/event.go",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "observe_event_normalizeevent",
+      "target": "observe_event_explicitfingerprint",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/event.go",
       "source_location": "L64",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -26249,6 +26763,17 @@
       "source_location": "L65",
       "weight": 1.0,
       "source": "observe_event_test_testextrapayloadovernormalizedevent",
+      "target": "observe_event_normalizeevent"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test_fingerprintof",
       "target": "observe_event_normalizeevent"
     },
     {
@@ -26527,12 +27052,257 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test",
+      "target": "observe_fingerprint_test_fingerprintof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L96",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test",
+      "target": "observe_fingerprint_test_quote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L87",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test",
+      "target": "observe_fingerprint_test_testemptyfingerprintfallsbacktothederivedone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test",
+      "target": "observe_fingerprint_test_testexplicitfingerprintacceptssdklists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test",
+      "target": "observe_fingerprint_test_testexplicitfingerprintisscopedbyproject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test",
+      "target": "observe_fingerprint_test_testexplicitfingerprintwins",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test",
+      "target": "observe_fingerprint_test_testfingerprintmasksvariabledata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test",
+      "target": "observe_fingerprint_test_testfingerprintstillseparatesdifferentfailures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L5",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "observe_fingerprint_test_fingerprintof",
+      "target": "internal_observe_fingerprint_test_go_event",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L5",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_fingerprint_test_fingerprintof",
+      "target": "internal_observe_fingerprint_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test_testemptyfingerprintfallsbacktothederivedone",
+      "target": "observe_fingerprint_test_fingerprintof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test_testexplicitfingerprintacceptssdklists",
+      "target": "observe_fingerprint_test_fingerprintof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test_testexplicitfingerprintisscopedbyproject",
+      "target": "observe_fingerprint_test_fingerprintof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test_testexplicitfingerprintwins",
+      "target": "observe_fingerprint_test_fingerprintof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test_testfingerprintmasksvariabledata",
+      "target": "observe_fingerprint_test_fingerprintof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test_testfingerprintstillseparatesdifferentfailures",
+      "target": "observe_fingerprint_test_fingerprintof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L87",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_fingerprint_test_testemptyfingerprintfallsbacktothederivedone",
+      "target": "internal_observe_fingerprint_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L77",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_fingerprint_test_testexplicitfingerprintacceptssdklists",
+      "target": "internal_observe_fingerprint_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L68",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_fingerprint_test_testexplicitfingerprintisscopedbyproject",
+      "target": "internal_observe_fingerprint_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_fingerprint_test_testexplicitfingerprintwins",
+      "target": "internal_observe_fingerprint_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_fingerprint_test_testfingerprintmasksvariabledata",
+      "target": "internal_observe_fingerprint_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_fingerprint_test_testfingerprintstillseparatesdifferentfailures",
+      "target": "internal_observe_fingerprint_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/fingerprint_test.go",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "observe_fingerprint_test_testfingerprintmasksvariabledata",
+      "target": "observe_fingerprint_test_quote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "internal/observe/firewall.go",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall",
-      "target": "observe_firewall_applyfirewallrules",
-      "confidence_score": 1.0
+      "target": "observe_firewall_applyfirewallrules"
     },
     {
       "relation": "contains",
@@ -26540,9 +27310,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall",
-      "target": "observe_firewall_firewallrules",
-      "confidence_score": 1.0
+      "target": "observe_firewall_firewallrules"
     },
     {
       "relation": "contains",
@@ -26550,9 +27320,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L110",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall",
-      "target": "observe_firewall_runinteractive",
-      "confidence_score": 1.0
+      "target": "observe_firewall_runinteractive"
     },
     {
       "relation": "contains",
@@ -26560,9 +27330,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall",
-      "target": "observe_firewall_ufwavailable",
-      "confidence_score": 1.0
+      "target": "observe_firewall_ufwavailable"
     },
     {
       "relation": "contains",
@@ -26570,9 +27340,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall",
-      "target": "observe_firewall_ufwenabled",
-      "confidence_score": 1.0
+      "target": "observe_firewall_ufwenabled"
     },
     {
       "relation": "contains",
@@ -26580,9 +27350,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall",
-      "target": "observe_firewallrule",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule"
     },
     {
       "relation": "references",
@@ -26591,9 +27361,9 @@
       "source_location": "L86",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_firewall_applyfirewallrules",
-      "target": "observe_firewallrule",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule"
     },
     {
       "relation": "references",
@@ -26602,9 +27372,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "observe_firewall_firewallrules",
-      "target": "observe_firewallrule",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule"
     },
     {
       "relation": "method",
@@ -26612,9 +27382,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewallrule",
-      "target": "observe_firewallrule_command",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule_command"
     },
     {
       "relation": "method",
@@ -26622,9 +27392,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewallrule",
-      "target": "observe_firewallrule_comment",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule_comment"
     },
     {
       "relation": "method",
@@ -26632,9 +27402,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewallrule",
-      "target": "observe_firewallrule_ufwargs",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule_ufwargs"
     },
     {
       "relation": "references",
@@ -26643,9 +27413,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_firewall_firewallrules",
-      "target": "internal_observe_firewall_go_networkinfo",
-      "confidence_score": 1.0
+      "target": "internal_observe_firewall_go_networkinfo"
     },
     {
       "relation": "calls",
@@ -26709,9 +27479,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall_applyfirewallrules",
-      "target": "observe_firewallrule_ufwargs",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule_ufwargs"
     },
     {
       "relation": "calls",
@@ -26720,9 +27490,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewallrule_ufwargs",
-      "target": "observe_firewallrule_comment",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule_comment"
     },
     {
       "relation": "calls",
@@ -26731,9 +27501,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewallrule_command",
-      "target": "observe_firewallrule_comment",
-      "confidence_score": 1.0
+      "target": "observe_firewallrule_comment"
     },
     {
       "relation": "calls",
@@ -26742,9 +27512,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L90",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall_applyfirewallrules",
-      "target": "observe_firewall_ufwavailable",
-      "confidence_score": 1.0
+      "target": "observe_firewall_ufwavailable"
     },
     {
       "relation": "references",
@@ -26753,9 +27523,9 @@
       "source_location": "L86",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_firewall_applyfirewallrules",
-      "target": "internal_observe_firewall_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_firewall_go_context"
     },
     {
       "relation": "calls",
@@ -26764,9 +27534,9 @@
       "source_file": "internal/observe/firewall.go",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall_applyfirewallrules",
-      "target": "observe_firewall_runinteractive",
-      "confidence_score": 1.0
+      "target": "observe_firewall_runinteractive"
     },
     {
       "relation": "references",
@@ -26775,9 +27545,9 @@
       "source_location": "L110",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_firewall_runinteractive",
-      "target": "internal_observe_firewall_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_firewall_go_context"
     },
     {
       "relation": "contains",
@@ -26785,9 +27555,9 @@
       "source_file": "internal/observe/firewall_test.go",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall_test",
-      "target": "observe_firewall_test_testfirewallrulesfallbacktodefaultport",
-      "confidence_score": 1.0
+      "target": "observe_firewall_test_testfirewallrulesfallbacktodefaultport"
     },
     {
       "relation": "contains",
@@ -26795,9 +27565,9 @@
       "source_file": "internal/observe/firewall_test.go",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall_test",
-      "target": "observe_firewall_test_testfirewallrulesonepernetwork",
-      "confidence_score": 1.0
+      "target": "observe_firewall_test_testfirewallrulesonepernetwork"
     },
     {
       "relation": "contains",
@@ -26805,9 +27575,9 @@
       "source_file": "internal/observe/firewall_test.go",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_firewall_test",
-      "target": "observe_firewall_test_testfirewallrulesskipsincompletenetworks",
-      "confidence_score": 1.0
+      "target": "observe_firewall_test_testfirewallrulesskipsincompletenetworks"
     },
     {
       "relation": "references",
@@ -26816,9 +27586,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_firewall_test_testfirewallrulesonepernetwork",
-      "target": "internal_observe_firewall_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_firewall_test_go_t"
     },
     {
       "relation": "references",
@@ -26827,9 +27597,9 @@
       "source_location": "L48",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_firewall_test_testfirewallrulesfallbacktodefaultport",
-      "target": "internal_observe_firewall_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_firewall_test_go_t"
     },
     {
       "relation": "references",
@@ -26838,9 +27608,9 @@
       "source_location": "L36",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_firewall_test_testfirewallrulesskipsincompletenetworks",
-      "target": "internal_observe_firewall_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_firewall_test_go_t"
     },
     {
       "relation": "contains",
@@ -27083,9 +27853,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L90",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network",
-      "target": "observe_network_inspectnetworks",
-      "confidence_score": 1.0
+      "target": "observe_network_inspectnetworks"
     },
     {
       "relation": "contains",
@@ -27103,9 +27873,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L168",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network",
-      "target": "observe_network_observednetworks",
-      "confidence_score": 1.0
+      "target": "observe_network_observednetworks"
     },
     {
       "relation": "contains",
@@ -27113,9 +27883,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L124",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network",
-      "target": "observe_network_projectnetworkcoverage",
-      "confidence_score": 1.0
+      "target": "observe_network_projectnetworkcoverage"
     },
     {
       "relation": "contains",
@@ -27123,9 +27893,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L201",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network",
-      "target": "observe_network_selectprojectnetwork",
-      "confidence_score": 1.0
+      "target": "observe_network_selectprojectnetwork"
     },
     {
       "relation": "contains",
@@ -27133,9 +27903,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network",
-      "target": "observe_network_sharednetworknames",
-      "confidence_score": 1.0
+      "target": "observe_network_sharednetworknames"
     },
     {
       "relation": "contains",
@@ -27153,9 +27923,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L224",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network",
-      "target": "observe_network_uniquefields",
-      "confidence_score": 1.0
+      "target": "observe_network_uniquefields"
     },
     {
       "relation": "contains",
@@ -27173,9 +27943,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L118",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network",
-      "target": "observe_networkcoverage",
-      "confidence_score": 1.0
+      "target": "observe_networkcoverage"
     },
     {
       "relation": "contains",
@@ -27216,9 +27986,9 @@
       "source_location": "L90",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "observe_network_inspectnetworks",
-      "target": "observe_networkinfo",
-      "confidence_score": 1.0
+      "target": "observe_networkinfo"
     },
     {
       "relation": "references",
@@ -27249,9 +28019,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L103",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network_inspectnetworks",
-      "target": "observe_network_inspectnetwork",
-      "confidence_score": 1.0
+      "target": "observe_network_inspectnetwork"
     },
     {
       "relation": "calls",
@@ -27315,9 +28085,9 @@
       "source_location": "L90",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_network_inspectnetworks",
-      "target": "internal_observe_network_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_network_go_context"
     },
     {
       "relation": "references",
@@ -27326,9 +28096,9 @@
       "source_location": "L168",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_network_observednetworks",
-      "target": "internal_observe_network_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_network_go_context"
     },
     {
       "relation": "references",
@@ -27337,9 +28107,9 @@
       "source_location": "L124",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_network_projectnetworkcoverage",
-      "target": "internal_observe_network_go_context",
-      "confidence_score": 1.0
+      "target": "internal_observe_network_go_context"
     },
     {
       "relation": "references",
@@ -27348,9 +28118,9 @@
       "source_location": "L90",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_network_inspectnetworks",
-      "target": "internal_observe_network_go_runner",
-      "confidence_score": 1.0
+      "target": "internal_observe_network_go_runner"
     },
     {
       "relation": "references",
@@ -27359,9 +28129,9 @@
       "source_location": "L168",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_network_observednetworks",
-      "target": "internal_observe_network_go_runner",
-      "confidence_score": 1.0
+      "target": "internal_observe_network_go_runner"
     },
     {
       "relation": "references",
@@ -27370,9 +28140,9 @@
       "source_location": "L124",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_network_projectnetworkcoverage",
-      "target": "internal_observe_network_go_runner",
-      "confidence_score": 1.0
+      "target": "internal_observe_network_go_runner"
     },
     {
       "relation": "calls",
@@ -27392,9 +28162,9 @@
       "source_location": "L124",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "observe_network_projectnetworkcoverage",
-      "target": "observe_networkcoverage",
-      "confidence_score": 1.0
+      "target": "observe_networkcoverage"
     },
     {
       "relation": "references",
@@ -27403,9 +28173,9 @@
       "source_location": "L201",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_network_selectprojectnetwork",
-      "target": "observe_networkcoverage",
-      "confidence_score": 1.0
+      "target": "observe_networkcoverage"
     },
     {
       "relation": "calls",
@@ -27436,9 +28206,9 @@
       "source_file": "internal/observe/network.go",
       "source_location": "L189",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_network_observednetworks",
-      "target": "observe_network_uniquefields",
-      "confidence_score": 1.0
+      "target": "observe_network_uniquefields"
     },
     {
       "relation": "calls",
@@ -28200,9 +28970,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testinspectnetworksskipsmissingones",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testinspectnetworksskipsmissingones"
     },
     {
       "relation": "contains",
@@ -28210,9 +28980,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L140",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testobservednetworksunion",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testobservednetworksunion"
     },
     {
       "relation": "contains",
@@ -28220,9 +28990,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testprojectnetworkcoveragecountspercontainer",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testprojectnetworkcoveragecountspercontainer"
     },
     {
       "relation": "contains",
@@ -28230,9 +29000,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L71",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testprojectnetworkcoveragewithoutrunningcontainers",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testprojectnetworkcoveragewithoutrunningcontainers"
     },
     {
       "relation": "contains",
@@ -28240,9 +29010,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testselectprojectnetworkfallsbacktotheprojectnetwork",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testselectprojectnetworkfallsbacktotheprojectnetwork"
     },
     {
       "relation": "contains",
@@ -28250,9 +29020,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L124",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testselectprojectnetworkisdeterministiconties",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testselectprojectnetworkisdeterministiconties"
     },
     {
       "relation": "contains",
@@ -28260,9 +29030,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L100",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testselectprojectnetworkpicksthewideststablenetwork",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testselectprojectnetworkpicksthewideststablenetwork"
     },
     {
       "relation": "contains",
@@ -28270,9 +29040,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testselectprojectnetworkprefersthestablenetwork",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testselectprojectnetworkprefersthestablenetwork"
     },
     {
       "relation": "contains",
@@ -28280,9 +29050,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L134",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testselectprojectnetworkwithoutcoverage",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testselectprojectnetworkwithoutcoverage"
     },
     {
       "relation": "contains",
@@ -28290,9 +29060,9 @@
       "source_file": "internal/observe/project_network_test.go",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "observe_project_network_test",
-      "target": "observe_project_network_test_testsharednetworknamesdedupes",
-      "confidence_score": 1.0
+      "target": "observe_project_network_test_testsharednetworknamesdedupes"
     },
     {
       "relation": "references",
@@ -28301,9 +29071,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testsharednetworknamesdedupes",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28312,9 +29082,9 @@
       "source_location": "L28",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testinspectnetworksskipsmissingones",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28323,9 +29093,9 @@
       "source_location": "L140",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testobservednetworksunion",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28334,9 +29104,9 @@
       "source_location": "L41",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testprojectnetworkcoveragecountspercontainer",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28345,9 +29115,9 @@
       "source_location": "L71",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testprojectnetworkcoveragewithoutrunningcontainers",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28356,9 +29126,9 @@
       "source_location": "L112",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testselectprojectnetworkfallsbacktotheprojectnetwork",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28367,9 +29137,9 @@
       "source_location": "L124",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testselectprojectnetworkisdeterministiconties",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28378,9 +29148,9 @@
       "source_location": "L100",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testselectprojectnetworkpicksthewideststablenetwork",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28389,9 +29159,9 @@
       "source_location": "L86",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testselectprojectnetworkprefersthestablenetwork",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "references",
@@ -28400,9 +29170,9 @@
       "source_location": "L134",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "observe_project_network_test_testselectprojectnetworkwithoutcoverage",
-      "target": "internal_observe_project_network_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_observe_project_network_test_go_t"
     },
     {
       "relation": "contains",
@@ -28840,6 +29610,261 @@
       "confidence_score": 1.0,
       "source": "observe_reachability_test_testprobefromcontainerskipswithoutnetwork",
       "target": "internal_observe_reachability_test_go_t"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "observe_reporter",
+      "target": "observe_reporter_ensurereporter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "observe_reporter",
+      "target": "observe_reporter_supportedreporterstacks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "observe_reporter",
+      "target": "observe_reporterresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "observe_reporter",
+      "target": "observe_reportertemplate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L56",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "observe_reporter_ensurereporter",
+      "target": "observe_reporterresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter.go",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "observe_reporter_ensurereporter",
+      "target": "observe_reporter_supportedreporterstacks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testensurereporterkeepsexistingfile",
+      "target": "observe_reporter_ensurereporter"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testensurereporteroverwriteswithforce",
+      "target": "observe_reporter_ensurereporter"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testensurereporterrejectsunsupportedstack",
+      "target": "observe_reporter_ensurereporter"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L103",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testensurereporterrequiresroot",
+      "target": "observe_reporter_ensurereporter"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testensurereporterwritesthelaravelfile",
+      "target": "observe_reporter_ensurereporter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "observe_reporter_test",
+      "target": "observe_reporter_test_testensurereporterkeepsexistingfile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "observe_reporter_test",
+      "target": "observe_reporter_test_testensurereporteroverwriteswithforce",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "observe_reporter_test",
+      "target": "observe_reporter_test_testensurereporterrejectsunsupportedstack",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "observe_reporter_test",
+      "target": "observe_reporter_test_testensurereporterrequiresroot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "observe_reporter_test",
+      "target": "observe_reporter_test_testensurereporterwritesthelaravelfile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L11",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_test_testensurereporterwritesthelaravelfile",
+      "target": "internal_observe_reporter_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testensurereporterwritesthelaravelfile",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L46",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_test_testensurereporterkeepsexistingfile",
+      "target": "internal_observe_reporter_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_test_testensurereporteroverwriteswithforce",
+      "target": "internal_observe_reporter_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L92",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_test_testensurereporterrejectsunsupportedstack",
+      "target": "internal_observe_reporter_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L102",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_test_testensurereporterrequiresroot",
+      "target": "internal_observe_reporter_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testensurereporterkeepsexistingfile",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L87",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testensurereporteroverwriteswithforce",
+      "target": "version_version_string"
     },
     {
       "relation": "references",
@@ -37877,6 +38902,180 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel",
+      "target": "observe_reporter_laravel_devherdobservereporter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel",
+      "target": "throwable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L237",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_caller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_capture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L132",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_endpoint",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L203",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_optionalarray",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L218",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_optionalstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L164",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_payload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L254",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_relativepath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_send",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L303",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_shortname",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L291",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_stringify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L272",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_transaction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_laravel_devherdobservereporter_report",
+      "target": "throwable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L203",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_laravel_devherdobservereporter_optionalarray",
+      "target": "throwable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L218",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_laravel_devherdobservereporter_optionalstring",
+      "target": "throwable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "testdata/projects/hello-vue-flask-docker/frontend/package.json",
       "source_location": "L4",
       "weight": 1.0,
@@ -39478,6 +40677,16 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/USAGE.md",
+      "source_location": "L700",
+      "weight": 1.0,
+      "source": "docs_usage",
+      "target": "guides_observe_laravel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/USAGE.md",
       "source_location": "L15",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -39840,9 +41049,9 @@
       "source_file": "docs/USAGE.md",
       "source_location": "L626",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_usage_4_17_devherd_observe",
-      "target": "docs_usage_observe_daemon_install_uninstall_status",
-      "confidence_score": 1.0
+      "target": "docs_usage_observe_daemon_install_uninstall_status"
     },
     {
       "relation": "contains",
@@ -39870,9 +41079,9 @@
       "source_file": "docs/USAGE.md",
       "source_location": "L605",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_usage_4_17_devherd_observe",
-      "target": "docs_usage_observe_firewall",
-      "confidence_score": 1.0
+      "target": "docs_usage_observe_firewall"
     },
     {
       "relation": "contains",
@@ -39920,9 +41129,9 @@
       "source_file": "docs/USAGE.md",
       "source_location": "L578",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_usage_4_17_devherd_observe",
-      "target": "docs_usage_observe_status_project",
-      "confidence_score": 1.0
+      "target": "docs_usage_observe_status_project"
     },
     {
       "relation": "contains",
@@ -40917,6 +42126,26 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "docs/guides/observe-laravel.md",
+      "source_location": "L345",
+      "weight": 1.0,
+      "source": "guides_observe_laravel_7_reportar_a_proposito",
+      "target": "guides_observe_laravel_eventos_que_no_son_excepciones",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/guides/observe-laravel.md",
+      "source_location": "L383",
+      "weight": 1.0,
+      "source": "guides_observe_laravel_7_reportar_a_proposito",
+      "target": "guides_observe_laravel_excepciones_que_afinan_su_evento",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "docs/guides/scaffold.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -41360,9 +42589,9 @@
       "source_file": "docs/observe.md",
       "source_location": "L144",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_observe_2_principio_de_aislamiento",
-      "target": "docs_observe_el_collector_como_servicio_de_usuario",
-      "confidence_score": 1.0
+      "target": "docs_observe_el_collector_como_servicio_de_usuario"
     },
     {
       "relation": "contains",
@@ -41423,6 +42652,26 @@
       "confidence_score": 1.0,
       "source": "docs_observe_5_normalizacion",
       "target": "docs_observe_datos_fuera_del_modelo_normalizado"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/observe.md",
+      "source_location": "L340",
+      "weight": 1.0,
+      "source": "docs_observe_6_agrupacion_de_issues",
+      "target": "docs_observe_fingerprint_derivado",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/observe.md",
+      "source_location": "L365",
+      "weight": 1.0,
+      "source": "docs_observe_6_agrupacion_de_issues",
+      "target": "docs_observe_fingerprint_explicito",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43110,5 +44359,5 @@
       "source_file": "docs/IMPROVEMENTS.md"
     }
   ],
-  "built_at_commit": "d923127f96f40795ee275ea9544d43649b0a849b"
+  "built_at_commit": "ee114312a2be8cf68d60d9b7f0cbc37d18ba4e45"
 }
