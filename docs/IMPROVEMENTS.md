@@ -4,6 +4,15 @@
 > Alcance: arquitectura, infraestructura, calidad/testing, UX/DX, seguridad y roadmap priorizado.
 > Esta revisión es de solo lectura: no se modificó código fuente, únicamente se generó este documento.
 
+> **Nota de vigencia.** El diagnóstico original es de **2026-06-19**. Buena parte de sus
+> hallazgos ya se resolvieron: ver ["Estado de implementación"](#estado-de-implementacion-2026-07-21)
+> y el roadmap al final, que llevan el estado real. En concreto, los titulares 1, 2, 3 y 4
+> del resumen ejecutivo **ya están corregidos**: el binario no está en git, existen
+> `Makefile`, CI y linter, y hay logging estructurado con `slog`.
+>
+> Para el estado actual completo del sistema, con métricas medidas, ver
+> [SYSTEM-OVERVIEW.md](SYSTEM-OVERVIEW.md).
+
 ---
 
 ## Resumen ejecutivo
@@ -169,29 +178,38 @@ Como el binario usa `modernc.org/sqlite` (Go puro, sin CGO), la matriz de CI es 
 
 ## Calidad de código y testing
 
-### Cobertura actual (medida con `go test ./... -cover`)
+### Cobertura (medida con `go test ./... -cover`)
 
-| Paquete | Cobertura | Nota |
-|---|---|---|
-| `internal/detector` | 76.1% | Bien |
-| `internal/database` | 64.7% | Bien |
-| `internal/observe` | 55.7% | Aceptable (gracias a `DockerRuntime` fake) |
-| `internal/compose` | 50.0% | Lógica de orquestación sin cubrir |
-| `internal/proxy` | 40.7% | Falta cubrir paths con `docker exec` |
-| `internal/config` | 40.3% | |
-| `internal/dns` | 31.0% | `SyncHosts` (sudo) sin cubrir |
-| `internal/doctor` | 19.4% | Mayoría toca el host |
-| `internal/preflight` | 17.8% | |
-| `internal/services` | 12.1% | Casi todo es `exec docker` |
-| `internal/cli` | 5.0% | La capa de comandos casi no se prueba |
-| `internal/version` | 0% | Sin tests |
-| `cmd/devherd` | 0% | Entrypoint |
+Dos columnas: el diagnóstico original de 2026-06-19 y la medición actual sobre `76a8a24`.
+La cobertura global es hoy del **41.3%**.
 
-20 archivos de test frente a 52 de código (no-test). La cobertura baja se concentra exactamente en los paquetes que tocan host/Docker — síntoma directo de la falta de interfaces (ver Arquitectura, punto 1).
+| Paquete | 2026-06-19 | Actual | Nota |
+|---|---|---|---|
+| `internal/runner` | — | **100.0%** | Paquete nuevo (item #7) |
+| `internal/version` | 0% | **100.0%** | |
+| `internal/scaffold` | — | **90.5%** | Paquete nuevo |
+| `internal/detector` | 76.1% | 76.1% | |
+| `internal/database` | 64.7% | 68.3% | |
+| `internal/services` | 12.1% | **67.4%** | Mejorado por el `Runner` inyectable |
+| `internal/observe` | 55.7% | 54.7% | |
+| `internal/compose` | 50.0% | 51.6% | |
+| `internal/proxy` | 40.7% | 48.2% | |
+| `internal/dns` | 31.0% | 44.1% | |
+| `internal/config` | 40.3% | 40.3% | `Store` (Load/Save) sigue al 0% |
+| `internal/doctor` | 19.4% | 39.2% | Mejorado por el seam de exec |
+| `internal/preflight` | 17.8% | 38.4% | `inspectPorts` e `inspectLaravelEnv` siguen al 0% |
+| `internal/cli` | 5.0% | **6.0%** | Sigue siendo el mayor punto ciego: 2722 LOC |
+| `cmd/devherd` | 0% | 0% | Entrypoint |
+
+La cobertura baja se concentra en los paquetes que tocan host/Docker. La adopción del
+`Runner` (item #7) mejoró claramente `services`, `doctor`, `preflight`, `dns` y `proxy`,
+pero **`internal/cli` sigue prácticamente sin probar**, y es donde vive la orquestación
+real.
 
 ### Problemas concretos
 
-**1. Funcionalidad anunciada como no implementada (deuda de producto).**
+**1. Funcionalidad anunciada como no implementada (deuda de producto).** *(Parcialmente
+resuelto: `logs` ya está implementado; `sentry` sigue siendo un placeholder.)*
 `grep notImplemented` → `cli/logs.go:11`, `cli/sentry.go:52` (apply), `:71` (set-dsn), `:87` (test). El README (líneas 21-25) y `root.go:38` registran `logs` y `sentry` como comandos de primera clase. Un usuario que ejecute `devherd logs <proj>` recibe `"logs is not implemented yet"`. 
 
 > Recomendación: ocultar comandos no implementados con `cmd.Hidden = true` o marcarlos `[experimental]` en el `Short`, y alinear el README. Implementar `logs` debería ser sencillo: ya existe `compose.Command(project)` para construir el `docker compose ... logs -f`.
@@ -202,11 +220,11 @@ Ya listados en Arquitectura punto 2 (`observe/server.go:137,146,183`). Un `golan
 **3. Duplicación de helpers.**
 `runCommand`/`run`/`runDocker` y `firstLine` aparecen casi idénticos en `proxy/external.go`, `compose/project.go`, `services/manager.go`, `observe/docker.go`. `primaryLabel` (`external.go:291`) y `composeProjectLabel` (`project.go:367`) son funciones casi gemelas. Consolidar en un paquete `internal/exec` y `internal/slug`.
 
-**4. Compose embebido como string literal de Go.**
-`services/manager.go:169-210` define el `docker-compose.yml` de servicios compartidos como una constante string. Es difícil de leer y versionar. Dado que el proyecto **ya usa `//go:embed`** para `schema.sql` (`database/migrations.go`) y para `Caddyfile.tmpl` (en `templates/`), debería embeberse desde un archivo `.yml` real para consistencia y para que editores/linters de YAML lo validen.
+**4. Compose embebido como string literal de Go.** *(Resuelto: ver roadmap #11.)*
+`services/manager.go` definía el `docker-compose.yml` de servicios compartidos como una constante string: difícil de leer y de versionar. Hoy se embebe desde un `.yml` real (`//go:embed shared-services.compose.yml`), en línea con el uso de `//go:embed` para las migraciones (`database/migrations.go`) y para `Caddyfile.tmpl` (en `templates/`), de modo que editores y linters de YAML lo validan.
 
-**5. Migraciones que no son migraciones.**
-`database/db.go:40` ejecuta `schemaSQL` completo en cada arranque (idempotente vía `CREATE TABLE IF NOT EXISTS`, presumiblemente). El archivo `migrations.go` solo hace `//go:embed schema.sql`. No hay versionado incremental: cualquier cambio de columna en una DB existente requiere borrar el archivo. Para un MVP es aceptable, pero conviene un esquema de migraciones versionadas (tabla `schema_migrations` + archivos numerados) antes de tener usuarios con datos.
+**5. Migraciones que no son migraciones.** *(Resuelto: ver roadmap #16.)*
+`database/db.go` ejecutaba el esquema completo en cada arranque, sin versionado incremental: cualquier cambio de columna en una DB existente obligaba a borrar el archivo. Hoy `Manager.Ensure` llama a `migrate()`, que embebe `migrations/*.sql`, aplica solo las migraciones pendientes y las registra en la tabla `schema_migrations` (con `migrations/0001_init.sql` como base y un test de compatibilidad para bases legacy).
 
 **6. Idiomático: salidas de usuario vía `cmd.OutOrStdout()` (bien), pero diagnósticos vía `fmt` (mal).** Ver Infraestructura punto 6.
 
@@ -285,6 +303,52 @@ Parte del roadmap ya se ejecuto. Resumen de lo completado:
   `-f/--follow` y `--tail N`, con streaming sin buffer (`internal/compose/logs.go`).
 
 El resto de los items siguen pendientes segun la tabla de abajo.
+
+---
+
+## Estado de implementacion (2026-07-21)
+
+Verificado sobre el commit `76a8a24`. Cambios respecto a la revision anterior:
+
+**Confirmado como resuelto**
+
+- ✅ **#1** El binario **no** esta en git (`git ls-files bin/` vacio; `bin/` ignorado).
+  El hallazgo original del resumen ejecutivo ya no aplica.
+- ✅ **#7** `internal/runner` existe con cobertura 100% y esta adoptado en `compose` y
+  `services`.
+- ✅ **#16** Migraciones versionadas activas, con test de compatibilidad para bases legacy.
+- ✅ **#17** Apagado limpio del poller con `WaitGroup`.
+
+**Nuevo desde entonces**
+
+- Comando `devherd scaffold` (genera compose y manifiesto para repos sin contenedores),
+  con soporte completo de Laravel. Cobertura 90.5%.
+- Comando `devherd serve` (up + proxy apply + open) via `runSiblingCommand`.
+
+**Revisado a la baja**
+
+- 🔶 **#7** La unificacion esta **a medias**: `doctor`, `preflight`, `proxy`, `dns`,
+  `observe` y `compose/logs` mantienen su propio helper de `exec`, con timeouts
+  inconsistentes (3 s, 5 s, 10 s o ninguno). Es exactamente la duplicacion que el doc del
+  paquete afirma haber eliminado.
+- 🔶 **#8** `cli` sigue en 6.0%. Sin poder inyectar `appContext`, la capa de comandos no es
+  testeable end-to-end. Es hoy el mayor riesgo de calidad del proyecto.
+
+**Deuda nueva detectada**
+
+Ver [SYSTEM-OVERVIEW.md, seccion 10](SYSTEM-OVERVIEW.md#10-riesgos-y-deuda-priorizados)
+para el detalle y la priorizacion. Los titulares:
+
+- El collector de Observe **no descomprime envelopes gzip**, lo que impide usar SDKs Sentry
+  oficiales sin desactivar la compresion.
+- El Caddyfile del proxy externo **se escribe antes de validarse**, sin rollback.
+- `prepareComposeProject` traga un error y devuelve el proyecto **sin los overrides**,
+  divergiendo en silencio de lo que `proxy apply` espera.
+- `observe cleanup` no purga la tabla `containers`, que crece sin limite.
+- GoReleaser esta configurado pero **ningun workflow lo dispara** y no hay tags git: el
+  release nunca se ha ejecutado.
+- Cuatro paquetes fantasma (`api`, `logs`, `runtimes`, `sentry`), tres plantillas no
+  referenciadas y cinco tablas SQLite sin uso.
 
 ---
 

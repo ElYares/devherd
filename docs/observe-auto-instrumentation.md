@@ -1,8 +1,26 @@
 # DevHerd Observe: Auto-Instrumentacion
 
-Este documento lista las fases pendientes para que DevHerd Observe capture errores reales de un proyecto sin depender de eventos manuales con `curl`.
+> **Este documento es un ROADMAP, no una descripcion del estado actual.** Describe lo que
+> haria falta para que Observe capture errores reales sin depender de eventos manuales con
+> `curl`. La mayoria de sus fases **no estan implementadas**.
+>
+> Para lo que si funciona hoy, ver [observe.md](observe.md) y
+> [USAGE.md](USAGE.md#417-devherd-observe-).
 
-El objetivo es que un flujo como este sea suficiente:
+## Estado por fase (revisado 2026-07-21)
+
+| Fase | Estado | Nota |
+|---|---|---|
+| 1. Instrumentar API (SDK Python) | **No implementado** | DevHerd no instala ni configura ningun SDK. |
+| 2. Instrumentar Web (SDK Next.js) | **No implementado** | Idem. |
+| 3. Mejorar `observe attach` | **No implementado** | `attach` **sobrescribe** el override completo; no lo fusiona. Las variables `NEXT_PUBLIC_*` no existen en el codigo. Las labels `devherd.*` de esta fase **si** estan implementadas. |
+| 4. Endpoints de prueba dev-only | **No implementado** | |
+| 5. Correlacion con Docker | **Implementado** | Ver [observe.md, seccion 7](observe.md#7-correlacion-con-contenedores). |
+| 6. Panel | **Parcial** | Hay filtro por proyecto, issues, eventos, contenedores y timeline con logs. Faltan filtro por servicio y el indicador de "el SDK aun no envia eventos". |
+| 7. Comando `devherd observe test` | **No implementado** | El comando no existe. |
+| 8. Documentacion | **Pendiente** | |
+
+El objetivo final es que un flujo como este sea suficiente:
 
 ```bash
 devherd observe start
@@ -11,6 +29,11 @@ devherd observe attach . --service web --stack node
 devherd up .
 devherd observe open
 ```
+
+> Ojo: el ejemplo de arriba **no funciona hoy**. Dos invocaciones consecutivas de `attach`
+> dejan solo la ultima, porque el override se reescribe entero. El equivalente actual seria
+> una sola invocacion con `--service api,web`, aunque entonces ambos servicios comparten el
+> mismo `--stack`.
 
 ## Fase 1: Instrumentar API
 

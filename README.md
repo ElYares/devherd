@@ -1,91 +1,126 @@
 # DevHerd
 
-DevHerd es una plataforma local de desarrollo para Ubuntu inspirada en el flujo de herramientas como Herd, pero diseñada como un producto propio centrado en Linux, servicios compartidos con Docker y observabilidad con Sentry.
+DevHerd es una plataforma local de desarrollo para Ubuntu inspirada en el flujo de
+herramientas como Herd, pero disenada como un producto propio centrado en Linux, servicios
+compartidos con Docker y observabilidad local.
+
+Una sola CLI para levantar tus proyectos Docker Compose, publicarlos en dominios locales a
+traves de un proxy Caddy, compartir Redis y Mailpit entre ellos, y capturar los errores de
+la aplicacion en un panel local.
+
+## Documentacion
+
+| Documento | Para que sirve |
+|---|---|
+| [docs/USAGE.md](docs/USAGE.md) | **Referencia de comandos**: todos los comandos, flags, ejemplos y flujos. |
+| [docs/SYSTEM-OVERVIEW.md](docs/SYSTEM-OVERVIEW.md) | Analisis del sistema: arquitectura, estado medido, limitaciones y deuda. |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Paquetes internos, tipos clave y flujo de datos. |
+| [docs/current-status.md](docs/current-status.md) | Estado actual del proyecto y lo que sigue pendiente. |
+| [docs/project-workflow.md](docs/project-workflow.md) | Flujos narrativos paso a paso sobre proyectos reales. |
+| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Como compilar, testear y anadir comandos. |
+| [docs/observe.md](docs/observe.md) | Observabilidad local en detalle. |
+| [docs/guides/scaffold.md](docs/guides/scaffold.md) | Generacion de `docker-compose` para repos sin contenedores. |
+| [docs/guides/logging-and-logs.md](docs/guides/logging-and-logs.md) | Logging de diagnostico y comando `logs`. |
+| [docs/guides/vikunja.md](docs/guides/vikunja.md) | Ejemplo completo con Vikunja. |
+| [docs/technical-plan.md](docs/technical-plan.md) | Plan tecnico original del producto. |
+| [docs/IMPROVEMENTS.md](docs/IMPROVEMENTS.md) | Revision de arquitectura e infraestructura, con roadmap. |
 
 ## Estado actual
 
-- CLI inicial en Go con Cobra.
-- Configuracion local basada en XDG.
-- Base SQLite inicial para proyectos, dominios, servicios y configuracion de Sentry.
-- Comando `devherd init` implementado.
-- Comando `devherd doctor` implementado para validar prerequisitos del MVP.
-- Comandos `park` y `list` implementados con deteccion basica de proyectos.
-- Comando `domain set` implementado para personalizar el dominio principal.
-- Comando `plan` implementado para inspeccionar stacks Compose sin side effects.
-- Comando `inspect` implementado para detectar colisiones locales antes o despues de levantar un stack.
-- `devherd up` ejecuta preflight automaticamente y soporta `--force` y `--no-inspect`.
-- Los comandos Compose usan `--project-name` estable por ruta para aislar clones con el mismo nombre de carpeta.
-- Comando `proxy apply` implementado tanto para Caddy local en host como para `local_proxy` Docker externo administrado por DevHerd.
-- Comando `proxy bootstrap` implementado para crear o reparar los assets del proxy externo.
-- Comandos `up`, `stop` y `down` implementados para proyectos con `docker-compose`, incluyendo manifiesto `.devherd.yml`.
-- Comandos `service start|stop|status` implementados para Redis y Mailpit compartidos.
-- `devherd observe` implementado con collector local, panel web, SQLite separada, DSN local, attach/detach por proyecto, correlacion Docker, logs cercanos, issues/eventos, alertas locales y limpieza de datos viejos.
-- `devherd sentry init <project> --stack <stack> --dry-run` implementado.
-- Comando `open` implementado para abrir el dominio del proyecto en el navegador.
-- Comando `logs` implementado (`devherd logs [path]` con `-f/--follow` y `--tail`).
-- Comando `serve` implementado: encadena `up` + `proxy apply` + `open`.
-- Comando `scaffold` implementado: genera `docker-compose` y manifiesto para repos sin contenedores (vue+flask, laravel, vue, flask, node, go), con menu de base de datos, Redis y puertos sin colision. `up` lo ofrece automaticamente cuando no hay compose. Ver [docs/guides/scaffold.md](docs/guides/scaffold.md).
-- Flags globales `--verbose` y `--log-json` para diagnostico estructurado (slog) en stderr.
-- `sentry set-dsn` y `sentry test` siguen como siguiente iteracion (ocultos en la CLI).
+DevHerd esta en **MVP/alpha** (`0.1.0-alpha`) y es Ubuntu/Linux-first.
 
-## Enfoque del MVP 1
+Lo que ya funciona:
 
-- `doctor` temprano para validar Docker, proxy activo y escritura local.
-- Proxy soportado hoy:
-  - `caddy` en host con resolucion local via `/etc/hosts`
-  - `caddy-docker-external` usando un `local_proxy` administrado bajo el data dir de DevHerd, por defecto `~/.local/share/devherd/local_proxy`
-- Dominio principal por proyecto:
-  - `proyecto.test` en modo host
-  - `proyecto.localhost` en modo `caddy-docker-external`
-- Solo Redis y Mailpit como servicios compartidos iniciales.
-- Solo Sentry Cloud como proveedor inicial.
-- `devherd sentry init` con `--dry-run` antes de modificar archivos del proyecto.
-- Sin daemon ni app desktop en MVP 1.
+- **Ciclo de vida Compose**: `up`, `stop`, `down`, `logs` y `plan`, con nombre de proyecto
+  estable por ruta para poder levantar clones del mismo repo a la vez.
+- **Preflight automatico**: `inspect` audita colisiones de puertos, `container_name`,
+  volumenes externos y configuracion tipo Laravel; `up` lo ejecuta antes de arrancar.
+- **Proxy local** en dos modos: `caddy-docker-external` (contenedor administrado, el
+  recomendado) y `caddy` en host.
+- **Dominios locales** por proyecto, con bloque administrado en `/etc/hosts`.
+- **Scaffold**: genera `docker-compose` y manifiesto para repos sin contenedores
+  (`vue+flask`, `laravel`, `vue`, `flask`, `node`, `go`), con menu de base de datos, Redis
+  y puertos sin colision. `up` lo ofrece automaticamente cuando no hay compose.
+- **Servicios compartidos**: Redis y Mailpit en la red `infra_net`.
+- **Observabilidad local** (`observe`): collector propio, panel web, base SQLite separada,
+  DSN local, attach/detach por proyecto, correlacion con contenedores Docker, issues,
+  eventos, timeline, alertas locales y limpieza de datos.
+- **`serve`**: encadena `up` + `proxy apply` + `open` en un solo comando.
+- **Diagnostico**: `doctor` valida los prerequisitos del host; los flags globales
+  `--verbose` y `--log-json` emiten trazas estructuradas a stderr.
+
+Limitaciones principales a dia de hoy:
+
+- El driver `caddy` en host solo enruta `vue+flask`, `flask` y `vue`, e ignora la metadata
+  `proxy` del manifiesto. El modo recomendado es `caddy-docker-external`.
+- `devherd sentry` es un placeholder: la observabilidad usable vive en `devherd observe`.
+- El collector de `observe` no descomprime envelopes gzip, lo que limita el uso de SDKs
+  Sentry oficiales sin configuracion adicional.
+
+El detalle completo, con metricas medidas, esta en
+[docs/SYSTEM-OVERVIEW.md](docs/SYSTEM-OVERVIEW.md) y
+[docs/current-status.md](docs/current-status.md).
 
 ## Quickstart
 
 ```bash
-go mod tidy
+# 1. Inicializa DevHerd (modo recomendado)
 go run ./cmd/devherd init --proxy caddy-docker-external
 go run ./cmd/devherd doctor
-go run ./cmd/devherd park /home/elyarestark/develop/examples
-go run ./cmd/devherd plan /home/elyarestark/develop/examples/hello-vue-flask-docker
-go run ./cmd/devherd inspect /home/elyarestark/develop/examples/hello-vue-flask-docker
-go run ./cmd/devherd domain set hello-vue-flask-docker --domain mi-demo
-go run ./cmd/devherd up /home/elyarestark/develop/examples/hello-vue-flask-docker
-go run ./cmd/devherd proxy apply hello-vue-flask-docker
-go run ./cmd/devherd open hello-vue-flask-docker
+
+# 2. Registra tu carpeta de proyectos
+go run ./cmd/devherd park ~/develop/examples
+
+# 3. Revisa un proyecto antes de levantarlo
+go run ./cmd/devherd plan ~/develop/examples/mi-app
+go run ./cmd/devherd inspect ~/develop/examples/mi-app
+
+# 4. Levantalo y publicalo
+go run ./cmd/devherd up ~/develop/examples/mi-app
+go run ./cmd/devherd proxy apply mi-app
+go run ./cmd/devherd open mi-app
+
 go run ./cmd/devherd list
 ```
 
-## Desde donde ejecutar
-
-Durante desarrollo:
-
-- Ejecuta `go run ./cmd/devherd <comando>` desde la raiz del repositorio.
-
-Si quieres usar `devherd` desde cualquier carpeta:
+Una vez registrado el proyecto, los tres pasos finales se reducen a uno:
 
 ```bash
-./scripts/install-ubuntu.sh
-./scripts/install-caddy-ubuntu.sh
+go run ./cmd/devherd serve ~/develop/examples/mi-app
+```
+
+## Instalacion
+
+Durante desarrollo, ejecuta `go run ./cmd/devherd <comando>` desde la raiz del repositorio.
+
+Para usar `devherd` desde cualquier carpeta:
+
+```bash
+./scripts/install-ubuntu.sh        # compila e instala en ~/.local/bin/devherd
+./scripts/install-caddy-ubuntu.sh  # opcional, solo para el modo de proxy en host
 devherd --help
 ```
 
-Una vez instalado en `~/.local/bin/devherd`, puedes ejecutar la CLI desde cualquier directorio. Los comandos que operan sobre proyectos aceptan ruta explicita, por ejemplo:
+Para tener metadatos de version reales (commit y fecha), compila con el `Makefile`:
 
 ```bash
-devherd park /home/elyarestark/develop/examples
-devherd plan /home/elyarestark/develop/examples/hello-vue-flask-docker
-devherd domain set hello-vue-flask-docker --domain mi-demo
-devherd up /home/elyarestark/develop/examples/hello-vue-flask-docker
-devherd proxy apply hello-vue-flask-docker
-devherd open hello-vue-flask-docker
+make build      # bin/devherd con version + commit + fecha
+make install    # go install en $GOBIN
 ```
 
-El plan tecnico completo vive en [docs/technical-plan.md](docs/technical-plan.md).
-La referencia de comandos vive en [docs/cli-commands.md](docs/cli-commands.md).
-El flujo de uso por proyecto vive en [docs/project-workflow.md](docs/project-workflow.md).
-El estado actual del proyecto vive en [docs/current-status.md](docs/current-status.md).
-La guia de Vikunja vive en [docs/guides/vikunja.md](docs/guides/vikunja.md).
-El plan de observabilidad local vive en [docs/observe.md](docs/observe.md).
+Los comandos que operan sobre proyectos aceptan una ruta explicita, asi que puedes
+invocarlos desde cualquier directorio:
+
+```bash
+devherd up ~/develop/examples/mi-app
+devherd proxy apply mi-app
+devherd open mi-app
+```
+
+## Requisitos
+
+- Docker con `docker compose` (plugin v2) y engine Linux.
+- Para el driver `caddy` en host: binario `caddy`, puertos 80/443 libres y acceso `sudo`.
+- Para el driver `caddy-docker-external`: solo Docker.
+
+`devherd doctor` valida todo esto y adapta sus chequeos al driver configurado.

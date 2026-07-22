@@ -1,49 +1,45 @@
 # DevHerd: Flujo de Uso por Proyecto
 
-Esta guia describe como usar DevHerd sobre un proyecto real y separa con claridad dos cosas:
+Esta guia es **narrativa**: recorre paso a paso el uso de DevHerd sobre proyectos reales,
+explicando el porque de cada paso y los problemas que aparecen en la practica.
 
-- El flujo que ya funciona hoy en el MVP actual.
-- El flujo actual para integrar un proxy Docker externo administrado como `local_proxy`.
+> **No es la referencia de comandos.** Para la lista completa de comandos, flags, valores
+> por defecto y efectos, ver [USAGE.md](USAGE.md), que es la fuente canonica. Si algo de
+> esta guia contradice a `USAGE.md`, gana `USAGE.md`.
+
+Cubre dos cosas:
+
+- El flujo de trabajo completo sobre un proyecto, de principio a fin.
+- La integracion con el proxy Docker externo administrado (`local_proxy`).
 
 ## 1. Alcance
 
-Esta guia usa como ejemplo un proyecto compuesto `Vue + Flask + Docker Compose` ubicado en:
+Esta guia usa como ejemplo un proyecto compuesto `Vue + Flask + Docker Compose`. Las rutas
+de los ejemplos corresponden a las maquinas donde se hicieron las validaciones; sustituyelas
+por las tuyas:
 
 ```text
-/home/elyarestark/develop/examples/hello-vue-flask-docker
+~/develop/examples/hello-vue-flask-docker
 ```
 
 El directorio padre que se registra con `park` es:
 
 ```text
-/home/elyarestark/develop/examples
+~/develop/examples
 ```
 
-## 2. Estado real de la CLI
+## 2. Estado de la CLI
 
-### Funciona hoy
+La CLI expone hoy 18 comandos de primer nivel. Todos estan implementados salvo el grupo
+`devherd sentry`, que es un placeholder (la observabilidad usable vive en
+`devherd observe`).
 
-- `devherd init`
-- `devherd doctor`
-- `devherd park <path>`
-- `devherd list`
-- `devherd domain set <project> --domain <name>`
-- `devherd plan [path]`
-- `devherd inspect [path]`
-- `devherd up [path]`
-- `devherd down [path]`
-- `devherd proxy apply [project]`
-- `devherd proxy bootstrap`
-- `devherd open <project>`
-- `devherd stop [path]`
-- `devherd service start|stop|status`
-- `devherd sentry init <project> --stack <stack> --dry-run`
+Ver el detalle en [current-status.md](current-status.md) y la referencia completa en
+[USAGE.md](USAGE.md).
 
-### Todavia no esta listo
-
-- `devherd logs`
-- `devherd sentry set-dsn`
-- `devherd sentry test`
+Si vienes de una version anterior de esta guia: `devherd logs` **ya esta implementado**
+(con `-f/--follow` y `--tail`), y existen dos comandos nuevos, `devherd scaffold` y
+`devherd serve`.
 
 ## 3. Prerequisitos
 

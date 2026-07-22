@@ -435,8 +435,8 @@
     "semantic_hash": "82efb97a359f5c7290bf2513d14686be"
   },
   "README.md": {
-    "mtime": 1784682600.1969216,
-    "ast_hash": "14e03cff7e4ffdc0dd1009c300643de0",
+    "mtime": 1784681367.0451086,
+    "ast_hash": "58d5b159f209e896950074e975d2db56",
     "semantic_hash": ""
   },
   "apps/desktop/README.md": {
@@ -445,23 +445,23 @@
     "semantic_hash": "2e0d83e41cf2d581aabfce7373bc2287"
   },
   "docs/ARCHITECTURE.md": {
-    "mtime": 1784682565.3623173,
-    "ast_hash": "22663900946c8310bff313f1c6522a49",
+    "mtime": 1781891073.2713027,
+    "ast_hash": "120afe1b783d8d1f1bf8eae5ac45ca2d",
     "semantic_hash": ""
   },
   "docs/CONTRIBUTING.md": {
-    "mtime": 1784682776.6729221,
-    "ast_hash": "35c7e09c3efff405ec59cdb772251ac8",
+    "mtime": 1781891073.2713027,
+    "ast_hash": "f5cc6b8c206d2b6e6810e9d3e6c35380",
     "semantic_hash": ""
   },
   "docs/IMPROVEMENTS.md": {
-    "mtime": 1784682783.213848,
-    "ast_hash": "1bb246bedf443af992d048831b186f0b",
+    "mtime": 1781891073.2713027,
+    "ast_hash": "9e8780ca8175fc10e42b74fe97688e92",
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1784682354.9697182,
-    "ast_hash": "bc7331e105550d1fd17f25809ee939c7",
+    "mtime": 1781891073.2713027,
+    "ast_hash": "daad4959ef7255b0c2731b05eb754d05",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -480,14 +480,14 @@
     "semantic_hash": "96aad0dbb682f3237e703a956ab2bab1"
   },
   "docs/cli-commands.md": {
-    "mtime": 1784682366.947581,
-    "ast_hash": "f1ab3c5823e5e3ad32de5f23d82d7278",
-    "semantic_hash": ""
+    "mtime": 1779443952.383987,
+    "ast_hash": "e1c990c06c6aebb73e036435dabcc769",
+    "semantic_hash": "e1c990c06c6aebb73e036435dabcc769"
   },
   "docs/current-status.md": {
-    "mtime": 1784682440.8997352,
-    "ast_hash": "890fa8ecd85940ebb6a32f9640ec4398",
-    "semantic_hash": ""
+    "mtime": 1779443984.802375,
+    "ast_hash": "6891f158f2c7519fab4ef007dca1f974",
+    "semantic_hash": "6891f158f2c7519fab4ef007dca1f974"
   },
   "docs/guides/vikunja.md": {
     "mtime": 1781891073.2720258,
@@ -495,19 +495,19 @@
     "semantic_hash": "d1615a9e4f2d124b5a77e77a3f8bf51f"
   },
   "docs/observe-auto-instrumentation.md": {
-    "mtime": 1784682683.1479807,
-    "ast_hash": "494aef2387325f70873248e4f8971495",
-    "semantic_hash": ""
+    "mtime": 1781891073.2795196,
+    "ast_hash": "80addb19fb69f6c02b397e711401f372",
+    "semantic_hash": "80addb19fb69f6c02b397e711401f372"
   },
   "docs/observe.md": {
-    "mtime": 1784682663.185207,
-    "ast_hash": "01279c306625713fbde1000c86d1f022",
-    "semantic_hash": ""
+    "mtime": 1779445598.8477783,
+    "ast_hash": "9d5b063a2258418d7c76b88d78d957a9",
+    "semantic_hash": "9d5b063a2258418d7c76b88d78d957a9"
   },
   "docs/project-workflow.md": {
-    "mtime": 1784682748.4442413,
-    "ast_hash": "9421f6a8378f0dcc0cc02b845913f8d9",
-    "semantic_hash": ""
+    "mtime": 1779443971.876617,
+    "ast_hash": "95a8d3e79f53d5c9ed6b9c7ce2790e63",
+    "semantic_hash": "95a8d3e79f53d5c9ed6b9c7ce2790e63"
   },
   "docs/technical-plan.md": {
     "mtime": 1778660449.058144,
@@ -662,11 +662,6 @@
   "docs/guides/scaffold.md": {
     "mtime": 1784681367.0462487,
     "ast_hash": "3d176375a359036cebec37afee8634e2",
-    "semantic_hash": ""
-  },
-  "docs/SYSTEM-OVERVIEW.md": {
-    "mtime": 1784682170.051848,
-    "ast_hash": "22fce8e9ba066cc9a48d68a6ceceaea7",
     "semantic_hash": ""
   }
 }
