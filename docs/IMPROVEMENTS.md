@@ -359,25 +359,52 @@ lectura de codigo. Ninguno aparece hoy en `docs/observe.md`.
 
 ### Bloqueantes: la ingesta desde contenedores no funciona de fabrica
 
-**O1. `attach` genera un DSN que ningun contenedor puede usar.**
-`observe attach` construye el DSN con el `--addr` por defecto, `127.0.0.1:9777`. Dentro de
+**O1. `attach` generaba un DSN que ningun contenedor podia usar.** *(Resuelto.)*
+`observe attach` construia el DSN con el `--addr` por defecto, `127.0.0.1:9777`. Dentro de
 un contenedor esa direccion es el propio contenedor, no el host, asi que el `SENTRY_DSN`
-inyectado en el override es inservible **en el unico escenario para el que se diseno**.
-Peor: el collector tambien escucha solo en loopback por defecto, de modo que ni corrigiendo
-el DSN a mano se alcanza. Ambos lados deben apuntar a una IP comun, p. ej. el gateway de
-`infra_web` (`172.18.0.1`), pasando `--addr` a `observe start` **y** a `observe attach`.
-> Recomendacion: que `attach` resuelva el gateway de `infra_web` y lo use como default, y
-> que advierta explicitamente cuando el DSN generado sea un loopback. Alternativa de fondo:
-> publicar el collector como contenedor en `infra_web` para eliminar el salto al host.
+inyectado en el override era inservible **en el unico escenario para el que se diseno**.
+Peor: el collector tambien escuchaba solo en loopback, de modo que ni corrigiendo el DSN a
+mano se alcanzaba.
+> Corregido resolviendo el gateway IPv4 de la red compartida (`observe.InspectNetwork`) y
+> usandolo por defecto en los dos lados: `observe start` escucha ahora **a la vez** en
+> loopback y en el gateway (`Server.ListenAndServeOn`, multi-listener; si el gateway no
+> existe arranca igual en loopback y lo registra), y `attach`/`dsn` construyen el DSN con el
+> gateway. Con `--addr` explicito manda el usuario, y cualquier DSN loopback dispara un aviso
+> por stderr. El panel sigue sirviendose en `127.0.0.1:9777`, sin exponer nada a la LAN.
 
-**O2. Requisito de firewall no documentado.**
+**O2. Requisito de firewall no documentado.** *(Resuelto.)*
 Con `ufw` activo (default en muchas distros), el trafico contenedor -> host se descarta en
 `INPUT`. Los puertos publicados por Docker funcionan porque sus reglas DNAT preceden a las
 cadenas de ufw, pero el collector es un listener normal del host y queda bloqueado. Hace
 falta una regla explicita del tipo
 `ufw allow from 172.18.0.0/16 to 172.18.0.1 port 9777 proto tcp`.
-> Recomendacion: que `observe status`/`doctor` diagnostiquen la alcanzabilidad *desde un
-> contenedor*, no solo desde el host, y sugieran la regla.
+> Corregido con una sonda real en `observe status`: lanza un contenedor efimero en la red
+> compartida y pide `/health` desde dentro, que es donde el fallo se manifiesta (el host
+> siempre se alcanza a si mismo). Usa la primera imagen ya presente en local —`busybox`,
+> `alpine`, `caddy:2-alpine`— y no descarga ninguna: si no hay, sugiere el comando
+> equivalente. Al fallar imprime la regla concreta, detectando si ufw esta activo por
+> `/etc/ufw/ufw.conf` (`ufw status` exigiria root). Se desactiva con
+> `--check-reachability=false`.
+
+**O10. La red del proxy no es la red por la que reporta el proyecto.** *(Resuelto.)*
+El arreglo de O1 asumia que `infra_web` servia para todos. Falso, y medido sobre dos
+proyectos reales: a la red del proxy solo se conecta el servicio que **publica** el proxy.
+
+| Proyecto | Red propia | `infra_net` | `infra_web` |
+|---|---|---|---|
+| aang-server | 6/6 contenedores | 2/6 (`app`, `queue`) | 1/6 (`web`) |
+| tl-mas-server | 4/4 contenedores | — | 1/4 (`app`) |
+
+Consecuencias: el DSN de `aang-server` apuntaba a una IP que su `app` no alcanzaba, y —peor—
+la sonda de O2 respondia **`ok`** porque lanzaba su contenedor efimero en `infra_web`, la
+unica red donde todo funcionaba. Un falso positivo en la comprobacion escrita justo para
+evitar ese fallo.
+> Corregido contando cobertura por red (`ProjectNetworkCoverage`) en vez de asumir una:
+> `attach`/`dsn` eligen la red DevHerd que mas contenedores del proyecto cubre, `start`
+> escucha en los gateways de todas las redes relevantes —incluidas las de los contenedores
+> ya observados— y `observe status <proyecto>` lanza la sonda en la red de ese proyecto.
+> Se prefiere una red estable aunque cubra menos: la red privada del proyecto cubre mas, pero
+> Docker le asigna otra subred al recrearla y dejaria el DSN inyectado apuntando al vacio.
 
 ### Alertas: sin silenciamiento, ruido garantizado
 

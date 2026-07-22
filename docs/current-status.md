@@ -41,6 +41,8 @@ implementados salvo donde se indica.
 - `devherd observe start|status|open|dsn`
 - `devherd observe attach|detach`
 - `devherd observe scan|containers|issues|events|timeline`
+- `devherd observe firewall [--apply]`
+- `devherd observe daemon install|uninstall|status`
 - `devherd observe alert add|list|remove|deliveries`
 - `devherd observe cleanup`
 
@@ -219,7 +221,9 @@ configurado, `Dockerfile` multi-stage sobre distroless y `.goreleaser.yml` con p
 - `observe cleanup` **no borra el inventario de contenedores**, que crece sin limite.
 - Las alertas solo escriben una fila en la base local: no hay webhooks ni notificaciones.
 - `error-rate` no tiene periodo de enfriamiento.
-- El collector no tiene autenticacion; el default es loopback.
+- El collector no tiene autenticacion. Por defecto escucha en loopback y en el gateway de la
+  red compartida (para que los contenedores puedan reportar); ninguna de las dos queda
+  expuesta a la LAN, pero cualquier contenedor de `infra_web` puede escribir eventos.
 
 ### Distribucion
 

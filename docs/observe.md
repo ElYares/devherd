@@ -6,8 +6,7 @@ No busca reemplazar Sentry en produccion. Busca dar una experiencia local integr
 
 > **Para integrarlo en un proyecto concreto** ver
 > [guides/observe-laravel.md](guides/observe-laravel.md): reporter listo para copiar,
-> soporte de contexto y —sobre todo— los **requisitos de red** (`--addr` y regla de
-> firewall) sin los cuales la ingesta desde contenedores no funciona.
+> soporte de contexto y los **requisitos de red** de la ingesta desde contenedores.
 
 ## 1. Objetivo
 
@@ -67,24 +66,43 @@ En macOS y Windows el directorio de datos cae bajo `os.UserConfigDir()`, salvo q
 
 ### Alcanzabilidad desde contenedores
 
-**Los valores por defecto no sirven para el caso de uso principal.** El collector escucha en
-`127.0.0.1:9777` y `observe attach` genera el DSN con esa misma direccion; dentro de un
-contenedor, `127.0.0.1` es el propio contenedor, no el host. Un proyecto dockerizado **no
-puede reportar** con la configuracion de fabrica.
+Dentro de un contenedor, `127.0.0.1` es el propio contenedor, no el host. Por eso el
+collector y el DSN **no pueden vivir solo en loopback** si el proyecto observado esta
+dockerizado, que es el caso de uso principal.
 
-Ambos lados deben apuntar a una IP que host y contenedores compartan. La natural es el
-gateway de `infra_web`, la red que ya usa el proxy externo:
+DevHerd resuelve esto solo. `observe start` escucha **a la vez** en `127.0.0.1:9777` y en el
+gateway de cada red relevante: las administradas por DevHerd (`infra_web` del proxy e
+`infra_net` de los servicios compartidos) y las de los contenedores ya observados.
 
 ```bash
-docker network inspect infra_web --format '{{(index .IPAM.Config 0).Gateway}}'   # p.ej. 172.18.0.1
-
-devherd observe start  --addr 172.18.0.1:9777
-devherd observe attach <proyecto> --stack laravel --addr 172.18.0.1:9777
+devherd observe start
+# observe collector: http://127.0.0.1:9777
+# observe collector: http://172.18.0.1:9777
+# observe collector: http://172.20.0.1:9777
+# containers on infra_web, infra_net should use http://172.20.0.1:9777
 ```
 
-Esa IP es una interfaz del host, asi que el panel te sigue sirviendo en
-`http://172.18.0.1:9777/observe`, y al ser una subred privada de Docker **no es ruteable
-desde la LAN** (a diferencia de `--addr 0.0.0.0`, que si te expondria).
+**Por que varias redes y no solo la del proxy.** A `infra_web` se conecta unicamente el
+servicio que publica el proxy —el nginx, el front—, no el que reporta. Medido sobre dos
+proyectos reales:
+
+| Proyecto | Red propia | `infra_net` | `infra_web` |
+|---|---|---|---|
+| aang-server | 6/6 contenedores | 2/6 (`app`, `queue`) | 1/6 (`web`) |
+| tl-mas-server | 4/4 contenedores | — | 1/4 (`app`) |
+
+Por eso `attach` y `dsn` no asumen una red: cuentan cuantos contenedores del proyecto hay en
+cada una y eligen **la red administrada por DevHerd con mayor cobertura**. Se prefiere una
+red estable aunque cubra menos contenedores, porque la red privada del proyecto cambia de
+subred cada vez que `compose` la recrea y dejaria el DSN inyectado apuntando a una direccion
+que ya no existe. Solo se cae a la red privada cuando ninguna red DevHerd toca el proyecto.
+
+Asi el panel te sigue sirviendo en `http://127.0.0.1:9777/observe` y los contenedores tienen
+una IP alcanzable. Al ser subredes privadas de Docker **no son ruteables desde la LAN** (a
+diferencia de `--addr 0.0.0.0`, que si te expondria).
+
+Si pasas `--addr` explicito mandas tu: DevHerd no añade gateways, y avisa por stderr si la
+direccion resultante es loopback.
 
 **Con `ufw` activo hace falta una regla explicita.** El trafico contenedor -> host se
 descarta en `INPUT`. Los puertos publicados por Docker funcionan porque sus reglas DNAT
@@ -95,12 +113,47 @@ sudo ufw allow from 172.18.0.0/16 to 172.18.0.1 port 9777 proto tcp \
   comment 'devherd observe collector'
 ```
 
-Verifica siempre **desde dentro del contenedor**, no desde el host, que es donde el fallo
-se manifiesta:
+Cada red necesita **su propia regla**, porque cambian tanto la subred de origen como el
+gateway de destino. `devherd observe firewall` las deriva todas y `--apply` las aplica con
+aviso previo de `sudo`, igual que la sincronizacion de `/etc/hosts`:
 
 ```bash
-docker exec <contenedor> curl -s -m 3 http://172.18.0.1:9777/health
+devherd observe firewall
+devherd observe firewall --apply
 ```
+
+`devherd observe status [proyecto]` verifica el resultado **desde dentro de un contenedor**,
+que es donde el fallo se manifiesta: el host siempre se alcanza a si mismo aunque el
+cortafuegos bloquee el trafico de Docker. Con un proyecto, la sonda corre en la red de **ese
+proyecto**; sin el, en una red compartida.
+
+```bash
+devherd observe status aang-server
+# container reachability (aang-server on infra_net): ok at http://172.20.0.1:9777
+```
+
+Pasarle el proyecto importa: una sonda lanzada en la red equivocada devuelve un `ok` que no
+significa nada para el proyecto que te interesa.
+
+Cuando falla, imprime la regla concreta que falta (y detecta si ufw esta activo leyendo
+`/etc/ufw/ufw.conf`, sin pedir root). La sonda usa la primera imagen que ya tengas en local
+—`busybox`, `alpine` o `caddy:2-alpine`— y **nunca descarga ninguna**: si no hay ninguna,
+imprime el comando equivalente para ejecutarlo a mano. Se desactiva con
+`--check-reachability=false`.
+
+### El collector como servicio de usuario
+
+El collector es un proceso en foreground: si cierras la terminal deja de ingerir y los
+errores se pierden sin rastro. Para que sobreviva y se reinicie solo:
+
+```bash
+devherd observe daemon install     # unidad systemd --user, habilitada y arrancada
+devherd observe daemon status
+devherd observe daemon uninstall
+```
+
+La unidad apunta al binario que ejecuta el comando (`os.Executable()`), asi que si
+reinstalas DevHerd en otra ruta hay que volver a instalarla.
 
 > Ver [guides/observe-laravel.md](guides/observe-laravel.md) para el procedimiento completo
 > en un proyecto Laravel.
@@ -117,7 +170,7 @@ devherd observe start
 
 Responsabilidades:
 
-- escuchar en `127.0.0.1:9777` por defecto
+- escuchar en `127.0.0.1:9777` y en el gateway de la red compartida por defecto
 - aceptar eventos JSON simples para pruebas y tooling propio
 - aceptar un primer corte de envelopes compatibles con SDKs Sentry
 - normalizar eventos

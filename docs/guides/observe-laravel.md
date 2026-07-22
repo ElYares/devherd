@@ -15,26 +15,22 @@ excepcion en tu app  →  handler de Laravel  →  DevherdObserveReporter
 
 ## 1. Requisitos de red (leelo antes que nada)
 
-Es donde falla la integracion, y no es obvio.
+Es donde falla la integracion. DevHerd ya lo resuelve por defecto, pero conviene entender
+que esta pasando.
 
-**El DSN por defecto no sirve dentro de un contenedor.** `observe attach` genera el DSN con
-`127.0.0.1:9777`, que dentro del contenedor apunta al propio contenedor. El collector
-ademas escucha solo en loopback. Ambos lados deben usar una IP comun: el gateway de la red
-compartida `infra_web`.
+Dentro de un contenedor, `127.0.0.1` es el propio contenedor. Por eso el collector escucha
+**a la vez** en loopback y en el gateway de la red compartida `infra_web`, y el DSN que
+genera `attach` usa esa segunda direccion:
 
 ```bash
-# 1. Averigua el gateway de infra_web (normalmente 172.18.0.1)
-docker network inspect infra_web --format '{{(index .IPAM.Config 0).Gateway}}'
-
-# 2. Levanta el collector ahi (NO en el default 127.0.0.1)
-devherd observe start --addr 172.18.0.1:9777
-
-# 3. Y genera el override con la misma direccion
-devherd observe attach <proyecto> --stack laravel --addr 172.18.0.1:9777
+devherd observe start
+# observe collector: http://127.0.0.1:9777
+# observe collector: http://172.18.0.1:9777
+# containers on infra_web should use http://172.18.0.1:9777
 ```
 
 Esa IP es una interfaz del host, asi que el panel te sigue funcionando en
-`http://172.18.0.1:9777/observe`, y **no** es ruteable desde tu LAN.
+`http://127.0.0.1:9777/observe`, y **no** es ruteable desde tu LAN.
 
 **Si usas `ufw`, hace falta una regla.** El trafico contenedor -> host se descarta en
 `INPUT`. Los puertos publicados por Docker funcionan porque sus reglas DNAT preceden a ufw,
@@ -45,18 +41,19 @@ sudo ufw allow from 172.18.0.0/16 to 172.18.0.1 port 9777 proto tcp \
   comment 'devherd observe collector'
 ```
 
-Comprueba que quedo bien **desde dentro del contenedor**, no desde el host:
+`observe status` comprueba esto **desde dentro de un contenedor**, no desde el host, y te
+imprime la regla exacta si falla:
 
 ```bash
-docker exec <contenedor-app> curl -s -m 3 http://172.18.0.1:9777/health
-# {"database":"...","status":"ok"}
+devherd observe status
+# container reachability (infra_web): ok at http://172.18.0.1:9777
 ```
 
 ## 2. Aplicar el attach
 
 ```bash
-devherd observe attach <proyecto> --stack laravel --addr 172.18.0.1:9777 --dry-run
-devherd observe attach <proyecto> --stack laravel --addr 172.18.0.1:9777
+devherd observe attach <proyecto> --stack laravel --dry-run
+devherd observe attach <proyecto> --stack laravel
 devherd up
 ```
 
@@ -404,7 +401,7 @@ linea agrupan en un unico issue con `COUNT=3`.
 
 ```bash
 # 1. El contenedor alcanza el collector
-docker exec <contenedor-app> curl -s -m 3 http://172.18.0.1:9777/health
+devherd observe status
 
 # 2. Las variables llegaron
 docker exec <contenedor-app> env | grep -E 'DEVHERD|SENTRY'
@@ -440,4 +437,4 @@ reporte falle sin dejar rastro.
 ## Referencias
 
 - [observe.md](../observe.md) — arquitectura y referencia completa del modulo
-- [IMPROVEMENTS.md](../IMPROVEMENTS.md) — seccion "Hallazgos de campo" (O1-O8)
+- [IMPROVEMENTS.md](../IMPROVEMENTS.md) — seccion "Hallazgos de campo" (O1-O9)
