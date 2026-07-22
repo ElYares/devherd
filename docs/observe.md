@@ -4,6 +4,11 @@ DevHerd Observe es el modulo local de observabilidad de DevHerd. Su objetivo es 
 
 No busca reemplazar Sentry en produccion. Busca dar una experiencia local integrada a DevHerd para entender como fallo un proyecto durante desarrollo.
 
+> **Para integrarlo en un proyecto concreto** ver
+> [guides/observe-laravel.md](guides/observe-laravel.md): reporter listo para copiar,
+> soporte de contexto y —sobre todo— los **requisitos de red** (`--addr` y regla de
+> firewall) sin los cuales la ingesta desde contenedores no funciona.
+
 ## 1. Objetivo
 
 Flujo conceptual:
@@ -59,6 +64,46 @@ En macOS y Windows el directorio de datos cae bajo `os.UserConfigDir()`, salvo q
 > migraciones versionadas**. El esquema completo se reejecuta en cada invocacion y solo es
 > idempotente porque todo es `CREATE ... IF NOT EXISTS`; cualquier cambio de columna futuro
 > requerira trabajo manual.
+
+### Alcanzabilidad desde contenedores
+
+**Los valores por defecto no sirven para el caso de uso principal.** El collector escucha en
+`127.0.0.1:9777` y `observe attach` genera el DSN con esa misma direccion; dentro de un
+contenedor, `127.0.0.1` es el propio contenedor, no el host. Un proyecto dockerizado **no
+puede reportar** con la configuracion de fabrica.
+
+Ambos lados deben apuntar a una IP que host y contenedores compartan. La natural es el
+gateway de `infra_web`, la red que ya usa el proxy externo:
+
+```bash
+docker network inspect infra_web --format '{{(index .IPAM.Config 0).Gateway}}'   # p.ej. 172.18.0.1
+
+devherd observe start  --addr 172.18.0.1:9777
+devherd observe attach <proyecto> --stack laravel --addr 172.18.0.1:9777
+```
+
+Esa IP es una interfaz del host, asi que el panel te sigue sirviendo en
+`http://172.18.0.1:9777/observe`, y al ser una subred privada de Docker **no es ruteable
+desde la LAN** (a diferencia de `--addr 0.0.0.0`, que si te expondria).
+
+**Con `ufw` activo hace falta una regla explicita.** El trafico contenedor -> host se
+descarta en `INPUT`. Los puertos publicados por Docker funcionan porque sus reglas DNAT
+preceden a las cadenas de ufw, pero el collector es un listener normal del host:
+
+```bash
+sudo ufw allow from 172.18.0.0/16 to 172.18.0.1 port 9777 proto tcp \
+  comment 'devherd observe collector'
+```
+
+Verifica siempre **desde dentro del contenedor**, no desde el host, que es donde el fallo
+se manifiesta:
+
+```bash
+docker exec <contenedor> curl -s -m 3 http://172.18.0.1:9777/health
+```
+
+> Ver [guides/observe-laravel.md](guides/observe-laravel.md) para el procedimiento completo
+> en un proyecto Laravel.
 
 ## 3. Componentes
 
@@ -207,6 +252,34 @@ Campos derivados:
 - `last_seen`
 - `event_count`
 
+### Datos fuera del modelo normalizado
+
+`raw_payload` guarda el payload original completo, tal cual llego. Todo lo que un emisor
+mande y no encaje en las columnas de arriba —`context`, `tags`, breadcrumbs, stack frames—
+sobrevive ahi.
+
+Para consultarlo no hace falta abrir SQLite: `observe timeline` imprime un bloque
+`Payload:` y la API del panel devuelve `payload_extra`, ambos ya filtrados para omitir las
+claves que duplican una columna existente (helper `observe.ExtraPayload`).
+
+```
+Exception: TimbradoFallidoException
+Message: El SAT rechazo el timbrado
+
+Payload:
+- context: {"cfdi_uuid":"A1B2-C3D4","intento":3,"reintentable":true}
+```
+
+Un emisor que quiera adjuntar contexto propio solo tiene que incluirlo en el JSON:
+
+```json
+{ "message": "...", "context": { "factura_id": 9182 } }
+```
+
+> Historico: hasta la exposicion de `raw_payload`, ninguna consulta leia esa columna, de
+> modo que el contexto se escribia y quedaba inaccesible salvo por SQL directo. Si tu
+> binario no imprime el bloque `Payload:`, es anterior a ese cambio.
+
 ## 6. Agrupacion de issues
 
 El fingerprint es un **SHA-1** de cinco componentes unidos por salto de linea:
@@ -267,6 +340,26 @@ instantaneas cada 10 segundos. La seleccion del contenedor es por cascada: prime
 nombre o ID de contenedor declarado en el evento, luego por servicio, y si el proyecto
 tiene un unico contenedor observado, ese. **No se usa ningun criterio temporal** para
 elegir contenedor; la ventana de tiempo (±30 s por defecto) solo decide que logs se traen.
+
+### Cadencias: cada cosa se registra en un momento distinto
+
+| Que | Cuando | Consecuencia practica |
+|---|---|---|
+| **Errores** | Al instante, push del emisor | Sin cola ni reintento: **si el collector no corre, el error se pierde** |
+| **Logs del contenedor** | Una sola vez, al ingerir el evento | `docker logs --since t-30s --until t+30s --tail 200`. No se rellenan despues |
+| **Estado de contenedores** | Cada 10 s (poller), o manual con `observe scan` | Un contenedor que cae y vuelve dentro del intervalo puede pasar inadvertido |
+| **Alertas** | Se evaluan al ingerir cada evento | Ver los avisos de la seccion de alertas |
+
+Dos corolarios que explican comportamientos que parecen bugs:
+
+- **`Container logs: none captured` suele ser correcto.** Si la app estaba ociosa no habia
+  lineas en la ventana, y como la captura es de una sola pasada, nunca se rellenaran.
+- **La mitad futura de la ventana casi siempre esta vacia**, porque se consulta en el
+  instante del evento y esos logs todavia no existen.
+
+**Observe no es un agregador de logs**: no sigue los contenedores de forma continua ni
+almacena su salida. Solo toma una foto de 60 segundos alrededor de cada error. Para ver
+logs completos sigue estando `devherd logs` o `docker compose logs`.
 
 ## 8. Trayectoria de la falla
 
@@ -494,7 +587,13 @@ Se evaluan de forma sincrona al ingerir cada evento o instantanea de contenedor;
 motor de alertas ni planificador.
 
 > `error-rate` **no tiene periodo de enfriamiento ni deduplicacion**: una vez superado el
-> umbral, cada evento posterior dentro de la ventana genera otra entrega.
+> umbral, cada evento posterior dentro de la ventana genera otra entrega. Medido: con
+> umbral 3 y ventana 5m, 4 eventos produjeron 2 entregas de `error-rate` (la 3.a y la 4.a).
+
+> `new-issue` dispara **por cada issue nuevo**, no una vez por proyecto. Combinado con que
+> el fingerprint no enmascara numeros ni identificadores, un mismo bug con mensajes
+> variables (`user 42`, `user 43`, ...) genera un issue y por tanto una alerta por cada
+> variante. Medido: 4 errores distintos = 4 entregas de `new-issue`.
 
 > No hay forma de deshabilitar una regla sin borrarla: `enabled` siempre se escribe en 1.
 

@@ -553,10 +553,22 @@ Arranca el collector HTTP **en foreground**. No hay daemon, ni pidfile, ni un co
 ```bash
 devherd observe start
 devherd observe start --addr 127.0.0.1:9999
+
+# Para que proyectos dockerizados puedan reportar (ver aviso):
+devherd observe start --addr 172.18.0.1:9777
 ```
 
+> **El default no sirve para proyectos en Docker.** Dentro de un contenedor `127.0.0.1` es
+> el propio contenedor, no el host. Si quieres que tus proyectos reporten, arranca el
+> collector en el gateway de `infra_web`
+> (`docker network inspect infra_web --format '{{(index .IPAM.Config 0).Gateway}}'`) y pasa
+> ese mismo `--addr` a `observe attach`. Con `ufw` activo hace falta ademas una regla que
+> permita contenedor -> host en ese puerto. Detalle en
+> [observe.md](observe.md#alcanzabilidad-desde-contenedores).
+
 > **No hay autenticacion.** El default es loopback; si cambias `--addr` a `0.0.0.0`,
-> expones la ingesta y el panel a toda la red sin ninguna barrera.
+> expones la ingesta y el panel a toda la red sin ninguna barrera. El gateway de
+> `infra_web` es una subred privada de Docker y **no** queda expuesto a la LAN.
 
 #### `observe status`
 
@@ -624,6 +636,14 @@ permiten la correlacion con Docker.
 > api` y luego `attach --service web`, solo queda `web`. Para observar varios servicios,
 > pasalos todos en la misma invocacion.
 
+> **El `--addr` por defecto genera un DSN inservible en Docker**: `127.0.0.1` dentro de un
+> contenedor apunta al contenedor mismo. Usa el mismo `--addr` con el que arrancaste el
+> collector (el gateway de `infra_web`), o pasa `--dsn` a mano. Ver
+> [observe.md](observe.md#alcanzabilidad-desde-contenedores).
+
+> El override solo surte efecto al **recrear** los contenedores: tras `attach` hace falta un
+> `devherd up`.
+
 El override generado se incluye automaticamente en `up`, `stop`, `down` y `logs`.
 
 #### `observe detach <project-or-path>`
@@ -663,6 +683,22 @@ devherd observe issues
 devherd observe events mi-app --limit 50
 devherd observe timeline <event-id>
 ```
+
+`observe timeline` imprime ademas un bloque `Payload:` con los datos que el emisor mando
+fuera del modelo normalizado (`context`, `tags`, breadcrumbs...), omitiendo las claves que
+ya aparecen como campos propios:
+
+```
+Exception: TimbradoFallidoException
+Message: El SAT rechazo el timbrado
+
+Payload:
+- context: {"cfdi_uuid":"A1B2-C3D4","intento":3,"reintentable":true}
+```
+
+> `observe issues` y `observe events` **no filtran por proyecto en el panel web**: la base
+> de Observe es unica por maquina y el panel muestra todos los proyectos juntos. El filtro
+> por proyecto solo existe en la CLI.
 
 #### `observe alert <add|list|remove|deliveries>`
 

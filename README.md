@@ -19,6 +19,7 @@ la aplicacion en un panel local.
 | [docs/project-workflow.md](docs/project-workflow.md) | Flujos narrativos paso a paso sobre proyectos reales. |
 | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Como compilar, testear y anadir comandos. |
 | [docs/observe.md](docs/observe.md) | Observabilidad local en detalle. |
+| [docs/guides/observe-laravel.md](docs/guides/observe-laravel.md) | Integrar Observe en un Laravel: reporter, contexto y requisitos de red. |
 | [docs/guides/scaffold.md](docs/guides/scaffold.md) | Generacion de `docker-compose` para repos sin contenedores. |
 | [docs/guides/logging-and-logs.md](docs/guides/logging-and-logs.md) | Logging de diagnostico y comando `logs`. |
 | [docs/guides/vikunja.md](docs/guides/vikunja.md) | Ejemplo completo con Vikunja. |

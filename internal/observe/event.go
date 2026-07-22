@@ -79,6 +79,53 @@ func NormalizeEvent(project string, payload []byte) (Event, error) {
 	return event, nil
 }
 
+// payloadColumns son las claves del payload que ya viajan como columnas propias
+// del evento. Repetirlas al inspeccionar el payload crudo solo anade ruido.
+var payloadColumns = map[string]bool{
+	"event_id":       true,
+	"timestamp":      true,
+	"level":          true,
+	"platform":       true,
+	"service":        true,
+	"container":      true,
+	"exception_type": true,
+	"message":        true,
+	"culprit":        true,
+	"transaction":    true,
+	"environment":    true,
+	"release":        true,
+}
+
+// ExtraPayload devuelve las claves del payload crudo que no tienen columna
+// propia: `context`, `tags`, breadcrumbs, stack frames y cualquier cosa que
+// mande un SDK. Es lo unico que aporta informacion nueva al inspeccionar un
+// evento. Devuelve nil si el payload es vacio, ilegible o no aporta extras.
+func ExtraPayload(rawPayload string) map[string]any {
+	trimmed := strings.TrimSpace(rawPayload)
+	if trimmed == "" || trimmed == "{}" {
+		return nil
+	}
+
+	var raw map[string]any
+	if err := json.Unmarshal([]byte(trimmed), &raw); err != nil {
+		return nil
+	}
+
+	extra := make(map[string]any, len(raw))
+	for key, value := range raw {
+		if payloadColumns[key] {
+			continue
+		}
+		extra[key] = value
+	}
+
+	if len(extra) == 0 {
+		return nil
+	}
+
+	return extra
+}
+
 func Fingerprint(event Event) string {
 	parts := []string{
 		strings.ToLower(strings.TrimSpace(event.Project)),

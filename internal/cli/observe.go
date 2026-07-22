@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"sort"
 	"strconv"
 	"strings"
 	"text/tabwriter"
@@ -753,6 +754,8 @@ func writeObserveTimeline(out io.Writer, timeline observe.Timeline) {
 		fmt.Fprintf(out, "Culprit: %s\n", event.Culprit)
 	}
 
+	writeObservePayload(out, event.RawPayload)
+
 	fmt.Fprintln(out)
 	fmt.Fprintln(out, "Container events:")
 	if len(timeline.ContainerEvents) == 0 {
@@ -772,6 +775,41 @@ func writeObserveTimeline(out io.Writer, timeline observe.Timeline) {
 			fmt.Fprintf(out, "- %s %s\n", log.Timestamp, log.Message)
 		}
 	}
+}
+
+// writeObservePayload muestra las claves del payload crudo que no tienen columna
+// propia: `context`, `tags`, breadcrumbs y demas datos que envia un SDK. Se
+// guardaban en events.raw_payload desde siempre, pero ninguna consulta las leia.
+func writeObservePayload(out io.Writer, rawPayload string) {
+	extra := observe.ExtraPayload(rawPayload)
+	if len(extra) == 0 {
+		return
+	}
+
+	keys := make([]string, 0, len(extra))
+	for key := range extra {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+
+	fmt.Fprintln(out)
+	fmt.Fprintln(out, "Payload:")
+	for _, key := range keys {
+		fmt.Fprintf(out, "- %s: %s\n", key, formatObservePayloadValue(extra[key]))
+	}
+}
+
+func formatObservePayloadValue(value any) string {
+	if text, ok := value.(string); ok {
+		return text
+	}
+
+	encoded, err := json.Marshal(value)
+	if err != nil {
+		return fmt.Sprintf("%v", value)
+	}
+
+	return string(encoded)
 }
 
 type observeTarget struct {

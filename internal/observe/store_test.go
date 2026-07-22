@@ -199,3 +199,49 @@ func TestStoreCreatesAlertDeliveries(t *testing.T) {
 		}
 	}
 }
+
+// Regresion: raw_payload existia en la tabla desde el principio, pero ninguna
+// consulta lo seleccionaba, de modo que el contexto que envia un SDK se escribia
+// y quedaba inaccesible salvo por SQL directo.
+func TestListEventsAndTimelineReturnRawPayload(t *testing.T) {
+	ctx := context.Background()
+	dbPath := filepath.Join(t.TempDir(), "observe.db")
+	manager := NewManager(dbPath)
+	if _, err := manager.Ensure(ctx); err != nil {
+		t.Fatalf("Ensure returned error: %v", err)
+	}
+
+	db, err := manager.Open()
+	if err != nil {
+		t.Fatalf("Open returned error: %v", err)
+	}
+	defer db.Close()
+
+	store := NewStore(db)
+	event, err := NormalizeEvent("demo", []byte(`{"message":"boom","context":{"factura_id":9182}}`))
+	if err != nil {
+		t.Fatalf("NormalizeEvent returned error: %v", err)
+	}
+	if _, err := store.StoreEvent(ctx, event); err != nil {
+		t.Fatalf("StoreEvent returned error: %v", err)
+	}
+
+	events, err := store.ListEvents(ctx, "demo", 10)
+	if err != nil {
+		t.Fatalf("ListEvents returned error: %v", err)
+	}
+	if len(events) != 1 {
+		t.Fatalf("ListEvents returned %d events, want 1", len(events))
+	}
+	if extra := ExtraPayload(events[0].RawPayload); extra["context"] == nil {
+		t.Fatalf("ListEvents lost the payload context, raw = %q", events[0].RawPayload)
+	}
+
+	timeline, err := store.Timeline(ctx, event.EventID)
+	if err != nil {
+		t.Fatalf("Timeline returned error: %v", err)
+	}
+	if extra := ExtraPayload(timeline.Event.RawPayload); extra["context"] == nil {
+		t.Fatalf("Timeline lost the payload context, raw = %q", timeline.Event.RawPayload)
+	}
+}

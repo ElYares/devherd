@@ -111,6 +111,8 @@ implementados salvo donde se indica.
 - Collector HTTP local en foreground con panel web y base SQLite propia.
 - Ingesta por endpoint propio, endpoint `store` y un parser de envelopes tipo Sentry.
 - Normalizacion de eventos y agrupacion en issues por fingerprint SHA-1.
+- Datos fuera del modelo normalizado (`context`, `tags`, breadcrumbs) preservados en
+  `raw_payload` y expuestos en `observe timeline` y en la API del panel.
 - Correlacion con contenedores Docker por labels `devherd.*`, con captura de logs
   cercanos al fallo y timeline por evento.
 - Alertas locales (`new-issue`, `error-rate`, `container-exit`, `container-restart`)
