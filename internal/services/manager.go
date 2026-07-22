@@ -15,7 +15,7 @@ import (
 
 // composeContent es el manifiesto de los servicios compartidos (redis, mailpit).
 // Se embebe desde un .yml real para que editores y linters de YAML lo validen,
-// igual que database/schema.sql.
+// igual que las migraciones en database/migrations/.
 //
 //go:embed shared-services.compose.yml
 var composeContent string

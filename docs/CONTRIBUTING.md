@@ -58,7 +58,7 @@ go build ./...
 
 ## 3. Ejecutar tests
 
-El repo usa tests estandar de Go (`*_test.go`, ~20 archivos en paquetes como `cli`,
+El repo usa tests estandar de Go (`*_test.go`, 32 archivos en paquetes como `cli`,
 `compose`, `config`, `database`, `detector`, `dns`, `doctor`, `preflight`, `proxy`,
 `services`, `observe`).
 
@@ -151,7 +151,7 @@ Estas convenciones se infieren del codigo existente; mantenlas para consistencia
 ### Acceso a config y base de datos
 
 - Si tu comando necesita config + DB, usa `loadAppContext(cmd.Context())`
-  (`internal/cli/app_context.go:20`) y haz `defer app.DB.Close()`.
+  (`internal/cli/app_context.go:21`) y haz `defer app.DB.Close()`.
 - Si el comando puede funcionar sin inicializacion (como `inspect`/`doctor`), maneja el
   error de `loadAppContext` y cae a `config.Default()`.
 - No abras SQLite manualmente: pasa por `database.NewManager(...)`.
@@ -160,9 +160,9 @@ Estas convenciones se infieren del codigo existente; mantenlas para consistencia
 
 - Envuelve errores con contexto: `fmt.Errorf("descripcion: %w", err)`.
 - Para features no implementadas, usa `notImplemented("nombre")`
-  (`internal/cli/root.go:47`).
+  (`internal/cli/root.go:58`).
 - Comandos de ejecucion externa usan `exec.CommandContext` con timeouts cuando aplica
-  (ver `internal/proxy/external.go:472` y `internal/doctor/doctor.go:455`).
+  (ver `internal/proxy/external.go:533` y `internal/doctor/doctor.go:464`).
 
 ### Tests
 
@@ -208,7 +208,7 @@ Ejemplo: agregar `devherd ping`.
    ```
 
 2. **Registralo** en `internal/cli/root.go`, dentro de `cmd.AddCommand(...)`
-   (`root.go:25`):
+   (`root.go:34`):
 
    ```go
    cmd.AddCommand(
@@ -236,17 +236,22 @@ Para grupos como `proxy`, `service`, `observe`, `sentry`, define un comando padr
 ## 6. Como agregar una feature de dominio
 
 - **Nuevo driver de proxy**: extiende `internal/proxy` y registra el valor en
-  `applyInitOverrides` (`internal/cli/init.go:107`) y en los checks de
+  `applyInitOverrides` (`internal/cli/init.go:112`) y en los checks de
   `internal/doctor/doctor.go:53`.
 - **Nuevo framework detectado**: extiende `featureSet` y `describeFramework` en
   `internal/detector/detector.go`, y si requiere rutas de proxy, agrega el caso en
   `Renderer.projectSite` (`internal/proxy/caddy.go:119`) y/o
-  `BuildExternalProject` (`internal/proxy/external.go:90`).
+  `BuildExternalProject` (`internal/proxy/external.go:99`).
 - **Nuevo servicio compartido**: agregalo a `supportedServices` y a `composeContent` en
   `internal/services/manager.go`.
-- **Cambios de esquema SQLite**: edita `internal/database/schema.sql` usando
-  `CREATE TABLE IF NOT EXISTS` (el esquema se reaplica de forma idempotente en
-  `Manager.Ensure`, `internal/database/db.go:21`).
+- **Cambios de esquema SQLite**: agrega un archivo numerado en
+  `internal/database/migrations/` (p. ej. `0002_....sql`, junto al `0001_init.sql`
+  existente). `internal/database/migrations.go` los embebe con
+  `//go:embed migrations/*.sql` y `migrate()` (en `internal/database/db.go`, invocado
+  desde `Manager.Ensure`) aplica solo las pendientes, registrandolas en la tabla
+  `schema_migrations`. Las migraciones deben ser idempotentes.
+  La base de Observe es independiente y si usa un esquema completo reaplicado en cada
+  arranque (`internal/observe/schema.sql`); no confundas ambos mecanismos.
 
 ## 7. Convenciones de Git y entorno
 
@@ -256,9 +261,11 @@ Para grupos como `proxy`, `service`, `observe`, `sentry`, define un comando padr
 - El proyecto mantiene un grafo de conocimiento en `graphify-out/`. Tras modificar codigo,
   el flujo del proyecto sugiere `graphify update .` para mantenerlo actualizado
   (AST-only, sin costo de API). Ver `CLAUDE.md` en la raiz.
-- Documentos de planificacion y estado viven en `docs/` (`technical-plan.md`,
-  `current-status.md`, `cli-commands.md`, `project-workflow.md`, `observe.md`). Revisalos
-  para contexto antes de cambios grandes.
+- Documentacion en `docs/`: `USAGE.md` es la **referencia canonica de comandos** (todo
+  comando o flag nuevo se documenta ahi). `SYSTEM-OVERVIEW.md` tiene el analisis del
+  sistema y la deuda tecnica, `ARCHITECTURE.md` los paquetes internos, `current-status.md`
+  el estado del proyecto, `project-workflow.md` los flujos narrativos y `observe.md` la
+  observabilidad. Revisalos para contexto antes de cambios grandes.
 
 ## 8. Checklist antes de un PR
 
@@ -269,4 +276,3 @@ Para grupos como `proxy`, `service`, `observe`, `sentry`, define un comando padr
 - [ ] `make lint` (golangci-lint) limpio.
 - [ ] Comandos/flags nuevos documentados en `docs/USAGE.md`.
 - [ ] Sin features inventadas: lo documentado coincide con el codigo.
-</content>

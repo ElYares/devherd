@@ -1,11 +1,11 @@
 # Graph Report - devherd  (2026-07-21)
 
 ## Corpus Check
-- 127 files · ~72,712 words
+- 126 files · ~67,437 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1288 nodes · 2350 edges · 82 communities (74 shown, 8 thin omitted)
+- 1277 nodes · 2316 edges · 73 communities (65 shown, 8 thin omitted)
 - Extraction: 85% EXTRACTED · 15% INFERRED · 0% AMBIGUOUS · INFERRED: 356 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -70,20 +70,11 @@
 - [[_COMMUNITY_Community 65|Community 65]]
 - [[_COMMUNITY_Community 66|Community 66]]
 - [[_COMMUNITY_Community 67|Community 67]]
-- [[_COMMUNITY_Community 68|Community 68]]
 - [[_COMMUNITY_Community 69|Community 69]]
-- [[_COMMUNITY_Community 70|Community 70]]
 - [[_COMMUNITY_Community 71|Community 71]]
-- [[_COMMUNITY_Community 72|Community 72]]
-- [[_COMMUNITY_Community 73|Community 73]]
-- [[_COMMUNITY_Community 74|Community 74]]
-- [[_COMMUNITY_Community 75|Community 75]]
 - [[_COMMUNITY_Community 76|Community 76]]
 - [[_COMMUNITY_Community 77|Community 77]]
-- [[_COMMUNITY_Community 78|Community 78]]
 - [[_COMMUNITY_Community 79|Community 79]]
-- [[_COMMUNITY_Community 80|Community 80]]
-- [[_COMMUNITY_Community 81|Community 81]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `contains()` - 35 edges
@@ -106,8 +97,8 @@
   cmd/devherd/main.go → internal/cli/root.go
 - `newObserveDetachCmd()` --calls--> `RemoveComposeOverride()`  [INFERRED]
   internal/cli/observe.go → internal/observe/override.go
-- `DevHerd` --references--> `DevHerd Observe Module`  [EXTRACTED]
-  README.md → docs/observe.md
+- `DevHerd` --references--> `Per-Project Usage Workflow`  [EXTRACTED]
+  README.md → docs/project-workflow.md
 
 ## Import Cycles
 - None detected.
@@ -117,15 +108,15 @@
 - **Observe Error Pipeline** — observe_collector, observe_issue_fingerprint, observe_separate_db, observe_docker_correlation, observe_local_alerts [EXTRACTED 1.00]
 - **Infra/Quality Improvement Cluster** — improvements_runner_interface, improvements_slog_logging, improvements_docker_runtime, improvements_not_implemented [INFERRED 0.75]
 
-## Communities (82 total, 8 thin omitted)
+## Communities (73 total, 8 thin omitted)
 
 ### Community 0 - "Preflight & Inspection"
 Cohesion: 0.08
 Nodes (57): Config, Context, Paths, Project, T, T, composeDoc, dockerContainer (+49 more)
 
 ### Community 1 - "Compose Runtime & Project Naming"
-Cohesion: 0.22
-Nodes (20): manifestCompose, manifestProxy, Project, Command(), composeArgs(), Down(), DownProject(), joinOutput() (+12 more)
+Cohesion: 0.09
+Nodes (46): appendObserveOverride(), prepareComposeProject(), resolveExternalProject(), newDownCmd(), newStopCmd(), manifest, manifestCompose, manifestProxy (+38 more)
 
 ### Community 2 - "Init/Config & Paths"
 Cohesion: 0.05
@@ -137,15 +128,15 @@ Nodes (51): Check, dockerEngineInfo, dockerNetworkInfo, checkBinary(), checkDire
 
 ### Community 4 - "CLI Commands & Root"
 Cohesion: 0.08
-Nodes (63): T, packageJSON, Plan, composeEscape(), databaseService(), Detect(), detectPort(), fileExists() (+55 more)
+Nodes (64): T, packageJSON, Plan, composeEscape(), databaseService(), Detect(), detectPort(), fileContains() (+56 more)
 
 ### Community 5 - "Observe Store & SQLite Models"
 Cohesion: 0.11
 Nodes (27): ContainerEvent, ContainerLog, Context, DB, Event, ObservedContainer, Paths, Tx (+19 more)
 
 ### Community 6 - "Observe HTTP Server & Panel"
-Cohesion: 0.07
-Nodes (39): Handler, ContainerLog, Context, DockerRuntime, Event, ObservedContainer, Store, Time (+31 more)
+Cohesion: 0.06
+Nodes (47): Handler, Server, Request, ResponseWriter, Context, DockerRuntime, Server, Request (+39 more)
 
 ### Community 7 - "Observe CLI Commands"
 Cohesion: 0.15
@@ -153,15 +144,15 @@ Nodes (37): emptyAsAll(), newObserveAlertAddCmd(), newObserveAlertCmd(), newObse
 
 ### Community 8 - "External Proxy Connection"
 Cohesion: 0.06
-Nodes (75): browserCommand(), newOpenCmd(), TestBrowserCommand(), externalSettingsConfig, Command, T, Config, Config (+67 more)
+Nodes (70): browserCommand(), newOpenCmd(), TestBrowserCommand(), externalSettingsConfig, Command, T, Config, Config (+62 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.53
 Nodes (5): T, TestCmdRunCapturesOutput(), TestCmdRunRespectsTimeout(), TestCmdRunSetsWorkingDir(), TestCmdRunUsesOutputAsErrorMessage()
 
 ### Community 10 - "Proxy Apply (Caddy/Hosts)"
-Cohesion: 0.18
-Nodes (12): Config, Paths, ProjectRecord, T, NewRenderer(), runInteractive(), SelectProjects(), sudoValidate() (+4 more)
+Cohesion: 0.08
+Nodes (33): collectDomains(), newProxyApplyCmd(), newProxyBootstrapCmd(), newProxyCmd(), syncManagedDomains(), TestSyncManagedDomainsUsesCollectedDomains(), buildManagedBlock(), mergeManagedBlock() (+25 more)
 
 ### Community 11 - "Domain & Projects DB"
 Cohesion: 0.12
@@ -180,20 +171,20 @@ Cohesion: 0.32
 Nodes (10): Logs(), LogsArgs(), LogsProject(), TestLogsArgsDefault(), TestLogsArgsWithFollowTailAndServices(), LogsOptions, Context, Project (+2 more)
 
 ### Community 15 - "Docs: Platform & Observe"
-Cohesion: 0.18
-Nodes (12): ProjectNameForPath (SHA1 stable name), Compose Container Isolation Pattern, DevHerd CLI Commands Reference, Current Project Status, DevHerd CLI (Go + Cobra), DevHerd, Documentacion, Estado actual (+4 more)
+Cohesion: 0.15
+Nodes (17): ProjectNameForPath (SHA1 stable name), Compose Container Isolation Pattern, DevHerd CLI Commands Reference, Current Project Status, Observe Auto-Instrumentation Plan, Observe Docker Label Correlation, Observe Isolation Principle (no prod impact), Issue Fingerprint Grouping (+9 more)
 
 ### Community 16 - "Observe Event Correlation"
-Cohesion: 0.05
-Nodes (39): 10. Riesgos y deuda priorizados, 11. Fortalezas que conviene preservar, 12. Siguiente bloque recomendado, 1. Qué es DevHerd, 2. Mapa de subsistemas, 3.1 Contexto de aplicación, 3.2 Rutas XDG, 3.3 Persistencia (+31 more)
+Cohesion: 0.23
+Nodes (11): ContainerLog, Context, DockerRuntime, Event, ObservedContainer, Store, Time, bestContainerMatch() (+3 more)
 
 ### Community 17 - "Compose Observe Override"
 Cohesion: 0.26
 Nodes (12): Project, AttachOptions, AttachResult, composeServicesDoc, observeOverrideDoc, observeOverrideService, BuildComposeOverride(), ComposeServices() (+4 more)
 
 ### Community 18 - "Docs: Architecture & Decisions"
-Cohesion: 0.14
-Nodes (18): loadAppContext (config + SQLite), DevHerd Architecture, Graphify Knowledge Graph Workflow, Cobra newXxxCmd Command Pattern, Domain Logic Outside cli Package, DevHerd Contributing Guide, Committed 21MB Binary Finding, DockerRuntime Dependency Injection (+10 more)
+Cohesion: 0.17
+Nodes (15): loadAppContext (config + SQLite), DevHerd Architecture, Domain Logic Outside cli Package, Committed 21MB Binary Finding, DockerRuntime Dependency Injection, Announced-but-Unimplemented Commands, Architecture & Infra Review, Proposed Runner/Executor Interface (+7 more)
 
 ### Community 19 - "Docs: Proxy Drivers & Manifest"
 Cohesion: 0.22
@@ -213,15 +204,15 @@ Nodes (6): author, authorUrl, description, minAppVersion, name, version
 
 ### Community 23 - "Infra Review Findings"
 Cohesion: 0.09
-Nodes (23): 1. Comandos disponibles, 2. Que hace hoy DevHerd, 3. Estado de ingenieria (medido), 4. Limitaciones actuales, 5. Siguiente bloque recomendado, Ciclo de vida, Cobertura y verificacion, Codigo muerto (+15 more)
+Nodes (23): 10. Siguiente bloque recomendado, 1. Que ya funciona, 2. Que hace hoy DevHerd, 3. Que ya validamos en un host real, 4. Que ya validamos manualmente con `local_proxy`, 5. Lo que ya quedo automatizado en `2026-05-04`, 6. Lo que ya validamos en un stack sensible real el `2026-05-04`, 7. Validacion operativa de `aang-server` y `Uniformes` (+15 more)
 
 ### Community 24 - "Desktop package.json (Vue)"
 Cohesion: 0.40
 Nodes (4): dependencies, vue, name, private
 
 ### Community 25 - "Embedded Templates & Services"
-Cohesion: 0.18
-Nodes (13): Embedded Templates (go:embed), Shared Services Manager (Redis/Mailpit), Shared Services Compose Base Template, Observe Auto-Instrumentation Plan, Observe Local HTTP Collector, Observe Docker Label Correlation, Observe Isolation Principle (no prod impact), Issue Fingerprint Grouping (+5 more)
+Cohesion: 0.20
+Nodes (10): Embedded Templates (go:embed), Shared Services Manager (Redis/Mailpit), Graphify Knowledge Graph Workflow, Cobra newXxxCmd Command Pattern, DevHerd Contributing Guide, Shared Services Compose Base Template, Observe Local HTTP Collector, Sentry Templates Placeholder (+2 more)
 
 ### Community 26 - "Compose Override Tests"
 Cohesion: 0.67
@@ -232,32 +223,32 @@ Cohesion: 0.17
 Nodes (17): Context, Paths, Context, Manager, T, Runner, fakeRunner, Manager (+9 more)
 
 ### Community 45 - "Community 45"
-Cohesion: 0.18
-Nodes (11): 4.17 `devherd observe ...`, `observe alert <add|list|remove|deliveries>`, `observe attach <project-or-path> --stack <stack>`, `observe cleanup`, `observe detach <project-or-path>`, `observe dsn <project>`, `observe issues [project]` / `observe events [project]` / `observe timeline <event-id>`, `observe open` (+3 more)
+Cohesion: 0.04
+Nodes (46): 1. Requisitos, 2.1 Durante desarrollo (sin instalar), 2.2 Instalar el binario (Ubuntu), 2.3 Build manual, 2.4 Desinstalar, 2. Instalacion y build, 3. Flags globales, 4.10 `devherd down [path]` (+38 more)
 
 ### Community 46 - "Community 46"
 Cohesion: 0.04
 Nodes (45): 10. Primer MVP alcanzable, 11. Riesgos tecnicos, 12. Buenas practicas de seguridad, 13. Mejoras recomendadas, 14. Base inicial incluida en este repositorio, 1. Vision del producto, 2. Como funcionaria, 3. Requerimientos funcionales (+37 more)
 
 ### Community 47 - "Community 47"
-Cohesion: 0.21
-Nodes (19): T, Event, compactJSON(), eventTitle(), exceptionDetails(), Fingerprint(), firstNonEmpty(), logEntryMessage() (+11 more)
+Cohesion: 0.12
+Nodes (16): Comandos, `devherd doctor`, `devherd domain`, `devherd domain set`, `devherd down`, `devherd init`, `devherd inspect`, `devherd list` (+8 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.06
-Nodes (33): 10. Siguiente iteracion recomendada, 1. Alcance, 2. Estado de la CLI, 3. Prerequisitos, 4. Instalacion del binario, 5. Flujo actual de uso en un proyecto, 6. Flujo recomendado hoy para el proyecto de ejemplo, 7. Flujo actual con `local_proxy` (+25 more)
+Nodes (35): 10. Siguiente iteracion recomendada, 1. Alcance, 2. Estado real de la CLI, 3. Prerequisitos, 4. Instalacion del binario, 5. Flujo actual de uso en un proyecto, 6. Flujo recomendado hoy para el proyecto de ejemplo, 7. Flujo actual con `local_proxy` (+27 more)
 
 ### Community 49 - "Community 49"
-Cohesion: 0.06
-Nodes (33): 10. Desactivar Observe en el proyecto, 10. Flujo de uso en un proyecto, 11. Comandos y como funcionan, 12. Criterio de exito del MVP, 1. Arrancar el collector local, 1. Objetivo, 2. Principio de aislamiento, 2. Revisar el DSN local del proyecto (+25 more)
+Cohesion: 0.17
+Nodes (12): 11. Comandos y como funcionan, 12. Criterio de exito del MVP, 1. Objetivo, 2. Principio de aislamiento, 4. Ingestion, 5. Normalizacion, 6. Agrupacion de issues, 7. Correlacion con contenedores (+4 more)
 
 ### Community 50 - "Community 50"
-Cohesion: 0.07
-Nodes (28): 10. DNS local (`/etc/hosts`), 11. Servicios compartidos, 12. Preflight / inspect, 13. Doctor, 14. Observe (observabilidad local), 15. Sentry (placeholder), 16. Tipos y funciones clave (referencia rapida), 17. Notas de diseno (+20 more)
+Cohesion: 0.08
+Nodes (25): 10. DNS local (`/etc/hosts`), 11. Servicios compartidos, 12. Preflight / inspect, 13. Doctor, 14. Observe (observabilidad local), 15. Sentry (estado MVP), 16. Tipos y funciones clave (referencia rapida), 17. Notas de diseno (+17 more)
 
 ### Community 51 - "Community 51"
 Cohesion: 0.10
-Nodes (21): Arquitectura, Calidad de código y testing, Cobertura (medida con `go test ./... -cover`), Cómo se usa hoy, DevHerd — Revisión de Arquitectura e Infraestructura, Estado actual, Estado de implementacion (2026-06-19), Estado de implementacion (2026-07-21) (+13 more)
+Nodes (20): Arquitectura, Calidad de código y testing, Cobertura actual (medida con `go test ./... -cover`), Cómo se usa hoy, DevHerd — Revisión de Arquitectura e Infraestructura, Estado actual, Estado de implementacion (2026-06-19), Formas de usar el proyecto (UX/DX) (+12 more)
 
 ### Community 52 - "Community 52"
 Cohesion: 0.10
@@ -268,12 +259,12 @@ Cohesion: 0.12
 Nodes (14): Comandos nuevos o ajustados, Contrato portable actual, devherd-v1-app, Evidencia, Fases cerradas en esta rama, Objetivo, Pendiente, Alcance (+6 more)
 
 ### Community 54 - "Community 54"
-Cohesion: 0.22
-Nodes (8): 2. Comando `devherd logs [path]`, 3. Manejo de errores en el colector `observe`, Cómo funciona, Cómo ver los logs de diagnóstico, Ejemplos, El helper en `internal/compose/logs.go`, Flags, Logging de diagnóstico y comando `logs`
+Cohesion: 0.13
+Nodes (14): 1. Logging estructurado con `slog`, 2. Comando `devherd logs [path]`, 3. Manejo de errores en el colector `observe`, Cómo funciona, Cómo funciona, Cómo ver los logs de diagnóstico, Ejemplos, Ejemplos (+6 more)
 
 ### Community 55 - "Community 55"
-Cohesion: 0.22
-Nodes (12): newLogsCmd(), Execute(), newRootCmd(), notImplemented(), newSentryCmd(), newSentryInitCmd(), newSentrySetDSNCmd(), newSentryTestCmd() (+4 more)
+Cohesion: 0.18
+Nodes (11): 10. Desactivar Observe en el proyecto, 10. Flujo de uso en un proyecto, 1. Arrancar el collector local, 2. Revisar el DSN local del proyecto, 3. Generar el override Compose local, 4. Levantar el proyecto, 5. Capturar una falla, 6. Inspeccionar desde CLI (+3 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.18
@@ -281,102 +272,66 @@ Nodes (10): Alcance de esta pasada, Cambios aplicados, Cross-Platform Runtime 20
 
 ### Community 57 - "Community 57"
 Cohesion: 0.18
-Nodes (11): DevHerd Observe: Auto-Instrumentacion, Estado por fase (revisado 2026-07-21), Fase 1: Instrumentar API, Fase 2: Instrumentar Web, Fase 3: Mejorar `observe attach`, Fase 4: Endpoints/Rutas de prueba dev-only, Fase 5: Correlacion con Docker, Fase 6: Panel (+3 more)
+Nodes (10): DevHerd Observe: Auto-Instrumentacion, Fase 1: Instrumentar API, Fase 2: Instrumentar Web, Fase 3: Mejorar `observe attach`, Fase 4: Endpoints/Rutas de prueba dev-only, Fase 5: Correlacion con Docker, Fase 6: Panel, Fase 7: Comando de prueba (+2 more)
 
 ### Community 58 - "Community 58"
 Cohesion: 0.20
 Nodes (10): Archivos generados, Bases de datos y Redis, Detección fina, Flags, Laravel (soporte completo), Oferta automática desde `up`, Scaffolding de Docker para repos sin contenedores, Sin colisiones con tus proyectos levantados (+2 more)
 
 ### Community 59 - "Community 59"
-Cohesion: 0.22
-Nodes (15): confirm(), ensureComposeOrScaffold(), newScaffoldCmd(), promptDatabase(), newServeCmd(), projectNameForPath(), runSiblingCommand(), newTestRoot() (+7 more)
+Cohesion: 0.06
+Nodes (49): loadAppContext(), appContext, newInspectCmd(), writePreflightReport(), newListCmd(), newLogsCmd(), describeEnvFile(), describeProjectSource() (+41 more)
 
 ### Community 60 - "Community 60"
-Cohesion: 0.22
+Cohesion: 0.25
 Nodes (8): 1. Crear el proyecto, 2. Levantarlo con DevHerd, 3. Abrir Vikunja, 4. Tumbarlo cuando no lo necesites, 5. Reanudarlo, 6. Comandos rapidos, 7. Nota sobre datos, Vikunja con DevHerd
 
 ### Community 62 - "Community 62"
-Cohesion: 0.12
-Nodes (16): 4.10 `devherd up [path]`, 4.11 `devherd serve [path]`, 4.12 `devherd stop [path]`, 4.13 `devherd down [path]`, 4.14 `devherd open <project>`, 4.15 `devherd logs [path]`, 4.16 `devherd service <start|stop|status> [service]`, 4.1 `devherd init` (+8 more)
+Cohesion: 0.33
+Nodes (6): 9. Fases de implementacion, Fase 1: Collector y persistencia local, Fase 2: Attach por proyecto, Fase 3: Correlacion con Docker, Fase 4: Panel local, Fase 5: Alertas
 
 ### Community 66 - "Community 66"
-Cohesion: 0.30
-Nodes (12): composeProjectLabel(), LegacyProjectNameForPath(), ProjectNameForPath(), ResolveProject(), TestComposeArgsIncludesEnvFileAndAllComposeFiles(), TestPlanReturnsDockerCommand(), TestProjectNameForPathIsStableAndPathScoped(), TestResolveProjectDefaultsToSingleComposeFile() (+4 more)
+Cohesion: 0.50
+Nodes (4): Context, Duration, Cmd, Runner
 
 ### Community 67 - "Community 67"
-Cohesion: 0.23
-Nodes (11): buildManagedBlock(), mergeManagedBlock(), runInteractive(), SyncHosts(), TestMergeManagedBlock(), validateDomains(), TestValidateDomainsAcceptsValid(), TestValidateDomainsNormalizesAndDedupes() (+3 more)
-
-### Community 68 - "Community 68"
-Cohesion: 0.17
-Nodes (10): loadAppContext(), appContext, newListCmd(), newStopCmd(), Config, Context, DB, Paths (+2 more)
+Cohesion: 0.50
+Nodes (4): 3. Componentes, Base de datos, CLI, Collector local
 
 ### Community 69 - "Community 69"
-Cohesion: 0.30
-Nodes (10): collectDomains(), newProxyApplyCmd(), newProxyBootstrapCmd(), newProxyCmd(), syncManagedDomains(), TestSyncManagedDomainsUsesCollectedDomains(), Command, ProjectRecord (+2 more)
-
-### Community 70 - "Community 70"
-Cohesion: 0.29
-Nodes (9): appendObserveOverride(), prepareComposeProject(), resolveExternalProject(), newDownCmd(), ExternalProject, appContext, Context, Project (+1 more)
+Cohesion: 0.15
+Nodes (13): `devherd observe`, `devherd observe attach`, `devherd observe cleanup`, `devherd observe containers`, `devherd observe detach`, `devherd observe dsn`, `devherd observe events`, `devherd observe issues` (+5 more)
 
 ### Community 71 - "Community 71"
-Cohesion: 0.24
-Nodes (9): newInspectCmd(), writePreflightReport(), newUpCmd(), runUpPreflight(), Command, Writer, appContext, Command (+1 more)
-
-### Community 72 - "Community 72"
-Cohesion: 0.22
-Nodes (9): 1. Requisitos, 3. Flags globales, 5. El manifiesto `.devherd.yml`, 7. Donde vive el estado, 8.1 Aislamiento de nombres de contenedor, 8.2 Volumenes que sobreviven a cambios de project-name, 8.3 Probar sin tocar tu configuracion real, 8. Patrones recomendados para proyectos Compose (+1 more)
-
-### Community 73 - "Community 73"
-Cohesion: 0.29
-Nodes (7): Automatizado en `2026-05-04`, Flujo manual con `local_proxy` (previo a la automatizacion), Historial de validaciones, Stack sensible real (`2026-05-04`), Validacion inicial (proyecto de ejemplo), Validacion operativa de `aang-server` y `Uniformes`, Validacion operativa pendiente
-
-### Community 74 - "Community 74"
-Cohesion: 0.53
-Nodes (5): describeEnvFile(), describeProjectSource(), newPlanCmd(), Command, Project
-
-### Community 75 - "Community 75"
-Cohesion: 0.33
-Nodes (6): 6.1 Modo proxy en Docker externo (recomendado), 6.2 Modo proxy en host (Caddy + /etc/hosts), 6.3 Repositorio sin Docker, 6.4 Servicios compartidos + observabilidad, 6.5 Bajar todo, 6. Flujos de trabajo
+Cohesion: 0.20
+Nodes (9): Comandos futuros probables, Desde donde correr los comandos, DevHerd CLI: Documentacion de Comandos, Ejemplo con el proyecto Vue + Flask + Docker, Estado de la CLI, Existe pero aun no esta implementado, Flujo recomendado de prueba hoy, Funciona hoy (+1 more)
 
 ### Community 76 - "Community 76"
-Cohesion: 0.33
-Nodes (6): 1. Logging estructurado con `slog`, Cómo funciona, Ejemplos, Flags, Modelo: diagnósticos a stderr, producto a stdout, Por qué `--log-json` y no `--json`
+Cohesion: 0.40
+Nodes (5): `devherd observe alert`, `devherd observe alert add`, `devherd observe alert deliveries`, `devherd observe alert list`, `devherd observe alert remove`
 
 ### Community 77 - "Community 77"
-Cohesion: 0.40
-Nodes (5): 2.1 Durante desarrollo (sin instalar), 2.2 Instalar el binario (Ubuntu), 2.3 Build manual, 2.4 Desinstalar, 2. Instalacion y build
-
-### Community 78 - "Community 78"
-Cohesion: 0.67
-Nodes (3): manifest, manifestCompose, manifestProxy
+Cohesion: 0.50
+Nodes (4): `devherd sentry`, `devherd sentry init`, `devherd sentry set-dsn`, `devherd sentry test`
 
 ### Community 79 - "Community 79"
 Cohesion: 0.67
-Nodes (3): DevHerd CLI: referencia de comandos, Donde esta ahora cada cosa, Por que se consolido
-
-### Community 80 - "Community 80"
-Cohesion: 0.67
-Nodes (3): 4.18 `devherd sentry ...`, `sentry init <project> --stack <stack>`, `sentry set-dsn <project> --dsn <dsn>` / `sentry test <project>`
-
-### Community 81 - "Community 81"
-Cohesion: 0.67
-Nodes (3): 4.6 `devherd proxy`, `devherd proxy apply [project]`, `devherd proxy bootstrap`
+Nodes (3): `devherd proxy`, `devherd proxy apply`, `devherd proxy bootstrap`
 
 ## Knowledge Gaps
-- **412 isolated node(s):** `name`, `version`, `minAppVersion`, `description`, `author` (+407 more)
+- **406 isolated node(s):** `name`, `version`, `minAppVersion`, `description`, `author` (+401 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `String()` connect `External Proxy Connection` to `Preflight & Inspection`, `Compose Runtime & Project Naming`, `observe migrations`, `Community 67`, `Community 68`, `Doctor Host Checks`, `Observe HTTP Server & Panel`, `Community 71`, `Observe Store & SQLite Models`, `CLI Commands & Root`, `Domain & Projects DB`, `Project Stack Detector`, `Docker CLI Runtime`, `Community 47`, `Compose Observe Override`, `Observe DB Manager`?**
-  _High betweenness centrality (0.433) - this node is a cross-community bridge._
-- **Why does `DevHerd Observe Module` connect `Embedded Templates & Services` to `Compose Observe Override`, `Docs: Architecture & Decisions`, `Docs: Proxy Drivers & Manifest`, `Docs: Platform & Observe`?**
-  _High betweenness centrality (0.380) - this node is a cross-community bridge._
-- **Why does `DevHerd` connect `Docs: Platform & Observe` to `Embedded Templates & Services`, `Docs: Architecture & Decisions`, `Docs: Proxy Drivers & Manifest`, `Community 61`?**
-  _High betweenness centrality (0.375) - this node is a cross-community bridge._
+- **Why does `String()` connect `External Proxy Connection` to `Preflight & Inspection`, `Compose Runtime & Project Naming`, `Community 66`, `Doctor Host Checks`, `CLI Commands & Root`, `Observe Store & SQLite Models`, `Observe HTTP Server & Panel`, `observe migrations`, `Proxy Apply (Caddy/Hosts)`, `Domain & Projects DB`, `Project Stack Detector`, `Docker CLI Runtime`, `Compose Observe Override`, `Observe DB Manager`, `Community 59`?**
+  _High betweenness centrality (0.343) - this node is a cross-community bridge._
+- **Why does `BuildComposeOverride()` connect `Compose Observe Override` to `External Proxy Connection`, `Compose Override Tests`, `Observe CLI Commands`?**
+  _High betweenness centrality (0.250) - this node is a cross-community bridge._
+- **Why does `DevHerd Observe Module` connect `Docs: Platform & Observe` to `Embedded Templates & Services`, `Docs: Architecture & Decisions`, `Docs: Proxy Drivers & Manifest`, `Compose Observe Override`?**
+  _High betweenness centrality (0.237) - this node is a cross-community bridge._
 - **Are the 32 inferred relationships involving `contains()` (e.g. with `TestVerboseEnablesDebugLevel()` and `normalizeDomain()`) actually correct?**
   _`contains()` has 32 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 17 inferred relationships involving `Detect()` (e.g. with `ensureComposeOrScaffold()` and `newScaffoldCmd()`) actually correct?**
@@ -384,4 +339,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 31 inferred relationships involving `String()` (e.g. with `writePreflightReport()` and `newListCmd()`) actually correct?**
   _`String()` has 31 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `version`, `minAppVersion` to the rest of the system?**
-  _417 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _411 weakly-connected nodes found - possible documentation gaps or missing edges._

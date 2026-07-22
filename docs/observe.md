@@ -40,17 +40,25 @@ Reglas:
 
 - No se hardcodea ningun DSN en codigo fuente del proyecto.
 - No se escriben secretos en el repositorio del proyecto.
-- La integracion se activa solo por archivos locales administrados por DevHerd, como `.devherd.observe.override.yml` o `.env.devherd`.
+- La integracion se activa solo por un archivo local administrado por DevHerd: `.devherd.observe.override.yml`.
 - Si Observe no esta levantado, el proyecto debe poder seguir arrancando sin fallar.
 - El patron recomendado en codigo es inicializar SDKs solo cuando `SENTRY_DSN` existe.
 - El entorno debe marcarse como `local` o `devherd-local`, nunca como `production`.
 - Los datos se guardan en una base local separada de la base principal de DevHerd.
 
-Ruta propuesta de la base:
+Ruta de la base (Linux):
 
 ```text
 ~/.local/share/devherd/observability/devherd-observe.db
 ```
+
+En macOS y Windows el directorio de datos cae bajo `os.UserConfigDir()`, salvo que definas
+`XDG_DATA_HOME`.
+
+> Nota de mantenimiento: a diferencia de la base principal, la base de Observe **no tiene
+> migraciones versionadas**. El esquema completo se reejecuta en cada invocacion y solo es
+> idempotente porque todo es `CREATE ... IF NOT EXISTS`; cualquier cambio de columna futuro
+> requerira trabajo manual.
 
 ## 3. Componentes
 
@@ -155,7 +163,22 @@ DSN local esperado:
 http://devherd@127.0.0.1:9777/<project>
 ```
 
-El collector no valida autenticacion actualmente porque solo escucha en loopback.
+Tambien se acepta la ruta legacy `POST /api/<project>/store`, equivalente al endpoint
+simple. El cuerpo esta limitado a 2 MiB y la respuesta es `202 Accepted`.
+
+> **Limitaciones actuales del parser de envelopes.** No descomprime `gzip`, que es el
+> default de varios SDKs oficiales (Python, PHP, Node); ignora el campo `length` del
+> header de item; asume una sola linea por payload; y descarta el array `fingerprint` que
+> envian los SDKs. En la practica, un SDK Sentry oficial puede no funcionar contra el
+> collector sin desactivar la compresion.
+
+> **Seguridad.** El collector **no valida autenticacion**: ignora `X-Sentry-Auth` y el
+> parametro `sentry_key`. Es aceptable porque escucha en loopback por defecto, pero si
+> cambias `--addr` a `0.0.0.0` expones la ingesta y el panel a toda la red sin ninguna
+> barrera.
+
+> **Nombre reservado.** Un proyecto llamado `observe` colisiona con la ruta del panel
+> (`/api/observe/`) y su ingesta devuelve 405. Usa otro nombre.
 
 ## 5. Normalizacion
 
@@ -186,11 +209,22 @@ Campos derivados:
 
 ## 6. Agrupacion de issues
 
-Fingerprint inicial:
+El fingerprint es un **SHA-1** de cinco componentes unidos por salto de linea:
 
 ```text
-exception_type + normalized_message + culprit + service
+project + exception_type + normalized_message + culprit + service
 ```
+
+`normalized_message` solo aplica trim, minusculas y colapso de espacios.
+
+> **Limitacion importante**: la normalizacion **no enmascara numeros, UUIDs, rutas ni
+> identificadores**. Eso significa que `"user 42 not found"` y `"user 43 not found"`
+> generan dos issues distintos. Es el principal limitante practico del agrupamiento.
+
+Otro detalle a tener en cuenta: el fingerprint se calcula **antes** de enriquecer el evento
+con los datos del contenedor, asi que el `service` inferido desde Docker no participa en la
+agrupacion. Dos eventos equivalentes pueden separarse segun si el SDK envio `service`
+explicitamente o no.
 
 Reglas:
 
@@ -199,17 +233,18 @@ Reglas:
 - `last_seen` se actualiza
 - `event_count` incrementa
 - estado default: `new`
+- un issue en estado `resolved` que vuelve a recibir eventos regresa a `new`
 
-Estados:
+Estados previstos en el esquema: `new`, `seen`, `resolved`, `ignored`.
 
-- `new`
-- `seen`
-- `resolved`
-- `ignored`
+> **Estado real**: hoy **no existe ningun comando ni endpoint para cambiar el estado de un
+> issue**, de modo que en la practica todos quedan en `new`. La transicion automatica
+> `resolved → new` esta implementada, pero nada puede marcar un issue como resuelto todavia.
 
 ## 7. Correlacion con contenedores
 
-Fase 2 agrega labels Docker en overrides administrados por DevHerd:
+**Implementado.** El override administrado por DevHerd anade estas labels a cada servicio
+observado:
 
 ```yaml
 labels:
@@ -218,7 +253,7 @@ labels:
   devherd.observe: "true"
 ```
 
-Con eso Observe podra vincular:
+Con eso Observe vincula:
 
 - proyecto
 - servicio Compose
@@ -226,6 +261,12 @@ Con eso Observe podra vincular:
 - imagen
 - estado del contenedor
 - logs alrededor de la falla
+
+El collector consulta Docker en cada ingesta y ademas mantiene un poller que toma
+instantaneas cada 10 segundos. La seleccion del contenedor es por cascada: primero por
+nombre o ID de contenedor declarado en el evento, luego por servicio, y si el proyecto
+tiene un unico contenedor observado, ese. **No se usa ningun criterio temporal** para
+elegir contenedor; la ventana de tiempo (±30 s por defecto) solo decide que logs se traen.
 
 ## 8. Trayectoria de la falla
 
@@ -378,7 +419,19 @@ Tambien puedes limitarlo a un servicio:
 devherd observe attach aang-server --stack laravel --service web
 ```
 
-Esto crea `.devherd.observe.override.yml` en la raiz del proyecto. El archivo inyecta `SENTRY_DSN`, `SENTRY_ENVIRONMENT`, `DEVHERD_OBSERVE`, `DEVHERD_PROJECT` y labels `devherd.*`.
+Esto crea `.devherd.observe.override.yml` en la raiz del proyecto. El archivo inyecta
+`SENTRY_DSN`, `SENTRY_ENVIRONMENT`, `DEVHERD_OBSERVE`, `DEVHERD_PROJECT`,
+`DEVHERD_OBSERVE_STACK` y las labels `devherd.observe`, `devherd.project`,
+`devherd.service` y `devherd.stack`.
+
+> `attach` **reescribe el archivo completo**, no lo fusiona con lo anterior. Si ejecutas
+> `attach --service api` y despues `attach --service web`, solo queda `web`. Para observar
+> varios servicios, pasalos en la misma invocacion:
+> `--service api,web`.
+
+> El `--stack` solo cambia el valor de `DEVHERD_OBSERVE_STACK` y de la label
+> `devherd.stack`. Hoy **no genera configuracion especifica por stack** (ni variables
+> `NEXT_PUBLIC_*`, ni sample rates, ni instalacion de SDKs).
 
 ### 4. Levantar el proyecto
 
@@ -428,12 +481,22 @@ devherd observe alert add --project aang-server --on container-exit
 devherd observe alert add --project aang-server --on container-restart
 ```
 
-Las alertas no salen a servicios externos. Se guardan como entregas locales y se ven desde CLI o desde el panel:
+Las alertas no salen a servicios externos. Una "entrega" es unicamente una fila en la base
+local: no hay webhooks, ni ejecucion de comandos, ni notificaciones del sistema, ni correo.
+Se consultan desde la CLI o desde el panel:
 
 ```bash
 devherd observe alert list aang-server
 devherd observe alert deliveries aang-server
 ```
+
+Se evaluan de forma sincrona al ingerir cada evento o instantanea de contenedor; no hay
+motor de alertas ni planificador.
+
+> `error-rate` **no tiene periodo de enfriamiento ni deduplicacion**: una vez superado el
+> umbral, cada evento posterior dentro de la ventana genera otra entrega.
+
+> No hay forma de deshabilitar una regla sin borrarla: `enabled` siempre se escribe en 1.
 
 ### 9. Limpiar datos viejos
 
@@ -441,7 +504,19 @@ devherd observe alert deliveries aang-server
 devherd observe cleanup --days 14
 ```
 
-Elimina eventos, logs, eventos de contenedor, entregas de alerta e issues con datos anteriores al corte indicado.
+Elimina eventos, logs de contenedor, eventos de contenedor, entregas de alerta e issues
+anteriores al corte indicado.
+
+Lo que **no** limpia:
+
+- El inventario de `containers`, que nunca caduca. Contenedores borrados hace meses siguen
+  apareciendo en `observe containers` y en el panel.
+- Las reglas de alerta (correcto: son configuracion).
+
+Dos detalles del corte: los eventos se filtran por su `timestamp`, que **lo controla el
+cliente**, asi que un SDK con el reloj desfasado puede no limpiarse nunca; y no se ejecuta
+`VACUUM`, de modo que el archivo `.db` no se encoge. **No hay limpieza automatica**: hay
+que ejecutar el comando a mano.
 
 ### 10. Desactivar Observe en el proyecto
 
@@ -453,7 +528,8 @@ Elimina `.devherd.observe.override.yml`. No toca codigo fuente ni configuracion 
 
 ## 11. Comandos y como funcionan
 
-- `devherd observe start`: arranca el collector HTTP y el panel local en foreground.
+- `devherd observe start`: arranca el collector HTTP y el panel local en foreground. No hay
+  daemon, ni pidfile, ni comando `stop`: se detiene interrumpiendo el proceso.
 - `devherd observe status`: consulta `GET /health` del collector.
 - `devherd observe open`: abre `http://127.0.0.1:9777/observe` en el navegador o imprime la URL si no puede abrirlo.
 - `devherd observe dsn <project>`: imprime el DSN local para SDKs tipo Sentry.
