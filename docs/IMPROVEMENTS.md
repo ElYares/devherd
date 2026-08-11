@@ -458,6 +458,50 @@ cambio de esquema: la columna ya existia y ya se poblaba.
 
 ---
 
+## Estado de implementacion (2026-08-11)
+
+Verificado sobre el commit `f5d3b3b`.
+
+**El linter nunca habia corrido**
+
+Los items #3 y #4 estaban marcados como hechos, y lo estaban en el sentido de que
+los archivos existian. Pero el job `lint` fallaba en **todas** las corridas desde al
+menos el 2026-07-22: los PR #4, #5, #6 y #7 se mergearon con el semaforo en rojo.
+
+    can't load config: the Go language version (go1.24) used to build
+    golangci-lint is lower than the targeted Go version (1.25.0)
+
+Moria en 90 ms cargando la configuracion, sin analizar una sola linea. Dos causas
+encadenadas: `golangci-lint-action@v6` tope en la serie v1 de golangci-lint y
+resolvia `version: latest` a v1.64.8 (compilada con go1.24), incompatible con un
+`go.mod` en `go 1.25.0`; y `.golangci.yml` era un hibrido que declaraba
+`version: "2"` pero conservaba la estructura v1, de modo que `golangci-lint migrate`
+lo daba por migrado y v2 lo rechazaba.
+
+Corregido subiendo a `golangci-lint-action@v8` con la version **fijada** en
+`v2.12.2` —no `latest`, para que no vuelva a romperse solo— y migrando la config a
+mano.
+
+**La primera corrida real: 438 hallazgos**
+
+| Categoria | # | Resolucion |
+|---|---|---|
+| errcheck en `fmt.Fprint*` | 205 | Excluido: el error solo puede venir de una salida rota, y para entonces no queda donde reportarlo |
+| revive `exported` + `package-comments` | 158 | Excluido: comentarios de doc que ahogarian los hallazgos que importan |
+| errcheck en `Close`/`Rollback` | 52 | Arreglado con descarte explicito |
+| revive `unused-parameter` | 17 | Arreglado |
+| staticcheck | 3 | Arreglado (`nil` como Context x2, ley de De Morgan) |
+| revive: blank-imports, redefines-builtin-id | 3 | Arreglado |
+
+Las dos exclusiones van comentadas en `.golangci.yml` con su razon, y la lista de
+reglas de revive quedo explicita para poder reactivar `exported` y
+`package-comments` cuando la documentacion de paquetes se aborde a proposito.
+
+**Leccion**: un job de CI que falla siempre deja de leerse. Conviene revisar que
+`lint` este en verde en `main`, no solo que exista.
+
+---
+
 ## Roadmap de mejoras priorizado
 
 > Estado: ✅ hecho · 🔶 parcial · (sin marca) pendiente. Ver "Estado de implementacion".
@@ -466,8 +510,8 @@ cambio de esquema: la columna ya existia y ya se poblaba.
 |---|---|---|---|---|
 | 1 | ✅ Quitar binario `devherd` de git + `.gitignore /devherd` | **Alta** | XS (min) | **Hecho.** `git rm --cached devherd`; opcional purgar historial |
 | 2 | ✅ Añadir `Makefile` con build/test/lint/cover + wiring de `ldflags` a `version.go` | **Alta** | S | **Hecho.** Incluye `version.Long()`; desbloquea release y versionado real |
-| 3 | ✅ CI con GitHub Actions (vet + test -race + golangci-lint) | **Alta** | S | **Hecho** (`.github/workflows/ci.yml`). Trivial por ser CGO-free (modernc sqlite) |
-| 4 | ✅ Configurar `.golangci.yml` (errcheck, staticcheck, gocritic, revive) | **Alta** | S | **Hecho.** Captura los errores ignorados de observe |
+| 3 | ✅ CI con GitHub Actions (vet + test -race + golangci-lint) | **Alta** | S | **Hecho** (`.github/workflows/ci.yml`). El job `lint` estuvo en rojo desde su creacion hasta el 2026-08-11 por incompatibilidad de versiones; ver "Estado de implementacion (2026-08-11)" |
+| 4 | ✅ Configurar `.golangci.yml` (errcheck, staticcheck, gocritic, revive) | **Alta** | S | **Hecho**, pero no corrio hasta el 2026-08-11: el archivo era un hibrido v1/v2. Config migrada y hallazgos saldados |
 | 5 | ✅ Alinear README con la realidad y ocultar/etiquetar comandos `notImplemented` | **Alta** | S | **Hecho:** README alineado (logs/serve/flags); `sentry set-dsn`/`test` `Hidden` |
 | 6 | 🔶 Introducir `slog` global + flags `--verbose`/`--json`; reemplazar `fmt` de diagnóstico | **Alta** | M | **Parcial:** infra slog + flags `--verbose`/`--log-json` + errores de observe hechos. Falta migrar `fmt` de diagnostico en `cli` y `ConnectProject` |
 | 7 | ✅ Extraer interfaz `Runner`/`Executor` y unificar `runCommand/run/runDocker` | **Media** | M | **Hecho:** `internal/runner` en `services`/`compose`; seam de exec en `doctor` y `proxy` (semántica propia preservada) |
