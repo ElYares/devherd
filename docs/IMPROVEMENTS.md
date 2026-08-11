@@ -352,6 +352,112 @@ para el detalle y la priorizacion. Los titulares:
 
 ---
 
+## Hallazgos de campo: Observe en un proyecto real (2026-07-22)
+
+Detectados al integrar Observe con un Laravel 13 sobre Docker (`tl-mas-server`), no por
+lectura de codigo. Ninguno aparece hoy en `docs/observe.md`.
+
+### Bloqueantes: la ingesta desde contenedores no funciona de fabrica
+
+**O1. `attach` generaba un DSN que ningun contenedor podia usar.** *(Resuelto.)*
+`observe attach` construia el DSN con el `--addr` por defecto, `127.0.0.1:9777`. Dentro de
+un contenedor esa direccion es el propio contenedor, no el host, asi que el `SENTRY_DSN`
+inyectado en el override era inservible **en el unico escenario para el que se diseno**.
+Peor: el collector tambien escuchaba solo en loopback, de modo que ni corrigiendo el DSN a
+mano se alcanzaba.
+> Corregido resolviendo el gateway IPv4 de la red compartida (`observe.InspectNetwork`) y
+> usandolo por defecto en los dos lados: `observe start` escucha ahora **a la vez** en
+> loopback y en el gateway (`Server.ListenAndServeOn`, multi-listener; si el gateway no
+> existe arranca igual en loopback y lo registra), y `attach`/`dsn` construyen el DSN con el
+> gateway. Con `--addr` explicito manda el usuario, y cualquier DSN loopback dispara un aviso
+> por stderr. El panel sigue sirviendose en `127.0.0.1:9777`, sin exponer nada a la LAN.
+
+**O2. Requisito de firewall no documentado.** *(Resuelto.)*
+Con `ufw` activo (default en muchas distros), el trafico contenedor -> host se descarta en
+`INPUT`. Los puertos publicados por Docker funcionan porque sus reglas DNAT preceden a las
+cadenas de ufw, pero el collector es un listener normal del host y queda bloqueado. Hace
+falta una regla explicita del tipo
+`ufw allow from 172.18.0.0/16 to 172.18.0.1 port 9777 proto tcp`.
+> Corregido con una sonda real en `observe status`: lanza un contenedor efimero en la red
+> compartida y pide `/health` desde dentro, que es donde el fallo se manifiesta (el host
+> siempre se alcanza a si mismo). Usa la primera imagen ya presente en local —`busybox`,
+> `alpine`, `caddy:2-alpine`— y no descarga ninguna: si no hay, sugiere el comando
+> equivalente. Al fallar imprime la regla concreta, detectando si ufw esta activo por
+> `/etc/ufw/ufw.conf` (`ufw status` exigiria root). Se desactiva con
+> `--check-reachability=false`.
+
+**O10. La red del proxy no es la red por la que reporta el proyecto.** *(Resuelto.)*
+El arreglo de O1 asumia que `infra_web` servia para todos. Falso, y medido sobre dos
+proyectos reales: a la red del proxy solo se conecta el servicio que **publica** el proxy.
+
+| Proyecto | Red propia | `infra_net` | `infra_web` |
+|---|---|---|---|
+| aang-server | 6/6 contenedores | 2/6 (`app`, `queue`) | 1/6 (`web`) |
+| tl-mas-server | 4/4 contenedores | — | 1/4 (`app`) |
+
+Consecuencias: el DSN de `aang-server` apuntaba a una IP que su `app` no alcanzaba, y —peor—
+la sonda de O2 respondia **`ok`** porque lanzaba su contenedor efimero en `infra_web`, la
+unica red donde todo funcionaba. Un falso positivo en la comprobacion escrita justo para
+evitar ese fallo.
+> Corregido contando cobertura por red (`ProjectNetworkCoverage`) en vez de asumir una:
+> `attach`/`dsn` eligen la red DevHerd que mas contenedores del proyecto cubre, `start`
+> escucha en los gateways de todas las redes relevantes —incluidas las de los contenedores
+> ya observados— y `observe status <proyecto>` lanza la sonda en la red de ese proyecto.
+> Se prefiere una red estable aunque cubra menos: la red privada del proyecto cubre mas, pero
+> Docker le asigna otra subred al recrearla y dejaria el DSN inyectado apuntando al vacio.
+
+### Alertas: sin silenciamiento, ruido garantizado
+
+**O3. `new-issue` notifica por cada issue nuevo.** *(Mitigado.)*
+Un mismo bug con mensajes variables (`user 42`, `user 43`, ...) generaba un issue —y por
+tanto una alerta— por cada variante.
+> El enmascarado del fingerprint (correos, UUIDs, hashes y numeros) elimina la causa mas
+> comun, y un `fingerprint` explicito da control fino. Queda pendiente el cooldown por regla:
+> un issue que reaparece muchas veces sigue sin silenciarse.
+
+**O4. `error-rate` notifica en cada evento posterior al umbral, no una vez por ventana.**
+Verificado: con umbral 3 y ventana 5m, el 3.er evento y **todos** los siguientes dentro de
+la ventana producen entrega. 50 errores en 5 minutos = 48 entregas.
+> Recomendacion para ambos: cooldown por regla, o entrega agregada por ventana.
+
+### Captura de logs: modelo de una sola foto
+
+**O5. Los logs se capturan una unica vez, en la ingesta, y nunca se rellenan.**
+`correlation.go:48` ejecuta `docker logs --since t-30s --until t+30s --tail 200` en el
+momento de recibir el evento. Consecuencias: la mitad futura de la ventana esta casi
+siempre vacia (esos logs aun no existen); si no hubo salida en la ventana, el timeline
+queda vacio para siempre; y un contenedor ruidoso agota las 200 lineas con ruido.
+> Recomendacion: documentar que Observe **no es un agregador de logs**, y evaluar una
+> segunda pasada diferida para capturar la mitad posterior de la ventana.
+
+**O6. El poller de 10 s puede perder reinicios rapidos.**
+`server.go:184` toma instantaneas cada 10 s. Un contenedor que cae y vuelve dentro de ese
+intervalo no genera `container_events`, y por tanto no dispara `container-exit`.
+
+### Perdida de datos y cosmetica
+
+**O7. Sin collector no hay evento.** La ingesta es push sincrono sin cola ni reintento: los
+errores ocurridos mientras el collector esta apagado se pierden sin rastro. Dado que el
+collector es un proceso en foreground que el usuario debe recordar levantar, es un modo de
+fallo probable, no teorico.
+
+**O8. Los IDs de issue tienen huecos.** El ID se reserva antes de resolver si el
+fingerprint ya existia, de modo que los duplicados consumen numeracion. Cosmetico.
+
+**O9. `events.raw_payload` era una columna de solo escritura.** *(Resuelto.)*
+`ListEvents` y `Timeline` seleccionaban 15 de las 16 columnas de `events`, omitiendo
+justo `raw_payload`. Todo lo que un SDK envia mas alla del modelo normalizado —`context`,
+`tags`, breadcrumbs, stack frames— se guardaba y quedaba inaccesible salvo por SQLite
+directo. Corregido exponiendo la columna en ambas consultas, con un helper
+`observe.ExtraPayload` que descarta las claves que ya tienen columna propia, un bloque
+`Payload:` en `observe timeline` y un campo `payload_extra` en la API del panel. Sin
+cambio de esquema: la columna ya existia y ya se poblaba.
+> Nota: esto multiplica el valor de arreglar la ingesta de envelopes (ver Resumen
+> ejecutivo). Mientras el payload crudo era invisible, casi todo lo que manda un SDK real
+> se descartaba de cara al usuario.
+
+---
+
 ## Roadmap de mejoras priorizado
 
 > Estado: ✅ hecho · 🔶 parcial · (sin marca) pendiente. Ver "Estado de implementacion".

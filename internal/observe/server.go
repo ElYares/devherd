@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"net"
 	"net/http"
 	"strings"
 	"sync"
@@ -55,16 +56,46 @@ func (s Server) ListenAndServe(ctx context.Context, addr string) error {
 		addr = DefaultAddr
 	}
 
+	return s.ListenAndServeOn(ctx, addr)
+}
+
+// ListenAndServeOn arranca el collector en varias direcciones a la vez. La
+// primera es obligatoria; las demas son best effort, porque normalmente son el
+// gateway de una red Docker que puede no existir todavia y eso no debe impedir
+// que el collector arranque en loopback.
+func (s Server) ListenAndServeOn(ctx context.Context, addrs ...string) error {
+	addrs = uniqueAddrs(addrs)
+	if len(addrs) == 0 {
+		addrs = []string{DefaultAddr}
+	}
+
 	server := &http.Server{
-		Addr:              addr,
 		Handler:           s.Handler(),
 		ReadHeaderTimeout: 5 * time.Second,
 	}
 
-	errc := make(chan error, 1)
-	go func() {
-		errc <- server.ListenAndServe()
-	}()
+	listeners := make([]net.Listener, 0, len(addrs))
+	for i, addr := range addrs {
+		listener, err := net.Listen("tcp", addr)
+		if err != nil {
+			if i == 0 {
+				closeListeners(listeners)
+				return fmt.Errorf("listen on %s: %w", addr, err)
+			}
+
+			slog.Warn("observe: extra collector address unavailable", "addr", addr, "err", err)
+			continue
+		}
+
+		listeners = append(listeners, listener)
+	}
+
+	errc := make(chan error, len(listeners))
+	for _, listener := range listeners {
+		go func(listener net.Listener) {
+			errc <- server.Serve(listener)
+		}(listener)
+	}
 
 	// El poller corre en su propio contexto para poder cancelarlo y esperar su
 	// drenado tanto si el ctx padre termina como si el server muere por su cuenta.
@@ -95,6 +126,31 @@ func (s Server) ListenAndServe(ctx context.Context, addr string) error {
 			return nil
 		}
 		return err
+	}
+}
+
+func uniqueAddrs(addrs []string) []string {
+	seen := make(map[string]struct{}, len(addrs))
+	unique := make([]string, 0, len(addrs))
+	for _, addr := range addrs {
+		addr = strings.TrimSpace(addr)
+		if addr == "" {
+			continue
+		}
+		if _, ok := seen[addr]; ok {
+			continue
+		}
+
+		seen[addr] = struct{}{}
+		unique = append(unique, addr)
+	}
+
+	return unique
+}
+
+func closeListeners(listeners []net.Listener) {
+	for _, listener := range listeners {
+		_ = listener.Close()
 	}
 }
 

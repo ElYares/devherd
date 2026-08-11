@@ -41,6 +41,8 @@ implementados salvo donde se indica.
 - `devherd observe start|status|open|dsn`
 - `devherd observe attach|detach`
 - `devherd observe scan|containers|issues|events|timeline`
+- `devherd observe firewall [--apply]`
+- `devherd observe daemon install|uninstall|status`
 - `devherd observe alert add|list|remove|deliveries`
 - `devherd observe cleanup`
 
@@ -110,7 +112,12 @@ implementados salvo donde se indica.
 
 - Collector HTTP local en foreground con panel web y base SQLite propia.
 - Ingesta por endpoint propio, endpoint `store` y un parser de envelopes tipo Sentry.
-- Normalizacion de eventos y agrupacion en issues por fingerprint SHA-1.
+- Normalizacion de eventos y agrupacion en issues por fingerprint SHA-1, con enmascarado de
+  correos, UUIDs, hashes y numeros, o con un `fingerprint` explicito del cliente.
+- Generacion del reporter del proyecto (`observe attach --reporter`, hoy solo Laravel), con
+  API para reportar excepciones y eventos de dominio que no son excepciones.
+- Datos fuera del modelo normalizado (`context`, `tags`, breadcrumbs) preservados en
+  `raw_payload` y expuestos en `observe timeline` y en la API del panel.
 - Correlacion con contenedores Docker por labels `devherd.*`, con captura de logs
   cercanos al fallo y timeline por evento.
 - Alertas locales (`new-issue`, `error-rate`, `container-exit`, `container-restart`)
@@ -210,14 +217,16 @@ configurado, `Dockerfile` multi-stage sobre distroless y `.goreleaser.yml` con p
 
 - El parser de envelopes **no descomprime gzip**, que es el default de varios SDKs
   oficiales. Es el principal bloqueador para usar un SDK Sentry real contra el collector.
-- El fingerprint no enmascara numeros ni identificadores, asi que mensajes que solo
-  difieren en un ID generan issues distintos.
+- El fingerprint agrupa por `culprit`, asi que la misma excepcion lanzada desde lineas
+  distintas genera issues distintos. Se puede sortear con un `fingerprint` explicito.
 - Los estados de issue `seen`/`resolved`/`ignored` **no existen**: no hay comando ni
   endpoint que los cambie.
 - `observe cleanup` **no borra el inventario de contenedores**, que crece sin limite.
 - Las alertas solo escriben una fila en la base local: no hay webhooks ni notificaciones.
 - `error-rate` no tiene periodo de enfriamiento.
-- El collector no tiene autenticacion; el default es loopback.
+- El collector no tiene autenticacion. Por defecto escucha en loopback y en el gateway de la
+  red compartida (para que los contenedores puedan reportar); ninguna de las dos queda
+  expuesta a la LAN, pero cualquier contenedor de `infra_web` puede escribir eventos.
 
 ### Distribucion
 

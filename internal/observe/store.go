@@ -62,12 +62,17 @@ type EventRecord struct {
 	Transaction   string `json:"transaction"`
 	Environment   string `json:"environment"`
 	Release       string `json:"release"`
+	RawPayload    string `json:"raw_payload,omitempty"`
 }
 
 type Timeline struct {
 	Event           EventRecord      `json:"event"`
 	Logs            []ContainerLog   `json:"logs"`
 	ContainerEvents []ContainerEvent `json:"container_events"`
+	// PayloadExtra son las claves del payload crudo sin columna propia, ya
+	// filtradas, para que los consumidores (panel, CLI) no repliquen la lista
+	// de columnas conocidas.
+	PayloadExtra map[string]any `json:"payload_extra,omitempty"`
 }
 
 type Alert struct {
@@ -575,7 +580,7 @@ func (s Store) ListEvents(ctx context.Context, project string, limit int) ([]Eve
 
 	query := `
 		SELECT id, event_id, project, issue_id, timestamp, level, platform, service, container,
-			exception_type, message, culprit, transaction_name, environment, release
+			exception_type, message, culprit, transaction_name, environment, release, raw_payload
 		FROM events
 	`
 	args := []any{}
@@ -595,7 +600,7 @@ func (s Store) ListEvents(ctx context.Context, project string, limit int) ([]Eve
 	var events []EventRecord
 	for rows.Next() {
 		var event EventRecord
-		if err := rows.Scan(&event.ID, &event.EventID, &event.Project, &event.IssueID, &event.Timestamp, &event.Level, &event.Platform, &event.Service, &event.Container, &event.ExceptionType, &event.Message, &event.Culprit, &event.Transaction, &event.Environment, &event.Release); err != nil {
+		if err := rows.Scan(&event.ID, &event.EventID, &event.Project, &event.IssueID, &event.Timestamp, &event.Level, &event.Platform, &event.Service, &event.Container, &event.ExceptionType, &event.Message, &event.Culprit, &event.Transaction, &event.Environment, &event.Release, &event.RawPayload); err != nil {
 			return nil, fmt.Errorf("scan observe event: %w", err)
 		}
 		events = append(events, event)
@@ -652,11 +657,11 @@ func (s Store) Timeline(ctx context.Context, eventID string) (Timeline, error) {
 
 	err := s.db.QueryRowContext(ctx, `
 		SELECT id, event_id, project, issue_id, timestamp, level, platform, service, container,
-			exception_type, message, culprit, transaction_name, environment, release
+			exception_type, message, culprit, transaction_name, environment, release, raw_payload
 		FROM events
 		WHERE event_id = ?
 		LIMIT 1
-	`, eventID).Scan(&timeline.Event.ID, &timeline.Event.EventID, &timeline.Event.Project, &timeline.Event.IssueID, &timeline.Event.Timestamp, &timeline.Event.Level, &timeline.Event.Platform, &timeline.Event.Service, &timeline.Event.Container, &timeline.Event.ExceptionType, &timeline.Event.Message, &timeline.Event.Culprit, &timeline.Event.Transaction, &timeline.Event.Environment, &timeline.Event.Release)
+	`, eventID).Scan(&timeline.Event.ID, &timeline.Event.EventID, &timeline.Event.Project, &timeline.Event.IssueID, &timeline.Event.Timestamp, &timeline.Event.Level, &timeline.Event.Platform, &timeline.Event.Service, &timeline.Event.Container, &timeline.Event.ExceptionType, &timeline.Event.Message, &timeline.Event.Culprit, &timeline.Event.Transaction, &timeline.Event.Environment, &timeline.Event.Release, &timeline.Event.RawPayload)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return Timeline{}, fmt.Errorf("observe event %q not found", eventID)
@@ -707,6 +712,8 @@ func (s Store) Timeline(ctx context.Context, eventID string) (Timeline, error) {
 	if err := eventRows.Err(); err != nil {
 		return Timeline{}, fmt.Errorf("iterate observe container events: %w", err)
 	}
+
+	timeline.PayloadExtra = ExtraPayload(timeline.Event.RawPayload)
 
 	return timeline, nil
 }

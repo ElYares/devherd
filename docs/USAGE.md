@@ -548,27 +548,98 @@ Arranca el collector HTTP **en foreground**. No hay daemon, ni pidfile, ni un co
 
 | Flag | Default | Descripcion |
 |------|---------|-------------|
-| `--addr` | `127.0.0.1:9777` | Direccion de escucha del collector. |
+| `--addr` | `127.0.0.1:9777` **mas** el gateway de cada red relevante | Direccion de escucha del collector. Si la pasas explicita, solo se usa esa. |
 
 ```bash
 devherd observe start
-devherd observe start --addr 127.0.0.1:9999
+# observe collector: http://127.0.0.1:9777
+# observe collector: http://172.18.0.1:9777
+# observe collector: http://172.20.0.1:9777
+# containers on infra_web, infra_net should use http://172.20.0.1:9777
+
+devherd observe start --addr 127.0.0.1:9999   # solo loopback, sin gateways
 ```
 
-> **No hay autenticacion.** El default es loopback; si cambias `--addr` a `0.0.0.0`,
-> expones la ingesta y el panel a toda la red sin ninguna barrera.
+> **Por que varias direcciones.** Dentro de un contenedor `127.0.0.1` es el propio
+> contenedor, no el host, asi que un collector solo en loopback no recibe nada de un
+> proyecto dockerizado. Y no basta con la red del proxy: a `infra_web` solo se conecta el
+> servicio que publica el proxy, no el que reporta. Por eso escucha en el gateway de las
+> redes DevHerd y de las de los contenedores ya observados. Con `ufw` activo hace falta
+> ademas una regla por red; las da `observe firewall`. Detalle en
+> [observe.md](observe.md#alcanzabilidad-desde-contenedores).
 
-#### `observe status`
+> **Es un proceso en foreground.** Si cierras la terminal, los errores se pierden sin rastro.
+> Para que sobreviva usa `devherd observe daemon install`.
 
-Consulta `/health` del collector. Es un cliente HTTP puro: no necesita `devherd init`.
+> **No hay autenticacion.** Las direcciones por defecto son loopback y una subred privada de
+> Docker, ninguna expuesta a la LAN. Si cambias `--addr` a `0.0.0.0`, expones la ingesta y el
+> panel a toda la red sin ninguna barrera.
+
+#### `observe status [project]`
+
+Consulta `/health` del collector y comprueba que sea alcanzable **desde un contenedor**. Es
+un cliente HTTP puro: no necesita `devherd init`.
 
 | Flag | Default | Descripcion |
 |------|---------|-------------|
 | `--addr` | `127.0.0.1:9777` | Direccion del collector a consultar. |
+| `--check-reachability` | `true` | Sonda el collector desde un contenedor de la red elegida. |
 
 ```bash
 devherd observe status
+devherd observe status aang-server
+# observe collector: running at http://127.0.0.1:9777
+# status: ok
+# container reachability (aang-server on infra_net): ok at http://172.20.0.1:9777
 ```
+
+**Pasa el proyecto siempre que puedas.** Sin el, la sonda corre en una red compartida
+elegida a ciegas y puede devolver un `ok` que no aplica al proyecto que te interesa; con el,
+corre en la red que de verdad usan sus contenedores.
+
+La sonda usa la primera imagen que ya tengas en local (`busybox`, `alpine` o
+`caddy:2-alpine`) y **nunca descarga ninguna**: si no hay ninguna, imprime el comando
+equivalente. Cuando falla, indica si la direccion es loopback y sugiere la regla de
+cortafuegos concreta que falta.
+
+#### `observe firewall`
+
+Deriva las reglas que necesita el trafico contenedor -> host, **una por red**, porque cada
+una tiene su propia subred de origen y su propio gateway de destino.
+
+| Flag | Default | Descripcion |
+|------|---------|-------------|
+| `--addr` | `127.0.0.1:9777` | Direccion del collector que deben permitir las reglas. |
+| `--apply` | `false` | Las aplica con `sudo` en vez de solo imprimirlas. |
+
+```bash
+devherd observe firewall
+# ufw: enabled (rules below are required)
+# sudo ufw allow from 172.20.0.0/16 to 172.20.0.1 port 9777 proto tcp comment '...'
+
+devherd observe firewall --apply
+```
+
+Detecta si ufw esta activo leyendo `/etc/ufw/ufw.conf`, sin pedir root. `ufw allow` es
+idempotente, asi que repetir `--apply` no duplica reglas.
+
+#### `observe daemon install|uninstall|status`
+
+Instala el collector como unidad `systemd --user`, para que arranque al iniciar sesion y se
+reinicie si falla, en vez de depender de una terminal abierta.
+
+| Flag | Default | Descripcion |
+|------|---------|-------------|
+| `--addr` (solo `install`) | vacio | Direccion de escucha. Vacio conserva el default (loopback + gateways). |
+
+```bash
+devherd observe daemon install
+devherd observe daemon status
+devherd observe daemon uninstall
+```
+
+La unidad se escribe en `$XDG_CONFIG_HOME/systemd/user/devherd-observe.service` y apunta al
+binario que ejecuto el comando: si reinstalas DevHerd en otra ruta, vuelve a instalarla.
 
 #### `observe open`
 
@@ -584,15 +655,17 @@ devherd observe open
 
 #### `observe dsn <project>`
 
-Imprime el DSN local del proyecto, con formato `http://devherd@<addr>/<project>`. Es una
-funcion pura: no valida que el proyecto exista.
+Imprime el DSN local del proyecto, con formato `http://devherd@<addr>/<project>`. No valida
+que el proyecto exista; solo consulta Docker para resolver el gateway de la red compartida, y
+si no puede cae a loopback avisando por stderr.
 
 | Flag | Default | Descripcion |
 |------|---------|-------------|
-| `--addr` | `127.0.0.1:9777` | Direccion usada para construir el DSN. |
+| `--addr` | gateway de la red compartida | Direccion usada para construir el DSN. |
 
 ```bash
 devherd observe dsn mi-app
+# http://devherd@172.18.0.1:9777/mi-app
 ```
 
 #### `observe attach <project-or-path> --stack <stack>`
@@ -605,9 +678,26 @@ observabilidad en los servicios del proyecto.
 | `--stack` (obligatorio) | — | `laravel`, `node`, `python`, `go`, `docker` o `generic`. |
 | `--service` | todos | Servicio(s) compose a observar; repetible o separado por comas. |
 | `--environment` | `local` | Valor de `SENTRY_ENVIRONMENT` inyectado. |
-| `--addr` | `127.0.0.1:9777` | Direccion usada para construir el DSN por defecto. |
+| `--addr` | gateway de la red compartida | Direccion usada para construir el DSN por defecto. Si la pasas explicita y es loopback, avisa. |
 | `--dsn` | — | Sobrescribe el DSN generado. |
 | `--dry-run` | `false` | Previsualiza el override sin escribir archivos. |
+| `--reporter` | `false` | Escribe tambien el reporter del proyecto (hoy solo `laravel`). |
+| `--force` | `false` | Permite sobrescribir un reporter existente. |
+
+**El override solo inyecta el DSN.** Sin algo que hable con el collector no sale ni un
+evento, y esa pieza es codigo dentro de tu proyecto. `--reporter` la genera:
+
+```bash
+devherd observe attach mi-app --stack laravel --reporter
+# reporter: /ruta/app/Exceptions/DevherdObserveReporter.php
+#   wire it up in bootstrap/app.php: ->withExceptions(...)
+```
+
+Nunca pisa un archivo existente —es codigo tuyo y puede estar editado— salvo con `--force`.
+El reporter expone dos entradas: `report(Throwable $e)` para excepciones y
+`capture($type, $message, $context, $level, $fingerprint)` para eventos de dominio que no son
+excepciones (un login rechazado, un pago denegado). Detalle en
+[guides/observe-laravel.md](guides/observe-laravel.md).
 
 ```bash
 devherd observe attach mi-app --stack laravel
@@ -623,6 +713,14 @@ permiten la correlacion con Docker.
 > `attach` **reescribe el archivo completo**, no lo fusiona. Si ejecutas `attach --service
 > api` y luego `attach --service web`, solo queda `web`. Para observar varios servicios,
 > pasalos todos en la misma invocacion.
+
+> **El `--addr` por defecto genera un DSN inservible en Docker**: `127.0.0.1` dentro de un
+> contenedor apunta al contenedor mismo. Usa el mismo `--addr` con el que arrancaste el
+> collector (el gateway de `infra_web`), o pasa `--dsn` a mano. Ver
+> [observe.md](observe.md#alcanzabilidad-desde-contenedores).
+
+> El override solo surte efecto al **recrear** los contenedores: tras `attach` hace falta un
+> `devherd up`.
 
 El override generado se incluye automaticamente en `up`, `stop`, `down` y `logs`.
 
@@ -663,6 +761,22 @@ devherd observe issues
 devherd observe events mi-app --limit 50
 devherd observe timeline <event-id>
 ```
+
+`observe timeline` imprime ademas un bloque `Payload:` con los datos que el emisor mando
+fuera del modelo normalizado (`context`, `tags`, breadcrumbs...), omitiendo las claves que
+ya aparecen como campos propios:
+
+```
+Exception: TimbradoFallidoException
+Message: El SAT rechazo el timbrado
+
+Payload:
+- context: {"cfdi_uuid":"A1B2-C3D4","intento":3,"reintentable":true}
+```
+
+> `observe issues` y `observe events` **no filtran por proyecto en el panel web**: la base
+> de Observe es unica por maquina y el panel muestra todos los proyectos juntos. El filtro
+> por proyecto solo existe en la CLI.
 
 #### `observe alert <add|list|remove|deliveries>`
 

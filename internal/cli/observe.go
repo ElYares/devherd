@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -11,6 +12,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"sort"
 	"strconv"
 	"strings"
 	"text/tabwriter"
@@ -36,6 +38,8 @@ func newObserveCmd() *cobra.Command {
 		newObserveAttachCmd(),
 		newObserveDetachCmd(),
 		newObserveScanCmd(),
+		newObserveFirewallCmd(),
+		newObserveDaemonCmd(),
 		newObserveContainersCmd(),
 		newObserveTimelineCmd(),
 		newObserveCleanupCmd(),
@@ -60,31 +64,47 @@ func newObserveStartCmd() *cobra.Command {
 			}
 			defer db.Close()
 
-			if addr == "" {
-				addr = observe.DefaultAddr
-			}
+			plan := planObserveAddrs(cmd.Context(), observeAddrOptions{
+				ProxyNetwork: observeSharedNetwork(cmd.Context()),
+				Addr:         addr,
+				Explicit:     cmd.Flags().Changed("addr"),
+			})
 
 			out := cmd.OutOrStdout()
 			fmt.Fprintf(out, "observe database: %s\n", dbPath)
-			fmt.Fprintf(out, "observe collector: http://%s\n", addr)
+			for _, bind := range plan.Bind {
+				fmt.Fprintf(out, "observe collector: http://%s\n", bind)
+			}
+			if len(plan.Networks) > 0 && !observe.IsLoopbackAddr(plan.DSN) {
+				fmt.Fprintf(out, "containers on %s should use http://%s\n", plan.networkNames(), plan.DSN)
+			}
+			warnObserveLoopbackDSN(cmd.ErrOrStderr(), plan.DSN, plan)
 
 			server := observe.NewServer(store, dbPath)
-			return server.ListenAndServe(cmd.Context(), addr)
+			return server.ListenAndServeOn(cmd.Context(), plan.Bind...)
 		},
 	}
 
-	cmd.Flags().StringVar(&addr, "addr", observe.DefaultAddr, "Collector listen address")
+	cmd.Flags().StringVar(&addr, "addr", observe.DefaultAddr, "Collector listen address. Defaults to loopback plus the shared network gateway")
 
 	return cmd
 }
 
 func newObserveStatusCmd() *cobra.Command {
 	var addr string
+	var checkReachability bool
 
 	cmd := &cobra.Command{
-		Use:   "status",
+		Use:   "status [project]",
 		Short: "Check the local Observe collector",
+		Long:  "Check the local Observe collector. With a project, the reachability probe runs on that project's own networks instead of a shared one.",
+		Args:  cobra.MaximumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			var project string
+			if len(args) == 1 {
+				project = args[0]
+			}
+
 			if addr == "" {
 				addr = observe.DefaultAddr
 			}
@@ -118,11 +138,22 @@ func newObserveStatusCmd() *cobra.Command {
 				fmt.Fprintf(out, "database: %s\n", payload.Database)
 			}
 
+			if checkReachability {
+				plan := planObserveAddrs(cmd.Context(), observeAddrOptions{
+					ProxyNetwork: observeSharedNetwork(cmd.Context()),
+					Project:      project,
+					Addr:         addr,
+					Explicit:     cmd.Flags().Changed("addr"),
+				})
+				reportObserveReachability(cmd, plan)
+			}
+
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVar(&addr, "addr", observe.DefaultAddr, "Collector address")
+	cmd.Flags().BoolVar(&checkReachability, "check-reachability", true, "Probe the collector from inside a container on the shared network")
 
 	return cmd
 }
@@ -169,11 +200,15 @@ func newObserveDSNCmd() *cobra.Command {
 		Short: "Print the local DSN for a project",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if addr == "" {
-				addr = observe.DefaultAddr
-			}
+			plan := planObserveAddrs(cmd.Context(), observeAddrOptions{
+				ProxyNetwork: observeSharedNetwork(cmd.Context()),
+				Project:      args[0],
+				Addr:         addr,
+				Explicit:     cmd.Flags().Changed("addr"),
+			})
+			warnObserveLoopbackDSN(cmd.ErrOrStderr(), plan.DSN, plan)
 
-			fmt.Fprintln(cmd.OutOrStdout(), observeDSN(addr, args[0]))
+			fmt.Fprintln(cmd.OutOrStdout(), observeDSN(plan.DSN, args[0]))
 			return nil
 		},
 	}
@@ -190,6 +225,8 @@ func newObserveAttachCmd() *cobra.Command {
 	var addr string
 	var dsn string
 	var dryRun bool
+	var reporter bool
+	var force bool
 
 	cmd := &cobra.Command{
 		Use:   "attach [project-or-path]",
@@ -200,10 +237,6 @@ func newObserveAttachCmd() *cobra.Command {
 			if stack == "" {
 				return fmt.Errorf("required flag(s) \"stack\" not set")
 			}
-			if addr == "" {
-				addr = observe.DefaultAddr
-			}
-
 			app, err := loadAppContext(cmd.Context())
 			if err != nil {
 				return err
@@ -215,9 +248,16 @@ func newObserveAttachCmd() *cobra.Command {
 				return err
 			}
 
+			plan := planObserveAddrs(cmd.Context(), observeAddrOptions{
+				ProxyNetwork: app.Config.Proxy.ExternalNetwork,
+				Project:      target.Name,
+				Addr:         addr,
+				Explicit:     cmd.Flags().Changed("addr"),
+			})
 			if dsn == "" {
-				dsn = observeDSN(addr, target.Name)
+				dsn = observeDSN(plan.DSN, target.Name)
 			}
+			warnObserveLoopbackDSN(cmd.ErrOrStderr(), dsn, plan)
 
 			options := observe.AttachOptions{
 				ProjectName: target.Name,
@@ -256,6 +296,13 @@ func newObserveAttachCmd() *cobra.Command {
 			fmt.Fprintf(out, "stack: %s\n", strings.ToLower(stack))
 			fmt.Fprintf(out, "services: %s\n", strings.Join(result.Services, ", "))
 			fmt.Fprintf(out, "override: %s\n", result.Path)
+
+			if reporter {
+				if err := writeObserveReporter(cmd, target.Compose.Root, stack, force); err != nil {
+					return err
+				}
+			}
+
 			fmt.Fprintln(out, "observe attach: complete")
 			return nil
 		},
@@ -264,11 +311,35 @@ func newObserveAttachCmd() *cobra.Command {
 	cmd.Flags().StringVar(&stack, "stack", "", "Project stack: laravel, node, python, go, docker or generic")
 	cmd.Flags().StringSliceVar(&services, "service", nil, "Compose service to observe; repeat or comma-separate. Defaults to all services")
 	cmd.Flags().StringVar(&environment, "environment", "local", "Sentry environment value injected into local override")
-	cmd.Flags().StringVar(&addr, "addr", observe.DefaultAddr, "Collector address used to build the default DSN")
+	cmd.Flags().StringVar(&addr, "addr", observe.DefaultAddr, "Collector address used to build the default DSN. Defaults to the shared network gateway so containers can reach the host")
 	cmd.Flags().StringVar(&dsn, "dsn", "", "Override the generated local DSN")
 	cmd.Flags().BoolVar(&dryRun, "dry-run", false, "Preview the generated override without writing files")
+	cmd.Flags().BoolVar(&reporter, "reporter", false, "Also write the reporter that sends events to the collector")
+	cmd.Flags().BoolVar(&force, "force", false, "Overwrite an existing reporter file")
 
 	return cmd
+}
+
+// writeObserveReporter escribe el reporter dentro del proyecto. El override solo
+// inyecta el DSN: sin algo que hable con el collector, no sale ni un evento.
+func writeObserveReporter(cmd *cobra.Command, root, stack string, force bool) error {
+	out := cmd.OutOrStdout()
+
+	result, err := observe.EnsureReporter(root, stack, force)
+	switch {
+	case errors.Is(err, observe.ErrReporterExists):
+		fmt.Fprintf(out, "reporter: %s (kept; pass --force to overwrite)\n", result.Path)
+		return nil
+	case err != nil:
+		return err
+	}
+
+	fmt.Fprintf(out, "reporter: %s\n", result.Path)
+	if result.Wiring != "" {
+		fmt.Fprintf(out, "  wire it up in %s\n", result.Wiring)
+	}
+
+	return nil
 }
 
 func newObserveDetachCmd() *cobra.Command {
@@ -753,6 +824,8 @@ func writeObserveTimeline(out io.Writer, timeline observe.Timeline) {
 		fmt.Fprintf(out, "Culprit: %s\n", event.Culprit)
 	}
 
+	writeObservePayload(out, event.RawPayload)
+
 	fmt.Fprintln(out)
 	fmt.Fprintln(out, "Container events:")
 	if len(timeline.ContainerEvents) == 0 {
@@ -772,6 +845,41 @@ func writeObserveTimeline(out io.Writer, timeline observe.Timeline) {
 			fmt.Fprintf(out, "- %s %s\n", log.Timestamp, log.Message)
 		}
 	}
+}
+
+// writeObservePayload muestra las claves del payload crudo que no tienen columna
+// propia: `context`, `tags`, breadcrumbs y demas datos que envia un SDK. Se
+// guardaban en events.raw_payload desde siempre, pero ninguna consulta las leia.
+func writeObservePayload(out io.Writer, rawPayload string) {
+	extra := observe.ExtraPayload(rawPayload)
+	if len(extra) == 0 {
+		return
+	}
+
+	keys := make([]string, 0, len(extra))
+	for key := range extra {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+
+	fmt.Fprintln(out)
+	fmt.Fprintln(out, "Payload:")
+	for _, key := range keys {
+		fmt.Fprintf(out, "- %s: %s\n", key, formatObservePayloadValue(extra[key]))
+	}
+}
+
+func formatObservePayloadValue(value any) string {
+	if text, ok := value.(string); ok {
+		return text
+	}
+
+	encoded, err := json.Marshal(value)
+	if err != nil {
+		return fmt.Sprintf("%v", value)
+	}
+
+	return string(encoded)
 }
 
 type observeTarget struct {
@@ -832,6 +940,193 @@ func openObserveStore(cmd *cobra.Command) (*sql.DB, observe.Store, string, error
 func observeDSN(addr, project string) string {
 	addr = strings.TrimPrefix(strings.TrimPrefix(addr, "http://"), "https://")
 	return "http://devherd@" + addr + "/" + url.PathEscape(project)
+}
+
+// observeAddrPlan resuelve las direcciones del collector, que no tienen por que
+// coincidir: donde escucha en el host y cual se inyecta en los contenedores.
+type observeAddrPlan struct {
+	Bind     []string
+	DSN      string
+	Networks []observe.NetworkInfo
+	Match    observe.NetworkInfo
+	Project  string
+	Coverage string
+	Reason   string
+}
+
+type observeAddrOptions struct {
+	ProxyNetwork string
+	Project      string
+	Addr         string
+	Explicit     bool
+}
+
+// planObserveAddrs hace escuchar al collector en el gateway de *todas* las redes
+// DevHerd, y elige para el DSN el de una red a la que el proyecto este realmente
+// conectado. Asumir la red del proxy no vale: a esa solo se conecta el servicio
+// que publica el proxy, no el que reporta.
+func planObserveAddrs(ctx context.Context, opts observeAddrOptions) observeAddrPlan {
+	addr := strings.TrimSpace(opts.Addr)
+	if addr == "" {
+		addr = observe.DefaultAddr
+	}
+
+	plan := observeAddrPlan{Bind: []string{addr}, DSN: addr, Project: strings.TrimSpace(opts.Project)}
+
+	// El collector atiende las redes estables de DevHerd y, ademas, las de los
+	// contenedores ya observados: la red propia de cada proyecto es justo la que
+	// comparten todos sus servicios.
+	shared := observe.SharedNetworkNames(opts.ProxyNetwork)
+	names := shared
+	if observed, err := observe.ObservedNetworks(ctx, nil); err == nil {
+		names = append(append([]string{}, shared...), observed...)
+	}
+
+	plan.Networks = observe.InspectNetworks(ctx, nil, names)
+	if len(plan.Networks) == 0 {
+		plan.Reason = "no Docker network could be resolved; is the Docker daemon running?"
+		return plan
+	}
+
+	plan.Match = plan.selectMatch(ctx, shared)
+
+	// Con --addr explicito manda el usuario: las redes se resuelven solo para
+	// poder avisar y para derivar las reglas de cortafuegos.
+	if opts.Explicit {
+		return plan
+	}
+
+	for _, info := range plan.Networks {
+		plan.Bind = append(plan.Bind, observe.WithHost(addr, info.Gateway))
+	}
+	plan.DSN = observe.WithHost(addr, plan.Match.Gateway)
+
+	return plan
+}
+
+// selectMatch elige la red del DSN: la que mas contenedores del proyecto
+// comparten. Sin proyecto conocido cae a la primera red estable de DevHerd.
+func (plan *observeAddrPlan) selectMatch(ctx context.Context, shared []string) observe.NetworkInfo {
+	if plan.Project == "" {
+		return plan.Networks[0]
+	}
+
+	coverage, err := observe.ProjectNetworkCoverage(ctx, nil, plan.Project)
+	if err != nil {
+		plan.Reason = err.Error()
+		return plan.Networks[0]
+	}
+	if coverage.Containers == 0 {
+		plan.Reason = fmt.Sprintf("project %s has no running containers, so its networks are unknown; verify with `devherd observe status %s` after `devherd up`", plan.Project, plan.Project)
+		return plan.Networks[0]
+	}
+
+	name, count := observe.SelectProjectNetwork(coverage, shared)
+	plan.Coverage = fmt.Sprintf("%d/%d", count, coverage.Containers)
+
+	for _, info := range plan.Networks {
+		if info.Name == name {
+			return info
+		}
+	}
+
+	// La red del proyecto puede no estar en la lista si sus contenedores no
+	// llevan aun la etiqueta de observado: se resuelve a demanda.
+	if info, err := observe.InspectNetwork(ctx, nil, name); err == nil {
+		plan.Networks = append(plan.Networks, info)
+		return info
+	}
+
+	return plan.Networks[0]
+}
+
+func (plan observeAddrPlan) networkNames() string {
+	names := make([]string, 0, len(plan.Networks))
+	for _, info := range plan.Networks {
+		names = append(names, info.Name)
+	}
+
+	return strings.Join(names, ", ")
+}
+
+// observeSharedNetwork lee la red compartida de la config y cae al default
+// cuando DevHerd no esta inicializado, para que el diagnostico siga funcionando.
+func observeSharedNetwork(ctx context.Context) string {
+	app, err := loadAppContext(ctx)
+	if err != nil {
+		return observe.DefaultNetwork
+	}
+	defer app.DB.Close()
+
+	return observeNetworkName(app.Config.Proxy.ExternalNetwork)
+}
+
+func observeNetworkName(name string) string {
+	if trimmed := strings.TrimSpace(name); trimmed != "" {
+		return trimmed
+	}
+
+	return observe.DefaultNetwork
+}
+
+func warnObserveLoopbackDSN(w io.Writer, dsn string, plan observeAddrPlan) {
+	// El aviso tambien aplica cuando el DSN es alcanzable pero el proyecto no
+	// esta en ninguna red DevHerd: ahi el problema no es el loopback, es que la
+	// direccion elegida no la ve nadie.
+	if !observe.IsLoopbackAddr(dsn) {
+		if plan.Reason != "" && plan.Project != "" {
+			fmt.Fprintf(w, "warning: %s\n", plan.Reason)
+			fmt.Fprintf(w, "  connect the project to %s, or run `devherd observe status %s` to verify\n", plan.Match.Name, plan.Project)
+		}
+		return
+	}
+
+	fmt.Fprintf(w, "warning: %s is a loopback address; inside a container it resolves to the container itself\n", dsn)
+	if plan.Reason != "" {
+		fmt.Fprintf(w, "  %s\n", plan.Reason)
+	}
+	fmt.Fprintln(w, "  create a DevHerd network with `devherd proxy bootstrap`, or pass the same reachable --addr to `observe start` and `observe attach`")
+}
+
+// reportObserveReachability comprueba el collector desde un contenedor, que es
+// donde falla de verdad: el host se alcanza siempre a si mismo, aunque el
+// cortafuegos descarte el trafico que llega desde la red de Docker. La sonda
+// corre en la red del proyecto cuando se conoce, no en una compartida elegida a
+// ciegas: probar en la red equivocada da un falso "ok".
+func reportObserveReachability(cmd *cobra.Command, plan observeAddrPlan) {
+	out := cmd.OutOrStdout()
+
+	if plan.Match.Name == "" {
+		reason := plan.Reason
+		if reason == "" {
+			reason = "no DevHerd network could be resolved"
+		}
+		fmt.Fprintf(out, "container reachability: skipped (%s)\n", reason)
+		return
+	}
+
+	result := observe.ProbeFromContainer(cmd.Context(), nil, plan.Match.Name, plan.DSN)
+	label := result.Network
+	if plan.Project != "" {
+		label = plan.Project + " on " + result.Network
+	}
+
+	switch {
+	case result.Reachable:
+		fmt.Fprintf(out, "container reachability (%s): ok at http://%s\n", label, result.Address)
+	case result.Skipped:
+		fmt.Fprintf(out, "container reachability (%s): skipped (%s)\n", label, result.Reason)
+		fmt.Fprintf(out, "  run it manually: %s\n", observe.ProbeCommand(result.Network, plan.DSN, result.Image))
+	default:
+		fmt.Fprintf(out, "container reachability (%s): FAILED at http://%s\n", label, result.Address)
+		if observe.IsLoopbackAddr(plan.DSN) {
+			fmt.Fprintln(out, "  the collector address is a loopback one, so containers reach themselves instead of the host")
+		}
+		if hint := observe.FirewallHint(plan.Match, plan.DSN); hint != "" {
+			fmt.Fprintf(out, "  %s\n", hint)
+		}
+		fmt.Fprintln(out, "  apply the needed rules with `devherd observe firewall --apply`")
+	}
 }
 
 func truncateObserveText(value string, max int) string {

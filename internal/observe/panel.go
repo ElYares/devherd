@@ -255,6 +255,17 @@ var panelTemplate = template.Must(template.New("observe-panel").Parse(`<!doctype
         '</tbody></table>';
     }
 
+    // El servidor ya entrega payload_extra filtrado (claves sin columna propia:
+    // context, tags, breadcrumbs...), asi que aqui solo se formatea.
+    function payloadLines(extra) {
+      const keys = Object.keys(extra || {}).sort();
+      if (!keys.length) return [];
+      return ['', 'payload:'].concat(keys.map(function (key) {
+        const value = extra[key];
+        return '- ' + key + ': ' + (typeof value === 'string' ? value : JSON.stringify(value));
+      }));
+    }
+
     async function loadTimeline(eventId) {
       const data = await getJSON('/api/observe/timeline?event_id=' + encodeURIComponent(eventId));
       const lines = [
@@ -263,6 +274,7 @@ var panelTemplate = template.Must(template.New("observe-panel").Parse(`<!doctype
         'service: ' + (data.event.service || ''),
         'container: ' + (data.event.container || ''),
         'message: ' + (data.event.message || ''),
+        ...payloadLines(data.payload_extra),
         '',
         'container events:',
         ...(data.container_events || []).map(e => '- ' + e.created_at + ' ' + e.kind + ' ' + e.message),
