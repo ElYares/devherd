@@ -9,3 +9,7 @@ apps/desktop/node_modules/
 
 # binario compilado en la raíz (usar bin/ vía make build)
 /devherd
+
+# configuracion local de IDEs
+.idea/
+.vscode/
