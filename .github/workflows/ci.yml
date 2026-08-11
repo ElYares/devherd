@@ -39,6 +39,8 @@ jobs:
         with:
           go-version-file: go.mod
           cache: true
-      - uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@v8
         with:
-          version: latest
+          # v8 es la primera serie de la accion que instala golangci-lint v2,
+          # la unica que entiende este .golangci.yml y un go.mod con go 1.25.
+          version: v2.12.2

@@ -13,12 +13,52 @@ linters:
     - gocritic
     - revive
 
+  settings:
+    errcheck:
+      # Escribir en la salida del comando: el error solo puede venir de un
+      # stdout roto, y para entonces no hay donde reportarlo. Comprobarlo
+      # obligaria a envolver ~200 llamadas sin ganar nada.
+      exclude-functions:
+        - fmt.Fprint
+        - fmt.Fprintf
+        - fmt.Fprintln
+
+    revive:
+      # Conjunto por defecto de revive menos 'exported' y 'package-comments':
+      # exigir comentario de doc en cada simbolo exportado son 158 hallazgos de
+      # redaccion que ahogarian los que si importan. Se pueden reactivar cuando
+      # la documentacion de paquetes se aborde a proposito.
+      rules:
+        - name: blank-imports
+        - name: context-as-argument
+        - name: context-keys-type
+        - name: dot-imports
+        - name: empty-block
+        - name: error-naming
+        - name: error-return
+        - name: error-strings
+        - name: errorf
+        - name: increment-decrement
+        - name: indent-error-flow
+        - name: range
+        - name: receiver-naming
+        - name: redefines-builtin-id
+        - name: superfluous-else
+        - name: time-naming
+        - name: unexported-return
+        - name: unreachable-code
+        - name: unused-parameter
+        - name: var-declaration
+        - name: var-naming
+
+  exclusions:
+    rules:
+      # los tests pueden ignorar errores y ser más laxos
+      - path: _test\.go
+        linters:
+          - errcheck
+          - gocritic
+
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0
-  exclude-rules:
-    # los tests pueden ignorar errores y ser más laxos
-    - path: _test\.go
-      linters:
-        - errcheck
-        - gocritic
