@@ -15,12 +15,12 @@ func newListCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List registered projects",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			app, err := loadAppContext(cmd.Context())
 			if err != nil {
 				return err
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			projects, err := database.ListProjects(cmd.Context(), app.DB)
 			if err != nil {

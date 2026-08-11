@@ -25,7 +25,7 @@ func newInitCmd() *cobra.Command {
 
   # Inicializa con Caddy en host (.test)
   devherd init --proxy caddy --tld test`,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			paths, err := config.ResolvePaths()
 			if err != nil {
 				return err

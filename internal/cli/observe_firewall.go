@@ -17,7 +17,7 @@ func newObserveFirewallCmd() *cobra.Command {
 		Long: "Container to host traffic is filtered by the host firewall: Docker published ports work because their DNAT rules precede it, " +
 			"but the collector is a plain host listener. This prints one rule per DevHerd network, since each has its own source subnet and gateway.",
 		Example: "  devherd observe firewall\n  devherd observe firewall --apply",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			plan := planObserveAddrs(cmd.Context(), observeAddrOptions{
 				ProxyNetwork: observeSharedNetwork(cmd.Context()),
 				Addr:         addr,

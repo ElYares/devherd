@@ -12,11 +12,11 @@ func newDoctorCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "doctor",
 		Short: "Validate local host prerequisites for the MVP",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			cfg := config.Default()
 			if app, err := loadAppContext(cmd.Context()); err == nil {
 				cfg = app.Config
-				app.DB.Close()
+				_ = app.DB.Close()
 			}
 
 			report := doctor.RunWithConfig(cmd.Context(), cfg)

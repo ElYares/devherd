@@ -30,7 +30,7 @@ func newStopCmd() *cobra.Command {
 
 				return fallbackErr
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			project, err := compose.ResolveProject(targetPath)
 			if err != nil {

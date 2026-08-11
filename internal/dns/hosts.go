@@ -59,10 +59,10 @@ func SyncHosts(domains []string) error {
 	if err != nil {
 		return fmt.Errorf("create temp hosts file: %w", err)
 	}
-	defer os.Remove(tempFile.Name())
+	defer func() { _ = os.Remove(tempFile.Name()) }()
 
 	if _, err := tempFile.WriteString(updated); err != nil {
-		tempFile.Close()
+		_ = tempFile.Close()
 		return fmt.Errorf("write temp hosts file: %w", err)
 	}
 

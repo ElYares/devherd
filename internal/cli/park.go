@@ -35,7 +35,7 @@ func newParkCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			if err := database.InsertPark(cmd.Context(), app.DB, targetPath); err != nil {
 				return err

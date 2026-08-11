@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/devherd/devherd/internal/config"
+	// Driver de SQLite sin cgo; se registra por su efecto de importacion.
 	_ "modernc.org/sqlite"
 )
 
@@ -127,7 +128,7 @@ func (m *Manager) Ensure(ctx context.Context) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 
 	if err := db.PingContext(ctx); err != nil {
 		return false, fmt.Errorf("ping observe database: %w", err)
@@ -186,7 +187,7 @@ func (s Store) StoreEvent(ctx context.Context, event Event) (StoredEvent, error)
 	if err != nil {
 		return StoredEvent{}, fmt.Errorf("begin observe transaction: %w", err)
 	}
-	defer tx.Rollback()
+	defer func() { _ = tx.Rollback() }()
 
 	issueWasNew, err := issueIsNew(ctx, tx, event.Project, event.Fingerprint)
 	if err != nil {
@@ -287,7 +288,7 @@ func (s Store) StoreContainers(ctx context.Context, containers []ObservedContain
 	if err != nil {
 		return nil, fmt.Errorf("begin observe container transaction: %w", err)
 	}
-	defer tx.Rollback()
+	defer func() { _ = tx.Rollback() }()
 
 	var events []ContainerEvent
 	for _, container := range containers {
@@ -422,7 +423,7 @@ func (s Store) ListAlerts(ctx context.Context, project string) ([]Alert, error) 
 	if err != nil {
 		return nil, fmt.Errorf("list observe alerts: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var alerts []Alert
 	for rows.Next() {
@@ -474,7 +475,7 @@ func (s Store) ListAlertDeliveries(ctx context.Context, project string, limit in
 	if err != nil {
 		return nil, fmt.Errorf("list observe alert deliveries: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var deliveries []AlertDelivery
 	for rows.Next() {
@@ -500,7 +501,7 @@ func (s Store) StoreContainerLogs(ctx context.Context, eventID string, logs []Co
 	if err != nil {
 		return fmt.Errorf("begin observe logs transaction: %w", err)
 	}
-	defer tx.Rollback()
+	defer func() { _ = tx.Rollback() }()
 
 	for _, log := range logs {
 		if log.EventID == "" {
@@ -556,7 +557,7 @@ func (s Store) ListIssues(ctx context.Context, project string, limit int) ([]Iss
 	if err != nil {
 		return nil, fmt.Errorf("list observe issues: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var issues []Issue
 	for rows.Next() {
@@ -595,7 +596,7 @@ func (s Store) ListEvents(ctx context.Context, project string, limit int) ([]Eve
 	if err != nil {
 		return nil, fmt.Errorf("list observe events: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var events []EventRecord
 	for rows.Next() {
@@ -633,7 +634,7 @@ func (s Store) ListContainers(ctx context.Context, project string, limit int) ([
 	if err != nil {
 		return nil, fmt.Errorf("list observed containers: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var containers []ObservedContainer
 	for rows.Next() {
@@ -678,7 +679,7 @@ func (s Store) Timeline(ctx context.Context, eventID string) (Timeline, error) {
 	if err != nil {
 		return Timeline{}, fmt.Errorf("list observe timeline logs: %w", err)
 	}
-	defer logRows.Close()
+	defer func() { _ = logRows.Close() }()
 	for logRows.Next() {
 		var log ContainerLog
 		if err := logRows.Scan(&log.EventID, &log.Project, &log.Service, &log.Container, &log.Timestamp, &log.Stream, &log.Message); err != nil {
@@ -701,7 +702,7 @@ func (s Store) Timeline(ctx context.Context, eventID string) (Timeline, error) {
 	if err != nil {
 		return Timeline{}, fmt.Errorf("list observe container events: %w", err)
 	}
-	defer eventRows.Close()
+	defer func() { _ = eventRows.Close() }()
 	for eventRows.Next() {
 		var event ContainerEvent
 		if err := eventRows.Scan(&event.ID, &event.ContainerID, &event.Name, &event.Project, &event.Service, &event.Kind, &event.Status, &event.RestartCount, &event.Message, &event.CreatedAt); err != nil {
@@ -728,7 +729,7 @@ func (s Store) Cleanup(ctx context.Context, days int) (CleanupResult, error) {
 	if err != nil {
 		return CleanupResult{}, fmt.Errorf("begin observe cleanup transaction: %w", err)
 	}
-	defer tx.Rollback()
+	defer func() { _ = tx.Rollback() }()
 
 	var result CleanupResult
 	var execErr error
@@ -889,7 +890,7 @@ func matchingAlerts(ctx context.Context, tx *sql.Tx, project string) ([]Alert, e
 	if err != nil {
 		return nil, fmt.Errorf("list matching observe alerts: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var alerts []Alert
 	for rows.Next() {

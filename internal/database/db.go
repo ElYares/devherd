@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 
+	// Driver de SQLite sin cgo; se registra por su efecto de importacion.
 	_ "modernc.org/sqlite"
 )
 
@@ -31,7 +32,7 @@ func (m *Manager) Ensure(ctx context.Context) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 
 	if err := db.PingContext(ctx); err != nil {
 		return false, fmt.Errorf("ping database: %w", err)
@@ -90,7 +91,7 @@ func appliedVersions(ctx context.Context, db *sql.DB) (map[int]bool, error) {
 	if err != nil {
 		return nil, fmt.Errorf("read schema_migrations: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	applied := make(map[int]bool)
 	for rows.Next() {

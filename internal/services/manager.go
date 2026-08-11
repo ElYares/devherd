@@ -154,4 +154,3 @@ func (m Manager) ensureNetwork(ctx context.Context) error {
 
 	return nil
 }
-

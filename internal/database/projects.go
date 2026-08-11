@@ -40,7 +40,7 @@ func UpsertProject(ctx context.Context, db *sql.DB, project detector.Project, do
 	if err != nil {
 		return fmt.Errorf("begin transaction: %w", err)
 	}
-	defer tx.Rollback()
+	defer func() { _ = tx.Rollback() }()
 
 	_, err = tx.ExecContext(ctx, `
 		INSERT INTO projects (name, path, stack, framework, runtime, status)
@@ -138,7 +138,7 @@ func ListProjects(ctx context.Context, db *sql.DB) ([]ProjectRecord, error) {
 	if err != nil {
 		return nil, fmt.Errorf("list projects: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var projects []ProjectRecord
 	for rows.Next() {
@@ -209,7 +209,7 @@ func SetPrimaryDomain(ctx context.Context, db *sql.DB, projectName, domain strin
 	if err != nil {
 		return fmt.Errorf("begin transaction: %w", err)
 	}
-	defer tx.Rollback()
+	defer func() { _ = tx.Rollback() }()
 
 	var projectID int64
 	if err := tx.QueryRowContext(ctx, `SELECT id FROM projects WHERE name = ?`, projectName).Scan(&projectID); err != nil {

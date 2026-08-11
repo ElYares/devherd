@@ -86,7 +86,7 @@ func newProxyApplyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			projects, err := database.ListProjects(cmd.Context(), app.DB)
 			if err != nil {
@@ -189,12 +189,12 @@ func newProxyBootstrapCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "bootstrap",
 		Short: "Create or refresh the managed external proxy assets",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			app, err := loadAppContext(cmd.Context())
 			if err != nil {
 				return err
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			if !proxy.UsesDockerExternal(app.Config) {
 				return fmt.Errorf("proxy bootstrap requires proxy driver %q", proxy.DriverCaddyDockerExternal)

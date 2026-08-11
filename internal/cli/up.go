@@ -36,7 +36,7 @@ func newUpCmd() *cobra.Command {
 
 				return fallbackErr
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			if err := ensureComposeOrScaffold(cmd, targetPath); err != nil {
 				return err
