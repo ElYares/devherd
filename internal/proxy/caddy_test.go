@@ -38,4 +38,3 @@ func TestRenderVueFlaskSite(t *testing.T) {
 		}
 	}
 }
-

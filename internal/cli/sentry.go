@@ -68,7 +68,7 @@ func newSentrySetDSNCmd() *cobra.Command {
 		Short:  "Set a Sentry DSN for a project",
 		Hidden: true, // aún no implementado (ver roadmap docs/IMPROVEMENTS.md #18)
 		Args:   cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			return notImplemented("sentry set-dsn")
 		},
 	}
@@ -85,7 +85,7 @@ func newSentryTestCmd() *cobra.Command {
 		Short:  "Send a test event to Sentry for a project",
 		Hidden: true, // aún no implementado (ver roadmap docs/IMPROVEMENTS.md #18)
 		Args:   cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			return notImplemented("sentry test")
 		},
 	}

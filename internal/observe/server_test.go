@@ -177,7 +177,7 @@ func TestServerServesObservePanelAPI(t *testing.T) {
 
 type fakeDockerRuntime struct{}
 
-func (fakeDockerRuntime) ObservedContainers(ctx context.Context, project string) ([]ObservedContainer, error) {
+func (fakeDockerRuntime) ObservedContainers(_ context.Context, _ string) ([]ObservedContainer, error) {
 	return []ObservedContainer{{
 		ContainerID:  "abc123",
 		Name:         "demo_web_1",
@@ -190,6 +190,6 @@ func (fakeDockerRuntime) ObservedContainers(ctx context.Context, project string)
 	}}, nil
 }
 
-func (fakeDockerRuntime) LogsAround(ctx context.Context, container string, at time.Time, window time.Duration, limit int) ([]ContainerLog, error) {
+func (fakeDockerRuntime) LogsAround(_ context.Context, _ string, _ time.Time, _ time.Duration, _ int) ([]ContainerLog, error) {
 	return []ContainerLog{{Timestamp: "2026-05-22T10:00:00Z", Message: "log near failure"}}, nil
 }

@@ -21,4 +21,3 @@ func TestMergeManagedBlock(t *testing.T) {
 		t.Fatal("expected original hosts content to be preserved")
 	}
 }
-

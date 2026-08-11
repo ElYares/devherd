@@ -34,7 +34,7 @@ func newDomainSetCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			normalizedDomain, err := normalizeDomain(domain, app.Config.LocalTLD)
 			if err != nil {

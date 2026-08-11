@@ -3,7 +3,7 @@ package preflight
 import "testing"
 
 func TestSeverityRankOrdering(t *testing.T) {
-	if !(severityRank(SeverityFail) > severityRank(SeverityWarn) && severityRank(SeverityWarn) > severityRank(SeverityOK)) {
+	if severityRank(SeverityFail) <= severityRank(SeverityWarn) || severityRank(SeverityWarn) <= severityRank(SeverityOK) {
 		t.Fatalf("expected fail > warn > ok, got %d %d %d",
 			severityRank(SeverityFail), severityRank(SeverityWarn), severityRank(SeverityOK))
 	}

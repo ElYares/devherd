@@ -57,12 +57,12 @@ func newObserveStartCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "start",
 		Short: "Start the local Observe collector",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			db, store, dbPath, err := openObserveStore(cmd)
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			plan := planObserveAddrs(cmd.Context(), observeAddrOptions{
 				ProxyNetwork: observeSharedNetwork(cmd.Context()),
@@ -114,7 +114,7 @@ func newObserveStatusCmd() *cobra.Command {
 			if err != nil {
 				return fmt.Errorf("observe collector is not reachable at http://%s: %w", addr, err)
 			}
-			defer resp.Body.Close()
+			defer func() { _ = resp.Body.Close() }()
 
 			var payload struct {
 				Status   string `json:"status"`
@@ -164,7 +164,7 @@ func newObserveOpenCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "open",
 		Short: "Open the local Observe panel",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			if addr == "" {
 				addr = observe.DefaultAddr
 			}
@@ -241,7 +241,7 @@ func newObserveAttachCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			target, err := resolveObserveTarget(cmd.Context(), app, args[0])
 			if err != nil {
@@ -352,7 +352,7 @@ func newObserveDetachCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			target, err := resolveObserveTarget(cmd.Context(), app, args[0])
 			if err != nil {
@@ -387,7 +387,7 @@ func newObserveScanCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			project := ""
 			if len(args) == 1 {
@@ -424,7 +424,7 @@ func newObserveContainersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			project := ""
 			if len(args) == 1 {
@@ -472,7 +472,7 @@ func newObserveTimelineCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			timeline, err := store.Timeline(cmd.Context(), args[0])
 			if err != nil {
@@ -508,7 +508,7 @@ func newObserveAlertAddCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "add",
 		Short: "Add a local Observe alert rule",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			kind = strings.TrimSpace(kind)
 			if kind == "" {
 				return fmt.Errorf("required flag(s) \"on\" not set")
@@ -526,7 +526,7 @@ func newObserveAlertAddCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			id, err := store.AddAlert(cmd.Context(), observe.Alert{
 				Project:       project,
@@ -568,7 +568,7 @@ func newObserveAlertListCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			project := ""
 			if len(args) == 1 {
@@ -609,7 +609,7 @@ func newObserveAlertRemoveCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			removed, err := store.RemoveAlert(cmd.Context(), id)
 			if err != nil {
@@ -637,7 +637,7 @@ func newObserveAlertDeliveriesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			project := ""
 			if len(args) == 1 {
@@ -673,12 +673,12 @@ func newObserveCleanupCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "cleanup",
 		Short: "Remove old Observe data",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			db, store, _, err := openObserveStore(cmd)
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			result, err := store.Cleanup(cmd.Context(), days)
 			if err != nil {
@@ -712,7 +712,7 @@ func newObserveIssuesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			project := ""
 			if len(args) == 1 {
@@ -764,7 +764,7 @@ func newObserveEventsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer db.Close()
+			defer func() { _ = db.Close() }()
 
 			project := ""
 			if len(args) == 1 {
@@ -921,7 +921,7 @@ func openObserveStore(cmd *cobra.Command) (*sql.DB, observe.Store, string, error
 	if err != nil {
 		return nil, observe.Store{}, "", err
 	}
-	defer app.DB.Close()
+	defer func() { _ = app.DB.Close() }()
 
 	dbPath := observe.DefaultDBPath(app.Paths)
 	manager := observe.NewManager(dbPath)
@@ -1056,7 +1056,7 @@ func observeSharedNetwork(ctx context.Context) string {
 	if err != nil {
 		return observe.DefaultNetwork
 	}
-	defer app.DB.Close()
+	defer func() { _ = app.DB.Close() }()
 
 	return observeNetworkName(app.Config.Proxy.ExternalNetwork)
 }
@@ -1129,17 +1129,17 @@ func reportObserveReachability(cmd *cobra.Command, plan observeAddrPlan) {
 	}
 }
 
-func truncateObserveText(value string, max int) string {
+func truncateObserveText(value string, limit int) string {
 	value = strings.TrimSpace(value)
-	if max <= 0 || len(value) <= max {
+	if limit <= 0 || len(value) <= limit {
 		return value
 	}
 
-	if max <= 3 {
-		return value[:max]
+	if limit <= 3 {
+		return value[:limit]
 	}
 
-	return strings.TrimSpace(value[:max-3]) + "..."
+	return strings.TrimSpace(value[:limit-3]) + "..."
 }
 
 func supportedAlertKind(kind string) bool {

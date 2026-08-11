@@ -2,6 +2,7 @@ package cli
 
 import (
 	"bytes"
+	"context"
 	"log/slog"
 	"strings"
 	"testing"
@@ -29,12 +30,12 @@ func TestVerboseEnablesDebugLevel(t *testing.T) {
 	var buf bytes.Buffer
 	// Sin verbose, DEBUG no debe emitirse; con verbose sí.
 	setupLogging(logOptions{verbose: false})
-	if slog.Default().Enabled(nil, slog.LevelDebug) {
+	if slog.Default().Enabled(context.Background(), slog.LevelDebug) {
 		t.Error("debug should be disabled without --verbose")
 	}
 
 	setupLogging(logOptions{verbose: true})
-	if !slog.Default().Enabled(nil, slog.LevelDebug) {
+	if !slog.Default().Enabled(context.Background(), slog.LevelDebug) {
 		t.Error("debug should be enabled with --verbose")
 	}
 

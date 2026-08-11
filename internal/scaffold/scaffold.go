@@ -120,7 +120,7 @@ func vueService(name, dir string, port int, script string) Service {
 	}
 }
 
-func nodeService(dir string, port int, script string) Service {
+func nodeService(_ string, port int, script string) Service {
 	return Service{
 		Name:          "app",
 		Image:         "node:20-alpine",

@@ -39,7 +39,7 @@ func newLogsCmd() *cobra.Command {
 			// proxy externo + observe) para que los logs cubran todos los servicios
 			// en ejecución. El app context es opcional: sin él, se usa el proyecto base.
 			if app, err := loadAppContext(cmd.Context()); err == nil {
-				defer app.DB.Close()
+				defer func() { _ = app.DB.Close() }()
 
 				if proxy.UsesDockerExternal(app.Config) {
 					overridePath := filepath.Join(project.Root, proxy.ManagedComposeOverrideFile)

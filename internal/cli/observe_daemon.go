@@ -32,7 +32,7 @@ func newObserveDaemonInstallCmd() *cobra.Command {
 		Use:     "install",
 		Short:   "Install and enable the collector user service",
 		Example: "  devherd observe daemon install",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			binary, err := os.Executable()
 			if err != nil {
 				return fmt.Errorf("resolve devherd binary: %w", err)
@@ -64,7 +64,7 @@ func newObserveDaemonUninstallCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "uninstall",
 		Short: "Stop and remove the collector user service",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			path, err := observe.UninstallDaemon(cmd.Context())
 			if err != nil {
 				return err
@@ -80,7 +80,7 @@ func newObserveDaemonStatusCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "status",
 		Short: "Show the collector user service status",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			output, err := observe.DaemonStatus(cmd.Context())
 			if output != "" {
 				fmt.Fprintln(cmd.OutOrStdout(), output)

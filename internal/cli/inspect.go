@@ -24,7 +24,7 @@ func newInspectCmd() *cobra.Command {
 			cfg := config.Default()
 			app, err := loadAppContext(cmd.Context())
 			if err == nil {
-				defer app.DB.Close()
+				defer func() { _ = app.DB.Close() }()
 				cfg = app.Config
 			}
 

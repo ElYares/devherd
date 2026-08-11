@@ -20,7 +20,7 @@ func newOpenCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			defer app.DB.Close()
+			defer func() { _ = app.DB.Close() }()
 
 			projects, err := database.ListProjects(cmd.Context(), app.DB)
 			if err != nil {

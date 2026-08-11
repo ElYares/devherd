@@ -88,7 +88,7 @@ func projectNameForPath(cmd *cobra.Command, targetPath string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer app.DB.Close()
+	defer func() { _ = app.DB.Close() }()
 
 	abs := targetPath
 	if abs == "" {
