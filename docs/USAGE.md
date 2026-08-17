@@ -790,12 +790,15 @@ Reglas de alerta locales.
 | `--project` | (todas) | Vacio = regla global para cualquier proyecto. |
 | `--threshold` | `1` | Solo relevante para `error-rate`. |
 | `--window` | `5m` | Duracion estilo Go (`30s`, `5m`, `1h`). Solo para `error-rate`. |
+| `--cooldown` | la ventana en `error-rate`, `15m` en el resto | Silencia la regla ese tiempo despues de avisar. `0` entrega siempre. Aplica a los cuatro tipos. |
 
 `observe alert deliveries` acepta `--limit` (default `20`).
 
 ```bash
 devherd observe alert add --on new-issue --project mi-app
 devherd observe alert add --on error-rate --threshold 5 --window 5m
+devherd observe alert add --on new-issue --cooldown 30m
+devherd observe alert add --on container-restart --cooldown 0   # sin silencio
 devherd observe alert list
 devherd observe alert remove 1
 devherd observe alert deliveries --limit 20
@@ -803,8 +806,9 @@ devherd observe alert deliveries --limit 20
 
 > Una "entrega" de alerta es **solo un registro en la base local**. No hay webhooks, ni
 > notificaciones del sistema, ni correo. Se consultan con `alert deliveries` o en el panel.
-> Ademas, `error-rate` no tiene periodo de enfriamiento: superado el umbral, cada evento
-> dentro de la ventana genera otra entrega.
+> Cada regla tiene un periodo de enfriamiento (`--cooldown`): despues de avisar se calla
+> ese tiempo, de modo que una rafaga produce un aviso y no cincuenta. El umbral se sigue
+> evaluando en cada evento; lo que se silencia es la entrega repetida.
 
 #### `observe cleanup`
 
