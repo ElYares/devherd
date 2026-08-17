@@ -504,6 +504,7 @@ func newObserveAlertAddCmd() *cobra.Command {
 	var kind string
 	var threshold int
 	var window string
+	var cooldown string
 
 	cmd := &cobra.Command{
 		Use:   "add",
@@ -522,6 +523,14 @@ func newObserveAlertAddCmd() *cobra.Command {
 				return err
 			}
 
+			cooldownSeconds := observe.DefaultCooldownSeconds(kind, windowSeconds)
+			if cmd.Flags().Changed("cooldown") {
+				cooldownSeconds, err = parseObserveCooldownSeconds(cooldown)
+				if err != nil {
+					return err
+				}
+			}
+
 			db, store, _, err := openObserveStore(cmd)
 			if err != nil {
 				return err
@@ -529,10 +538,11 @@ func newObserveAlertAddCmd() *cobra.Command {
 			defer func() { _ = db.Close() }()
 
 			id, err := store.AddAlert(cmd.Context(), observe.Alert{
-				Project:       project,
-				Kind:          kind,
-				Threshold:     threshold,
-				WindowSeconds: windowSeconds,
+				Project:         project,
+				Kind:            kind,
+				Threshold:       threshold,
+				WindowSeconds:   windowSeconds,
+				CooldownSeconds: cooldownSeconds,
 			})
 			if err != nil {
 				return err
@@ -546,6 +556,7 @@ func newObserveAlertAddCmd() *cobra.Command {
 				fmt.Fprintf(out, "threshold: %d\n", threshold)
 				fmt.Fprintf(out, "window: %s\n", window)
 			}
+			fmt.Fprintf(out, "cooldown: %ds\n", cooldownSeconds)
 			return nil
 		},
 	}
@@ -554,6 +565,7 @@ func newObserveAlertAddCmd() *cobra.Command {
 	cmd.Flags().StringVar(&kind, "on", "", "Alert kind: new-issue, error-rate, container-exit or container-restart")
 	cmd.Flags().IntVar(&threshold, "threshold", 1, "Threshold for error-rate alerts")
 	cmd.Flags().StringVar(&window, "window", "5m", "Window for error-rate alerts")
+	cmd.Flags().StringVar(&cooldown, "cooldown", "", "Silence the rule for this long after it fires; 0 disables the silence (default: the window for error-rate, 15m otherwise)")
 
 	return cmd
 }
@@ -585,9 +597,9 @@ func newObserveAlertListCmd() *cobra.Command {
 			}
 
 			writer := tabwriter.NewWriter(cmd.OutOrStdout(), 0, 0, 2, ' ', 0)
-			fmt.Fprintln(writer, "ID\tPROJECT\tON\tTHRESHOLD\tWINDOW\tENABLED")
+			fmt.Fprintln(writer, "ID\tPROJECT\tON\tTHRESHOLD\tWINDOW\tCOOLDOWN\tENABLED")
 			for _, alert := range alerts {
-				fmt.Fprintf(writer, "%d\t%s\t%s\t%d\t%ds\t%t\n", alert.ID, emptyAsAll(alert.Project), alert.Kind, alert.Threshold, alert.WindowSeconds, alert.Enabled)
+				fmt.Fprintf(writer, "%d\t%s\t%s\t%d\t%ds\t%ds\t%t\n", alert.ID, emptyAsAll(alert.Project), alert.Kind, alert.Threshold, alert.WindowSeconds, alert.CooldownSeconds, alert.Enabled)
 			}
 			return writer.Flush()
 		},
@@ -1149,6 +1161,25 @@ func supportedAlertKind(kind string) bool {
 	default:
 		return false
 	}
+}
+
+// parseObserveCooldownSeconds no reusa parseObserveDurationSeconds porque aquel
+// rechaza el cero, y aqui cero es una opcion legitima: entregar siempre.
+func parseObserveCooldownSeconds(value string) (int, error) {
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return 0, fmt.Errorf("observe alert cooldown must not be empty")
+	}
+
+	duration, err := time.ParseDuration(value)
+	if err != nil {
+		return 0, fmt.Errorf("parse observe alert cooldown: %w", err)
+	}
+	if duration < 0 {
+		return 0, fmt.Errorf("observe alert cooldown must not be negative")
+	}
+
+	return int(duration.Seconds()), nil
 }
 
 func parseObserveDurationSeconds(value string) (int, error) {
