@@ -248,7 +248,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_compose_runtime",
-      "community": 89,
+      "community": 1,
       "norm_label": "compose_runtime.go"
     },
     {
@@ -258,7 +258,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "cli_compose_runtime_preparecomposeproject",
-      "community": 89,
+      "community": 1,
       "norm_label": "preparecomposeproject()"
     },
     {
@@ -268,7 +268,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_cli_compose_runtime_go_context",
-      "community": 89,
+      "community": 1,
       "norm_label": "context"
     },
     {
@@ -278,7 +278,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_cli_compose_runtime_go_appcontext",
-      "community": 89,
+      "community": 1,
       "norm_label": "appcontext"
     },
     {
@@ -288,7 +288,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_cli_compose_runtime_go_project",
-      "community": 89,
+      "community": 1,
       "norm_label": "project"
     },
     {
@@ -298,7 +298,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "cli_compose_runtime_resolveexternalproject",
-      "community": 89,
+      "community": 1,
       "norm_label": "resolveexternalproject()"
     },
     {
@@ -308,7 +308,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "internal_cli_compose_runtime_go_externalproject",
-      "community": 89,
+      "community": 1,
       "norm_label": "externalproject"
     },
     {
@@ -318,7 +318,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "cli_compose_runtime_appendobserveoverride",
-      "community": 89,
+      "community": 1,
       "norm_label": "appendobserveoverride()"
     },
     {
@@ -418,7 +418,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_down",
-      "community": 89,
+      "community": 1,
       "norm_label": "down.go"
     },
     {
@@ -428,7 +428,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_down_newdowncmd",
-      "community": 89,
+      "community": 1,
       "norm_label": "newdowncmd()"
     },
     {
@@ -438,7 +438,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_down_go_command",
-      "community": 89,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -598,7 +598,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_list",
-      "community": 68,
+      "community": 78,
       "norm_label": "list.go"
     },
     {
@@ -608,7 +608,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_list_newlistcmd",
-      "community": 68,
+      "community": 78,
       "norm_label": "newlistcmd()"
     },
     {
@@ -618,7 +618,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_list_go_command",
-      "community": 68,
+      "community": 78,
       "norm_label": "command"
     },
     {
@@ -698,7 +698,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_logs",
-      "community": 84,
+      "community": 68,
       "norm_label": "logs.go"
     },
     {
@@ -708,7 +708,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_logs_newlogscmd",
-      "community": 84,
+      "community": 68,
       "norm_label": "newlogscmd()"
     },
     {
@@ -718,7 +718,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_logs_go_command",
-      "community": 84,
+      "community": 68,
       "norm_label": "command"
     },
     {
@@ -945,7 +945,7 @@
       "label": "newObserveAlertListCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L573",
+      "source_location": "L561",
       "_origin": "ast",
       "id": "cli_observe_newobservealertlistcmd",
       "community": 7,
@@ -955,7 +955,7 @@
       "label": "newObserveAlertRemoveCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L609",
+      "source_location": "L597",
       "_origin": "ast",
       "id": "cli_observe_newobservealertremovecmd",
       "community": 7,
@@ -965,7 +965,7 @@
       "label": "newObserveAlertDeliveriesCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L640",
+      "source_location": "L628",
       "_origin": "ast",
       "id": "cli_observe_newobservealertdeliveriescmd",
       "community": 7,
@@ -975,7 +975,7 @@
       "label": "newObserveCleanupCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L682",
+      "source_location": "L670",
       "_origin": "ast",
       "id": "cli_observe_newobservecleanupcmd",
       "community": 7,
@@ -985,7 +985,7 @@
       "label": "newObserveIssuesCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L715",
+      "source_location": "L703",
       "_origin": "ast",
       "id": "cli_observe_newobserveissuescmd",
       "community": 7,
@@ -995,7 +995,7 @@
       "label": "newObserveEventsCmd()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L767",
+      "source_location": "L755",
       "_origin": "ast",
       "id": "cli_observe_newobserveeventscmd",
       "community": 7,
@@ -1005,7 +1005,7 @@
       "label": "writeObserveTimeline()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L820",
+      "source_location": "L808",
       "_origin": "ast",
       "id": "cli_observe_writeobservetimeline",
       "community": 7,
@@ -1015,7 +1015,7 @@
       "label": "Writer",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L820",
+      "source_location": "L808",
       "_origin": "ast",
       "id": "internal_cli_observe_go_writer",
       "community": 7,
@@ -1025,7 +1025,7 @@
       "label": "Timeline",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L820",
+      "source_location": "L808",
       "_origin": "ast",
       "id": "timeline",
       "community": 7,
@@ -1035,7 +1035,7 @@
       "label": "writeObservePayload()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L865",
+      "source_location": "L853",
       "_origin": "ast",
       "id": "cli_observe_writeobservepayload",
       "community": 7,
@@ -1045,7 +1045,7 @@
       "label": "formatObservePayloadValue()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L884",
+      "source_location": "L872",
       "_origin": "ast",
       "id": "cli_observe_formatobservepayloadvalue",
       "community": 7,
@@ -1055,7 +1055,7 @@
       "label": "observeTarget",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L897",
+      "source_location": "L885",
       "_origin": "ast",
       "id": "cli_observetarget",
       "community": 7,
@@ -1065,7 +1065,7 @@
       "label": "Project",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L899",
+      "source_location": "L887",
       "_origin": "ast",
       "id": "internal_cli_observe_go_project",
       "community": 7,
@@ -1075,7 +1075,7 @@
       "label": "resolveObserveTarget()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L902",
+      "source_location": "L890",
       "_origin": "ast",
       "id": "cli_observe_resolveobservetarget",
       "community": 7,
@@ -1085,7 +1085,7 @@
       "label": "Context",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L902",
+      "source_location": "L890",
       "_origin": "ast",
       "id": "internal_cli_observe_go_context",
       "community": 7,
@@ -1095,7 +1095,7 @@
       "label": "appContext",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L902",
+      "source_location": "L890",
       "_origin": "ast",
       "id": "internal_cli_observe_go_appcontext",
       "community": 7,
@@ -1105,7 +1105,7 @@
       "label": "openObserveStore()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L931",
+      "source_location": "L919",
       "_origin": "ast",
       "id": "cli_observe_openobservestore",
       "community": 7,
@@ -1115,7 +1115,7 @@
       "label": "DB",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L931",
+      "source_location": "L919",
       "_origin": "ast",
       "id": "internal_cli_observe_go_db",
       "community": 7,
@@ -1125,7 +1125,7 @@
       "label": "Store",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L931",
+      "source_location": "L919",
       "_origin": "ast",
       "id": "internal_cli_observe_go_store",
       "community": 7,
@@ -1135,7 +1135,7 @@
       "label": "observeDSN()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L952",
+      "source_location": "L940",
       "_origin": "ast",
       "id": "cli_observe_observedsn",
       "community": 7,
@@ -1145,7 +1145,7 @@
       "label": "observeAddrPlan",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L959",
+      "source_location": "L947",
       "_origin": "ast",
       "id": "cli_observeaddrplan",
       "community": 7,
@@ -1155,7 +1155,7 @@
       "label": "NetworkInfo",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L962",
+      "source_location": "L950",
       "_origin": "ast",
       "id": "internal_cli_observe_go_networkinfo",
       "community": 7,
@@ -1165,7 +1165,7 @@
       "label": "observeAddrOptions",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L969",
+      "source_location": "L957",
       "_origin": "ast",
       "id": "cli_observeaddroptions",
       "community": 7,
@@ -1175,7 +1175,7 @@
       "label": "planObserveAddrs()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L980",
+      "source_location": "L968",
       "_origin": "ast",
       "id": "cli_observe_planobserveaddrs",
       "community": 7,
@@ -1185,7 +1185,7 @@
       "label": ".selectMatch()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1021",
+      "source_location": "L1009",
       "_origin": "ast",
       "id": "cli_observeaddrplan_selectmatch",
       "community": 7,
@@ -1195,7 +1195,7 @@
       "label": ".networkNames()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1055",
+      "source_location": "L1043",
       "_origin": "ast",
       "id": "cli_observeaddrplan_networknames",
       "community": 7,
@@ -1205,7 +1205,7 @@
       "label": "observeSharedNetwork()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1066",
+      "source_location": "L1054",
       "_origin": "ast",
       "id": "cli_observe_observesharednetwork",
       "community": 7,
@@ -1215,7 +1215,7 @@
       "label": "observeNetworkName()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1076",
+      "source_location": "L1064",
       "_origin": "ast",
       "id": "cli_observe_observenetworkname",
       "community": 7,
@@ -1225,7 +1225,7 @@
       "label": "warnObserveLoopbackDSN()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1084",
+      "source_location": "L1072",
       "_origin": "ast",
       "id": "cli_observe_warnobserveloopbackdsn",
       "community": 7,
@@ -1235,7 +1235,7 @@
       "label": "reportObserveReachability()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1108",
+      "source_location": "L1096",
       "_origin": "ast",
       "id": "cli_observe_reportobservereachability",
       "community": 7,
@@ -1245,7 +1245,7 @@
       "label": "truncateObserveText()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1144",
+      "source_location": "L1132",
       "_origin": "ast",
       "id": "cli_observe_truncateobservetext",
       "community": 7,
@@ -1255,27 +1255,17 @@
       "label": "supportedAlertKind()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1157",
+      "source_location": "L1145",
       "_origin": "ast",
       "id": "cli_observe_supportedalertkind",
       "community": 7,
       "norm_label": "supportedalertkind()"
     },
     {
-      "label": "parseObserveCooldownSeconds()",
-      "file_type": "code",
-      "source_file": "internal/cli/observe.go",
-      "source_location": "L1168",
-      "_origin": "ast",
-      "id": "cli_observe_parseobservecooldownseconds",
-      "community": 7,
-      "norm_label": "parseobservecooldownseconds()"
-    },
-    {
       "label": "parseObserveDurationSeconds()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1185",
+      "source_location": "L1154",
       "_origin": "ast",
       "id": "cli_observe_parseobservedurationseconds",
       "community": 7,
@@ -1285,71 +1275,11 @@
       "label": "emptyAsAll()",
       "file_type": "code",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1202",
+      "source_location": "L1171",
       "_origin": "ast",
       "id": "cli_observe_emptyasall",
       "community": 7,
       "norm_label": "emptyasall()"
-    },
-    {
-      "label": "observe_cooldown_test.go",
-      "file_type": "code",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "cli_observe_cooldown_test",
-      "community": 7,
-      "norm_label": "observe_cooldown_test.go"
-    },
-    {
-      "label": "TestParseObserveCooldownSecondsAcceptsZero()",
-      "file_type": "code",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "cli_observe_cooldown_test_testparseobservecooldownsecondsacceptszero",
-      "community": 7,
-      "norm_label": "testparseobservecooldownsecondsacceptszero()"
-    },
-    {
-      "label": "T",
-      "file_type": "code",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "internal_cli_observe_cooldown_test_go_t",
-      "community": 7,
-      "norm_label": "t"
-    },
-    {
-      "label": "TestParseObserveCooldownSecondsRejectsNegative()",
-      "file_type": "code",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L19",
-      "_origin": "ast",
-      "id": "cli_observe_cooldown_test_testparseobservecooldownsecondsrejectsnegative",
-      "community": 7,
-      "norm_label": "testparseobservecooldownsecondsrejectsnegative()"
-    },
-    {
-      "label": "TestParseObserveCooldownSecondsParsesDurations()",
-      "file_type": "code",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L25",
-      "_origin": "ast",
-      "id": "cli_observe_cooldown_test_testparseobservecooldownsecondsparsesdurations",
-      "community": 7,
-      "norm_label": "testparseobservecooldownsecondsparsesdurations()"
-    },
-    {
-      "label": "TestDefaultCooldownFollowsTheWindowOnlyForErrorRate()",
-      "file_type": "code",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L37",
-      "_origin": "ast",
-      "id": "cli_observe_cooldown_test_testdefaultcooldownfollowsthewindowonlyforerrorrate",
-      "community": 7,
-      "norm_label": "testdefaultcooldownfollowsthewindowonlyforerrorrate()"
     },
     {
       "label": "observe_daemon.go",
@@ -1638,7 +1568,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_proxy",
-      "community": 8,
+      "community": 10,
       "norm_label": "proxy.go"
     },
     {
@@ -1648,7 +1578,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "cli_proxy_resolveexternalprojects",
-      "community": 8,
+      "community": 10,
       "norm_label": "resolveexternalprojects()"
     },
     {
@@ -1658,7 +1588,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_config",
-      "community": 8,
+      "community": 10,
       "norm_label": "config"
     },
     {
@@ -1668,7 +1598,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_projectrecord",
-      "community": 8,
+      "community": 10,
       "norm_label": "projectrecord"
     },
     {
@@ -1678,7 +1608,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_externalproject",
-      "community": 8,
+      "community": 10,
       "norm_label": "externalproject"
     },
     {
@@ -1688,7 +1618,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "cli_proxy_newproxycmd",
-      "community": 8,
+      "community": 10,
       "norm_label": "newproxycmd()"
     },
     {
@@ -1698,7 +1628,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_command",
-      "community": 8,
+      "community": 10,
       "norm_label": "command"
     },
     {
@@ -1708,7 +1638,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "cli_proxy_newproxyapplycmd",
-      "community": 8,
+      "community": 10,
       "norm_label": "newproxyapplycmd()"
     },
     {
@@ -1718,7 +1648,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "cli_proxy_syncmanageddomains",
-      "community": 8,
+      "community": 10,
       "norm_label": "syncmanageddomains()"
     },
     {
@@ -1728,7 +1658,7 @@
       "source_location": "L175",
       "_origin": "ast",
       "id": "cli_proxy_collectdomains",
-      "community": 8,
+      "community": 10,
       "norm_label": "collectdomains()"
     },
     {
@@ -1738,7 +1668,7 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "cli_proxy_newproxybootstrapcmd",
-      "community": 8,
+      "community": 10,
       "norm_label": "newproxybootstrapcmd()"
     },
     {
@@ -1748,7 +1678,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_proxy_test",
-      "community": 8,
+      "community": 10,
       "norm_label": "proxy_test.go"
     },
     {
@@ -1758,7 +1688,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_proxy_test_testsyncmanageddomainsusescollecteddomains",
-      "community": 8,
+      "community": 10,
       "norm_label": "testsyncmanageddomainsusescollecteddomains()"
     },
     {
@@ -1768,7 +1698,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_proxy_test_go_t",
-      "community": 8,
+      "community": 10,
       "norm_label": "t"
     },
     {
@@ -1778,7 +1708,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "cli_proxy_test_testresolveexternalprojectsskipsunresolvableprojects",
-      "community": 8,
+      "community": 10,
       "norm_label": "testresolveexternalprojectsskipsunresolvableprojects()"
     },
     {
@@ -1788,7 +1718,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "cli_proxy_test_testresolveexternalprojectsfailswhenprojectisexplicit",
-      "community": 8,
+      "community": 10,
       "norm_label": "testresolveexternalprojectsfailswhenprojectisexplicit()"
     },
     {
@@ -2158,7 +2088,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_stop",
-      "community": 68,
+      "community": 1,
       "norm_label": "stop.go"
     },
     {
@@ -2168,7 +2098,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_stop_newstopcmd",
-      "community": 68,
+      "community": 1,
       "norm_label": "newstopcmd()"
     },
     {
@@ -2178,7 +2108,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_stop_go_command",
-      "community": 68,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -2188,7 +2118,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_up",
-      "community": 71,
+      "community": 1,
       "norm_label": "up.go"
     },
     {
@@ -2198,7 +2128,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_up_newupcmd",
-      "community": 71,
+      "community": 1,
       "norm_label": "newupcmd()"
     },
     {
@@ -2208,7 +2138,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_up_go_command",
-      "community": 71,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -2218,7 +2148,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "cli_up_runuppreflight",
-      "community": 71,
+      "community": 1,
       "norm_label": "runuppreflight()"
     },
     {
@@ -2228,7 +2158,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "internal_cli_up_go_appcontext",
-      "community": 71,
+      "community": 1,
       "norm_label": "appcontext"
     },
     {
@@ -2378,7 +2308,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "compose_manifest",
-      "community": 97,
+      "community": 1,
       "norm_label": "manifest"
     },
     {
@@ -2388,7 +2318,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "manifestcompose",
-      "community": 97,
+      "community": 1,
       "norm_label": "manifestcompose"
     },
     {
@@ -2398,7 +2328,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "manifestproxy",
-      "community": 97,
+      "community": 1,
       "norm_label": "manifestproxy"
     },
     {
@@ -2588,7 +2518,7 @@
       "source_location": "L316",
       "_origin": "ast",
       "id": "compose_project_withprojectnames",
-      "community": 9,
+      "community": 1,
       "norm_label": ".withprojectnames()"
     },
     {
@@ -2598,7 +2528,7 @@
       "source_location": "L335",
       "_origin": "ast",
       "id": "compose_project_projectnameforpath",
-      "community": 9,
+      "community": 1,
       "norm_label": "projectnameforpath()"
     },
     {
@@ -2608,7 +2538,7 @@
       "source_location": "L354",
       "_origin": "ast",
       "id": "compose_project_legacyprojectnameforpath",
-      "community": 9,
+      "community": 1,
       "norm_label": "legacyprojectnameforpath()"
     },
     {
@@ -2618,7 +2548,7 @@
       "source_location": "L358",
       "_origin": "ast",
       "id": "compose_project_composeprojectlabel",
-      "community": 9,
+      "community": 1,
       "norm_label": "composeprojectlabel()"
     },
     {
@@ -2638,7 +2568,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_project_test",
-      "community": 9,
+      "community": 1,
       "norm_label": "project_test.go"
     },
     {
@@ -2648,7 +2578,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectdefaultstosinglecomposefile",
-      "community": 9,
+      "community": 1,
       "norm_label": "testresolveprojectdefaultstosinglecomposefile()"
     },
     {
@@ -2658,7 +2588,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_compose_project_test_go_t",
-      "community": 9,
+      "community": 1,
       "norm_label": "t"
     },
     {
@@ -2668,7 +2598,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectusesmanifestcomposefiles",
-      "community": 9,
+      "community": 1,
       "norm_label": "testresolveprojectusesmanifestcomposefiles()"
     },
     {
@@ -2678,7 +2608,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojecterrorswhenmanifestcomposefilemissing",
-      "community": 9,
+      "community": 1,
       "norm_label": "testresolveprojecterrorswhenmanifestcomposefilemissing()"
     },
     {
@@ -2688,7 +2618,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "compose_project_test_testcomposeargsincludesenvfileandallcomposefiles",
-      "community": 9,
+      "community": 1,
       "norm_label": "testcomposeargsincludesenvfileandallcomposefiles()"
     },
     {
@@ -2698,7 +2628,7 @@
       "source_location": "L133",
       "_origin": "ast",
       "id": "compose_project_test_testplanreturnsdockercommand",
-      "community": 9,
+      "community": 1,
       "norm_label": "testplanreturnsdockercommand()"
     },
     {
@@ -2708,7 +2638,7 @@
       "source_location": "L155",
       "_origin": "ast",
       "id": "compose_project_test_teststopprojectusescomposestop",
-      "community": 9,
+      "community": 1,
       "norm_label": "teststopprojectusescomposestop()"
     },
     {
@@ -2718,7 +2648,7 @@
       "source_location": "L179",
       "_origin": "ast",
       "id": "compose_project_test_testprojectnameforpathisstableandpathscoped",
-      "community": 9,
+      "community": 1,
       "norm_label": "testprojectnameforpathisstableandpathscoped()"
     },
     {
@@ -2798,7 +2728,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "config_config_default",
-      "community": 95,
+      "community": 82,
       "norm_label": "default()"
     },
     {
@@ -2828,7 +2758,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "config_config_defaultexternalproxydir",
-      "community": 95,
+      "community": 82,
       "norm_label": "defaultexternalproxydir()"
     },
     {
@@ -2878,7 +2808,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "config_config_test",
-      "community": 95,
+      "community": 82,
       "norm_label": "config_test.go"
     },
     {
@@ -2888,7 +2818,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "config_config_test_testdefaultconfig",
-      "community": 95,
+      "community": 82,
       "norm_label": "testdefaultconfig()"
     },
     {
@@ -2898,7 +2828,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_config_config_test_go_t",
-      "community": 95,
+      "community": 82,
       "norm_label": "t"
     },
     {
@@ -4352,196 +4282,6 @@
       "norm_label": "doc.go"
     },
     {
-      "label": "alerts_cooldown_test.go",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test",
-      "community": 67,
-      "norm_label": "alerts_cooldown_test.go"
-    },
-    {
-      "label": "testClock",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "observe_testclock",
-      "community": 67,
-      "norm_label": "testclock"
-    },
-    {
-      "label": "Time",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "internal_observe_alerts_cooldown_test_go_time",
-      "community": 67,
-      "norm_label": "time"
-    },
-    {
-      "label": ".Now()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "observe_testclock_now",
-      "community": 67,
-      "norm_label": ".now()"
-    },
-    {
-      "label": ".advance()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "observe_testclock_advance",
-      "community": 67,
-      "norm_label": ".advance()"
-    },
-    {
-      "label": "Duration",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "internal_observe_alerts_cooldown_test_go_duration",
-      "community": 67,
-      "norm_label": "duration"
-    },
-    {
-      "label": "newCooldownStore()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L26",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_newcooldownstore",
-      "community": 67,
-      "norm_label": "newcooldownstore()"
-    },
-    {
-      "label": "T",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L26",
-      "_origin": "ast",
-      "id": "internal_observe_alerts_cooldown_test_go_t",
-      "community": 67,
-      "norm_label": "t"
-    },
-    {
-      "label": "Store",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L26",
-      "_origin": "ast",
-      "id": "internal_observe_alerts_cooldown_test_go_store",
-      "community": 67,
-      "norm_label": "store"
-    },
-    {
-      "label": "storeErrorEvents()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L47",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_storeerrorevents",
-      "community": 67,
-      "norm_label": "storeerrorevents()"
-    },
-    {
-      "label": "distinctFailure()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L66",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_distinctfailure",
-      "community": 67,
-      "norm_label": "distinctfailure()"
-    },
-    {
-      "label": "countDeliveries()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L70",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_countdeliveries",
-      "community": 67,
-      "norm_label": "countdeliveries()"
-    },
-    {
-      "label": "TestCooldownCollapsesErrorRateBurst()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L90",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_testcooldowncollapseserrorrateburst",
-      "community": 67,
-      "norm_label": "testcooldowncollapseserrorrateburst()"
-    },
-    {
-      "label": "TestCooldownExpiresAndAllowsANewDelivery()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L111",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_testcooldownexpiresandallowsanewdelivery",
-      "community": 67,
-      "norm_label": "testcooldownexpiresandallowsanewdelivery()"
-    },
-    {
-      "label": "TestCooldownCollapsesNewIssueBurst()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L140",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_testcooldowncollapsesnewissueburst",
-      "community": 67,
-      "norm_label": "testcooldowncollapsesnewissueburst()"
-    },
-    {
-      "label": "TestZeroCooldownDeliversEveryTime()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L162",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_testzerocooldowndeliverseverytime",
-      "community": 67,
-      "norm_label": "testzerocooldowndeliverseverytime()"
-    },
-    {
-      "label": "TestWithoutCooldownErrorRateDeliversOncePerEvent()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L185",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_testwithoutcooldownerrorratedeliversonceperevent",
-      "community": 67,
-      "norm_label": "testwithoutcooldownerrorratedeliversonceperevent()"
-    },
-    {
-      "label": "TestAddAlertAppliesDefaultCooldownByKind()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L206",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_testaddalertappliesdefaultcooldownbykind",
-      "community": 67,
-      "norm_label": "testaddalertappliesdefaultcooldownbykind()"
-    },
-    {
-      "label": "TestEnsureAddsCooldownToAnExistingDatabase()",
-      "file_type": "code",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L239",
-      "_origin": "ast",
-      "id": "observe_alerts_cooldown_test_testensureaddscooldowntoanexistingdatabase",
-      "community": 67,
-      "norm_label": "testensureaddscooldowntoanexistingdatabase()"
-    },
-    {
       "label": "correlation.go",
       "file_type": "code",
       "source_file": "internal/observe/correlation.go",
@@ -5058,7 +4798,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "observe_event_extrapayload",
-      "community": 90,
+      "community": 87,
       "norm_label": "extrapayload()"
     },
     {
@@ -5208,7 +4948,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_event_test",
-      "community": 90,
+      "community": 87,
       "norm_label": "event_test.go"
     },
     {
@@ -5218,7 +4958,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayload",
-      "community": 90,
+      "community": 87,
       "norm_label": "testextrapayload()"
     },
     {
@@ -5228,7 +4968,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_event_test_go_t",
-      "community": 90,
+      "community": 87,
       "norm_label": "t"
     },
     {
@@ -5238,7 +4978,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayloadovernormalizedevent",
-      "community": 90,
+      "community": 87,
       "norm_label": "testextrapayloadovernormalizedevent()"
     },
     {
@@ -5248,7 +4988,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_fingerprint_test",
-      "community": 92,
+      "community": 87,
       "norm_label": "fingerprint_test.go"
     },
     {
@@ -5258,7 +4998,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "observe_fingerprint_test_fingerprintof",
-      "community": 92,
+      "community": 87,
       "norm_label": "fingerprintof()"
     },
     {
@@ -5268,7 +5008,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_observe_fingerprint_test_go_t",
-      "community": 92,
+      "community": 87,
       "norm_label": "t"
     },
     {
@@ -5278,7 +5018,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_observe_fingerprint_test_go_event",
-      "community": 92,
+      "community": 87,
       "norm_label": "event"
     },
     {
@@ -5288,7 +5028,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testfingerprintmasksvariabledata",
-      "community": 92,
+      "community": 87,
       "norm_label": "testfingerprintmasksvariabledata()"
     },
     {
@@ -5298,7 +5038,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testfingerprintstillseparatesdifferentfailures",
-      "community": 92,
+      "community": 87,
       "norm_label": "testfingerprintstillseparatesdifferentfailures()"
     },
     {
@@ -5308,7 +5048,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testexplicitfingerprintwins",
-      "community": 92,
+      "community": 87,
       "norm_label": "testexplicitfingerprintwins()"
     },
     {
@@ -5318,7 +5058,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testexplicitfingerprintisscopedbyproject",
-      "community": 92,
+      "community": 87,
       "norm_label": "testexplicitfingerprintisscopedbyproject()"
     },
     {
@@ -5328,7 +5068,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testexplicitfingerprintacceptssdklists",
-      "community": 92,
+      "community": 87,
       "norm_label": "testexplicitfingerprintacceptssdklists()"
     },
     {
@@ -5338,7 +5078,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testemptyfingerprintfallsbacktothederivedone",
-      "community": 92,
+      "community": 87,
       "norm_label": "testemptyfingerprintfallsbacktothederivedone()"
     },
     {
@@ -5348,7 +5088,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "observe_fingerprint_test_quote",
-      "community": 92,
+      "community": 87,
       "norm_label": "quote()"
     },
     {
@@ -5528,7 +5268,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_listen_test",
-      "community": 93,
+      "community": 6,
       "norm_label": "listen_test.go"
     },
     {
@@ -5538,7 +5278,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "observe_listen_test_newtestserver",
-      "community": 93,
+      "community": 6,
       "norm_label": "newtestserver()"
     },
     {
@@ -5548,7 +5288,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_listen_test_go_t",
-      "community": 93,
+      "community": 6,
       "norm_label": "t"
     },
     {
@@ -5558,7 +5298,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "server",
-      "community": 93,
+      "community": 6,
       "norm_label": "server"
     },
     {
@@ -5568,7 +5308,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "observe_listen_test_freeloopbackport",
-      "community": 93,
+      "community": 6,
       "norm_label": "freeloopbackport()"
     },
     {
@@ -5578,7 +5318,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "observe_listen_test_waitforhealth",
-      "community": 93,
+      "community": 6,
       "norm_label": "waitforhealth()"
     },
     {
@@ -5588,7 +5328,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveonserveseveryaddress",
-      "community": 93,
+      "community": 6,
       "norm_label": "testlistenandserveonserveseveryaddress()"
     },
     {
@@ -5598,7 +5338,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveontoleratesanunavailableextraaddress",
-      "community": 93,
+      "community": 6,
       "norm_label": "testlistenandserveontoleratesanunavailableextraaddress()"
     },
     {
@@ -5608,7 +5348,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveonfailswhentheprimaryaddressistaken",
-      "community": 93,
+      "community": 6,
       "norm_label": "testlistenandserveonfailswhentheprimaryaddressistaken()"
     },
     {
@@ -5618,58 +5358,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_migrations",
-      "community": 5,
+      "community": 37,
       "norm_label": "migrations.go"
-    },
-    {
-      "label": "columnAddition",
-      "file_type": "code",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "observe_columnaddition",
-      "community": 5,
-      "norm_label": "columnaddition"
-    },
-    {
-      "label": "applyColumnAdditions()",
-      "file_type": "code",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L36",
-      "_origin": "ast",
-      "id": "observe_migrations_applycolumnadditions",
-      "community": 5,
-      "norm_label": "applycolumnadditions()"
-    },
-    {
-      "label": "Context",
-      "file_type": "code",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L36",
-      "_origin": "ast",
-      "id": "internal_observe_migrations_go_context",
-      "community": 5,
-      "norm_label": "context"
-    },
-    {
-      "label": "DB",
-      "file_type": "code",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L36",
-      "_origin": "ast",
-      "id": "internal_observe_migrations_go_db",
-      "community": 5,
-      "norm_label": "db"
-    },
-    {
-      "label": "columnExists()",
-      "file_type": "code",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L60",
-      "_origin": "ast",
-      "id": "observe_migrations_columnexists",
-      "community": 5,
-      "norm_label": "columnexists()"
     },
     {
       "label": "network.go",
@@ -6508,7 +6198,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_reporter",
-      "community": 33,
+      "community": 78,
       "norm_label": "reporter.go"
     },
     {
@@ -6518,7 +6208,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "observe_reportertemplate",
-      "community": 33,
+      "community": 78,
       "norm_label": "reportertemplate"
     },
     {
@@ -6528,7 +6218,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "observe_reporterresult",
-      "community": 33,
+      "community": 78,
       "norm_label": "reporterresult"
     },
     {
@@ -6538,7 +6228,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "observe_reporter_supportedreporterstacks",
-      "community": 33,
+      "community": 78,
       "norm_label": "supportedreporterstacks()"
     },
     {
@@ -6548,7 +6238,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "observe_reporter_ensurereporter",
-      "community": 33,
+      "community": 78,
       "norm_label": "ensurereporter()"
     },
     {
@@ -6558,7 +6248,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_reporter_test",
-      "community": 33,
+      "community": 78,
       "norm_label": "reporter_test.go"
     },
     {
@@ -6568,7 +6258,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterwritesthelaravelfile",
-      "community": 33,
+      "community": 78,
       "norm_label": "testensurereporterwritesthelaravelfile()"
     },
     {
@@ -6578,7 +6268,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_observe_reporter_test_go_t",
-      "community": 33,
+      "community": 78,
       "norm_label": "t"
     },
     {
@@ -6588,7 +6278,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterkeepsexistingfile",
-      "community": 33,
+      "community": 78,
       "norm_label": "testensurereporterkeepsexistingfile()"
     },
     {
@@ -6598,7 +6288,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporteroverwriteswithforce",
-      "community": 33,
+      "community": 78,
       "norm_label": "testensurereporteroverwriteswithforce()"
     },
     {
@@ -6608,7 +6298,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterrejectsunsupportedstack",
-      "community": 33,
+      "community": 78,
       "norm_label": "testensurereporterrejectsunsupportedstack()"
     },
     {
@@ -6618,7 +6308,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterrequiresroot",
-      "community": 33,
+      "community": 78,
       "norm_label": "testensurereporterrequiresroot()"
     },
     {
@@ -6628,7 +6318,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "internal_observe_server_go_observe_server",
-      "community": 37,
+      "community": 6,
       "norm_label": "server"
     },
     {
@@ -6638,7 +6328,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "internal_observe_server_go_store",
-      "community": 37,
+      "community": 6,
       "norm_label": "store"
     },
     {
@@ -6648,7 +6338,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "internal_observe_server_go_dockerruntime",
-      "community": 94,
+      "community": 6,
       "norm_label": "dockerruntime"
     },
     {
@@ -6658,7 +6348,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "observe_server_newserver",
-      "community": 37,
+      "community": 6,
       "norm_label": "newserver()"
     },
     {
@@ -6668,7 +6358,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "observe_server_newserverwithdocker",
-      "community": 94,
+      "community": 6,
       "norm_label": "newserverwithdocker()"
     },
     {
@@ -6678,7 +6368,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "observe_server_handler",
-      "community": 37,
+      "community": 6,
       "norm_label": ".handler()"
     },
     {
@@ -6688,7 +6378,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "handler",
-      "community": 37,
+      "community": 6,
       "norm_label": "handler"
     },
     {
@@ -6698,7 +6388,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "observe_server_listenandserve",
-      "community": 37,
+      "community": 6,
       "norm_label": ".listenandserve()"
     },
     {
@@ -6708,7 +6398,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "internal_observe_server_go_context",
-      "community": 37,
+      "community": 6,
       "norm_label": "context"
     },
     {
@@ -6718,7 +6408,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "observe_server_listenandserveon",
-      "community": 37,
+      "community": 6,
       "norm_label": ".listenandserveon()"
     },
     {
@@ -6728,7 +6418,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "observe_server_uniqueaddrs",
-      "community": 37,
+      "community": 6,
       "norm_label": "uniqueaddrs()"
     },
     {
@@ -6738,7 +6428,7 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "observe_server_closelisteners",
-      "community": 37,
+      "community": 6,
       "norm_label": "closelisteners()"
     },
     {
@@ -6748,7 +6438,7 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "listener",
-      "community": 37,
+      "community": 6,
       "norm_label": "listener"
     },
     {
@@ -6798,7 +6488,7 @@
       "source_location": "L239",
       "_origin": "ast",
       "id": "observe_server_pollobservedcontainers",
-      "community": 37,
+      "community": 6,
       "norm_label": ".pollobservedcontainers()"
     },
     {
@@ -6808,7 +6498,7 @@
       "source_location": "L253",
       "_origin": "ast",
       "id": "observe_server_snapshotobservedcontainers",
-      "community": 37,
+      "community": 6,
       "norm_label": ".snapshotobservedcontainers()"
     },
     {
@@ -6828,7 +6518,7 @@
       "source_location": "L290",
       "_origin": "ast",
       "id": "observe_server_eventpayloadfromenvelope",
-      "community": 94,
+      "community": 6,
       "norm_label": "eventpayloadfromenvelope()"
     },
     {
@@ -6858,7 +6548,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_server_test",
-      "community": 94,
+      "community": 6,
       "norm_label": "server_test.go"
     },
     {
@@ -6868,7 +6558,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "observe_server_test_testserveracceptssimpleevent",
-      "community": 94,
+      "community": 6,
       "norm_label": "testserveracceptssimpleevent()"
     },
     {
@@ -6878,7 +6568,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_t",
-      "community": 94,
+      "community": 6,
       "norm_label": "t"
     },
     {
@@ -6888,7 +6578,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "observe_server_test_testeventpayloadfromenvelope",
-      "community": 94,
+      "community": 6,
       "norm_label": "testeventpayloadfromenvelope()"
     },
     {
@@ -6898,7 +6588,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "observe_server_test_testservercorrelateseventwithcontainerlogs",
-      "community": 94,
+      "community": 6,
       "norm_label": "testservercorrelateseventwithcontainerlogs()"
     },
     {
@@ -6908,7 +6598,7 @@
       "source_location": "L122",
       "_origin": "ast",
       "id": "observe_server_test_testserverservesobservepanelapi",
-      "community": 94,
+      "community": 6,
       "norm_label": "testserverservesobservepanelapi()"
     },
     {
@@ -6918,7 +6608,7 @@
       "source_location": "L178",
       "_origin": "ast",
       "id": "observe_fakedockerruntime",
-      "community": 96,
+      "community": 6,
       "norm_label": "fakedockerruntime"
     },
     {
@@ -6928,7 +6618,7 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "observe_fakedockerruntime_observedcontainers",
-      "community": 96,
+      "community": 6,
       "norm_label": ".observedcontainers()"
     },
     {
@@ -6938,7 +6628,7 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_context",
-      "community": 96,
+      "community": 6,
       "norm_label": "context"
     },
     {
@@ -6948,7 +6638,7 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_observedcontainer",
-      "community": 96,
+      "community": 6,
       "norm_label": "observedcontainer"
     },
     {
@@ -6958,7 +6648,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "observe_fakedockerruntime_logsaround",
-      "community": 96,
+      "community": 6,
       "norm_label": ".logsaround()"
     },
     {
@@ -6968,7 +6658,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_time",
-      "community": 96,
+      "community": 6,
       "norm_label": "time"
     },
     {
@@ -6978,7 +6668,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_duration",
-      "community": 96,
+      "community": 6,
       "norm_label": "duration"
     },
     {
@@ -6988,7 +6678,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_containerlog",
-      "community": 96,
+      "community": 6,
       "norm_label": "containerlog"
     },
     {
@@ -7022,20 +6712,10 @@
       "norm_label": "db"
     },
     {
-      "label": "Time",
-      "file_type": "code",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L25",
-      "_origin": "ast",
-      "id": "internal_observe_store_go_time",
-      "community": 5,
-      "norm_label": "time"
-    },
-    {
       "label": "StoredEvent",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L28",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "observe_storedevent",
       "community": 5,
@@ -7045,7 +6725,7 @@
       "label": "Issue",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L34",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "observe_issue",
       "community": 5,
@@ -7055,7 +6735,7 @@
       "label": "EventRecord",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L51",
+      "source_location": "L50",
       "_origin": "ast",
       "id": "observe_eventrecord",
       "community": 5,
@@ -7065,7 +6745,7 @@
       "label": "Timeline",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L70",
+      "source_location": "L69",
       "_origin": "ast",
       "id": "observe_timeline",
       "community": 5,
@@ -7075,7 +6755,7 @@
       "label": "ContainerLog",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L72",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "internal_observe_store_go_containerlog",
       "community": 5,
@@ -7085,7 +6765,7 @@
       "label": "ContainerEvent",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L73",
+      "source_location": "L72",
       "_origin": "ast",
       "id": "containerevent",
       "community": 5,
@@ -7095,7 +6775,7 @@
       "label": "Alert",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L80",
+      "source_location": "L79",
       "_origin": "ast",
       "id": "observe_alert",
       "community": 5,
@@ -7105,7 +6785,7 @@
       "label": "AlertDelivery",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L91",
+      "source_location": "L89",
       "_origin": "ast",
       "id": "observe_alertdelivery",
       "community": 5,
@@ -7115,7 +6795,7 @@
       "label": "CleanupResult",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L101",
+      "source_location": "L99",
       "_origin": "ast",
       "id": "observe_cleanupresult",
       "community": 5,
@@ -7125,7 +6805,7 @@
       "label": "DefaultDBPath()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L109",
+      "source_location": "L107",
       "_origin": "ast",
       "id": "observe_store_defaultdbpath",
       "community": 5,
@@ -7135,7 +6815,7 @@
       "label": "Paths",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L109",
+      "source_location": "L107",
       "_origin": "ast",
       "id": "internal_observe_store_go_paths",
       "community": 5,
@@ -7145,7 +6825,7 @@
       "label": "NewManager()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L113",
+      "source_location": "L111",
       "_origin": "ast",
       "id": "observe_store_newmanager",
       "community": 5,
@@ -7155,7 +6835,7 @@
       "label": ".Ensure()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L117",
+      "source_location": "L115",
       "_origin": "ast",
       "id": "observe_manager_ensure",
       "community": 5,
@@ -7165,7 +6845,7 @@
       "label": "Context",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L117",
+      "source_location": "L115",
       "_origin": "ast",
       "id": "internal_observe_store_go_context",
       "community": 5,
@@ -7175,7 +6855,7 @@
       "label": ".Open()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L150",
+      "source_location": "L144",
       "_origin": "ast",
       "id": "observe_manager_open",
       "community": 5,
@@ -7185,37 +6865,17 @@
       "label": "NewStore()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L160",
+      "source_location": "L154",
       "_origin": "ast",
       "id": "observe_store_newstore",
       "community": 5,
       "norm_label": "newstore()"
     },
     {
-      "label": "NewStoreWithClock()",
-      "file_type": "code",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L166",
-      "_origin": "ast",
-      "id": "observe_store_newstorewithclock",
-      "community": 5,
-      "norm_label": "newstorewithclock()"
-    },
-    {
-      "label": ".nowUTC()",
-      "file_type": "code",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L170",
-      "_origin": "ast",
-      "id": "observe_store_nowutc",
-      "community": 5,
-      "norm_label": ".nowutc()"
-    },
-    {
       "label": ".Ping()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L178",
+      "source_location": "L158",
       "_origin": "ast",
       "id": "observe_store_ping",
       "community": 5,
@@ -7225,7 +6885,7 @@
       "label": ".StoreEvent()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L182",
+      "source_location": "L162",
       "_origin": "ast",
       "id": "observe_store_storeevent",
       "community": 5,
@@ -7235,7 +6895,7 @@
       "label": "Event",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L182",
+      "source_location": "L162",
       "_origin": "ast",
       "id": "internal_observe_store_go_event",
       "community": 5,
@@ -7245,7 +6905,7 @@
       "label": ".StoreContainers()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L302",
+      "source_location": "L281",
       "_origin": "ast",
       "id": "observe_store_storecontainers",
       "community": 5,
@@ -7255,27 +6915,17 @@
       "label": "ObservedContainer",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L302",
+      "source_location": "L281",
       "_origin": "ast",
       "id": "internal_observe_store_go_observedcontainer",
       "community": 5,
       "norm_label": "observedcontainer"
     },
     {
-      "label": "DefaultCooldownSeconds()",
-      "file_type": "code",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L417",
-      "_origin": "ast",
-      "id": "observe_store_defaultcooldownseconds",
-      "community": 5,
-      "norm_label": "defaultcooldownseconds()"
-    },
-    {
       "label": ".AddAlert()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L425",
+      "source_location": "L382",
       "_origin": "ast",
       "id": "observe_store_addalert",
       "community": 5,
@@ -7285,7 +6935,7 @@
       "label": ".ListAlerts()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L456",
+      "source_location": "L410",
       "_origin": "ast",
       "id": "observe_store_listalerts",
       "community": 5,
@@ -7295,7 +6945,7 @@
       "label": ".RemoveAlert()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L491",
+      "source_location": "L445",
       "_origin": "ast",
       "id": "observe_store_removealert",
       "community": 5,
@@ -7305,7 +6955,7 @@
       "label": ".ListAlertDeliveries()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L503",
+      "source_location": "L457",
       "_origin": "ast",
       "id": "observe_store_listalertdeliveries",
       "community": 5,
@@ -7315,7 +6965,7 @@
       "label": ".StoreContainerLogs()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L541",
+      "source_location": "L495",
       "_origin": "ast",
       "id": "observe_store_storecontainerlogs",
       "community": 5,
@@ -7325,7 +6975,7 @@
       "label": ".ListIssues()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L584",
+      "source_location": "L538",
       "_origin": "ast",
       "id": "observe_store_listissues",
       "community": 5,
@@ -7335,7 +6985,7 @@
       "label": ".ListEvents()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L623",
+      "source_location": "L577",
       "_origin": "ast",
       "id": "observe_store_listevents",
       "community": 5,
@@ -7345,7 +6995,7 @@
       "label": ".ListContainers()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L662",
+      "source_location": "L616",
       "_origin": "ast",
       "id": "observe_store_listcontainers",
       "community": 5,
@@ -7355,7 +7005,7 @@
       "label": ".Timeline()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L702",
+      "source_location": "L656",
       "_origin": "ast",
       "id": "observe_store_timeline",
       "community": 5,
@@ -7365,7 +7015,7 @@
       "label": ".Cleanup()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L768",
+      "source_location": "L722",
       "_origin": "ast",
       "id": "observe_store_cleanup",
       "community": 5,
@@ -7375,7 +7025,7 @@
       "label": "containerEventsForSnapshot()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L810",
+      "source_location": "L764",
       "_origin": "ast",
       "id": "observe_store_containereventsforsnapshot",
       "community": 5,
@@ -7385,7 +7035,7 @@
       "label": "issueIsNew()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L845",
+      "source_location": "L799",
       "_origin": "ast",
       "id": "observe_store_issueisnew",
       "community": 5,
@@ -7395,7 +7045,7 @@
       "label": "Tx",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L845",
+      "source_location": "L799",
       "_origin": "ast",
       "id": "internal_observe_store_go_tx",
       "community": 5,
@@ -7405,7 +7055,7 @@
       "label": "insertEventAlertDeliveries()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L863",
+      "source_location": "L817",
       "_origin": "ast",
       "id": "observe_store_inserteventalertdeliveries",
       "community": 5,
@@ -7415,7 +7065,7 @@
       "label": "insertContainerAlertDeliveries()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L902",
+      "source_location": "L856",
       "_origin": "ast",
       "id": "observe_store_insertcontaineralertdeliveries",
       "community": 5,
@@ -7425,7 +7075,7 @@
       "label": "matchingAlerts()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L929",
+      "source_location": "L883",
       "_origin": "ast",
       "id": "observe_store_matchingalerts",
       "community": 5,
@@ -7435,37 +7085,17 @@
       "label": "insertAlertDelivery()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L958",
+      "source_location": "L912",
       "_origin": "ast",
       "id": "observe_store_insertalertdelivery",
       "community": 5,
       "norm_label": "insertalertdelivery()"
     },
     {
-      "label": "alertIsSilenced()",
-      "file_type": "code",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L982",
-      "_origin": "ast",
-      "id": "observe_store_alertissilenced",
-      "community": 5,
-      "norm_label": "alertissilenced()"
-    },
-    {
-      "label": "parseAlertDeliveryTime()",
-      "file_type": "code",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L1014",
-      "_origin": "ast",
-      "id": "observe_store_parsealertdeliverytime",
-      "community": 5,
-      "norm_label": "parsealertdeliverytime()"
-    },
-    {
       "label": "execDelete()",
       "file_type": "code",
       "source_file": "internal/observe/store.go",
-      "source_location": "L1024",
+      "source_location": "L924",
       "_origin": "ast",
       "id": "observe_store_execdelete",
       "community": 5,
@@ -7478,7 +7108,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_store_test",
-      "community": 90,
+      "community": 87,
       "norm_label": "store_test.go"
     },
     {
@@ -7488,7 +7118,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_store_test_teststoreeventgroupsissues",
-      "community": 90,
+      "community": 87,
       "norm_label": "teststoreeventgroupsissues()"
     },
     {
@@ -7498,7 +7128,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_store_test_go_t",
-      "community": 90,
+      "community": 87,
       "norm_label": "t"
     },
     {
@@ -7508,7 +7138,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_store_test_teststorecontainersrecordsstatusandrestartevents",
-      "community": 90,
+      "community": 87,
       "norm_label": "teststorecontainersrecordsstatusandrestartevents()"
     },
     {
@@ -7518,7 +7148,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_store_test_teststorecreatesalertdeliveries",
-      "community": 90,
+      "community": 87,
       "norm_label": "teststorecreatesalertdeliveries()"
     },
     {
@@ -7528,7 +7158,7 @@
       "source_location": "L206",
       "_origin": "ast",
       "id": "observe_store_test_testlisteventsandtimelinereturnrawpayload",
-      "community": 90,
+      "community": 87,
       "norm_label": "testlisteventsandtimelinereturnrawpayload()"
     },
     {
@@ -8178,7 +7808,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_bootstrap",
-      "community": 33,
+      "community": 8,
       "norm_label": "bootstrap.go"
     },
     {
@@ -8188,7 +7818,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxy_bootstrapresult",
-      "community": 33,
+      "community": 8,
       "norm_label": "bootstrapresult"
     },
     {
@@ -8198,7 +7828,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "proxy_bootstrapoptions",
-      "community": 33,
+      "community": 8,
       "norm_label": "bootstrapoptions"
     },
     {
@@ -8208,7 +7838,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxy",
-      "community": 33,
+      "community": 8,
       "norm_label": "bootstrapexternalproxy()"
     },
     {
@@ -8218,7 +7848,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_proxy_bootstrap_go_config",
-      "community": 33,
+      "community": 8,
       "norm_label": "config"
     },
     {
@@ -8228,7 +7858,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxywithoptions",
-      "community": 33,
+      "community": 8,
       "norm_label": "bootstrapexternalproxywithoptions()"
     },
     {
@@ -8238,7 +7868,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxysettings",
-      "community": 33,
+      "community": 8,
       "norm_label": "bootstrapexternalproxysettings()"
     },
     {
@@ -8248,7 +7878,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "externalsettingsconfig",
-      "community": 33,
+      "community": 8,
       "norm_label": "externalsettingsconfig"
     },
     {
@@ -8258,7 +7888,7 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "proxy_bootstrap_ensuremanagedfile",
-      "community": 33,
+      "community": 8,
       "norm_label": "ensuremanagedfile()"
     },
     {
@@ -8268,7 +7898,7 @@
       "source_location": "L117",
       "_origin": "ast",
       "id": "proxy_bootstrap_renderembeddedtemplate",
-      "community": 33,
+      "community": 8,
       "norm_label": "renderembeddedtemplate()"
     },
     {
@@ -8278,7 +7908,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy",
-      "community": 8,
+      "community": 10,
       "norm_label": "caddy.go"
     },
     {
@@ -8288,7 +7918,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "proxy_route",
-      "community": 8,
+      "community": 10,
       "norm_label": "route"
     },
     {
@@ -8298,7 +7928,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "proxy_site",
-      "community": 8,
+      "community": 10,
       "norm_label": "site"
     },
     {
@@ -8308,7 +7938,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "proxy_renderer",
-      "community": 8,
+      "community": 10,
       "norm_label": "renderer"
     },
     {
@@ -8318,7 +7948,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_paths",
-      "community": 8,
+      "community": 10,
       "norm_label": "paths"
     },
     {
@@ -8328,7 +7958,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_config",
-      "community": 8,
+      "community": 10,
       "norm_label": "config"
     },
     {
@@ -8338,7 +7968,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "proxy_caddy_newrenderer",
-      "community": 8,
+      "community": 10,
       "norm_label": "newrenderer()"
     },
     {
@@ -8348,7 +7978,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "proxy_renderer_render",
-      "community": 8,
+      "community": 10,
       "norm_label": ".render()"
     },
     {
@@ -8358,7 +7988,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_projectrecord",
-      "community": 8,
+      "community": 10,
       "norm_label": "projectrecord"
     },
     {
@@ -8368,7 +7998,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "proxy_renderer_write",
-      "community": 8,
+      "community": 10,
       "norm_label": ".write()"
     },
     {
@@ -8378,7 +8008,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "proxy_renderer_apply",
-      "community": 8,
+      "community": 10,
       "norm_label": ".apply()"
     },
     {
@@ -8388,7 +8018,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "proxy_renderer_projectsite",
-      "community": 8,
+      "community": 10,
       "norm_label": ".projectsite()"
     },
     {
@@ -8398,7 +8028,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "proxy_caddy_sudovalidate",
-      "community": 8,
+      "community": 10,
       "norm_label": "sudovalidate()"
     },
     {
@@ -8408,7 +8038,7 @@
       "source_location": "L152",
       "_origin": "ast",
       "id": "proxy_caddy_runinteractive",
-      "community": 8,
+      "community": 10,
       "norm_label": "runinteractive()"
     },
     {
@@ -8418,7 +8048,7 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "proxy_caddy_selectprojects",
-      "community": 8,
+      "community": 10,
       "norm_label": "selectprojects()"
     },
     {
@@ -8428,7 +8058,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy_test",
-      "community": 95,
+      "community": 10,
       "norm_label": "caddy_test.go"
     },
     {
@@ -8438,7 +8068,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "proxy_caddy_test_testrendervueflasksite",
-      "community": 95,
+      "community": 10,
       "norm_label": "testrendervueflasksite()"
     },
     {
@@ -8448,7 +8078,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_proxy_caddy_test_go_t",
-      "community": 95,
+      "community": 10,
       "norm_label": "t"
     },
     {
@@ -8558,7 +8188,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "proxy_external_usesdockerexternal",
-      "community": 8,
+      "community": 10,
       "norm_label": "usesdockerexternal()"
     },
     {
@@ -8888,7 +8518,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_external_test",
-      "community": 33,
+      "community": 8,
       "norm_label": "external_test.go"
     },
     {
@@ -8898,7 +8528,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxy_external_test_testbuildexternalprojectusesmanifestproxy",
-      "community": 33,
+      "community": 8,
       "norm_label": "testbuildexternalprojectusesmanifestproxy()"
     },
     {
@@ -8908,7 +8538,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_proxy_external_test_go_t",
-      "community": 33,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -8918,7 +8548,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "proxy_external_test_testbuildexternalprojectusesvueflaskfallback",
-      "community": 33,
+      "community": 8,
       "norm_label": "testbuildexternalprojectusesvueflaskfallback()"
     },
     {
@@ -8928,7 +8558,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "proxy_external_test_testensurecomposeoverridewritesaliases",
-      "community": 33,
+      "community": 8,
       "norm_label": "testensurecomposeoverridewritesaliases()"
     },
     {
@@ -8938,7 +8568,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "proxy_external_test_teststripmanageddomainsreplacesselectedsites",
-      "community": 33,
+      "community": 8,
       "norm_label": "teststripmanageddomainsreplacesselectedsites()"
     },
     {
@@ -8948,7 +8578,7 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "proxy_external_test_testbootstrapexternalproxycreatesandreusesfiles",
-      "community": 33,
+      "community": 8,
       "norm_label": "testbootstrapexternalproxycreatesandreusesfiles()"
     },
     {
@@ -8958,7 +8588,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "proxy_external_test_testbootstrapexternalproxywithforceupdatesmanagedfilesbutpreservesenv",
-      "community": 33,
+      "community": 8,
       "norm_label": "testbootstrapexternalproxywithforceupdatesmanagedfilesbutpreservesenv()"
     },
     {
@@ -8968,7 +8598,7 @@
       "source_location": "L214",
       "_origin": "ast",
       "id": "proxy_external_test_writetestfile",
-      "community": 33,
+      "community": 8,
       "norm_label": "writetestfile()"
     },
     {
@@ -8978,7 +8608,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "runner_runner",
-      "community": 67,
+      "community": 78,
       "norm_label": "runner"
     },
     {
@@ -8988,7 +8618,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "runner_cmd",
-      "community": 67,
+      "community": 78,
       "norm_label": "cmd"
     },
     {
@@ -8998,7 +8628,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_runner_runner_go_duration",
-      "community": 67,
+      "community": 78,
       "norm_label": "duration"
     },
     {
@@ -9008,7 +8638,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "runner_cmd_run",
-      "community": 67,
+      "community": 78,
       "norm_label": ".run()"
     },
     {
@@ -9018,7 +8648,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "internal_runner_runner_go_context",
-      "community": 67,
+      "community": 78,
       "norm_label": "context"
     },
     {
@@ -9028,7 +8658,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "runner_runner_test",
-      "community": 67,
+      "community": 9,
       "norm_label": "runner_test.go"
     },
     {
@@ -9038,7 +8668,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdruncapturesoutput",
-      "community": 67,
+      "community": 9,
       "norm_label": "testcmdruncapturesoutput()"
     },
     {
@@ -9048,7 +8678,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_runner_runner_test_go_t",
-      "community": 67,
+      "community": 9,
       "norm_label": "t"
     },
     {
@@ -9058,7 +8688,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunusesoutputaserrormessage",
-      "community": 67,
+      "community": 9,
       "norm_label": "testcmdrunusesoutputaserrormessage()"
     },
     {
@@ -9068,7 +8698,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunrespectstimeout",
-      "community": 67,
+      "community": 9,
       "norm_label": "testcmdrunrespectstimeout()"
     },
     {
@@ -9078,7 +8708,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunsetsworkingdir",
-      "community": 67,
+      "community": 9,
       "norm_label": "testcmdrunsetsworkingdir()"
     },
     {
@@ -9958,7 +9588,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_manager_runner_test",
-      "community": 33,
+      "community": 8,
       "norm_label": "manager_runner_test.go"
     },
     {
@@ -9968,7 +9598,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "services_fakerunner",
-      "community": 33,
+      "community": 8,
       "norm_label": "fakerunner"
     },
     {
@@ -9978,7 +9608,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "services_fakerunner_run",
-      "community": 33,
+      "community": 8,
       "norm_label": ".run()"
     },
     {
@@ -9988,7 +9618,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_context",
-      "community": 33,
+      "community": 8,
       "norm_label": "context"
     },
     {
@@ -9998,7 +9628,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "services_manager_runner_test_newtestmanager",
-      "community": 33,
+      "community": 8,
       "norm_label": "newtestmanager()"
     },
     {
@@ -10008,7 +9638,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_t",
-      "community": 33,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -10018,7 +9648,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_manager",
-      "community": 33,
+      "community": 8,
       "norm_label": "manager"
     },
     {
@@ -10028,7 +9658,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartensuresnetworkandcomposesup",
-      "community": 33,
+      "community": 8,
       "norm_label": "teststartensuresnetworkandcomposesup()"
     },
     {
@@ -10038,7 +9668,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartcreatesnetworkwheninspectfails",
-      "community": 33,
+      "community": 8,
       "norm_label": "teststartcreatesnetworkwheninspectfails()"
     },
     {
@@ -10048,7 +9678,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartrejectsunsupportedservicewithoutdocker",
-      "community": 33,
+      "community": 8,
       "norm_label": "teststartrejectsunsupportedservicewithoutdocker()"
     },
     {
@@ -10058,7 +9688,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststopcomposesstop",
-      "community": 33,
+      "community": 8,
       "norm_label": "teststopcomposesstop()"
     },
     {
@@ -10068,7 +9698,7 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststatusallservices",
-      "community": 33,
+      "community": 8,
       "norm_label": "teststatusallservices()"
     },
     {
@@ -10078,7 +9708,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_manager_test",
-      "community": 33,
+      "community": 8,
       "norm_label": "manager_test.go"
     },
     {
@@ -10088,7 +9718,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "services_manager_test_testbootstrapwritessharedservicescompose",
-      "community": 33,
+      "community": 8,
       "norm_label": "testbootstrapwritessharedservicescompose()"
     },
     {
@@ -10098,7 +9728,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_services_manager_test_go_t",
-      "community": 33,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -10108,7 +9738,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "services_manager_test_testvalidateservicerejectsunknownservice",
-      "community": 33,
+      "community": 8,
       "norm_label": "testvalidateservicerejectsunknownservice()"
     },
     {
@@ -10118,7 +9748,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version",
-      "community": 33,
+      "community": 68,
       "norm_label": "version.go"
     },
     {
@@ -10128,7 +9758,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "version_version_string",
-      "community": 33,
+      "community": 78,
       "norm_label": "string()"
     },
     {
@@ -10138,7 +9768,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "version_version_long",
-      "community": 33,
+      "community": 68,
       "norm_label": "long()"
     },
     {
@@ -10148,7 +9778,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version_test",
-      "community": 33,
+      "community": 8,
       "norm_label": "version_test.go"
     },
     {
@@ -10158,7 +9788,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "version_version_test_teststringreturnsversion",
-      "community": 33,
+      "community": 8,
       "norm_label": "teststringreturnsversion()"
     },
     {
@@ -10168,7 +9798,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_version_version_test_go_t",
-      "community": 33,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -10178,7 +9808,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "version_version_test_testlongincludesversioncommitanddate",
-      "community": 33,
+      "community": 8,
       "norm_label": "testlongincludesversioncommitanddate()"
     },
     {
@@ -10188,7 +9818,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "version_version_test_contains",
-      "community": 33,
+      "community": 8,
       "norm_label": "contains()"
     },
     {
@@ -10198,7 +9828,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "version_version_test_indexof",
-      "community": 33,
+      "community": 8,
       "norm_label": "indexof()"
     },
     {
@@ -11349,7 +10979,7 @@
       "label": "Captura de logs: modelo de una sola foto",
       "file_type": "document",
       "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L433",
+      "source_location": "L423",
       "_origin": "ast",
       "id": "docs_improvements_captura_de_logs_modelo_de_una_sola_foto",
       "community": 51,
@@ -11359,27 +10989,17 @@
       "label": "Perdida de datos y cosmetica",
       "file_type": "document",
       "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L447",
+      "source_location": "L437",
       "_origin": "ast",
       "id": "docs_improvements_perdida_de_datos_y_cosmetica",
       "community": 51,
       "norm_label": "perdida de datos y cosmetica"
     },
     {
-      "label": "Estado de implementacion (2026-08-11)",
-      "file_type": "document",
-      "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L471",
-      "_origin": "ast",
-      "id": "docs_improvements_estado_de_implementacion_2026_08_11",
-      "community": 51,
-      "norm_label": "estado de implementacion (2026-08-11)"
-    },
-    {
       "label": "Roadmap de mejoras priorizado",
       "file_type": "document",
       "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L515",
+      "source_location": "L461",
       "_origin": "ast",
       "id": "docs_improvements_roadmap_de_mejoras_priorizado",
       "community": 51,
@@ -11389,7 +11009,7 @@
       "label": "Orden sugerido de ataque",
       "file_type": "document",
       "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L542",
+      "source_location": "L488",
       "_origin": "ast",
       "id": "docs_improvements_orden_sugerido_de_ataque",
       "community": 51,
@@ -12219,7 +11839,7 @@
       "label": "`observe cleanup`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L813",
+      "source_location": "L809",
       "_origin": "ast",
       "id": "docs_usage_observe_cleanup",
       "community": 45,
@@ -12229,7 +11849,7 @@
       "label": "4.18 `devherd sentry ...`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L829",
+      "source_location": "L825",
       "_origin": "ast",
       "id": "docs_usage_4_18_devherd_sentry",
       "community": 80,
@@ -12239,7 +11859,7 @@
       "label": "`sentry init <project> --stack <stack>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L835",
+      "source_location": "L831",
       "_origin": "ast",
       "id": "docs_usage_sentry_init_project_stack_stack",
       "community": 80,
@@ -12249,7 +11869,7 @@
       "label": "`sentry set-dsn <project> --dsn <dsn>` / `sentry test <project>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L849",
+      "source_location": "L845",
       "_origin": "ast",
       "id": "docs_usage_sentry_set_dsn_project_dsn_dsn_sentry_test_project",
       "community": 80,
@@ -12259,7 +11879,7 @@
       "label": "5. El manifiesto `.devherd.yml`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L854",
+      "source_location": "L850",
       "_origin": "ast",
       "id": "docs_usage_5_el_manifiesto_devherd_yml",
       "community": 72,
@@ -12269,7 +11889,7 @@
       "label": "6. Flujos de trabajo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L887",
+      "source_location": "L883",
       "_origin": "ast",
       "id": "docs_usage_6_flujos_de_trabajo",
       "community": 75,
@@ -12279,7 +11899,7 @@
       "label": "6.1 Modo proxy en Docker externo (recomendado)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L889",
+      "source_location": "L885",
       "_origin": "ast",
       "id": "docs_usage_6_1_modo_proxy_en_docker_externo_recomendado",
       "community": 75,
@@ -12289,7 +11909,7 @@
       "label": "6.2 Modo proxy en host (Caddy + /etc/hosts)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L912",
+      "source_location": "L908",
       "_origin": "ast",
       "id": "docs_usage_6_2_modo_proxy_en_host_caddy_etc_hosts",
       "community": 75,
@@ -12299,7 +11919,7 @@
       "label": "6.3 Repositorio sin Docker",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L928",
+      "source_location": "L924",
       "_origin": "ast",
       "id": "docs_usage_6_3_repositorio_sin_docker",
       "community": 75,
@@ -12309,7 +11929,7 @@
       "label": "6.4 Servicios compartidos + observabilidad",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L937",
+      "source_location": "L933",
       "_origin": "ast",
       "id": "docs_usage_6_4_servicios_compartidos_observabilidad",
       "community": 75,
@@ -12319,7 +11939,7 @@
       "label": "6.5 Bajar todo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L951",
+      "source_location": "L947",
       "_origin": "ast",
       "id": "docs_usage_6_5_bajar_todo",
       "community": 75,
@@ -12329,7 +11949,7 @@
       "label": "7. Donde vive el estado",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L961",
+      "source_location": "L957",
       "_origin": "ast",
       "id": "docs_usage_7_donde_vive_el_estado",
       "community": 72,
@@ -12339,7 +11959,7 @@
       "label": "8. Patrones recomendados para proyectos Compose",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L982",
+      "source_location": "L978",
       "_origin": "ast",
       "id": "docs_usage_8_patrones_recomendados_para_proyectos_compose",
       "community": 72,
@@ -12349,7 +11969,7 @@
       "label": "8.1 Aislamiento de nombres de contenedor",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L984",
+      "source_location": "L980",
       "_origin": "ast",
       "id": "docs_usage_8_1_aislamiento_de_nombres_de_contenedor",
       "community": 72,
@@ -12359,7 +11979,7 @@
       "label": "8.2 Volumenes que sobreviven a cambios de project-name",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1027",
+      "source_location": "L1023",
       "_origin": "ast",
       "id": "docs_usage_8_2_volumenes_que_sobreviven_a_cambios_de_project_name",
       "community": 72,
@@ -12369,7 +11989,7 @@
       "label": "8.3 Probar sin tocar tu configuracion real",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1048",
+      "source_location": "L1044",
       "_origin": "ast",
       "id": "docs_usage_8_3_probar_sin_tocar_tu_configuracion_real",
       "community": 72,
@@ -14079,7 +13699,7 @@
       "label": "9. Limpiar datos viejos",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L686",
+      "source_location": "L681",
       "_origin": "ast",
       "id": "docs_observe_9_limpiar_datos_viejos",
       "community": 49,
@@ -14089,7 +13709,7 @@
       "label": "10. Desactivar Observe en el proyecto",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L706",
+      "source_location": "L701",
       "_origin": "ast",
       "id": "docs_observe_10_desactivar_observe_en_el_proyecto",
       "community": 49,
@@ -14099,7 +13719,7 @@
       "label": "11. Comandos y como funcionan",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L714",
+      "source_location": "L709",
       "_origin": "ast",
       "id": "docs_observe_11_comandos_y_como_funcionan",
       "community": 49,
@@ -14109,7 +13729,7 @@
       "label": "12. Criterio de exito del MVP",
       "file_type": "document",
       "source_file": "docs/observe.md",
-      "source_location": "L734",
+      "source_location": "L729",
       "_origin": "ast",
       "id": "docs_observe_12_criterio_de_exito_del_mvp",
       "community": 49,
@@ -16212,9 +15832,9 @@
       "source_location": "L39",
       "weight": 1.0,
       "context": "return_type",
-      "confidence_score": 1.0,
       "source": "cli_compose_runtime_resolveexternalproject",
-      "target": "internal_cli_compose_runtime_go_externalproject"
+      "target": "internal_cli_compose_runtime_go_externalproject",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -17495,16 +17115,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L1168",
-      "weight": 1.0,
-      "source": "cli_observe",
-      "target": "cli_observe_parseobservecooldownseconds",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe.go",
       "source_location": "L859",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -18516,17 +18126,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/observe.go",
-      "source_location": "L528",
-      "weight": 1.0,
-      "source": "cli_observe_newobservealertaddcmd",
-      "target": "cli_observe_parseobservecooldownseconds",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe.go",
       "source_location": "L449",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -18554,17 +18153,6 @@
       "confidence_score": 1.0,
       "source": "cli_observe_newobservealertaddcmd",
       "target": "internal_cli_observe_go_context"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/cli/observe.go",
-      "source_location": "L526",
-      "weight": 1.0,
-      "source": "cli_observe_newobservealertaddcmd",
-      "target": "observe_store_defaultcooldownseconds"
     },
     {
       "relation": "calls",
@@ -19280,134 +18868,6 @@
       "target": "observe_reachability_probefromcontainer"
     },
     {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "cli_observe_cooldown_test_testparseobservecooldownsecondsacceptszero",
-      "target": "cli_observe_parseobservecooldownseconds"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L26",
-      "weight": 1.0,
-      "source": "cli_observe_cooldown_test_testparseobservecooldownsecondsparsesdurations",
-      "target": "cli_observe_parseobservecooldownseconds"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L20",
-      "weight": 1.0,
-      "source": "cli_observe_cooldown_test_testparseobservecooldownsecondsrejectsnegative",
-      "target": "cli_observe_parseobservecooldownseconds"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L37",
-      "weight": 1.0,
-      "source": "cli_observe_cooldown_test",
-      "target": "cli_observe_cooldown_test_testdefaultcooldownfollowsthewindowonlyforerrorrate",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "cli_observe_cooldown_test",
-      "target": "cli_observe_cooldown_test_testparseobservecooldownsecondsacceptszero",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L25",
-      "weight": 1.0,
-      "source": "cli_observe_cooldown_test",
-      "target": "cli_observe_cooldown_test_testparseobservecooldownsecondsparsesdurations",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L19",
-      "weight": 1.0,
-      "source": "cli_observe_cooldown_test",
-      "target": "cli_observe_cooldown_test_testparseobservecooldownsecondsrejectsnegative",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L9",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "cli_observe_cooldown_test_testparseobservecooldownsecondsacceptszero",
-      "target": "internal_cli_observe_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L37",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "cli_observe_cooldown_test_testdefaultcooldownfollowsthewindowonlyforerrorrate",
-      "target": "internal_cli_observe_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L25",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "cli_observe_cooldown_test_testparseobservecooldownsecondsparsesdurations",
-      "target": "internal_cli_observe_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L19",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "cli_observe_cooldown_test_testparseobservecooldownsecondsrejectsnegative",
-      "target": "internal_cli_observe_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/cli/observe_cooldown_test.go",
-      "source_location": "L38",
-      "weight": 1.0,
-      "source": "cli_observe_cooldown_test_testdefaultcooldownfollowsthewindowonlyforerrorrate",
-      "target": "observe_store_defaultcooldownseconds"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/observe_daemon.go",
@@ -19990,9 +19450,9 @@
       "source_file": "internal/cli/proxy.go",
       "source_location": "L29",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "cli_proxy",
-      "target": "cli_proxy_resolveexternalprojects"
+      "target": "cli_proxy_resolveexternalprojects",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -20011,9 +19471,9 @@
       "source_file": "internal/cli/proxy.go",
       "source_location": "L105",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "cli_proxy_newproxyapplycmd",
-      "target": "cli_proxy_resolveexternalprojects"
+      "target": "cli_proxy_resolveexternalprojects",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -20022,9 +19482,9 @@
       "source_location": "L29",
       "weight": 1.0,
       "context": "parameter_type",
-      "confidence_score": 1.0,
       "source": "cli_proxy_resolveexternalprojects",
-      "target": "internal_cli_proxy_go_config"
+      "target": "internal_cli_proxy_go_config",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -20033,9 +19493,9 @@
       "source_location": "L29",
       "weight": 1.0,
       "context": "return_type",
-      "confidence_score": 1.0,
       "source": "cli_proxy_resolveexternalprojects",
-      "target": "internal_cli_proxy_go_externalproject"
+      "target": "internal_cli_proxy_go_externalproject",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -20044,9 +19504,9 @@
       "source_location": "L29",
       "weight": 1.0,
       "context": "parameter_type",
-      "confidence_score": 1.0,
       "source": "cli_proxy_resolveexternalprojects",
-      "target": "internal_cli_proxy_go_projectrecord"
+      "target": "internal_cli_proxy_go_projectrecord",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -20340,9 +19800,9 @@
       "source_file": "internal/cli/proxy_test.go",
       "source_location": "L78",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "cli_proxy_test",
-      "target": "cli_proxy_test_testresolveexternalprojectsfailswhenprojectisexplicit"
+      "target": "cli_proxy_test_testresolveexternalprojectsfailswhenprojectisexplicit",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -20350,9 +19810,9 @@
       "source_file": "internal/cli/proxy_test.go",
       "source_location": "L44",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "cli_proxy_test",
-      "target": "cli_proxy_test_testresolveexternalprojectsskipsunresolvableprojects"
+      "target": "cli_proxy_test_testresolveexternalprojectsskipsunresolvableprojects",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -20382,9 +19842,9 @@
       "source_location": "L78",
       "weight": 1.0,
       "context": "parameter_type",
-      "confidence_score": 1.0,
       "source": "cli_proxy_test_testresolveexternalprojectsfailswhenprojectisexplicit",
-      "target": "internal_cli_proxy_test_go_t"
+      "target": "internal_cli_proxy_test_go_t",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -20393,9 +19853,9 @@
       "source_location": "L44",
       "weight": 1.0,
       "context": "parameter_type",
-      "confidence_score": 1.0,
       "source": "cli_proxy_test_testresolveexternalprojectsskipsunresolvableprojects",
-      "target": "internal_cli_proxy_test_go_t"
+      "target": "internal_cli_proxy_test_go_t",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -26398,663 +25858,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L70",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_countdeliveries",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L66",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_distinctfailure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L26",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_newcooldownstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L47",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_storeerrorevents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L206",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_testaddalertappliesdefaultcooldownbykind",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L90",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_testcooldowncollapseserrorrateburst",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L140",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_testcooldowncollapsesnewissueburst",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L111",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_testcooldownexpiresandallowsanewdelivery",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L239",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_testensureaddscooldowntoanexistingdatabase",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L185",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_testwithoutcooldownerrorratedeliversonceperevent",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L162",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_alerts_cooldown_test_testzerocooldowndeliverseverytime",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test",
-      "target": "observe_testclock",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L26",
-      "weight": 1.0,
-      "context": "return_type",
-      "source": "observe_alerts_cooldown_test_newcooldownstore",
-      "target": "observe_testclock",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L15",
-      "weight": 1.0,
-      "context": "field",
-      "source": "observe_testclock",
-      "target": "internal_observe_alerts_cooldown_test_go_time",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "observe_testclock",
-      "target": "observe_testclock_advance",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L18",
-      "weight": 1.0,
-      "source": "observe_testclock",
-      "target": "observe_testclock_now",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L18",
-      "weight": 1.0,
-      "context": "return_type",
-      "source": "observe_testclock_now",
-      "target": "internal_observe_alerts_cooldown_test_go_time",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/correlation.go",
-      "source_location": "L89",
-      "weight": 1.0,
-      "source": "observe_correlation_parseobservetime",
-      "target": "observe_testclock_now"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/docker.go",
-      "source_location": "L99",
-      "weight": 1.0,
-      "source": "observe_dockercli_logsaround",
-      "target": "observe_testclock_now"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/event.go",
-      "source_location": "L239",
-      "weight": 1.0,
-      "source": "observe_event_neweventid",
-      "target": "observe_testclock_now"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/event.go",
-      "source_location": "L77",
-      "weight": 1.0,
-      "source": "observe_event_normalizeevent",
-      "target": "observe_testclock_now"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/store.go",
-      "source_location": "L773",
-      "weight": 1.0,
-      "source": "observe_store_cleanup",
-      "target": "observe_testclock_now"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/store.go",
-      "source_location": "L172",
-      "weight": 1.0,
-      "source": "observe_store_nowutc",
-      "target": "observe_testclock_now"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/runner/runner.go",
-      "source_location": "L45",
-      "weight": 1.0,
-      "source": "runner_cmd_run",
-      "target": "observe_testclock_now"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/runner/runner_test.go",
-      "source_location": "L44",
-      "weight": 1.0,
-      "source": "runner_runner_test_testcmdrunrespectstimeout",
-      "target": "observe_testclock_now"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L130",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldownexpiresandallowsanewdelivery",
-      "target": "observe_testclock_advance",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L22",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_testclock_advance",
-      "target": "internal_observe_alerts_cooldown_test_go_duration",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L26",
-      "weight": 1.0,
-      "context": "return_type",
-      "source": "observe_alerts_cooldown_test_newcooldownstore",
-      "target": "internal_observe_alerts_cooldown_test_go_store",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L26",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_newcooldownstore",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L44",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_newcooldownstore",
-      "target": "observe_store_newstorewithclock"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L208",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testaddalertappliesdefaultcooldownbykind",
-      "target": "observe_alerts_cooldown_test_newcooldownstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L92",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldowncollapseserrorrateburst",
-      "target": "observe_alerts_cooldown_test_newcooldownstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L142",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldowncollapsesnewissueburst",
-      "target": "observe_alerts_cooldown_test_newcooldownstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L113",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldownexpiresandallowsanewdelivery",
-      "target": "observe_alerts_cooldown_test_newcooldownstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L187",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testwithoutcooldownerrorratedeliversonceperevent",
-      "target": "observe_alerts_cooldown_test_newcooldownstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L164",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testzerocooldowndeliverseverytime",
-      "target": "observe_alerts_cooldown_test_newcooldownstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L70",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_countdeliveries",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L47",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_storeerrorevents",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L206",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_testaddalertappliesdefaultcooldownbykind",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L90",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_testcooldowncollapseserrorrateburst",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L140",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_testcooldowncollapsesnewissueburst",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L111",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_testcooldownexpiresandallowsanewdelivery",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L239",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_testensureaddscooldowntoanexistingdatabase",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L185",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_testwithoutcooldownerrorratedeliversonceperevent",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L162",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_testzerocooldowndeliverseverytime",
-      "target": "internal_observe_alerts_cooldown_test_go_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L70",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_countdeliveries",
-      "target": "internal_observe_alerts_cooldown_test_go_store",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L47",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_alerts_cooldown_test_storeerrorevents",
-      "target": "internal_observe_alerts_cooldown_test_go_store",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L53",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_storeerrorevents",
-      "target": "observe_event_normalizeevent"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L104",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldowncollapseserrorrateburst",
-      "target": "observe_alerts_cooldown_test_storeerrorevents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L153",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldowncollapsesnewissueburst",
-      "target": "observe_alerts_cooldown_test_storeerrorevents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L125",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldownexpiresandallowsanewdelivery",
-      "target": "observe_alerts_cooldown_test_storeerrorevents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L199",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testwithoutcooldownerrorratedeliversonceperevent",
-      "target": "observe_alerts_cooldown_test_storeerrorevents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L175",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testzerocooldowndeliverseverytime",
-      "target": "observe_alerts_cooldown_test_storeerrorevents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L67",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_distinctfailure",
-      "target": "version_version_string"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L153",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldowncollapsesnewissueburst",
-      "target": "observe_alerts_cooldown_test_distinctfailure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L175",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testzerocooldowndeliverseverytime",
-      "target": "observe_alerts_cooldown_test_distinctfailure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L106",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldowncollapseserrorrateburst",
-      "target": "observe_alerts_cooldown_test_countdeliveries",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L156",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldowncollapsesnewissueburst",
-      "target": "observe_alerts_cooldown_test_countdeliveries",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L126",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testcooldownexpiresandallowsanewdelivery",
-      "target": "observe_alerts_cooldown_test_countdeliveries",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L201",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testwithoutcooldownerrorratedeliversonceperevent",
-      "target": "observe_alerts_cooldown_test_countdeliveries",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/alerts_cooldown_test.go",
-      "source_location": "L178",
-      "weight": 1.0,
-      "source": "observe_alerts_cooldown_test_testzerocooldowndeliverseverytime",
-      "target": "observe_alerts_cooldown_test_countdeliveries",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "internal/observe/correlation.go",
       "source_location": "L62",
       "weight": 1.0,
@@ -29332,102 +28135,6 @@
       "confidence_score": 1.0,
       "source": "observe_listen_test_testlistenandserveontoleratesanunavailableextraaddress",
       "target": "observe_listen_test_waitforhealth"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L18",
-      "weight": 1.0,
-      "source": "observe_migrations",
-      "target": "observe_columnaddition",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L36",
-      "weight": 1.0,
-      "source": "observe_migrations",
-      "target": "observe_migrations_applycolumnadditions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L60",
-      "weight": 1.0,
-      "source": "observe_migrations",
-      "target": "observe_migrations_columnexists",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "internal/observe/store.go",
-      "source_location": "L143",
-      "weight": 1.0,
-      "source": "observe_manager_ensure",
-      "target": "observe_migrations_applycolumnadditions"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L36",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_migrations_applycolumnadditions",
-      "target": "internal_observe_migrations_go_context",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L36",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_migrations_applycolumnadditions",
-      "target": "internal_observe_migrations_go_db",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L38",
-      "weight": 1.0,
-      "source": "observe_migrations_applycolumnadditions",
-      "target": "observe_migrations_columnexists",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L60",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_migrations_columnexists",
-      "target": "internal_observe_migrations_go_context",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/migrations.go",
-      "source_location": "L60",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_migrations_columnexists",
-      "target": "internal_observe_migrations_go_db",
-      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -32252,17 +30959,6 @@
       "target": "internal_observe_store_go_db"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L25",
-      "weight": 1.0,
-      "context": "field",
-      "source": "observe_store",
-      "target": "internal_observe_store_go_time",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/store.go",
@@ -32343,16 +31039,6 @@
       "target": "observe_store_addalert"
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L982",
-      "weight": 1.0,
-      "source": "observe_store",
-      "target": "observe_store_alertissilenced",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/store.go",
@@ -32371,16 +31057,6 @@
       "confidence_score": 1.0,
       "source": "observe_store",
       "target": "observe_store_containereventsforsnapshot"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L417",
-      "weight": 1.0,
-      "source": "observe_store",
-      "target": "observe_store_defaultcooldownseconds",
-      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -32524,37 +31200,6 @@
       "target": "observe_store"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L166",
-      "weight": 1.0,
-      "context": "return_type",
-      "source": "observe_store_newstorewithclock",
-      "target": "observe_store",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L170",
-      "weight": 1.0,
-      "source": "observe_store",
-      "target": "observe_store_nowutc",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L1014",
-      "weight": 1.0,
-      "source": "observe_store",
-      "target": "observe_store_parsealertdeliverytime",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/store.go",
@@ -32686,94 +31331,6 @@
       "confidence_score": 1.0,
       "source": "observe_store_newstore",
       "target": "internal_observe_store_go_db"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L166",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_newstorewithclock",
-      "target": "internal_observe_store_go_db",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L982",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_alertissilenced",
-      "target": "internal_observe_store_go_time",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L958",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_insertalertdelivery",
-      "target": "internal_observe_store_go_time",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L902",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_insertcontaineralertdeliveries",
-      "target": "internal_observe_store_go_time",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L863",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_inserteventalertdeliveries",
-      "target": "internal_observe_store_go_time",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L166",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_newstorewithclock",
-      "target": "internal_observe_store_go_time",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L170",
-      "weight": 1.0,
-      "context": "return_type",
-      "source": "observe_store_nowutc",
-      "target": "internal_observe_store_go_time",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L1014",
-      "weight": 1.0,
-      "context": "return_type",
-      "source": "observe_store_parsealertdeliverytime",
-      "target": "internal_observe_store_go_time",
-      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -32911,17 +31468,6 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/store.go",
-      "source_location": "L982",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_alertissilenced",
-      "target": "observe_alert",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
       "source_location": "L904",
       "weight": 1.0,
       "context": "parameter_type",
@@ -33016,17 +31562,6 @@
       "confidence_score": 1.0,
       "source": "observe_store_addalert",
       "target": "internal_observe_store_go_context"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L982",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_alertissilenced",
-      "target": "internal_observe_store_go_context",
-      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -33227,28 +31762,6 @@
       "target": "internal_observe_store_go_context"
     },
     {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L307",
-      "weight": 1.0,
-      "source": "observe_store_storecontainers",
-      "target": "observe_store_nowutc",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L183",
-      "weight": 1.0,
-      "source": "observe_store_storeevent",
-      "target": "observe_store_nowutc",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/store.go",
@@ -33363,17 +31876,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/store.go",
-      "source_location": "L437",
-      "weight": 1.0,
-      "source": "observe_store_addalert",
-      "target": "observe_store_defaultcooldownseconds",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
       "source_location": "L728",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -33390,17 +31892,6 @@
       "confidence_score": 1.0,
       "source": "observe_store_issueisnew",
       "target": "internal_observe_store_go_tx"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L982",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "observe_store_alertissilenced",
-      "target": "internal_observe_store_go_tx",
-      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -33500,28 +31991,6 @@
       "confidence_score": 1.0,
       "source": "observe_store_insertcontaineralertdeliveries",
       "target": "observe_store_matchingalerts"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L959",
-      "weight": 1.0,
-      "source": "observe_store_insertalertdelivery",
-      "target": "observe_store_alertissilenced",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "internal/observe/store.go",
-      "source_location": "L1002",
-      "weight": 1.0,
-      "source": "observe_store_alertissilenced",
-      "target": "observe_store_parsealertdeliverytime",
-      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -41289,9 +39758,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams",
-      "target": "docs_architecture"
+      "target": "docs_architecture",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -41299,9 +39768,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_architecture"
+      "target": "docs_architecture",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -41589,9 +40058,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_contributing"
+      "target": "docs_contributing",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -41799,9 +40268,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_improvements"
+      "target": "docs_improvements",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -41852,16 +40321,6 @@
       "confidence_score": 1.0,
       "source": "docs_improvements_devherd_revisi\u00f3n_de_arquitectura_e_infraestructura",
       "target": "docs_improvements_estado_de_implementacion_2026_07_21"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPROVEMENTS.md",
-      "source_location": "L471",
-      "weight": 1.0,
-      "source": "docs_improvements_devherd_revisi\u00f3n_de_arquitectura_e_infraestructura",
-      "target": "docs_improvements_estado_de_implementacion_2026_08_11",
-      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -42079,9 +40538,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "devherd_v1_app_cross_platform_runtime_2026_05_05"
+      "target": "devherd_v1_app_cross_platform_runtime_2026_05_05",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42089,9 +40548,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "devherd_v1_app_readme"
+      "target": "devherd_v1_app_readme",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42099,9 +40558,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "devherd_v1_app_validation_2026_05_04"
+      "target": "devherd_v1_app_validation_2026_05_04",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42109,9 +40568,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_cli_commands"
+      "target": "docs_cli_commands",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42119,9 +40578,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L16",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_current_status"
+      "target": "docs_current_status",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42129,9 +40588,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L17",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_diagrams"
+      "target": "docs_diagrams",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -42139,9 +40598,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_index_indice_de_documentacion_devherd"
+      "target": "docs_index_indice_de_documentacion_devherd",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42149,9 +40608,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L23",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_observe"
+      "target": "docs_observe",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42159,9 +40618,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L22",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_observe_auto_instrumentation"
+      "target": "docs_observe_auto_instrumentation",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42169,9 +40628,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L24",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_project_workflow"
+      "target": "docs_project_workflow",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42179,9 +40638,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_system_overview"
+      "target": "docs_system_overview",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42189,9 +40648,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L25",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_technical_plan"
+      "target": "docs_technical_plan",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42199,9 +40658,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L11",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "docs_usage"
+      "target": "docs_usage",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42209,9 +40668,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "guides_logging_and_logs"
+      "target": "guides_logging_and_logs",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42219,9 +40678,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "guides_observe_laravel"
+      "target": "guides_observe_laravel",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42229,9 +40688,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "guides_scaffold"
+      "target": "guides_scaffold",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42239,9 +40698,9 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L21",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_index",
-      "target": "guides_vikunja"
+      "target": "guides_vikunja",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -42269,9 +40728,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams",
-      "target": "docs_system_overview"
+      "target": "docs_system_overview",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43919,9 +42378,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams",
-      "target": "docs_diagrams_diagramas_de_devherd"
+      "target": "docs_diagrams_diagramas_de_devherd",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43929,9 +42388,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams_diagramas_de_devherd",
-      "target": "docs_diagrams_1_arquitectura_de_componentes"
+      "target": "docs_diagrams_1_arquitectura_de_componentes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43939,9 +42398,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L84",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams_diagramas_de_devherd",
-      "target": "docs_diagrams_2_flujo_t\u00edpico_de_usuario"
+      "target": "docs_diagrams_2_flujo_t\u00edpico_de_usuario",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43949,9 +42408,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L108",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams_diagramas_de_devherd",
-      "target": "docs_diagrams_3_devherd_up_paso_a_paso"
+      "target": "docs_diagrams_3_devherd_up_paso_a_paso",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43959,9 +42418,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L142",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams_diagramas_de_devherd",
-      "target": "docs_diagrams_4_proxy_driver_caddy_docker_external"
+      "target": "docs_diagrams_4_proxy_driver_caddy_docker_external",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43969,9 +42428,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L214",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams_diagramas_de_devherd",
-      "target": "docs_diagrams_5_observe_ingesta_de_eventos"
+      "target": "docs_diagrams_5_observe_ingesta_de_eventos",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43979,9 +42438,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L258",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams_diagramas_de_devherd",
-      "target": "docs_diagrams_6_modelo_de_datos"
+      "target": "docs_diagrams_6_modelo_de_datos",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43989,9 +42448,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L294",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams_diagramas_de_devherd",
-      "target": "docs_diagrams_7_estados_de_un_proyecto"
+      "target": "docs_diagrams_7_estados_de_un_proyecto",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43999,9 +42458,9 @@
       "source_file": "docs/diagrams.md",
       "source_location": "L313",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_diagrams_diagramas_de_devherd",
-      "target": "docs_diagrams_c\u00f3mo_regenerar_editar"
+      "target": "docs_diagrams_c\u00f3mo_regenerar_editar",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -46509,5 +44968,5 @@
       "source_file": "docs/IMPROVEMENTS.md"
     }
   ],
-  "built_at_commit": "61432662d64986d5a0f5e26b4972fcb578d03008"
+  "built_at_commit": "f5d3b3bc1c57e4afd5809a9bb1679a48038f8edb"
 }
