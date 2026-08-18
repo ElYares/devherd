@@ -408,17 +408,27 @@ evitar ese fallo.
 
 ### Alertas: sin silenciamiento, ruido garantizado
 
-**O3. `new-issue` notifica por cada issue nuevo.** *(Mitigado.)*
+**O3. `new-issue` notifica por cada issue nuevo.** *(Resuelto.)*
 Un mismo bug con mensajes variables (`user 42`, `user 43`, ...) generaba un issue —y por
 tanto una alerta— por cada variante.
 > El enmascarado del fingerprint (correos, UUIDs, hashes y numeros) elimina la causa mas
-> comun, y un `fingerprint` explicito da control fino. Queda pendiente el cooldown por regla:
-> un issue que reaparece muchas veces sigue sin silenciarse.
+> comun, y un `fingerprint` explicito da control fino.
+> **Correccion al registro anterior:** este documento decia que un issue que reaparece
+> seguia sin silenciarse. Es falso: el corte `if !issueWasNew { continue }` ya estaba en el
+> codigo y nunca realertaba sobre un issue conocido. Lo que quedaba sin tope era una rafaga
+> de issues genuinamente nuevos —un despliegue que rompe 20 cosas distintas—, y eso lo
+> cierra el cooldown por regla, 15 minutos por defecto para este tipo.
 
 **O4. `error-rate` notifica en cada evento posterior al umbral, no una vez por ventana.**
+*(Resuelto.)*
 Verificado: con umbral 3 y ventana 5m, el 3.er evento y **todos** los siguientes dentro de
 la ventana producen entrega. 50 errores en 5 minutos = 48 entregas.
-> Recomendacion para ambos: cooldown por regla, o entrega agregada por ventana.
+> Resuelto con `cooldown_seconds` por regla, evaluado en `insertAlertDelivery`, de modo que
+> el silencio vale para los cuatro tipos con un solo mecanismo. El umbral se sigue mirando en
+> cada evento; lo que se corta es la entrega repetida. Medido en pruebas: los mismos 50
+> eventos pasan de 48 entregas a 1, y con `--cooldown 0` vuelven a ser 48.
+> Se descarto la entrega agregada por ventana: dejaria de ser inmediata y necesitaria un
+> disparador periodico que hoy no existe.
 
 ### Captura de logs: modelo de una sola foto
 

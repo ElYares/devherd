@@ -21,7 +21,8 @@ type Manager struct {
 }
 
 type Store struct {
-	db *sql.DB
+	db    *sql.DB
+	clock func() time.Time
 }
 
 type StoredEvent struct {
@@ -77,13 +78,14 @@ type Timeline struct {
 }
 
 type Alert struct {
-	ID            int64  `json:"id"`
-	Project       string `json:"project"`
-	Kind          string `json:"kind"`
-	Threshold     int    `json:"threshold"`
-	WindowSeconds int    `json:"window_seconds"`
-	Enabled       bool   `json:"enabled"`
-	CreatedAt     string `json:"created_at"`
+	ID              int64  `json:"id"`
+	Project         string `json:"project"`
+	Kind            string `json:"kind"`
+	Threshold       int    `json:"threshold"`
+	WindowSeconds   int    `json:"window_seconds"`
+	CooldownSeconds int    `json:"cooldown_seconds"`
+	Enabled         bool   `json:"enabled"`
+	CreatedAt       string `json:"created_at"`
 }
 
 type AlertDelivery struct {
@@ -138,6 +140,10 @@ func (m *Manager) Ensure(ctx context.Context) (bool, error) {
 		return false, fmt.Errorf("apply observe schema: %w", err)
 	}
 
+	if err := applyColumnAdditions(ctx, db); err != nil {
+		return false, err
+	}
+
 	return created, nil
 }
 
@@ -155,14 +161,29 @@ func NewStore(db *sql.DB) Store {
 	return Store{db: db}
 }
 
+// NewStoreWithClock devuelve un Store que lee la hora del reloj dado, en vez de
+// time.Now. El cooldown de alertas solo se puede probar adelantando el reloj.
+func NewStoreWithClock(db *sql.DB, clock func() time.Time) Store {
+	return Store{db: db, clock: clock}
+}
+
+func (s Store) nowUTC() time.Time {
+	if s.clock == nil {
+		return time.Now().UTC()
+	}
+
+	return s.clock().UTC()
+}
+
 func (s Store) Ping(ctx context.Context) error {
 	return s.db.PingContext(ctx)
 }
 
 func (s Store) StoreEvent(ctx context.Context, event Event) (StoredEvent, error) {
-	now := time.Now().UTC().Format(time.RFC3339Nano)
+	now := s.nowUTC()
+	nowText := now.Format(time.RFC3339Nano)
 	if event.Timestamp == "" {
-		event.Timestamp = now
+		event.Timestamp = nowText
 	}
 	if event.EventID == "" {
 		event.EventID = newEventID()
@@ -224,7 +245,7 @@ func (s Store) StoreEvent(ctx context.Context, event Event) (StoredEvent, error)
 			event_count = issues.event_count + 1,
 			status = CASE WHEN issues.status = 'resolved' THEN 'new' ELSE issues.status END,
 			updated_at = excluded.updated_at
-	`, event.Project, event.Fingerprint, event.Title, event.Level, event.Platform, event.Service, event.Container, event.ExceptionType, event.Culprit, event.Timestamp, event.Timestamp, now)
+	`, event.Project, event.Fingerprint, event.Title, event.Level, event.Platform, event.Service, event.Container, event.ExceptionType, event.Culprit, event.Timestamp, event.Timestamp, nowText)
 	if err != nil {
 		return StoredEvent{}, fmt.Errorf("upsert observe issue: %w", err)
 	}
@@ -283,7 +304,8 @@ func (s Store) StoreContainers(ctx context.Context, containers []ObservedContain
 		return nil, nil
 	}
 
-	now := time.Now().UTC().Format(time.RFC3339Nano)
+	now := s.nowUTC()
+	nowText := now.Format(time.RFC3339Nano)
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
 		return nil, fmt.Errorf("begin observe container transaction: %w", err)
@@ -341,12 +363,12 @@ func (s Store) StoreContainers(ctx context.Context, containers []ObservedContain
 				labels_json = excluded.labels_json,
 				last_seen = excluded.last_seen,
 				updated_at = excluded.updated_at
-		`, container.ContainerID, container.Name, container.Project, container.Service, container.Image, container.Status, container.RestartCount, string(labelsJSON), now, now, now)
+		`, container.ContainerID, container.Name, container.Project, container.Service, container.Image, container.Status, container.RestartCount, string(labelsJSON), nowText, nowText, nowText)
 		if err != nil {
 			return nil, fmt.Errorf("upsert observed container: %w", err)
 		}
 
-		events = append(events, containerEventsForSnapshot(container, exists == 1, previousStatus, previousRestartCount, now)...)
+		events = append(events, containerEventsForSnapshot(container, exists == 1, previousStatus, previousRestartCount, nowText)...)
 	}
 
 	for _, event := range events {
@@ -367,7 +389,7 @@ func (s Store) StoreContainers(ctx context.Context, containers []ObservedContain
 		if err != nil {
 			return nil, fmt.Errorf("insert observed container event: %w", err)
 		}
-		if err := insertContainerAlertDeliveries(ctx, tx, event); err != nil {
+		if err := insertContainerAlertDeliveries(ctx, tx, event, now); err != nil {
 			return nil, err
 		}
 	}
@@ -377,6 +399,27 @@ func (s Store) StoreContainers(ctx context.Context, containers []ObservedContain
 	}
 
 	return events, nil
+}
+
+// CooldownUnset le pide a AddAlert que aplique el cooldown por defecto del kind.
+// Cero no es lo mismo: significa entregar siempre, que es el comportamiento que
+// tenia Observe antes de existir el cooldown y sigue siendo alcanzable a proposito.
+const CooldownUnset = -1
+
+// defaultNonRateCooldownSeconds silencia 15 minutos las reglas cuya ventana no
+// dice nada del ritmo esperado.
+const defaultNonRateCooldownSeconds = 900
+
+// DefaultCooldownSeconds elige el silencio por defecto de una regla. Para
+// error-rate la ventana ya expresa el periodo que le interesa al usuario; para
+// los demas kinds window_seconds no participa en la evaluacion, asi que no sirve
+// como referencia y se usa un valor fijo.
+func DefaultCooldownSeconds(kind string, windowSeconds int) int {
+	if kind == "error-rate" {
+		return windowSeconds
+	}
+
+	return defaultNonRateCooldownSeconds
 }
 
 func (s Store) AddAlert(ctx context.Context, alert Alert) (int64, error) {
@@ -390,11 +433,14 @@ func (s Store) AddAlert(ctx context.Context, alert Alert) (int64, error) {
 	if alert.WindowSeconds <= 0 {
 		alert.WindowSeconds = 300
 	}
+	if alert.CooldownSeconds < 0 {
+		alert.CooldownSeconds = DefaultCooldownSeconds(alert.Kind, alert.WindowSeconds)
+	}
 
 	result, err := s.db.ExecContext(ctx, `
-		INSERT INTO alerts (project, kind, threshold, window_seconds, enabled)
-		VALUES (?, ?, ?, ?, 1)
-	`, strings.TrimSpace(alert.Project), alert.Kind, alert.Threshold, alert.WindowSeconds)
+		INSERT INTO alerts (project, kind, threshold, window_seconds, cooldown_seconds, enabled)
+		VALUES (?, ?, ?, ?, ?, 1)
+	`, strings.TrimSpace(alert.Project), alert.Kind, alert.Threshold, alert.WindowSeconds, alert.CooldownSeconds)
 	if err != nil {
 		return 0, fmt.Errorf("insert observe alert: %w", err)
 	}
@@ -409,7 +455,7 @@ func (s Store) AddAlert(ctx context.Context, alert Alert) (int64, error) {
 
 func (s Store) ListAlerts(ctx context.Context, project string) ([]Alert, error) {
 	query := `
-		SELECT id, project, kind, threshold, window_seconds, enabled, created_at
+		SELECT id, project, kind, threshold, window_seconds, cooldown_seconds, enabled, created_at
 		FROM alerts
 	`
 	args := []any{}
@@ -429,7 +475,7 @@ func (s Store) ListAlerts(ctx context.Context, project string) ([]Alert, error) 
 	for rows.Next() {
 		var alert Alert
 		var enabled int
-		if err := rows.Scan(&alert.ID, &alert.Project, &alert.Kind, &alert.Threshold, &alert.WindowSeconds, &enabled, &alert.CreatedAt); err != nil {
+		if err := rows.Scan(&alert.ID, &alert.Project, &alert.Kind, &alert.Threshold, &alert.WindowSeconds, &alert.CooldownSeconds, &enabled, &alert.CreatedAt); err != nil {
 			return nil, fmt.Errorf("scan observe alert: %w", err)
 		}
 		alert.Enabled = enabled == 1
@@ -814,7 +860,7 @@ func issueIsNew(ctx context.Context, tx *sql.Tx, project, fingerprint string) (b
 	return false, nil
 }
 
-func insertEventAlertDeliveries(ctx context.Context, tx *sql.Tx, event Event, issueID int64, issueWasNew bool, now string) error {
+func insertEventAlertDeliveries(ctx context.Context, tx *sql.Tx, event Event, issueID int64, issueWasNew bool, now time.Time) error {
 	alerts, err := matchingAlerts(ctx, tx, event.Project)
 	if err != nil {
 		return err
@@ -830,7 +876,7 @@ func insertEventAlertDeliveries(ctx context.Context, tx *sql.Tx, event Event, is
 				return err
 			}
 		case "error-rate":
-			windowStart := time.Now().UTC().Add(-time.Duration(alert.WindowSeconds) * time.Second).Format(time.RFC3339Nano)
+			windowStart := now.Add(-time.Duration(alert.WindowSeconds) * time.Second).Format(time.RFC3339Nano)
 			var count int
 			if err := tx.QueryRowContext(ctx, `
 				SELECT COUNT(*)
@@ -853,7 +899,7 @@ func insertEventAlertDeliveries(ctx context.Context, tx *sql.Tx, event Event, is
 	return nil
 }
 
-func insertContainerAlertDeliveries(ctx context.Context, tx *sql.Tx, event ContainerEvent) error {
+func insertContainerAlertDeliveries(ctx context.Context, tx *sql.Tx, event ContainerEvent, now time.Time) error {
 	alerts, err := matchingAlerts(ctx, tx, event.Project)
 	if err != nil {
 		return err
@@ -872,7 +918,7 @@ func insertContainerAlertDeliveries(ctx context.Context, tx *sql.Tx, event Conta
 		default:
 			continue
 		}
-		if err := insertAlertDelivery(ctx, tx, alert, event.Project, event.Kind+" "+event.Name, event.Message, event.CreatedAt); err != nil {
+		if err := insertAlertDelivery(ctx, tx, alert, event.Project, event.Kind+" "+event.Name, event.Message, now); err != nil {
 			return err
 		}
 	}
@@ -882,7 +928,7 @@ func insertContainerAlertDeliveries(ctx context.Context, tx *sql.Tx, event Conta
 
 func matchingAlerts(ctx context.Context, tx *sql.Tx, project string) ([]Alert, error) {
 	rows, err := tx.QueryContext(ctx, `
-		SELECT id, project, kind, threshold, window_seconds, enabled, created_at
+		SELECT id, project, kind, threshold, window_seconds, cooldown_seconds, enabled, created_at
 		FROM alerts
 		WHERE enabled = 1
 		  AND (project = '' OR project = ?)
@@ -896,7 +942,7 @@ func matchingAlerts(ctx context.Context, tx *sql.Tx, project string) ([]Alert, e
 	for rows.Next() {
 		var alert Alert
 		var enabled int
-		if err := rows.Scan(&alert.ID, &alert.Project, &alert.Kind, &alert.Threshold, &alert.WindowSeconds, &enabled, &alert.CreatedAt); err != nil {
+		if err := rows.Scan(&alert.ID, &alert.Project, &alert.Kind, &alert.Threshold, &alert.WindowSeconds, &alert.CooldownSeconds, &enabled, &alert.CreatedAt); err != nil {
 			return nil, fmt.Errorf("scan matching observe alert: %w", err)
 		}
 		alert.Enabled = enabled == 1
@@ -909,16 +955,70 @@ func matchingAlerts(ctx context.Context, tx *sql.Tx, project string) ([]Alert, e
 	return alerts, nil
 }
 
-func insertAlertDelivery(ctx context.Context, tx *sql.Tx, alert Alert, project, subject, message, createdAt string) error {
-	_, err := tx.ExecContext(ctx, `
+func insertAlertDelivery(ctx context.Context, tx *sql.Tx, alert Alert, project, subject, message string, now time.Time) error {
+	silenced, err := alertIsSilenced(ctx, tx, alert, now)
+	if err != nil {
+		return err
+	}
+	if silenced {
+		return nil
+	}
+
+	_, err = tx.ExecContext(ctx, `
 		INSERT INTO alert_deliveries (alert_id, project, kind, subject, message, created_at)
 		VALUES (?, ?, ?, ?, ?, ?)
-	`, alert.ID, project, alert.Kind, subject, message, createdAt)
+	`, alert.ID, project, alert.Kind, subject, message, now.Format(time.RFC3339Nano))
 	if err != nil {
 		return fmt.Errorf("insert observe alert delivery: %w", err)
 	}
 
 	return nil
+}
+
+// alertIsSilenced dice si la regla entrego hace menos de su cooldown. El corte es
+// por regla y no por issue: una racha de issues nuevos distintos produce un aviso,
+// no uno por issue. Como todos los kinds terminan en insertAlertDelivery, el
+// silencio vale para los cuatro sin duplicar la logica.
+func alertIsSilenced(ctx context.Context, tx *sql.Tx, alert Alert, now time.Time) (bool, error) {
+	if alert.CooldownSeconds <= 0 {
+		return false, nil
+	}
+
+	var lastCreatedAt string
+	err := tx.QueryRowContext(ctx, `
+		SELECT created_at
+		FROM alert_deliveries
+		WHERE alert_id = ?
+		ORDER BY id DESC
+		LIMIT 1
+	`, alert.ID).Scan(&lastCreatedAt)
+	if errors.Is(err, sql.ErrNoRows) {
+		return false, nil
+	}
+	if err != nil {
+		return false, fmt.Errorf("read last observe alert delivery: %w", err)
+	}
+
+	last, ok := parseAlertDeliveryTime(lastCreatedAt)
+	if !ok {
+		// Una marca de tiempo ilegible no debe callar una alerta: ante la duda, entrega.
+		return false, nil
+	}
+
+	return now.Sub(last) < time.Duration(alert.CooldownSeconds)*time.Second, nil
+}
+
+// parseAlertDeliveryTime acepta los dos formatos que pueden estar en la columna:
+// el RFC3339Nano que escribe el store y el CURRENT_TIMESTAMP de SQLite, que es el
+// valor por defecto de la columna y no lleva zona.
+func parseAlertDeliveryTime(value string) (time.Time, bool) {
+	for _, layout := range []string{time.RFC3339Nano, time.RFC3339, "2006-01-02 15:04:05"} {
+		if parsed, err := time.Parse(layout, value); err == nil {
+			return parsed.UTC(), true
+		}
+	}
+
+	return time.Time{}, false
 }
 
 func execDelete(ctx context.Context, tx *sql.Tx, query string, args ...any) (int64, error) {

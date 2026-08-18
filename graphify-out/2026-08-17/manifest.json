@@ -105,8 +105,8 @@
     "semantic_hash": "7207c210f6946dfe10665208cc118bdc"
   },
   "internal/cli/observe.go": {
-    "mtime": 1786996832.838897,
-    "ast_hash": "8462fbcf96d38e6ade6d9cf5a5fc87fa",
+    "mtime": 1786431783.7434945,
+    "ast_hash": "9536cb7e12b97a17937fdf9cfacb6359",
     "semantic_hash": ""
   },
   "internal/cli/observe_test.go": {
@@ -285,9 +285,9 @@
     "semantic_hash": ""
   },
   "internal/observe/migrations.go": {
-    "mtime": 1786996814.9325383,
-    "ast_hash": "de3976f55bfa973136181d9f5b483cbe",
-    "semantic_hash": ""
+    "mtime": 1786431227.7400415,
+    "ast_hash": "f42ddf18a721a593879dc242eafb94f9",
+    "semantic_hash": "f42ddf18a721a593879dc242eafb94f9"
   },
   "internal/observe/override.go": {
     "mtime": 1786431227.7431977,
@@ -305,9 +305,9 @@
     "semantic_hash": ""
   },
   "internal/observe/schema.sql": {
-    "mtime": 1786996814.928741,
-    "ast_hash": "c4debbaed4bb1b072d0158b763492cf7",
-    "semantic_hash": ""
+    "mtime": 1779443467.9107904,
+    "ast_hash": "331855f87a213d27f876f9029db7bd4f",
+    "semantic_hash": "331855f87a213d27f876f9029db7bd4f"
   },
   "internal/observe/server.go": {
     "mtime": 1786431227.7488759,
@@ -320,8 +320,8 @@
     "semantic_hash": ""
   },
   "internal/observe/store.go": {
-    "mtime": 1786996814.9408362,
-    "ast_hash": "3421c9175bfe4c1051cc2959a0a18b86",
+    "mtime": 1786431783.7444947,
+    "ast_hash": "6a68b68263a8119d1bb3ef9b6f7fa1b9",
     "semantic_hash": ""
   },
   "internal/observe/store_test.go": {
@@ -455,13 +455,13 @@
     "semantic_hash": ""
   },
   "docs/IMPROVEMENTS.md": {
-    "mtime": 1786997354.5029616,
-    "ast_hash": "c1e37fcd6c441de43421e4f2650f57ad",
+    "mtime": 1786430798.1903791,
+    "ast_hash": "54f32cd81ab7d1c918dd3c83c8a65be6",
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1786997340.195222,
-    "ast_hash": "9afd219f2ef438b57c8c9ab14a47b4cb",
+    "mtime": 1786430798.1903791,
+    "ast_hash": "b01bfb596b7fac8da670f4b542f294e7",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "docs/observe.md": {
-    "mtime": 1786997340.2034001,
-    "ast_hash": "0a16538f1b9a00475e66442e60d8aa79",
+    "mtime": 1786430798.191379,
+    "ast_hash": "8c055dcb821fa11ef35ed32cd07ee3aa",
     "semantic_hash": ""
   },
   "docs/project-workflow.md": {
@@ -765,23 +765,13 @@
     "semantic_hash": ""
   },
   "docs/INDEX.md": {
-    "mtime": 1786996169.868884,
+    "mtime": 1785785082.8706732,
     "ast_hash": "2c2f419227374c2fa087f5ae0eaf94c1",
     "semantic_hash": ""
   },
   "docs/diagrams.md": {
-    "mtime": 1786996169.868884,
+    "mtime": 1785646453.2701516,
     "ast_hash": "95f13f38313a9fe8a8d20b363cf7a1f7",
-    "semantic_hash": ""
-  },
-  "internal/cli/observe_cooldown_test.go": {
-    "mtime": 1786996958.2365456,
-    "ast_hash": "44296f793b2eb1d2e103614d9e7147b9",
-    "semantic_hash": ""
-  },
-  "internal/observe/alerts_cooldown_test.go": {
-    "mtime": 1786996933.455113,
-    "ast_hash": "518f0ab01e53d3567cd59fc58b4cc676",
     "semantic_hash": ""
   }
 }

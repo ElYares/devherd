@@ -216,7 +216,7 @@ devherd observe timeline <event-id>
 devherd observe cleanup --days 14
 devherd observe alert add --project aang-server --on new-issue
 devherd observe alert add --project aang-server --on error-rate --threshold 10 --window 5m
-devherd observe alert add --project aang-server --on container-exit
+devherd observe alert add --project aang-server --on container-exit --cooldown 30m
 devherd observe alert list [project]
 devherd observe alert deliveries [project]
 devherd observe alert remove <id>
@@ -652,8 +652,12 @@ devherd observe containers aang-server
 devherd observe alert add --project aang-server --on new-issue
 devherd observe alert add --project aang-server --on error-rate --threshold 10 --window 5m
 devherd observe alert add --project aang-server --on container-exit
-devherd observe alert add --project aang-server --on container-restart
+devherd observe alert add --project aang-server --on container-restart --cooldown 30m
 ```
+
+Cada regla se silencia un rato despues de avisar. `--cooldown` acepta una duracion estilo
+Go y, si no se pasa, vale lo mismo que la ventana en `error-rate` y 15 minutos en los demas
+tipos, para los que `--window` no participa en la evaluacion. `--cooldown 0` entrega siempre.
 
 Las alertas no salen a servicios externos. Una "entrega" es unicamente una fila en la base
 local: no hay webhooks, ni ejecucion de comandos, ni notificaciones del sistema, ni correo.
@@ -667,14 +671,15 @@ devherd observe alert deliveries aang-server
 Se evaluan de forma sincrona al ingerir cada evento o instantanea de contenedor; no hay
 motor de alertas ni planificador.
 
-> `error-rate` **no tiene periodo de enfriamiento ni deduplicacion**: una vez superado el
-> umbral, cada evento posterior dentro de la ventana genera otra entrega. Medido: con
-> umbral 3 y ventana 5m, 4 eventos produjeron 2 entregas de `error-rate` (la 3.a y la 4.a).
+> El umbral de `error-rate` se sigue evaluando en cada evento, pero el cooldown corta la
+> repeticion. Medido: con umbral 3, ventana 5m y cooldown 5m, 50 eventos producen **1**
+> entrega; con `--cooldown 0`, las 48 de antes.
 
-> `new-issue` dispara **por cada issue nuevo**, no una vez por proyecto. Combinado con que
-> el fingerprint no enmascara numeros ni identificadores, un mismo bug con mensajes
-> variables (`user 42`, `user 43`, ...) genera un issue y por tanto una alerta por cada
-> variante. Medido: 4 errores distintos = 4 entregas de `new-issue`.
+> `new-issue` dispara por cada issue nuevo, no una vez por proyecto, y el cooldown lo acota:
+> una rafaga de issues distintos —un despliegue que rompe 20 cosas— produce un aviso. Un
+> issue que **reaparece** nunca realertaba: eso ya lo cortaba `issueWasNew`. Ademas el
+> fingerprint enmascara numeros, correos, UUIDs y hashes, de modo que un mismo bug con
+> mensajes variables (`user 42`, `user 43`, ...) es un solo issue.
 
 > No hay forma de deshabilitar una regla sin borrarla: `enabled` siempre se escribe en 1.
 
