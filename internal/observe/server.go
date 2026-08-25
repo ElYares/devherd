@@ -236,17 +236,83 @@ func (s Server) handleAPI(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// logBackfillBatch acota lo que se intenta por tick. Cada objetivo cuesta una llamada
+// a docker logs con timeout de 5 s, y el mismo goroutine tiene que volver a tiempo
+// para la instantanea de contenedores del tick siguiente.
+const logBackfillBatch = 25
+
 func (s Server) pollObservedContainers(ctx context.Context) {
 	ticker := time.NewTicker(10 * time.Second)
 	defer ticker.Stop()
 
 	for {
 		s.snapshotObservedContainers(ctx, "")
+		s.backfillPendingLogs(ctx)
 		select {
 		case <-ctx.Done():
 			return
 		case <-ticker.C:
 		}
+	}
+}
+
+// backfillPendingLogs es la segunda pasada de captura. La ingesta pide
+// --since t-30s --until t+30s en el instante t, asi que la mitad futura de la ventana
+// llega vacia: esos logs todavia no existen. Aqui se vuelve por ellos cuando ya
+// transcurrieron, mientras el contenedor sigue vivo y sus logs sin rotar.
+func (s Server) backfillPendingLogs(ctx context.Context) {
+	if s.docker == nil {
+		return
+	}
+
+	targets, err := s.store.PendingLogBackfills(ctx, logBackfillBatch)
+	if err != nil {
+		slog.Warn("observe: list pending log backfills failed", "error", err)
+		return
+	}
+
+	for _, target := range targets {
+		if ctx.Err() != nil {
+			return
+		}
+		s.backfillEventLogs(ctx, target)
+	}
+}
+
+func (s Server) backfillEventLogs(ctx context.Context, target LogBackfillTarget) {
+	logs, err := s.docker.LogsBetween(ctx, target.Container, target.At, target.At.Add(logCaptureWindow), logCaptureLimit)
+	if err != nil {
+		// El contenedor pudo morir o cambiar de nombre. Marcarlo evita reintentar
+		// cada 10 s un evento que ya no tiene de donde leer.
+		slog.Warn("observe: backfill container logs failed",
+			"event_id", target.EventID, "container", target.Container, "error", err)
+		s.markLogBackfill(ctx, target.EventID, logsBackfillSkipped)
+		return
+	}
+
+	for i := range logs {
+		logs[i].EventID = target.EventID
+		logs[i].Project = target.Project
+		logs[i].Service = target.Service
+		logs[i].Container = target.Container
+	}
+
+	if len(logs) > 0 {
+		if err := s.store.StoreContainerLogs(ctx, target.EventID, logs); err != nil {
+			// A diferencia del fallo de Docker, este es transitorio: el evento se
+			// queda pendiente para reintentarlo en el tick siguiente.
+			slog.Warn("observe: store backfilled container logs failed",
+				"event_id", target.EventID, "log_count", len(logs), "error", err)
+			return
+		}
+	}
+
+	s.markLogBackfill(ctx, target.EventID, logsBackfillDone)
+}
+
+func (s Server) markLogBackfill(ctx context.Context, eventID string, state int) {
+	if err := s.store.MarkLogBackfill(ctx, eventID, state); err != nil {
+		slog.Warn("observe: mark log backfill failed", "event_id", eventID, "error", err)
 	}
 }
 

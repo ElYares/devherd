@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS events (
     environment TEXT NOT NULL DEFAULT 'local',
     release TEXT NOT NULL DEFAULT '',
     raw_payload TEXT NOT NULL DEFAULT '{}',
+    logs_backfilled INTEGER NOT NULL DEFAULT 0,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(issue_id) REFERENCES issues(id) ON DELETE CASCADE
 );

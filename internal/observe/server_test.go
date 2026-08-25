@@ -193,3 +193,7 @@ func (fakeDockerRuntime) ObservedContainers(_ context.Context, _ string) ([]Obse
 func (fakeDockerRuntime) LogsAround(_ context.Context, _ string, _ time.Time, _ time.Duration, _ int) ([]ContainerLog, error) {
 	return []ContainerLog{{Timestamp: "2026-05-22T10:00:00Z", Message: "log near failure"}}, nil
 }
+
+func (fakeDockerRuntime) LogsBetween(_ context.Context, _ string, _, _ time.Time, _ int) ([]ContainerLog, error) {
+	return nil, nil
+}
