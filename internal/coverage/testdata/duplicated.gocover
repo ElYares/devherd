@@ -1,0 +1,6 @@
+mode: count
+example.com/app/handler.go:10.20,12.3 2 4
+example.com/app/handler.go:10.20,12.3 2 7
+example.com/app/handler.go:14.2,16.9 3 0
+example.com/app/handler.go:14.2,16.9 3 0
+example.com/app/handler.go:14.2,16.9 3 0

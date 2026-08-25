@@ -1,0 +1,4 @@
+mode: set
+example.com/app/handler.go:10.20,12.3 2 1
+example.com/app/handler.go:14.2,16.9 3 0
+example.com/app/util.go:5.13,7.2 1 1

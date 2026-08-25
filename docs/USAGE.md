@@ -130,7 +130,7 @@ Casi todos los comandos que operan sobre proyectos requieren haber ejecutado
 
 ## 4. Referencia de comandos
 
-Los 18 comandos de primer nivel, en el mismo orden en que los registra la CLI.
+Los 19 comandos de primer nivel, en el mismo orden en que los registra la CLI.
 
 ### 4.1 `devherd init`
 
@@ -826,7 +826,39 @@ Borra eventos, logs de contenedor, eventos de contenedor, entregas de alerta e i
 **No borra el inventario de contenedores observados** ni las reglas de alerta, y no hay
 limpieza automatica: hay que ejecutarlo a mano.
 
-### 4.18 `devherd sentry ...`
+### 4.18 `devherd coverage`
+
+Lee un reporte de cobertura ya generado y lo resume en terminal. **DevHerd no
+instrumenta codigo ni mide nada**: el reporte lo produce la herramienta de tu stack
+y aqui se lee. Detalle completo en [coverage.md](coverage.md).
+
+| Flag | Default | Descripcion |
+|------|---------|-------------|
+| `--report` | *(obligatorio)* | Ruta del reporte a leer. |
+| `--all` | `false` | Lista todos los archivos en vez de los de mayor masa sin cubrir. |
+| `--top` | `10` | Cuantos archivos listar cuando no se usa `--all`. |
+| `--json` | `false` | Emite el reporte normalizado como JSON. |
+
+Formatos que reconoce, **detectados por el contenido y no por la extension**:
+
+| Formato | Lo genera | Unidad |
+|---|---|---|
+| `go` | `go test -coverprofile` | sentencias |
+| `lcov` | vitest, jest, c8 (Vue, React, TypeScript) | lineas |
+| `clover` | PHPUnit | sentencias |
+| `jacoco` | Maven, Gradle | lineas |
+| `cobertura` | coverage.py | lineas |
+
+Notas:
+
+- **La unidad sale siempre en la cabecera.** Go cuenta sentencias y los demas cuentan
+  lineas: un 58% de uno y un 58% de otro **no son comparables**.
+- **El total se pondera por unidades**, nunca promediando los porcentajes por archivo.
+- **La lista se ordena por masa sin cubrir**, no por porcentaje, y si se omiten
+  archivos se dice cuantos.
+- Un reporte sin unidades medibles se reporta como *no coverage data*, no como `0.0%`.
+
+### 4.19 `devherd sentry ...`
 
 > **Estado: placeholder.** Este grupo de comandos no realiza ninguna accion funcional. La
 > observabilidad real y usable hoy vive en `devherd observe`, que es un subsistema

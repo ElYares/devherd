@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1756090000">
+  <project timestamp="1756090000">
+    <file name="/app/Http/Controllers/UserController.php">
+      <class name="UserController" namespace="App\Http\Controllers">
+        <metrics complexity="3" methods="2" coveredmethods="2" statements="4" coveredstatements="3"/>
+      </class>
+      <line num="10" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="12" type="stmt" count="1"/>
+      <line num="13" type="stmt" count="1"/>
+      <line num="14" type="stmt" count="1"/>
+      <line num="18" type="method" name="store" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <metrics loc="30" ncloc="24" classes="1" methods="2" coveredmethods="1"
+               statements="4" coveredstatements="3" elements="6" coveredelements="4"/>
+    </file>
+    <file name="/app/Services/Billing.php">
+      <metrics statements="2" coveredstatements="0"/>
+      <line num="8" type="stmt" count="0"/>
+      <line num="9" type="stmt" count="0"/>
+    </file>
+    <metrics statements="6" coveredstatements="3"/>
+  </project>
+</coverage>
