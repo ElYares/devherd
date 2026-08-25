@@ -334,3 +334,85 @@ func repoRootForTest(t *testing.T) string {
 
 	return ""
 }
+
+// countListedDirs cuenta las filas de la tabla de directorios: llevan porcentaje y
+// un par cubierto/total, pero no la palabra "uncovered" de la lista de archivos.
+func countListedDirs(out string) int {
+	count := 0
+	for _, line := range strings.Split(out, "\n") {
+		if strings.Contains(line, "%") && strings.Contains(line, "/") &&
+			!strings.Contains(line, "uncovered") && !strings.Contains(line, "total") {
+			count++
+		}
+	}
+
+	return count
+}
+
+// La tabla de directorios se acota igual que la de archivos. Dejarla completa
+// volcaba 38 filas en un proyecto real mientras los archivos se limitaban a 10.
+func TestCoverageLimitsTheDirectoryTable(t *testing.T) {
+	var builder strings.Builder
+	for i := 0; i < 15; i++ {
+		builder.WriteString("TN:\n")
+		fmt.Fprintf(&builder, "SF:src/dir%02d/file.ts\n", i)
+		builder.WriteString("DA:1,0\nDA:2,1\nend_of_record\n")
+	}
+	path := writeCoverageFixture(t, "lcov.info", builder.String())
+
+	out, err := runCoverageCmd(t, "--report", path, "--top", "4")
+	if err != nil {
+		t.Fatalf("coverage returned error: %v\n%s", err, out)
+	}
+	if got := countListedDirs(out); got != 4 {
+		t.Fatalf("expected 4 directories with --top 4, got %d:\n%s", got, out)
+	}
+	if !strings.Contains(out, "11 more directories") {
+		t.Fatalf("expected the omitted directories stated:\n%s", out)
+	}
+
+	full, err := runCoverageCmd(t, "--report", path, "--all")
+	if err != nil {
+		t.Fatalf("coverage --all returned error: %v\n%s", err, full)
+	}
+	if got := countListedDirs(full); got != 15 {
+		t.Fatalf("expected every directory with --all, got %d:\n%s", got, full)
+	}
+	if strings.Contains(full, "more directories") {
+		t.Fatalf("--all must not report omitted directories:\n%s", full)
+	}
+}
+
+// El bulto arriba: es lo que evita leer la tabla entera para encontrar el trabajo.
+func TestCoverageDirectoryTableRanksByUncoveredMass(t *testing.T) {
+	// Los nombres estan elegidos para que el orden alfabetico sea el **contrario**
+	// al de masa: si la prueba pasara por orden alfabetico, no probaria nada.
+	fixture := `TN:
+SF:app/Aaa/cubierto.php
+DA:1,1
+DA:2,1
+end_of_record
+TN:
+SF:app/Zzz/sin_cubrir.php
+DA:1,0
+DA:2,0
+DA:3,0
+DA:4,0
+end_of_record
+`
+	path := writeCoverageFixture(t, "lcov.info", fixture)
+
+	out, err := runCoverageCmd(t, "--report", path)
+	if err != nil {
+		t.Fatalf("coverage returned error: %v\n%s", err, out)
+	}
+
+	bulto := strings.Index(out, "app/Zzz")
+	cubierto := strings.Index(out, "app/Aaa")
+	if bulto < 0 || cubierto < 0 {
+		t.Fatalf("expected both directories listed:\n%s", out)
+	}
+	if bulto > cubierto {
+		t.Fatalf("expected app/Zzz first for having more uncovered mass:\n%s", out)
+	}
+}

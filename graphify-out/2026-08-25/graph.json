@@ -492,13 +492,333 @@
       "norm_label": "testpreparecomposeprojectkeepsobserveoverridewhenproxycannotresolve()"
     },
     {
+      "label": "coverage.go",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cli_coverage",
+      "community": 84,
+      "norm_label": "coverage.go"
+    },
+    {
+      "label": "newCoverageCmd()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "cli_coverage_newcoveragecmd",
+      "community": 84,
+      "norm_label": "newcoveragecmd()"
+    },
+    {
+      "label": "Command",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_go_command",
+      "community": 84,
+      "norm_label": "command"
+    },
+    {
+      "label": "coverageViewOptions",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "cli_coverageviewoptions",
+      "community": 84,
+      "norm_label": "coverageviewoptions"
+    },
+    {
+      "label": "writeCoverageJSON()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "cli_coverage_writecoveragejson",
+      "community": 84,
+      "norm_label": "writecoveragejson()"
+    },
+    {
+      "label": "Writer",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_go_writer",
+      "community": 84,
+      "norm_label": "writer"
+    },
+    {
+      "label": "Report",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_go_report",
+      "community": 84,
+      "norm_label": "report"
+    },
+    {
+      "label": "writeCoverageReport()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "cli_coverage_writecoveragereport",
+      "community": 84,
+      "norm_label": "writecoveragereport()"
+    },
+    {
+      "label": "writeCoverageGroups()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L102",
+      "_origin": "ast",
+      "id": "cli_coverage_writecoveragegroups",
+      "community": 84,
+      "norm_label": "writecoveragegroups()"
+    },
+    {
+      "label": "writeCoverageFiles()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "cli_coverage_writecoveragefiles",
+      "community": 84,
+      "norm_label": "writecoveragefiles()"
+    },
+    {
+      "label": "writeCoverageFileLine()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L159",
+      "_origin": "ast",
+      "id": "cli_coverage_writecoveragefileline",
+      "community": 84,
+      "norm_label": "writecoveragefileline()"
+    },
+    {
+      "label": "FileReport",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L159",
+      "_origin": "ast",
+      "id": "filereport",
+      "community": 84,
+      "norm_label": "filereport"
+    },
+    {
+      "label": "countCoverageUncoveredFiles()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L164",
+      "_origin": "ast",
+      "id": "cli_coverage_countcoverageuncoveredfiles",
+      "community": 84,
+      "norm_label": "countcoverageuncoveredfiles()"
+    },
+    {
+      "label": "truncateCoveragePath()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L177",
+      "_origin": "ast",
+      "id": "cli_coverage_truncatecoveragepath",
+      "community": 84,
+      "norm_label": "truncatecoveragepath()"
+    },
+    {
+      "label": "coverage_test.go",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cli_coverage_test",
+      "community": 9,
+      "norm_label": "coverage_test.go"
+    },
+    {
+      "label": "runCoverageCmd()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "cli_coverage_test_runcoveragecmd",
+      "community": 9,
+      "norm_label": "runcoveragecmd()"
+    },
+    {
+      "label": "T",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_test_go_t",
+      "community": 9,
+      "norm_label": "t"
+    },
+    {
+      "label": "countListedFiles()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "cli_coverage_test_countlistedfiles",
+      "community": 9,
+      "norm_label": "countlistedfiles()"
+    },
+    {
+      "label": "writeCoverageFixture()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "cli_coverage_test_writecoveragefixture",
+      "community": 9,
+      "norm_label": "writecoveragefixture()"
+    },
+    {
+      "label": "TestCoverageOutputAlwaysNamesTheUnit()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoverageoutputalwaysnamestheunit",
+      "community": 9,
+      "norm_label": "testcoverageoutputalwaysnamestheunit()"
+    },
+    {
+      "label": "TestCoverageTotalIsWeightedNotAveraged()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L89",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragetotalisweightednotaveraged",
+      "community": 9,
+      "norm_label": "testcoveragetotalisweightednotaveraged()"
+    },
+    {
+      "label": "TestCoverageLimitsTheListAndSaysWhatItOmitted()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L111",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragelimitsthelistandsayswhatitomitted",
+      "community": 9,
+      "norm_label": "testcoveragelimitsthelistandsayswhatitomitted()"
+    },
+    {
+      "label": "TestCoverageTopFlagChangesHowManyAreListed()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L142",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragetopflagchangeshowmanyarelisted",
+      "community": 9,
+      "norm_label": "testcoveragetopflagchangeshowmanyarelisted()"
+    },
+    {
+      "label": "TestCoverageJSONSerializesTheReport()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L163",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragejsonserializesthereport",
+      "community": 9,
+      "norm_label": "testcoveragejsonserializesthereport()"
+    },
+    {
+      "label": "TestCoverageSaysThereIsNoDataInsteadOfZeroPercent()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L185",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragesaysthereisnodatainsteadofzeropercent",
+      "community": 9,
+      "norm_label": "testcoveragesaysthereisnodatainsteadofzeropercent()"
+    },
+    {
+      "label": "TestCoverageFailsOnUnknownFormatWithoutPanicking()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L200",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragefailsonunknownformatwithoutpanicking",
+      "community": 9,
+      "norm_label": "testcoveragefailsonunknownformatwithoutpanicking()"
+    },
+    {
+      "label": "TestCoverageFailsOnMissingFile()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L214",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragefailsonmissingfile",
+      "community": 9,
+      "norm_label": "testcoveragefailsonmissingfile()"
+    },
+    {
+      "label": "TestCoverageRequiresTheReportFlag()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L221",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragerequiresthereportflag",
+      "community": 9,
+      "norm_label": "testcoveragerequiresthereportflag()"
+    },
+    {
+      "label": "TestCoverageGroupsByDirectoryWhenThereIsMoreThanOne()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L232",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragegroupsbydirectorywhenthereismorethanone",
+      "community": 9,
+      "norm_label": "testcoveragegroupsbydirectorywhenthereismorethanone()"
+    },
+    {
+      "label": "TestCoverageMatchesGoToolCoverOnARealProfile()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L260",
+      "_origin": "ast",
+      "id": "cli_coverage_test_testcoveragematchesgotoolcoveronarealprofile",
+      "community": 9,
+      "norm_label": "testcoveragematchesgotoolcoveronarealprofile()"
+    },
+    {
+      "label": "totalFromGoToolCover()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L295",
+      "_origin": "ast",
+      "id": "cli_coverage_test_totalfromgotoolcover",
+      "community": 9,
+      "norm_label": "totalfromgotoolcover()"
+    },
+    {
+      "label": "repoRootForTest()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L318",
+      "_origin": "ast",
+      "id": "cli_coverage_test_reporootfortest",
+      "community": 9,
+      "norm_label": "reporootfortest()"
+    },
+    {
       "label": "doctor.go",
       "file_type": "code",
       "source_file": "internal/cli/doctor.go",
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_doctor",
-      "community": 88,
+      "community": 7,
       "norm_label": "doctor.go"
     },
     {
@@ -508,7 +828,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_doctor_newdoctorcmd",
-      "community": 88,
+      "community": 7,
       "norm_label": "newdoctorcmd()"
     },
     {
@@ -518,7 +838,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_doctor_go_command",
-      "community": 88,
+      "community": 7,
       "norm_label": "command"
     },
     {
@@ -528,7 +848,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "cli_doctor_statuslabel",
-      "community": 88,
+      "community": 7,
       "norm_label": "statuslabel()"
     },
     {
@@ -538,7 +858,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "status",
-      "community": 88,
+      "community": 7,
       "norm_label": "status"
     },
     {
@@ -588,7 +908,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_down",
-      "community": 68,
+      "community": 1,
       "norm_label": "down.go"
     },
     {
@@ -598,7 +918,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_down_newdowncmd",
-      "community": 68,
+      "community": 1,
       "norm_label": "newdowncmd()"
     },
     {
@@ -608,7 +928,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_down_go_command",
-      "community": 68,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -868,7 +1188,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_inspect",
-      "community": 71,
+      "community": 84,
       "norm_label": "inspect.go"
     },
     {
@@ -878,7 +1198,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_inspect_newinspectcmd",
-      "community": 71,
+      "community": 84,
       "norm_label": "newinspectcmd()"
     },
     {
@@ -888,7 +1208,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_inspect_go_command",
-      "community": 71,
+      "community": 84,
       "norm_label": "command"
     },
     {
@@ -898,7 +1218,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "cli_inspect_writepreflightreport",
-      "community": 71,
+      "community": 84,
       "norm_label": "writepreflightreport()"
     },
     {
@@ -908,7 +1228,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "internal_cli_inspect_go_writer",
-      "community": 71,
+      "community": 84,
       "norm_label": "writer"
     },
     {
@@ -917,8 +1237,8 @@
       "source_file": "internal/cli/inspect.go",
       "source_location": "L43",
       "_origin": "ast",
-      "id": "report",
-      "community": 71,
+      "id": "internal_cli_inspect_go_report",
+      "community": 84,
       "norm_label": "report"
     },
     {
@@ -928,7 +1248,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_list",
-      "community": 90,
+      "community": 11,
       "norm_label": "list.go"
     },
     {
@@ -938,7 +1258,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_list_newlistcmd",
-      "community": 90,
+      "community": 11,
       "norm_label": "newlistcmd()"
     },
     {
@@ -948,7 +1268,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_list_go_command",
-      "community": 90,
+      "community": 11,
       "norm_label": "command"
     },
     {
@@ -1568,7 +1888,7 @@
       "source_location": "L1090",
       "_origin": "ast",
       "id": "cli_observe_warnobserveloopbackdsn",
-      "community": 7,
+      "community": 83,
       "norm_label": "warnobserveloopbackdsn()"
     },
     {
@@ -1578,7 +1898,7 @@
       "source_location": "L1114",
       "_origin": "ast",
       "id": "cli_observe_reportobservereachability",
-      "community": 7,
+      "community": 83,
       "norm_label": "reportobservereachability()"
     },
     {
@@ -1888,7 +2208,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_firewall",
-      "community": 7,
+      "community": 47,
       "norm_label": "observe_firewall.go"
     },
     {
@@ -1898,7 +2218,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_observe_firewall_newobservefirewallcmd",
-      "community": 7,
+      "community": 47,
       "norm_label": "newobservefirewallcmd()"
     },
     {
@@ -1908,7 +2228,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_cli_observe_firewall_go_command",
-      "community": 7,
+      "community": 47,
       "norm_label": "command"
     },
     {
@@ -2248,7 +2568,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_plan",
-      "community": 74,
+      "community": 84,
       "norm_label": "plan.go"
     },
     {
@@ -2258,7 +2578,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_plan_newplancmd",
-      "community": 74,
+      "community": 84,
       "norm_label": "newplancmd()"
     },
     {
@@ -2268,7 +2588,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_plan_go_command",
-      "community": 74,
+      "community": 84,
       "norm_label": "command"
     },
     {
@@ -2278,7 +2598,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "cli_plan_describeprojectsource",
-      "community": 74,
+      "community": 84,
       "norm_label": "describeprojectsource()"
     },
     {
@@ -2288,7 +2608,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "internal_cli_plan_go_project",
-      "community": 74,
+      "community": 84,
       "norm_label": "project"
     },
     {
@@ -2298,7 +2618,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "cli_plan_describeenvfile",
-      "community": 74,
+      "community": 84,
       "norm_label": "describeenvfile()"
     },
     {
@@ -2505,7 +2825,7 @@
       "label": "notImplemented()",
       "file_type": "code",
       "source_file": "internal/cli/root.go",
-      "source_location": "L58",
+      "source_location": "L59",
       "_origin": "ast",
       "id": "cli_root_notimplemented",
       "community": 84,
@@ -2828,7 +3148,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_stop",
-      "community": 68,
+      "community": 1,
       "norm_label": "stop.go"
     },
     {
@@ -2838,7 +3158,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_stop_newstopcmd",
-      "community": 68,
+      "community": 1,
       "norm_label": "newstopcmd()"
     },
     {
@@ -2848,7 +3168,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_stop_go_command",
-      "community": 68,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -2858,7 +3178,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_up",
-      "community": 71,
+      "community": 1,
       "norm_label": "up.go"
     },
     {
@@ -2868,7 +3188,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_up_newupcmd",
-      "community": 71,
+      "community": 1,
       "norm_label": "newupcmd()"
     },
     {
@@ -2878,7 +3198,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_up_go_command",
-      "community": 71,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -2888,7 +3208,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "cli_up_runuppreflight",
-      "community": 71,
+      "community": 1,
       "norm_label": "runuppreflight()"
     },
     {
@@ -2898,7 +3218,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "internal_cli_up_go_appcontext",
-      "community": 71,
+      "community": 1,
       "norm_label": "appcontext"
     },
     {
@@ -2908,7 +3228,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_logs",
-      "community": 14,
+      "community": 1,
       "norm_label": "logs.go"
     },
     {
@@ -2918,7 +3238,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "compose_logsoptions",
-      "community": 14,
+      "community": 1,
       "norm_label": "logsoptions"
     },
     {
@@ -2928,7 +3248,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "compose_logs_logsargs",
-      "community": 14,
+      "community": 1,
       "norm_label": "logsargs()"
     },
     {
@@ -2938,7 +3258,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "internal_compose_logs_go_project",
-      "community": 14,
+      "community": 1,
       "norm_label": "project"
     },
     {
@@ -2948,7 +3268,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "compose_logs_logsproject",
-      "community": 14,
+      "community": 1,
       "norm_label": "logsproject()"
     },
     {
@@ -2958,7 +3278,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_compose_logs_go_context",
-      "community": 14,
+      "community": 1,
       "norm_label": "context"
     },
     {
@@ -2968,7 +3288,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_compose_logs_go_writer",
-      "community": 14,
+      "community": 1,
       "norm_label": "writer"
     },
     {
@@ -2978,7 +3298,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "compose_logs_logs",
-      "community": 14,
+      "community": 1,
       "norm_label": "logs()"
     },
     {
@@ -2988,7 +3308,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_logs_test",
-      "community": 14,
+      "community": 1,
       "norm_label": "logs_test.go"
     },
     {
@@ -2998,7 +3318,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "compose_logs_test_testlogsargsdefault",
-      "community": 14,
+      "community": 1,
       "norm_label": "testlogsargsdefault()"
     },
     {
@@ -3008,7 +3328,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_compose_logs_test_go_t",
-      "community": 14,
+      "community": 1,
       "norm_label": "t"
     },
     {
@@ -3018,7 +3338,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "compose_logs_test_testlogsargswithfollowtailandservices",
-      "community": 14,
+      "community": 1,
       "norm_label": "testlogsargswithfollowtailandservices()"
     },
     {
@@ -3108,7 +3428,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "compose_project_resolveproject",
-      "community": 9,
+      "community": 1,
       "norm_label": "resolveproject()"
     },
     {
@@ -3118,7 +3438,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "compose_project_up",
-      "community": 68,
+      "community": 1,
       "norm_label": "up()"
     },
     {
@@ -3128,7 +3448,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "internal_compose_project_go_context",
-      "community": 68,
+      "community": 1,
       "norm_label": "context"
     },
     {
@@ -3138,7 +3458,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "compose_project_down",
-      "community": 68,
+      "community": 1,
       "norm_label": "down()"
     },
     {
@@ -3148,7 +3468,7 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "compose_project_stop",
-      "community": 68,
+      "community": 1,
       "norm_label": "stop()"
     },
     {
@@ -3158,7 +3478,7 @@
       "source_location": "L138",
       "_origin": "ast",
       "id": "compose_project_upproject",
-      "community": 68,
+      "community": 1,
       "norm_label": "upproject()"
     },
     {
@@ -3168,7 +3488,7 @@
       "source_location": "L144",
       "_origin": "ast",
       "id": "compose_project_downproject",
-      "community": 68,
+      "community": 1,
       "norm_label": "downproject()"
     },
     {
@@ -3178,7 +3498,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "compose_project_stopproject",
-      "community": 68,
+      "community": 1,
       "norm_label": "stopproject()"
     },
     {
@@ -3208,7 +3528,7 @@
       "source_location": "L276",
       "_origin": "ast",
       "id": "compose_project_composeargs",
-      "community": 9,
+      "community": 1,
       "norm_label": "composeargs()"
     },
     {
@@ -3218,7 +3538,7 @@
       "source_location": "L294",
       "_origin": "ast",
       "id": "compose_project_plan",
-      "community": 9,
+      "community": 1,
       "norm_label": "plan()"
     },
     {
@@ -3248,7 +3568,7 @@
       "source_location": "L312",
       "_origin": "ast",
       "id": "compose_project_run",
-      "community": 68,
+      "community": 1,
       "norm_label": "run()"
     },
     {
@@ -3268,7 +3588,7 @@
       "source_location": "L335",
       "_origin": "ast",
       "id": "compose_project_projectnameforpath",
-      "community": 9,
+      "community": 1,
       "norm_label": "projectnameforpath()"
     },
     {
@@ -3298,7 +3618,7 @@
       "source_location": "L384",
       "_origin": "ast",
       "id": "compose_project_joinoutput",
-      "community": 68,
+      "community": 1,
       "norm_label": "joinoutput()"
     },
     {
@@ -3308,7 +3628,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_project_test",
-      "community": 9,
+      "community": 1,
       "norm_label": "project_test.go"
     },
     {
@@ -3318,7 +3638,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectdefaultstosinglecomposefile",
-      "community": 9,
+      "community": 1,
       "norm_label": "testresolveprojectdefaultstosinglecomposefile()"
     },
     {
@@ -3328,7 +3648,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_compose_project_test_go_t",
-      "community": 9,
+      "community": 1,
       "norm_label": "t"
     },
     {
@@ -3338,7 +3658,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectusesmanifestcomposefiles",
-      "community": 9,
+      "community": 1,
       "norm_label": "testresolveprojectusesmanifestcomposefiles()"
     },
     {
@@ -3348,7 +3668,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojecterrorswhenmanifestcomposefilemissing",
-      "community": 9,
+      "community": 1,
       "norm_label": "testresolveprojecterrorswhenmanifestcomposefilemissing()"
     },
     {
@@ -3358,7 +3678,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "compose_project_test_testcomposeargsincludesenvfileandallcomposefiles",
-      "community": 9,
+      "community": 1,
       "norm_label": "testcomposeargsincludesenvfileandallcomposefiles()"
     },
     {
@@ -3368,7 +3688,7 @@
       "source_location": "L133",
       "_origin": "ast",
       "id": "compose_project_test_testplanreturnsdockercommand",
-      "community": 9,
+      "community": 1,
       "norm_label": "testplanreturnsdockercommand()"
     },
     {
@@ -3378,7 +3698,7 @@
       "source_location": "L155",
       "_origin": "ast",
       "id": "compose_project_test_teststopprojectusescomposestop",
-      "community": 9,
+      "community": 1,
       "norm_label": "teststopprojectusescomposestop()"
     },
     {
@@ -3388,7 +3708,7 @@
       "source_location": "L179",
       "_origin": "ast",
       "id": "compose_project_test_testprojectnameforpathisstableandpathscoped",
-      "community": 9,
+      "community": 1,
       "norm_label": "testprojectnameforpathisstableandpathscoped()"
     },
     {
@@ -4308,7 +4628,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dns_hosts",
-      "community": 10,
+      "community": 59,
       "norm_label": "hosts.go"
     },
     {
@@ -4318,7 +4638,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "dns_hosts_validatedomains",
-      "community": 10,
+      "community": 59,
       "norm_label": "validatedomains()"
     },
     {
@@ -4328,7 +4648,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "dns_hosts_synchosts",
-      "community": 10,
+      "community": 59,
       "norm_label": "synchosts()"
     },
     {
@@ -4338,7 +4658,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "dns_hosts_mergemanagedblock",
-      "community": 10,
+      "community": 59,
       "norm_label": "mergemanagedblock()"
     },
     {
@@ -4348,7 +4668,7 @@
       "source_location": "L114",
       "_origin": "ast",
       "id": "dns_hosts_buildmanagedblock",
-      "community": 10,
+      "community": 59,
       "norm_label": "buildmanagedblock()"
     },
     {
@@ -4358,7 +4678,7 @@
       "source_location": "L126",
       "_origin": "ast",
       "id": "dns_hosts_runinteractive",
-      "community": 10,
+      "community": 59,
       "norm_label": "runinteractive()"
     },
     {
@@ -4368,7 +4688,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dns_hosts_test",
-      "community": 10,
+      "community": 59,
       "norm_label": "hosts_test.go"
     },
     {
@@ -4378,7 +4698,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "dns_hosts_test_testmergemanagedblock",
-      "community": 10,
+      "community": 59,
       "norm_label": "testmergemanagedblock()"
     },
     {
@@ -4388,7 +4708,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_dns_hosts_test_go_t",
-      "community": 10,
+      "community": 59,
       "norm_label": "t"
     },
     {
@@ -4398,7 +4718,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dns_validate_test",
-      "community": 10,
+      "community": 59,
       "norm_label": "validate_test.go"
     },
     {
@@ -4408,7 +4728,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "dns_validate_test_testvalidatedomainsnormalizesanddedupes",
-      "community": 10,
+      "community": 59,
       "norm_label": "testvalidatedomainsnormalizesanddedupes()"
     },
     {
@@ -4418,7 +4738,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_dns_validate_test_go_t",
-      "community": 10,
+      "community": 59,
       "norm_label": "t"
     },
     {
@@ -4428,7 +4748,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "dns_validate_test_testvalidatedomainsrejectsinjection",
-      "community": 10,
+      "community": 59,
       "norm_label": "testvalidatedomainsrejectsinjection()"
     },
     {
@@ -4438,7 +4758,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "dns_validate_test_testvalidatedomainsacceptsvalid",
-      "community": 10,
+      "community": 59,
       "norm_label": "testvalidatedomainsacceptsvalid()"
     },
     {
@@ -5038,7 +5358,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "observe_testclock",
-      "community": 5,
+      "community": 67,
       "norm_label": "testclock"
     },
     {
@@ -5048,7 +5368,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_observe_alerts_cooldown_test_go_time",
-      "community": 5,
+      "community": 67,
       "norm_label": "time"
     },
     {
@@ -5058,7 +5378,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "observe_testclock_now",
-      "community": 5,
+      "community": 67,
       "norm_label": ".now()"
     },
     {
@@ -5218,7 +5538,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_correlation",
-      "community": 59,
+      "community": 67,
       "norm_label": "correlation.go"
     },
     {
@@ -5228,7 +5548,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_correlator",
-      "community": 59,
+      "community": 67,
       "norm_label": "correlator"
     },
     {
@@ -5238,7 +5558,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_observe_correlation_go_store",
-      "community": 59,
+      "community": 67,
       "norm_label": "store"
     },
     {
@@ -5248,7 +5568,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_observe_correlation_go_dockerruntime",
-      "community": 59,
+      "community": 67,
       "norm_label": "dockerruntime"
     },
     {
@@ -5258,7 +5578,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "observe_correlation_newcorrelator",
-      "community": 59,
+      "community": 67,
       "norm_label": "newcorrelator()"
     },
     {
@@ -5268,7 +5588,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "observe_correlator_correlateevent",
-      "community": 59,
+      "community": 67,
       "norm_label": ".correlateevent()"
     },
     {
@@ -5278,7 +5598,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "internal_observe_correlation_go_context",
-      "community": 59,
+      "community": 67,
       "norm_label": "context"
     },
     {
@@ -5288,7 +5608,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "internal_observe_correlation_go_event",
-      "community": 59,
+      "community": 67,
       "norm_label": "event"
     },
     {
@@ -5298,7 +5618,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "internal_observe_correlation_go_containerlog",
-      "community": 59,
+      "community": 67,
       "norm_label": "containerlog"
     },
     {
@@ -5308,7 +5628,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_correlation_bestcontainermatch",
-      "community": 59,
+      "community": 67,
       "norm_label": "bestcontainermatch()"
     },
     {
@@ -5318,7 +5638,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "internal_observe_correlation_go_observedcontainer",
-      "community": 59,
+      "community": 67,
       "norm_label": "observedcontainer"
     },
     {
@@ -5328,7 +5648,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "observe_correlation_parseobservetime",
-      "community": 59,
+      "community": 67,
       "norm_label": "parseobservetime()"
     },
     {
@@ -5338,7 +5658,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "internal_observe_correlation_go_time",
-      "community": 59,
+      "community": 67,
       "norm_label": "time"
     },
     {
@@ -5348,7 +5668,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "observe_correlation_parseobservetimestrict",
-      "community": 59,
+      "community": 67,
       "norm_label": "parseobservetimestrict()"
     },
     {
@@ -5728,7 +6048,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "observe_event",
-      "community": 5,
+      "community": 87,
       "norm_label": "event"
     },
     {
@@ -5738,7 +6058,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "observe_event_normalizeevent",
-      "community": 5,
+      "community": 87,
       "norm_label": "normalizeevent()"
     },
     {
@@ -5748,7 +6068,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "observe_event_extrapayload",
-      "community": 5,
+      "community": 87,
       "norm_label": "extrapayload()"
     },
     {
@@ -5758,7 +6078,7 @@
       "source_location": "L131",
       "_origin": "ast",
       "id": "observe_event_fingerprint",
-      "community": 5,
+      "community": 87,
       "norm_label": "fingerprint()"
     },
     {
@@ -5768,7 +6088,7 @@
       "source_location": "L143",
       "_origin": "ast",
       "id": "observe_event_eventtitle",
-      "community": 5,
+      "community": 87,
       "norm_label": "eventtitle()"
     },
     {
@@ -5778,7 +6098,7 @@
       "source_location": "L159",
       "_origin": "ast",
       "id": "observe_event_compactjson",
-      "community": 5,
+      "community": 87,
       "norm_label": "compactjson()"
     },
     {
@@ -5788,7 +6108,7 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "observe_event_normalizemessage",
-      "community": 5,
+      "community": 87,
       "norm_label": "normalizemessage()"
     },
     {
@@ -5798,7 +6118,7 @@
       "source_location": "L210",
       "_origin": "ast",
       "id": "observe_event_explicitfingerprint",
-      "community": 5,
+      "community": 87,
       "norm_label": "explicitfingerprint()"
     },
     {
@@ -5808,7 +6128,7 @@
       "source_location": "L233",
       "_origin": "ast",
       "id": "observe_event_neweventid",
-      "community": 5,
+      "community": 87,
       "norm_label": "neweventid()"
     },
     {
@@ -5818,7 +6138,7 @@
       "source_location": "L243",
       "_origin": "ast",
       "id": "observe_event_stringvalue",
-      "community": 5,
+      "community": 87,
       "norm_label": "stringvalue()"
     },
     {
@@ -5828,7 +6148,7 @@
       "source_location": "L257",
       "_origin": "ast",
       "id": "observe_event_timestampvalue",
-      "community": 5,
+      "community": 87,
       "norm_label": "timestampvalue()"
     },
     {
@@ -5838,7 +6158,7 @@
       "source_location": "L270",
       "_origin": "ast",
       "id": "observe_event_logentrymessage",
-      "community": 5,
+      "community": 87,
       "norm_label": "logentrymessage()"
     },
     {
@@ -5848,7 +6168,7 @@
       "source_location": "L284",
       "_origin": "ast",
       "id": "observe_event_exceptiondetails",
-      "community": 5,
+      "community": 87,
       "norm_label": "exceptiondetails()"
     },
     {
@@ -5858,7 +6178,7 @@
       "source_location": "L307",
       "_origin": "ast",
       "id": "observe_event_stackculprit",
-      "community": 5,
+      "community": 87,
       "norm_label": "stackculprit()"
     },
     {
@@ -5868,7 +6188,7 @@
       "source_location": "L341",
       "_origin": "ast",
       "id": "observe_event_tagvalue",
-      "community": 5,
+      "community": 87,
       "norm_label": "tagvalue()"
     },
     {
@@ -5878,7 +6198,7 @@
       "source_location": "L365",
       "_origin": "ast",
       "id": "observe_event_mapstring",
-      "community": 5,
+      "community": 87,
       "norm_label": "mapstring()"
     },
     {
@@ -5888,7 +6208,7 @@
       "source_location": "L379",
       "_origin": "ast",
       "id": "observe_event_firstnonempty",
-      "community": 5,
+      "community": 87,
       "norm_label": "firstnonempty()"
     },
     {
@@ -5898,7 +6218,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_event_test",
-      "community": 5,
+      "community": 87,
       "norm_label": "event_test.go"
     },
     {
@@ -5908,7 +6228,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayload",
-      "community": 5,
+      "community": 87,
       "norm_label": "testextrapayload()"
     },
     {
@@ -5918,7 +6238,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_event_test_go_t",
-      "community": 5,
+      "community": 87,
       "norm_label": "t"
     },
     {
@@ -5928,7 +6248,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayloadovernormalizedevent",
-      "community": 5,
+      "community": 87,
       "norm_label": "testextrapayloadovernormalizedevent()"
     },
     {
@@ -6808,7 +7128,7 @@
       "source_location": "L264",
       "_origin": "ast",
       "id": "observe_network_isloopbackaddr",
-      "community": 7,
+      "community": 83,
       "norm_label": "isloopbackaddr()"
     },
     {
@@ -8558,7 +8878,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_store_test",
-      "community": 5,
+      "community": 87,
       "norm_label": "store_test.go"
     },
     {
@@ -8568,7 +8888,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_store_test_teststoreeventgroupsissues",
-      "community": 5,
+      "community": 87,
       "norm_label": "teststoreeventgroupsissues()"
     },
     {
@@ -8578,7 +8898,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_store_test_go_t",
-      "community": 5,
+      "community": 87,
       "norm_label": "t"
     },
     {
@@ -8588,7 +8908,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_store_test_teststorecontainersrecordsstatusandrestartevents",
-      "community": 5,
+      "community": 87,
       "norm_label": "teststorecontainersrecordsstatusandrestartevents()"
     },
     {
@@ -8598,7 +8918,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_store_test_teststorecreatesalertdeliveries",
-      "community": 5,
+      "community": 87,
       "norm_label": "teststorecreatesalertdeliveries()"
     },
     {
@@ -8608,7 +8928,7 @@
       "source_location": "L206",
       "_origin": "ast",
       "id": "observe_store_test_testlisteventsandtimelinereturnrawpayload",
-      "community": 5,
+      "community": 87,
       "norm_label": "testlisteventsandtimelinereturnrawpayload()"
     },
     {
@@ -9358,7 +9678,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy",
-      "community": 10,
+      "community": 14,
       "norm_label": "caddy.go"
     },
     {
@@ -9368,7 +9688,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "proxy_route",
-      "community": 10,
+      "community": 14,
       "norm_label": "route"
     },
     {
@@ -9378,7 +9698,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "proxy_site",
-      "community": 10,
+      "community": 14,
       "norm_label": "site"
     },
     {
@@ -9388,7 +9708,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "proxy_renderer",
-      "community": 10,
+      "community": 14,
       "norm_label": "renderer"
     },
     {
@@ -9398,7 +9718,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_paths",
-      "community": 10,
+      "community": 14,
       "norm_label": "paths"
     },
     {
@@ -9408,7 +9728,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_config",
-      "community": 10,
+      "community": 14,
       "norm_label": "config"
     },
     {
@@ -9418,7 +9738,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "proxy_caddy_newrenderer",
-      "community": 10,
+      "community": 14,
       "norm_label": "newrenderer()"
     },
     {
@@ -9428,7 +9748,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "proxy_renderer_render",
-      "community": 10,
+      "community": 14,
       "norm_label": ".render()"
     },
     {
@@ -9438,7 +9758,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_projectrecord",
-      "community": 10,
+      "community": 14,
       "norm_label": "projectrecord"
     },
     {
@@ -9448,7 +9768,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "proxy_renderer_write",
-      "community": 10,
+      "community": 14,
       "norm_label": ".write()"
     },
     {
@@ -9458,7 +9778,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "proxy_renderer_apply",
-      "community": 10,
+      "community": 14,
       "norm_label": ".apply()"
     },
     {
@@ -9468,7 +9788,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "proxy_renderer_projectsite",
-      "community": 10,
+      "community": 14,
       "norm_label": ".projectsite()"
     },
     {
@@ -9478,7 +9798,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "proxy_caddy_sudovalidate",
-      "community": 10,
+      "community": 14,
       "norm_label": "sudovalidate()"
     },
     {
@@ -9488,7 +9808,7 @@
       "source_location": "L152",
       "_origin": "ast",
       "id": "proxy_caddy_runinteractive",
-      "community": 10,
+      "community": 14,
       "norm_label": "runinteractive()"
     },
     {
@@ -9498,7 +9818,7 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "proxy_caddy_selectprojects",
-      "community": 10,
+      "community": 93,
       "norm_label": "selectprojects()"
     },
     {
@@ -9508,7 +9828,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy_test",
-      "community": 10,
+      "community": 14,
       "norm_label": "caddy_test.go"
     },
     {
@@ -9518,7 +9838,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "proxy_caddy_test_testrendervueflasksite",
-      "community": 10,
+      "community": 14,
       "norm_label": "testrendervueflasksite()"
     },
     {
@@ -9528,7 +9848,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_proxy_caddy_test_go_t",
-      "community": 10,
+      "community": 14,
       "norm_label": "t"
     },
     {
@@ -9558,7 +9878,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "proxy_external_managedsitestart",
-      "community": 82,
+      "community": 8,
       "norm_label": "managedsitestart()"
     },
     {
@@ -9568,7 +9888,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "proxy_external_managedsiteend",
-      "community": 82,
+      "community": 8,
       "norm_label": "managedsiteend()"
     },
     {
@@ -9628,7 +9948,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "proxy_externalsettingsconfig",
-      "community": 8,
+      "community": 71,
       "norm_label": "externalsettingsconfig"
     },
     {
@@ -9648,7 +9968,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "internal_proxy_external_go_config",
-      "community": 8,
+      "community": 71,
       "norm_label": "config"
     },
     {
@@ -9658,7 +9978,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "proxy_external_externalsettings",
-      "community": 8,
+      "community": 71,
       "norm_label": "externalsettings()"
     },
     {
@@ -9698,7 +10018,7 @@
       "source_location": "L141",
       "_origin": "ast",
       "id": "proxy_external_ensurecomposeoverride",
-      "community": 8,
+      "community": 71,
       "norm_label": "ensurecomposeoverride()"
     },
     {
@@ -9708,7 +10028,7 @@
       "source_location": "L178",
       "_origin": "ast",
       "id": "proxy_external_connectproject",
-      "community": 8,
+      "community": 71,
       "norm_label": "connectproject()"
     },
     {
@@ -9718,7 +10038,7 @@
       "source_location": "L178",
       "_origin": "ast",
       "id": "internal_proxy_external_go_context",
-      "community": 8,
+      "community": 71,
       "norm_label": "context"
     },
     {
@@ -9728,7 +10048,7 @@
       "source_location": "L206",
       "_origin": "ast",
       "id": "proxy_external_applyexternalproxy",
-      "community": 8,
+      "community": 71,
       "norm_label": "applyexternalproxy()"
     },
     {
@@ -9738,7 +10058,7 @@
       "source_location": "L239",
       "_origin": "ast",
       "id": "proxy_external_removeexternalproxy",
-      "community": 8,
+      "community": 71,
       "norm_label": "removeexternalproxy()"
     },
     {
@@ -9788,7 +10108,7 @@
       "source_location": "L328",
       "_origin": "ast",
       "id": "proxy_external_mergeexternalproxyconfig",
-      "community": 82,
+      "community": 8,
       "norm_label": "mergeexternalproxyconfig()"
     },
     {
@@ -9798,7 +10118,7 @@
       "source_location": "L348",
       "_origin": "ast",
       "id": "proxy_external_renderexternalsites",
-      "community": 82,
+      "community": 8,
       "norm_label": "renderexternalsites()"
     },
     {
@@ -9808,7 +10128,7 @@
       "source_location": "L357",
       "_origin": "ast",
       "id": "proxy_external_renderexternalsite",
-      "community": 82,
+      "community": 8,
       "norm_label": "renderexternalsite()"
     },
     {
@@ -9818,7 +10138,7 @@
       "source_location": "L389",
       "_origin": "ast",
       "id": "proxy_external_stripmanageddomains",
-      "community": 82,
+      "community": 8,
       "norm_label": "stripmanageddomains()"
     },
     {
@@ -9828,7 +10148,7 @@
       "source_location": "L394",
       "_origin": "ast",
       "id": "proxy_external_stripmarkeddomains",
-      "community": 82,
+      "community": 8,
       "norm_label": "stripmarkeddomains()"
     },
     {
@@ -9838,7 +10158,7 @@
       "source_location": "L423",
       "_origin": "ast",
       "id": "proxy_external_stripbracedomains",
-      "community": 82,
+      "community": 8,
       "norm_label": "stripbracedomains()"
     },
     {
@@ -9848,7 +10168,7 @@
       "source_location": "L461",
       "_origin": "ast",
       "id": "proxy_external_composeservicecontainer",
-      "community": 8,
+      "community": 71,
       "norm_label": "composeservicecontainer()"
     },
     {
@@ -9858,7 +10178,7 @@
       "source_location": "L481",
       "_origin": "ast",
       "id": "proxy_external_ensureexternalproxyready",
-      "community": 8,
+      "community": 71,
       "norm_label": "ensureexternalproxyready()"
     },
     {
@@ -9868,7 +10188,7 @@
       "source_location": "L493",
       "_origin": "ast",
       "id": "proxy_external_ensureexternalproxynetwork",
-      "community": 8,
+      "community": 71,
       "norm_label": "ensureexternalproxynetwork()"
     },
     {
@@ -9878,7 +10198,7 @@
       "source_location": "L520",
       "_origin": "ast",
       "id": "proxy_external_externalproxycontainername",
-      "community": 8,
+      "community": 71,
       "norm_label": "externalproxycontainername()"
     },
     {
@@ -9888,7 +10208,7 @@
       "source_location": "L529",
       "_origin": "ast",
       "id": "proxy_external_runcommand",
-      "community": 8,
+      "community": 71,
       "norm_label": "runcommand()"
     },
     {
@@ -9918,7 +10238,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_external_markers_test",
-      "community": 82,
+      "community": 8,
       "norm_label": "external_markers_test.go"
     },
     {
@@ -9928,7 +10248,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "proxy_external_markers_test_testrenderexternalsitewrapswithmarkers",
-      "community": 82,
+      "community": 8,
       "norm_label": "testrenderexternalsitewrapswithmarkers()"
     },
     {
@@ -9938,7 +10258,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_proxy_external_markers_test_go_t",
-      "community": 82,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -9948,7 +10268,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "proxy_external_markers_test_teststripmanageddomainsremovesmarkedblockkeepingothers",
-      "community": 82,
+      "community": 8,
       "norm_label": "teststripmanageddomainsremovesmarkedblockkeepingothers()"
     },
     {
@@ -9958,7 +10278,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "proxy_external_markers_test_teststripmanageddomainsmigrateslegacyunmarkedblock",
-      "community": 82,
+      "community": 8,
       "norm_label": "teststripmanageddomainsmigrateslegacyunmarkedblock()"
     },
     {
@@ -10058,7 +10378,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "runner_runner",
-      "community": 5,
+      "community": 67,
       "norm_label": "runner"
     },
     {
@@ -10068,7 +10388,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "runner_cmd",
-      "community": 5,
+      "community": 67,
       "norm_label": "cmd"
     },
     {
@@ -10078,7 +10398,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_runner_runner_go_duration",
-      "community": 5,
+      "community": 67,
       "norm_label": "duration"
     },
     {
@@ -10088,7 +10408,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "runner_cmd_run",
-      "community": 5,
+      "community": 67,
       "norm_label": ".run()"
     },
     {
@@ -10098,7 +10418,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "internal_runner_runner_go_context",
-      "community": 5,
+      "community": 67,
       "norm_label": "context"
     },
     {
@@ -10108,7 +10428,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "runner_runner_test",
-      "community": 94,
+      "community": 67,
       "norm_label": "runner_test.go"
     },
     {
@@ -10118,7 +10438,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdruncapturesoutput",
-      "community": 94,
+      "community": 67,
       "norm_label": "testcmdruncapturesoutput()"
     },
     {
@@ -10128,7 +10448,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_runner_runner_test_go_t",
-      "community": 94,
+      "community": 67,
       "norm_label": "t"
     },
     {
@@ -10138,7 +10458,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunusesoutputaserrormessage",
-      "community": 94,
+      "community": 67,
       "norm_label": "testcmdrunusesoutputaserrormessage()"
     },
     {
@@ -10148,7 +10468,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunrespectstimeout",
-      "community": 94,
+      "community": 67,
       "norm_label": "testcmdrunrespectstimeout()"
     },
     {
@@ -10158,7 +10478,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunsetsworkingdir",
-      "community": 94,
+      "community": 67,
       "norm_label": "testcmdrunsetsworkingdir()"
     },
     {
@@ -10548,7 +10868,7 @@
       "source_location": "L671",
       "_origin": "ast",
       "id": "scaffold_scaffold_filecontains",
-      "community": 4,
+      "community": 55,
       "norm_label": "filecontains()"
     },
     {
@@ -11038,7 +11358,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_manager_runner_test",
-      "community": 89,
+      "community": 33,
       "norm_label": "manager_runner_test.go"
     },
     {
@@ -11048,7 +11368,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "services_fakerunner",
-      "community": 89,
+      "community": 33,
       "norm_label": "fakerunner"
     },
     {
@@ -11058,7 +11378,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "services_fakerunner_run",
-      "community": 89,
+      "community": 33,
       "norm_label": ".run()"
     },
     {
@@ -11068,7 +11388,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_context",
-      "community": 89,
+      "community": 33,
       "norm_label": "context"
     },
     {
@@ -11078,7 +11398,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "services_manager_runner_test_newtestmanager",
-      "community": 89,
+      "community": 33,
       "norm_label": "newtestmanager()"
     },
     {
@@ -11088,7 +11408,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_t",
-      "community": 89,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -11098,7 +11418,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_manager",
-      "community": 89,
+      "community": 33,
       "norm_label": "manager"
     },
     {
@@ -11108,7 +11428,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartensuresnetworkandcomposesup",
-      "community": 89,
+      "community": 33,
       "norm_label": "teststartensuresnetworkandcomposesup()"
     },
     {
@@ -11118,7 +11438,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartcreatesnetworkwheninspectfails",
-      "community": 89,
+      "community": 33,
       "norm_label": "teststartcreatesnetworkwheninspectfails()"
     },
     {
@@ -11128,7 +11448,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartrejectsunsupportedservicewithoutdocker",
-      "community": 89,
+      "community": 33,
       "norm_label": "teststartrejectsunsupportedservicewithoutdocker()"
     },
     {
@@ -11138,7 +11458,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststopcomposesstop",
-      "community": 89,
+      "community": 33,
       "norm_label": "teststopcomposesstop()"
     },
     {
@@ -11148,7 +11468,7 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststatusallservices",
-      "community": 89,
+      "community": 33,
       "norm_label": "teststatusallservices()"
     },
     {
@@ -11198,7 +11518,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version",
-      "community": 90,
+      "community": 55,
       "norm_label": "version.go"
     },
     {
@@ -11208,7 +11528,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "version_version_string",
-      "community": 90,
+      "community": 55,
       "norm_label": "string()"
     },
     {
@@ -11218,7 +11538,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "version_version_long",
-      "community": 90,
+      "community": 55,
       "norm_label": "long()"
     },
     {
@@ -13306,20 +13626,30 @@
       "norm_label": "`observe cleanup`"
     },
     {
-      "label": "4.18 `devherd sentry ...`",
+      "label": "4.18 `devherd coverage`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
       "source_location": "L829",
       "_origin": "ast",
-      "id": "docs_usage_4_18_devherd_sentry",
+      "id": "docs_usage_4_18_devherd_coverage",
+      "community": 62,
+      "norm_label": "4.18 `devherd coverage`"
+    },
+    {
+      "label": "4.19 `devherd sentry ...`",
+      "file_type": "document",
+      "source_file": "docs/USAGE.md",
+      "source_location": "L861",
+      "_origin": "ast",
+      "id": "docs_usage_4_19_devherd_sentry",
       "community": 80,
-      "norm_label": "4.18 `devherd sentry ...`"
+      "norm_label": "4.19 `devherd sentry ...`"
     },
     {
       "label": "`sentry init <project> --stack <stack>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L835",
+      "source_location": "L867",
       "_origin": "ast",
       "id": "docs_usage_sentry_init_project_stack_stack",
       "community": 80,
@@ -13329,7 +13659,7 @@
       "label": "`sentry set-dsn <project> --dsn <dsn>` / `sentry test <project>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L849",
+      "source_location": "L881",
       "_origin": "ast",
       "id": "docs_usage_sentry_set_dsn_project_dsn_dsn_sentry_test_project",
       "community": 80,
@@ -13339,7 +13669,7 @@
       "label": "5. El manifiesto `.devherd.yml`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L854",
+      "source_location": "L886",
       "_origin": "ast",
       "id": "docs_usage_5_el_manifiesto_devherd_yml",
       "community": 72,
@@ -13349,7 +13679,7 @@
       "label": "6. Flujos de trabajo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L887",
+      "source_location": "L919",
       "_origin": "ast",
       "id": "docs_usage_6_flujos_de_trabajo",
       "community": 75,
@@ -13359,7 +13689,7 @@
       "label": "6.1 Modo proxy en Docker externo (recomendado)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L889",
+      "source_location": "L921",
       "_origin": "ast",
       "id": "docs_usage_6_1_modo_proxy_en_docker_externo_recomendado",
       "community": 75,
@@ -13369,7 +13699,7 @@
       "label": "6.2 Modo proxy en host (Caddy + /etc/hosts)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L912",
+      "source_location": "L944",
       "_origin": "ast",
       "id": "docs_usage_6_2_modo_proxy_en_host_caddy_etc_hosts",
       "community": 75,
@@ -13379,7 +13709,7 @@
       "label": "6.3 Repositorio sin Docker",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L928",
+      "source_location": "L960",
       "_origin": "ast",
       "id": "docs_usage_6_3_repositorio_sin_docker",
       "community": 75,
@@ -13389,7 +13719,7 @@
       "label": "6.4 Servicios compartidos + observabilidad",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L937",
+      "source_location": "L969",
       "_origin": "ast",
       "id": "docs_usage_6_4_servicios_compartidos_observabilidad",
       "community": 75,
@@ -13399,7 +13729,7 @@
       "label": "6.5 Bajar todo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L951",
+      "source_location": "L983",
       "_origin": "ast",
       "id": "docs_usage_6_5_bajar_todo",
       "community": 75,
@@ -13409,7 +13739,7 @@
       "label": "7. Donde vive el estado",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L961",
+      "source_location": "L993",
       "_origin": "ast",
       "id": "docs_usage_7_donde_vive_el_estado",
       "community": 72,
@@ -13419,7 +13749,7 @@
       "label": "8. Patrones recomendados para proyectos Compose",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L982",
+      "source_location": "L1014",
       "_origin": "ast",
       "id": "docs_usage_8_patrones_recomendados_para_proyectos_compose",
       "community": 72,
@@ -13429,7 +13759,7 @@
       "label": "8.1 Aislamiento de nombres de contenedor",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L984",
+      "source_location": "L1016",
       "_origin": "ast",
       "id": "docs_usage_8_1_aislamiento_de_nombres_de_contenedor",
       "community": 72,
@@ -13439,7 +13769,7 @@
       "label": "8.2 Volumenes que sobreviven a cambios de project-name",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1027",
+      "source_location": "L1059",
       "_origin": "ast",
       "id": "docs_usage_8_2_volumenes_que_sobreviven_a_cambios_de_project_name",
       "community": 72,
@@ -13449,7 +13779,7 @@
       "label": "8.3 Probar sin tocar tu configuracion real",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1048",
+      "source_location": "L1080",
       "_origin": "ast",
       "id": "docs_usage_8_3_probar_sin_tocar_tu_configuracion_real",
       "community": 72,
@@ -13462,7 +13792,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "devherd_v1_app_readme",
-      "community": 61,
+      "community": 53,
       "norm_label": "readme.md"
     },
     {
@@ -13652,7 +13982,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "devherd_v1_app_validation_2026_05_04",
-      "community": 61,
+      "community": 53,
       "norm_label": "validation-2026-05-04.md"
     },
     {
@@ -13662,7 +13992,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "devherd_v1_app_validation_2026_05_04_validaci\u00f3n_2026_05_04",
-      "community": 86,
+      "community": 53,
       "norm_label": "validacion 2026-05-04"
     },
     {
@@ -13672,7 +14002,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "devherd_v1_app_validation_2026_05_04_alcance",
-      "community": 86,
+      "community": 53,
       "norm_label": "alcance"
     },
     {
@@ -13682,7 +14012,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "devherd_v1_app_validation_2026_05_04_resultado",
-      "community": 86,
+      "community": 53,
       "norm_label": "resultado"
     },
     {
@@ -13692,7 +14022,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "devherd_v1_app_validation_2026_05_04_smoke_test_portable",
-      "community": 86,
+      "community": 53,
       "norm_label": "smoke test portable"
     },
     {
@@ -13702,7 +14032,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "devherd_v1_app_validation_2026_05_04_bootstrap_idempotente",
-      "community": 86,
+      "community": 53,
       "norm_label": "bootstrap idempotente"
     },
     {
@@ -13712,7 +14042,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "devherd_v1_app_validation_2026_05_04_recuperaci\u00f3n_con_force",
-      "community": 86,
+      "community": 53,
       "norm_label": "recuperacion con `--force`"
     },
     {
@@ -13722,7 +14052,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "devherd_v1_app_validation_2026_05_04_lectura_operativa",
-      "community": 86,
+      "community": 53,
       "norm_label": "lectura operativa"
     },
     {
@@ -13764,6 +14094,136 @@
       "id": "docs_cli_commands_por_que_se_consolido",
       "community": 79,
       "norm_label": "por que se consolido"
+    },
+    {
+      "label": "coverage.md",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_coverage",
+      "community": 68,
+      "norm_label": "coverage.md"
+    },
+    {
+      "label": "DevHerd Coverage",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_coverage_devherd_coverage",
+      "community": 68,
+      "norm_label": "devherd coverage"
+    },
+    {
+      "label": "Estado",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "docs_coverage_estado",
+      "community": 68,
+      "norm_label": "estado"
+    },
+    {
+      "label": "Uso",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "docs_coverage_uso",
+      "community": 68,
+      "norm_label": "uso"
+    },
+    {
+      "label": "Como generar el reporte",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "docs_coverage_como_generar_el_reporte",
+      "community": 68,
+      "norm_label": "como generar el reporte"
+    },
+    {
+      "label": "Que se lee",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "docs_coverage_que_se_lee",
+      "community": 68,
+      "norm_label": "que se lee"
+    },
+    {
+      "label": "Salida",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L62",
+      "_origin": "ast",
+      "id": "docs_coverage_salida",
+      "community": 68,
+      "norm_label": "salida"
+    },
+    {
+      "label": "Tres cosas que hace distinto",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "docs_coverage_tres_cosas_que_hace_distinto",
+      "community": 68,
+      "norm_label": "tres cosas que hace distinto"
+    },
+    {
+      "label": "1. La unidad va siempre en la cabecera",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L82",
+      "_origin": "ast",
+      "id": "docs_coverage_1_la_unidad_va_siempre_en_la_cabecera",
+      "community": 68,
+      "norm_label": "1. la unidad va siempre en la cabecera"
+    },
+    {
+      "label": "2. El total se pondera por unidades, nunca se promedian porcentajes",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "docs_coverage_2_el_total_se_pondera_por_unidades_nunca_se_promedian_porcentajes",
+      "community": 68,
+      "norm_label": "2. el total se pondera por unidades, nunca se promedian porcentajes"
+    },
+    {
+      "label": "3. Se ordena por masa sin cubrir, no por porcentaje",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L100",
+      "_origin": "ast",
+      "id": "docs_coverage_3_se_ordena_por_masa_sin_cubrir_no_por_porcentaje",
+      "community": 68,
+      "norm_label": "3. se ordena por masa sin cubrir, no por porcentaje"
+    },
+    {
+      "label": "Limites de esta fase",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L107",
+      "_origin": "ast",
+      "id": "docs_coverage_limites_de_esta_fase",
+      "community": 68,
+      "norm_label": "limites de esta fase"
+    },
+    {
+      "label": "Un reporte vacio no es 0%",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L118",
+      "_origin": "ast",
+      "id": "docs_coverage_un_reporte_vacio_no_es_0",
+      "community": 68,
+      "norm_label": "un reporte vacio no es 0%"
     },
     {
       "label": "current-status.md",
@@ -14082,7 +14542,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_diagrams",
-      "community": 76,
+      "community": 61,
       "norm_label": "diagrams.md"
     },
     {
@@ -17444,9 +17904,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_externalproxyconfig",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_externalproxyconfig"
     },
     {
       "relation": "contains",
@@ -17454,9 +17914,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_newcomposeprojectdir",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newcomposeprojectdir"
     },
     {
       "relation": "contains",
@@ -17464,9 +17924,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_newtestappcontext",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newtestappcontext"
     },
     {
       "relation": "contains",
@@ -17474,9 +17934,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L198",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_seedproject",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_seedproject"
     },
     {
       "relation": "contains",
@@ -17484,9 +17944,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_testappendobserveoverrideonlywhenthefileexists",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_testappendobserveoverrideonlywhenthefileexists"
     },
     {
       "relation": "contains",
@@ -17494,9 +17954,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_testpreparecomposeprojectaddsproxyandobserveoverrides",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_testpreparecomposeprojectaddsproxyandobserveoverrides"
     },
     {
       "relation": "contains",
@@ -17504,9 +17964,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L216",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_testpreparecomposeprojectkeepsobserveoverridewhenproxycannotresolve",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_testpreparecomposeprojectkeepsobserveoverridewhenproxycannotresolve"
     },
     {
       "relation": "contains",
@@ -17514,9 +17974,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L113",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_testpreparecomposeprojectskipsproxyoverridewithoutexternaldriver",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_testpreparecomposeprojectskipsproxyoverridewithoutexternaldriver"
     },
     {
       "relation": "contains",
@@ -17524,9 +17984,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L131",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_testpreparecomposeprojecttoleratesnilappcontext",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_testpreparecomposeprojecttoleratesnilappcontext"
     },
     {
       "relation": "contains",
@@ -17534,9 +17994,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L169",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_testresolveexternalprojectfallsbacktothedetector",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_testresolveexternalprojectfallsbacktothedetector"
     },
     {
       "relation": "contains",
@@ -17544,9 +18004,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L183",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_testresolveexternalprojectusestheregisteredrecord",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_testresolveexternalprojectusestheregisteredrecord"
     },
     {
       "relation": "contains",
@@ -17554,9 +18014,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test",
-      "target": "cli_compose_runtime_test_withproxymanifest",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_withproxymanifest"
     },
     {
       "relation": "references",
@@ -17565,9 +18025,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_newtestappcontext",
-      "target": "internal_cli_compose_runtime_test_go_appcontext",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_appcontext"
     },
     {
       "relation": "references",
@@ -17576,9 +18036,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_newtestappcontext",
-      "target": "internal_cli_compose_runtime_test_go_config",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_config"
     },
     {
       "relation": "references",
@@ -17587,9 +18047,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_newtestappcontext",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "calls",
@@ -17598,9 +18058,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L151",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectaddsproxyandobserveoverrides",
-      "target": "cli_compose_runtime_test_newtestappcontext",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newtestappcontext"
     },
     {
       "relation": "calls",
@@ -17609,9 +18069,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L223",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectkeepsobserveoverridewhenproxycannotresolve",
-      "target": "cli_compose_runtime_test_newtestappcontext",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newtestappcontext"
     },
     {
       "relation": "calls",
@@ -17620,9 +18080,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L115",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectskipsproxyoverridewithoutexternaldriver",
-      "target": "cli_compose_runtime_test_newtestappcontext",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newtestappcontext"
     },
     {
       "relation": "calls",
@@ -17631,9 +18091,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L171",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectfallsbacktothedetector",
-      "target": "cli_compose_runtime_test_newtestappcontext",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newtestappcontext"
     },
     {
       "relation": "calls",
@@ -17642,9 +18102,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L185",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectusestheregisteredrecord",
-      "target": "cli_compose_runtime_test_newtestappcontext",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newtestappcontext"
     },
     {
       "relation": "calls",
@@ -17697,9 +18157,9 @@
       "source_location": "L73",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_externalproxyconfig",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17708,9 +18168,9 @@
       "source_location": "L47",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_newcomposeprojectdir",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17719,9 +18179,9 @@
       "source_location": "L198",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_seedproject",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17730,9 +18190,9 @@
       "source_location": "L84",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testappendobserveoverrideonlywhenthefileexists",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17741,9 +18201,9 @@
       "source_location": "L143",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectaddsproxyandobserveoverrides",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17752,9 +18212,9 @@
       "source_location": "L216",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectkeepsobserveoverridewhenproxycannotresolve",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17763,9 +18223,9 @@
       "source_location": "L113",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectskipsproxyoverridewithoutexternaldriver",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17774,9 +18234,9 @@
       "source_location": "L131",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojecttoleratesnilappcontext",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17785,9 +18245,9 @@
       "source_location": "L169",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectfallsbacktothedetector",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17796,9 +18256,9 @@
       "source_location": "L183",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectusestheregisteredrecord",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17807,9 +18267,9 @@
       "source_location": "L62",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_withproxymanifest",
-      "target": "internal_cli_compose_runtime_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_t"
     },
     {
       "relation": "references",
@@ -17818,9 +18278,9 @@
       "source_location": "L73",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_externalproxyconfig",
-      "target": "internal_cli_compose_runtime_test_go_config",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_config"
     },
     {
       "relation": "calls",
@@ -17829,9 +18289,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testappendobserveoverrideonlywhenthefileexists",
-      "target": "cli_compose_runtime_test_newcomposeprojectdir",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newcomposeprojectdir"
     },
     {
       "relation": "calls",
@@ -17840,9 +18300,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L144",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectaddsproxyandobserveoverrides",
-      "target": "cli_compose_runtime_test_newcomposeprojectdir",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newcomposeprojectdir"
     },
     {
       "relation": "calls",
@@ -17851,9 +18311,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L217",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectkeepsobserveoverridewhenproxycannotresolve",
-      "target": "cli_compose_runtime_test_newcomposeprojectdir",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newcomposeprojectdir"
     },
     {
       "relation": "calls",
@@ -17862,9 +18322,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L114",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectskipsproxyoverridewithoutexternaldriver",
-      "target": "cli_compose_runtime_test_newcomposeprojectdir",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newcomposeprojectdir"
     },
     {
       "relation": "calls",
@@ -17873,9 +18333,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L132",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojecttoleratesnilappcontext",
-      "target": "cli_compose_runtime_test_newcomposeprojectdir",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newcomposeprojectdir"
     },
     {
       "relation": "calls",
@@ -17884,9 +18344,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L170",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectfallsbacktothedetector",
-      "target": "cli_compose_runtime_test_newcomposeprojectdir",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newcomposeprojectdir"
     },
     {
       "relation": "calls",
@@ -17895,9 +18355,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectusestheregisteredrecord",
-      "target": "cli_compose_runtime_test_newcomposeprojectdir",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_newcomposeprojectdir"
     },
     {
       "relation": "calls",
@@ -17939,9 +18399,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L144",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectaddsproxyandobserveoverrides",
-      "target": "cli_compose_runtime_test_withproxymanifest",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_withproxymanifest"
     },
     {
       "relation": "calls",
@@ -17950,9 +18410,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L170",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectfallsbacktothedetector",
-      "target": "cli_compose_runtime_test_withproxymanifest",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_withproxymanifest"
     },
     {
       "relation": "calls",
@@ -17961,9 +18421,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectusestheregisteredrecord",
-      "target": "cli_compose_runtime_test_withproxymanifest",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_withproxymanifest"
     },
     {
       "relation": "calls",
@@ -17983,9 +18443,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L150",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectaddsproxyandobserveoverrides",
-      "target": "cli_compose_runtime_test_externalproxyconfig",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_externalproxyconfig"
     },
     {
       "relation": "calls",
@@ -17994,9 +18454,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L223",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectkeepsobserveoverridewhenproxycannotresolve",
-      "target": "cli_compose_runtime_test_externalproxyconfig",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_externalproxyconfig"
     },
     {
       "relation": "calls",
@@ -18005,9 +18465,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L171",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectfallsbacktothedetector",
-      "target": "cli_compose_runtime_test_externalproxyconfig",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_externalproxyconfig"
     },
     {
       "relation": "calls",
@@ -18016,9 +18476,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L185",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectusestheregisteredrecord",
-      "target": "cli_compose_runtime_test_externalproxyconfig",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_externalproxyconfig"
     },
     {
       "relation": "calls",
@@ -18049,9 +18509,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L152",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojectaddsproxyandobserveoverrides",
-      "target": "cli_compose_runtime_test_seedproject",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_seedproject"
     },
     {
       "relation": "calls",
@@ -18060,9 +18520,9 @@
       "source_file": "internal/cli/compose_runtime_test.go",
       "source_location": "L186",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_testresolveexternalprojectusestheregisteredrecord",
-      "target": "cli_compose_runtime_test_seedproject",
-      "confidence_score": 1.0
+      "target": "cli_compose_runtime_test_seedproject"
     },
     {
       "relation": "calls",
@@ -18082,9 +18542,9 @@
       "source_location": "L198",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_compose_runtime_test_seedproject",
-      "target": "internal_cli_compose_runtime_test_go_db",
-      "confidence_score": 1.0
+      "target": "internal_cli_compose_runtime_test_go_db"
     },
     {
       "relation": "calls",
@@ -18107,6 +18567,938 @@
       "weight": 1.0,
       "source": "cli_observe_target_test_testresolveobservetargetignorescaseinthename",
       "target": "cli_compose_runtime_test_seedproject"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L164",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_countcoverageuncoveredfiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_newcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L177",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_truncatecoveragepath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_writecoveragefileline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_writecoveragefiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_writecoveragegroups",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_writecoveragejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_writecoveragereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverageviewoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "cli_coverage_newcoveragecmd",
+      "target": "cli_coverage_writecoveragejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "cli_coverage_newcoveragecmd",
+      "target": "cli_coverage_writecoveragereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "cli_coverage_newcoveragecmd",
+      "target": "internal_cli_coverage_go_command",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "cli_coverage_test_runcoveragecmd",
+      "target": "cli_coverage_newcoveragecmd"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/root.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "cli_root_newrootcmd",
+      "target": "cli_coverage_newcoveragecmd"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L117",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragefiles",
+      "target": "cli_coverageviewoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L80",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragereport",
+      "target": "cli_coverageviewoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L70",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragejson",
+      "target": "internal_cli_coverage_go_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L70",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragejson",
+      "target": "internal_cli_coverage_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L159",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragefileline",
+      "target": "internal_cli_coverage_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L117",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragefiles",
+      "target": "internal_cli_coverage_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L102",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragegroups",
+      "target": "internal_cli_coverage_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L80",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragereport",
+      "target": "internal_cli_coverage_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L117",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragefiles",
+      "target": "internal_cli_coverage_go_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L102",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragegroups",
+      "target": "internal_cli_coverage_go_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L80",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragereport",
+      "target": "internal_cli_coverage_go_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L99",
+      "weight": 1.0,
+      "source": "cli_coverage_writecoveragereport",
+      "target": "cli_coverage_writecoveragefiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "cli_coverage_writecoveragereport",
+      "target": "cli_coverage_writecoveragegroups",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "cli_coverage_writecoveragegroups",
+      "target": "cli_coverage_truncatecoveragepath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L154",
+      "weight": 1.0,
+      "source": "cli_coverage_writecoveragefiles",
+      "target": "cli_coverage_countcoverageuncoveredfiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "cli_coverage_writecoveragefiles",
+      "target": "cli_coverage_writecoveragefileline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "cli_coverage_writecoveragefileline",
+      "target": "cli_coverage_truncatecoveragepath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L159",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_writecoveragefileline",
+      "target": "filereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L164",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_countcoverageuncoveredfiles",
+      "target": "filereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_countlistedfiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L318",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_reporootfortest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L214",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragefailsonmissingfile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L200",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragefailsonunknownformatwithoutpanicking",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L232",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragegroupsbydirectorywhenthereismorethanone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L163",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragejsonserializesthereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragelimitsthelistandsayswhatitomitted",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L260",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragematchesgotoolcoveronarealprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoverageoutputalwaysnamestheunit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L221",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragerequiresthereportflag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L185",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragesaysthereisnodatainsteadofzeropercent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L142",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragetopflagchangeshowmanyarelisted",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L89",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_testcoveragetotalisweightednotaveraged",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L295",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_totalfromgotoolcover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "cli_coverage_test",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_runcoveragecmd",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L215",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragefailsonmissingfile",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L203",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragefailsonunknownformatwithoutpanicking",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L246",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragegroupsbydirectorywhenthereismorethanone",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L166",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragejsonserializesthereport",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L120",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragelimitsthelistandsayswhatitomitted",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoverageoutputalwaysnamestheunit",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L222",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragerequiresthereportflag",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L188",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragesaysthereisnodatainsteadofzeropercent",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L151",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragetopflagchangeshowmanyarelisted",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragetotalisweightednotaveraged",
+      "target": "cli_coverage_test_runcoveragecmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L318",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_reporootfortest",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L214",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragefailsonmissingfile",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L200",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragefailsonunknownformatwithoutpanicking",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L232",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragegroupsbydirectorywhenthereismorethanone",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L163",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragejsonserializesthereport",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L111",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragelimitsthelistandsayswhatitomitted",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L260",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragematchesgotoolcoveronarealprofile",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoverageoutputalwaysnamestheunit",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L221",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragerequiresthereportflag",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L185",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragesaysthereisnodatainsteadofzeropercent",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L142",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragetopflagchangeshowmanyarelisted",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L89",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_testcoveragetotalisweightednotaveraged",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L295",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_totalfromgotoolcover",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L45",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_test_writecoveragefixture",
+      "target": "internal_cli_coverage_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragelimitsthelistandsayswhatitomitted",
+      "target": "cli_coverage_test_countlistedfiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragetopflagchangeshowmanyarelisted",
+      "target": "cli_coverage_test_countlistedfiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L201",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragefailsonunknownformatwithoutpanicking",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L244",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragegroupsbydirectorywhenthereismorethanone",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L164",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragejsonserializesthereport",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragelimitsthelistandsayswhatitomitted",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoverageoutputalwaysnamestheunit",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L186",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragesaysthereisnodatainsteadofzeropercent",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragetopflagchangeshowmanyarelisted",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L90",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragetotalisweightednotaveraged",
+      "target": "cli_coverage_test_writecoveragefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L268",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragematchesgotoolcoveronarealprofile",
+      "target": "cli_coverage_test_reporootfortest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L277",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragematchesgotoolcoveronarealprofile",
+      "target": "cli_coverage_test_totalfromgotoolcover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_test.go",
+      "source_location": "L277",
+      "weight": 1.0,
+      "source": "cli_coverage_test_testcoveragematchesgotoolcoveronarealprofile",
+      "target": "version_version_string"
     },
     {
       "relation": "contains",
@@ -18384,9 +19776,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L154",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testdescribeenvfile",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testdescribeenvfile"
     },
     {
       "relation": "contains",
@@ -18394,9 +19786,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testdescribeprojectsource",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testdescribeprojectsource"
     },
     {
       "relation": "contains",
@@ -18404,9 +19796,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L88",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testemptyasall",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testemptyasall"
     },
     {
       "relation": "contains",
@@ -18414,9 +19806,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L97",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testformatobservepayloadvalue",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testformatobservepayloadvalue"
     },
     {
       "relation": "contains",
@@ -18424,9 +19816,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L71",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testobservecooldownacceptszerobutwindowdoesnot",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testobservecooldownacceptszerobutwindowdoesnot"
     },
     {
       "relation": "contains",
@@ -18434,9 +19826,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testparseobservedurationseconds",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testparseobservedurationseconds"
     },
     {
       "relation": "contains",
@@ -18444,9 +19836,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L128",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testserviceactionshort",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testserviceactionshort"
     },
     {
       "relation": "contains",
@@ -18454,9 +19846,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L114",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_teststatuslabel",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_teststatuslabel"
     },
     {
       "relation": "contains",
@@ -18464,9 +19856,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testsupportedalertkind",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testsupportedalertkind"
     },
     {
       "relation": "contains",
@@ -18474,9 +19866,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testtruncateobservetext",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testtruncateobservetext"
     },
     {
       "relation": "contains",
@@ -18484,9 +19876,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L196",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testwriteobservepayloadshowsonlyextrakeys",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testwriteobservepayloadshowsonlyextrakeys"
     },
     {
       "relation": "contains",
@@ -18494,9 +19886,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L217",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testwriteobservepayloadstaysquietwhenthereisnothingextra",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testwriteobservepayloadstaysquietwhenthereisnothingextra"
     },
     {
       "relation": "contains",
@@ -18504,9 +19896,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L173",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testwriteobservetimelinesayswhatismissing",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testwriteobservetimelinesayswhatismissing"
     },
     {
       "relation": "contains",
@@ -18514,9 +19906,9 @@
       "source_file": "internal/cli/formatting_test.go",
       "source_location": "L231",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_formatting_test",
-      "target": "cli_formatting_test_testwritepreflightreporthidesokunlessasked",
-      "confidence_score": 1.0
+      "target": "cli_formatting_test_testwritepreflightreporthidesokunlessasked"
     },
     {
       "relation": "calls",
@@ -18536,9 +19928,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testtruncateobservetext",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18547,9 +19939,9 @@
       "source_location": "L154",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testdescribeenvfile",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18558,9 +19950,9 @@
       "source_location": "L143",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testdescribeprojectsource",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18569,9 +19961,9 @@
       "source_location": "L88",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testemptyasall",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18580,9 +19972,9 @@
       "source_location": "L97",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testformatobservepayloadvalue",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18591,9 +19983,9 @@
       "source_location": "L71",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testobservecooldownacceptszerobutwindowdoesnot",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18602,9 +19994,9 @@
       "source_location": "L55",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testparseobservedurationseconds",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18613,9 +20005,9 @@
       "source_location": "L128",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testserviceactionshort",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18624,9 +20016,9 @@
       "source_location": "L114",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_teststatuslabel",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18635,9 +20027,9 @@
       "source_location": "L42",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testsupportedalertkind",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18646,9 +20038,9 @@
       "source_location": "L196",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testwriteobservepayloadshowsonlyextrakeys",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18657,9 +20049,9 @@
       "source_location": "L217",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testwriteobservepayloadstaysquietwhenthereisnothingextra",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18668,9 +20060,9 @@
       "source_location": "L173",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testwriteobservetimelinesayswhatismissing",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "references",
@@ -18679,9 +20071,9 @@
       "source_location": "L231",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_formatting_test_testwritepreflightreporthidesokunlessasked",
-      "target": "internal_cli_formatting_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_formatting_test_go_t"
     },
     {
       "relation": "calls",
@@ -19124,9 +20516,9 @@
       "source_location": "L43",
       "weight": 1.0,
       "context": "parameter_type",
-      "confidence_score": 1.0,
       "source": "cli_inspect_writepreflightreport",
-      "target": "internal_cli_inspect_go_writer"
+      "target": "internal_cli_inspect_go_report",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -19137,7 +20529,7 @@
       "context": "parameter_type",
       "confidence_score": 1.0,
       "source": "cli_inspect_writepreflightreport",
-      "target": "report"
+      "target": "internal_cli_inspect_go_writer"
     },
     {
       "relation": "calls",
@@ -21406,9 +22798,9 @@
       "source_location": "L969",
       "weight": 1.0,
       "context": "field",
+      "confidence_score": 1.0,
       "source": "cli_observeaddrplan",
-      "target": "internal_cli_observe_go_runner",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_go_runner"
     },
     {
       "relation": "references",
@@ -21428,9 +22820,9 @@
       "source_location": "L979",
       "weight": 1.0,
       "context": "field",
+      "confidence_score": 1.0,
       "source": "cli_observeaddroptions",
-      "target": "internal_cli_observe_go_runner",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_go_runner"
     },
     {
       "relation": "references",
@@ -21845,9 +23237,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_observe_addrs_test_demorunner",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_demorunner"
     },
     {
       "relation": "contains",
@@ -21855,9 +23247,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L209",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_observe_addrs_test_testobserveaddrplannetworknameslistseverynetwork",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_testobserveaddrplannetworknameslistseverynetwork"
     },
     {
       "relation": "contains",
@@ -21865,9 +23257,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L129",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_observe_addrs_test_testplanobserveaddrsbindseveryresolvednetwork",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_testplanobserveaddrsbindseveryresolvednetwork"
     },
     {
       "relation": "contains",
@@ -21875,9 +23267,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_observe_addrs_test_testplanobserveaddrsexplainsprojectwithoutcontainers",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_testplanobserveaddrsexplainsprojectwithoutcontainers"
     },
     {
       "relation": "contains",
@@ -21885,9 +23277,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_observe_addrs_test_testplanobserveaddrsfallsbacktoprojectnetworkwhenisolated",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_testplanobserveaddrsfallsbacktoprojectnetworkwhenisolated"
     },
     {
       "relation": "contains",
@@ -21895,9 +23287,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_observe_addrs_test_testplanobserveaddrsprefersstablenetworkovercoverage",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_testplanobserveaddrsprefersstablenetworkovercoverage"
     },
     {
       "relation": "contains",
@@ -21905,9 +23297,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L194",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_observe_addrs_test_testplanobserveaddrsreportswhennonetworkresolves",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_testplanobserveaddrsreportswhennonetworkresolves"
     },
     {
       "relation": "contains",
@@ -21915,9 +23307,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L172",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_observe_addrs_test_testplanobserveaddrsrespectsexplicitaddr",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_testplanobserveaddrsrespectsexplicitaddr"
     },
     {
       "relation": "contains",
@@ -21925,9 +23317,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test",
-      "target": "cli_routedrunner",
-      "confidence_score": 1.0
+      "target": "cli_routedrunner"
     },
     {
       "relation": "references",
@@ -21936,9 +23328,9 @@
       "source_location": "L63",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_demorunner",
-      "target": "cli_routedrunner",
-      "confidence_score": 1.0
+      "target": "cli_routedrunner"
     },
     {
       "relation": "method",
@@ -21946,9 +23338,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_routedrunner",
-      "target": "cli_routedrunner_run",
-      "confidence_score": 1.0
+      "target": "cli_routedrunner_run"
     },
     {
       "relation": "references",
@@ -21957,9 +23349,9 @@
       "source_location": "L24",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_routedrunner_run",
-      "target": "internal_cli_observe_addrs_test_go_context",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_addrs_test_go_context"
     },
     {
       "relation": "calls",
@@ -21968,9 +23360,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L213",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testobserveaddrplannetworknameslistseverynetwork",
-      "target": "cli_observe_addrs_test_demorunner",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_demorunner"
     },
     {
       "relation": "calls",
@@ -21979,9 +23371,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L133",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsbindseveryresolvednetwork",
-      "target": "cli_observe_addrs_test_demorunner",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_demorunner"
     },
     {
       "relation": "calls",
@@ -21990,9 +23382,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L153",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsexplainsprojectwithoutcontainers",
-      "target": "cli_observe_addrs_test_demorunner",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_demorunner"
     },
     {
       "relation": "calls",
@@ -22001,9 +23393,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L110",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsfallsbacktoprojectnetworkwhenisolated",
-      "target": "cli_observe_addrs_test_demorunner",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_demorunner"
     },
     {
       "relation": "calls",
@@ -22012,9 +23404,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsprefersstablenetworkovercoverage",
-      "target": "cli_observe_addrs_test_demorunner",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_demorunner"
     },
     {
       "relation": "calls",
@@ -22023,9 +23415,9 @@
       "source_file": "internal/cli/observe_addrs_test.go",
       "source_location": "L178",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsrespectsexplicitaddr",
-      "target": "cli_observe_addrs_test_demorunner",
-      "confidence_score": 1.0
+      "target": "cli_observe_addrs_test_demorunner"
     },
     {
       "relation": "references",
@@ -22034,9 +23426,9 @@
       "source_location": "L87",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsprefersstablenetworkovercoverage",
-      "target": "internal_cli_observe_addrs_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_addrs_test_go_t"
     },
     {
       "relation": "references",
@@ -22045,9 +23437,9 @@
       "source_location": "L209",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testobserveaddrplannetworknameslistseverynetwork",
-      "target": "internal_cli_observe_addrs_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_addrs_test_go_t"
     },
     {
       "relation": "references",
@@ -22056,9 +23448,9 @@
       "source_location": "L129",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsbindseveryresolvednetwork",
-      "target": "internal_cli_observe_addrs_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_addrs_test_go_t"
     },
     {
       "relation": "references",
@@ -22067,9 +23459,9 @@
       "source_location": "L149",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsexplainsprojectwithoutcontainers",
-      "target": "internal_cli_observe_addrs_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_addrs_test_go_t"
     },
     {
       "relation": "references",
@@ -22078,9 +23470,9 @@
       "source_location": "L109",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsfallsbacktoprojectnetworkwhenisolated",
-      "target": "internal_cli_observe_addrs_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_addrs_test_go_t"
     },
     {
       "relation": "references",
@@ -22089,9 +23481,9 @@
       "source_location": "L194",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsreportswhennonetworkresolves",
-      "target": "internal_cli_observe_addrs_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_addrs_test_go_t"
     },
     {
       "relation": "references",
@@ -22100,9 +23492,9 @@
       "source_location": "L172",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_addrs_test_testplanobserveaddrsrespectsexplicitaddr",
-      "target": "internal_cli_observe_addrs_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_addrs_test_go_t"
     },
     {
       "relation": "contains",
@@ -22409,9 +23801,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L126",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testconfirmdefaultstoyesonemptyinput",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testconfirmdefaultstoyesonemptyinput"
     },
     {
       "relation": "contains",
@@ -22419,9 +23811,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L151",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testconfirmrefuseswithoutinput",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testconfirmrefuseswithoutinput"
     },
     {
       "relation": "contains",
@@ -22429,9 +23821,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L75",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testobservenetworknamefallsbacktothedefault",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testobservenetworknamefallsbacktothedefault"
     },
     {
       "relation": "contains",
@@ -22439,9 +23831,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testpromptdatabaseacceptsnumbersandnames",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testpromptdatabaseacceptsnumbersandnames"
     },
     {
       "relation": "contains",
@@ -22449,9 +23841,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L208",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testreportobservereachabilityexplainsfailure",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testreportobservereachabilityexplainsfailure"
     },
     {
       "relation": "contains",
@@ -22459,9 +23851,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L187",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testreportobservereachabilityreportssuccess",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testreportobservereachabilityreportssuccess"
     },
     {
       "relation": "contains",
@@ -22469,9 +23861,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L253",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testreportobservereachabilityskipswithoutnetwork",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testreportobservereachabilityskipswithoutnetwork"
     },
     {
       "relation": "contains",
@@ -22479,9 +23871,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L233",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testreportobservereachabilityskipswithoutprobeimage",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testreportobservereachabilityskipswithoutprobeimage"
     },
     {
       "relation": "contains",
@@ -22489,9 +23881,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testresolveobservetargetacceptsanunregisteredpath",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testresolveobservetargetacceptsanunregisteredpath"
     },
     {
       "relation": "contains",
@@ -22499,9 +23891,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testresolveobservetargetexplainswhatitlookedfor",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testresolveobservetargetexplainswhatitlookedfor"
     },
     {
       "relation": "contains",
@@ -22509,9 +23901,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testresolveobservetargetfindsregisteredprojectbyname",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testresolveobservetargetfindsregisteredprojectbyname"
     },
     {
       "relation": "contains",
@@ -22519,9 +23911,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testresolveobservetargetignorescaseinthename",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testresolveobservetargetignorescaseinthename"
     },
     {
       "relation": "contains",
@@ -22529,9 +23921,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testwarnobserveloopbackdsnexplainsthecontainertrap",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testwarnobserveloopbackdsnexplainsthecontainertrap"
     },
     {
       "relation": "contains",
@@ -22539,9 +23931,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L118",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testwarnobserveloopbackdsnstaysquietwhenalliswell",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testwarnobserveloopbackdsnstaysquietwhenalliswell"
     },
     {
       "relation": "contains",
@@ -22549,9 +23941,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_observe_target_test_testwarnobserveloopbackdsnwarnsonunreachablenetwork",
-      "confidence_score": 1.0
+      "target": "cli_observe_target_test_testwarnobserveloopbackdsnwarnsonunreachablenetwork"
     },
     {
       "relation": "contains",
@@ -22559,9 +23951,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L267",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test",
-      "target": "cli_proberunner",
-      "confidence_score": 1.0
+      "target": "cli_proberunner"
     },
     {
       "relation": "calls",
@@ -22581,9 +23973,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testresolveobservetargetfindsregisteredprojectbyname",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22592,9 +23984,9 @@
       "source_location": "L126",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testconfirmdefaultstoyesonemptyinput",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22603,9 +23995,9 @@
       "source_location": "L151",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testconfirmrefuseswithoutinput",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22614,9 +24006,9 @@
       "source_location": "L75",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testobservenetworknamefallsbacktothedefault",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22625,9 +24017,9 @@
       "source_location": "L161",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testpromptdatabaseacceptsnumbersandnames",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22636,9 +24028,9 @@
       "source_location": "L208",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testreportobservereachabilityexplainsfailure",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22647,9 +24039,9 @@
       "source_location": "L187",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testreportobservereachabilityreportssuccess",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22658,9 +24050,9 @@
       "source_location": "L253",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testreportobservereachabilityskipswithoutnetwork",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22669,9 +24061,9 @@
       "source_location": "L233",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testreportobservereachabilityskipswithoutprobeimage",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22680,9 +24072,9 @@
       "source_location": "L50",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testresolveobservetargetacceptsanunregisteredpath",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22691,9 +24083,9 @@
       "source_location": "L63",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testresolveobservetargetexplainswhatitlookedfor",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22702,9 +24094,9 @@
       "source_location": "L34",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testresolveobservetargetignorescaseinthename",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22713,9 +24105,9 @@
       "source_location": "L86",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testwarnobserveloopbackdsnexplainsthecontainertrap",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22724,9 +24116,9 @@
       "source_location": "L118",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testwarnobserveloopbackdsnstaysquietwhenalliswell",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "references",
@@ -22735,9 +24127,9 @@
       "source_location": "L101",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_observe_target_test_testwarnobserveloopbackdsnwarnsonunreachablenetwork",
-      "target": "internal_cli_observe_target_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_t"
     },
     {
       "relation": "calls",
@@ -22811,9 +24203,9 @@
       "source_file": "internal/cli/observe_target_test.go",
       "source_location": "L272",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_proberunner",
-      "target": "cli_proberunner_run",
-      "confidence_score": 1.0
+      "target": "cli_proberunner_run"
     },
     {
       "relation": "references",
@@ -22822,9 +24214,9 @@
       "source_location": "L272",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_proberunner_run",
-      "target": "internal_cli_observe_target_test_go_context",
-      "confidence_score": 1.0
+      "target": "internal_cli_observe_target_test_go_context"
     },
     {
       "relation": "contains",
@@ -46506,6 +47898,16 @@
       "source_file": "docs/INDEX.md",
       "source_location": "L16",
       "weight": 1.0,
+      "source": "docs_index",
+      "target": "docs_coverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/INDEX.md",
+      "source_location": "L16",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "docs_index",
       "target": "docs_current_status"
@@ -47104,6 +48506,16 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/USAGE.md",
+      "source_location": "L833",
+      "weight": 1.0,
+      "source": "docs_usage",
+      "target": "docs_coverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/USAGE.md",
       "source_location": "L540",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -47344,11 +48756,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/USAGE.md",
-      "source_location": "L709",
+      "source_location": "L829",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_usage_4_referencia_de_comandos",
-      "target": "docs_usage_4_18_devherd_sentry"
+      "target": "docs_usage_4_18_devherd_coverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/USAGE.md",
+      "source_location": "L861",
+      "weight": 1.0,
+      "source": "docs_usage_4_referencia_de_comandos",
+      "target": "docs_usage_4_19_devherd_sentry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -47584,21 +49006,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/USAGE.md",
-      "source_location": "L715",
+      "source_location": "L867",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_usage_4_18_devherd_sentry",
-      "target": "docs_usage_sentry_init_project_stack_stack"
+      "source": "docs_usage_4_19_devherd_sentry",
+      "target": "docs_usage_sentry_init_project_stack_stack",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/USAGE.md",
-      "source_location": "L729",
+      "source_location": "L881",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_usage_4_18_devherd_sentry",
-      "target": "docs_usage_sentry_set_dsn_project_dsn_dsn_sentry_test_project"
+      "source": "docs_usage_4_19_devherd_sentry",
+      "target": "docs_usage_sentry_set_dsn_project_dsn_dsn_sentry_test_project",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -47989,6 +49411,126 @@
       "confidence_score": 1.0,
       "source": "docs_cli_commands_devherd_cli_referencia_de_comandos",
       "target": "docs_cli_commands_por_que_se_consolido"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_coverage",
+      "target": "docs_coverage_devherd_coverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_como_generar_el_reporte",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_estado",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_limites_de_esta_fase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_que_se_lee",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_salida",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_tres_cosas_que_hace_distinto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_un_reporte_vacio_no_es_0",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_uso",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "docs_coverage_tres_cosas_que_hace_distinto",
+      "target": "docs_coverage_1_la_unidad_va_siempre_en_la_cabecera",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "docs_coverage_tres_cosas_que_hace_distinto",
+      "target": "docs_coverage_2_el_total_se_pondera_por_unidades_nunca_se_promedian_porcentajes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L100",
+      "weight": 1.0,
+      "source": "docs_coverage_tres_cosas_que_hace_distinto",
+      "target": "docs_coverage_3_se_ordena_por_masa_sin_cubrir_no_por_porcentaje",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -50906,5 +52448,5 @@
       "source_file": "docs/IMPROVEMENTS.md"
     }
   ],
-  "built_at_commit": "52446d78f68599e1dd6a3a3968b3b35e94ac6922"
+  "built_at_commit": "6fce60cdc1bab7ffa6e90c6835c58ad6a405ca41"
 }

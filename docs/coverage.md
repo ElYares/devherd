@@ -102,7 +102,13 @@ El segundo es el real. El primero es el error mas comun al hacer esto a mano.
 Un archivo de 800 unidades al 40% deja **480** sin cubrir; uno de 3 al 0% deja
 **3**. Por porcentaje saldria primero el segundo, y no es donde esta el trabajo.
 
-Y la lista **nunca se trunca en silencio**: si se omiten archivos, se dice cuantos.
+**Aplica igual a la tabla de directorios y a la de archivos**, y las dos se acotan
+a `--top` (10 por defecto). Medido en un proyecto real de 38 directorios: en orden
+alfabetico habia que leerlos todos para encontrar el bulto, que es justo el trabajo
+que este comando viene a ahorrar.
+
+Y nada **se trunca en silencio**: si se omiten filas, se dice cuantas. Con `--all`
+salen todas.
 
 ## Limites de esta fase
 

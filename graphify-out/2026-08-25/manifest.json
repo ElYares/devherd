@@ -50,7 +50,7 @@
     "semantic_hash": ""
   },
   "internal/cli/compose_runtime.go": {
-    "mtime": 1787635756.2559137,
+    "mtime": 1787636356.678893,
     "ast_hash": "9cec90990ee4fd5dcd1b75a0ef512557",
     "semantic_hash": ""
   },
@@ -105,7 +105,7 @@
     "semantic_hash": "7207c210f6946dfe10665208cc118bdc"
   },
   "internal/cli/observe.go": {
-    "mtime": 1787635964.300608,
+    "mtime": 1787636356.678893,
     "ast_hash": "49811ae61941415415539f25c17427c4",
     "semantic_hash": ""
   },
@@ -145,8 +145,8 @@
     "semantic_hash": ""
   },
   "internal/cli/root.go": {
-    "mtime": 1786431227.721036,
-    "ast_hash": "e542965a7f41dc02996822821b1b993a",
+    "mtime": 1787638379.704671,
+    "ast_hash": "ecc5bc328bc38d0acd291e6d2507ac57",
     "semantic_hash": ""
   },
   "internal/cli/sentry.go": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1787633458.7016594,
-    "ast_hash": "9afd219f2ef438b57c8c9ab14a47b4cb",
+    "mtime": 1787638805.213729,
+    "ast_hash": "883df0d6e980dfd4b5a7049c37e80b6b",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "docs/INDEX.md": {
-    "mtime": 1786996169.868884,
-    "ast_hash": "2c2f419227374c2fa087f5ae0eaf94c1",
+    "mtime": 1787638787.2996745,
+    "ast_hash": "db05b105b7ad2f0c0f36c1f80ef9bd48",
     "semantic_hash": ""
   },
   "docs/diagrams.md": {
@@ -790,23 +790,38 @@
     "semantic_hash": ""
   },
   "internal/cli/compose_runtime_test.go": {
-    "mtime": 1787635779.9434845,
+    "mtime": 1787636356.678893,
     "ast_hash": "c463c4160c512845d39a0c7075bc40a9",
     "semantic_hash": ""
   },
   "internal/cli/formatting_test.go": {
-    "mtime": 1787635866.1954603,
+    "mtime": 1787636356.678893,
     "ast_hash": "4db0306c5aaca6f79d023f3d9155c56a",
     "semantic_hash": ""
   },
   "internal/cli/observe_addrs_test.go": {
-    "mtime": 1787635665.0391686,
+    "mtime": 1787636356.678893,
     "ast_hash": "204989be89b557306e8573c727e333be",
     "semantic_hash": ""
   },
   "internal/cli/observe_target_test.go": {
-    "mtime": 1787635981.5061846,
+    "mtime": 1787636356.678893,
     "ast_hash": "62476cf3a7b0273bb8f579a1a82ad2a7",
+    "semantic_hash": ""
+  },
+  "internal/cli/coverage.go": {
+    "mtime": 1787638389.291651,
+    "ast_hash": "9a249dc87caaa77c147134f75731909d",
+    "semantic_hash": ""
+  },
+  "internal/cli/coverage_test.go": {
+    "mtime": 1787638686.290839,
+    "ast_hash": "1985e82b3e89b97b8672ade682813d72",
+    "semantic_hash": ""
+  },
+  "docs/coverage.md": {
+    "mtime": 1787638775.0062616,
+    "ast_hash": "e273a1fc6594d6a032e59c1ab0a23c37",
     "semantic_hash": ""
   }
 }
