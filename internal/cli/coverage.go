@@ -91,7 +91,7 @@ func writeCoverageReport(out io.Writer, report coverage.Report, opts coverageVie
 		return
 	}
 
-	writeCoverageGroups(out, report)
+	writeCoverageGroups(out, report, opts)
 
 	fmt.Fprintf(out, "\n  %-38s %6.1f%%   (%d %s)\n",
 		"total", report.Percent(), report.Total(), report.Unit)
@@ -99,18 +99,37 @@ func writeCoverageReport(out io.Writer, report coverage.Report, opts coverageVie
 	writeCoverageFiles(out, report, opts)
 }
 
-func writeCoverageGroups(out io.Writer, report coverage.Report) {
+func writeCoverageGroups(out io.Writer, report coverage.Report, opts coverageViewOptions) {
 	groups := report.Groups()
 	if len(groups) <= 1 {
 		return
 	}
 
+	// Vienen ordenados por masa sin cubrir, asi que la cola son directorios ya
+	// cubiertos: informacion cero. Se acotan igual que la lista de archivos, o la
+	// tabla principal volcaria 38 filas mientras los archivos se limitan a 10.
+	limit := len(groups)
+	if !opts.All {
+		limit = opts.Top
+		if limit <= 0 {
+			limit = defaultCoverageTop
+		}
+		if limit > len(groups) {
+			limit = len(groups)
+		}
+	}
+
 	fmt.Fprintf(out, "  %-38s %7s %12s\n", "directory", "covered", "units")
-	for _, group := range groups {
+	for _, group := range groups[:limit] {
 		fmt.Fprintf(out, "  %-38s %6.1f%% %12s\n",
 			truncateCoveragePath(group.Name, 38),
 			group.Percent(),
 			fmt.Sprintf("%d/%d", group.Covered, group.Total))
+	}
+
+	if remaining := len(groups) - limit; remaining > 0 {
+		fmt.Fprintf(out, "  %d more director%s (--all to list them)\n",
+			remaining, map[bool]string{true: "y", false: "ies"}[remaining == 1])
 	}
 }
 

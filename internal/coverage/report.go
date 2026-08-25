@@ -130,8 +130,10 @@ func (g GroupReport) Percent() float64 {
 	return percent(g.Covered, g.Total)
 }
 
-// Groups agrega por directorio, que en la practica es el paquete o modulo. Es la
-// vista util cuando un reporte trae cientos de archivos.
+// Groups agrega por directorio, que en la practica es el paquete o modulo, y lo
+// devuelve **ordenado por masa sin cubrir** igual que ByUncovered. En orden
+// alfabetico obliga a leer los 38 directorios de un proyecto real para encontrar
+// donde esta el bulto, que es justo el trabajo que este comando viene a ahorrar.
 func (r Report) Groups() []GroupReport {
 	index := map[string]*GroupReport{}
 	for _, file := range r.Files {
@@ -154,7 +156,13 @@ func (r Report) Groups() []GroupReport {
 	for _, group := range index {
 		groups = append(groups, *group)
 	}
-	sort.Slice(groups, func(i, j int) bool { return groups[i].Name < groups[j].Name })
+	sort.Slice(groups, func(i, j int) bool {
+		if groups[i].Uncovered() != groups[j].Uncovered() {
+			return groups[i].Uncovered() > groups[j].Uncovered()
+		}
+
+		return groups[i].Name < groups[j].Name
+	})
 
 	return groups
 }

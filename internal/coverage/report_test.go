@@ -72,6 +72,42 @@ func TestGroupsAggregateByDirectory(t *testing.T) {
 	}
 }
 
+// El bulto va arriba. En orden alfabetico, un proyecto real con 38 directorios
+// obliga a leerlos todos para encontrar donde esta el trabajo.
+func TestGroupsRankByUncoveredMass(t *testing.T) {
+	report := Report{Unit: UnitStatements, Files: []FileReport{
+		// Alfabeticamente iria primero, y no tiene nada sin cubrir.
+		{Path: "app/Actions/Companies.php", Total: 23, Covered: 23},
+		{Path: "app/Policies/UserPolicy.php", Total: 236, Covered: 105},
+		{Path: "app/Livewire/Forms/ToolForm.php", Total: 962, Covered: 421},
+	}}
+
+	groups := report.Groups()
+	if groups[0].Name != "app/Livewire/Forms" {
+		t.Fatalf("expected the largest uncovered mass first, got %q", groups[0].Name)
+	}
+	if groups[1].Name != "app/Policies" {
+		t.Fatalf("expected the second largest next, got %q", groups[1].Name)
+	}
+	// Lo que esta al 100% se hunde al final: ya no hay nada que hacer ahi.
+	if groups[2].Name != "app/Actions" {
+		t.Fatalf("expected the fully covered directory last, got %q", groups[2].Name)
+	}
+}
+
+// Sin desempate estable la salida cambiaria entre corridas por el recorrido del mapa.
+func TestGroupsBreakTiesByName(t *testing.T) {
+	report := Report{Unit: UnitLines, Files: []FileReport{
+		{Path: "zebra/a.go", Total: 10, Covered: 5},
+		{Path: "alpha/a.go", Total: 10, Covered: 5},
+	}}
+
+	groups := report.Groups()
+	if groups[0].Name != "alpha" || groups[1].Name != "zebra" {
+		t.Fatalf("expected a stable name tiebreak, got %q then %q", groups[0].Name, groups[1].Name)
+	}
+}
+
 // Este es el guardarrail central: sentencias y lineas no se suman nunca.
 func TestMergeRefusesToMixUnits(t *testing.T) {
 	statements := Report{Format: "go", Unit: UnitStatements, Files: []FileReport{{Path: "a.go", Total: 10, Covered: 5}}}
