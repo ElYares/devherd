@@ -1,0 +1,183 @@
+package cli
+
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"path/filepath"
+	"strings"
+
+	"github.com/devherd/devherd/internal/coverage"
+	"github.com/spf13/cobra"
+)
+
+// defaultCoverageTop acota la lista de archivos. El resumen tiene que caber en
+// una pantalla; para el detalle completo esta --all.
+const defaultCoverageTop = 10
+
+func newCoverageCmd() *cobra.Command {
+	var (
+		report string
+		all    bool
+		asJSON bool
+		top    int
+	)
+
+	cmd := &cobra.Command{
+		Use:   "coverage",
+		Short: "Summarize a coverage report and show where the uncovered mass is",
+		Long: "Reads a coverage report produced by the project's own tooling and " +
+			"summarizes it. Supported formats: " + strings.Join(coverage.SupportedFormats(), ", ") + ".\n\n" +
+			"DevHerd does not instrument code: generate the report with your stack's " +
+			"tooling (go test -coverprofile, phpunit --coverage-clover, vitest --coverage, " +
+			"jacoco, coverage xml) and pass it with --report.",
+		Args: cobra.NoArgs,
+		RunE: func(cmd *cobra.Command, _ []string) error {
+			parsed, err := coverage.ParseFile(report)
+			if err != nil {
+				return err
+			}
+
+			if asJSON {
+				return writeCoverageJSON(cmd.OutOrStdout(), parsed)
+			}
+
+			writeCoverageReport(cmd.OutOrStdout(), parsed, coverageViewOptions{
+				Source: report,
+				All:    all,
+				Top:    top,
+			})
+
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVar(&report, "report", "", "Path to the coverage report to read")
+	cmd.Flags().BoolVar(&all, "all", false, "List every file instead of the largest uncovered ones")
+	cmd.Flags().BoolVar(&asJSON, "json", false, "Output the parsed report as JSON")
+	cmd.Flags().IntVar(&top, "top", defaultCoverageTop, "How many files to list when not using --all")
+	_ = cmd.MarkFlagRequired("report")
+
+	return cmd
+}
+
+type coverageViewOptions struct {
+	Source string
+	All    bool
+	Top    int
+}
+
+func writeCoverageJSON(out io.Writer, report coverage.Report) error {
+	encoder := json.NewEncoder(out)
+	encoder.SetIndent("", "  ")
+	if err := encoder.Encode(report); err != nil {
+		return fmt.Errorf("encode coverage report: %w", err)
+	}
+
+	return nil
+}
+
+func writeCoverageReport(out io.Writer, report coverage.Report, opts coverageViewOptions) {
+	// La unidad va en la cabecera siempre. Sin ella, comparar el 58% de un
+	// proyecto Go con el 58% de uno JS parece razonable, y no lo es: uno cuenta
+	// sentencias y el otro lineas.
+	fmt.Fprintf(out, "%s  ·  %s  ·  %s\n\n", filepath.Base(opts.Source), report.Format, report.Unit)
+
+	if report.IsEmpty() {
+		// Un 0% aqui se leeria como "nada esta probado", que es lo contrario de
+		// "no hay nada medido".
+		fmt.Fprintln(out, "  no coverage data: the report contains no measurable units")
+
+		return
+	}
+
+	writeCoverageGroups(out, report)
+
+	fmt.Fprintf(out, "\n  %-38s %6.1f%%   (%d %s)\n",
+		"total", report.Percent(), report.Total(), report.Unit)
+
+	writeCoverageFiles(out, report, opts)
+}
+
+func writeCoverageGroups(out io.Writer, report coverage.Report) {
+	groups := report.Groups()
+	if len(groups) <= 1 {
+		return
+	}
+
+	fmt.Fprintf(out, "  %-38s %7s %12s\n", "directory", "covered", "units")
+	for _, group := range groups {
+		fmt.Fprintf(out, "  %-38s %6.1f%% %12s\n",
+			truncateCoveragePath(group.Name, 38),
+			group.Percent(),
+			fmt.Sprintf("%d/%d", group.Covered, group.Total))
+	}
+}
+
+func writeCoverageFiles(out io.Writer, report coverage.Report, opts coverageViewOptions) {
+	files := report.ByUncovered()
+	if opts.All {
+		files = report.ByPath()
+		fmt.Fprintf(out, "\n  Files (%d):\n", len(files))
+		for _, file := range files {
+			writeCoverageFileLine(out, file)
+		}
+
+		return
+	}
+
+	// Ordenado por masa sin cubrir y no por porcentaje: es lo que dice donde
+	// trabajar. Un archivo de 800 unidades al 40% deja 480 sin cubrir; uno de 3
+	// al 0% deja 3, y por porcentaje saldria primero.
+	if report.Uncovered() == 0 {
+		fmt.Fprintln(out, "\n  Every measured unit is covered.")
+
+		return
+	}
+
+	limit := opts.Top
+	if limit <= 0 {
+		limit = defaultCoverageTop
+	}
+
+	shown := 0
+	fmt.Fprintln(out, "\n  Largest uncovered mass:")
+	for _, file := range files {
+		if file.Uncovered() == 0 || shown == limit {
+			break
+		}
+		writeCoverageFileLine(out, file)
+		shown++
+	}
+
+	// Nunca truncar en silencio: quien no ve la nota asume que vio todo.
+	if remaining := countCoverageUncoveredFiles(files) - shown; remaining > 0 {
+		fmt.Fprintf(out, "    %d more file(s) with uncovered %s (--all to list them)\n", remaining, report.Unit)
+	}
+}
+
+func writeCoverageFileLine(out io.Writer, file coverage.FileReport) {
+	fmt.Fprintf(out, "    %-46s %6d uncovered %6.1f%%\n",
+		truncateCoveragePath(file.Path, 46), file.Uncovered(), file.Percent())
+}
+
+func countCoverageUncoveredFiles(files []coverage.FileReport) int {
+	count := 0
+	for _, file := range files {
+		if file.Uncovered() > 0 {
+			count++
+		}
+	}
+
+	return count
+}
+
+// truncateCoveragePath recorta por la izquierda: en una ruta larga lo que
+// identifica al archivo esta al final, no al principio.
+func truncateCoveragePath(value string, limit int) string {
+	if limit <= 3 || len(value) <= limit {
+		return value
+	}
+
+	return "..." + value[len(value)-(limit-3):]
+}

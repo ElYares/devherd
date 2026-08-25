@@ -49,6 +49,7 @@ func newRootCmd() *cobra.Command {
 		newLogsCmd(),
 		newServiceCmd(),
 		newObserveCmd(),
+		newCoverageCmd(),
 		newSentryCmd(),
 	)
 
