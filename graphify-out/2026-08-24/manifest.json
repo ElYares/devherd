@@ -105,7 +105,7 @@
     "semantic_hash": "7207c210f6946dfe10665208cc118bdc"
   },
   "internal/cli/observe.go": {
-    "mtime": 1787633458.7086592,
+    "mtime": 1786996832.838897,
     "ast_hash": "8462fbcf96d38e6ade6d9cf5a5fc87fa",
     "semantic_hash": ""
   },
@@ -265,14 +265,14 @@
     "semantic_hash": "92078252b1be4449c050b9c35334afb4"
   },
   "internal/observe/correlation.go": {
-    "mtime": 1787633999.3170998,
-    "ast_hash": "93841633dd9697f20ce16b2feebfe7c7",
-    "semantic_hash": ""
+    "mtime": 1786431227.736258,
+    "ast_hash": "b670b9dd97c57e6403852693d7ffbdce",
+    "semantic_hash": "b670b9dd97c57e6403852693d7ffbdce"
   },
   "internal/observe/docker.go": {
-    "mtime": 1787633989.0428236,
-    "ast_hash": "dc9695dc96375c94b02d27f99574f104",
-    "semantic_hash": ""
+    "mtime": 1786431227.7377632,
+    "ast_hash": "9a773bdb7595e654f113a949e1af3d5c",
+    "semantic_hash": "9a773bdb7595e654f113a949e1af3d5c"
   },
   "internal/observe/docker_test.go": {
     "mtime": 1779443263.457455,
@@ -285,8 +285,8 @@
     "semantic_hash": ""
   },
   "internal/observe/migrations.go": {
-    "mtime": 1787633973.9154387,
-    "ast_hash": "6d66632d4269f106672f6de9a14cb142",
+    "mtime": 1786996814.9325383,
+    "ast_hash": "de3976f55bfa973136181d9f5b483cbe",
     "semantic_hash": ""
   },
   "internal/observe/override.go": {
@@ -305,23 +305,23 @@
     "semantic_hash": ""
   },
   "internal/observe/schema.sql": {
-    "mtime": 1787633959.3068156,
-    "ast_hash": "e46d0d4eccea64271514c21c54af49ca",
+    "mtime": 1786996814.928741,
+    "ast_hash": "c4debbaed4bb1b072d0158b763492cf7",
     "semantic_hash": ""
   },
   "internal/observe/server.go": {
-    "mtime": 1787634043.691019,
-    "ast_hash": "bc8b0890409b7e7b5a3b23be46768cf1",
+    "mtime": 1786431227.7488759,
+    "ast_hash": "7f4ca64989dc76d2bd61deee36e87908",
     "semantic_hash": ""
   },
   "internal/observe/server_test.go": {
-    "mtime": 1787634067.9372382,
-    "ast_hash": "b7a7ab304d42f311cdd53c48ab5a84cd",
+    "mtime": 1786431783.7444947,
+    "ast_hash": "b805138283b84f60575dc61d2529b46e",
     "semantic_hash": ""
   },
   "internal/observe/store.go": {
-    "mtime": 1787634028.1739595,
-    "ast_hash": "b8a57b961a1e0588b0e6d743e3bde9ac",
+    "mtime": 1786996814.9408362,
+    "ast_hash": "3421c9175bfe4c1051cc2959a0a18b86",
     "semantic_hash": ""
   },
   "internal/observe/store_test.go": {
@@ -455,12 +455,12 @@
     "semantic_hash": ""
   },
   "docs/IMPROVEMENTS.md": {
-    "mtime": 1787634262.9091473,
-    "ast_hash": "9ea56d76d874026ac070391353d08d51",
+    "mtime": 1786997354.5029616,
+    "ast_hash": "c1e37fcd6c441de43421e4f2650f57ad",
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1787633458.7016594,
+    "mtime": 1786997340.195222,
     "ast_hash": "9afd219f2ef438b57c8c9ab14a47b4cb",
     "semantic_hash": ""
   },
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "docs/observe.md": {
-    "mtime": 1787634242.438771,
-    "ast_hash": "9f41a74253873f22494c515cc6da9129",
+    "mtime": 1786997340.2034001,
+    "ast_hash": "0a16538f1b9a00475e66442e60d8aa79",
     "semantic_hash": ""
   },
   "docs/project-workflow.md": {
@@ -775,18 +775,13 @@
     "semantic_hash": ""
   },
   "internal/cli/observe_cooldown_test.go": {
-    "mtime": 1787633458.7086592,
+    "mtime": 1786996958.2365456,
     "ast_hash": "44296f793b2eb1d2e103614d9e7147b9",
     "semantic_hash": ""
   },
   "internal/observe/alerts_cooldown_test.go": {
-    "mtime": 1787633458.7096593,
+    "mtime": 1786996933.455113,
     "ast_hash": "518f0ab01e53d3567cd59fc58b4cc676",
-    "semantic_hash": ""
-  },
-  "internal/observe/logs_backfill_test.go": {
-    "mtime": 1787634159.578823,
-    "ast_hash": "48c94a3e6123215d8141af040e134468",
     "semantic_hash": ""
   }
 }
