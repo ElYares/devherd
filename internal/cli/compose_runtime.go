@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"log/slog"
 	"os"
 	"path/filepath"
 
@@ -24,7 +25,12 @@ func prepareComposeProject(ctx context.Context, app *appContext, targetPath stri
 
 	externalProject, err := resolveExternalProject(ctx, app, project.Root)
 	if err != nil {
-		return project, nil
+		// Que no se pueda resolver el proxy no tiene por que apagar Observe: son
+		// dos overrides independientes, y devolver el proyecto pelado dejaba al
+		// contenedor sin DSN y sin reportar, en silencio.
+		slog.Debug("compose: proxy override skipped; project could not be resolved",
+			"path", project.Root, "error", err)
+		return appendObserveOverride(project), nil
 	}
 
 	overridePath, err := proxy.EnsureComposeOverride(app.Config, externalProject)
