@@ -39,12 +39,14 @@ type Project struct {
 	ProjectName       string
 	LegacyProjectName string
 	Proxy             ProjectProxy
+	Test              ProjectTest
 }
 
 type manifest struct {
 	Version int             `yaml:"version"`
 	Compose manifestCompose `yaml:"compose"`
 	Proxy   manifestProxy   `yaml:"proxy"`
+	Test    manifestTest    `yaml:"test"`
 }
 
 type manifestCompose struct {
@@ -58,10 +60,24 @@ type manifestProxy struct {
 	Port    int    `yaml:"port"`
 }
 
+// manifestTest declara como se corren las pruebas del proyecto. Existe porque el
+// comando no se puede adivinar: tl-mas-server y aang-server usan Pest, asi que
+// `vendor/bin/phpunit` revienta con un error de bootstrap en los dos.
+type manifestTest struct {
+	Command string `yaml:"command"`
+	Service string `yaml:"service"`
+}
+
 type ProjectProxy struct {
 	Domain  string
 	Service string
 	Port    int
+}
+
+// ProjectTest es lo declarado en la seccion `test:` del manifiesto.
+type ProjectTest struct {
+	Command string
+	Service string
 }
 
 func ResolveProject(input string) (Project, error) {
@@ -232,6 +248,10 @@ func resolveManifestProject(root string) (Project, bool, error) {
 			Domain:  cfg.Proxy.Domain,
 			Service: cfg.Proxy.Service,
 			Port:    cfg.Proxy.Port,
+		},
+		Test: ProjectTest{
+			Command: strings.TrimSpace(cfg.Test.Command),
+			Service: strings.TrimSpace(cfg.Test.Service),
 		},
 	}
 
