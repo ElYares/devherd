@@ -13,6 +13,7 @@ Generado por `vaultdocs index`. Una linea por documento para poder elegir que le
 | [`branches/devherd-v1-app/cross-platform-runtime-2026-05-05.md`](branches/devherd-v1-app/cross-platform-runtime-2026-05-05.md) | Cross-Platform Runtime 2026-05-05 | 84 |
 | [`branches/devherd-v1-app/validation-2026-05-04.md`](branches/devherd-v1-app/validation-2026-05-04.md) | Validación 2026-05-04 | 62 |
 | [`cli-commands.md`](cli-commands.md) | DevHerd CLI: referencia de comandos | 31 |
+| [`coverage.md`](coverage.md) | DevHerd Coverage | 127 |
 | [`current-status.md`](current-status.md) | DevHerd: Estado Actual del Proyecto | 328 |
 | [`diagrams.md`](diagrams.md) | Diagramas de DevHerd | 319 |
 | [`guides/logging-and-logs.md`](guides/logging-and-logs.md) | Logging de diagnóstico y comando `logs` | 223 |
