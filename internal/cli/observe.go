@@ -21,6 +21,7 @@ import (
 	"github.com/devherd/devherd/internal/compose"
 	"github.com/devherd/devherd/internal/database"
 	"github.com/devherd/devherd/internal/observe"
+	"github.com/devherd/devherd/internal/runner"
 	"github.com/spf13/cobra"
 )
 
@@ -964,6 +965,8 @@ type observeAddrPlan struct {
 	Project  string
 	Coverage string
 	Reason   string
+	// runner viaja con el plan porque selectMatch vuelve a consultar Docker.
+	runner runner.Runner
 }
 
 type observeAddrOptions struct {
@@ -971,6 +974,9 @@ type observeAddrOptions struct {
 	Project      string
 	Addr         string
 	Explicit     bool
+	// Runner deja inyectar un doble de Docker. Nil usa el runner real, que es lo
+	// que hacen todos los comandos; solo las pruebas lo rellenan.
+	Runner runner.Runner
 }
 
 // planObserveAddrs hace escuchar al collector en el gateway de *todas* las redes
@@ -983,18 +989,18 @@ func planObserveAddrs(ctx context.Context, opts observeAddrOptions) observeAddrP
 		addr = observe.DefaultAddr
 	}
 
-	plan := observeAddrPlan{Bind: []string{addr}, DSN: addr, Project: strings.TrimSpace(opts.Project)}
+	plan := observeAddrPlan{Bind: []string{addr}, DSN: addr, Project: strings.TrimSpace(opts.Project), runner: opts.Runner}
 
 	// El collector atiende las redes estables de DevHerd y, ademas, las de los
 	// contenedores ya observados: la red propia de cada proyecto es justo la que
 	// comparten todos sus servicios.
 	shared := observe.SharedNetworkNames(opts.ProxyNetwork)
 	names := shared
-	if observed, err := observe.ObservedNetworks(ctx, nil); err == nil {
+	if observed, err := observe.ObservedNetworks(ctx, opts.Runner); err == nil {
 		names = append(append([]string{}, shared...), observed...)
 	}
 
-	plan.Networks = observe.InspectNetworks(ctx, nil, names)
+	plan.Networks = observe.InspectNetworks(ctx, opts.Runner, names)
 	if len(plan.Networks) == 0 {
 		plan.Reason = "no Docker network could be resolved; is the Docker daemon running?"
 		return plan
@@ -1023,7 +1029,7 @@ func (plan *observeAddrPlan) selectMatch(ctx context.Context, shared []string) o
 		return plan.Networks[0]
 	}
 
-	coverage, err := observe.ProjectNetworkCoverage(ctx, nil, plan.Project)
+	coverage, err := observe.ProjectNetworkCoverage(ctx, plan.runner, plan.Project)
 	if err != nil {
 		plan.Reason = err.Error()
 		return plan.Networks[0]
@@ -1044,7 +1050,7 @@ func (plan *observeAddrPlan) selectMatch(ctx context.Context, shared []string) o
 
 	// La red del proyecto puede no estar en la lista si sus contenedores no
 	// llevan aun la etiqueta de observado: se resuelve a demanda.
-	if info, err := observe.InspectNetwork(ctx, nil, name); err == nil {
+	if info, err := observe.InspectNetwork(ctx, plan.runner, name); err == nil {
 		plan.Networks = append(plan.Networks, info)
 		return info
 	}
@@ -1117,7 +1123,7 @@ func reportObserveReachability(cmd *cobra.Command, plan observeAddrPlan) {
 		return
 	}
 
-	result := observe.ProbeFromContainer(cmd.Context(), nil, plan.Match.Name, plan.DSN)
+	result := observe.ProbeFromContainer(cmd.Context(), plan.runner, plan.Match.Name, plan.DSN)
 	label := result.Network
 	if plan.Project != "" {
 		label = plan.Project + " on " + result.Network
