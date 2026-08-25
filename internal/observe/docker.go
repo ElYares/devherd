@@ -11,9 +11,18 @@ import (
 	"time"
 )
 
+const (
+	// Ventana de logs a cada lado del evento. La mitad anterior se captura en la
+	// ingesta; la posterior, cuando ya transcurrio (ver Server.backfillPendingLogs).
+	logCaptureWindow = 30 * time.Second
+	// Tope de lineas por llamada a docker logs. Cada pasada trae el suyo.
+	logCaptureLimit = 200
+)
+
 type DockerRuntime interface {
 	ObservedContainers(ctx context.Context, project string) ([]ObservedContainer, error)
 	LogsAround(ctx context.Context, container string, at time.Time, window time.Duration, limit int) ([]ContainerLog, error)
+	LogsBetween(ctx context.Context, container string, since, until time.Time, limit int) ([]ContainerLog, error)
 }
 
 type DockerCLI struct{}
@@ -90,24 +99,32 @@ func (DockerCLI) ObservedContainers(ctx context.Context, project string) ([]Obse
 	return parseObservedContainers(inspectOutput)
 }
 
-func (DockerCLI) LogsAround(ctx context.Context, container string, at time.Time, window time.Duration, limit int) ([]ContainerLog, error) {
-	container = strings.TrimSpace(container)
-	if container == "" {
-		return nil, nil
-	}
+func (d DockerCLI) LogsAround(ctx context.Context, container string, at time.Time, window time.Duration, limit int) ([]ContainerLog, error) {
 	if at.IsZero() {
 		at = time.Now().UTC()
 	}
 	if window <= 0 {
-		window = 30 * time.Second
-	}
-	if limit <= 0 {
-		limit = 200
+		window = logCaptureWindow
 	}
 
-	since := at.Add(-window).UTC().Format(time.RFC3339Nano)
-	until := at.Add(window).UTC().Format(time.RFC3339Nano)
-	output, err := runDocker(ctx, "logs", "--timestamps", "--since", since, "--until", until, "--tail", strconv.Itoa(limit), container)
+	return d.LogsBetween(ctx, container, at.Add(-window), at.Add(window), limit)
+}
+
+// LogsBetween pide un rango explicito en vez de uno centrado en el evento. Es lo que
+// necesita la segunda pasada: la mitad futura de la ventana, sin volver a traer la
+// mitad pasada que ya se capturo en la ingesta.
+func (DockerCLI) LogsBetween(ctx context.Context, container string, since, until time.Time, limit int) ([]ContainerLog, error) {
+	container = strings.TrimSpace(container)
+	if container == "" {
+		return nil, nil
+	}
+	if limit <= 0 {
+		limit = logCaptureLimit
+	}
+
+	sinceText := since.UTC().Format(time.RFC3339Nano)
+	untilText := until.UTC().Format(time.RFC3339Nano)
+	output, err := runDocker(ctx, "logs", "--timestamps", "--since", sinceText, "--until", untilText, "--tail", strconv.Itoa(limit), container)
 	if err != nil {
 		return nil, err
 	}

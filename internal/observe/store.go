@@ -557,6 +557,10 @@ func (s Store) StoreContainerLogs(ctx context.Context, eventID string, logs []Co
 			log.Stream = "combined"
 		}
 
+		// El WHERE NOT EXISTS es lo que hace idempotente la segunda pasada: docker
+		// logs --since t solapa con la mitad ya capturada en la ingesta, porque entre
+		// el evento y la llamada original transcurrieron unos milisegundos de salida.
+		// Sin esto, esas lineas saldrian dos veces en el timeline.
 		_, err := tx.ExecContext(ctx, `
 			INSERT INTO container_logs (
 				event_id,
@@ -567,8 +571,17 @@ func (s Store) StoreContainerLogs(ctx context.Context, eventID string, logs []Co
 				stream,
 				message
 			)
-			VALUES (?, ?, ?, ?, ?, ?, ?)
-		`, log.EventID, log.Project, log.Service, log.Container, log.Timestamp, log.Stream, log.Message)
+			SELECT ?, ?, ?, ?, ?, ?, ?
+			WHERE NOT EXISTS (
+				SELECT 1
+				FROM container_logs
+				WHERE event_id = ?
+				  AND timestamp = ?
+				  AND stream = ?
+				  AND message = ?
+			)
+		`, log.EventID, log.Project, log.Service, log.Container, log.Timestamp, log.Stream, log.Message,
+			log.EventID, log.Timestamp, log.Stream, log.Message)
 		if err != nil {
 			return fmt.Errorf("insert observe container log: %w", err)
 		}
@@ -576,6 +589,100 @@ func (s Store) StoreContainerLogs(ctx context.Context, eventID string, logs []Co
 
 	if err := tx.Commit(); err != nil {
 		return fmt.Errorf("commit observe logs transaction: %w", err)
+	}
+
+	return nil
+}
+
+// Estados de events.logs_backfilled. Vencido y rellenado se distinguen solo para
+// poder diagnosticar un timeline vacio: los dos significan "no volver a intentarlo".
+const (
+	logsBackfillPending = 0
+	logsBackfillDone    = 1
+	logsBackfillSkipped = 2
+)
+
+// logBackfillMaxAge es la edad a partir de la cual un evento se da por perdido sin
+// llamar a Docker. Cubre el arranque tras un rato con el collector apagado: sus
+// contenedores probablemente ya no existen, y reintentarlos cada 10 s no los revive.
+const logBackfillMaxAge = 5 * time.Minute
+
+// LogBackfillTarget es un evento cuya mitad futura de ventana ya transcurrio y sigue
+// sin capturarse.
+type LogBackfillTarget struct {
+	EventID   string
+	Project   string
+	Service   string
+	Container string
+	At        time.Time
+}
+
+// PendingLogBackfills devuelve los eventos listos para la segunda pasada de logs y,
+// de paso, marca como vencidos los que ya no vale la pena intentar. Los que todavia
+// tienen la ventana abierta se quedan pendientes para un tick posterior.
+func (s Store) PendingLogBackfills(ctx context.Context, limit int) ([]LogBackfillTarget, error) {
+	if limit <= 0 {
+		limit = 50
+	}
+
+	rows, err := s.db.QueryContext(ctx, `
+		SELECT event_id, project, service, container, timestamp
+		FROM events
+		WHERE logs_backfilled = ?
+		ORDER BY id ASC
+		LIMIT ?
+	`, logsBackfillPending, limit)
+	if err != nil {
+		return nil, fmt.Errorf("list observe log backfills: %w", err)
+	}
+	defer func() { _ = rows.Close() }()
+
+	now := s.nowUTC()
+	var ready []LogBackfillTarget
+	var expired []string
+	for rows.Next() {
+		var target LogBackfillTarget
+		var timestamp string
+		if err := rows.Scan(&target.EventID, &target.Project, &target.Service, &target.Container, &timestamp); err != nil {
+			return nil, fmt.Errorf("scan observe log backfill: %w", err)
+		}
+
+		at, ok := parseObserveTimeStrict(timestamp)
+		switch {
+		case !ok, target.Container == "":
+			// Sin marca legible no se puede acotar la ventana, y sin contenedor no
+			// hay a quien preguntarle. En los dos casos no hay nada que reintentar.
+			expired = append(expired, target.EventID)
+		case now.Before(at.Add(logCaptureWindow)):
+			// La ventana sigue abierta: esos logs aun no existen.
+		case now.After(at.Add(logBackfillMaxAge)):
+			expired = append(expired, target.EventID)
+		default:
+			target.At = at
+			ready = append(ready, target)
+		}
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("iterate observe log backfills: %w", err)
+	}
+
+	for _, eventID := range expired {
+		if err := s.MarkLogBackfill(ctx, eventID, logsBackfillSkipped); err != nil {
+			return nil, err
+		}
+	}
+
+	return ready, nil
+}
+
+// MarkLogBackfill saca un evento de la cola de relleno.
+func (s Store) MarkLogBackfill(ctx context.Context, eventID string, state int) error {
+	if _, err := s.db.ExecContext(ctx, `
+		UPDATE events
+		SET logs_backfilled = ?
+		WHERE event_id = ?
+	`, state, eventID); err != nil {
+		return fmt.Errorf("mark observe log backfill %s: %w", eventID, err)
 	}
 
 	return nil
@@ -720,7 +827,7 @@ func (s Store) Timeline(ctx context.Context, eventID string) (Timeline, error) {
 		SELECT event_id, project, service, container, timestamp, stream, message
 		FROM container_logs
 		WHERE event_id = ?
-		ORDER BY id ASC
+		ORDER BY timestamp ASC, id ASC
 	`, eventID)
 	if err != nil {
 		return Timeline{}, fmt.Errorf("list observe timeline logs: %w", err)

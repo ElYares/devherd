@@ -31,6 +31,25 @@ var columnAdditions = []columnAddition{
 		// silencio: exactamente el ruido que el cooldown viene a resolver.
 		backfill: `UPDATE alerts SET cooldown_seconds = CASE WHEN kind = 'error-rate' THEN window_seconds ELSE 900 END`,
 	},
+	{
+		table:  "events",
+		column: "logs_backfilled",
+		addDDL: `ALTER TABLE events ADD COLUMN logs_backfilled INTEGER NOT NULL DEFAULT 0`,
+		// Los eventos que ya estaban en la base son de corridas anteriores del
+		// collector: su ventana vencio hace rato y su contenedor probablemente ya
+		// no existe. Marcarlos como vencidos evita que el primer barrido intente
+		// una llamada a Docker por cada uno.
+		backfill: `UPDATE events SET logs_backfilled = 2`,
+	},
+}
+
+// indexAdditions corre despues de columnAdditions. Un indice parcial sobre una
+// columna recien agregada no puede vivir en schema.sql, que se aplica antes: en una
+// base que ya existia la columna todavia no esta cuando ese archivo corre.
+var indexAdditions = []string{
+	// Parcial a proposito: solo indexa los eventos pendientes de relleno, que son
+	// unos pocos, en vez de la tabla entera de eventos que crece sin techo.
+	`CREATE INDEX IF NOT EXISTS idx_observe_events_logs_pending ON events(id) WHERE logs_backfilled = 0`,
 }
 
 func applyColumnAdditions(ctx context.Context, db *sql.DB) error {
@@ -51,6 +70,12 @@ func applyColumnAdditions(ctx context.Context, db *sql.DB) error {
 		}
 		if _, err := db.ExecContext(ctx, addition.backfill); err != nil {
 			return fmt.Errorf("backfill observe column %s.%s: %w", addition.table, addition.column, err)
+		}
+	}
+
+	for _, ddl := range indexAdditions {
+		if _, err := db.ExecContext(ctx, ddl); err != nil {
+			return fmt.Errorf("add observe index: %w", err)
 		}
 	}
 

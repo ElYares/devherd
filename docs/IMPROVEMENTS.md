@@ -430,15 +430,28 @@ la ventana producen entrega. 50 errores en 5 minutos = 48 entregas.
 > Se descarto la entrega agregada por ventana: dejaria de ser inmediata y necesitaria un
 > disparador periodico que hoy no existe.
 
-### Captura de logs: modelo de una sola foto
+### Captura de logs: de una foto a dos pasadas
 
-**O5. Los logs se capturan una unica vez, en la ingesta, y nunca se rellenan.**
-`correlation.go:48` ejecuta `docker logs --since t-30s --until t+30s --tail 200` en el
-momento de recibir el evento. Consecuencias: la mitad futura de la ventana esta casi
+**O5. Los logs se capturaban una unica vez, en la ingesta, y nunca se rellenaban.**
+*(Resuelto.)*
+`correlation.go:48` ejecutaba `docker logs --since t-30s --until t+30s --tail 200` en el
+momento de recibir el evento. Consecuencias: la mitad futura de la ventana estaba casi
 siempre vacia (esos logs aun no existen); si no hubo salida en la ventana, el timeline
-queda vacio para siempre; y un contenedor ruidoso agota las 200 lineas con ruido.
-> Recomendacion: documentar que Observe **no es un agregador de logs**, y evaluar una
-> segunda pasada diferida para capturar la mitad posterior de la ventana.
+quedaba vacio para siempre; y un contenedor ruidoso agotaba las 200 lineas con ruido.
+> Resuelto con una segunda pasada enganchada al poller de 10 s. Cada tick busca eventos
+> cuya ventana futura ya vencio y siguen sin rellenar, y pide solo la mitad que faltaba
+> (`--since t --until t+30s`). El estado vive en `events.logs_backfilled`, de modo que
+> cada evento se intenta una sola vez y no una por tick.
+> Se eligio el poller sobre el relleno perezoso al leer el timeline: capturar cerca del
+> evento encuentra al contenedor vivo y sus logs sin rotar, mientras que una consulta
+> horas despues se quedaria sin nada igual. El costo es que depende del collector
+> encendido —la misma dependencia que ya tiene la ingesta, ver **O7**—, y por eso un
+> evento con mas de 5 minutos sin rellenar se da por perdido en vez de reintentarse.
+> Efectos colaterales: cada pasada trae su propio tope de 200 lineas, asi que el ruido
+> ya no se come el presupuesto de lo que paso *despues* del error; las lineas que las
+> dos pasadas ven en comun se insertan una sola vez; y `Timeline` pasa a ordenar por
+> marca de tiempo en vez de por orden de insercion, que con dos pasadas dejo de ser lo
+> mismo.
 
 **O6. El poller de 10 s puede perder reinicios rapidos.**
 `server.go:184` toma instantaneas cada 10 s. Un contenedor que cae y vuelve dentro de ese

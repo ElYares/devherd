@@ -45,7 +45,7 @@ func (c Correlator) CorrelateEvent(ctx context.Context, event *Event) ([]Contain
 	}
 
 	eventTime := parseObserveTime(event.Timestamp)
-	logs, err := c.docker.LogsAround(ctx, firstNonEmpty(container.Name, container.ContainerID), eventTime, 30*time.Second, 200)
+	logs, err := c.docker.LogsAround(ctx, firstNonEmpty(container.Name, container.ContainerID), eventTime, logCaptureWindow, logCaptureLimit)
 	if err != nil {
 		return nil, err
 	}
@@ -84,17 +84,29 @@ func bestContainerMatch(event Event, containers []ObservedContainer) ObservedCon
 }
 
 func parseObserveTime(value string) time.Time {
-	value = strings.TrimSpace(value)
-	if value == "" {
-		return time.Now().UTC()
-	}
-
-	if parsed, err := time.Parse(time.RFC3339Nano, value); err == nil {
-		return parsed.UTC()
-	}
-	if parsed, err := time.Parse(time.RFC3339, value); err == nil {
-		return parsed.UTC()
+	if parsed, ok := parseObserveTimeStrict(value); ok {
+		return parsed
 	}
 
 	return time.Now().UTC()
+}
+
+// parseObserveTimeStrict distingue "no pude leer la marca" de "la marca es ahora".
+// Para la ingesta da igual —cae en time.Now y sigue—, pero el relleno diferido tiene
+// que decidir si la ventana de un evento ya vencio, y ahi un time.Now inventado
+// dejaria el evento pendiente para siempre.
+func parseObserveTimeStrict(value string) (time.Time, bool) {
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return time.Time{}, false
+	}
+
+	if parsed, err := time.Parse(time.RFC3339Nano, value); err == nil {
+		return parsed.UTC(), true
+	}
+	if parsed, err := time.Parse(time.RFC3339, value); err == nil {
+		return parsed.UTC(), true
+	}
+
+	return time.Time{}, false
 }

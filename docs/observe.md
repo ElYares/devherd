@@ -427,20 +427,42 @@ elegir contenedor; la ventana de tiempo (±30 s por defecto) solo decide que log
 | Que | Cuando | Consecuencia practica |
 |---|---|---|
 | **Errores** | Al instante, push del emisor | Sin cola ni reintento: **si el collector no corre, el error se pierde** |
-| **Logs del contenedor** | Una sola vez, al ingerir el evento | `docker logs --since t-30s --until t+30s --tail 200`. No se rellenan despues |
+| **Logs del contenedor** | En dos pasadas: la mitad anterior al ingerir, la posterior cuando ya transcurrio | `docker logs --tail 200`, con su propio tope por pasada. La segunda la hace el poller |
 | **Estado de contenedores** | Cada 10 s (poller), o manual con `observe scan` | Un contenedor que cae y vuelve dentro del intervalo puede pasar inadvertido |
 | **Alertas** | Se evaluan al ingerir cada evento | Ver los avisos de la seccion de alertas |
 
-Dos corolarios que explican comportamientos que parecen bugs:
+### La captura de logs va en dos pasadas
 
-- **`Container logs: none captured` suele ser correcto.** Si la app estaba ociosa no habia
-  lineas en la ventana, y como la captura es de una sola pasada, nunca se rellenaran.
-- **La mitad futura de la ventana casi siempre esta vacia**, porque se consulta en el
-  instante del evento y esos logs todavia no existen.
+La ventana de logs es simetrica, ±30 s alrededor del evento, pero **no se puede traer
+entera de una sola vez**: en el instante `t` en que llega el evento, los logs de `t` a
+`t+30s` todavia no existen. Pedirlos ahi devuelve la mitad vacia.
+
+Por eso hay dos pasadas:
+
+| Pasada | Quien | Cuando | Rango |
+|---|---|---|---|
+| Primera | Handler de ingesta | En el instante `t` | `--since t-30s --until t+30s` |
+| Segunda | Poller, cada 10 s | Cuando el evento ya cumplio 30 s | `--since t --until t+30s` |
+
+Cada pasada trae su propio tope de 200 lineas, asi que un contenedor ruidoso ya no agota
+el presupuesto antes de llegar a lo que paso despues del error. Las lineas que las dos
+pasadas ven en comun se insertan una sola vez, y el timeline se ordena por la marca de
+tiempo de la linea, no por el orden en que se guardaron.
+
+Corolarios que explican comportamientos que parecen bugs:
+
+- **`Container logs: none captured` puede resolverse solo.** Si consultas el timeline en
+  los primeros 30 s, la mitad posterior aun no se ha rellenado. Vuelve a mirar despues.
+- **Si no hubo salida en la ventana, sigue siendo correcto que este vacia.** Una app
+  ociosa no escribio nada que capturar.
+- **La segunda pasada necesita el collector encendido.** Si lo apagas antes de que venza
+  la ventana, ese relleno no ocurre y no se recupera al volver.
+- **Un evento de mas de 5 minutos sin rellenar se da por perdido.** A esa altura el
+  contenedor pudo morir o sus logs rotar, y reintentarlo cada 10 s no lo revive.
 
 **Observe no es un agregador de logs**: no sigue los contenedores de forma continua ni
-almacena su salida. Solo toma una foto de 60 segundos alrededor de cada error. Para ver
-logs completos sigue estando `devherd logs` o `docker compose logs`.
+almacena su salida. Solo toma una foto de 60 segundos alrededor de cada error, en dos
+tiempos. Para ver logs completos sigue estando `devherd logs` o `docker compose logs`.
 
 ## 8. Trayectoria de la falla
 
