@@ -854,8 +854,9 @@ Notas:
 - **La unidad sale siempre en la cabecera.** Go cuenta sentencias y los demas cuentan
   lineas: un 58% de uno y un 58% de otro **no son comparables**.
 - **El total se pondera por unidades**, nunca promediando los porcentajes por archivo.
-- **La lista se ordena por masa sin cubrir**, no por porcentaje, y si se omiten
-  archivos se dice cuantos.
+- **Se ordena por masa sin cubrir**, no por porcentaje, tanto la tabla de
+  directorios como la de archivos. Las dos se acotan a `--top`, y si se omiten
+  filas se dice cuantas.
 - Un reporte sin unidades medibles se reporta como *no coverage data*, no como `0.0%`.
 
 ### 4.19 `devherd sentry ...`
