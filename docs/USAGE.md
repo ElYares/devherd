@@ -834,9 +834,13 @@ y aqui se lee. Detalle completo en [coverage.md](coverage.md).
 
 | Flag | Default | Descripcion |
 |------|---------|-------------|
-| `--report` | *(obligatorio)* | Ruta del reporte a leer. |
-| `--all` | `false` | Lista todos los archivos en vez de los de mayor masa sin cubrir. |
-| `--top` | `10` | Cuantos archivos listar cuando no se usa `--all`. |
+| `--report` | — | Ruta de un reporte ya existente. Obligatorio salvo con `--run`. |
+| `--run` | `false` | Prepara el contenedor, corre las pruebas del proyecto y lee el resultado. |
+| `--explain` | `false` | Imprime los comandos que `--run` ejecutaria, **sin ejecutar ninguno**. |
+| `--stack` | *(detectado)* | Fuerza el stack (`laravel`, `go`). |
+| `--service` | *(del stack)* | Servicio compose donde correr las pruebas. |
+| `--all` | `false` | Lista todo en vez de lo de mayor masa sin cubrir. |
+| `--top` | `10` | Cuantas filas listar cuando no se usa `--all`. |
 | `--json` | `false` | Emite el reporte normalizado como JSON. |
 
 Formatos que reconoce, **detectados por el contenido y no por la extension**:
@@ -858,6 +862,18 @@ Notas:
   directorios como la de archivos. Las dos se acotan a `--top`, y si se omiten
   filas se dice cuantas.
 - Un reporte sin unidades medibles se reporta como *no coverage data*, no como `0.0%`.
+
+Sobre `--run` (soporta **laravel** y **go**):
+
+- **Instala PCOV si falta** y sube `memory_limit` si esta por debajo de 512M. Los
+  dos pasos son idempotentes, y los que ya estaban resueltos se anuncian igual.
+- **`-u root` solo cuando el contenedor no lo es.** Las pruebas siempre corren con
+  el usuario original.
+- **El comando de pruebas se declara** en la seccion `test:` de `.devherd.yml`; sin
+  ella se usa el de por defecto del stack y la salida dice cual uso.
+- **Si las pruebas fallan**, el aviso va por stderr antes del resumen, el numero se
+  muestra igual y se sale con codigo distinto de cero.
+- El reporte queda en `.devherd.coverage.*` dentro del proyecto.
 
 ### 4.19 `devherd sentry ...`
 
@@ -900,6 +916,9 @@ proxy:
   domain: mi-app.localhost          # dominio para el proxy
   service: web                      # servicio que recibe el trafico
   port: 8080                        # puerto interno del servicio
+test:                               # opcional, lo usa `devherd coverage --run`
+  command: php artisan test --coverage-clover=.devherd.coverage.xml
+  service: app                      # servicio donde correr las pruebas
 ```
 
 Reglas reales que conviene conocer:
@@ -916,6 +935,9 @@ Reglas reales que conviene conocer:
   silencio.
 - La metadata `proxy` solo la usa el driver `caddy-docker-external`. El driver `caddy` en
   host la ignora por completo.
+- `test.command` existe porque **el comando de pruebas no se puede adivinar**: un
+  proyecto Laravel con Pest revienta si se le llama `vendor/bin/phpunit`. Sin la
+  seccion se usa el de por defecto del stack y `coverage --run` **dice cual uso**.
 
 ## 6. Flujos de trabajo
 
