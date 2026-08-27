@@ -37,10 +37,16 @@ type FunctionReport struct {
 	Kind FunctionKind `json:"kind"`
 	// Enclosing es la funcion que la contiene, vacia si es de paquete.
 	Enclosing string `json:"enclosing,omitempty"`
-	StartLine int    `json:"start_line"`
-	EndLine   int    `json:"end_line"`
-	Total     int    `json:"total"`
-	Covered   int    `json:"covered"`
+	// Stored marca un closure que se **guarda** en una estructura de datos en vez
+	// de ejecutarse: `RunE: func(...)` dentro de un literal de struct. Llamar a la
+	// funcion que lo declara no lo corre, asi que sus sentencias quedan fuera del
+	// alcance de un test que no arme y dispare esa estructura. Es lo que separa el
+	// techo real de la cobertura que solo exige escribir mas pruebas.
+	Stored    bool `json:"stored,omitempty"`
+	StartLine int  `json:"start_line"`
+	EndLine   int  `json:"end_line"`
+	Total     int  `json:"total"`
+	Covered   int  `json:"covered"`
 }
 
 // Uncovered es la masa sin cubrir de la funcion, que es lo que decide si vale la
@@ -52,6 +58,15 @@ func (f FunctionReport) Uncovered() int {
 // Percent es el porcentaje cubierto de la funcion.
 func (f FunctionReport) Percent() float64 {
 	return percent(f.Covered, f.Total)
+}
+
+// Reachable dice si un test puede llegar a esta funcion llamandola, directamente
+// o a traves de la que la declara. Lo unico que la deja fuera es estar guardada en
+// una estructura de datos: un closure pasado como argumento o asignado a una
+// variable local si se ejecuta cuando corre su funcion, y contarlo como
+// inalcanzable inflaria el techo con codigo que ya es probable hoy.
+func (f FunctionReport) Reachable() bool {
+	return !f.Stored
 }
 
 // FileAttribution es el resultado de atribuir un archivo, con lo que no se pudo
@@ -86,6 +101,7 @@ func AttributeFile(file FileReport, sourcePath string) (FileAttribution, error) 
 			Name:      fn.name,
 			Kind:      fn.kind,
 			Enclosing: fn.enclosing,
+			Stored:    fn.stored,
 			StartLine: fn.start,
 			EndLine:   fn.end,
 		}
@@ -127,6 +143,7 @@ type goFunc struct {
 	name      string
 	enclosing string
 	kind      FunctionKind
+	stored    bool
 	start     int
 	end       int
 }
@@ -177,7 +194,7 @@ func parseFunctions(path string) ([]goFunc, error) {
 		return fset.Position(pos).Line
 	}
 
-	labels := litLabels(parsed)
+	labels, stored := litLabels(parsed)
 	found := make([]goFunc, 0, 32)
 	// scope lleva el nombre de la funcion que se esta recorriendo, para nombrar los
 	// closures que cuelgan de ella. counters cuenta los closures anonimos por
@@ -220,6 +237,7 @@ func parseFunctions(path string) ([]goFunc, error) {
 					name:      name,
 					enclosing: enclosing,
 					kind:      KindClosure,
+					stored:    stored[fn],
 					start:     lineOf(fn.Pos()),
 					end:       lineOf(fn.End()),
 				})
@@ -277,8 +295,9 @@ func receiverType(expr ast.Expr) string {
 // el caso que importa: la masa de `internal/cli` vive en closures asignados a
 // campos de cobra. Se hace en una pasada previa y no buscando cada literal en el
 // subarbol de su funcion, que seria cuadratico en archivos grandes.
-func litLabels(file *ast.File) map[*ast.FuncLit]string {
+func litLabels(file *ast.File) (map[*ast.FuncLit]string, map[*ast.FuncLit]bool) {
 	labels := map[*ast.FuncLit]string{}
+	stored := map[*ast.FuncLit]bool{}
 
 	note := func(expr ast.Expr, name string) {
 		lit, ok := expr.(*ast.FuncLit)
@@ -290,8 +309,13 @@ func litLabels(file *ast.File) map[*ast.FuncLit]string {
 
 	ast.Inspect(file, func(n ast.Node) bool {
 		switch node := n.(type) {
-		// `RunE: func(...) {...}` dentro de un literal de struct.
+		// `RunE: func(...) {...}` dentro de un literal de struct. Este es el unico
+		// caso que guarda el closure en vez de ejecutarlo, y por eso el unico que
+		// queda fuera del techo alcanzable.
 		case *ast.KeyValueExpr:
+			if lit, ok := node.Value.(*ast.FuncLit); ok {
+				stored[lit] = true
+			}
 			if key, ok := node.Key.(*ast.Ident); ok {
 				note(node.Value, key.Name)
 			}
@@ -320,7 +344,7 @@ func litLabels(file *ast.File) map[*ast.FuncLit]string {
 		return true
 	})
 
-	return labels
+	return labels, stored
 }
 
 // closureName califica el closure con la funcion que lo contiene. Sin etiqueta se

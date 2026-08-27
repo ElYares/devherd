@@ -17,14 +17,15 @@ const defaultCoverageTop = 10
 
 func newCoverageCmd() *cobra.Command {
 	var (
-		report  string
-		all     bool
-		asJSON  bool
-		top     int
-		run     bool
-		explain bool
-		stack   string
-		service string
+		report    string
+		all       bool
+		asJSON    bool
+		top       int
+		run       bool
+		explain   bool
+		structure bool
+		stack     string
+		service   string
 	)
 
 	cmd := &cobra.Command{
@@ -46,12 +47,13 @@ func newCoverageCmd() *cobra.Command {
 				}
 
 				return runCoverage(cmd, coverageRunFlags{
-					Target:  target,
-					Stack:   stack,
-					Service: service,
-					Explain: explain,
-					AsJSON:  asJSON,
-					View:    view,
+					Target:    target,
+					Stack:     stack,
+					Service:   service,
+					Explain:   explain,
+					AsJSON:    asJSON,
+					Structure: structure,
+					View:      view,
 				})
 			}
 
@@ -62,6 +64,23 @@ func newCoverageCmd() *cobra.Command {
 			parsed, err := coverage.ParseFile(report)
 			if err != nil {
 				return err
+			}
+
+			if structure {
+				// El root no sale del reporte: puede estar en /tmp. Sale del proyecto
+				// que se analiza, que es donde vive el go.mod que traduce las rutas.
+				root, err := coverageProjectRoot(firstArg(args))
+				if err != nil {
+					return err
+				}
+				view.Source = report
+
+				return runCoverageStructure(cmd.OutOrStdout(), parsed, coverageStructureFlags{
+					Root:   root,
+					Source: report,
+					View:   view,
+					AsJSON: asJSON,
+				})
 			}
 
 			if asJSON {
@@ -78,6 +97,8 @@ func newCoverageCmd() *cobra.Command {
 	cmd.Flags().StringVar(&report, "report", "", "Path to an existing coverage report to read")
 	cmd.Flags().BoolVar(&run, "run", false, "Prepare the project container, run its tests and read the result")
 	cmd.Flags().BoolVar(&explain, "explain", false, "Print the commands --run would execute, without running any")
+	cmd.Flags().BoolVar(&structure, "structure", false,
+		"Attribute coverage to functions and report the ceiling the code structure imposes (Go only)")
 	cmd.Flags().StringVar(&stack, "stack", "", "Override the detected stack (laravel, go)")
 	cmd.Flags().StringVar(&service, "service", "", "Compose service to run the tests in")
 	cmd.Flags().BoolVar(&all, "all", false, "List every file instead of the largest uncovered ones")
@@ -225,4 +246,15 @@ func truncateCoveragePath(value string, limit int) string {
 	}
 
 	return "..." + value[len(value)-(limit-3):]
+}
+
+// firstArg devuelve el argumento posicional si lo hay. El comando lo trata como
+// opcional en los dos caminos, y repetir el chequeo en cada uno invita a que se
+// desincronicen.
+func firstArg(args []string) string {
+	if len(args) == 0 {
+		return ""
+	}
+
+	return args[0]
 }
