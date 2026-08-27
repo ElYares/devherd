@@ -526,6 +526,54 @@ Va a `error_log()` y no al logger de Laravel a proposito: el logger puede ser ju
 lo que esta roto, y este codigo tiene que seguir funcionando mientras el framework
 se cae.
 
+## 7ter. Metricas para Prometheus
+
+`GET /metrics` en el collector publica lo que Observe ya sabe, en el formato de
+exposicion de Prometheus. La idea de fondo: en vez de que DevHerd **traiga** un
+stack de monitoreo, que DevHerd **sea scrapeable**.
+
+```text
+# HELP devherd_observe_issues Issues currently grouped by DevHerd Observe.
+# TYPE devherd_observe_issues gauge
+devherd_observe_issues{level="error",project="aang-server"} 1
+devherd_observe_issues{level="warning",project="aang-server"} 1
+...
+devherd_observe_collector_gap_seconds 79168.008
+```
+
+| Metrica | Tipo | Etiquetas |
+|---|---|---|
+| `devherd_observe_issues` | gauge | `project`, `level` |
+| `devherd_observe_events_total` | counter | `project`, `level` |
+| `devherd_observe_container_restarts_total` | counter | `project`, `service`, `container` |
+| `devherd_observe_collector_uptime_seconds` | gauge | — |
+| `devherd_observe_collector_gap_seconds` | gauge | — |
+
+Apuntar cualquier Prometheus a `http://<collector>/metrics` basta. No hay que
+arrancar nada nuevo: es una ruta mas sobre el servidor que ya corria.
+
+### Detalles que importan
+
+- **Sin `prometheus/client_golang`.** El formato es una linea por muestra con dos
+  de metadatos por familia; escribirlo son unas decenas de lineas. La libreria
+  seria la cuarta dependencia directa de un proyecto que tiene tres.
+  `promtool check metrics` valida la salida en las pruebas.
+- **Los conteos se agregan en SQL.** Los metodos de listado llevan `LIMIT` —20 por
+  defecto en `ListIssues`— asi que contar con ellos daria un numero que parece
+  cierto y no lo es.
+- **Las etiquetas son conjuntos acotados**: proyecto, nivel, servicio y contenedor.
+  Etiquetar por mensaje o por fingerprint haria explotar la cardinalidad, que es la
+  forma clasica de inutilizar un Prometheus.
+- **Sin corridas registradas, `collector_uptime_seconds` no se publica.** Un 0
+  significa "el collector esta caido"; la ausencia significa "no se sabe", y
+  confundirlas dispara alertas falsas el primer dia.
+- **`collector_gap_seconds` incluye el hueco inicial.** Una instalacion nueva
+  reporta casi 24 h de hueco durante su primer dia. Es cierto —no habia
+  cobertura— pero conviene saberlo antes de poner una alerta encima.
+- **Una base vacia responde `200` con las familias declaradas y sin muestras**, no
+  un cuerpo vacio ni un `404`. Para Prometheus, un scrape fallido y uno en cero
+  son cosas distintas.
+
 ## 8. Trayectoria de la falla
 
 Primer corte:
