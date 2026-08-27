@@ -29,3 +29,18 @@ var GrafanaDashboards string
 //
 //go:embed grafana-dashboard.json
 var GrafanaDashboard string
+
+// GrafanaAlertingRules son las reglas de alerta sobre las series que publica
+// Observe. Se provisionan siempre: sin destino de notificacion no suenan, pero se
+// ven disparar en la interfaz, y un tablero hay que estar mirandolo.
+//
+//go:embed grafana-alerting-rules.yml
+var GrafanaAlertingRules string
+
+// GrafanaAlertingSlack es el contact point de Slack y la ruta que le manda las
+// alertas de DevHerd. **Solo se escribe si hay un webhook configurado**: un
+// $__env{} sin definir resuelve a vacio, la validacion del contact point falla y
+// Grafana no arranca. Ver grafanaFiles.
+//
+//go:embed grafana-alerting-slack.yml
+var GrafanaAlertingSlack string

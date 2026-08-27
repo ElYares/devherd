@@ -621,6 +621,51 @@ Notas:
   acceso anonimo. Si pasa, `devherd service start grafana --force` y borrar el
   volumen `devherd_shared_grafana_data` lo devuelve a su sitio.
 
+##### Alertas en Slack
+
+Grafana llega con cuatro reglas de alerta ya provisionadas sobre las metricas del
+collector, en la carpeta **DevHerd**:
+
+| Alerta | Cuando |
+|---|---|
+| Observe collector caido | El collector lleva 5 min sin escuchar |
+| Collector de Observe reiniciando | Se reinicio 3 o mas veces en una hora |
+| Contenedor reiniciando en bucle | Un contenedor reinicio 3 o mas veces en 5 min |
+| Errores nuevos en un proyecto | Llegaron eventos de nivel error en 10 min |
+
+Las reglas se provisionan **siempre**, con o sin Slack: sin destino no suenan,
+pero se ven disparar en la interfaz de Grafana. Un tablero hay que estar
+mirandolo; una alerta te busca.
+
+Para que ademas te lleguen al telefono, pon el webhook en el `.env` del stack
+compartido, junto al token de Jupyter:
+
+```bash
+echo 'DEVHERD_SLACK_WEBHOOK=https://hooks.slack.com/services/T.../B.../...' \
+  >> ~/.local/share/devherd/compose/shared-services/.env
+devherd service start grafana
+```
+
+El webhook sale de un incoming webhook de Slack (api.slack.com/apps → tu app →
+Incoming Webhooks → Add New Webhook to Workspace). Es por canal, y quien lo tenga
+escribe ahi: tratalo como una contrasena.
+
+Notas:
+
+- **El contact point solo se escribe si hay webhook**, y el arranque de Grafana
+  depende de eso. Un `$__env{}` sin definir resuelve a cadena vacia, la validacion
+  del receptor pide un `url` que ya no esta, y Grafana **sale con codigo 1**. Por
+  eso la configuracion se parte en dos archivos y solo uno es condicional.
+- **Si borras el webhook del `.env` con el contact point ya escrito**, las
+  notificaciones fallan en silencio en vez de tumbar el servicio: el compose pasa
+  una URL invalida como valor por defecto, a proposito.
+- **Borrar una regla del archivo no la borra de Grafana.** El provisioning agrega
+  y actualiza, pero no limpia: la regla sigue viva con su ultima definicion. Para
+  retirarla, borrala tambien desde la interfaz.
+- **En el telefono, pon el canal en "todos los mensajes nuevos".** Un canal de
+  bajo trafico donde solo escribe un bot se cuela entre las no leidas, y montar
+  todo esto para no enterarte seria el peor resultado.
+
 #### Jupyter
 
 Un JupyterLab **global**, con todos tus proyectos montados a la vez. La idea es

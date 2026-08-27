@@ -1,0 +1,208 @@
+# Escrito por DevHerd la primera vez que arrancaste Grafana.
+#
+# Puedes editarlo: DevHerd respeta tus cambios y no los pisa. Para volver a esta
+# plantilla, `devherd service start grafana --force` la restaura y deja tu version
+# en un .bak al lado.
+#
+# Las reglas se provisionan **siempre**, con o sin Slack configurado. Sin un
+# destino de notificacion no te suena el telefono, pero las ves disparar en la
+# interfaz de Grafana, que ya es mas de lo que da un tablero: un tablero hay que
+# estar mirandolo.
+#
+# Grafana marca como de solo lectura lo que llega por provisioning. Para editar
+# una regla desde la interfaz, primero sacala de este archivo.
+#
+# **Borrar una regla de aqui no la borra de Grafana.** El provisioning agrega y
+# actualiza, pero no limpia: una regla que quitas de este archivo se queda viva en
+# la base con su ultima definicion, y sigue disparando sin que exista nada que la
+# explique. Para retirarla de verdad, borrala tambien desde la interfaz, o
+# declarala en un bloque `deleteRules` con su uid y su orgId.
+
+apiVersion: 1
+
+groups:
+  - orgId: 1
+    name: devherd-observe
+    folder: DevHerd
+    # Un minuto entre evaluaciones. El collector publica cada scrape de Prometheus
+    # y no hay nada que ganar evaluando mas rapido de lo que cambian los datos.
+    interval: 1m
+    rules:
+      # ---------------------------------------------------------------------
+      # El collector caido es la alerta que sostiene a las otras tres: sin el,
+      # nadie recibe eventos y todas las demas series se quedan planas. Un grafico
+      # plano y un grafico sano se ven igual, y esa es justo la confusion que esta
+      # regla existe para romper.
+      #
+      # Se apoya en que `devherd_observe_collector_uptime_seconds` **no se publica**
+      # cuando no hay corrida viva, en vez de publicar un 0. Ver expose.go: un 0
+      # significaria "caido" y la ausencia significa "no se sabe". Por eso la
+      # condicion es un absent() y por eso noDataState es OK: con el collector vivo
+      # el absent() no devuelve nada, y eso es exactamente la buena noticia.
+      # ---------------------------------------------------------------------
+      - uid: devherd-collector-down
+        title: Observe collector caido
+        condition: THRESHOLD
+        for: 5m
+        labels:
+          devherd: "true"
+          severity: critical
+        annotations:
+          summary: El collector de Observe no esta escuchando.
+          description: >-
+            Ninguna aplicacion puede reportar errores ahora mismo, y los tableros
+            se van a ver planos sin que nada este sano.
+            Revisa el daemon con `devherd observe status`.
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: QUERY
+            relativeTimeRange: {from: 600, to: 0}
+            datasourceUid: devherd-prometheus
+            model:
+              refId: QUERY
+              instant: true
+              expr: absent(devherd_observe_collector_uptime_seconds)
+          - refId: THRESHOLD
+            datasourceUid: __expr__
+            model:
+              refId: THRESHOLD
+              type: threshold
+              expression: QUERY
+              conditions:
+                - evaluator: {type: gt, params: [0]}
+
+      # ---------------------------------------------------------------------
+      # El collector que va y viene: atrapa lo que el absent() no ve. Uno que se
+      # cae y se levanta cada pocos minutos nunca lleva 5 minutos seguidos
+      # ausente, asi que la regla de arriba no dispara, y aun asi estas perdiendo
+      # eventos en cada hueco.
+      #
+      # Se cuenta sobre `collector_uptime_seconds`, que vuelve a empezar en cada
+      # corrida: resets() cuenta esas caidas y cada una es un reinicio.
+      #
+      # **No se usa `collector_gap_seconds` aqui, y la razon importa.** Esa metrica
+      # es el total de una ventana movil de 24 h, no un evento. Recien instalado
+      # vale casi 24 h —todo el tiempo anterior a existir— y cualquier umbral
+      # dispara el primer dia diciendo solo "acabas de instalar esto", que es como
+      # se ensena a ignorar un canal de alertas. Y mirar su crecimiento tampoco
+      # sirve: la ventana drena la historia vieja a un segundo por segundo, asi que
+      # un corte real queda escondido bajo ese -3600/h mientras haya historia que
+      # drenar. Sigue siendo buena informacion, y por eso vive en el tablero; como
+      # disparador no funciona.
+      # ---------------------------------------------------------------------
+      - uid: devherd-collector-flapping
+        title: Collector de Observe reiniciando
+        condition: THRESHOLD
+        for: 0s
+        labels:
+          devherd: "true"
+          severity: warning
+        annotations:
+          summary: El collector de Observe se reinicio 3 o mas veces en una hora.
+          description: >-
+            Cada reinicio deja un hueco donde nadie recibio eventos. Revisa el
+            daemon con `systemctl --user status devherd-observe`.
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: QUERY
+            relativeTimeRange: {from: 3600, to: 0}
+            datasourceUid: devherd-prometheus
+            model:
+              refId: QUERY
+              instant: true
+              expr: resets(devherd_observe_collector_uptime_seconds[1h])
+          - refId: THRESHOLD
+            datasourceUid: __expr__
+            model:
+              refId: THRESHOLD
+              type: threshold
+              expression: QUERY
+              conditions:
+                - evaluator: {type: gt, params: [2]}
+
+      # ---------------------------------------------------------------------
+      # Reinicios: un contenedor que reinicia tres veces en cinco minutos esta en
+      # crashloop, no tuvo un mal rato.
+      #
+      # Esta regla sale del contador `restart_count`, que es correcto **hoy**. No
+      # depende de HU-014: lo que ahi se pierde son los eventos de la trayectoria
+      # —tres reinicios seguidos se cuentan como uno solo en el timeline—, no el
+      # total acumulado que lee esta serie. La alerta suena bien antes de arreglar
+      # HU-014; lo que HU-014 arregla es lo que ves al entrar a mirar por que sono.
+      #
+      # El evaluador de Grafana no tiene "mayor o igual", y los reinicios son
+      # enteros: `gt 2` es exactamente `>= 3`.
+      # ---------------------------------------------------------------------
+      - uid: devherd-container-crashloop
+        title: Contenedor reiniciando en bucle
+        condition: THRESHOLD
+        for: 0s
+        labels:
+          devherd: "true"
+          severity: critical
+        annotations:
+          summary: "{{ $labels.project }}/{{ $labels.service }} reinicio 3 o mas veces en 5 minutos."
+          description: >-
+            El contenedor {{ $labels.container }} esta en crashloop.
+            Revisa sus logs con `devherd logs {{ $labels.service }}`.
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: QUERY
+            relativeTimeRange: {from: 600, to: 0}
+            datasourceUid: devherd-prometheus
+            model:
+              refId: QUERY
+              instant: true
+              expr: increase(devherd_observe_container_restarts_total[5m])
+          - refId: THRESHOLD
+            datasourceUid: __expr__
+            model:
+              refId: THRESHOLD
+              type: threshold
+              expression: QUERY
+              conditions:
+                - evaluator: {type: gt, params: [2]}
+
+      # ---------------------------------------------------------------------
+      # Errores nuevos. Es la regla que mas te va a sonar el telefono, y la primera
+      # que vas a querer callar: si un proyecto es ruidoso, sube el umbral aqui en
+      # vez de apagar la regla entera.
+      #
+      # `level` sale del payload que manda el reporter, con "error" por defecto
+      # cuando no viene (event.go). No se etiqueta por mensaje ni por fingerprint a
+      # proposito: eso haria explotar la cardinalidad de la serie, que es la forma
+      # clasica de inutilizar un Prometheus.
+      # ---------------------------------------------------------------------
+      - uid: devherd-new-errors
+        title: Errores nuevos en un proyecto
+        condition: THRESHOLD
+        for: 0s
+        labels:
+          devherd: "true"
+          severity: warning
+        annotations:
+          summary: "{{ $labels.project }} reporto errores nuevos."
+          description: >-
+            Llegaron eventos de nivel error en los ultimos 10 minutos.
+            Miralos con `devherd observe issues {{ $labels.project }}`.
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: QUERY
+            relativeTimeRange: {from: 900, to: 0}
+            datasourceUid: devherd-prometheus
+            model:
+              refId: QUERY
+              instant: true
+              expr: increase(devherd_observe_events_total{level="error"}[10m])
+          - refId: THRESHOLD
+            datasourceUid: __expr__
+            model:
+              refId: THRESHOLD
+              type: threshold
+              expression: QUERY
+              conditions:
+                - evaluator: {type: gt, params: [0]}
