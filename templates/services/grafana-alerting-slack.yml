@@ -1,0 +1,57 @@
+# Escrito por DevHerd la primera vez que arrancaste Grafana **con un webhook de
+# Slack configurado**. Sin webhook este archivo no se escribe, y Grafana arranca
+# igual con las reglas pero sin destino donde avisarte.
+#
+# Puedes editarlo: DevHerd respeta tus cambios y no los pisa. Para volver a esta
+# plantilla, `devherd service start grafana --force` la restaura y deja tu version
+# en un .bak al lado.
+#
+# ---------------------------------------------------------------------------
+# El webhook NO se escribe aqui. Vive en el .env del stack, junto al token de
+# Jupyter, y entra por la variable de entorno del contenedor:
+#
+#     DEVHERD_SLACK_WEBHOOK=https://hooks.slack.com/services/T.../B.../...
+#
+# El motivo es que este archivo es una plantilla de DevHerd y el webhook es tuyo:
+# quien lo tenga escribe en tu canal. Grafana trata el `url` de Slack como campo
+# secreto y lo devuelve como [REDACTED] por su API, lo que importa porque este
+# Grafana corre con acceso anonimo de Editor.
+#
+# **Si borras la variable del .env, el contact point queda apuntando a una URL
+# invalida y las notificaciones fallan en silencio** (queda en el log de Grafana).
+# Es a proposito: la alternativa era que Grafana no arrancara, porque un
+# $__env{} sin definir resuelve a vacio y la validacion del contact point mata el
+# proceso entero. Mas vale un Slack mudo que un Grafana caido.
+# ---------------------------------------------------------------------------
+
+apiVersion: 1
+
+contactPoints:
+  - orgId: 1
+    name: devherd-slack
+    receivers:
+      - uid: devherd-slack-webhook
+        type: slack
+        settings:
+          url: $__env{DEVHERD_SLACK_WEBHOOK}
+          title: '{{ template "default.title" . }}'
+          text: '{{ template "default.message" . }}'
+
+policies:
+  # Provisionar politicas **reemplaza el arbol completo** de la organizacion, no
+  # agrega una rama. Por eso la raiz se deja en el receptor por defecto y DevHerd
+  # cuelga una sola ruta hija que matchea su propia etiqueta: si manana agregas
+  # alertas que no son de DevHerd, siguen su camino y no se las traga Slack.
+  - orgId: 1
+    receiver: grafana-default-email
+    routes:
+      - receiver: devherd-slack
+        object_matchers:
+          - [devherd, "=", "true"]
+        # Un aviso cada 4 h mientras algo siga roto. Sin esto Grafana repite cada
+        # 5 minutos, y una alerta que se repite cada 5 minutos se silencia el
+        # primer dia y ya no te enteras de nada nunca mas.
+        group_by: [alertname, project, service]
+        group_wait: 30s
+        group_interval: 5m
+        repeat_interval: 4h

@@ -74,11 +74,20 @@ services:
       GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: "/etc/grafana/provisioning/dashboards/devherd/devherd-observe.json"
       GF_ANALYTICS_REPORTING_ENABLED: "false"
       GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      # El webhook de Slack para las alertas, si lo configuraste en el .env. El
+      # provisioning lo lee como $__env{DEVHERD_SLACK_WEBHOOK}.
+      #
+      # El valor por defecto es una URL invalida a proposito, y no una cadena
+      # vacia: un $__env{} vacio hace fallar la validacion del contact point y
+      # Grafana **no arranca**. Con esto, un webhook borrado deja las
+      # notificaciones mudas —y anotadas en el log— en vez de tumbar el servicio.
+      DEVHERD_SLACK_WEBHOOK: ${DEVHERD_SLACK_WEBHOOK:-https://hooks.slack.com/services/DEVHERD/NOT/CONFIGURED}
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
       - ./grafana/datasources:/etc/grafana/provisioning/datasources:ro
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./grafana/alerting:/etc/grafana/provisioning/alerting:ro
       - grafana_data:/var/lib/grafana
     networks:
       infra_net:

@@ -9,8 +9,8 @@ import (
 	"testing"
 )
 
-// Los tres archivos de provisioning van en las rutas que el compose monta. Una
-// ruta mal puesta no falla al arrancar: Grafana levanta igual y muestra un tablero
+// Los archivos de provisioning van en las rutas que el compose monta. Una ruta
+// mal puesta no falla al arrancar: Grafana levanta igual y muestra un tablero
 // vacio, que es la peor forma de fallar porque parece que funciona.
 func TestGrafanaProvisionsDatasourceAndDashboard(t *testing.T) {
 	files, err := ServiceFiles("grafana", ServiceOptions{})
@@ -23,6 +23,7 @@ func TestGrafanaProvisionsDatasourceAndDashboard(t *testing.T) {
 		paths = append(paths, file.Path)
 	}
 	expected := []string{
+		"grafana/alerting/devherd-rules.yml",
 		"grafana/dashboards/devherd.yml",
 		"grafana/dashboards/devherd/devherd-observe.json",
 		"grafana/datasources/prometheus.yml",
@@ -153,7 +154,7 @@ func TestGrafanaDependsOnPrometheus(t *testing.T) {
 	}
 }
 
-// Arrancarlo escribe los tres archivos donde el compose los monta.
+// Arrancarlo escribe los archivos donde el compose los monta.
 func TestStartGrafanaWritesItsProvisioning(t *testing.T) {
 	m := newTestManager(t, &fakeRunner{outputs: []string{"", "", ""}})
 
@@ -161,14 +162,15 @@ func TestStartGrafanaWritesItsProvisioning(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Start returned error: %v", err)
 	}
-	if len(files) != 3 {
-		t.Fatalf("expected three provisioning files, got %#v", files)
+	if len(files) != 4 {
+		t.Fatalf("expected four provisioning files, got %#v", files)
 	}
 
 	for _, relative := range []string{
 		"grafana/datasources/prometheus.yml",
 		"grafana/dashboards/devherd.yml",
 		"grafana/dashboards/devherd/devherd-observe.json",
+		"grafana/alerting/devherd-rules.yml",
 	} {
 		if _, err := os.Stat(filepath.Join(m.dir, filepath.FromSlash(relative))); err != nil {
 			t.Errorf("%s was not written: %v", relative, err)
@@ -201,4 +203,204 @@ func TestGrafanaIsPartOfTheCatalog(t *testing.T) {
 			t.Errorf("%s should be a supported service, got %v", want, supported)
 		}
 	}
+}
+
+// **El caso que tumba el servicio.** Sin webhook, el contact point NO se escribe:
+// un $__env{} sin definir resuelve a cadena vacia, la validacion del receptor pide
+// un `url` que ya no esta, y Grafana sale con codigo 1. Verificado contra
+// grafana/grafana:11.5.1, que muere con "failure parsing contact points:
+// required field 'url' is not specified".
+//
+// Un servicio compartido no puede caerse porque alguien no use Slack.
+func TestGrafanaOmitsTheSlackContactPointWithoutAWebhook(t *testing.T) {
+	files, err := ServiceFiles("grafana", ServiceOptions{SlackConfigured: false})
+	if err != nil {
+		t.Fatalf("ServiceFiles returned error: %v", err)
+	}
+
+	for _, file := range files {
+		if strings.Contains(file.Path, "devherd-slack") {
+			t.Fatalf("the Slack contact point must not be written without a webhook: %s", file.Path)
+		}
+	}
+
+	// Las reglas si van: sin destino no suenan, pero se ven disparar en la
+	// interfaz, y eso ya es mas de lo que da un tablero que hay que estar mirando.
+	if !hasPath(files, "grafana/alerting/devherd-rules.yml") {
+		t.Error("the alert rules should be provisioned even without Slack")
+	}
+}
+
+// Con webhook si se escribe, y toma el secreto del entorno en vez de llevarlo
+// dentro. El archivo es una plantilla de DevHerd; el webhook es del usuario.
+func TestGrafanaWritesTheSlackContactPointWithAWebhook(t *testing.T) {
+	files, err := ServiceFiles("grafana", ServiceOptions{SlackConfigured: true})
+	if err != nil {
+		t.Fatalf("ServiceFiles returned error: %v", err)
+	}
+
+	var slack string
+	for _, file := range files {
+		if file.Path == "grafana/alerting/devherd-slack.yml" {
+			slack = file.Content
+		}
+	}
+	if slack == "" {
+		t.Fatal("the Slack contact point is missing")
+	}
+
+	if !strings.Contains(slack, "url: $__env{DEVHERD_SLACK_WEBHOOK}") {
+		t.Error("the webhook must come from the environment, not from the file")
+	}
+	// Un webhook literal en una plantilla versionada es un secreto filtrado. Se
+	// miran solo las lineas efectivas: los comentarios documentan la forma que
+	// tiene que tener el valor, y ahi el ejemplo es justo lo util.
+	for _, line := range strings.Split(slack, "\n") {
+		if strings.HasPrefix(strings.TrimSpace(line), "#") {
+			continue
+		}
+		if strings.Contains(line, "hooks.slack.com") {
+			t.Errorf("the template must not carry a real webhook: %q", line)
+		}
+	}
+}
+
+// El .env es la fuente de verdad, igual que para el token de Jupyter.
+func TestSlackConfiguredReadsTheEnvFile(t *testing.T) {
+	for _, tc := range []struct {
+		name string
+		env  string
+		want bool
+	}{
+		{"sin archivo", "", false},
+		{"definido", "DEVHERD_SLACK_WEBHOOK=https://hooks.slack.com/services/T/B/x\n", true},
+		{"vacio", "DEVHERD_SLACK_WEBHOOK=\n", false},
+		{"solo espacios", "DEVHERD_SLACK_WEBHOOK=   \n", false},
+		// Comentarlo es como se desactiva un webhook sin borrarlo. Tomarlo por
+		// bueno escribiria el contact point y dejaria a Grafana sin arrancar.
+		{"comentado", "#DEVHERD_SLACK_WEBHOOK=https://hooks.slack.com/services/T/B/x\n", false},
+		{"entre otras variables", "JUPYTER_TOKEN=abc\nDEVHERD_SLACK_WEBHOOK=https://h/x\nDEVHERD_UID=1000\n", true},
+		// Un prefijo que solo se parece no cuenta.
+		{"nombre parecido", "DEVHERD_SLACK_WEBHOOK_OLD=https://h/x\n", false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			dir := t.TempDir()
+			if tc.env != "" {
+				if err := os.WriteFile(filepath.Join(dir, ".env"), []byte(tc.env), 0o644); err != nil {
+					t.Fatalf("write .env: %v", err)
+				}
+			}
+
+			if got := SlackConfigured(dir); got != tc.want {
+				t.Errorf("SlackConfigured() = %v, want %v", got, tc.want)
+			}
+		})
+	}
+}
+
+// Las reglas consultan las series que Observe publica de verdad. Una regla contra
+// una metrica que no existe no falla: se queda en NoData para siempre, que se ve
+// igual que "todo bien".
+func TestGrafanaAlertRulesQueryTheRealMetrics(t *testing.T) {
+	files, err := ServiceFiles("grafana", ServiceOptions{})
+	if err != nil {
+		t.Fatalf("ServiceFiles returned error: %v", err)
+	}
+
+	var rules string
+	for _, file := range files {
+		if file.Path == "grafana/alerting/devherd-rules.yml" {
+			rules = file.Content
+		}
+	}
+	if rules == "" {
+		t.Fatal("the alert rules are missing")
+	}
+
+	for _, metric := range []string{
+		"devherd_observe_collector_uptime_seconds",
+		"devherd_observe_container_restarts_total",
+		"devherd_observe_events_total",
+	} {
+		if !strings.Contains(rules, metric) {
+			t.Errorf("no rule queries %s", metric)
+		}
+	}
+
+	// **`collector_gap_seconds` no puede ser un disparador.** Es el total de una
+	// ventana movil de 24 h: recien instalado vale casi 24 h y cualquier umbral
+	// dispara el primer dia diciendo solo "acabas de instalar esto". Mirar su
+	// crecimiento tampoco sirve, porque la ventana drena la historia vieja a un
+	// segundo por segundo y esconde los cortes reales debajo. Vive en el tablero,
+	// que es donde una metrica de ventana se lee bien.
+	if strings.Contains(rules, "devherd_observe_collector_gap_seconds") {
+		t.Error("the 24h gap window fires on day one for every new install; alert on collector restarts instead")
+	}
+
+	// Contra el datasource que DevHerd provisiona, no contra el que Grafana
+	// elija por defecto.
+	if !strings.Contains(rules, "datasourceUid: devherd-prometheus") {
+		t.Error("the rules must target the provisioned datasource")
+	}
+
+	// La etiqueta que la ruta de Slack matchea. Sin ella las alertas se evaluan
+	// y no se entregan, que es la falla silenciosa de siempre.
+	if !strings.Contains(rules, `devherd: "true"`) {
+		t.Error("the rules must carry the devherd label the Slack route matches on")
+	}
+}
+
+// El collector caido se detecta con absent(), y absent() **no devuelve nada**
+// cuando la serie esta. Sin noDataState: OK, el estado sano se leeria como
+// NoData y la alerta viviria disparada al reves.
+func TestCollectorDownRuleTreatsNoDataAsHealthy(t *testing.T) {
+	files, err := ServiceFiles("grafana", ServiceOptions{})
+	if err != nil {
+		t.Fatalf("ServiceFiles returned error: %v", err)
+	}
+
+	var rules string
+	for _, file := range files {
+		if file.Path == "grafana/alerting/devherd-rules.yml" {
+			rules = file.Content
+		}
+	}
+
+	if !strings.Contains(rules, "absent(devherd_observe_collector_uptime_seconds)") {
+		t.Error("the collector-down rule should use absent(); the metric is omitted, not zeroed, when it is not running")
+	}
+	// Cada regla declara su noDataState. Ninguna puede quedarse con el default.
+	rulesCount := strings.Count(rules, "- uid: devherd-")
+	noData := strings.Count(rules, "noDataState:")
+	if rulesCount != noData {
+		t.Errorf("%d rules but %d noDataState declarations; every rule must declare one", rulesCount, noData)
+	}
+}
+
+// El compose tiene que montar el directorio y pasar la variable, o el
+// provisioning que DevHerd escribe no lo ve nadie.
+func TestComposeMountsAlertingAndPassesTheWebhook(t *testing.T) {
+	if !strings.Contains(composeContent, "./grafana/alerting:/etc/grafana/provisioning/alerting:ro") {
+		t.Error("the compose must mount the alerting provisioning directory")
+	}
+	if !strings.Contains(composeContent, "DEVHERD_SLACK_WEBHOOK: ${DEVHERD_SLACK_WEBHOOK:-") {
+		t.Error("the compose must pass the webhook through to Grafana")
+	}
+	// **El default no puede ser vacio.** Un $__env{} vacio mata a Grafana al
+	// arrancar; una URL invalida solo deja las notificaciones mudas. Si alguien
+	// borra el webhook del .env con el contact point ya escrito, la diferencia es
+	// entre un Slack callado y un Grafana caido.
+	if strings.Contains(composeContent, "DEVHERD_SLACK_WEBHOOK: ${DEVHERD_SLACK_WEBHOOK:-}") {
+		t.Error("an empty default stops Grafana from starting; use an invalid URL instead")
+	}
+}
+
+func hasPath(files []ManagedFile, path string) bool {
+	for _, file := range files {
+		if file.Path == path {
+			return true
+		}
+	}
+
+	return false
 }

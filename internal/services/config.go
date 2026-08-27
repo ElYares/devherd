@@ -53,6 +53,11 @@ type ServiceOptions struct {
 	// escriba en el workspace acabaria perteneciendo a otro dueno.
 	UID int
 	GID int
+	// SlackConfigured dice si el usuario puso un webhook de Slack en el .env del
+	// stack. Es un booleano y no el webhook porque el valor nunca pasa por aqui:
+	// lo lee Grafana de su entorno. Lo unico que decide este campo es **si el
+	// contact point se escribe**, y esa decision no necesita el secreto.
+	SlackConfigured bool
 }
 
 // serviceFiles declara la configuracion de cada servicio. Redis y Mailpit no
@@ -136,12 +141,27 @@ func DefaultWorkspace(home string) string {
 // Ninguno lleva plantilla: Grafana alcanza a Prometheus por su alias de red, que
 // no cambia. Una IP si cambiaria al recrear la red, que es la misma trampa que ya
 // costo un falso positivo en Observe.
-func grafanaFiles(ServiceOptions) ([]ManagedFile, error) {
-	return []ManagedFile{
+func grafanaFiles(opts ServiceOptions) ([]ManagedFile, error) {
+	files := []ManagedFile{
 		{Path: "grafana/datasources/prometheus.yml", Content: servicestemplates.GrafanaDatasource},
 		{Path: "grafana/dashboards/devherd.yml", Content: servicestemplates.GrafanaDashboards},
 		{Path: "grafana/dashboards/devherd/devherd-observe.json", Content: servicestemplates.GrafanaDashboard},
-	}, nil
+		{Path: "grafana/alerting/devherd-rules.yml", Content: servicestemplates.GrafanaAlertingRules},
+	}
+
+	// El contact point de Slack solo se escribe si hay webhook. **Escribirlo sin
+	// el impide que Grafana arranque**, y no de una forma que se entienda: un
+	// $__env{} sin definir resuelve a cadena vacia, la validacion del receptor
+	// pide un `url` que ya no esta y el proceso sale con codigo 1. Un servicio
+	// compartido no puede caerse porque alguien no use Slack.
+	if opts.SlackConfigured {
+		files = append(files, ManagedFile{
+			Path:    "grafana/alerting/devherd-slack.yml",
+			Content: servicestemplates.GrafanaAlertingSlack,
+		})
+	}
+
+	return files, nil
 }
 
 // prometheusFiles arma el prometheus.yml con el collector ya apuntado. Escribirlo
@@ -223,10 +243,11 @@ func NeedsCollector(service string) bool {
 // es como se pierde una tarde buscando por que un servicio no toma sus ajustes.
 func (m Manager) ensureServiceFiles(service string, opts StartOptions) ([]FileResult, error) {
 	files, err := ServiceFiles(service, ServiceOptions{
-		CollectorAddr: opts.CollectorAddr,
-		Workspace:     opts.Workspace,
-		UID:           opts.UID,
-		GID:           opts.GID,
+		CollectorAddr:   opts.CollectorAddr,
+		Workspace:       opts.Workspace,
+		UID:             opts.UID,
+		GID:             opts.GID,
+		SlackConfigured: SlackConfigured(m.dir),
 	})
 	if err != nil {
 		return nil, err
@@ -319,4 +340,43 @@ func DescribeFileResults(results []FileResult) string {
 	}
 
 	return strings.Join(lines, "\n")
+}
+
+// slackWebhookVar es la variable del .env donde vive el webhook de Slack. Va en
+// el .env y no en el compose por lo de siempre: el compose es de DevHerd y se
+// regenera, el secreto es del usuario y se queda.
+const slackWebhookVar = "DEVHERD_SLACK_WEBHOOK"
+
+// SlackConfigured dice si el .env del stack define un webhook de Slack con algun
+// valor. No valida que la URL sirva —eso lo dira Grafana al intentar entregar—,
+// solo distingue "configurado" de "ausente", que es la unica pregunta que decide
+// si el contact point se escribe.
+//
+// Un .env que no existe todavia no es un error: significa que nadie ha arrancado
+// Jupyter ni ha puesto un webhook, y la respuesta correcta es que no hay Slack.
+func SlackConfigured(dir string) bool {
+	raw, err := os.ReadFile(filepath.Join(dir, ".env"))
+	if err != nil {
+		return false
+	}
+
+	for _, line := range strings.Split(string(raw), "\n") {
+		line = strings.TrimSpace(line)
+		// Una linea comentada es justo como queda un webhook que alguien desactivo
+		// sin borrarlo. Tomarla por buena escribiria el contact point y dejaria a
+		// Grafana sin arrancar.
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+
+		name, value, found := strings.Cut(line, "=")
+		if !found || strings.TrimSpace(name) != slackWebhookVar {
+			continue
+		}
+		if strings.TrimSpace(value) != "" {
+			return true
+		}
+	}
+
+	return false
 }

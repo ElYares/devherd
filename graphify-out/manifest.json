@@ -155,7 +155,7 @@
     "semantic_hash": ""
   },
   "internal/cli/service.go": {
-    "mtime": 1787814217.4995995,
+    "mtime": 1787816407.0525434,
     "ast_hash": "ad26720aa1318c5b08019f8a4995b656",
     "semantic_hash": ""
   },
@@ -385,7 +385,7 @@
     "semantic_hash": "b6ad509aaccbb719b8da64eef79b4b6c"
   },
   "internal/services/manager.go": {
-    "mtime": 1787814200.5435169,
+    "mtime": 1787816407.0535433,
     "ast_hash": "19b139da099eaaed95cd2fabee58579c",
     "semantic_hash": ""
   },
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1787814352.0164468,
-    "ast_hash": "4f2d0d0249ee94d37c84d986143ea97d",
+    "mtime": 1787862009.6970532,
+    "ast_hash": "f6331a97e724c1e9e0885fcff4ef4858",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -595,8 +595,8 @@
     "semantic_hash": ""
   },
   "internal/services/shared-services.compose.yml": {
-    "mtime": 1787813675.6448495,
-    "ast_hash": "3ad642c106d36a218af21e68e5964a86",
+    "mtime": 1787861352.551748,
+    "ast_hash": "b7eff09e2c57c569dfaa664c80071c7c",
     "semantic_hash": ""
   },
   "internal/cli/serve.go": {
@@ -885,8 +885,8 @@
     "semantic_hash": ""
   },
   "internal/services/config.go": {
-    "mtime": 1787813675.681231,
-    "ast_hash": "6c60177b2909a0be3bbb0c597cd1b8f7",
+    "mtime": 1787861380.2547128,
+    "ast_hash": "f1e77def87c19e8aa10a3fe69833668d",
     "semantic_hash": ""
   },
   "internal/services/config_test.go": {
@@ -905,8 +905,8 @@
     "semantic_hash": ""
   },
   "templates/services/embed.go": {
-    "mtime": 1787809688.6251652,
-    "ast_hash": "b8428be2434ffec8470e191e50916f3f",
+    "mtime": 1787861341.9743643,
+    "ast_hash": "2fc091b20b02dc4a2dd309898a05dd75",
     "semantic_hash": ""
   },
   "templates/services/prometheus.yml": {
@@ -915,43 +915,53 @@
     "semantic_hash": ""
   },
   "internal/cli/service_dependency_test.go": {
-    "mtime": 1787814287.802659,
+    "mtime": 1787816407.0525434,
     "ast_hash": "29188a6726b7d87977fab8752c15da41",
     "semantic_hash": ""
   },
   "internal/services/grafana_test.go": {
-    "mtime": 1787810144.2062418,
-    "ast_hash": "9c8f39cdb5b69aa0a55ceb0cd64954b6",
+    "mtime": 1787861796.65662,
+    "ast_hash": "8058ca72177744e67e49fee1e1e1fced",
     "semantic_hash": ""
   },
   "templates/services/grafana-dashboard.json": {
-    "mtime": 1787809680.899418,
+    "mtime": 1787816407.0535433,
     "ast_hash": "0934b84baec18b1772b27d42f79f1e8a",
     "semantic_hash": ""
   },
   "templates/services/grafana-dashboards.yml": {
-    "mtime": 1787809648.543785,
+    "mtime": 1787816407.0535433,
     "ast_hash": "1d946eb3145bc18a92f5d933221db3ef",
     "semantic_hash": ""
   },
   "templates/services/grafana-datasource.yml": {
-    "mtime": 1787809648.542785,
+    "mtime": 1787816407.0535433,
     "ast_hash": "e236454e5eb2d5aa163189cd22700290",
     "semantic_hash": ""
   },
   "internal/services/jupyter_test.go": {
-    "mtime": 1787814287.8036592,
+    "mtime": 1787816407.0535433,
     "ast_hash": "530d3fade5d26b45b540aee6dc34685c",
     "semantic_hash": ""
   },
   "internal/proxy/shared.go": {
-    "mtime": 1787814176.9971611,
+    "mtime": 1787816407.0525434,
     "ast_hash": "f4a7de4c8a9779164beca3738023d327",
     "semantic_hash": ""
   },
   "internal/proxy/shared_test.go": {
-    "mtime": 1787814269.6718373,
+    "mtime": 1787816407.0525434,
     "ast_hash": "edc145070c7e44996efba4238b001b46",
+    "semantic_hash": ""
+  },
+  "templates/services/grafana-alerting-rules.yml": {
+    "mtime": 1787861929.4181166,
+    "ast_hash": "1935d460f88bd3a0f05aba643bd6187a",
+    "semantic_hash": ""
+  },
+  "templates/services/grafana-alerting-slack.yml": {
+    "mtime": 1787861335.0890584,
+    "ast_hash": "e7b9abcbf9bf670e123cc5947843bd94",
     "semantic_hash": ""
   }
 }
