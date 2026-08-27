@@ -45,6 +45,7 @@ func NewServerWithDocker(store Store, dbPath string, docker DockerRuntime) Serve
 func (s Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", s.handleHealth)
+	mux.HandleFunc("/metrics", s.handleMetrics)
 	mux.HandleFunc("/api/observe/", s.handlePanelAPI)
 	mux.HandleFunc("/api/", s.handleAPI)
 	mux.HandleFunc("/", s.handlePanel)
@@ -450,5 +451,34 @@ func (s Server) beat(ctx context.Context) {
 				slog.Warn("observe: heartbeat failed", "error", err)
 			}
 		}
+	}
+}
+
+// handleMetrics publica lo que Observe sabe en el formato de exposicion de
+// Prometheus. Es una ruta de lectura sobre un servidor que ya existe: ni un
+// proceso mas, ni una dependencia mas.
+func (s Server) handleMetrics(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+
+		return
+	}
+
+	snapshot, err := s.store.Metrics(r.Context())
+	if err != nil {
+		// 500 y no un cuerpo vacio con 200: para Prometheus, un scrape fallido y un
+		// scrape con todo en cero son cosas distintas, y confundirlas convierte una
+		// base rota en "no paso nada".
+		slog.Warn("observe: metrics snapshot failed", "error", err)
+		http.Error(w, "metrics unavailable", http.StatusInternalServerError)
+
+		return
+	}
+
+	w.Header().Set("Content-Type", MetricsContentType)
+	w.WriteHeader(http.StatusOK)
+	if _, err := io.WriteString(w, FormatMetrics(snapshot)); err != nil {
+		slog.Warn("observe: writing metrics failed", "error", err)
 	}
 }
