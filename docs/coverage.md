@@ -3,17 +3,27 @@
 `devherd coverage` lee el reporte de cobertura que tu proyecto ya genera y calcula
 sobre el lo que ninguna herramienta nativa te da: **donde esta la masa sin cubrir**.
 
-> **DevHerd no instrumenta codigo.** No inyecta Xdebug, PCOV ni el agente de
-> JaCoCo, y no cuenta lineas ejecutadas. Eso lo hace la herramienta de tu stack;
-> aqui se lee lo que dejo. Configurar el proyecto para que lo genere sera
-> `devherd coverage init`, que todavia no existe.
+> **DevHerd no instrumenta codigo.** No cuenta lineas ejecutadas ni reimplementa
+> PHPUnit, JaCoCo, vitest o coverage.py. Lo que si hace `--run` es **habilitar** el
+> driver que esas herramientas necesitan, correrlas y leer lo que dejaron.
 
 ## Estado
 
-**Fase 0 implementada.** Lee los cinco formatos, calcula y resume en terminal. La
-ruta del reporte se pasa a mano con `--report`.
+**Fases 0 y 1 implementadas.** Lee los cinco formatos y calcula (`--report`), y
+prepara el contenedor, corre las pruebas y lee el resultado (`--run`).
 
-## Uso
+## Uso rapido
+
+```bash
+devherd coverage --run                  # en la raiz del proyecto
+devherd coverage --run --explain        # imprime los comandos, sin ejecutar nada
+devherd coverage --run ~/proyectos/x    # otro proyecto
+```
+
+`--run` soporta **laravel** y **go**. Para los demas stacks, genera el reporte con
+la herramienta del proyecto y pasalo con `--report`.
+
+## Uso con un reporte ya existente
 
 ```bash
 devherd coverage --report coverage.out          # Go
@@ -110,14 +120,82 @@ que este comando viene a ahorrar.
 Y nada **se trunca en silencio**: si se omiten filas, se dice cuantas. Con `--all`
 salen todas.
 
-## Limites de esta fase
+## Que hace `--run`, paso a paso
 
-- **La ruta se pasa a mano.** Encontrar el reporte solo, por stack, es la fase 3.
-- **No corre las pruebas.** Es la fase 4.
-- **No configura el proyecto.** Es la fase 1, `coverage init`.
+```text
+$ devherd coverage --run
+
+tl-mas-server  (laravel)  ·  service app
+
+  · coverage driver  pcov already present
+  · memory limit     1G is enough
+  ✓ tests            Tests:    865 passed (2203 assertions)
+
+.devherd.coverage.xml  ·  clover  ·  statements
+  total                                    78.1%   (2185 statements)
+```
+
+1. **Sondea el contenedor** una sola vez, de solo lectura: directorio de trabajo,
+   usuario, si hay driver y cual es el limite de memoria.
+2. **Instala PCOV si falta.** Es idempotente, cuesta ~3,5 s y **se pierde al
+   recrear el contenedor**, por eso se re-verifica en cada corrida. Se usa PCOV y no
+   Xdebug: aquel ralentiza las pruebas entre 2x y 20x, este ~1,3x.
+3. **Sube `memory_limit` a 1G si esta por debajo de 512M.** Con los 128M por
+   defecto, PCOV mata la suite a mitad. **Se escribe en `conf.d`, nunca con `-d`**:
+   `artisan test` lanza el runner en un proceso hijo que no hereda los flags.
+4. **Corre las pruebas** y lee el reporte.
+
+Los pasos que ya estaban resueltos **se anuncian igual** (con `·` en vez de `✓`):
+saber que algo no hacia falta vale tanto como haberlo hecho.
+
+### `--explain`: automatico no quiere decir opaco
+
+```bash
+devherd coverage --run --explain
+```
+
+Imprime los comandos exactos y **no ejecuta ninguno**. Sirven para leerlos, para
+copiarlos y correrlos a mano, o para entender que va a pasar antes de dejar actuar
+al comando.
+
+### Detalles que conviene saber
+
+- **`-u root` solo cuando hace falta.** `aang-server` corre como uid 1000 y ahi
+  `pecl install` falla por permisos; `tl-mas-server` ya es root y forzarlo cambiaria
+  el dueno de lo que escriba. Las **pruebas siempre corren con el usuario
+  original**, nunca como root.
+- **El comando de pruebas no se puede adivinar.** El de por defecto para Laravel es
+  `php artisan test`, **no** `vendor/bin/phpunit`: los proyectos con Pest revientan
+  con un error de bootstrap. Se declara asi:
+
+  ```yaml
+  # .devherd.yml
+  test:
+    command: php artisan test --coverage-clover=.devherd.coverage.xml
+    service: app
+  ```
+
+- **Si las pruebas fallan**, el aviso sale por stderr **antes** del resumen, el
+  numero **se muestra igual** —la cobertura de lo que si corrio es real, y la
+  corrida ya costo su tiempo— y se sale con codigo distinto de cero.
+- **Si la suite muere sin generar reporte**, se dice eso y no "sin datos de
+  cobertura": son cosas distintas.
+- **El reporte anterior se borra antes de empezar.** Si no, una corrida que muere
+  dejaria leer el de la vez pasada como si fuera de ahora.
+- **El reporte va dentro del proyecto**, como `.devherd.coverage.*`. No puede ir
+  fuera: el contenedor solo ve el proyecto montado. El comando avisa si no esta en
+  el `.gitignore`.
+
+## Limites
+
+- **`--run` solo sabe de laravel y go.** Node, Python y Java se agregan como
+  adaptadores; mientras tanto, `--report`.
+- **No encuentra un reporte ya existente.** Pasar la ruta a mano sigue siendo
+  necesario sin `--run`. Es la fase 3.
 - **No hay analisis estructural todavia.** El techo alcanzable —"el 69% de este
   paquete vive dentro de los `RunE`, tu maximo real es 31%"— es la fase 2. Necesita
   un analizador por lenguaje y empezara por Go.
+- **No toca Dockerfiles ni imagenes.** Instala en el contenedor vivo.
 - **Solo lineas y sentencias.** No se lee cobertura de ramas, aunque LCOV y JaCoCo
   la traigan.
 

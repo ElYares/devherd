@@ -145,7 +145,7 @@
     "semantic_hash": ""
   },
   "internal/cli/root.go": {
-    "mtime": 1787638379.704671,
+    "mtime": 1787639375.5436869,
     "ast_hash": "ecc5bc328bc38d0acd291e6d2507ac57",
     "semantic_hash": ""
   },
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1787638805.213729,
-    "ast_hash": "883df0d6e980dfd4b5a7049c37e80b6b",
+    "mtime": 1787641425.3475497,
+    "ast_hash": "6658b45485e0032a7f8aad95609dbb26",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -765,7 +765,7 @@
     "semantic_hash": ""
   },
   "docs/INDEX.md": {
-    "mtime": 1787638787.2996745,
+    "mtime": 1787639375.533687,
     "ast_hash": "db05b105b7ad2f0c0f36c1f80ef9bd48",
     "semantic_hash": ""
   },
@@ -810,18 +810,18 @@
     "semantic_hash": ""
   },
   "internal/cli/coverage.go": {
-    "mtime": 1787638389.291651,
-    "ast_hash": "9a249dc87caaa77c147134f75731909d",
+    "mtime": 1787641360.951177,
+    "ast_hash": "5b58a87e06dd7752f849d6f174fae5a5",
     "semantic_hash": ""
   },
   "internal/cli/coverage_test.go": {
-    "mtime": 1787638686.290839,
-    "ast_hash": "1985e82b3e89b97b8672ade682813d72",
+    "mtime": 1787641405.8102064,
+    "ast_hash": "0cd30345689d134999be8d054df45749",
     "semantic_hash": ""
   },
   "docs/coverage.md": {
-    "mtime": 1787638775.0062616,
-    "ast_hash": "e273a1fc6594d6a032e59c1ab0a23c37",
+    "mtime": 1787641425.3471873,
+    "ast_hash": "b0d43ffcf5fff51fc7e2954662c576a7",
     "semantic_hash": ""
   }
 }

@@ -13,3 +13,6 @@ apps/desktop/node_modules/
 # configuracion local de IDEs
 .idea/
 .vscode/
+
+# Reportes de cobertura generados por `devherd coverage --run`
+.devherd.coverage*

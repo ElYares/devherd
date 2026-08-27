@@ -17,22 +17,48 @@ const defaultCoverageTop = 10
 
 func newCoverageCmd() *cobra.Command {
 	var (
-		report string
-		all    bool
-		asJSON bool
-		top    int
+		report  string
+		all     bool
+		asJSON  bool
+		top     int
+		run     bool
+		explain bool
+		stack   string
+		service string
 	)
 
 	cmd := &cobra.Command{
-		Use:   "coverage",
+		Use:   "coverage [project-or-path]",
 		Short: "Summarize a coverage report and show where the uncovered mass is",
 		Long: "Reads a coverage report produced by the project's own tooling and " +
 			"summarizes it. Supported formats: " + strings.Join(coverage.SupportedFormats(), ", ") + ".\n\n" +
 			"DevHerd does not instrument code: generate the report with your stack's " +
 			"tooling (go test -coverprofile, phpunit --coverage-clover, vitest --coverage, " +
 			"jacoco, coverage xml) and pass it with --report.",
-		Args: cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, _ []string) error {
+		Args: cobra.MaximumNArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			view := coverageViewOptions{All: all, Top: top}
+
+			if run || explain {
+				target := ""
+				if len(args) > 0 {
+					target = args[0]
+				}
+
+				return runCoverage(cmd, coverageRunFlags{
+					Target:  target,
+					Stack:   stack,
+					Service: service,
+					Explain: explain,
+					AsJSON:  asJSON,
+					View:    view,
+				})
+			}
+
+			if strings.TrimSpace(report) == "" {
+				return fmt.Errorf("either --report <path> or --run is required")
+			}
+
 			parsed, err := coverage.ParseFile(report)
 			if err != nil {
 				return err
@@ -42,21 +68,21 @@ func newCoverageCmd() *cobra.Command {
 				return writeCoverageJSON(cmd.OutOrStdout(), parsed)
 			}
 
-			writeCoverageReport(cmd.OutOrStdout(), parsed, coverageViewOptions{
-				Source: report,
-				All:    all,
-				Top:    top,
-			})
+			view.Source = report
+			writeCoverageReport(cmd.OutOrStdout(), parsed, view)
 
 			return nil
 		},
 	}
 
-	cmd.Flags().StringVar(&report, "report", "", "Path to the coverage report to read")
+	cmd.Flags().StringVar(&report, "report", "", "Path to an existing coverage report to read")
+	cmd.Flags().BoolVar(&run, "run", false, "Prepare the project container, run its tests and read the result")
+	cmd.Flags().BoolVar(&explain, "explain", false, "Print the commands --run would execute, without running any")
+	cmd.Flags().StringVar(&stack, "stack", "", "Override the detected stack (laravel, go)")
+	cmd.Flags().StringVar(&service, "service", "", "Compose service to run the tests in")
 	cmd.Flags().BoolVar(&all, "all", false, "List every file instead of the largest uncovered ones")
 	cmd.Flags().BoolVar(&asJSON, "json", false, "Output the parsed report as JSON")
-	cmd.Flags().IntVar(&top, "top", defaultCoverageTop, "How many files to list when not using --all")
-	_ = cmd.MarkFlagRequired("report")
+	cmd.Flags().IntVar(&top, "top", defaultCoverageTop, "How many rows to list when not using --all")
 
 	return cmd
 }

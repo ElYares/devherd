@@ -56,7 +56,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "devherd_main",
-      "community": 84,
+      "community": 86,
       "norm_label": "main.go"
     },
     {
@@ -66,7 +66,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "devherd_main_main",
-      "community": 84,
+      "community": 86,
       "norm_label": "main()"
     },
     {
@@ -525,7 +525,7 @@
       "label": "coverageViewOptions",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L64",
+      "source_location": "L90",
       "_origin": "ast",
       "id": "cli_coverageviewoptions",
       "community": 55,
@@ -535,7 +535,7 @@
       "label": "writeCoverageJSON()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L70",
+      "source_location": "L96",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragejson",
       "community": 55,
@@ -545,7 +545,7 @@
       "label": "Writer",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L70",
+      "source_location": "L96",
       "_origin": "ast",
       "id": "internal_cli_coverage_go_writer",
       "community": 55,
@@ -555,7 +555,7 @@
       "label": "Report",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L70",
+      "source_location": "L96",
       "_origin": "ast",
       "id": "internal_cli_coverage_go_report",
       "community": 55,
@@ -565,7 +565,7 @@
       "label": "writeCoverageReport()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L80",
+      "source_location": "L106",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragereport",
       "community": 55,
@@ -575,7 +575,7 @@
       "label": "writeCoverageGroups()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L102",
+      "source_location": "L128",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragegroups",
       "community": 55,
@@ -585,7 +585,7 @@
       "label": "writeCoverageFiles()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L136",
+      "source_location": "L162",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragefiles",
       "community": 55,
@@ -595,7 +595,7 @@
       "label": "writeCoverageFileLine()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L178",
+      "source_location": "L204",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragefileline",
       "community": 55,
@@ -605,7 +605,7 @@
       "label": "FileReport",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L178",
+      "source_location": "L204",
       "_origin": "ast",
       "id": "filereport",
       "community": 55,
@@ -615,7 +615,7 @@
       "label": "countCoverageUncoveredFiles()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L183",
+      "source_location": "L209",
       "_origin": "ast",
       "id": "cli_coverage_countcoverageuncoveredfiles",
       "community": 55,
@@ -625,11 +625,141 @@
       "label": "truncateCoveragePath()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L196",
+      "source_location": "L222",
       "_origin": "ast",
       "id": "cli_coverage_truncatecoveragepath",
       "community": 55,
       "norm_label": "truncatecoveragepath()"
+    },
+    {
+      "label": "coverage_run.go",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cli_coverage_run",
+      "community": 55,
+      "norm_label": "coverage_run.go"
+    },
+    {
+      "label": "coverageRunFlags",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "cli_coveragerunflags",
+      "community": 55,
+      "norm_label": "coveragerunflags"
+    },
+    {
+      "label": "coverageViewOptions",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "coverageviewoptions",
+      "community": 55,
+      "norm_label": "coverageviewoptions"
+    },
+    {
+      "label": "runCoverage()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "cli_coverage_run_runcoverage",
+      "community": 55,
+      "norm_label": "runcoverage()"
+    },
+    {
+      "label": "Command",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_run_go_command",
+      "community": 55,
+      "norm_label": "command"
+    },
+    {
+      "label": "coverageProjectRoot()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L112",
+      "_origin": "ast",
+      "id": "cli_coverage_run_coverageprojectroot",
+      "community": 55,
+      "norm_label": "coverageprojectroot()"
+    },
+    {
+      "label": "coverageStack()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L133",
+      "_origin": "ast",
+      "id": "cli_coverage_run_coveragestack",
+      "community": 55,
+      "norm_label": "coveragestack()"
+    },
+    {
+      "label": "writeCoverageTestFailure()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L151",
+      "_origin": "ast",
+      "id": "cli_coverage_run_writecoveragetestfailure",
+      "community": 55,
+      "norm_label": "writecoveragetestfailure()"
+    },
+    {
+      "label": "Writer",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L151",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_run_go_writer",
+      "community": 55,
+      "norm_label": "writer"
+    },
+    {
+      "label": "RunResult",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L151",
+      "_origin": "ast",
+      "id": "runresult",
+      "community": 55,
+      "norm_label": "runresult"
+    },
+    {
+      "label": "warnCoverageReportNotIgnored()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L166",
+      "_origin": "ast",
+      "id": "cli_coverage_run_warncoveragereportnotignored",
+      "community": 55,
+      "norm_label": "warncoveragereportnotignored()"
+    },
+    {
+      "label": "lastLines()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L189",
+      "_origin": "ast",
+      "id": "cli_coverage_run_lastlines",
+      "community": 55,
+      "norm_label": "lastlines()"
+    },
+    {
+      "label": "firstNonEmptyCoverage()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L198",
+      "_origin": "ast",
+      "id": "cli_coverage_run_firstnonemptycoverage",
+      "community": 55,
+      "norm_label": "firstnonemptycoverage()"
     },
     {
       "label": "coverage_test.go",
@@ -848,7 +978,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_doctor",
-      "community": 86,
+      "community": 7,
       "norm_label": "doctor.go"
     },
     {
@@ -858,7 +988,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_doctor_newdoctorcmd",
-      "community": 86,
+      "community": 7,
       "norm_label": "newdoctorcmd()"
     },
     {
@@ -868,7 +998,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_doctor_go_command",
-      "community": 86,
+      "community": 7,
       "norm_label": "command"
     },
     {
@@ -878,7 +1008,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "cli_doctor_statuslabel",
-      "community": 86,
+      "community": 7,
       "norm_label": "statuslabel()"
     },
     {
@@ -888,7 +1018,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "status",
-      "community": 86,
+      "community": 7,
       "norm_label": "status"
     },
     {
@@ -938,7 +1068,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_down",
-      "community": 1,
+      "community": 86,
       "norm_label": "down.go"
     },
     {
@@ -948,7 +1078,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_down_newdowncmd",
-      "community": 1,
+      "community": 86,
       "norm_label": "newdowncmd()"
     },
     {
@@ -958,7 +1088,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_down_go_command",
-      "community": 1,
+      "community": 86,
       "norm_label": "command"
     },
     {
@@ -1278,7 +1408,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_list",
-      "community": 11,
+      "community": 86,
       "norm_label": "list.go"
     },
     {
@@ -1288,7 +1418,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_list_newlistcmd",
-      "community": 11,
+      "community": 86,
       "norm_label": "newlistcmd()"
     },
     {
@@ -1298,7 +1428,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_list_go_command",
-      "community": 11,
+      "community": 86,
       "norm_label": "command"
     },
     {
@@ -1738,7 +1868,7 @@
       "source_location": "L898",
       "_origin": "ast",
       "id": "cli_observetarget",
-      "community": 7,
+      "community": 83,
       "norm_label": "observetarget"
     },
     {
@@ -1748,7 +1878,7 @@
       "source_location": "L900",
       "_origin": "ast",
       "id": "internal_cli_observe_go_project",
-      "community": 7,
+      "community": 83,
       "norm_label": "project"
     },
     {
@@ -1758,7 +1888,7 @@
       "source_location": "L903",
       "_origin": "ast",
       "id": "cli_observe_resolveobservetarget",
-      "community": 7,
+      "community": 83,
       "norm_label": "resolveobservetarget()"
     },
     {
@@ -1778,7 +1908,7 @@
       "source_location": "L903",
       "_origin": "ast",
       "id": "internal_cli_observe_go_appcontext",
-      "community": 7,
+      "community": 83,
       "norm_label": "appcontext"
     },
     {
@@ -1928,7 +2058,7 @@
       "source_location": "L1114",
       "_origin": "ast",
       "id": "cli_observe_reportobservereachability",
-      "community": 7,
+      "community": 83,
       "norm_label": "reportobservereachability()"
     },
     {
@@ -2238,7 +2368,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_firewall",
-      "community": 7,
+      "community": 47,
       "norm_label": "observe_firewall.go"
     },
     {
@@ -2248,7 +2378,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_observe_firewall_newobservefirewallcmd",
-      "community": 7,
+      "community": 47,
       "norm_label": "newobservefirewallcmd()"
     },
     {
@@ -2258,7 +2388,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_cli_observe_firewall_go_command",
-      "community": 7,
+      "community": 47,
       "norm_label": "command"
     },
     {
@@ -2498,7 +2628,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_open",
-      "community": 11,
+      "community": 8,
       "norm_label": "open.go"
     },
     {
@@ -2508,7 +2638,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_open_newopencmd",
-      "community": 11,
+      "community": 8,
       "norm_label": "newopencmd()"
     },
     {
@@ -2518,7 +2648,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_open_go_command",
-      "community": 11,
+      "community": 8,
       "norm_label": "command"
     },
     {
@@ -2528,7 +2658,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "cli_open_browsercommand",
-      "community": 11,
+      "community": 8,
       "norm_label": "browsercommand()"
     },
     {
@@ -2538,7 +2668,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_open_test",
-      "community": 11,
+      "community": 8,
       "norm_label": "open_test.go"
     },
     {
@@ -2548,7 +2678,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "cli_open_test_testbrowsercommand",
-      "community": 11,
+      "community": 8,
       "norm_label": "testbrowsercommand()"
     },
     {
@@ -2558,7 +2688,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_cli_open_test_go_t",
-      "community": 11,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -2658,7 +2788,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_proxy",
-      "community": 14,
+      "community": 8,
       "norm_label": "proxy.go"
     },
     {
@@ -2668,7 +2798,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "cli_proxy_resolveexternalprojects",
-      "community": 14,
+      "community": 8,
       "norm_label": "resolveexternalprojects()"
     },
     {
@@ -2678,7 +2808,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_config",
-      "community": 14,
+      "community": 8,
       "norm_label": "config"
     },
     {
@@ -2688,7 +2818,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_projectrecord",
-      "community": 14,
+      "community": 8,
       "norm_label": "projectrecord"
     },
     {
@@ -2698,7 +2828,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_externalproject",
-      "community": 14,
+      "community": 8,
       "norm_label": "externalproject"
     },
     {
@@ -2708,7 +2838,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "cli_proxy_newproxycmd",
-      "community": 14,
+      "community": 8,
       "norm_label": "newproxycmd()"
     },
     {
@@ -2718,7 +2848,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_command",
-      "community": 14,
+      "community": 8,
       "norm_label": "command"
     },
     {
@@ -2728,7 +2858,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "cli_proxy_newproxyapplycmd",
-      "community": 14,
+      "community": 8,
       "norm_label": "newproxyapplycmd()"
     },
     {
@@ -2738,7 +2868,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "cli_proxy_syncmanageddomains",
-      "community": 14,
+      "community": 8,
       "norm_label": "syncmanageddomains()"
     },
     {
@@ -2748,7 +2878,7 @@
       "source_location": "L175",
       "_origin": "ast",
       "id": "cli_proxy_collectdomains",
-      "community": 14,
+      "community": 8,
       "norm_label": "collectdomains()"
     },
     {
@@ -2758,7 +2888,7 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "cli_proxy_newproxybootstrapcmd",
-      "community": 14,
+      "community": 8,
       "norm_label": "newproxybootstrapcmd()"
     },
     {
@@ -2768,7 +2898,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_proxy_test",
-      "community": 14,
+      "community": 8,
       "norm_label": "proxy_test.go"
     },
     {
@@ -2778,7 +2908,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_proxy_test_testsyncmanageddomainsusescollecteddomains",
-      "community": 14,
+      "community": 8,
       "norm_label": "testsyncmanageddomainsusescollecteddomains()"
     },
     {
@@ -2788,7 +2918,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_proxy_test_go_t",
-      "community": 14,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -2798,7 +2928,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "cli_proxy_test_testresolveexternalprojectsskipsunresolvableprojects",
-      "community": 14,
+      "community": 8,
       "norm_label": "testresolveexternalprojectsskipsunresolvableprojects()"
     },
     {
@@ -2808,7 +2938,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "cli_proxy_test_testresolveexternalprojectsfailswhenprojectisexplicit",
-      "community": 14,
+      "community": 8,
       "norm_label": "testresolveexternalprojectsfailswhenprojectisexplicit()"
     },
     {
@@ -2818,7 +2948,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_root",
-      "community": 84,
+      "community": 86,
       "norm_label": "root.go"
     },
     {
@@ -2828,7 +2958,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_root_execute",
-      "community": 84,
+      "community": 86,
       "norm_label": "execute()"
     },
     {
@@ -2838,7 +2968,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "cli_root_newrootcmd",
-      "community": 84,
+      "community": 86,
       "norm_label": "newrootcmd()"
     },
     {
@@ -2848,7 +2978,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_cli_root_go_command",
-      "community": 84,
+      "community": 86,
       "norm_label": "command"
     },
     {
@@ -3178,7 +3308,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_stop",
-      "community": 1,
+      "community": 86,
       "norm_label": "stop.go"
     },
     {
@@ -3188,7 +3318,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_stop_newstopcmd",
-      "community": 1,
+      "community": 86,
       "norm_label": "newstopcmd()"
     },
     {
@@ -3198,7 +3328,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_stop_go_command",
-      "community": 1,
+      "community": 86,
       "norm_label": "command"
     },
     {
@@ -3378,7 +3508,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "compose_project",
-      "community": 10,
+      "community": 1,
       "norm_label": "project"
     },
     {
@@ -3388,14 +3518,24 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "projectproxy",
-      "community": 10,
+      "community": 1,
       "norm_label": "projectproxy"
+    },
+    {
+      "label": "ProjectTest",
+      "file_type": "code",
+      "source_file": "internal/compose/project.go",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "projecttest",
+      "community": 1,
+      "norm_label": "projecttest"
     },
     {
       "label": "manifest",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "compose_manifest",
       "community": 10,
@@ -3405,7 +3545,7 @@
       "label": "manifestCompose",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "manifestcompose",
       "community": 10,
@@ -3415,47 +3555,77 @@
       "label": "manifestProxy",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L47",
+      "source_location": "L48",
       "_origin": "ast",
       "id": "manifestproxy",
       "community": 10,
       "norm_label": "manifestproxy"
     },
     {
+      "label": "manifestTest",
+      "file_type": "code",
+      "source_file": "internal/compose/project.go",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "manifesttest",
+      "community": 10,
+      "norm_label": "manifesttest"
+    },
+    {
       "label": "manifestCompose",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L50",
+      "source_location": "L52",
       "_origin": "ast",
       "id": "compose_manifestcompose",
-      "community": 10,
+      "community": 1,
       "norm_label": "manifestcompose"
     },
     {
       "label": "manifestProxy",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L55",
+      "source_location": "L57",
       "_origin": "ast",
       "id": "compose_manifestproxy",
-      "community": 10,
+      "community": 1,
       "norm_label": "manifestproxy"
+    },
+    {
+      "label": "manifestTest",
+      "file_type": "code",
+      "source_file": "internal/compose/project.go",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "compose_manifesttest",
+      "community": 1,
+      "norm_label": "manifesttest"
     },
     {
       "label": "ProjectProxy",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L61",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "compose_projectproxy",
-      "community": 10,
+      "community": 1,
       "norm_label": "projectproxy"
+    },
+    {
+      "label": "ProjectTest",
+      "file_type": "code",
+      "source_file": "internal/compose/project.go",
+      "source_location": "L78",
+      "_origin": "ast",
+      "id": "compose_projecttest",
+      "community": 1,
+      "norm_label": "projecttest"
     },
     {
       "label": "ResolveProject()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L67",
+      "source_location": "L83",
       "_origin": "ast",
       "id": "compose_project_resolveproject",
       "community": 59,
@@ -3465,7 +3635,7 @@
       "label": "Up()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L111",
+      "source_location": "L127",
       "_origin": "ast",
       "id": "compose_project_up",
       "community": 1,
@@ -3475,7 +3645,7 @@
       "label": "Context",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L111",
+      "source_location": "L127",
       "_origin": "ast",
       "id": "internal_compose_project_go_context",
       "community": 1,
@@ -3485,7 +3655,7 @@
       "label": "Down()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L120",
+      "source_location": "L136",
       "_origin": "ast",
       "id": "compose_project_down",
       "community": 1,
@@ -3495,7 +3665,7 @@
       "label": "Stop()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L129",
+      "source_location": "L145",
       "_origin": "ast",
       "id": "compose_project_stop",
       "community": 1,
@@ -3505,7 +3675,7 @@
       "label": "UpProject()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L138",
+      "source_location": "L154",
       "_origin": "ast",
       "id": "compose_project_upproject",
       "community": 1,
@@ -3515,7 +3685,7 @@
       "label": "DownProject()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L144",
+      "source_location": "L160",
       "_origin": "ast",
       "id": "compose_project_downproject",
       "community": 1,
@@ -3525,7 +3695,7 @@
       "label": "StopProject()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L171",
+      "source_location": "L187",
       "_origin": "ast",
       "id": "compose_project_stopproject",
       "community": 1,
@@ -3535,67 +3705,67 @@
       "label": "resolveManifestProject()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L198",
+      "source_location": "L214",
       "_origin": "ast",
       "id": "compose_project_resolvemanifestproject",
-      "community": 10,
+      "community": 1,
       "norm_label": "resolvemanifestproject()"
     },
     {
       "label": "resolveRelativeFile()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L250",
+      "source_location": "L270",
       "_origin": "ast",
       "id": "compose_project_resolverelativefile",
-      "community": 10,
+      "community": 1,
       "norm_label": "resolverelativefile()"
     },
     {
       "label": "composeArgs()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L276",
+      "source_location": "L296",
       "_origin": "ast",
       "id": "compose_project_composeargs",
-      "community": 59,
+      "community": 1,
       "norm_label": "composeargs()"
     },
     {
       "label": "Plan()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L294",
+      "source_location": "L314",
       "_origin": "ast",
       "id": "compose_project_plan",
-      "community": 59,
+      "community": 1,
       "norm_label": "plan()"
     },
     {
       "label": "PlanProject()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L303",
+      "source_location": "L323",
       "_origin": "ast",
       "id": "compose_project_planproject",
-      "community": 10,
+      "community": 1,
       "norm_label": "planproject()"
     },
     {
       "label": "Command()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L307",
+      "source_location": "L327",
       "_origin": "ast",
       "id": "compose_project_command",
-      "community": 10,
+      "community": 1,
       "norm_label": "command()"
     },
     {
       "label": "run()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L312",
+      "source_location": "L332",
       "_origin": "ast",
       "id": "compose_project_run",
       "community": 1,
@@ -3605,17 +3775,17 @@
       "label": ".withProjectNames()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L316",
+      "source_location": "L336",
       "_origin": "ast",
       "id": "compose_project_withprojectnames",
-      "community": 10,
+      "community": 59,
       "norm_label": ".withprojectnames()"
     },
     {
       "label": "ProjectNameForPath()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L335",
+      "source_location": "L355",
       "_origin": "ast",
       "id": "compose_project_projectnameforpath",
       "community": 59,
@@ -3625,27 +3795,27 @@
       "label": "LegacyProjectNameForPath()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L354",
+      "source_location": "L374",
       "_origin": "ast",
       "id": "compose_project_legacyprojectnameforpath",
-      "community": 10,
+      "community": 59,
       "norm_label": "legacyprojectnameforpath()"
     },
     {
       "label": "composeProjectLabel()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L358",
+      "source_location": "L378",
       "_origin": "ast",
       "id": "compose_project_composeprojectlabel",
-      "community": 10,
+      "community": 59,
       "norm_label": "composeprojectlabel()"
     },
     {
       "label": "joinOutput()",
       "file_type": "code",
       "source_file": "internal/compose/project.go",
-      "source_location": "L384",
+      "source_location": "L404",
       "_origin": "ast",
       "id": "compose_project_joinoutput",
       "community": 1,
@@ -5378,7 +5548,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test",
-      "community": 87,
+      "community": 67,
       "norm_label": "alerts_cooldown_test.go"
     },
     {
@@ -5388,7 +5558,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "observe_testclock",
-      "community": 87,
+      "community": 67,
       "norm_label": "testclock"
     },
     {
@@ -5398,7 +5568,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_observe_alerts_cooldown_test_go_time",
-      "community": 87,
+      "community": 67,
       "norm_label": "time"
     },
     {
@@ -5408,7 +5578,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "observe_testclock_now",
-      "community": 87,
+      "community": 67,
       "norm_label": ".now()"
     },
     {
@@ -5418,7 +5588,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "observe_testclock_advance",
-      "community": 87,
+      "community": 67,
       "norm_label": ".advance()"
     },
     {
@@ -5428,7 +5598,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "internal_observe_alerts_cooldown_test_go_duration",
-      "community": 87,
+      "community": 67,
       "norm_label": "duration"
     },
     {
@@ -5438,7 +5608,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_newcooldownstore",
-      "community": 87,
+      "community": 67,
       "norm_label": "newcooldownstore()"
     },
     {
@@ -5448,7 +5618,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_observe_alerts_cooldown_test_go_t",
-      "community": 87,
+      "community": 67,
       "norm_label": "t"
     },
     {
@@ -5458,7 +5628,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_observe_alerts_cooldown_test_go_store",
-      "community": 87,
+      "community": 67,
       "norm_label": "store"
     },
     {
@@ -5468,7 +5638,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_storeerrorevents",
-      "community": 87,
+      "community": 67,
       "norm_label": "storeerrorevents()"
     },
     {
@@ -5478,7 +5648,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_distinctfailure",
-      "community": 87,
+      "community": 67,
       "norm_label": "distinctfailure()"
     },
     {
@@ -5488,7 +5658,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_countdeliveries",
-      "community": 87,
+      "community": 67,
       "norm_label": "countdeliveries()"
     },
     {
@@ -5498,7 +5668,7 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_testcooldowncollapseserrorrateburst",
-      "community": 87,
+      "community": 67,
       "norm_label": "testcooldowncollapseserrorrateburst()"
     },
     {
@@ -5508,7 +5678,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_testcooldownexpiresandallowsanewdelivery",
-      "community": 87,
+      "community": 67,
       "norm_label": "testcooldownexpiresandallowsanewdelivery()"
     },
     {
@@ -5518,7 +5688,7 @@
       "source_location": "L140",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_testcooldowncollapsesnewissueburst",
-      "community": 87,
+      "community": 67,
       "norm_label": "testcooldowncollapsesnewissueburst()"
     },
     {
@@ -5528,7 +5698,7 @@
       "source_location": "L162",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_testzerocooldowndeliverseverytime",
-      "community": 87,
+      "community": 67,
       "norm_label": "testzerocooldowndeliverseverytime()"
     },
     {
@@ -5538,7 +5708,7 @@
       "source_location": "L185",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_testwithoutcooldownerrorratedeliversonceperevent",
-      "community": 87,
+      "community": 67,
       "norm_label": "testwithoutcooldownerrorratedeliversonceperevent()"
     },
     {
@@ -5548,7 +5718,7 @@
       "source_location": "L206",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_testaddalertappliesdefaultcooldownbykind",
-      "community": 87,
+      "community": 67,
       "norm_label": "testaddalertappliesdefaultcooldownbykind()"
     },
     {
@@ -5558,7 +5728,7 @@
       "source_location": "L239",
       "_origin": "ast",
       "id": "observe_alerts_cooldown_test_testensureaddscooldowntoanexistingdatabase",
-      "community": 87,
+      "community": 67,
       "norm_label": "testensureaddscooldowntoanexistingdatabase()"
     },
     {
@@ -7158,7 +7328,7 @@
       "source_location": "L264",
       "_origin": "ast",
       "id": "observe_network_isloopbackaddr",
-      "community": 7,
+      "community": 66,
       "norm_label": "isloopbackaddr()"
     },
     {
@@ -7858,7 +8028,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_reporter",
-      "community": 90,
+      "community": 33,
       "norm_label": "reporter.go"
     },
     {
@@ -7868,7 +8038,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "observe_reportertemplate",
-      "community": 90,
+      "community": 33,
       "norm_label": "reportertemplate"
     },
     {
@@ -7878,7 +8048,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "observe_reporterresult",
-      "community": 90,
+      "community": 33,
       "norm_label": "reporterresult"
     },
     {
@@ -7888,7 +8058,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "observe_reporter_supportedreporterstacks",
-      "community": 90,
+      "community": 33,
       "norm_label": "supportedreporterstacks()"
     },
     {
@@ -7898,7 +8068,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "observe_reporter_ensurereporter",
-      "community": 90,
+      "community": 33,
       "norm_label": "ensurereporter()"
     },
     {
@@ -7908,7 +8078,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_reporter_test",
-      "community": 90,
+      "community": 33,
       "norm_label": "reporter_test.go"
     },
     {
@@ -7918,7 +8088,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterwritesthelaravelfile",
-      "community": 90,
+      "community": 33,
       "norm_label": "testensurereporterwritesthelaravelfile()"
     },
     {
@@ -7928,7 +8098,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_observe_reporter_test_go_t",
-      "community": 90,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -7938,7 +8108,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterkeepsexistingfile",
-      "community": 90,
+      "community": 33,
       "norm_label": "testensurereporterkeepsexistingfile()"
     },
     {
@@ -7948,7 +8118,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporteroverwriteswithforce",
-      "community": 90,
+      "community": 33,
       "norm_label": "testensurereporteroverwriteswithforce()"
     },
     {
@@ -7958,7 +8128,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterrejectsunsupportedstack",
-      "community": 90,
+      "community": 33,
       "norm_label": "testensurereporterrejectsunsupportedstack()"
     },
     {
@@ -7968,7 +8138,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterrequiresroot",
-      "community": 90,
+      "community": 33,
       "norm_label": "testensurereporterrequiresroot()"
     },
     {
@@ -8218,7 +8388,7 @@
       "source_location": "L356",
       "_origin": "ast",
       "id": "observe_server_eventpayloadfromenvelope",
-      "community": 6,
+      "community": 87,
       "norm_label": "eventpayloadfromenvelope()"
     },
     {
@@ -9608,7 +9778,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_bootstrap",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrap.go"
     },
     {
@@ -9618,7 +9788,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxy_bootstrapresult",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapresult"
     },
     {
@@ -9628,7 +9798,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "proxy_bootstrapoptions",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapoptions"
     },
     {
@@ -9638,7 +9808,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxy",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapexternalproxy()"
     },
     {
@@ -9648,7 +9818,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_proxy_bootstrap_go_config",
-      "community": 8,
+      "community": 33,
       "norm_label": "config"
     },
     {
@@ -9658,7 +9828,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxywithoptions",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapexternalproxywithoptions()"
     },
     {
@@ -9668,7 +9838,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxysettings",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapexternalproxysettings()"
     },
     {
@@ -9678,7 +9848,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "externalsettingsconfig",
-      "community": 8,
+      "community": 33,
       "norm_label": "externalsettingsconfig"
     },
     {
@@ -9688,7 +9858,7 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "proxy_bootstrap_ensuremanagedfile",
-      "community": 8,
+      "community": 33,
       "norm_label": "ensuremanagedfile()"
     },
     {
@@ -9698,7 +9868,7 @@
       "source_location": "L117",
       "_origin": "ast",
       "id": "proxy_bootstrap_renderembeddedtemplate",
-      "community": 8,
+      "community": 33,
       "norm_label": "renderembeddedtemplate()"
     },
     {
@@ -9708,7 +9878,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy",
-      "community": 14,
+      "community": 8,
       "norm_label": "caddy.go"
     },
     {
@@ -9718,7 +9888,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "proxy_route",
-      "community": 14,
+      "community": 8,
       "norm_label": "route"
     },
     {
@@ -9728,7 +9898,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "proxy_site",
-      "community": 14,
+      "community": 8,
       "norm_label": "site"
     },
     {
@@ -9738,7 +9908,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "proxy_renderer",
-      "community": 14,
+      "community": 8,
       "norm_label": "renderer"
     },
     {
@@ -9748,7 +9918,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_paths",
-      "community": 14,
+      "community": 8,
       "norm_label": "paths"
     },
     {
@@ -9758,7 +9928,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_config",
-      "community": 14,
+      "community": 8,
       "norm_label": "config"
     },
     {
@@ -9768,7 +9938,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "proxy_caddy_newrenderer",
-      "community": 14,
+      "community": 8,
       "norm_label": "newrenderer()"
     },
     {
@@ -9778,7 +9948,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "proxy_renderer_render",
-      "community": 14,
+      "community": 8,
       "norm_label": ".render()"
     },
     {
@@ -9788,7 +9958,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_projectrecord",
-      "community": 14,
+      "community": 8,
       "norm_label": "projectrecord"
     },
     {
@@ -9798,7 +9968,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "proxy_renderer_write",
-      "community": 14,
+      "community": 8,
       "norm_label": ".write()"
     },
     {
@@ -9808,7 +9978,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "proxy_renderer_apply",
-      "community": 14,
+      "community": 8,
       "norm_label": ".apply()"
     },
     {
@@ -9818,7 +9988,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "proxy_renderer_projectsite",
-      "community": 14,
+      "community": 8,
       "norm_label": ".projectsite()"
     },
     {
@@ -9828,7 +9998,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "proxy_caddy_sudovalidate",
-      "community": 14,
+      "community": 8,
       "norm_label": "sudovalidate()"
     },
     {
@@ -9838,7 +10008,7 @@
       "source_location": "L152",
       "_origin": "ast",
       "id": "proxy_caddy_runinteractive",
-      "community": 14,
+      "community": 8,
       "norm_label": "runinteractive()"
     },
     {
@@ -9848,7 +10018,7 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "proxy_caddy_selectprojects",
-      "community": 14,
+      "community": 8,
       "norm_label": "selectprojects()"
     },
     {
@@ -9858,7 +10028,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy_test",
-      "community": 14,
+      "community": 8,
       "norm_label": "caddy_test.go"
     },
     {
@@ -9868,7 +10038,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "proxy_caddy_test_testrendervueflasksite",
-      "community": 14,
+      "community": 8,
       "norm_label": "testrendervueflasksite()"
     },
     {
@@ -9878,7 +10048,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_proxy_caddy_test_go_t",
-      "community": 14,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -10318,7 +10488,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_external_test",
-      "community": 8,
+      "community": 33,
       "norm_label": "external_test.go"
     },
     {
@@ -10328,7 +10498,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxy_external_test_testbuildexternalprojectusesmanifestproxy",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbuildexternalprojectusesmanifestproxy()"
     },
     {
@@ -10338,7 +10508,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_proxy_external_test_go_t",
-      "community": 8,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -10348,7 +10518,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "proxy_external_test_testbuildexternalprojectusesvueflaskfallback",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbuildexternalprojectusesvueflaskfallback()"
     },
     {
@@ -10358,7 +10528,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "proxy_external_test_testensurecomposeoverridewritesaliases",
-      "community": 8,
+      "community": 33,
       "norm_label": "testensurecomposeoverridewritesaliases()"
     },
     {
@@ -10368,7 +10538,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "proxy_external_test_teststripmanageddomainsreplacesselectedsites",
-      "community": 8,
+      "community": 33,
       "norm_label": "teststripmanageddomainsreplacesselectedsites()"
     },
     {
@@ -10378,7 +10548,7 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "proxy_external_test_testbootstrapexternalproxycreatesandreusesfiles",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbootstrapexternalproxycreatesandreusesfiles()"
     },
     {
@@ -10388,7 +10558,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "proxy_external_test_testbootstrapexternalproxywithforceupdatesmanagedfilesbutpreservesenv",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbootstrapexternalproxywithforceupdatesmanagedfilesbutpreservesenv()"
     },
     {
@@ -10398,7 +10568,7 @@
       "source_location": "L214",
       "_origin": "ast",
       "id": "proxy_external_test_writetestfile",
-      "community": 8,
+      "community": 33,
       "norm_label": "writetestfile()"
     },
     {
@@ -10408,7 +10578,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "runner_runner",
-      "community": 87,
+      "community": 67,
       "norm_label": "runner"
     },
     {
@@ -10418,7 +10588,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "runner_cmd",
-      "community": 87,
+      "community": 67,
       "norm_label": "cmd"
     },
     {
@@ -10428,7 +10598,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_runner_runner_go_duration",
-      "community": 87,
+      "community": 67,
       "norm_label": "duration"
     },
     {
@@ -10438,7 +10608,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "runner_cmd_run",
-      "community": 87,
+      "community": 67,
       "norm_label": ".run()"
     },
     {
@@ -10448,7 +10618,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "internal_runner_runner_go_context",
-      "community": 87,
+      "community": 67,
       "norm_label": "context"
     },
     {
@@ -10458,7 +10628,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "runner_runner_test",
-      "community": 87,
+      "community": 67,
       "norm_label": "runner_test.go"
     },
     {
@@ -10468,7 +10638,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdruncapturesoutput",
-      "community": 87,
+      "community": 67,
       "norm_label": "testcmdruncapturesoutput()"
     },
     {
@@ -10478,7 +10648,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_runner_runner_test_go_t",
-      "community": 87,
+      "community": 67,
       "norm_label": "t"
     },
     {
@@ -10488,7 +10658,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunusesoutputaserrormessage",
-      "community": 87,
+      "community": 67,
       "norm_label": "testcmdrunusesoutputaserrormessage()"
     },
     {
@@ -10498,7 +10668,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunrespectstimeout",
-      "community": 87,
+      "community": 67,
       "norm_label": "testcmdrunrespectstimeout()"
     },
     {
@@ -10508,7 +10678,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunsetsworkingdir",
-      "community": 87,
+      "community": 67,
       "norm_label": "testcmdrunsetsworkingdir()"
     },
     {
@@ -10898,7 +11068,7 @@
       "source_location": "L671",
       "_origin": "ast",
       "id": "scaffold_scaffold_filecontains",
-      "community": 8,
+      "community": 4,
       "norm_label": "filecontains()"
     },
     {
@@ -11508,7 +11678,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_manager_test",
-      "community": 8,
+      "community": 33,
       "norm_label": "manager_test.go"
     },
     {
@@ -11518,7 +11688,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "services_manager_test_testbootstrapwritessharedservicescompose",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbootstrapwritessharedservicescompose()"
     },
     {
@@ -11528,7 +11698,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_services_manager_test_go_t",
-      "community": 8,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -11538,7 +11708,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "services_manager_test_testvalidateservicerejectsunknownservice",
-      "community": 8,
+      "community": 33,
       "norm_label": "testvalidateservicerejectsunknownservice()"
     },
     {
@@ -11548,7 +11718,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version",
-      "community": 8,
+      "community": 33,
       "norm_label": "version.go"
     },
     {
@@ -11558,7 +11728,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "version_version_string",
-      "community": 8,
+      "community": 33,
       "norm_label": "string()"
     },
     {
@@ -11568,7 +11738,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "version_version_long",
-      "community": 8,
+      "community": 33,
       "norm_label": "long()"
     },
     {
@@ -11578,7 +11748,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version_test",
-      "community": 8,
+      "community": 33,
       "norm_label": "version_test.go"
     },
     {
@@ -11588,7 +11758,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "version_version_test_teststringreturnsversion",
-      "community": 8,
+      "community": 33,
       "norm_label": "teststringreturnsversion()"
     },
     {
@@ -11598,7 +11768,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_version_version_test_go_t",
-      "community": 8,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -11608,7 +11778,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "version_version_test_testlongincludesversioncommitanddate",
-      "community": 8,
+      "community": 33,
       "norm_label": "testlongincludesversioncommitanddate()"
     },
     {
@@ -11618,7 +11788,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "version_version_test_contains",
-      "community": 8,
+      "community": 33,
       "norm_label": "contains()"
     },
     {
@@ -11628,7 +11798,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "version_version_test_indexof",
-      "community": 8,
+      "community": 33,
       "norm_label": "indexof()"
     },
     {
@@ -13669,7 +13839,7 @@
       "label": "4.19 `devherd sentry ...`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L862",
+      "source_location": "L878",
       "_origin": "ast",
       "id": "docs_usage_4_19_devherd_sentry",
       "community": 80,
@@ -13679,7 +13849,7 @@
       "label": "`sentry init <project> --stack <stack>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L868",
+      "source_location": "L884",
       "_origin": "ast",
       "id": "docs_usage_sentry_init_project_stack_stack",
       "community": 80,
@@ -13689,7 +13859,7 @@
       "label": "`sentry set-dsn <project> --dsn <dsn>` / `sentry test <project>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L882",
+      "source_location": "L898",
       "_origin": "ast",
       "id": "docs_usage_sentry_set_dsn_project_dsn_dsn_sentry_test_project",
       "community": 80,
@@ -13699,7 +13869,7 @@
       "label": "5. El manifiesto `.devherd.yml`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L887",
+      "source_location": "L903",
       "_origin": "ast",
       "id": "docs_usage_5_el_manifiesto_devherd_yml",
       "community": 72,
@@ -13709,7 +13879,7 @@
       "label": "6. Flujos de trabajo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L920",
+      "source_location": "L942",
       "_origin": "ast",
       "id": "docs_usage_6_flujos_de_trabajo",
       "community": 75,
@@ -13719,7 +13889,7 @@
       "label": "6.1 Modo proxy en Docker externo (recomendado)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L922",
+      "source_location": "L944",
       "_origin": "ast",
       "id": "docs_usage_6_1_modo_proxy_en_docker_externo_recomendado",
       "community": 75,
@@ -13729,7 +13899,7 @@
       "label": "6.2 Modo proxy en host (Caddy + /etc/hosts)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L945",
+      "source_location": "L967",
       "_origin": "ast",
       "id": "docs_usage_6_2_modo_proxy_en_host_caddy_etc_hosts",
       "community": 75,
@@ -13739,7 +13909,7 @@
       "label": "6.3 Repositorio sin Docker",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L961",
+      "source_location": "L983",
       "_origin": "ast",
       "id": "docs_usage_6_3_repositorio_sin_docker",
       "community": 75,
@@ -13749,7 +13919,7 @@
       "label": "6.4 Servicios compartidos + observabilidad",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L970",
+      "source_location": "L992",
       "_origin": "ast",
       "id": "docs_usage_6_4_servicios_compartidos_observabilidad",
       "community": 75,
@@ -13759,7 +13929,7 @@
       "label": "6.5 Bajar todo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L984",
+      "source_location": "L1006",
       "_origin": "ast",
       "id": "docs_usage_6_5_bajar_todo",
       "community": 75,
@@ -13769,7 +13939,7 @@
       "label": "7. Donde vive el estado",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L994",
+      "source_location": "L1016",
       "_origin": "ast",
       "id": "docs_usage_7_donde_vive_el_estado",
       "community": 72,
@@ -13779,7 +13949,7 @@
       "label": "8. Patrones recomendados para proyectos Compose",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1015",
+      "source_location": "L1037",
       "_origin": "ast",
       "id": "docs_usage_8_patrones_recomendados_para_proyectos_compose",
       "community": 72,
@@ -13789,7 +13959,7 @@
       "label": "8.1 Aislamiento de nombres de contenedor",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1017",
+      "source_location": "L1039",
       "_origin": "ast",
       "id": "docs_usage_8_1_aislamiento_de_nombres_de_contenedor",
       "community": 72,
@@ -13799,7 +13969,7 @@
       "label": "8.2 Volumenes que sobreviven a cambios de project-name",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1060",
+      "source_location": "L1082",
       "_origin": "ast",
       "id": "docs_usage_8_2_volumenes_que_sobreviven_a_cambios_de_project_name",
       "community": 72,
@@ -13809,7 +13979,7 @@
       "label": "8.3 Probar sin tocar tu configuracion real",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1081",
+      "source_location": "L1103",
       "_origin": "ast",
       "id": "docs_usage_8_3_probar_sin_tocar_tu_configuracion_real",
       "community": 72,
@@ -14132,7 +14302,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_coverage",
-      "community": 68,
+      "community": 61,
       "norm_label": "coverage.md"
     },
     {
@@ -14149,27 +14319,37 @@
       "label": "Estado",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L11",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "docs_coverage_estado",
       "community": 68,
       "norm_label": "estado"
     },
     {
-      "label": "Uso",
+      "label": "Uso rapido",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L16",
+      "source_location": "L15",
       "_origin": "ast",
-      "id": "docs_coverage_uso",
+      "id": "docs_coverage_uso_rapido",
       "community": 68,
-      "norm_label": "uso"
+      "norm_label": "uso rapido"
+    },
+    {
+      "label": "Uso con un reporte ya existente",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "docs_coverage_uso_con_un_reporte_ya_existente",
+      "community": 68,
+      "norm_label": "uso con un reporte ya existente"
     },
     {
       "label": "Como generar el reporte",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L30",
+      "source_location": "L40",
       "_origin": "ast",
       "id": "docs_coverage_como_generar_el_reporte",
       "community": 68,
@@ -14179,7 +14359,7 @@
       "label": "Que se lee",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L45",
+      "source_location": "L55",
       "_origin": "ast",
       "id": "docs_coverage_que_se_lee",
       "community": 68,
@@ -14189,7 +14369,7 @@
       "label": "Salida",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L62",
+      "source_location": "L72",
       "_origin": "ast",
       "id": "docs_coverage_salida",
       "community": 68,
@@ -14199,7 +14379,7 @@
       "label": "Tres cosas que hace distinto",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L80",
+      "source_location": "L90",
       "_origin": "ast",
       "id": "docs_coverage_tres_cosas_que_hace_distinto",
       "community": 68,
@@ -14209,7 +14389,7 @@
       "label": "1. La unidad va siempre en la cabecera",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L82",
+      "source_location": "L92",
       "_origin": "ast",
       "id": "docs_coverage_1_la_unidad_va_siempre_en_la_cabecera",
       "community": 68,
@@ -14219,7 +14399,7 @@
       "label": "2. El total se pondera por unidades, nunca se promedian porcentajes",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L91",
+      "source_location": "L101",
       "_origin": "ast",
       "id": "docs_coverage_2_el_total_se_pondera_por_unidades_nunca_se_promedian_porcentajes",
       "community": 68,
@@ -14229,27 +14409,57 @@
       "label": "3. Se ordena por masa sin cubrir, no por porcentaje",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L100",
+      "source_location": "L110",
       "_origin": "ast",
       "id": "docs_coverage_3_se_ordena_por_masa_sin_cubrir_no_por_porcentaje",
       "community": 68,
       "norm_label": "3. se ordena por masa sin cubrir, no por porcentaje"
     },
     {
-      "label": "Limites de esta fase",
+      "label": "Que hace `--run`, paso a paso",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L113",
+      "source_location": "L123",
       "_origin": "ast",
-      "id": "docs_coverage_limites_de_esta_fase",
+      "id": "docs_coverage_que_hace_run_paso_a_paso",
       "community": 68,
-      "norm_label": "limites de esta fase"
+      "norm_label": "que hace `--run`, paso a paso"
+    },
+    {
+      "label": "`--explain`: automatico no quiere decir opaco",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L151",
+      "_origin": "ast",
+      "id": "docs_coverage_explain_automatico_no_quiere_decir_opaco",
+      "community": 68,
+      "norm_label": "`--explain`: automatico no quiere decir opaco"
+    },
+    {
+      "label": "Detalles que conviene saber",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L161",
+      "_origin": "ast",
+      "id": "docs_coverage_detalles_que_conviene_saber",
+      "community": 68,
+      "norm_label": "detalles que conviene saber"
+    },
+    {
+      "label": "Limites",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L189",
+      "_origin": "ast",
+      "id": "docs_coverage_limites",
+      "community": 68,
+      "norm_label": "limites"
     },
     {
       "label": "Un reporte vacio no es 0%",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L124",
+      "source_location": "L202",
       "_origin": "ast",
       "id": "docs_coverage_un_reporte_vacio_no_es_0",
       "community": 68,
@@ -17430,6 +17640,17 @@
       "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_app_context_loadappcontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
       "source_file": "internal/cli/doctor.go",
       "source_location": "L17",
       "weight": 1.0,
@@ -17761,6 +17982,17 @@
       "source_location": "L134",
       "weight": 1.0,
       "source": "cli_compose_runtime_test_testpreparecomposeprojecttoleratesnilappcontext",
+      "target": "cli_compose_runtime_preparecomposeproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
       "target": "cli_compose_runtime_preparecomposeproject"
     },
     {
@@ -18691,6 +18923,17 @@
     {
       "relation": "calls",
       "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "cli_coverage_newcoveragecmd",
+      "target": "cli_coverage_run_runcoverage"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/coverage.go",
       "source_location": "L42",
@@ -18761,9 +19004,9 @@
       "source_location": "L102",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_writecoveragegroups",
-      "target": "cli_coverageviewoptions",
-      "confidence_score": 1.0
+      "target": "cli_coverageviewoptions"
     },
     {
       "relation": "references",
@@ -18775,6 +19018,17 @@
       "confidence_score": 1.0,
       "source": "cli_coverage_writecoveragereport",
       "target": "cli_coverageviewoptions"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coverage_writecoveragejson"
     },
     {
       "relation": "references",
@@ -18874,6 +19128,17 @@
       "confidence_score": 1.0,
       "source": "cli_coverage_writecoveragereport",
       "target": "internal_cli_coverage_go_report"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L103",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coverage_writecoveragereport"
     },
     {
       "relation": "calls",
@@ -18966,12 +19231,246 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L112",
+      "weight": 1.0,
+      "source": "cli_coverage_run",
+      "target": "cli_coverage_run_coverageprojectroot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L133",
+      "weight": 1.0,
+      "source": "cli_coverage_run",
+      "target": "cli_coverage_run_coveragestack",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L198",
+      "weight": 1.0,
+      "source": "cli_coverage_run",
+      "target": "cli_coverage_run_firstnonemptycoverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "cli_coverage_run",
+      "target": "cli_coverage_run_lastlines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "cli_coverage_run",
+      "target": "cli_coverage_run_runcoverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L166",
+      "weight": 1.0,
+      "source": "cli_coverage_run",
+      "target": "cli_coverage_run_warncoveragereportnotignored",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L151",
+      "weight": 1.0,
+      "source": "cli_coverage_run",
+      "target": "cli_coverage_run_writecoveragetestfailure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "cli_coverage_run",
+      "target": "cli_coveragerunflags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L26",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coveragerunflags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L23",
+      "weight": 1.0,
+      "context": "field",
+      "source": "cli_coveragerunflags",
+      "target": "coverageviewoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coverage_run_coverageprojectroot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coverage_run_coveragestack",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coverage_run_firstnonemptycoverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coverage_run_warncoveragereportnotignored",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coverage_run_writecoveragetestfailure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "internal_cli_coverage_run_go_command",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L138",
+      "weight": 1.0,
+      "source": "cli_coverage_run_coveragestack",
+      "target": "detector_detector_detectproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "cli_coverage_run_writecoveragetestfailure",
+      "target": "cli_coverage_run_lastlines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L151",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_run_writecoveragetestfailure",
+      "target": "internal_cli_coverage_run_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L151",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_run_writecoveragetestfailure",
+      "target": "runresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L166",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_run_warncoveragereportnotignored",
+      "target": "internal_cli_coverage_run_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L171",
+      "weight": 1.0,
+      "source": "cli_coverage_run_warncoveragereportnotignored",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "internal/cli/coverage_test.go",
       "source_location": "L340",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_test",
-      "target": "cli_coverage_test_countlisteddirs",
-      "confidence_score": 1.0
+      "target": "cli_coverage_test_countlisteddirs"
     },
     {
       "relation": "contains",
@@ -19009,9 +19508,9 @@
       "source_file": "internal/cli/coverage_test.go",
       "source_location": "L387",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_test",
-      "target": "cli_coverage_test_testcoveragedirectorytableranksbyuncoveredmass",
-      "confidence_score": 1.0
+      "target": "cli_coverage_test_testcoveragedirectorytableranksbyuncoveredmass"
     },
     {
       "relation": "contains",
@@ -19059,9 +19558,9 @@
       "source_file": "internal/cli/coverage_test.go",
       "source_location": "L354",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_test",
-      "target": "cli_coverage_test_testcoveragelimitsthedirectorytable",
-      "confidence_score": 1.0
+      "target": "cli_coverage_test_testcoveragelimitsthedirectorytable"
     },
     {
       "relation": "contains",
@@ -19171,9 +19670,9 @@
       "source_file": "internal/cli/coverage_test.go",
       "source_location": "L405",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_test_testcoveragedirectorytableranksbyuncoveredmass",
-      "target": "cli_coverage_test_runcoveragecmd",
-      "confidence_score": 1.0
+      "target": "cli_coverage_test_runcoveragecmd"
     },
     {
       "relation": "calls",
@@ -19226,9 +19725,9 @@
       "source_file": "internal/cli/coverage_test.go",
       "source_location": "L363",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_test_testcoveragelimitsthedirectorytable",
-      "target": "cli_coverage_test_runcoveragecmd",
-      "confidence_score": 1.0
+      "target": "cli_coverage_test_runcoveragecmd"
     },
     {
       "relation": "calls",
@@ -19314,9 +19813,9 @@
       "source_location": "L387",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_test_testcoveragedirectorytableranksbyuncoveredmass",
-      "target": "internal_cli_coverage_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_test_go_t"
     },
     {
       "relation": "references",
@@ -19369,9 +19868,9 @@
       "source_location": "L354",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_test_testcoveragelimitsthedirectorytable",
-      "target": "internal_cli_coverage_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_test_go_t"
     },
     {
       "relation": "references",
@@ -19501,9 +20000,9 @@
       "source_file": "internal/cli/coverage_test.go",
       "source_location": "L403",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_test_testcoveragedirectorytableranksbyuncoveredmass",
-      "target": "cli_coverage_test_writecoveragefixture",
-      "confidence_score": 1.0
+      "target": "cli_coverage_test_writecoveragefixture"
     },
     {
       "relation": "calls",
@@ -19545,9 +20044,9 @@
       "source_file": "internal/cli/coverage_test.go",
       "source_location": "L361",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_test_testcoveragelimitsthedirectorytable",
-      "target": "cli_coverage_test_writecoveragefixture",
-      "confidence_score": 1.0
+      "target": "cli_coverage_test_writecoveragefixture"
     },
     {
       "relation": "calls",
@@ -19644,9 +20143,9 @@
       "source_file": "internal/cli/coverage_test.go",
       "source_location": "L367",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_test_testcoveragelimitsthedirectorytable",
-      "target": "cli_coverage_test_countlisteddirs",
-      "confidence_score": 1.0
+      "target": "cli_coverage_test_countlisteddirs"
     },
     {
       "relation": "contains",
@@ -26431,6 +26930,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/compose/project.go",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "compose_project",
+      "target": "compose_manifesttest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/compose/project.go",
       "source_location": "L34",
       "weight": 1.0,
       "source": "compose_project",
@@ -26648,6 +27157,16 @@
       "target": "compose_projectproxy"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/compose/project.go",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "compose_project",
+      "target": "compose_projecttest",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "internal/compose/project.go",
@@ -26657,6 +27176,17 @@
       "confidence_score": 1.0,
       "source": "compose_project",
       "target": "projectproxy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/compose/project.go",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "field",
+      "source": "compose_project",
+      "target": "projecttest",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -26679,6 +27209,17 @@
       "confidence_score": 1.0,
       "source": "compose_manifest",
       "target": "manifestproxy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/compose/project.go",
+      "source_location": "L49",
+      "weight": 1.0,
+      "context": "field",
+      "source": "compose_manifest",
+      "target": "manifesttest",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -49594,11 +50135,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/coverage.md",
-      "source_location": "L107",
+      "source_location": "L189",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_coverage_devherd_coverage",
-      "target": "docs_coverage_limites_de_esta_fase"
+      "target": "docs_coverage_limites",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_que_hace_run_paso_a_paso",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -49644,11 +50195,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/coverage.md",
-      "source_location": "L16",
+      "source_location": "L26",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_coverage_devherd_coverage",
-      "target": "docs_coverage_uso"
+      "target": "docs_coverage_uso_con_un_reporte_ya_existente",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_uso_rapido",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -49679,6 +50240,26 @@
       "confidence_score": 1.0,
       "source": "docs_coverage_tres_cosas_que_hace_distinto",
       "target": "docs_coverage_3_se_ordena_por_masa_sin_cubrir_no_por_porcentaje"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "docs_coverage_que_hace_run_paso_a_paso",
+      "target": "docs_coverage_detalles_que_conviene_saber",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L151",
+      "weight": 1.0,
+      "source": "docs_coverage_que_hace_run_paso_a_paso",
+      "target": "docs_coverage_explain_automatico_no_quiere_decir_opaco",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -52596,5 +53177,5 @@
       "source_file": "docs/IMPROVEMENTS.md"
     }
   ],
-  "built_at_commit": "ad23d5cba665b664916890f4f70f90b4ad277ec2"
+  "built_at_commit": "d137ef7e8aeeb21c99f63e93e892f755b42b7bed"
 }
