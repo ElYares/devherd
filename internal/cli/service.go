@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/devherd/devherd/internal/config"
+	"github.com/devherd/devherd/internal/observe"
 	"github.com/devherd/devherd/internal/services"
 	"github.com/spf13/cobra"
 )
@@ -82,7 +83,18 @@ func runServiceAction(
 ) (string, []services.FileResult, error) {
 	switch action {
 	case "start":
-		return manager.Start(cmd.Context(), service, force)
+		opts := services.StartOptions{Force: force}
+		if services.NeedsCollector(service) {
+			addr, warning := collectorAddrForService(cmd)
+			// El aviso va **antes** de arrancar: un target caido se descubre media
+			// hora despues, cuando ya nadie recuerda que corrio este comando.
+			if warning != "" {
+				fmt.Fprintln(cmd.ErrOrStderr(), warning)
+			}
+			opts.CollectorAddr = addr
+		}
+
+		return manager.Start(cmd.Context(), service, opts)
 	case "stop":
 		output, err := manager.Stop(cmd.Context(), service)
 
@@ -107,4 +119,78 @@ func serviceActionShort(action string) string {
 	default:
 		return "Manage a shared service"
 	}
+}
+
+// collectorAddrForService resuelve la direccion del collector que un contenedor
+// puede alcanzar, y devuelve un aviso cuando no la hay.
+//
+// Reusa planObserveAddrs en vez de recalcular: esa funcion ya resolvio que la red
+// DevHerd se prefiere sobre la privada del proyecto, porque Docker le cambia la
+// subred a esta al recrearla. Recalcularlo aqui seria repetir un bug que ya costo
+// un falso positivo.
+func collectorAddrForService(cmd *cobra.Command) (addr string, warning string) {
+	plan := planObserveAddrs(cmd.Context(), observeAddrOptions{
+		ProxyNetwork: observeSharedNetwork(cmd.Context()),
+	})
+
+	return collectorAddrFromPlan(plan, func(network, target string) observe.Reachability {
+		return observe.ProbeFromContainer(cmd.Context(), plan.runner, network, target)
+	})
+}
+
+// collectorAddrFromPlan es la decision, separada de como se obtiene el plan y de
+// como se sondea, para poder probarla sin Docker.
+func collectorAddrFromPlan(
+	plan observeAddrPlan,
+	probe func(network, addr string) observe.Reachability,
+) (addr string, warning string) {
+
+	// **La red que importa es la del servicio, no la del proyecto.** El DSN del
+	// plan elige la red que mas contenedores del proyecto comparten, que es lo
+	// correcto para un reporter dentro de ese proyecto. Prometheus corre en
+	// infra_net, y el gateway que tiene que alcanzar es el de esa red: medido, el
+	// plan devolvia el gateway de infra_web (172.18.0.1) mientras Prometheus vivia
+	// en infra_net (172.20.0.1).
+	for _, network := range plan.Networks {
+		if network.Name != services.NetworkName || network.Gateway == "" {
+			continue
+		}
+
+		addr := observe.WithHost(plan.DSN, network.Gateway)
+
+		// Que exista el gateway no significa que se llegue: el cortafuegos del host
+		// filtra el trafico de los contenedores y es la barrera que de verdad deja
+		// el target caido. Se comprueba **desde dentro** de un contenedor, porque
+		// probarlo desde el host da un falso positivo: el host alcanza su propio
+		// loopback y atraviesa su propio cortafuegos.
+		result := probe(services.NetworkName, addr)
+		switch {
+		case result.Reachable, result.Skipped:
+			// Skipped es "no habia imagen local para sondear", no "no se llega".
+			// Tratarlo como fallo asustaria sin motivo.
+			return addr, ""
+		}
+
+		warning := "WARNING: the Observe collector did not answer at " + addr + " from inside a container.\n" +
+			"  Prometheus will start, but the devherd-observe target will stay down."
+		if hint := observe.FirewallHint(network, addr); hint != "" {
+			warning += "\n  " + hint
+		}
+		warning += "\n  Fix it, then rerun with --force to rewrite the target."
+
+		return addr, warning
+	}
+
+	// Sin gateway de infra_net no hay direccion que sirva: 127.0.0.1 dentro de un
+	// contenedor es el propio contenedor, y escribirlo igual dejaria el target en
+	// `down` sin ninguna explicacion.
+	reason := plan.Reason
+	if reason == "" {
+		reason = "the " + services.NetworkName + " network has no gateway yet"
+	}
+
+	return plan.DSN, "WARNING: the Observe collector is not reachable from a container (" + reason + ").\n" +
+		"  The devherd-observe target will stay down until it is.\n" +
+		"  Start a shared service first so " + services.NetworkName + " exists, then\n" +
+		"  `devherd service start prometheus --force` to rewrite the target."
 }

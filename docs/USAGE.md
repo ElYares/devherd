@@ -507,8 +507,8 @@ devherd logs /ruta/al/proyecto -f --tail 50
 
 ### 4.16 `devherd service <start|stop|status> [service]`
 
-Administra los servicios compartidos de desarrollo. Servicios soportados: `redis` y
-`mailpit`.
+Administra los servicios compartidos de desarrollo. Servicios soportados: `redis`,
+`mailpit` y `prometheus`.
 
 - `service start <service>`: arranca el servicio (`docker compose up -d`), creando la red
   `infra_net` si falta. Argumento obligatorio. Con `--force` devuelve los archivos de
@@ -525,7 +525,32 @@ devherd service status redis
 devherd service stop redis
 ```
 
-Puertos publicados (en `127.0.0.1`): Redis `6379`, Mailpit `1025` (SMTP) y `8025` (UI web).
+Puertos publicados (en `127.0.0.1`): Redis `6379`, Mailpit `1025` (SMTP) y `8025` (UI web),
+Prometheus `9090`.
+
+#### Prometheus
+
+`devherd service start prometheus` lo levanta **ya apuntado al collector de Observe**,
+que publica sus metricas en `/metrics` (ver `docs/observe.md`). No hay que escribir el
+`prometheus.yml`: DevHerd lo genera con la direccion correcta.
+
+Esa direccion **no es `127.0.0.1`**. Prometheus corre dentro de un contenedor, y desde
+ahi loopback es el propio contenedor: lo que se escribe es el gateway de `infra_net`,
+que es la red donde vive. Antes de arrancar, DevHerd **sonda el collector desde un
+contenedor** y avisa si no responde, en vez de dejar un target caido que se descubre
+media hora despues:
+
+```text
+WARNING: the Observe collector did not answer at 172.20.0.1:9777 from inside a container.
+  Prometheus will start, but the devherd-observe target will stay down.
+  if a host firewall is filtering container traffic, allow it: sudo ufw allow from ...
+  Fix it, then rerun with --force to rewrite the target.
+```
+
+La causa mas comun es el cortafuegos del host filtrando el trafico de los contenedores.
+`devherd observe firewall --apply` pone las reglas.
+
+Prometheus es **opcional**: nada del producto depende de que este arrancado.
 
 Notas:
 
