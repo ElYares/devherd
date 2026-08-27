@@ -218,13 +218,22 @@ func TestCoverageFailsOnMissingFile(t *testing.T) {
 	}
 }
 
-func TestCoverageRequiresTheReportFlag(t *testing.T) {
-	_, err := runCoverageCmd(t)
+// `--report` dejo de ser obligatorio al llegar el autodescubrimiento. Lo que si
+// sigue siendo obligatorio es que, sin nada que leer, el comando diga donde busco
+// y como generar un reporte, en vez de pedir una bandera y ya.
+func TestCoverageWithoutAnyReportSaysWhereItLooked(t *testing.T) {
+	empty := t.TempDir()
+
+	_, err := runCoverageCmd(t, empty)
 	if err == nil {
-		t.Fatal("expected --report to be required")
+		t.Fatal("expected an error when there is no report to read")
 	}
-	if !strings.Contains(err.Error(), "report") {
-		t.Fatalf("the error should name the missing flag, got %q", err)
+
+	message := err.Error()
+	for _, expected := range []string{"looked for", "coverage.out", "coverage/lcov.info"} {
+		if !strings.Contains(message, expected) {
+			t.Errorf("expected the error to contain %q, got:\n%s", expected, message)
+		}
 	}
 }
 

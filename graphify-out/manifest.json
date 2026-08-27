@@ -765,7 +765,7 @@
     "semantic_hash": ""
   },
   "docs/INDEX.md": {
-    "mtime": 1787798495.5494463,
+    "mtime": 1787802185.7900913,
     "ast_hash": "ddd5241582bfcbd9155f38b4b1996eeb",
     "semantic_hash": ""
   },
@@ -810,33 +810,38 @@
     "semantic_hash": ""
   },
   "internal/cli/coverage.go": {
-    "mtime": 1787799229.4102287,
-    "ast_hash": "24955965386a31f9ee583f7f0c2aa8be",
+    "mtime": 1787803391.8001425,
+    "ast_hash": "1532454665fd566fe1235426c3a820c6",
     "semantic_hash": ""
   },
   "internal/cli/coverage_test.go": {
-    "mtime": 1787642206.2451289,
-    "ast_hash": "0cd30345689d134999be8d054df45749",
+    "mtime": 1787802507.8599644,
+    "ast_hash": "705466867a1ab2718091824291646036",
     "semantic_hash": ""
   },
   "docs/coverage.md": {
-    "mtime": 1787799386.9956195,
-    "ast_hash": "a3e03e6749f5fa95a1737332242e3cb3",
+    "mtime": 1787803450.324123,
+    "ast_hash": "b79d543522a2864e9cdce98d270c4712",
     "semantic_hash": ""
   },
   "internal/cli/coverage_run.go": {
-    "mtime": 1787799229.4062288,
+    "mtime": 1787802185.7960913,
     "ast_hash": "ad4904e08f69f5977e15c8e428a90897",
     "semantic_hash": ""
   },
   "internal/cli/coverage_structure.go": {
-    "mtime": 1787799206.4134617,
+    "mtime": 1787802185.7960913,
     "ast_hash": "4ca7560bd297069f0250fef986b9f990",
     "semantic_hash": ""
   },
   "internal/cli/coverage_structure_test.go": {
-    "mtime": 1787799344.099981,
+    "mtime": 1787802185.7960913,
     "ast_hash": "8af4d75a94cf23804eaae65a0fd162d0",
+    "semantic_hash": ""
+  },
+  "internal/cli/coverage_discover_test.go": {
+    "mtime": 1787803425.4783802,
+    "ast_hash": "555162a5020aef7b560d7ed7b1859e3a",
     "semantic_hash": ""
   }
 }

@@ -6,6 +6,7 @@ import (
 	"io"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/devherd/devherd/internal/coverage"
 	"github.com/spf13/cobra"
@@ -57,27 +58,47 @@ func newCoverageCmd() *cobra.Command {
 				})
 			}
 
-			if strings.TrimSpace(report) == "" {
-				return fmt.Errorf("either --report <path> or --run is required")
+			// El root se resuelve siempre: lo necesita el descubrimiento para saber
+			// donde buscar, y --structure para encontrar el go.mod.
+			root, err := coverageProjectRoot(firstArg(args))
+			if err != nil {
+				return err
 			}
 
-			parsed, err := coverage.ParseFile(report)
+			reportPath := strings.TrimSpace(report)
+			chosen := coverage.Candidate{}
+			if reportPath == "" {
+				// --report explicito manda sobre el autodescubrimiento y no busca nada.
+				discovery, err := coverage.DiscoverReport(root, coverageStackOrEmpty(root))
+				if err != nil {
+					return err
+				}
+				// Decir que archivo se uso no es cortesia: sin eso, leer el reporte del
+				// front creyendo que es el del back no deja ninguna señal.
+				writeCoverageDiscovery(cmd.OutOrStdout(), discovery)
+				chosen = discovery.Chosen
+				reportPath = chosen.Path
+			} else if candidate, err := coverage.CandidateFor(reportPath); err == nil {
+				chosen = candidate
+			}
+
+			// El aviso de antiguedad va por stderr y para los dos caminos: un reporte
+			// viejo engaña igual venga de --report o del descubrimiento.
+			warnCoverageReportIsStale(cmd.ErrOrStderr(), chosen)
+
+			parsed, err := coverage.ParseFile(reportPath)
 			if err != nil {
 				return err
 			}
 
 			if structure {
-				// El root no sale del reporte: puede estar en /tmp. Sale del proyecto
-				// que se analiza, que es donde vive el go.mod que traduce las rutas.
-				root, err := coverageProjectRoot(firstArg(args))
-				if err != nil {
-					return err
-				}
-				view.Source = report
+				// El root no sale del reporte, que puede estar en /tmp: sale del
+				// proyecto, que es donde vive el go.mod que traduce las rutas.
+				view.Source = reportPath
 
 				return runCoverageStructure(cmd.OutOrStdout(), parsed, coverageStructureFlags{
 					Root:   root,
-					Source: report,
+					Source: reportPath,
 					View:   view,
 					AsJSON: asJSON,
 				})
@@ -87,14 +108,15 @@ func newCoverageCmd() *cobra.Command {
 				return writeCoverageJSON(cmd.OutOrStdout(), parsed)
 			}
 
-			view.Source = report
+			view.Source = reportPath
 			writeCoverageReport(cmd.OutOrStdout(), parsed, view)
 
 			return nil
 		},
 	}
 
-	cmd.Flags().StringVar(&report, "report", "", "Path to an existing coverage report to read")
+	cmd.Flags().StringVar(&report, "report", "",
+		"Path to an existing coverage report. Without it, the report is discovered by the project's stack")
 	cmd.Flags().BoolVar(&run, "run", false, "Prepare the project container, run its tests and read the result")
 	cmd.Flags().BoolVar(&explain, "explain", false, "Print the commands --run would execute, without running any")
 	cmd.Flags().BoolVar(&structure, "structure", false,
@@ -257,4 +279,43 @@ func firstArg(args []string) string {
 	}
 
 	return args[0]
+}
+
+// coverageStackOrEmpty detecta el stack sin fallar si no lo reconoce. El
+// descubrimiento sabe buscar todas las convenciones cuando no hay stack, y exigir
+// que el proyecto sea identificable seria mas estricto que el problema: lo que se
+// busca es un archivo, no un ecosistema.
+func coverageStackOrEmpty(root string) string {
+	stack, err := coverageStack("", root)
+	if err != nil {
+		return ""
+	}
+
+	return stack
+}
+
+// writeCoverageDiscovery dice de donde salio el reporte y que mas habia. Elegir en
+// silencio entre dos reportes es como se lee una medicion que no era la buscada.
+func writeCoverageDiscovery(out io.Writer, discovery coverage.Discovery) {
+	fmt.Fprintf(out, "using %s\n", coverage.DescribeCandidate(discovery.Chosen))
+	for _, other := range discovery.Others {
+		fmt.Fprintf(out, "  also found, not used: %s\n", coverage.DescribeCandidate(other))
+	}
+	fmt.Fprintln(out)
+}
+
+// warnCoverageReportIsStale avisa de un reporte viejo. Va por stderr para no
+// ensuciar el --json, y no falla: el reporte se sigue leyendo, porque una medicion
+// vieja no es invalida, solo es de otro momento. Lo que no puede pasar es leerla
+// como si fuera de hoy.
+func warnCoverageReportIsStale(out io.Writer, candidate coverage.Candidate) {
+	if candidate.Path == "" || !candidate.IsStale(time.Now()) {
+		return
+	}
+
+	days := int(candidate.Age(time.Now()).Hours() / 24)
+	fmt.Fprintf(out, "WARNING: %s is %d days old.\n", coverage.DescribeCandidate(candidate), days)
+	fmt.Fprintln(out, "  The numbers below describe the code as it was then, not as it is now.")
+	fmt.Fprintln(out, "  Regenerate it with devherd coverage --run.")
+	fmt.Fprintln(out)
 }

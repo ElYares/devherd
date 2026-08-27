@@ -9,13 +9,14 @@ sobre el lo que ninguna herramienta nativa te da: **donde esta la masa sin cubri
 
 ## Estado
 
-**Fases 0, 1 y 2 implementadas.** Lee los cinco formatos y calcula (`--report`),
-prepara el contenedor, corre las pruebas y lee el resultado (`--run`), y atribuye
+**Las cuatro fases implementadas.** Encuentra el reporte solo, lee los cinco
+formatos y calcula, prepara el contenedor y corre las pruebas (`--run`), y atribuye
 la cobertura a funciones para decir cual es el techo real (`--structure`, solo Go).
 
 ## Uso rapido
 
 ```bash
+devherd coverage                        # encuentra el reporte por la convencion del stack
 devherd coverage --run                  # en la raiz del proyecto
 devherd coverage --run --explain        # imprime los comandos, sin ejecutar nada
 devherd coverage --run ~/proyectos/x    # otro proyecto
@@ -24,6 +25,70 @@ devherd coverage --run --structure      # ademas, el techo alcanzable (solo Go)
 
 `--run` soporta **laravel** y **go**. Para los demas stacks, genera el reporte con
 la herramienta del proyecto y pasalo con `--report`.
+
+## Encontrar el reporte solo
+
+`devherd coverage` a secas busca el reporte donde lo deja la herramienta del stack
+detectado, y **dice cual uso**:
+
+```text
+using coverage.out  (go convention)
+  also found, not used: coverage/lcov.info  (node convention)
+```
+
+Las convenciones por stack:
+
+| Stack | Rutas, en orden |
+|---|---|
+| `laravel` | `coverage/clover.xml`, `build/logs/clover.xml`, `clover.xml` |
+| `go` | `coverage.out`, `cover.out`, `coverage.txt` |
+| `vue`, `node` | `coverage/lcov.info`, `coverage/clover.xml` |
+| `python`, `flask` | `coverage.xml`, `htmlcov/coverage.xml` |
+
+Tres reglas que valen la pena:
+
+- **`--report` manda.** Si lo pasas, no se busca nada.
+- **El reporte del proyecto gana sobre el que deja `--run`.** El administrado
+  (`.devherd.coverage.*`) puede ser de una corrida vieja; se usa si es lo unico que
+  hay, y entonces se dice que es suyo.
+- **Lo que no se eligio se nombra.** En un monorepo con front y back hay dos
+  reportes de formatos distintos, y tomar uno en silencio es como se lee la
+  medicion equivocada creyendo que es la buena.
+
+### Un reporte viejo lleva aviso
+
+A partir de **siete dias**, el comando avisa antes de mostrar los numeros:
+
+```text
+WARNING: coverage.out  (go convention) is 23 days old.
+  The numbers below describe the code as it was then, not as it is now.
+  Regenerate it with devherd coverage --run.
+```
+
+Una cobertura vieja leida como actual es peor que no tenerla: da por probado
+codigo que pudo cambiar entero desde entonces. El aviso **no bloquea**, porque una
+medicion vieja sigue siendo una medicion; lo que no puede pasar es leerla creyendo
+que es de hoy. Va por `stderr`, asi que no ensucia `--json`, y aplica igual a
+`--report` que al autodescubrimiento.
+
+Sin ningun reporte, el error dice **donde busco** y el comando que generaria uno:
+
+```text
+no coverage report found in /home/dev/app for stack "go"
+
+looked for:
+  coverage.out
+  cover.out
+  coverage.txt
+  .devherd.coverage.out
+  .devherd.coverage.xml
+
+generate one with:
+  go test ./... -coverprofile=coverage.out
+
+or let DevHerd do it:
+  devherd coverage --run
+```
 
 ## Uso con un reporte ya existente
 
@@ -257,8 +322,10 @@ funcion se cuentan aparte y el comando lo dice. No se reparten a la fuerza.
 
 - **`--run` solo sabe de laravel y go.** Node, Python y Java se agregan como
   adaptadores; mientras tanto, `--report`.
-- **No encuentra un reporte ya existente.** Pasar la ruta a mano sigue siendo
-  necesario sin `--run`. Es la fase 3.
+- **El autodescubrimiento no cubre Java.** El detector de DevHerd no distingue un
+  proyecto Java, asi que JaCoCo se lee con `--report` pero no se encuentra solo.
+  Agregar Java al detector es una historia aparte: sin adaptador de `--run` para ese
+  stack, detectarlo lo dejaria a medias igual.
 - **El analisis estructural es solo de Go.** `--structure` necesita los rangos de
   linea por bloque, y de los cinco formatos solo el perfil de Go los trae. Para los
   demas el comando lo dice en vez de inventar un techo. Cada lenguaje nuevo pide su
