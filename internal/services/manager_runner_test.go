@@ -43,7 +43,7 @@ func TestStartEnsuresNetworkAndComposesUp(t *testing.T) {
 	r := &fakeRunner{outputs: []string{"net", "started"}}
 	m := newTestManager(t, r)
 
-	out, err := m.Start(context.Background(), "redis")
+	out, _, err := m.Start(context.Background(), "redis", false)
 	if err != nil {
 		t.Fatalf("Start returned error: %v", err)
 	}
@@ -69,7 +69,7 @@ func TestStartCreatesNetworkWhenInspectFails(t *testing.T) {
 	}
 	m := newTestManager(t, r)
 
-	if _, err := m.Start(context.Background(), "mailpit"); err != nil {
+	if _, _, err := m.Start(context.Background(), "mailpit", false); err != nil {
 		t.Fatalf("Start returned error: %v", err)
 	}
 	if len(r.calls) != 3 {
@@ -84,7 +84,7 @@ func TestStartRejectsUnsupportedServiceWithoutDocker(t *testing.T) {
 	r := &fakeRunner{}
 	m := newTestManager(t, r)
 
-	if _, err := m.Start(context.Background(), "postgres"); err == nil {
+	if _, _, err := m.Start(context.Background(), "postgres", false); err == nil {
 		t.Fatal("expected error for unsupported service")
 	}
 	if len(r.calls) != 0 {
@@ -108,8 +108,14 @@ func TestStopComposesStop(t *testing.T) {
 }
 
 func TestStatusAllServices(t *testing.T) {
-	r := &fakeRunner{outputs: []string{"ps output"}}
+	r := &fakeRunner{outputs: []string{"", "ps output"}}
 	m := newTestManager(t, r)
+
+	// Status ya no crea el stack, asi que primero hay que arrancar algo.
+	if _, _, err := m.Start(context.Background(), "redis", false); err != nil {
+		t.Fatalf("Start returned error: %v", err)
+	}
+	r.calls = nil
 
 	if _, err := m.Status(context.Background(), ""); err != nil {
 		t.Fatalf("Status returned error: %v", err)

@@ -511,9 +511,11 @@ Administra los servicios compartidos de desarrollo. Servicios soportados: `redis
 `mailpit`.
 
 - `service start <service>`: arranca el servicio (`docker compose up -d`), creando la red
-  `infra_net` si falta. Argumento obligatorio.
+  `infra_net` si falta. Argumento obligatorio. Con `--force` devuelve los archivos de
+  configuracion administrados a la plantilla de DevHerd, guardando antes una copia `.bak`.
 - `service stop <service>`: detiene el servicio. Argumento obligatorio.
 - `service status [service]`: muestra el estado (`docker compose ps`). Argumento opcional.
+  **No escribe nada**: si nunca se arranco un servicio, lo dice en vez de crear el stack.
 
 ```bash
 devherd service start redis
@@ -527,8 +529,16 @@ Puertos publicados (en `127.0.0.1`): Redis `6379`, Mailpit `1025` (SMTP) y `8025
 
 Notas:
 
-- El compose administrado en `~/.local/share/devherd/compose/shared-services/` se
-  **reescribe en cada invocacion**: no edites ese archivo, se perdera.
+- **El compose es de DevHerd; la configuracion es tuya.** El compose administrado en
+  `~/.local/share/devherd/compose/shared-services/docker-compose.yml` se **regenera en
+  cada `start` y `stop`**: es el catalogo de lo que DevHerd ofrece, y congelarlo con una
+  edicion haria que una version nueva del binario no pudiera ofrecer un servicio nuevo.
+  No lo edites, se perdera.
+- **Los archivos de configuracion de un servicio si respetan tus ediciones.** Si los
+  cambias, DevHerd los deja como estan y avisa por stderr que difieren de su plantilla.
+  Con `--force` restaura la plantilla y guarda tu version en un `.bak` al lado. Hoy
+  ningun servicio declara configuracion —redis y mailpit no la necesitan— pero la regla
+  ya esta puesta.
 - `stop` y `status` no crean la red `infra_net`; si la borraste, falla hasta que ejecutes
   un `start`.
 - La red de servicios (`infra_net`) y la del proxy (`infra_web`) son **distintas y no se
