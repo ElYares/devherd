@@ -58,9 +58,41 @@ services:
       devherd.role: "shared-service"
       devherd.service: "prometheus"
 
+  grafana:
+    image: grafana/grafana:11.5.1
+    container_name: infra_grafana
+    restart: unless-stopped
+    environment:
+      # Acceso anonimo con rol de editor: es un entorno local, y un login que
+      # nadie recuerda es friccion sin seguridad. El puerto solo escucha en
+      # loopback, asi que no hay superficie que proteger.
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Editor"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_USERS_DEFAULT_THEME: "dark"
+      # Abre directo en el tablero de DevHerd en vez de en una pagina vacia.
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: "/etc/grafana/provisioning/dashboards/devherd/devherd-observe.json"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    networks:
+      infra_net:
+        aliases:
+          - grafana
+    labels:
+      devherd.managed: "true"
+      devherd.role: "shared-service"
+      devherd.service: "grafana"
+
 volumes:
   redis_data:
   prometheus_data:
+  grafana_data:
 
 networks:
   infra_net:

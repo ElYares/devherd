@@ -1,0 +1,19 @@
+# Escrito por DevHerd la primera vez que arrancaste Grafana.
+#
+# Puedes editarlo: DevHerd respeta tus cambios y no los pisa. Para volver a esta
+# plantilla, `devherd service start grafana --force` la restaura y deja tu version
+# en un .bak al lado.
+
+apiVersion: 1
+
+datasources:
+  # Se apunta a Prometheus por su alias de red, no por IP: los dos contenedores
+  # comparten infra_net y Docker resuelve el nombre. Una IP cambiaria al recrear la
+  # red, que es la misma trampa que ya costo un falso positivo en Observe.
+  - name: Prometheus
+    uid: devherd-prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true

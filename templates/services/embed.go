@@ -11,3 +11,21 @@ import _ "embed"
 //
 //go:embed prometheus.yml
 var PrometheusConfig string
+
+// GrafanaDatasource declara el Prometheus compartido como fuente de datos. No
+// lleva plantilla: se apunta por alias de red, que no cambia.
+//
+//go:embed grafana-datasource.yml
+var GrafanaDatasource string
+
+// GrafanaDashboards declara de donde salen los tableros provisionados.
+//
+//go:embed grafana-dashboards.yml
+var GrafanaDashboards string
+
+// GrafanaDashboard es el tablero de DevHerd Observe. Es lo que decide si
+// empaquetar Grafana valio la pena: con datasource y sin tableros, el usuario se
+// queda exactamente donde estaba.
+//
+//go:embed grafana-dashboard.json
+var GrafanaDashboard string

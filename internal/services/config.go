@@ -43,6 +43,25 @@ type ServiceOptions struct {
 // llego Prometheus.
 var serviceFiles = map[string]func(ServiceOptions) ([]ManagedFile, error){
 	"prometheus": prometheusFiles,
+	"grafana":    grafanaFiles,
+}
+
+// grafanaFiles son los tres archivos de provisioning: la fuente de datos, el
+// proveedor de tableros y el tablero.
+//
+// **El tablero es lo que decide si empaquetar Grafana valio la pena.** Con
+// datasource y sin tableros, el usuario se queda exactamente donde estaba: habria
+// cambiado "configura Prometheus a mano" por "construye un tablero a mano".
+//
+// Ninguno lleva plantilla: Grafana alcanza a Prometheus por su alias de red, que
+// no cambia. Una IP si cambiaria al recrear la red, que es la misma trampa que ya
+// costo un falso positivo en Observe.
+func grafanaFiles(ServiceOptions) ([]ManagedFile, error) {
+	return []ManagedFile{
+		{Path: "grafana/datasources/prometheus.yml", Content: servicestemplates.GrafanaDatasource},
+		{Path: "grafana/dashboards/devherd.yml", Content: servicestemplates.GrafanaDashboards},
+		{Path: "grafana/dashboards/devherd/devherd-observe.json", Content: servicestemplates.GrafanaDashboard},
+	}, nil
 }
 
 // prometheusFiles arma el prometheus.yml con el collector ya apuntado. Escribirlo

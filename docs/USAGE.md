@@ -508,7 +508,7 @@ devherd logs /ruta/al/proyecto -f --tail 50
 ### 4.16 `devherd service <start|stop|status> [service]`
 
 Administra los servicios compartidos de desarrollo. Servicios soportados: `redis`,
-`mailpit` y `prometheus`.
+`mailpit`, `prometheus` y `grafana`.
 
 - `service start <service>`: arranca el servicio (`docker compose up -d`), creando la red
   `infra_net` si falta. Argumento obligatorio. Con `--force` devuelve los archivos de
@@ -551,6 +551,41 @@ La causa mas comun es el cortafuegos del host filtrando el trafico de los conten
 `devherd observe firewall --apply` pone las reglas.
 
 Prometheus es **opcional**: nada del producto depende de que este arrancado.
+
+#### Grafana
+
+`devherd service start grafana` lo levanta con el datasource de Prometheus ya
+configurado y un tablero cargado, en `http://127.0.0.1:3000`. **Sin login**: es un
+entorno local, el puerto solo escucha en loopback y un login que nadie recuerda es
+friccion sin seguridad.
+
+El tablero **DevHerd Observe** trae seis paneles sobre las metricas del collector:
+uptime, segundos sin cobertura en 24 h, issues abiertos, eventos por minuto, issues
+por proyecto y nivel, y reinicios de contenedor.
+
+Si Prometheus no esta arrancado, el comando lo dice antes:
+
+```text
+WARNING: prometheus is not running, so grafana will show empty panels.
+  Start it first:  devherd service start prometheus
+  Or point grafana at your own prometheus by editing its datasource.
+```
+
+No lo arranca solo: levantar contenedores que nadie pidio es peor que avisar, y
+puedes tener tu propio Prometheus fuera de DevHerd.
+
+Notas:
+
+- **El datasource apunta a `http://prometheus:9090`**, el alias de red, no una IP.
+  Los dos contenedores comparten `infra_net` y Docker resuelve el nombre; una IP
+  cambiaria al recrear la red.
+- **Las ediciones desde la interfaz sobreviven.** El provisioning declara
+  `allowUiUpdates`, y Grafana guarda tus cambios en su propio volumen. Los archivos
+  de provisioning tambien respetan tus ediciones, como el resto (`--force` los
+  restaura).
+- **Mover el tablero fuera de la carpeta `DevHerd`** puede dejarlo inaccesible con
+  acceso anonimo. Si pasa, `devherd service start grafana --force` y borrar el
+  volumen `devherd_shared_grafana_data` lo devuelve a su sitio.
 
 Notas:
 

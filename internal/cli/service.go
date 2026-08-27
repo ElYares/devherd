@@ -83,6 +83,13 @@ func runServiceAction(
 ) (string, []services.FileResult, error) {
 	switch action {
 	case "start":
+		// Grafana sin Prometheus arranca y muestra paneles vacios, que es la peor
+		// forma de fallar: parece que funciona. Se dice antes, no despues de que el
+		// usuario abra el tablero y no entienda nada.
+		if warning := missingDependencyWarning(cmd, manager, service); warning != "" {
+			fmt.Fprintln(cmd.ErrOrStderr(), warning)
+		}
+
 		opts := services.StartOptions{Force: force}
 		if services.NeedsCollector(service) {
 			addr, warning := collectorAddrForService(cmd)
@@ -193,4 +200,31 @@ func collectorAddrFromPlan(
 		"  The devherd-observe target will stay down until it is.\n" +
 		"  Start a shared service first so " + services.NetworkName + " exists, then\n" +
 		"  `devherd service start prometheus --force` to rewrite the target."
+}
+
+// missingDependencyWarning avisa si falta el servicio del que este depende. No
+// falla ni lo arranca solo: levantar contenedores que nadie pidio es peor que
+// avisar, y el usuario puede tener su propio Prometheus fuera de DevHerd.
+func missingDependencyWarning(cmd *cobra.Command, manager services.Manager, service string) string {
+	dependency := services.DependsOn(service)
+	if dependency == "" {
+		return ""
+	}
+
+	running, err := manager.IsRunning(cmd.Context(), dependency)
+	if err != nil || running {
+		// Un fallo al consultar docker no se convierte en un aviso: el propio
+		// `service start` va a fallar a continuacion con un error de verdad.
+		return ""
+	}
+
+	return dependencyWarning(service, dependency)
+}
+
+// dependencyWarning arma el mensaje. Separado de la consulta a docker para poder
+// probar el texto, que es lo unico que ve el usuario.
+func dependencyWarning(service, dependency string) string {
+	return "WARNING: " + dependency + " is not running, so " + service + " will show empty panels.\n" +
+		"  Start it first:  devherd service start " + dependency + "\n" +
+		"  Or point " + service + " at your own " + dependency + " by editing its datasource."
 }

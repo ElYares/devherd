@@ -28,7 +28,7 @@ const (
 
 // supportedServices es el catalogo. Prometheus es opcional como los demas: nada
 // del producto depende de que este arrancado.
-var supportedServices = []string{"redis", "mailpit", "prometheus"}
+var supportedServices = []string{"redis", "mailpit", "prometheus", "grafana"}
 
 type Manager struct {
 	dir         string
@@ -88,6 +88,43 @@ func (m Manager) Start(ctx context.Context, service string, opts StartOptions) (
 	output, err := m.compose(ctx, "up", "-d", service)
 
 	return output, files, err
+}
+
+// DependsOn dice que otro servicio compartido necesita este para servir de algo.
+// Grafana sin Prometheus arranca perfectamente y muestra paneles vacios, que es la
+// peor forma de fallar: parece que funciona.
+func DependsOn(service string) string {
+	if service == "grafana" {
+		return "prometheus"
+	}
+
+	return ""
+}
+
+// IsRunning dice si un servicio compartido esta levantado. Se consulta a docker y
+// no al disco: que el compose lo declare no significa que el contenedor viva.
+func (m Manager) IsRunning(ctx context.Context, service string) (bool, error) {
+	if err := validateService(service); err != nil {
+		return false, err
+	}
+
+	exists, err := m.stackExists()
+	if err != nil || !exists {
+		return false, err
+	}
+
+	out, err := m.compose(ctx, "ps", "--status", "running", "--services")
+	if err != nil {
+		return false, err
+	}
+
+	for _, line := range strings.Split(out, "\n") {
+		if strings.TrimSpace(line) == service {
+			return true, nil
+		}
+	}
+
+	return false, nil
 }
 
 func (m Manager) Stop(ctx context.Context, service string) (string, error) {
