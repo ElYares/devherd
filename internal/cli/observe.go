@@ -94,6 +94,7 @@ func newObserveStartCmd() *cobra.Command {
 func newObserveStatusCmd() *cobra.Command {
 	var addr string
 	var checkReachability bool
+	var lookback time.Duration
 
 	cmd := &cobra.Command{
 		Use:   "status [project]",
@@ -139,6 +140,10 @@ func newObserveStatusCmd() *cobra.Command {
 				fmt.Fprintf(out, "database: %s\n", payload.Database)
 			}
 
+			// Que el collector conteste ahora no dice nada de las ultimas horas, y
+			// eso es lo que hace ambiguo un `observe issues` vacio.
+			reportObserveCoverage(cmd, lookback)
+
 			if checkReachability {
 				plan := planObserveAddrs(cmd.Context(), observeAddrOptions{
 					ProxyNetwork: observeSharedNetwork(cmd.Context()),
@@ -155,8 +160,117 @@ func newObserveStatusCmd() *cobra.Command {
 
 	cmd.Flags().StringVar(&addr, "addr", observe.DefaultAddr, "Collector address")
 	cmd.Flags().BoolVar(&checkReachability, "check-reachability", true, "Probe the collector from inside a container on the shared network")
+	cmd.Flags().DurationVar(&lookback, "since", 24*time.Hour, "How far back to look for windows where the collector was not listening")
 
 	return cmd
+}
+
+// minReportedGap es el hueco mas corto que se menciona. Reiniciar el collector
+// deja segundos sin cobertura que no le importan a nadie, y avisar de esos
+// convierte el aviso en ruido que se aprende a ignorar.
+const minReportedGap = 2 * time.Minute
+
+// maxListedGaps acota la lista. Un collector que se enciende y se apaga a diario
+// deja decenas de huecos, y la respuesta util es el total mas los mayores.
+const maxListedGaps = 5
+
+// reportObserveCoverage dice si hubo ventanas sin collector escuchando. Es lo que
+// resuelve la ambiguedad de fondo: hasta ahora, un `observe issues` vacio podia
+// significar que la aplicacion estuvo sana o que nadie estaba recibiendo, y no
+// habia forma de distinguirlo.
+//
+// No falla nunca: es informacion adicional sobre un comando cuyo trabajo —decir si
+// el collector responde— ya esta hecho para cuando esto corre.
+func reportObserveCoverage(cmd *cobra.Command, lookback time.Duration) {
+	if lookback <= 0 {
+		return
+	}
+
+	db, store, _, err := openObserveStore(cmd)
+	if err != nil {
+		return
+	}
+	defer func() { _ = db.Close() }()
+
+	ctx := cmd.Context()
+	out := cmd.OutOrStdout()
+	since := time.Now().UTC().Add(-lookback)
+
+	if session, found, err := store.LastCollectorSession(ctx); err == nil && found {
+		fmt.Fprintf(out, "listening since: %s\n", session.StartedAt.Local().Format("2006-01-02 15:04"))
+	}
+
+	gaps, err := store.CoverageGaps(ctx, since, minReportedGap)
+	if err != nil {
+		return
+	}
+	if len(gaps) == 0 {
+		fmt.Fprintf(out, "coverage: no gaps in the last %s\n", shortDuration(lookback))
+
+		return
+	}
+
+	total := time.Duration(0)
+	for _, gap := range gaps {
+		total += gap.Duration()
+	}
+
+	fmt.Fprintf(out, "\nWARNING: the collector was not listening for %s in the last %s.\n",
+		shortDuration(total), shortDuration(lookback))
+	fmt.Fprintln(out, "  Issues are absent from those windows because nobody received them,")
+	fmt.Fprintln(out, "  not because nothing failed.")
+
+	listed := gaps
+	if len(listed) > maxListedGaps {
+		listed = listed[:maxListedGaps]
+	}
+	for _, gap := range listed {
+		fmt.Fprintf(out, "    %s  (%s)\n", formatGapRange(gap.From, gap.To), shortDuration(gap.Duration()))
+	}
+	if remaining := len(gaps) - len(listed); remaining > 0 {
+		fmt.Fprintf(out, "    and %d more\n", remaining)
+	}
+}
+
+// formatGapRange escribe el intervalo de un hueco. La fecha del final solo aparece
+// si es otro dia: sin eso, un hueco que cruza la medianoche sale como
+// "22:34 to 16:34" y se lee como si fuera hacia atras.
+func formatGapRange(from, to time.Time) string {
+	start := from.Local()
+	end := to.Local()
+
+	if start.Year() == end.Year() && start.YearDay() == end.YearDay() {
+		return start.Format("2006-01-02 15:04") + " to " + end.Format("15:04")
+	}
+
+	return start.Format("2006-01-02 15:04") + " to " + end.Format("2006-01-02 15:04")
+}
+
+// shortDuration escribe una duracion como la leeria una persona. El formato de Go
+// da "4h0m0s", que obliga a leer tres numeros para entender uno.
+func shortDuration(d time.Duration) string {
+	switch {
+	case d >= 24*time.Hour:
+		days := int(d.Hours() / 24)
+		hours := int(d.Hours()) % 24
+		if hours == 0 {
+			return fmt.Sprintf("%dd", days)
+		}
+
+		return fmt.Sprintf("%dd %dh", days, hours)
+	case d >= time.Hour:
+		hours := int(d.Hours())
+		minutes := int(d.Minutes()) % 60
+		if minutes == 0 {
+			return fmt.Sprintf("%dh", hours)
+		}
+
+		return fmt.Sprintf("%dh %dm", hours, minutes)
+	case d >= time.Minute:
+		return fmt.Sprintf("%dm", int(d.Minutes()))
+	}
+
+	return fmt.Sprintf("%ds", int(d.Seconds()))
 }
 
 func newObserveOpenCmd() *cobra.Command {

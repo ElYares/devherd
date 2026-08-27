@@ -33,6 +33,11 @@ class DevherdObserveReporter
     private const TIMEOUT_SECONDS = 2;
 
     /**
+     * Cuanto del cuerpo de una respuesta de error se copia al log.
+     */
+    private const SNIPPET_LENGTH = 200;
+
+    /**
      * Reporta una excepcion.
      *
      * La excepcion puede afinar el evento definiendo metodos opcionales:
@@ -96,12 +101,16 @@ class DevherdObserveReporter
             $endpoint = self::endpoint();
 
             if ($endpoint === null) {
+                self::trace('no endpoint: OBSERVE_DSN is missing or malformed');
+
                 return;
             }
 
             $payload = json_encode(self::payload($event));
 
             if ($payload === false) {
+                self::trace('payload could not be encoded: '.json_last_error_msg());
+
                 return;
             }
 
@@ -116,11 +125,71 @@ class DevherdObserveReporter
                 CURLOPT_TIMEOUT => self::TIMEOUT_SECONDS,
             ]);
 
-            curl_exec($handle);
+            $body = curl_exec($handle);
+            $status = (int) curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
+            $error = curl_error($handle);
             curl_close($handle);
-        } catch (Throwable) {
-            // Observe jamas debe romper la aplicacion.
+
+            // El collector caido y el collector contestando 500 son problemas
+            // distintos, y hasta ahora los dos se veian igual: como nada.
+            if ($body === false || $error !== '') {
+                self::trace('transport failed: '.($error !== '' ? $error : 'unknown curl error'));
+
+                return;
+            }
+
+            if ($status >= 400) {
+                self::trace('collector rejected the event with HTTP '.$status.self::snippet($body));
+            }
+        } catch (Throwable $t) {
+            // Observe jamas debe romper la aplicacion, pero callarse del todo
+            // convierte un reporter roto en una app sin errores.
+            self::trace('reporter threw '.self::shortName($t::class).': '.$t->getMessage());
         }
+    }
+
+    /**
+     * Deja rastro de un envio que no llego.
+     *
+     * Sin esto, un `observe issues` vacio es ambiguo: no se puede distinguir una
+     * aplicacion sana de un reporter que lleva horas fallando en silencio. Va a
+     * `error_log()` y no al logger de Laravel a proposito: el logger puede ser
+     * justo lo que esta roto, y este codigo tiene que funcionar incluso mientras
+     * el framework se cae.
+     */
+    private static function trace(string $reason): void
+    {
+        try {
+            error_log('[devherd-observe] '.$reason);
+        } catch (Throwable) {
+            // Si ni error_log funciona, no queda nada que hacer: lo que no puede
+            // pasar es que el intento de avisar tumbe la aplicacion.
+        }
+    }
+
+    /**
+     * Recorta el cuerpo de una respuesta de error para el log.
+     *
+     * Un collector devolviendo HTML de error puede escupir kilobytes, y un log
+     * de aplicacion no es sitio para eso.
+     */
+    private static function snippet(string|bool $body): string
+    {
+        if (! is_string($body)) {
+            return '';
+        }
+
+        $trimmed = trim($body);
+
+        if ($trimmed === '') {
+            return '';
+        }
+
+        if (mb_strlen($trimmed) > self::SNIPPET_LENGTH) {
+            $trimmed = mb_substr($trimmed, 0, self::SNIPPET_LENGTH).'...';
+        }
+
+        return ': '.$trimmed;
     }
 
     /**

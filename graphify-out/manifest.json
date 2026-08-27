@@ -105,8 +105,8 @@
     "semantic_hash": "7207c210f6946dfe10665208cc118bdc"
   },
   "internal/cli/observe.go": {
-    "mtime": 1787636356.678893,
-    "ast_hash": "49811ae61941415415539f25c17427c4",
+    "mtime": 1787805306.4352794,
+    "ast_hash": "1e4f5e41be67ac76c86d8057dddf5302",
     "semantic_hash": ""
   },
   "internal/cli/observe_test.go": {
@@ -145,8 +145,8 @@
     "semantic_hash": ""
   },
   "internal/cli/root.go": {
-    "mtime": 1787639375.5436869,
-    "ast_hash": "ecc5bc328bc38d0acd291e6d2507ac57",
+    "mtime": 1787805256.7846193,
+    "ast_hash": "8045f9a5b2ca99676034383d596a8561",
     "semantic_hash": ""
   },
   "internal/cli/sentry.go": {
@@ -305,13 +305,13 @@
     "semantic_hash": ""
   },
   "internal/observe/schema.sql": {
-    "mtime": 1787635007.0818992,
-    "ast_hash": "e46d0d4eccea64271514c21c54af49ca",
+    "mtime": 1787805076.0118558,
+    "ast_hash": "e636792cfe8e151d4f5f012b12dbef25",
     "semantic_hash": ""
   },
   "internal/observe/server.go": {
-    "mtime": 1787635007.0818992,
-    "ast_hash": "bc8b0890409b7e7b5a3b23be46768cf1",
+    "mtime": 1787805101.8909004,
+    "ast_hash": "ef47a904eeb250fad8d363ef7245537d",
     "semantic_hash": ""
   },
   "internal/observe/server_test.go": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "docs/observe.md": {
-    "mtime": 1787635007.0758994,
-    "ast_hash": "9f41a74253873f22494c515cc6da9129",
+    "mtime": 1787805339.9152877,
+    "ast_hash": "9a64a07824b78bd5cf005dfef5f8f0f6",
     "semantic_hash": ""
   },
   "docs/project-workflow.md": {
@@ -630,8 +630,8 @@
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
-    "mtime": 1786431783.7424946,
-    "ast_hash": "c93ea8450bb33e9af2a8999202df0a54",
+    "mtime": 1787804993.214848,
+    "ast_hash": "27ac0069c299061f8e32c0caedcd7b1c",
     "semantic_hash": ""
   },
   ".golangci.yml": {
@@ -750,8 +750,8 @@
     "semantic_hash": ""
   },
   "internal/observe/reporter_test.go": {
-    "mtime": 1786430798.206379,
-    "ast_hash": "db6006703e79136da4d3f58f137dd30d",
+    "mtime": 1787804983.7698057,
+    "ast_hash": "9369ff16b419d4199c55aec518f4bc76",
     "semantic_hash": ""
   },
   "templates/observe/embed.go": {
@@ -760,8 +760,8 @@
     "semantic_hash": ""
   },
   "templates/observe/reporter-laravel.php": {
-    "mtime": 1786430798.2086399,
-    "ast_hash": "bc9aabe66eacc0ff628b6826c58cdcb4",
+    "mtime": 1787804960.0566506,
+    "ast_hash": "71e38af399befc2ef628601a8ee7e473",
     "semantic_hash": ""
   },
   "docs/INDEX.md": {
@@ -810,17 +810,17 @@
     "semantic_hash": ""
   },
   "internal/cli/coverage.go": {
-    "mtime": 1787803391.8001425,
+    "mtime": 1787804826.262431,
     "ast_hash": "1532454665fd566fe1235426c3a820c6",
     "semantic_hash": ""
   },
   "internal/cli/coverage_test.go": {
-    "mtime": 1787802507.8599644,
+    "mtime": 1787804826.262431,
     "ast_hash": "705466867a1ab2718091824291646036",
     "semantic_hash": ""
   },
   "docs/coverage.md": {
-    "mtime": 1787803450.324123,
+    "mtime": 1787804826.2554312,
     "ast_hash": "b79d543522a2864e9cdce98d270c4712",
     "semantic_hash": ""
   },
@@ -840,8 +840,23 @@
     "semantic_hash": ""
   },
   "internal/cli/coverage_discover_test.go": {
-    "mtime": 1787803425.4783802,
+    "mtime": 1787804826.262431,
     "ast_hash": "555162a5020aef7b560d7ed7b1859e3a",
+    "semantic_hash": ""
+  },
+  "internal/cli/observe_coverage_test.go": {
+    "mtime": 1787805306.438589,
+    "ast_hash": "1a7f9bff10418994ccfa5c02cacceb86",
+    "semantic_hash": ""
+  },
+  "internal/observe/heartbeat.go": {
+    "mtime": 1787805086.948743,
+    "ast_hash": "7fdd1718c57e89750c76b5421032ea1f",
+    "semantic_hash": ""
+  },
+  "internal/observe/heartbeat_test.go": {
+    "mtime": 1787805159.1680005,
+    "ast_hash": "cd8106c23f2afc80e8aebd2871b011c4",
     "semantic_hash": ""
   }
 }

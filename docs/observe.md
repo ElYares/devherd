@@ -464,6 +464,68 @@ Corolarios que explican comportamientos que parecen bugs:
 almacena su salida. Solo toma una foto de 60 segundos alrededor de cada error, en dos
 tiempos. Para ver logs completos sigue estando `devherd logs` o `docker compose logs`.
 
+## 7bis. Saber si el collector estaba escuchando
+
+Un `observe issues` vacio era ambiguo: podia significar que la aplicacion estuvo
+sana, o que el collector estuvo muerto y nadie recibio nada. No habia forma de
+distinguirlo, y es la diferencia entre "todo bien" y "no tienes datos".
+
+Ahora el collector deja registro. `observe status` lo lee:
+
+```text
+observe collector: running at http://127.0.0.1:9777
+status: ok
+listening since: 2026-08-26 22:35
+
+WARNING: the collector was not listening for 21h 59m in the last 1d.
+  Issues are absent from those windows because nobody received them,
+  not because nothing failed.
+    2026-08-25 22:35 to 2026-08-26 16:34  (17h 59m)
+    2026-08-26 18:34 to 22:34  (4h)
+```
+
+Con `--since` se cambia la ventana (por defecto 24 h).
+
+### Como se registra
+
+Una fila por **corrida** del collector en `collector_sessions`, no una por latido:
+el latido actualiza `last_seen` en su sitio. Seis latidos por minuto darian 8.640
+filas al dia para responder una pregunta que se contesta con dos fechas.
+
+El hueco es la distancia entre el `last_seen` de una corrida y el `started_at` de
+la siguiente, mas el hueco inicial desde el principio de la ventana.
+
+Tres detalles que importan:
+
+- **El latido no depende de Docker.** Corre en su propia goroutine, no dentro del
+  poller de contenedores. Un collector sin Docker esta igual de vivo, y atarlos
+  dejaria sin registro justo a quien no usa contenedores.
+- **La resolucion es el intervalo del latido**, 10 s. Si el proceso muere de golpe,
+  el ultimo latido escrito es lo mas cerca que se puede estar del momento real.
+- **Los huecos de menos de 2 minutos no se mencionan.** Reiniciar el collector deja
+  segundos sin cobertura que no le importan a nadie, y avisar de esos convierte el
+  aviso en ruido que se aprende a ignorar.
+
+### El reporter tambien deja rastro
+
+Del otro lado del cable, `send()` en el reporter tenia cuatro salidas silenciosas.
+Ahora cada una escribe en `error_log()` con prefijo `[devherd-observe]`:
+
+| Situacion | Que dice |
+|---|---|
+| El DSN falta o esta mal formado | `no endpoint: OBSERVE_DSN is missing or malformed` |
+| El evento no se pudo serializar | `payload could not be encoded: ...` |
+| El collector no contesta | `transport failed: ...` |
+| El collector rechaza el evento | `collector rejected the event with HTTP 500: ...` |
+
+La ultima no existia siquiera: **el resultado de `curl_exec()` se descartaba sin
+mirarlo**, asi que un collector contestando 500 era indistinguible de un envio
+correcto.
+
+Va a `error_log()` y no al logger de Laravel a proposito: el logger puede ser justo
+lo que esta roto, y este codigo tiene que seguir funcionando mientras el framework
+se cae.
+
 ## 8. Trayectoria de la falla
 
 Primer corte:

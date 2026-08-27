@@ -31,6 +31,21 @@ jobs:
       - name: coverage summary
         run: go tool cover -func=coverage.out | tail -n 1
 
+  # Las plantillas PHP se escriben dentro de proyectos ajenos. Un error de
+  # sintaxis no lo detecta ningun test de Go —comprueban que el archivo se
+  # escribe, no que sea PHP valido— y llegaria al proyecto del usuario.
+  php-templates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+      - name: php -l
+        run: |
+          find templates -name '*.php' -print0 | xargs -0 -r -n1 php -l
+
   lint:
     runs-on: ubuntu-latest
     steps:

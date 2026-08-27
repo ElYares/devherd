@@ -115,3 +115,19 @@ CREATE TABLE IF NOT EXISTS alert_deliveries (
 
 CREATE INDEX IF NOT EXISTS idx_observe_alerts_project ON alerts(project, kind);
 CREATE INDEX IF NOT EXISTS idx_observe_alert_deliveries_project ON alert_deliveries(project, created_at DESC);
+
+-- Una fila por corrida del collector, no por latido: el latido actualiza
+-- last_seen en su sitio. Con seis latidos por minuto, una fila por tick daria
+-- 8.640 filas al dia para responder una pregunta que se contesta con dos fechas.
+--
+-- Lo que esta tabla permite saber es lo que antes no se podia: si un `observe
+-- issues` vacio significa que la aplicacion estuvo sana, o que el collector
+-- estuvo muerto y nadie recibio nada. El hueco es la distancia entre el
+-- last_seen de una corrida y el started_at de la siguiente.
+CREATE TABLE IF NOT EXISTS collector_sessions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    started_at TEXT NOT NULL,
+    last_seen TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_observe_collector_sessions_started ON collector_sessions(started_at DESC);

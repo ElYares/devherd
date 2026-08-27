@@ -104,3 +104,88 @@ func TestEnsureReporterRequiresRoot(t *testing.T) {
 		t.Fatal("expected an error without a project root")
 	}
 }
+
+// Un `observe issues` vacio hoy es ambiguo: no distingue una aplicacion sana de un
+// reporter que lleva horas fallando en silencio. Cada salida sin envio tiene que
+// dejar rastro, y cada una el suyo: no llega a lo mismo un DSN mal puesto que un
+// collector contestando 500.
+func TestReporterLeavesATraceOnEverySilentExit(t *testing.T) {
+	root := t.TempDir()
+
+	result, err := EnsureReporter(root, "laravel", false)
+	if err != nil {
+		t.Fatalf("EnsureReporter returned error: %v", err)
+	}
+	payload, err := os.ReadFile(result.Path)
+	if err != nil {
+		t.Fatalf("read written reporter: %v", err)
+	}
+	content := string(payload)
+
+	traces := map[string]string{
+		"endpoint ausente":  "no endpoint",
+		"payload invalido":  "payload could not be encoded",
+		"transporte caido":  "transport failed",
+		"collector rechaza": "collector rejected the event with HTTP",
+		"reporter revienta": "reporter threw",
+	}
+	for name, marker := range traces {
+		t.Run(name, func(t *testing.T) {
+			if !strings.Contains(content, marker) {
+				t.Errorf("the reporter should trace %q, and it does not", marker)
+			}
+		})
+	}
+
+	// El prefijo permite filtrar el log de la aplicacion por lo que es de Observe.
+	if !strings.Contains(content, "[devherd-observe]") {
+		t.Error("every trace should carry the [devherd-observe] prefix")
+	}
+}
+
+// El rastro va a error_log() y no al logger de Laravel: el logger puede ser justo
+// lo que esta roto, y el reporter tiene que funcionar mientras el framework se cae.
+func TestReporterTracesThroughErrorLogNotTheFrameworkLogger(t *testing.T) {
+	root := t.TempDir()
+
+	result, err := EnsureReporter(root, "laravel", false)
+	if err != nil {
+		t.Fatalf("EnsureReporter returned error: %v", err)
+	}
+	payload, err := os.ReadFile(result.Path)
+	if err != nil {
+		t.Fatalf("read written reporter: %v", err)
+	}
+	content := string(payload)
+
+	if !strings.Contains(content, "error_log(") {
+		t.Error("the reporter should trace through error_log()")
+	}
+	for _, forbidden := range []string{"Log::", "logger(", "Illuminate\\Support\\Facades\\Log"} {
+		if strings.Contains(content, forbidden) {
+			t.Errorf("the reporter must not depend on the framework logger, found %q", forbidden)
+		}
+	}
+}
+
+// El resultado de curl_exec no se puede descartar: un collector contestando 500 se
+// veia exactamente igual que un envio correcto, es decir, como nada.
+func TestReporterChecksTheTransportResult(t *testing.T) {
+	root := t.TempDir()
+
+	result, err := EnsureReporter(root, "laravel", false)
+	if err != nil {
+		t.Fatalf("EnsureReporter returned error: %v", err)
+	}
+	payload, err := os.ReadFile(result.Path)
+	if err != nil {
+		t.Fatalf("read written reporter: %v", err)
+	}
+	content := string(payload)
+
+	for _, want := range []string{"curl_getinfo(", "CURLINFO_RESPONSE_CODE", "curl_error("} {
+		if !strings.Contains(content, want) {
+			t.Errorf("the reporter should inspect the transport result, missing %q", want)
+		}
+	}
+}
