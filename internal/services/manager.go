@@ -26,7 +26,9 @@ const (
 	composeFile = "docker-compose.yml"
 )
 
-var supportedServices = []string{"redis", "mailpit"}
+// supportedServices es el catalogo. Prometheus es opcional como los demas: nada
+// del producto depende de que este arrancado.
+var supportedServices = []string{"redis", "mailpit", "prometheus"}
 
 type Manager struct {
 	dir         string
@@ -52,9 +54,20 @@ func SupportedServices() []string {
 	return append([]string{}, supportedServices...)
 }
 
-// Start levanta un servicio compartido. force devuelve sus archivos de
-// configuracion a la plantilla de DevHerd, guardando antes una copia.
-func (m Manager) Start(ctx context.Context, service string, force bool) (string, []FileResult, error) {
+// StartOptions son las decisiones de quien arranca el servicio. Van en una
+// estructura y no como parametros sueltos porque ya son dos y creceran con cada
+// servicio que necesite algo del entorno.
+type StartOptions struct {
+	// Force devuelve los archivos de configuracion administrados a la plantilla
+	// de DevHerd, guardando antes una copia.
+	Force bool
+	// CollectorAddr es la direccion del collector de Observe alcanzable desde un
+	// contenedor. Solo la usan los servicios que la piden; ver NeedsCollector.
+	CollectorAddr string
+}
+
+// Start levanta un servicio compartido.
+func (m Manager) Start(ctx context.Context, service string, opts StartOptions) (string, []FileResult, error) {
 	if err := validateService(service); err != nil {
 		return "", nil, err
 	}
@@ -63,7 +76,7 @@ func (m Manager) Start(ctx context.Context, service string, force bool) (string,
 		return "", nil, err
 	}
 
-	files, err := m.ensureServiceFiles(service, force)
+	files, err := m.ensureServiceFiles(service, opts)
 	if err != nil {
 		return "", nil, err
 	}

@@ -16,7 +16,7 @@ func withServiceFiles(t *testing.T, service string, files ...ManagedFile) {
 	t.Helper()
 
 	previous, had := serviceFiles[service]
-	serviceFiles[service] = files
+	serviceFiles[service] = func(ServiceOptions) ([]ManagedFile, error) { return files, nil }
 	t.Cleanup(func() {
 		if had {
 			serviceFiles[service] = previous
@@ -149,7 +149,7 @@ func TestStartWritesTheServiceConfiguration(t *testing.T) {
 	withServiceFiles(t, "redis", ManagedFile{Path: "redis/redis.conf", Content: "maxmemory 64mb\n"})
 
 	m := newTestManager(t, &fakeRunner{})
-	_, files, err := m.Start(context.Background(), "redis", false)
+	_, files, err := m.Start(context.Background(), "redis", StartOptions{})
 	if err != nil {
 		t.Fatalf("Start returned error: %v", err)
 	}
@@ -166,7 +166,7 @@ func TestStartWritesTheServiceConfiguration(t *testing.T) {
 func TestStartOnAServiceWithoutConfigurationReportsNothing(t *testing.T) {
 	m := newTestManager(t, &fakeRunner{})
 
-	_, files, err := m.Start(context.Background(), "mailpit", false)
+	_, files, err := m.Start(context.Background(), "mailpit", StartOptions{})
 	if err != nil {
 		t.Fatalf("Start returned error: %v", err)
 	}
@@ -186,7 +186,7 @@ func TestStatusDoesNotWriteAnything(t *testing.T) {
 	m := newTestManager(t, &fakeRunner{outputs: []string{"", "", "ps output"}})
 	ctx := context.Background()
 
-	if _, _, err := m.Start(ctx, "redis", false); err != nil {
+	if _, _, err := m.Start(ctx, "redis", StartOptions{}); err != nil {
 		t.Fatalf("Start returned error: %v", err)
 	}
 
@@ -240,14 +240,14 @@ func TestStartAlwaysRegeneratesTheCompose(t *testing.T) {
 	m := newTestManager(t, &fakeRunner{outputs: []string{"", "", ""}})
 	ctx := context.Background()
 
-	if _, _, err := m.Start(ctx, "redis", false); err != nil {
+	if _, _, err := m.Start(ctx, "redis", StartOptions{}); err != nil {
 		t.Fatalf("Start returned error: %v", err)
 	}
 	if err := os.WriteFile(m.composeFile, []byte("# borrado el catalogo\n"), 0o644); err != nil {
 		t.Fatalf("edit compose: %v", err)
 	}
 
-	if _, _, err := m.Start(ctx, "redis", false); err != nil {
+	if _, _, err := m.Start(ctx, "redis", StartOptions{}); err != nil {
 		t.Fatalf("second Start returned error: %v", err)
 	}
 	if got := readFile(t, m.composeFile); !strings.Contains(got, "mailpit") {

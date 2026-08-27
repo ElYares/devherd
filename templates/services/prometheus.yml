@@ -1,0 +1,23 @@
+# Escrito por DevHerd la primera vez que arrancaste Prometheus.
+#
+# Puedes editarlo: DevHerd respeta tus cambios y no los pisa. Si quieres volver a
+# esta plantilla, `devherd service start prometheus --force` la restaura y deja tu
+# version en un .bak al lado.
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # El collector de DevHerd Observe. La direccion no es 127.0.0.1 a proposito:
+  # Prometheus corre dentro de un contenedor, y desde ahi loopback es el propio
+  # contenedor. DevHerd resuelve el gateway de la red compartida al escribir esto.
+  - job_name: devherd-observe
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["{{ .CollectorAddr }}"]
+
+  # El propio Prometheus, para saber si el scrape esta sano.
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
