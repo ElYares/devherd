@@ -178,7 +178,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_app_context",
-      "community": 7,
+      "community": 59,
       "norm_label": "app_context.go"
     },
     {
@@ -188,7 +188,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "cli_appcontext",
-      "community": 7,
+      "community": 59,
       "norm_label": "appcontext"
     },
     {
@@ -198,7 +198,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "internal_cli_app_context_go_paths",
-      "community": 7,
+      "community": 59,
       "norm_label": "paths"
     },
     {
@@ -208,7 +208,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "internal_cli_app_context_go_config",
-      "community": 7,
+      "community": 59,
       "norm_label": "config"
     },
     {
@@ -218,7 +218,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "internal_cli_app_context_go_db",
-      "community": 7,
+      "community": 59,
       "norm_label": "db"
     },
     {
@@ -228,7 +228,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "cli_app_context_loadappcontext",
-      "community": 7,
+      "community": 59,
       "norm_label": "loadappcontext()"
     },
     {
@@ -238,7 +238,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "internal_cli_app_context_go_context",
-      "community": 7,
+      "community": 59,
       "norm_label": "context"
     },
     {
@@ -525,7 +525,7 @@
       "label": "coverageViewOptions",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L90",
+      "source_location": "L111",
       "_origin": "ast",
       "id": "cli_coverageviewoptions",
       "community": 55,
@@ -535,7 +535,7 @@
       "label": "writeCoverageJSON()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L96",
+      "source_location": "L117",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragejson",
       "community": 55,
@@ -545,7 +545,7 @@
       "label": "Writer",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L96",
+      "source_location": "L117",
       "_origin": "ast",
       "id": "internal_cli_coverage_go_writer",
       "community": 55,
@@ -555,7 +555,7 @@
       "label": "Report",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L96",
+      "source_location": "L117",
       "_origin": "ast",
       "id": "internal_cli_coverage_go_report",
       "community": 55,
@@ -565,7 +565,7 @@
       "label": "writeCoverageReport()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L106",
+      "source_location": "L127",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragereport",
       "community": 55,
@@ -575,7 +575,7 @@
       "label": "writeCoverageGroups()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L128",
+      "source_location": "L149",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragegroups",
       "community": 55,
@@ -585,7 +585,7 @@
       "label": "writeCoverageFiles()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L162",
+      "source_location": "L183",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragefiles",
       "community": 55,
@@ -595,7 +595,7 @@
       "label": "writeCoverageFileLine()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L204",
+      "source_location": "L225",
       "_origin": "ast",
       "id": "cli_coverage_writecoveragefileline",
       "community": 55,
@@ -605,7 +605,7 @@
       "label": "FileReport",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L204",
+      "source_location": "L225",
       "_origin": "ast",
       "id": "filereport",
       "community": 55,
@@ -615,7 +615,7 @@
       "label": "countCoverageUncoveredFiles()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L209",
+      "source_location": "L230",
       "_origin": "ast",
       "id": "cli_coverage_countcoverageuncoveredfiles",
       "community": 55,
@@ -625,11 +625,21 @@
       "label": "truncateCoveragePath()",
       "file_type": "code",
       "source_file": "internal/cli/coverage.go",
-      "source_location": "L222",
+      "source_location": "L243",
       "_origin": "ast",
       "id": "cli_coverage_truncatecoveragepath",
       "community": 55,
       "norm_label": "truncatecoveragepath()"
+    },
+    {
+      "label": "firstArg()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L254",
+      "_origin": "ast",
+      "id": "cli_coverage_firstarg",
+      "community": 55,
+      "norm_label": "firstarg()"
     },
     {
       "label": "coverage_run.go",
@@ -655,9 +665,9 @@
       "label": "coverageViewOptions",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L23",
+      "source_location": "L24",
       "_origin": "ast",
-      "id": "coverageviewoptions",
+      "id": "internal_cli_coverage_run_go_coverageviewoptions",
       "community": 55,
       "norm_label": "coverageviewoptions"
     },
@@ -665,7 +675,7 @@
       "label": "runCoverage()",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "cli_coverage_run_runcoverage",
       "community": 55,
@@ -675,7 +685,7 @@
       "label": "Command",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "internal_cli_coverage_run_go_command",
       "community": 55,
@@ -685,7 +695,7 @@
       "label": "coverageProjectRoot()",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L112",
+      "source_location": "L124",
       "_origin": "ast",
       "id": "cli_coverage_run_coverageprojectroot",
       "community": 55,
@@ -695,7 +705,7 @@
       "label": "coverageStack()",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L133",
+      "source_location": "L145",
       "_origin": "ast",
       "id": "cli_coverage_run_coveragestack",
       "community": 55,
@@ -705,7 +715,7 @@
       "label": "writeCoverageTestFailure()",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L151",
+      "source_location": "L163",
       "_origin": "ast",
       "id": "cli_coverage_run_writecoveragetestfailure",
       "community": 55,
@@ -715,7 +725,7 @@
       "label": "Writer",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L151",
+      "source_location": "L163",
       "_origin": "ast",
       "id": "internal_cli_coverage_run_go_writer",
       "community": 55,
@@ -725,7 +735,7 @@
       "label": "RunResult",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L151",
+      "source_location": "L163",
       "_origin": "ast",
       "id": "runresult",
       "community": 55,
@@ -735,7 +745,7 @@
       "label": "warnCoverageReportNotIgnored()",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L166",
+      "source_location": "L178",
       "_origin": "ast",
       "id": "cli_coverage_run_warncoveragereportnotignored",
       "community": 55,
@@ -745,7 +755,7 @@
       "label": "lastLines()",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L189",
+      "source_location": "L201",
       "_origin": "ast",
       "id": "cli_coverage_run_lastlines",
       "community": 55,
@@ -755,11 +765,201 @@
       "label": "firstNonEmptyCoverage()",
       "file_type": "code",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L198",
+      "source_location": "L210",
       "_origin": "ast",
       "id": "cli_coverage_run_firstnonemptycoverage",
       "community": 55,
       "norm_label": "firstnonemptycoverage()"
+    },
+    {
+      "label": "coverage_structure.go",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cli_coverage_structure",
+      "community": 55,
+      "norm_label": "coverage_structure.go"
+    },
+    {
+      "label": "coverageStructureFlags",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "cli_coveragestructureflags",
+      "community": 55,
+      "norm_label": "coveragestructureflags"
+    },
+    {
+      "label": "coverageViewOptions",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_structure_go_coverageviewoptions",
+      "community": 55,
+      "norm_label": "coverageviewoptions"
+    },
+    {
+      "label": "runCoverageStructure()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_runcoveragestructure",
+      "community": 55,
+      "norm_label": "runcoveragestructure()"
+    },
+    {
+      "label": "Writer",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_structure_go_writer",
+      "community": 55,
+      "norm_label": "writer"
+    },
+    {
+      "label": "Report",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_structure_go_report",
+      "community": 55,
+      "norm_label": "report"
+    },
+    {
+      "label": "writeCoverageStructure()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_writecoveragestructure",
+      "community": 55,
+      "norm_label": "writecoveragestructure()"
+    },
+    {
+      "label": "StructureReport",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "structurereport",
+      "community": 55,
+      "norm_label": "structurereport"
+    },
+    {
+      "label": "writeCoverageCeiling()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_writecoverageceiling",
+      "community": 55,
+      "norm_label": "writecoverageceiling()"
+    },
+    {
+      "label": "writeCoverageFunctions()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_writecoveragefunctions",
+      "community": 55,
+      "norm_label": "writecoveragefunctions()"
+    },
+    {
+      "label": "writeCoverageStructureCaveats()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L139",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_writecoveragestructurecaveats",
+      "community": 55,
+      "norm_label": "writecoveragestructurecaveats()"
+    },
+    {
+      "label": "coverage_structure_test.go",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_test",
+      "community": 9,
+      "norm_label": "coverage_structure_test.go"
+    },
+    {
+      "label": "goModuleFixture()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_test_gomodulefixture",
+      "community": 9,
+      "norm_label": "gomodulefixture()"
+    },
+    {
+      "label": "T",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "internal_cli_coverage_structure_test_go_t",
+      "community": 9,
+      "norm_label": "t"
+    },
+    {
+      "label": "TestCoverageStructureReportsTheCeiling()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_test_testcoveragestructurereportstheceiling",
+      "community": 9,
+      "norm_label": "testcoveragestructurereportstheceiling()"
+    },
+    {
+      "label": "TestCoverageStructureMarksStoredClosuresInline()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L97",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_test_testcoveragestructuremarksstoredclosuresinline",
+      "community": 9,
+      "norm_label": "testcoveragestructuremarksstoredclosuresinline()"
+    },
+    {
+      "label": "TestCoverageStructureIsHonestAboutOtherStacks()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L123",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_test_testcoveragestructureishonestaboutotherstacks",
+      "community": 9,
+      "norm_label": "testcoveragestructureishonestaboutotherstacks()"
+    },
+    {
+      "label": "TestCoverageStructureJSONCarriesFunctionAttribution()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L144",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_test_testcoveragestructurejsoncarriesfunctionattribution",
+      "community": 9,
+      "norm_label": "testcoveragestructurejsoncarriesfunctionattribution()"
+    },
+    {
+      "label": "TestCoverageStructureFailsWithoutAModule()",
+      "file_type": "code",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L189",
+      "_origin": "ast",
+      "id": "cli_coverage_structure_test_testcoveragestructurefailswithoutamodule",
+      "community": 9,
+      "norm_label": "testcoveragestructurefailswithoutamodule()"
     },
     {
       "label": "coverage_test.go",
@@ -978,7 +1178,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_doctor",
-      "community": 7,
+      "community": 89,
       "norm_label": "doctor.go"
     },
     {
@@ -988,7 +1188,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_doctor_newdoctorcmd",
-      "community": 7,
+      "community": 89,
       "norm_label": "newdoctorcmd()"
     },
     {
@@ -998,7 +1198,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_doctor_go_command",
-      "community": 7,
+      "community": 89,
       "norm_label": "command"
     },
     {
@@ -1008,7 +1208,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "cli_doctor_statuslabel",
-      "community": 7,
+      "community": 89,
       "norm_label": "statuslabel()"
     },
     {
@@ -1018,7 +1218,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "status",
-      "community": 7,
+      "community": 89,
       "norm_label": "status"
     },
     {
@@ -1028,7 +1228,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_domain",
-      "community": 11,
+      "community": 86,
       "norm_label": "domain.go"
     },
     {
@@ -1038,7 +1238,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_domain_newdomaincmd",
-      "community": 11,
+      "community": 86,
       "norm_label": "newdomaincmd()"
     },
     {
@@ -1048,7 +1248,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_cli_domain_go_command",
-      "community": 11,
+      "community": 86,
       "norm_label": "command"
     },
     {
@@ -1058,7 +1258,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "cli_domain_newdomainsetcmd",
-      "community": 11,
+      "community": 86,
       "norm_label": "newdomainsetcmd()"
     },
     {
@@ -1068,7 +1268,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_down",
-      "community": 86,
+      "community": 1,
       "norm_label": "down.go"
     },
     {
@@ -1078,7 +1278,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_down_newdowncmd",
-      "community": 86,
+      "community": 1,
       "norm_label": "newdowncmd()"
     },
     {
@@ -1088,7 +1288,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_down_go_command",
-      "community": 86,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -1408,7 +1608,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_list",
-      "community": 86,
+      "community": 59,
       "norm_label": "list.go"
     },
     {
@@ -1418,7 +1618,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_list_newlistcmd",
-      "community": 86,
+      "community": 59,
       "norm_label": "newlistcmd()"
     },
     {
@@ -1428,7 +1628,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_list_go_command",
-      "community": 86,
+      "community": 59,
       "norm_label": "command"
     },
     {
@@ -1508,7 +1708,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_logs",
-      "community": 84,
+      "community": 59,
       "norm_label": "logs.go"
     },
     {
@@ -1518,7 +1718,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_logs_newlogscmd",
-      "community": 84,
+      "community": 59,
       "norm_label": "newlogscmd()"
     },
     {
@@ -1528,7 +1728,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_logs_go_command",
-      "community": 84,
+      "community": 59,
       "norm_label": "command"
     },
     {
@@ -1538,7 +1738,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_naming",
-      "community": 11,
+      "community": 71,
       "norm_label": "naming.go"
     },
     {
@@ -1548,7 +1748,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "cli_naming_primarydomainlabel",
-      "community": 11,
+      "community": 71,
       "norm_label": "primarydomainlabel()"
     },
     {
@@ -1558,7 +1758,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "cli_naming_primarydomain",
-      "community": 11,
+      "community": 71,
       "norm_label": "primarydomain()"
     },
     {
@@ -1568,7 +1768,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "cli_naming_normalizedomain",
-      "community": 11,
+      "community": 71,
       "norm_label": "normalizedomain()"
     },
     {
@@ -1578,7 +1778,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_naming_test",
-      "community": 11,
+      "community": 71,
       "norm_label": "naming_test.go"
     },
     {
@@ -1588,7 +1788,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "cli_naming_test_testnormalizedomain",
-      "community": 11,
+      "community": 71,
       "norm_label": "testnormalizedomain()"
     },
     {
@@ -1598,7 +1798,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_cli_naming_test_go_t",
-      "community": 11,
+      "community": 71,
       "norm_label": "t"
     },
     {
@@ -1868,7 +2068,7 @@
       "source_location": "L898",
       "_origin": "ast",
       "id": "cli_observetarget",
-      "community": 83,
+      "community": 7,
       "norm_label": "observetarget"
     },
     {
@@ -1878,7 +2078,7 @@
       "source_location": "L900",
       "_origin": "ast",
       "id": "internal_cli_observe_go_project",
-      "community": 83,
+      "community": 7,
       "norm_label": "project"
     },
     {
@@ -1888,7 +2088,7 @@
       "source_location": "L903",
       "_origin": "ast",
       "id": "cli_observe_resolveobservetarget",
-      "community": 83,
+      "community": 7,
       "norm_label": "resolveobservetarget()"
     },
     {
@@ -1908,7 +2108,7 @@
       "source_location": "L903",
       "_origin": "ast",
       "id": "internal_cli_observe_go_appcontext",
-      "community": 83,
+      "community": 7,
       "norm_label": "appcontext"
     },
     {
@@ -2058,7 +2258,7 @@
       "source_location": "L1114",
       "_origin": "ast",
       "id": "cli_observe_reportobservereachability",
-      "community": 83,
+      "community": 7,
       "norm_label": "reportobservereachability()"
     },
     {
@@ -2368,7 +2568,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_firewall",
-      "community": 47,
+      "community": 7,
       "norm_label": "observe_firewall.go"
     },
     {
@@ -2378,7 +2578,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_observe_firewall_newobservefirewallcmd",
-      "community": 47,
+      "community": 7,
       "norm_label": "newobservefirewallcmd()"
     },
     {
@@ -2388,7 +2588,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_cli_observe_firewall_go_command",
-      "community": 47,
+      "community": 7,
       "norm_label": "command"
     },
     {
@@ -2628,7 +2828,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_open",
-      "community": 8,
+      "community": 88,
       "norm_label": "open.go"
     },
     {
@@ -2638,7 +2838,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_open_newopencmd",
-      "community": 8,
+      "community": 88,
       "norm_label": "newopencmd()"
     },
     {
@@ -2648,7 +2848,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_open_go_command",
-      "community": 8,
+      "community": 88,
       "norm_label": "command"
     },
     {
@@ -2658,7 +2858,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "cli_open_browsercommand",
-      "community": 8,
+      "community": 88,
       "norm_label": "browsercommand()"
     },
     {
@@ -2668,7 +2868,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_open_test",
-      "community": 8,
+      "community": 88,
       "norm_label": "open_test.go"
     },
     {
@@ -2678,7 +2878,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "cli_open_test_testbrowsercommand",
-      "community": 8,
+      "community": 88,
       "norm_label": "testbrowsercommand()"
     },
     {
@@ -2688,7 +2888,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_cli_open_test_go_t",
-      "community": 8,
+      "community": 88,
       "norm_label": "t"
     },
     {
@@ -2698,7 +2898,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_park",
-      "community": 11,
+      "community": 71,
       "norm_label": "park.go"
     },
     {
@@ -2708,7 +2908,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "cli_park_newparkcmd",
-      "community": 11,
+      "community": 71,
       "norm_label": "newparkcmd()"
     },
     {
@@ -2718,7 +2918,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_cli_park_go_command",
-      "community": 11,
+      "community": 71,
       "norm_label": "command"
     },
     {
@@ -2728,7 +2928,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_plan",
-      "community": 82,
+      "community": 7,
       "norm_label": "plan.go"
     },
     {
@@ -2738,7 +2938,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_plan_newplancmd",
-      "community": 82,
+      "community": 7,
       "norm_label": "newplancmd()"
     },
     {
@@ -2748,7 +2948,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_plan_go_command",
-      "community": 82,
+      "community": 7,
       "norm_label": "command"
     },
     {
@@ -2758,7 +2958,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "cli_plan_describeprojectsource",
-      "community": 82,
+      "community": 7,
       "norm_label": "describeprojectsource()"
     },
     {
@@ -2768,7 +2968,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "internal_cli_plan_go_project",
-      "community": 82,
+      "community": 7,
       "norm_label": "project"
     },
     {
@@ -2778,7 +2978,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "cli_plan_describeenvfile",
-      "community": 82,
+      "community": 7,
       "norm_label": "describeenvfile()"
     },
     {
@@ -3308,7 +3508,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_stop",
-      "community": 86,
+      "community": 1,
       "norm_label": "stop.go"
     },
     {
@@ -3318,7 +3518,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_stop_newstopcmd",
-      "community": 86,
+      "community": 1,
       "norm_label": "newstopcmd()"
     },
     {
@@ -3328,7 +3528,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_stop_go_command",
-      "community": 86,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -3338,7 +3538,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_up",
-      "community": 74,
+      "community": 1,
       "norm_label": "up.go"
     },
     {
@@ -3348,7 +3548,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_up_newupcmd",
-      "community": 74,
+      "community": 1,
       "norm_label": "newupcmd()"
     },
     {
@@ -3358,7 +3558,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_up_go_command",
-      "community": 74,
+      "community": 1,
       "norm_label": "command"
     },
     {
@@ -3368,7 +3568,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "cli_up_runuppreflight",
-      "community": 74,
+      "community": 1,
       "norm_label": "runuppreflight()"
     },
     {
@@ -3378,7 +3578,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "internal_cli_up_go_appcontext",
-      "community": 74,
+      "community": 1,
       "norm_label": "appcontext"
     },
     {
@@ -3388,7 +3588,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_logs",
-      "community": 71,
+      "community": 1,
       "norm_label": "logs.go"
     },
     {
@@ -3398,7 +3598,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "compose_logsoptions",
-      "community": 71,
+      "community": 1,
       "norm_label": "logsoptions"
     },
     {
@@ -3408,7 +3608,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "compose_logs_logsargs",
-      "community": 71,
+      "community": 1,
       "norm_label": "logsargs()"
     },
     {
@@ -3418,7 +3618,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "internal_compose_logs_go_project",
-      "community": 71,
+      "community": 1,
       "norm_label": "project"
     },
     {
@@ -3428,7 +3628,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "compose_logs_logsproject",
-      "community": 71,
+      "community": 1,
       "norm_label": "logsproject()"
     },
     {
@@ -3438,7 +3638,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_compose_logs_go_context",
-      "community": 71,
+      "community": 1,
       "norm_label": "context"
     },
     {
@@ -3448,7 +3648,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_compose_logs_go_writer",
-      "community": 71,
+      "community": 1,
       "norm_label": "writer"
     },
     {
@@ -3458,7 +3658,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "compose_logs_logs",
-      "community": 71,
+      "community": 1,
       "norm_label": "logs()"
     },
     {
@@ -3468,7 +3668,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_logs_test",
-      "community": 71,
+      "community": 1,
       "norm_label": "logs_test.go"
     },
     {
@@ -3478,7 +3678,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "compose_logs_test_testlogsargsdefault",
-      "community": 71,
+      "community": 1,
       "norm_label": "testlogsargsdefault()"
     },
     {
@@ -3488,7 +3688,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_compose_logs_test_go_t",
-      "community": 71,
+      "community": 1,
       "norm_label": "t"
     },
     {
@@ -3498,7 +3698,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "compose_logs_test_testlogsargswithfollowtailandservices",
-      "community": 71,
+      "community": 1,
       "norm_label": "testlogsargswithfollowtailandservices()"
     },
     {
@@ -3538,7 +3738,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "compose_manifest",
-      "community": 10,
+      "community": 1,
       "norm_label": "manifest"
     },
     {
@@ -3548,7 +3748,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "manifestcompose",
-      "community": 10,
+      "community": 1,
       "norm_label": "manifestcompose"
     },
     {
@@ -3558,7 +3758,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "manifestproxy",
-      "community": 10,
+      "community": 1,
       "norm_label": "manifestproxy"
     },
     {
@@ -3568,7 +3768,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "manifesttest",
-      "community": 10,
+      "community": 1,
       "norm_label": "manifesttest"
     },
     {
@@ -3628,7 +3828,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "compose_project_resolveproject",
-      "community": 59,
+      "community": 1,
       "norm_label": "resolveproject()"
     },
     {
@@ -3778,7 +3978,7 @@
       "source_location": "L336",
       "_origin": "ast",
       "id": "compose_project_withprojectnames",
-      "community": 59,
+      "community": 1,
       "norm_label": ".withprojectnames()"
     },
     {
@@ -3788,7 +3988,7 @@
       "source_location": "L355",
       "_origin": "ast",
       "id": "compose_project_projectnameforpath",
-      "community": 59,
+      "community": 1,
       "norm_label": "projectnameforpath()"
     },
     {
@@ -3798,7 +3998,7 @@
       "source_location": "L374",
       "_origin": "ast",
       "id": "compose_project_legacyprojectnameforpath",
-      "community": 59,
+      "community": 1,
       "norm_label": "legacyprojectnameforpath()"
     },
     {
@@ -3808,7 +4008,7 @@
       "source_location": "L378",
       "_origin": "ast",
       "id": "compose_project_composeprojectlabel",
-      "community": 59,
+      "community": 1,
       "norm_label": "composeprojectlabel()"
     },
     {
@@ -3828,7 +4028,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_project_test",
-      "community": 59,
+      "community": 1,
       "norm_label": "project_test.go"
     },
     {
@@ -3838,7 +4038,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectdefaultstosinglecomposefile",
-      "community": 59,
+      "community": 1,
       "norm_label": "testresolveprojectdefaultstosinglecomposefile()"
     },
     {
@@ -3848,7 +4048,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_compose_project_test_go_t",
-      "community": 59,
+      "community": 1,
       "norm_label": "t"
     },
     {
@@ -3858,7 +4058,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectusesmanifestcomposefiles",
-      "community": 59,
+      "community": 1,
       "norm_label": "testresolveprojectusesmanifestcomposefiles()"
     },
     {
@@ -3868,7 +4068,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojecterrorswhenmanifestcomposefilemissing",
-      "community": 59,
+      "community": 1,
       "norm_label": "testresolveprojecterrorswhenmanifestcomposefilemissing()"
     },
     {
@@ -3878,7 +4078,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "compose_project_test_testcomposeargsincludesenvfileandallcomposefiles",
-      "community": 59,
+      "community": 1,
       "norm_label": "testcomposeargsincludesenvfileandallcomposefiles()"
     },
     {
@@ -3888,7 +4088,7 @@
       "source_location": "L133",
       "_origin": "ast",
       "id": "compose_project_test_testplanreturnsdockercommand",
-      "community": 59,
+      "community": 1,
       "norm_label": "testplanreturnsdockercommand()"
     },
     {
@@ -3898,7 +4098,7 @@
       "source_location": "L155",
       "_origin": "ast",
       "id": "compose_project_test_teststopprojectusescomposestop",
-      "community": 59,
+      "community": 1,
       "norm_label": "teststopprojectusescomposestop()"
     },
     {
@@ -3908,7 +4108,7 @@
       "source_location": "L179",
       "_origin": "ast",
       "id": "compose_project_test_testprojectnameforpathisstableandpathscoped",
-      "community": 59,
+      "community": 1,
       "norm_label": "testprojectnameforpathisstableandpathscoped()"
     },
     {
@@ -6738,7 +6938,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_listen_test",
-      "community": 6,
+      "community": 82,
       "norm_label": "listen_test.go"
     },
     {
@@ -6748,7 +6948,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "observe_listen_test_newtestserver",
-      "community": 6,
+      "community": 82,
       "norm_label": "newtestserver()"
     },
     {
@@ -6758,7 +6958,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_listen_test_go_t",
-      "community": 6,
+      "community": 82,
       "norm_label": "t"
     },
     {
@@ -6768,7 +6968,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_listen_test_go_server",
-      "community": 6,
+      "community": 82,
       "norm_label": "server"
     },
     {
@@ -6778,7 +6978,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "observe_listen_test_freeloopbackport",
-      "community": 6,
+      "community": 82,
       "norm_label": "freeloopbackport()"
     },
     {
@@ -6788,7 +6988,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "observe_listen_test_waitforhealth",
-      "community": 6,
+      "community": 82,
       "norm_label": "waitforhealth()"
     },
     {
@@ -6798,7 +6998,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveonserveseveryaddress",
-      "community": 6,
+      "community": 82,
       "norm_label": "testlistenandserveonserveseveryaddress()"
     },
     {
@@ -6808,7 +7008,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveontoleratesanunavailableextraaddress",
-      "community": 6,
+      "community": 82,
       "norm_label": "testlistenandserveontoleratesanunavailableextraaddress()"
     },
     {
@@ -6818,7 +7018,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveonfailswhentheprimaryaddressistaken",
-      "community": 6,
+      "community": 82,
       "norm_label": "testlistenandserveonfailswhentheprimaryaddressistaken()"
     },
     {
@@ -7328,7 +7528,7 @@
       "source_location": "L264",
       "_origin": "ast",
       "id": "observe_network_isloopbackaddr",
-      "community": 66,
+      "community": 7,
       "norm_label": "isloopbackaddr()"
     },
     {
@@ -8388,7 +8588,7 @@
       "source_location": "L356",
       "_origin": "ast",
       "id": "observe_server_eventpayloadfromenvelope",
-      "community": 87,
+      "community": 6,
       "norm_label": "eventpayloadfromenvelope()"
     },
     {
@@ -9188,7 +9388,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "preflight_report_hasfailures",
-      "community": 0,
+      "community": 8,
       "norm_label": ".hasfailures()"
     },
     {
@@ -9198,7 +9398,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "preflight_report_haswarnings",
-      "community": 0,
+      "community": 8,
       "norm_label": ".haswarnings()"
     },
     {
@@ -9208,7 +9408,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "preflight_report_count",
-      "community": 0,
+      "community": 8,
       "norm_label": ".count()"
     },
     {
@@ -9878,7 +10078,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy",
-      "community": 8,
+      "community": 10,
       "norm_label": "caddy.go"
     },
     {
@@ -9888,7 +10088,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "proxy_route",
-      "community": 8,
+      "community": 10,
       "norm_label": "route"
     },
     {
@@ -9898,7 +10098,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "proxy_site",
-      "community": 8,
+      "community": 10,
       "norm_label": "site"
     },
     {
@@ -9908,7 +10108,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "proxy_renderer",
-      "community": 8,
+      "community": 10,
       "norm_label": "renderer"
     },
     {
@@ -9918,7 +10118,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_paths",
-      "community": 8,
+      "community": 10,
       "norm_label": "paths"
     },
     {
@@ -9928,7 +10128,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_config",
-      "community": 8,
+      "community": 10,
       "norm_label": "config"
     },
     {
@@ -9938,7 +10138,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "proxy_caddy_newrenderer",
-      "community": 8,
+      "community": 10,
       "norm_label": "newrenderer()"
     },
     {
@@ -9948,7 +10148,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "proxy_renderer_render",
-      "community": 8,
+      "community": 10,
       "norm_label": ".render()"
     },
     {
@@ -9958,7 +10158,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_projectrecord",
-      "community": 8,
+      "community": 10,
       "norm_label": "projectrecord"
     },
     {
@@ -9968,7 +10168,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "proxy_renderer_write",
-      "community": 8,
+      "community": 10,
       "norm_label": ".write()"
     },
     {
@@ -9978,7 +10178,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "proxy_renderer_apply",
-      "community": 8,
+      "community": 10,
       "norm_label": ".apply()"
     },
     {
@@ -9988,7 +10188,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "proxy_renderer_projectsite",
-      "community": 8,
+      "community": 10,
       "norm_label": ".projectsite()"
     },
     {
@@ -9998,7 +10198,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "proxy_caddy_sudovalidate",
-      "community": 8,
+      "community": 10,
       "norm_label": "sudovalidate()"
     },
     {
@@ -10008,7 +10208,7 @@
       "source_location": "L152",
       "_origin": "ast",
       "id": "proxy_caddy_runinteractive",
-      "community": 8,
+      "community": 10,
       "norm_label": "runinteractive()"
     },
     {
@@ -10018,7 +10218,7 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "proxy_caddy_selectprojects",
-      "community": 8,
+      "community": 10,
       "norm_label": "selectprojects()"
     },
     {
@@ -10028,7 +10228,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy_test",
-      "community": 8,
+      "community": 10,
       "norm_label": "caddy_test.go"
     },
     {
@@ -10038,7 +10238,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "proxy_caddy_test_testrendervueflasksite",
-      "community": 8,
+      "community": 10,
       "norm_label": "testrendervueflasksite()"
     },
     {
@@ -10048,7 +10248,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_proxy_caddy_test_go_t",
-      "community": 8,
+      "community": 10,
       "norm_label": "t"
     },
     {
@@ -14329,7 +14529,7 @@
       "label": "Uso rapido",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "docs_coverage_uso_rapido",
       "community": 68,
@@ -14339,7 +14539,7 @@
       "label": "Uso con un reporte ya existente",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L26",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "docs_coverage_uso_con_un_reporte_ya_existente",
       "community": 68,
@@ -14349,7 +14549,7 @@
       "label": "Como generar el reporte",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L40",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "docs_coverage_como_generar_el_reporte",
       "community": 68,
@@ -14359,7 +14559,7 @@
       "label": "Que se lee",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L55",
+      "source_location": "L57",
       "_origin": "ast",
       "id": "docs_coverage_que_se_lee",
       "community": 68,
@@ -14369,7 +14569,7 @@
       "label": "Salida",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L72",
+      "source_location": "L74",
       "_origin": "ast",
       "id": "docs_coverage_salida",
       "community": 68,
@@ -14379,7 +14579,7 @@
       "label": "Tres cosas que hace distinto",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L90",
+      "source_location": "L92",
       "_origin": "ast",
       "id": "docs_coverage_tres_cosas_que_hace_distinto",
       "community": 68,
@@ -14389,7 +14589,7 @@
       "label": "1. La unidad va siempre en la cabecera",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L92",
+      "source_location": "L94",
       "_origin": "ast",
       "id": "docs_coverage_1_la_unidad_va_siempre_en_la_cabecera",
       "community": 68,
@@ -14399,7 +14599,7 @@
       "label": "2. El total se pondera por unidades, nunca se promedian porcentajes",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L101",
+      "source_location": "L103",
       "_origin": "ast",
       "id": "docs_coverage_2_el_total_se_pondera_por_unidades_nunca_se_promedian_porcentajes",
       "community": 68,
@@ -14409,7 +14609,7 @@
       "label": "3. Se ordena por masa sin cubrir, no por porcentaje",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L110",
+      "source_location": "L112",
       "_origin": "ast",
       "id": "docs_coverage_3_se_ordena_por_masa_sin_cubrir_no_por_porcentaje",
       "community": 68,
@@ -14419,7 +14619,7 @@
       "label": "Que hace `--run`, paso a paso",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L123",
+      "source_location": "L125",
       "_origin": "ast",
       "id": "docs_coverage_que_hace_run_paso_a_paso",
       "community": 68,
@@ -14429,7 +14629,7 @@
       "label": "`--explain`: automatico no quiere decir opaco",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L151",
+      "source_location": "L153",
       "_origin": "ast",
       "id": "docs_coverage_explain_automatico_no_quiere_decir_opaco",
       "community": 68,
@@ -14439,17 +14639,47 @@
       "label": "Detalles que conviene saber",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L161",
+      "source_location": "L163",
       "_origin": "ast",
       "id": "docs_coverage_detalles_que_conviene_saber",
       "community": 68,
       "norm_label": "detalles que conviene saber"
     },
     {
+      "label": "`--structure`: donde esta el techo",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L191",
+      "_origin": "ast",
+      "id": "docs_coverage_structure_donde_esta_el_techo",
+      "community": 68,
+      "norm_label": "`--structure`: donde esta el techo"
+    },
+    {
+      "label": "Que cuenta como inalcanzable",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L225",
+      "_origin": "ast",
+      "id": "docs_coverage_que_cuenta_como_inalcanzable",
+      "community": 68,
+      "norm_label": "que cuenta como inalcanzable"
+    },
+    {
+      "label": "La atribucion es por AST, no por texto",
+      "file_type": "document",
+      "source_file": "docs/coverage.md",
+      "source_location": "L246",
+      "_origin": "ast",
+      "id": "docs_coverage_la_atribucion_es_por_ast_no_por_texto",
+      "community": 68,
+      "norm_label": "la atribucion es por ast, no por texto"
+    },
+    {
       "label": "Limites",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L189",
+      "source_location": "L256",
       "_origin": "ast",
       "id": "docs_coverage_limites",
       "community": 68,
@@ -14459,7 +14689,7 @@
       "label": "Un reporte vacio no es 0%",
       "file_type": "document",
       "source_file": "docs/coverage.md",
-      "source_location": "L202",
+      "source_location": "L270",
       "_origin": "ast",
       "id": "docs_coverage_un_reporte_vacio_no_es_0",
       "community": 68,
@@ -18844,6 +19074,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/coverage.go",
+      "source_location": "L254",
+      "weight": 1.0,
+      "source": "cli_coverage",
+      "target": "cli_coverage_firstarg",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
       "source_location": "L18",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -18923,6 +19163,28 @@
     {
       "relation": "calls",
       "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "cli_coverage_newcoveragecmd",
+      "target": "cli_coverage_firstarg",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "cli_coverage_newcoveragecmd",
+      "target": "cli_coverage_run_coverageprojectroot"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "internal/cli/coverage.go",
@@ -18930,6 +19192,17 @@
       "weight": 1.0,
       "source": "cli_coverage_newcoveragecmd",
       "target": "cli_coverage_run_runcoverage"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage.go",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "cli_coverage_newcoveragecmd",
+      "target": "cli_coverage_structure_runcoveragestructure"
     },
     {
       "relation": "calls",
@@ -19229,14 +19502,25 @@
       "target": "filereport"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_writecoveragefunctions",
+      "target": "cli_coverage_truncatecoveragepath"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run",
-      "target": "cli_coverage_run_coverageprojectroot",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_coverageprojectroot"
     },
     {
       "relation": "contains",
@@ -19244,9 +19528,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L133",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run",
-      "target": "cli_coverage_run_coveragestack",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_coveragestack"
     },
     {
       "relation": "contains",
@@ -19254,9 +19538,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L198",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run",
-      "target": "cli_coverage_run_firstnonemptycoverage",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_firstnonemptycoverage"
     },
     {
       "relation": "contains",
@@ -19264,9 +19548,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L189",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run",
-      "target": "cli_coverage_run_lastlines",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_lastlines"
     },
     {
       "relation": "contains",
@@ -19274,9 +19558,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run",
-      "target": "cli_coverage_run_runcoverage",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_runcoverage"
     },
     {
       "relation": "contains",
@@ -19284,9 +19568,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L166",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run",
-      "target": "cli_coverage_run_warncoveragereportnotignored",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_warncoveragereportnotignored"
     },
     {
       "relation": "contains",
@@ -19294,9 +19578,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L151",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run",
-      "target": "cli_coverage_run_writecoveragetestfailure",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_writecoveragetestfailure"
     },
     {
       "relation": "contains",
@@ -19304,9 +19588,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run",
-      "target": "cli_coveragerunflags",
-      "confidence_score": 1.0
+      "target": "cli_coveragerunflags"
     },
     {
       "relation": "references",
@@ -19315,19 +19599,19 @@
       "source_location": "L26",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_runcoverage",
-      "target": "cli_coveragerunflags",
-      "confidence_score": 1.0
+      "target": "cli_coveragerunflags"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/coverage_run.go",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0,
       "context": "field",
       "source": "cli_coveragerunflags",
-      "target": "coverageviewoptions",
+      "target": "internal_cli_coverage_run_go_coverageviewoptions",
       "confidence_score": 1.0
     },
     {
@@ -19337,9 +19621,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_runcoverage",
-      "target": "cli_coverage_run_coverageprojectroot",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_coverageprojectroot"
     },
     {
       "relation": "calls",
@@ -19348,9 +19632,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_runcoverage",
-      "target": "cli_coverage_run_coveragestack",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_coveragestack"
     },
     {
       "relation": "calls",
@@ -19359,9 +19643,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L61",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_runcoverage",
-      "target": "cli_coverage_run_firstnonemptycoverage",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_firstnonemptycoverage"
     },
     {
       "relation": "calls",
@@ -19370,9 +19654,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L106",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_runcoverage",
-      "target": "cli_coverage_run_warncoveragereportnotignored",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_warncoveragereportnotignored"
     },
     {
       "relation": "calls",
@@ -19381,9 +19665,20 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L93",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_runcoverage",
-      "target": "cli_coverage_run_writecoveragetestfailure",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_writecoveragetestfailure"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_run.go",
+      "source_location": "L101",
+      "weight": 1.0,
+      "source": "cli_coverage_run_runcoverage",
+      "target": "cli_coverage_structure_runcoveragestructure"
     },
     {
       "relation": "references",
@@ -19392,9 +19687,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_runcoverage",
-      "target": "internal_cli_coverage_run_go_command",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_run_go_command"
     },
     {
       "relation": "calls",
@@ -19414,9 +19709,9 @@
       "source_file": "internal/cli/coverage_run.go",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_writecoveragetestfailure",
-      "target": "cli_coverage_run_lastlines",
-      "confidence_score": 1.0
+      "target": "cli_coverage_run_lastlines"
     },
     {
       "relation": "references",
@@ -19425,9 +19720,9 @@
       "source_location": "L151",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_writecoveragetestfailure",
-      "target": "internal_cli_coverage_run_go_writer",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_run_go_writer"
     },
     {
       "relation": "references",
@@ -19436,9 +19731,9 @@
       "source_location": "L151",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_writecoveragetestfailure",
-      "target": "runresult",
-      "confidence_score": 1.0
+      "target": "runresult"
     },
     {
       "relation": "references",
@@ -19447,9 +19742,9 @@
       "source_location": "L166",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_run_warncoveragereportnotignored",
-      "target": "internal_cli_coverage_run_go_writer",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_run_go_writer"
     },
     {
       "relation": "calls",
@@ -19461,6 +19756,511 @@
       "weight": 1.0,
       "source": "cli_coverage_run_warncoveragereportnotignored",
       "target": "version_version_string"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "cli_coverage_structure",
+      "target": "cli_coverage_structure_runcoveragestructure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "cli_coverage_structure",
+      "target": "cli_coverage_structure_writecoverageceiling",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "cli_coverage_structure",
+      "target": "cli_coverage_structure_writecoveragefunctions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "cli_coverage_structure",
+      "target": "cli_coverage_structure_writecoveragestructure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "cli_coverage_structure",
+      "target": "cli_coverage_structure_writecoveragestructurecaveats",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "cli_coverage_structure",
+      "target": "cli_coveragestructureflags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L23",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_runcoveragestructure",
+      "target": "cli_coveragestructureflags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L55",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoveragestructure",
+      "target": "cli_coveragestructureflags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L19",
+      "weight": 1.0,
+      "context": "field",
+      "source": "cli_coveragestructureflags",
+      "target": "internal_cli_coverage_structure_go_coverageviewoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L91",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoveragefunctions",
+      "target": "internal_cli_coverage_structure_go_coverageviewoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_runcoveragestructure",
+      "target": "cli_coverage_structure_writecoveragestructure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L23",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_runcoveragestructure",
+      "target": "internal_cli_coverage_structure_go_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L23",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_runcoveragestructure",
+      "target": "internal_cli_coverage_structure_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoverageceiling",
+      "target": "internal_cli_coverage_structure_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L91",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoveragefunctions",
+      "target": "internal_cli_coverage_structure_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L55",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoveragestructure",
+      "target": "internal_cli_coverage_structure_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L139",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoveragestructurecaveats",
+      "target": "internal_cli_coverage_structure_go_writer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_writecoveragestructure",
+      "target": "cli_coverage_structure_writecoverageceiling",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_writecoveragestructure",
+      "target": "cli_coverage_structure_writecoveragefunctions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_writecoveragestructure",
+      "target": "cli_coverage_structure_writecoveragestructurecaveats",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L55",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoveragestructure",
+      "target": "structurereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoverageceiling",
+      "target": "structurereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L91",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoveragefunctions",
+      "target": "structurereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L139",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_writecoveragestructurecaveats",
+      "target": "structurereport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_structure.go",
+      "source_location": "L121",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_writecoveragefunctions",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test",
+      "target": "cli_coverage_structure_test_gomodulefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test",
+      "target": "cli_coverage_structure_test_testcoveragestructurefailswithoutamodule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test",
+      "target": "cli_coverage_structure_test_testcoveragestructureishonestaboutotherstacks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L144",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test",
+      "target": "cli_coverage_structure_test_testcoveragestructurejsoncarriesfunctionattribution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L97",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test",
+      "target": "cli_coverage_structure_test_testcoveragestructuremarksstoredclosuresinline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test",
+      "target": "cli_coverage_structure_test_testcoveragestructurereportstheceiling",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L14",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_test_gomodulefixture",
+      "target": "internal_cli_coverage_structure_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L190",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructurefailswithoutamodule",
+      "target": "cli_coverage_structure_test_gomodulefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L145",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructurejsoncarriesfunctionattribution",
+      "target": "cli_coverage_structure_test_gomodulefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructuremarksstoredclosuresinline",
+      "target": "cli_coverage_structure_test_gomodulefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructurereportstheceiling",
+      "target": "cli_coverage_structure_test_gomodulefixture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L189",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_test_testcoveragestructurefailswithoutamodule",
+      "target": "internal_cli_coverage_structure_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L123",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_test_testcoveragestructureishonestaboutotherstacks",
+      "target": "internal_cli_coverage_structure_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L144",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_test_testcoveragestructurejsoncarriesfunctionattribution",
+      "target": "internal_cli_coverage_structure_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L97",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_test_testcoveragestructuremarksstoredclosuresinline",
+      "target": "internal_cli_coverage_structure_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_coverage_structure_test_testcoveragestructurereportstheceiling",
+      "target": "internal_cli_coverage_structure_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructurereportstheceiling",
+      "target": "cli_coverage_test_runcoveragecmd"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L100",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructuremarksstoredclosuresinline",
+      "target": "cli_coverage_test_runcoveragecmd"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L126",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructureishonestaboutotherstacks",
+      "target": "cli_coverage_test_runcoveragecmd"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructureishonestaboutotherstacks",
+      "target": "cli_coverage_test_writecoveragefixture"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L147",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructurejsoncarriesfunctionattribution",
+      "target": "cli_coverage_test_runcoveragecmd"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/coverage_structure_test.go",
+      "source_location": "L193",
+      "weight": 1.0,
+      "source": "cli_coverage_structure_test_testcoveragestructurefailswithoutamodule",
+      "target": "cli_coverage_test_runcoveragecmd"
     },
     {
       "relation": "contains",
@@ -26932,9 +27732,9 @@
       "source_file": "internal/compose/project.go",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "compose_project",
-      "target": "compose_manifesttest",
-      "confidence_score": 1.0
+      "target": "compose_manifesttest"
     },
     {
       "relation": "contains",
@@ -27162,9 +27962,9 @@
       "source_file": "internal/compose/project.go",
       "source_location": "L78",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "compose_project",
-      "target": "compose_projecttest",
-      "confidence_score": 1.0
+      "target": "compose_projecttest"
     },
     {
       "relation": "references",
@@ -27184,9 +27984,9 @@
       "source_location": "L42",
       "weight": 1.0,
       "context": "field",
+      "confidence_score": 1.0,
       "source": "compose_project",
-      "target": "projecttest",
-      "confidence_score": 1.0
+      "target": "projecttest"
     },
     {
       "relation": "references",
@@ -27217,9 +28017,9 @@
       "source_location": "L49",
       "weight": 1.0,
       "context": "field",
+      "confidence_score": 1.0,
       "source": "compose_manifest",
-      "target": "manifesttest",
-      "confidence_score": 1.0
+      "target": "manifesttest"
     },
     {
       "relation": "calls",
@@ -50137,9 +50937,9 @@
       "source_file": "docs/coverage.md",
       "source_location": "L189",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_coverage_devherd_coverage",
-      "target": "docs_coverage_limites",
-      "confidence_score": 1.0
+      "target": "docs_coverage_limites"
     },
     {
       "relation": "contains",
@@ -50147,9 +50947,9 @@
       "source_file": "docs/coverage.md",
       "source_location": "L123",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_coverage_devherd_coverage",
-      "target": "docs_coverage_que_hace_run_paso_a_paso",
-      "confidence_score": 1.0
+      "target": "docs_coverage_que_hace_run_paso_a_paso"
     },
     {
       "relation": "contains",
@@ -50170,6 +50970,16 @@
       "confidence_score": 1.0,
       "source": "docs_coverage_devherd_coverage",
       "target": "docs_coverage_salida"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L191",
+      "weight": 1.0,
+      "source": "docs_coverage_devherd_coverage",
+      "target": "docs_coverage_structure_donde_esta_el_techo",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -50197,9 +51007,9 @@
       "source_file": "docs/coverage.md",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_coverage_devherd_coverage",
-      "target": "docs_coverage_uso_con_un_reporte_ya_existente",
-      "confidence_score": 1.0
+      "target": "docs_coverage_uso_con_un_reporte_ya_existente"
     },
     {
       "relation": "contains",
@@ -50207,9 +51017,9 @@
       "source_file": "docs/coverage.md",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_coverage_devherd_coverage",
-      "target": "docs_coverage_uso_rapido",
-      "confidence_score": 1.0
+      "target": "docs_coverage_uso_rapido"
     },
     {
       "relation": "contains",
@@ -50247,9 +51057,9 @@
       "source_file": "docs/coverage.md",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_coverage_que_hace_run_paso_a_paso",
-      "target": "docs_coverage_detalles_que_conviene_saber",
-      "confidence_score": 1.0
+      "target": "docs_coverage_detalles_que_conviene_saber"
     },
     {
       "relation": "contains",
@@ -50257,8 +51067,28 @@
       "source_file": "docs/coverage.md",
       "source_location": "L151",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_coverage_que_hace_run_paso_a_paso",
-      "target": "docs_coverage_explain_automatico_no_quiere_decir_opaco",
+      "target": "docs_coverage_explain_automatico_no_quiere_decir_opaco"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L246",
+      "weight": 1.0,
+      "source": "docs_coverage_structure_donde_esta_el_techo",
+      "target": "docs_coverage_la_atribucion_es_por_ast_no_por_texto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coverage.md",
+      "source_location": "L225",
+      "weight": 1.0,
+      "source": "docs_coverage_structure_donde_esta_el_techo",
+      "target": "docs_coverage_que_cuenta_como_inalcanzable",
       "confidence_score": 1.0
     },
     {
@@ -53177,5 +54007,5 @@
       "source_file": "docs/IMPROVEMENTS.md"
     }
   ],
-  "built_at_commit": "d137ef7e8aeeb21c99f63e93e892f755b42b7bed"
+  "built_at_commit": "d8fe08f53808f85b4f81585abe44038e1d54b567"
 }

@@ -57,27 +57,39 @@ func newCoverageCmd() *cobra.Command {
 				})
 			}
 
-			if strings.TrimSpace(report) == "" {
-				return fmt.Errorf("either --report <path> or --run is required")
+			// El root se resuelve siempre: lo necesita el descubrimiento para saber
+			// donde buscar, y --structure para encontrar el go.mod.
+			root, err := coverageProjectRoot(firstArg(args))
+			if err != nil {
+				return err
 			}
 
-			parsed, err := coverage.ParseFile(report)
+			reportPath := strings.TrimSpace(report)
+			if reportPath == "" {
+				// --report explicito manda sobre el autodescubrimiento y no busca nada.
+				discovery, err := coverage.DiscoverReport(root, coverageStackOrEmpty(root))
+				if err != nil {
+					return err
+				}
+				// Decir que archivo se uso no es cortesia: sin eso, leer el reporte del
+				// front creyendo que es el del back no deja ninguna señal.
+				writeCoverageDiscovery(cmd.OutOrStdout(), discovery)
+				reportPath = discovery.Chosen.Path
+			}
+
+			parsed, err := coverage.ParseFile(reportPath)
 			if err != nil {
 				return err
 			}
 
 			if structure {
-				// El root no sale del reporte: puede estar en /tmp. Sale del proyecto
-				// que se analiza, que es donde vive el go.mod que traduce las rutas.
-				root, err := coverageProjectRoot(firstArg(args))
-				if err != nil {
-					return err
-				}
-				view.Source = report
+				// El root no sale del reporte, que puede estar en /tmp: sale del
+				// proyecto, que es donde vive el go.mod que traduce las rutas.
+				view.Source = reportPath
 
 				return runCoverageStructure(cmd.OutOrStdout(), parsed, coverageStructureFlags{
 					Root:   root,
-					Source: report,
+					Source: reportPath,
 					View:   view,
 					AsJSON: asJSON,
 				})
@@ -87,14 +99,15 @@ func newCoverageCmd() *cobra.Command {
 				return writeCoverageJSON(cmd.OutOrStdout(), parsed)
 			}
 
-			view.Source = report
+			view.Source = reportPath
 			writeCoverageReport(cmd.OutOrStdout(), parsed, view)
 
 			return nil
 		},
 	}
 
-	cmd.Flags().StringVar(&report, "report", "", "Path to an existing coverage report to read")
+	cmd.Flags().StringVar(&report, "report", "",
+		"Path to an existing coverage report. Without it, the report is discovered by the project's stack")
 	cmd.Flags().BoolVar(&run, "run", false, "Prepare the project container, run its tests and read the result")
 	cmd.Flags().BoolVar(&explain, "explain", false, "Print the commands --run would execute, without running any")
 	cmd.Flags().BoolVar(&structure, "structure", false,
@@ -257,4 +270,42 @@ func firstArg(args []string) string {
 	}
 
 	return args[0]
+}
+
+// coverageStackOrEmpty detecta el stack sin fallar si no lo reconoce. El
+// descubrimiento sabe buscar todas las convenciones cuando no hay stack, y exigir
+// que el proyecto sea identificable seria mas estricto que el problema: lo que se
+// busca es un archivo, no un ecosistema.
+func coverageStackOrEmpty(root string) string {
+	stack, err := coverageStack("", root)
+	if err != nil {
+		return ""
+	}
+
+	return stack
+}
+
+// writeCoverageDiscovery dice de donde salio el reporte y que mas habia. Elegir en
+// silencio entre dos reportes es como se lee una medicion que no era la buscada.
+func writeCoverageDiscovery(out io.Writer, discovery coverage.Discovery) {
+	origin := discovery.Chosen.RelPath
+	switch {
+	case discovery.Chosen.Managed:
+		origin += "  (written by devherd coverage --run)"
+	case discovery.Chosen.Stack != "":
+		origin += "  (" + discovery.Chosen.Stack + " convention)"
+	}
+	fmt.Fprintf(out, "using %s\n", origin)
+
+	for _, other := range discovery.Others {
+		note := other.RelPath
+		switch {
+		case other.Managed:
+			note += "  (written by devherd coverage --run)"
+		case other.Stack != "":
+			note += "  (" + other.Stack + " convention)"
+		}
+		fmt.Fprintf(out, "  also found, not used: %s\n", note)
+	}
+	fmt.Fprintln(out)
 }
