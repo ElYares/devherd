@@ -22,11 +22,47 @@ const (
 	UnitLines      Unit = "lines"
 )
 
+// Block es un bloque basico del reporte, con el rango de lineas que ocupa en el
+// fuente. Solo lo produce el perfil de Go: es el unico de los cinco formatos que
+// dice **donde** empieza y termina cada bloque medido, y sin ese dato no se puede
+// atribuir cobertura a funciones. Los demas parsers dejan Blocks vacio, y esa
+// ausencia es justo lo que distingue "hay analisis estructural disponible" de
+// "solo hay agregacion por archivo".
+type Block struct {
+	StartLine int
+	EndLine   int
+	// Stmts son las unidades del bloque, en las unidades del reporte.
+	Stmts int
+	// Count es cuantas veces se ejecuto. Cubierto es Count > 0; el numero exacto
+	// solo tiene sentido en modo `count` y se conserva porque no cuesta nada.
+	Count int
+}
+
+// Covered dice si el bloque llego a ejecutarse.
+func (b Block) Covered() bool {
+	return b.Count > 0
+}
+
 // FileReport es la cobertura de un archivo, en las unidades del reporte.
 type FileReport struct {
 	Path    string `json:"path"`
 	Total   int    `json:"total"`
 	Covered int    `json:"covered"`
+	// Blocks es el detalle por rango de lineas, cuando el formato lo trae. Vacio
+	// no significa "sin cobertura", significa "este formato no lo reporta".
+	//
+	// Fuera del JSON a proposito: es el insumo del analisis estructural, no parte
+	// del reporte. Serializarlo multiplica por 50 la salida de `coverage --json`
+	// (22.214 lineas contra 400, medido sobre este repo) para dar un detalle que
+	// nadie consume crudo. Lo que se publica es la atribucion por funcion, que es
+	// lo que se pidio y ademas es legible.
+	Blocks []Block `json:"-"`
+}
+
+// HasBlocks dice si el archivo trae detalle por rango de lineas, que es la
+// precondicion de cualquier analisis estructural.
+func (f FileReport) HasBlocks() bool {
+	return len(f.Blocks) > 0
 }
 
 // Uncovered es la masa sin cubrir, que es lo que decide donde trabajar. Un
@@ -86,6 +122,19 @@ func (r Report) Percent() float64 {
 // se ven como 0% y significan cosas opuestas.
 func (r Report) IsEmpty() bool {
 	return r.Total() == 0
+}
+
+// HasBlocks dice si el reporte trae detalle por rango de lineas en al menos un
+// archivo. Es la precondicion del analisis estructural: sin bloques solo se puede
+// agregar por archivo, y decirlo es mas honesto que inventar un techo.
+func (r Report) HasBlocks() bool {
+	for _, file := range r.Files {
+		if file.HasBlocks() {
+			return true
+		}
+	}
+
+	return false
 }
 
 // ByUncovered devuelve los archivos ordenados por masa sin cubrir, de mayor a
@@ -196,9 +245,21 @@ func (r Report) Merge(other Report) (Report, error) {
 		// cobertura, no la suma, que inventaria unidades que no existen.
 		if file.Covered > existing.Covered {
 			existing.Covered = file.Covered
+			// Los bloques siguen a la medicion que gana. Mezclarlos rango a rango
+			// exigiria que las dos corridas vieran el mismo fuente, y nada lo
+			// garantiza: quedarse con los del perdedor daria una atribucion por
+			// funcion que no corresponde a los totales que se muestran.
+			if file.HasBlocks() {
+				existing.Blocks = file.Blocks
+			}
 		}
 		if file.Total > existing.Total {
 			existing.Total = file.Total
+		}
+		// Un formato con bloques y otro sin ellos: se conservan los que hay, que
+		// es mejor que perderlos porque el otro lado no los reporta.
+		if !existing.HasBlocks() && file.HasBlocks() {
+			existing.Blocks = file.Blocks
 		}
 		index[file.Path] = existing
 	}
