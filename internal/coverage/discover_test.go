@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 )
 
 // projectWith arma un proyecto con los reportes indicados. El contenido no
@@ -217,4 +218,83 @@ func asErrNoReportFound(err error, target *ErrNoReportFound) bool {
 	}
 
 	return ok
+}
+
+// Una cobertura vieja leida como actual es peor que no tenerla: da por probado
+// codigo que puede haber cambiado entero desde entonces.
+func TestCandidateIsStaleAfterSevenDays(t *testing.T) {
+	now := time.Date(2026, 8, 26, 12, 0, 0, 0, time.UTC)
+
+	cases := []struct {
+		name  string
+		age   time.Duration
+		stale bool
+	}{
+		{"recien escrito", 0, false},
+		{"seis dias", 6 * 24 * time.Hour, false},
+		{"justo siete dias", StaleReportAge, false},
+		{"siete dias y un minuto", StaleReportAge + time.Minute, true},
+		{"un mes", 30 * 24 * time.Hour, true},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			candidate := Candidate{Path: "coverage.out", ModTime: now.Add(-tc.age)}
+			if candidate.IsStale(now) != tc.stale {
+				t.Errorf("expected IsStale()=%v for an age of %s, got %v",
+					tc.stale, tc.age, candidate.IsStale(now))
+			}
+		})
+	}
+}
+
+// Sin fecha no se inventa una antiguedad: un candidato sin ModTime no es viejo,
+// es desconocido, y avisar de algo que no se sabe es ruido.
+func TestCandidateWithoutModTimeIsNeverStale(t *testing.T) {
+	if (Candidate{Path: "coverage.out"}).IsStale(time.Now()) {
+		t.Error("a candidate with no mod time should not be reported as stale")
+	}
+}
+
+// El descubrimiento anota cuando se escribio cada reporte, que es de donde sale
+// el aviso.
+func TestDiscoverReportRecordsTheModTime(t *testing.T) {
+	root := projectWith(t, "coverage.out")
+	old := time.Now().Add(-30 * 24 * time.Hour)
+	if err := os.Chtimes(filepath.Join(root, "coverage.out"), old, old); err != nil {
+		t.Fatalf("chtimes: %v", err)
+	}
+
+	discovery, err := DiscoverReport(root, "go")
+	if err != nil {
+		t.Fatalf("DiscoverReport returned error: %v", err)
+	}
+	if discovery.Chosen.ModTime.IsZero() {
+		t.Fatal("the candidate should carry the file's mod time")
+	}
+	if !discovery.Chosen.IsStale(time.Now()) {
+		t.Errorf("a 30-day-old report should be stale, got an age of %s",
+			discovery.Chosen.Age(time.Now()))
+	}
+}
+
+// Un reporte pasado con --report tambien tiene edad, y engaña igual.
+func TestCandidateForRecordsTheModTimeOfAnExplicitReport(t *testing.T) {
+	root := projectWith(t, "somewhere/else.out")
+	path := filepath.Join(root, "somewhere", "else.out")
+	old := time.Now().Add(-14 * 24 * time.Hour)
+	if err := os.Chtimes(path, old, old); err != nil {
+		t.Fatalf("chtimes: %v", err)
+	}
+
+	candidate, err := CandidateFor(path)
+	if err != nil {
+		t.Fatalf("CandidateFor returned error: %v", err)
+	}
+	if !candidate.IsStale(time.Now()) {
+		t.Error("a 14-day-old explicit report should be stale")
+	}
+	if candidate.Managed {
+		t.Error("a report that is not named .devherd.coverage.* is not managed")
+	}
 }

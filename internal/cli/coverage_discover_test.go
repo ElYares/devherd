@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/devherd/devherd/internal/coverage"
 )
@@ -133,5 +134,70 @@ func TestCoverageDiscoveryFeedsTheStructuralAnalysis(t *testing.T) {
 	}
 	if !strings.Contains(out, "reachable ceiling") {
 		t.Errorf("expected the structural report, got:\n%s", out)
+	}
+}
+
+// Una cobertura de hace semanas se lee como actual si nadie avisa, y da por
+// probado codigo que pudo cambiar entero desde entonces.
+func TestCoverageWarnsAboutAStaleReport(t *testing.T) {
+	root := projectWithReports(t, map[string]string{
+		"go.mod":       "module example.com/app\n\ngo 1.25.0\n",
+		"coverage.out": goProfileTwoFiles,
+	})
+	old := time.Now().Add(-21 * 24 * time.Hour)
+	if err := os.Chtimes(filepath.Join(root, "coverage.out"), old, old); err != nil {
+		t.Fatalf("chtimes: %v", err)
+	}
+
+	out, err := runCoverageCmd(t, root)
+	if err != nil {
+		t.Fatalf("a stale report should still be read, not rejected: %v\n%s", err, out)
+	}
+
+	if !strings.Contains(out, "21 days old") {
+		t.Errorf("expected the warning to name the age, got:\n%s", out)
+	}
+	if !strings.Contains(out, "devherd coverage --run") {
+		t.Errorf("expected the warning to say how to regenerate it, got:\n%s", out)
+	}
+	// El aviso no reemplaza al reporte: la medicion vieja sigue siendo una
+	// medicion, solo que de otro momento.
+	if !strings.Contains(out, "statements") {
+		t.Errorf("the report should still be printed, got:\n%s", out)
+	}
+}
+
+// Un reporte fresco no lleva aviso: avisar siempre lo convierte en ruido que se
+// ignora, y entonces no avisa de nada.
+func TestCoverageDoesNotWarnAboutAFreshReport(t *testing.T) {
+	root := projectWithReports(t, map[string]string{
+		"go.mod":       "module example.com/app\n\ngo 1.25.0\n",
+		"coverage.out": goProfileTwoFiles,
+	})
+
+	out, err := runCoverageCmd(t, root)
+	if err != nil {
+		t.Fatalf("coverage returned error: %v\n%s", err, out)
+	}
+	if strings.Contains(out, "days old") {
+		t.Errorf("a report written just now should not be flagged as stale, got:\n%s", out)
+	}
+}
+
+// El aviso vale tambien para --report: un reporte viejo engaña venga de donde
+// venga.
+func TestCoverageWarnsAboutAStaleExplicitReport(t *testing.T) {
+	path := writeCoverageFixture(t, "old.lcov", lcovTwoFiles)
+	old := time.Now().Add(-40 * 24 * time.Hour)
+	if err := os.Chtimes(path, old, old); err != nil {
+		t.Fatalf("chtimes: %v", err)
+	}
+
+	out, err := runCoverageCmd(t, "--report", path)
+	if err != nil {
+		t.Fatalf("coverage --report returned error: %v\n%s", err, out)
+	}
+	if !strings.Contains(out, "40 days old") {
+		t.Errorf("expected the warning for an explicit stale report, got:\n%s", out)
 	}
 }

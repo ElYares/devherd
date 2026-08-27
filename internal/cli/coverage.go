@@ -6,6 +6,7 @@ import (
 	"io"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/devherd/devherd/internal/coverage"
 	"github.com/spf13/cobra"
@@ -65,6 +66,7 @@ func newCoverageCmd() *cobra.Command {
 			}
 
 			reportPath := strings.TrimSpace(report)
+			chosen := coverage.Candidate{}
 			if reportPath == "" {
 				// --report explicito manda sobre el autodescubrimiento y no busca nada.
 				discovery, err := coverage.DiscoverReport(root, coverageStackOrEmpty(root))
@@ -74,8 +76,15 @@ func newCoverageCmd() *cobra.Command {
 				// Decir que archivo se uso no es cortesia: sin eso, leer el reporte del
 				// front creyendo que es el del back no deja ninguna señal.
 				writeCoverageDiscovery(cmd.OutOrStdout(), discovery)
-				reportPath = discovery.Chosen.Path
+				chosen = discovery.Chosen
+				reportPath = chosen.Path
+			} else if candidate, err := coverage.CandidateFor(reportPath); err == nil {
+				chosen = candidate
 			}
+
+			// El aviso de antiguedad va por stderr y para los dos caminos: un reporte
+			// viejo engaña igual venga de --report o del descubrimiento.
+			warnCoverageReportIsStale(cmd.ErrOrStderr(), chosen)
 
 			parsed, err := coverage.ParseFile(reportPath)
 			if err != nil {
@@ -288,24 +297,25 @@ func coverageStackOrEmpty(root string) string {
 // writeCoverageDiscovery dice de donde salio el reporte y que mas habia. Elegir en
 // silencio entre dos reportes es como se lee una medicion que no era la buscada.
 func writeCoverageDiscovery(out io.Writer, discovery coverage.Discovery) {
-	origin := discovery.Chosen.RelPath
-	switch {
-	case discovery.Chosen.Managed:
-		origin += "  (written by devherd coverage --run)"
-	case discovery.Chosen.Stack != "":
-		origin += "  (" + discovery.Chosen.Stack + " convention)"
-	}
-	fmt.Fprintf(out, "using %s\n", origin)
-
+	fmt.Fprintf(out, "using %s\n", coverage.DescribeCandidate(discovery.Chosen))
 	for _, other := range discovery.Others {
-		note := other.RelPath
-		switch {
-		case other.Managed:
-			note += "  (written by devherd coverage --run)"
-		case other.Stack != "":
-			note += "  (" + other.Stack + " convention)"
-		}
-		fmt.Fprintf(out, "  also found, not used: %s\n", note)
+		fmt.Fprintf(out, "  also found, not used: %s\n", coverage.DescribeCandidate(other))
 	}
+	fmt.Fprintln(out)
+}
+
+// warnCoverageReportIsStale avisa de un reporte viejo. Va por stderr para no
+// ensuciar el --json, y no falla: el reporte se sigue leyendo, porque una medicion
+// vieja no es invalida, solo es de otro momento. Lo que no puede pasar es leerla
+// como si fuera de hoy.
+func warnCoverageReportIsStale(out io.Writer, candidate coverage.Candidate) {
+	if candidate.Path == "" || !candidate.IsStale(time.Now()) {
+		return
+	}
+
+	days := int(candidate.Age(time.Now()).Hours() / 24)
+	fmt.Fprintf(out, "WARNING: %s is %d days old.\n", coverage.DescribeCandidate(candidate), days)
+	fmt.Fprintln(out, "  The numbers below describe the code as it was then, not as it is now.")
+	fmt.Fprintln(out, "  Regenerate it with devherd coverage --run.")
 	fmt.Fprintln(out)
 }

@@ -55,6 +55,22 @@ Tres reglas que valen la pena:
   reportes de formatos distintos, y tomar uno en silencio es como se lee la
   medicion equivocada creyendo que es la buena.
 
+### Un reporte viejo lleva aviso
+
+A partir de **siete dias**, el comando avisa antes de mostrar los numeros:
+
+```text
+WARNING: coverage.out  (go convention) is 23 days old.
+  The numbers below describe the code as it was then, not as it is now.
+  Regenerate it with devherd coverage --run.
+```
+
+Una cobertura vieja leida como actual es peor que no tenerla: da por probado
+codigo que pudo cambiar entero desde entonces. El aviso **no bloquea**, porque una
+medicion vieja sigue siendo una medicion; lo que no puede pasar es leerla creyendo
+que es de hoy. Va por `stderr`, asi que no ensucia `--json`, y aplica igual a
+`--report` que al autodescubrimiento.
+
 Sin ningun reporte, el error dice **donde busco** y el comando que generaria uno:
 
 ```text

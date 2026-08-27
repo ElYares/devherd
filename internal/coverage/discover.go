@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 )
 
 // Candidate es un reporte encontrado en el proyecto, con el porque de su lugar en
@@ -23,6 +24,30 @@ type Candidate struct {
 	// Managed marca los reportes que escribio DevHerd con `--run`. Se distinguen
 	// porque pueden ser de una corrida vieja, y el del proyecto manda sobre ellos.
 	Managed bool `json:"managed,omitempty"`
+	// ModTime es cuando se escribio el archivo, para poder avisar si esta viejo.
+	ModTime time.Time `json:"mod_time"`
+}
+
+// StaleReportAge es a partir de cuando un reporte se considera viejo. Siete dias
+// es una semana de trabajo: mas que eso y casi seguro no refleja el codigo que
+// hay hoy delante.
+const StaleReportAge = 7 * 24 * time.Hour
+
+// Age es la antiguedad del reporte respecto a now. Se recibe el instante en vez de
+// llamar a time.Now() adentro para que la prueba pueda fijarlo.
+func (c Candidate) Age(now time.Time) time.Duration {
+	if c.ModTime.IsZero() {
+		return 0
+	}
+
+	return now.Sub(c.ModTime)
+}
+
+// IsStale dice si el reporte es lo bastante viejo como para no fiarse. Una
+// cobertura vieja leida como actual es peor que no tenerla: da por probado codigo
+// que puede haber cambiado entero desde entonces.
+func (c Candidate) IsStale(now time.Time) bool {
+	return c.Age(now) > StaleReportAge
 }
 
 // stackReportPaths son las rutas donde cada ecosistema deja su reporte por
@@ -191,7 +216,13 @@ func DiscoverReport(root, stack string) (Discovery, error) {
 			return Candidate{}, false
 		}
 
-		return Candidate{Path: absolute, RelPath: relative, Stack: forStack, Managed: managed}, true
+		return Candidate{
+			Path:    absolute,
+			RelPath: relative,
+			Stack:   forStack,
+			Managed: managed,
+			ModTime: info.ModTime(),
+		}, true
 	}
 
 	// Primero las convenciones del stack detectado, que son las unicas elegibles.
@@ -276,4 +307,35 @@ func stackOwning(catalog map[string][]string, relative string) string {
 	}
 
 	return ""
+}
+
+// DescribeCandidate es la ruta del reporte con el porque de su procedencia. Vive
+// aqui y no en el comando para que el descubrimiento y el aviso de antiguedad
+// nombren los archivos igual.
+func DescribeCandidate(candidate Candidate) string {
+	switch {
+	case candidate.Managed:
+		return candidate.RelPath + "  (written by devherd coverage --run)"
+	case candidate.Stack != "":
+		return candidate.RelPath + "  (" + candidate.Stack + " convention)"
+	}
+
+	return candidate.RelPath
+}
+
+// CandidateFor construye el candidato de una ruta suelta, para poder avisar de la
+// antiguedad tambien cuando el reporte llego por --report y no por descubrimiento.
+// Un reporte viejo engaña igual venga de donde venga.
+func CandidateFor(path string) (Candidate, error) {
+	info, err := os.Stat(path)
+	if err != nil {
+		return Candidate{}, err
+	}
+
+	return Candidate{
+		Path:    path,
+		RelPath: filepath.Base(path),
+		Managed: strings.HasPrefix(filepath.Base(path), ManagedReportPrefix),
+		ModTime: info.ModTime(),
+	}, nil
 }
