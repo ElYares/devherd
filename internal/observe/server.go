@@ -111,6 +111,16 @@ func (s Server) ListenAndServeOn(ctx context.Context, addrs ...string) error {
 		}()
 	}
 
+	// El latido corre siempre, no dentro del poller: el poller depende de Docker
+	// y el collector puede estar perfectamente vivo sin el. Atarlos dejaria sin
+	// registro justo a quien no usa contenedores, que es quien mas necesita saber
+	// que el collector estuvo escuchando.
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		s.beat(pollCtx)
+	}()
+
 	select {
 	case <-ctx.Done():
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -402,4 +412,43 @@ func writeError(w http.ResponseWriter, status int, message string) {
 	writeJSON(w, status, map[string]any{
 		"error": message,
 	})
+}
+
+// heartbeatInterval es cada cuanto el collector marca que sigue vivo. Tambien es
+// la resolucion del registro: si el proceso muere de golpe, el ultimo latido
+// escrito es lo mas cerca que se puede estar del momento real de la caida.
+const heartbeatInterval = 10 * time.Second
+
+// beat abre la corrida del collector y la va marcando. Ningun fallo aqui puede
+// tumbar el collector: quedarse sin registro de disponibilidad es malo, pero
+// dejar de recibir eventos por eso seria peor.
+func (s Server) beat(ctx context.Context) {
+	sessionID, err := s.store.StartCollectorSession(ctx)
+	if err != nil {
+		slog.Warn("observe: could not open the collector session", "error", err)
+		return
+	}
+
+	ticker := time.NewTicker(heartbeatInterval)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-ctx.Done():
+			// Un ultimo latido al apagarse, con el contexto de fondo porque el del
+			// poller ya esta cancelado. Sin el, un apagado limpio se registraria como
+			// hasta 10 s de hueco que nunca existio.
+			shutdownCtx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+			if err := s.store.Heartbeat(shutdownCtx, sessionID); err != nil {
+				slog.Warn("observe: final heartbeat failed", "error", err)
+			}
+			cancel()
+
+			return
+		case <-ticker.C:
+			if err := s.store.Heartbeat(ctx, sessionID); err != nil {
+				slog.Warn("observe: heartbeat failed", "error", err)
+			}
+		}
+	}
 }

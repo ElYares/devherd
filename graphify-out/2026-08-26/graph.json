@@ -2728,7 +2728,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_firewall",
-      "community": 47,
+      "community": 7,
       "norm_label": "observe_firewall.go"
     },
     {
@@ -2738,7 +2738,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_observe_firewall_newobservefirewallcmd",
-      "community": 47,
+      "community": 7,
       "norm_label": "newobservefirewallcmd()"
     },
     {
@@ -2748,7 +2748,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_cli_observe_firewall_go_command",
-      "community": 47,
+      "community": 7,
       "norm_label": "command"
     },
     {
@@ -3148,7 +3148,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_proxy",
-      "community": 10,
+      "community": 8,
       "norm_label": "proxy.go"
     },
     {
@@ -3158,7 +3158,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "cli_proxy_resolveexternalprojects",
-      "community": 10,
+      "community": 8,
       "norm_label": "resolveexternalprojects()"
     },
     {
@@ -3168,7 +3168,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_config",
-      "community": 10,
+      "community": 8,
       "norm_label": "config"
     },
     {
@@ -3178,7 +3178,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_projectrecord",
-      "community": 10,
+      "community": 8,
       "norm_label": "projectrecord"
     },
     {
@@ -3188,7 +3188,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_externalproject",
-      "community": 10,
+      "community": 8,
       "norm_label": "externalproject"
     },
     {
@@ -3198,7 +3198,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "cli_proxy_newproxycmd",
-      "community": 10,
+      "community": 8,
       "norm_label": "newproxycmd()"
     },
     {
@@ -3208,7 +3208,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "internal_cli_proxy_go_command",
-      "community": 10,
+      "community": 8,
       "norm_label": "command"
     },
     {
@@ -3218,7 +3218,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "cli_proxy_newproxyapplycmd",
-      "community": 10,
+      "community": 8,
       "norm_label": "newproxyapplycmd()"
     },
     {
@@ -3228,7 +3228,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "cli_proxy_syncmanageddomains",
-      "community": 10,
+      "community": 8,
       "norm_label": "syncmanageddomains()"
     },
     {
@@ -3238,7 +3238,7 @@
       "source_location": "L175",
       "_origin": "ast",
       "id": "cli_proxy_collectdomains",
-      "community": 10,
+      "community": 8,
       "norm_label": "collectdomains()"
     },
     {
@@ -3248,7 +3248,7 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "cli_proxy_newproxybootstrapcmd",
-      "community": 10,
+      "community": 8,
       "norm_label": "newproxybootstrapcmd()"
     },
     {
@@ -3258,7 +3258,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_proxy_test",
-      "community": 10,
+      "community": 8,
       "norm_label": "proxy_test.go"
     },
     {
@@ -3268,7 +3268,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_proxy_test_testsyncmanageddomainsusescollecteddomains",
-      "community": 10,
+      "community": 8,
       "norm_label": "testsyncmanageddomainsusescollecteddomains()"
     },
     {
@@ -3278,7 +3278,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_proxy_test_go_t",
-      "community": 10,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -3288,7 +3288,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "cli_proxy_test_testresolveexternalprojectsskipsunresolvableprojects",
-      "community": 10,
+      "community": 8,
       "norm_label": "testresolveexternalprojectsskipsunresolvableprojects()"
     },
     {
@@ -3298,7 +3298,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "cli_proxy_test_testresolveexternalprojectsfailswhenprojectisexplicit",
-      "community": 10,
+      "community": 8,
       "norm_label": "testresolveexternalprojectsfailswhenprojectisexplicit()"
     },
     {
@@ -6628,7 +6628,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "observe_event_extrapayload",
-      "community": 89,
+      "community": 14,
       "norm_label": "extrapayload()"
     },
     {
@@ -6778,7 +6778,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_event_test",
-      "community": 89,
+      "community": 14,
       "norm_label": "event_test.go"
     },
     {
@@ -6788,7 +6788,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayload",
-      "community": 89,
+      "community": 14,
       "norm_label": "testextrapayload()"
     },
     {
@@ -6798,7 +6798,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_event_test_go_t",
-      "community": 89,
+      "community": 14,
       "norm_label": "t"
     },
     {
@@ -6808,7 +6808,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayloadovernormalizedevent",
-      "community": 89,
+      "community": 14,
       "norm_label": "testextrapayloadovernormalizedevent()"
     },
     {
@@ -6818,7 +6818,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_fingerprint_test",
-      "community": 90,
+      "community": 14,
       "norm_label": "fingerprint_test.go"
     },
     {
@@ -6828,7 +6828,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "observe_fingerprint_test_fingerprintof",
-      "community": 90,
+      "community": 14,
       "norm_label": "fingerprintof()"
     },
     {
@@ -6838,7 +6838,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_observe_fingerprint_test_go_t",
-      "community": 90,
+      "community": 14,
       "norm_label": "t"
     },
     {
@@ -6848,7 +6848,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_observe_fingerprint_test_go_event",
-      "community": 90,
+      "community": 14,
       "norm_label": "event"
     },
     {
@@ -6858,7 +6858,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testfingerprintmasksvariabledata",
-      "community": 90,
+      "community": 14,
       "norm_label": "testfingerprintmasksvariabledata()"
     },
     {
@@ -6868,7 +6868,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testfingerprintstillseparatesdifferentfailures",
-      "community": 90,
+      "community": 14,
       "norm_label": "testfingerprintstillseparatesdifferentfailures()"
     },
     {
@@ -6878,7 +6878,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testexplicitfingerprintwins",
-      "community": 90,
+      "community": 14,
       "norm_label": "testexplicitfingerprintwins()"
     },
     {
@@ -6888,7 +6888,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testexplicitfingerprintisscopedbyproject",
-      "community": 90,
+      "community": 14,
       "norm_label": "testexplicitfingerprintisscopedbyproject()"
     },
     {
@@ -6898,7 +6898,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testexplicitfingerprintacceptssdklists",
-      "community": 90,
+      "community": 14,
       "norm_label": "testexplicitfingerprintacceptssdklists()"
     },
     {
@@ -6908,7 +6908,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "observe_fingerprint_test_testemptyfingerprintfallsbacktothederivedone",
-      "community": 90,
+      "community": 14,
       "norm_label": "testemptyfingerprintfallsbacktothederivedone()"
     },
     {
@@ -6918,7 +6918,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "observe_fingerprint_test_quote",
-      "community": 90,
+      "community": 14,
       "norm_label": "quote()"
     },
     {
@@ -7098,7 +7098,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_listen_test",
-      "community": 92,
+      "community": 6,
       "norm_label": "listen_test.go"
     },
     {
@@ -7108,7 +7108,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "observe_listen_test_newtestserver",
-      "community": 92,
+      "community": 6,
       "norm_label": "newtestserver()"
     },
     {
@@ -7118,7 +7118,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_listen_test_go_t",
-      "community": 92,
+      "community": 6,
       "norm_label": "t"
     },
     {
@@ -7128,7 +7128,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_listen_test_go_server",
-      "community": 92,
+      "community": 6,
       "norm_label": "server"
     },
     {
@@ -7138,7 +7138,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "observe_listen_test_freeloopbackport",
-      "community": 92,
+      "community": 6,
       "norm_label": "freeloopbackport()"
     },
     {
@@ -7148,7 +7148,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "observe_listen_test_waitforhealth",
-      "community": 92,
+      "community": 6,
       "norm_label": "waitforhealth()"
     },
     {
@@ -7158,7 +7158,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveonserveseveryaddress",
-      "community": 92,
+      "community": 6,
       "norm_label": "testlistenandserveonserveseveryaddress()"
     },
     {
@@ -7168,7 +7168,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveontoleratesanunavailableextraaddress",
-      "community": 92,
+      "community": 6,
       "norm_label": "testlistenandserveontoleratesanunavailableextraaddress()"
     },
     {
@@ -7178,7 +7178,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveonfailswhentheprimaryaddressistaken",
-      "community": 92,
+      "community": 6,
       "norm_label": "testlistenandserveonfailswhentheprimaryaddressistaken()"
     },
     {
@@ -7998,7 +7998,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_panel",
-      "community": 67,
+      "community": 6,
       "norm_label": "panel.go"
     },
     {
@@ -8008,7 +8008,7 @@
       "source_location": "L295",
       "_origin": "ast",
       "id": "internal_observe_panel_go_observe_server",
-      "community": 67,
+      "community": 6,
       "norm_label": "server"
     },
     {
@@ -8018,7 +8018,7 @@
       "source_location": "L295",
       "_origin": "ast",
       "id": "observe_server_handlepanel",
-      "community": 67,
+      "community": 6,
       "norm_label": ".handlepanel()"
     },
     {
@@ -8028,7 +8028,7 @@
       "source_location": "L295",
       "_origin": "ast",
       "id": "internal_observe_panel_go_responsewriter",
-      "community": 67,
+      "community": 6,
       "norm_label": "responsewriter"
     },
     {
@@ -8038,7 +8038,7 @@
       "source_location": "L295",
       "_origin": "ast",
       "id": "internal_observe_panel_go_request",
-      "community": 67,
+      "community": 6,
       "norm_label": "request"
     },
     {
@@ -8048,7 +8048,7 @@
       "source_location": "L308",
       "_origin": "ast",
       "id": "observe_server_handlepanelapi",
-      "community": 67,
+      "community": 6,
       "norm_label": ".handlepanelapi()"
     },
     {
@@ -8058,7 +8058,7 @@
       "source_location": "L364",
       "_origin": "ast",
       "id": "observe_panel_queryint",
-      "community": 67,
+      "community": 6,
       "norm_label": "queryint()"
     },
     {
@@ -8388,7 +8388,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_reporter",
-      "community": 8,
+      "community": 33,
       "norm_label": "reporter.go"
     },
     {
@@ -8398,7 +8398,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "observe_reportertemplate",
-      "community": 8,
+      "community": 33,
       "norm_label": "reportertemplate"
     },
     {
@@ -8408,7 +8408,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "observe_reporterresult",
-      "community": 8,
+      "community": 33,
       "norm_label": "reporterresult"
     },
     {
@@ -8418,7 +8418,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "observe_reporter_supportedreporterstacks",
-      "community": 8,
+      "community": 33,
       "norm_label": "supportedreporterstacks()"
     },
     {
@@ -8428,7 +8428,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "observe_reporter_ensurereporter",
-      "community": 8,
+      "community": 33,
       "norm_label": "ensurereporter()"
     },
     {
@@ -8438,7 +8438,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_reporter_test",
-      "community": 8,
+      "community": 33,
       "norm_label": "reporter_test.go"
     },
     {
@@ -8448,7 +8448,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterwritesthelaravelfile",
-      "community": 8,
+      "community": 33,
       "norm_label": "testensurereporterwritesthelaravelfile()"
     },
     {
@@ -8458,7 +8458,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_observe_reporter_test_go_t",
-      "community": 8,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -8468,7 +8468,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterkeepsexistingfile",
-      "community": 8,
+      "community": 33,
       "norm_label": "testensurereporterkeepsexistingfile()"
     },
     {
@@ -8478,7 +8478,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporteroverwriteswithforce",
-      "community": 8,
+      "community": 33,
       "norm_label": "testensurereporteroverwriteswithforce()"
     },
     {
@@ -8488,7 +8488,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterrejectsunsupportedstack",
-      "community": 8,
+      "community": 33,
       "norm_label": "testensurereporterrejectsunsupportedstack()"
     },
     {
@@ -8498,8 +8498,38 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "observe_reporter_test_testensurereporterrequiresroot",
-      "community": 8,
+      "community": 33,
       "norm_label": "testensurereporterrequiresroot()"
+    },
+    {
+      "label": "TestReporterLeavesATraceOnEverySilentExit()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L112",
+      "_origin": "ast",
+      "id": "observe_reporter_test_testreporterleavesatraceoneverysilentexit",
+      "community": 33,
+      "norm_label": "testreporterleavesatraceoneverysilentexit()"
+    },
+    {
+      "label": "TestReporterTracesThroughErrorLogNotTheFrameworkLogger()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L148",
+      "_origin": "ast",
+      "id": "observe_reporter_test_testreportertracesthrougherrorlognottheframeworklogger",
+      "community": 33,
+      "norm_label": "testreportertracesthrougherrorlognottheframeworklogger()"
+    },
+    {
+      "label": "TestReporterChecksTheTransportResult()",
+      "file_type": "code",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L173",
+      "_origin": "ast",
+      "id": "observe_reporter_test_testreporterchecksthetransportresult",
+      "community": 33,
+      "norm_label": "testreporterchecksthetransportresult()"
     },
     {
       "label": "Server",
@@ -8528,7 +8558,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "internal_observe_server_go_dockerruntime",
-      "community": 93,
+      "community": 6,
       "norm_label": "dockerruntime"
     },
     {
@@ -8548,7 +8578,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "observe_server_newserverwithdocker",
-      "community": 93,
+      "community": 6,
       "norm_label": "newserverwithdocker()"
     },
     {
@@ -8638,7 +8668,7 @@
       "source_location": "L157",
       "_origin": "ast",
       "id": "observe_server_handlehealth",
-      "community": 67,
+      "community": 6,
       "norm_label": ".handlehealth()"
     },
     {
@@ -8648,7 +8678,7 @@
       "source_location": "L157",
       "_origin": "ast",
       "id": "internal_observe_server_go_responsewriter",
-      "community": 67,
+      "community": 6,
       "norm_label": "responsewriter"
     },
     {
@@ -8658,7 +8688,7 @@
       "source_location": "L157",
       "_origin": "ast",
       "id": "internal_observe_server_go_request",
-      "community": 67,
+      "community": 6,
       "norm_label": "request"
     },
     {
@@ -8668,7 +8698,7 @@
       "source_location": "L174",
       "_origin": "ast",
       "id": "observe_server_handleapi",
-      "community": 67,
+      "community": 6,
       "norm_label": ".handleapi()"
     },
     {
@@ -8738,7 +8768,7 @@
       "source_location": "L339",
       "_origin": "ast",
       "id": "observe_server_parseapipath",
-      "community": 67,
+      "community": 6,
       "norm_label": "parseapipath()"
     },
     {
@@ -8748,7 +8778,7 @@
       "source_location": "L356",
       "_origin": "ast",
       "id": "observe_server_eventpayloadfromenvelope",
-      "community": 93,
+      "community": 6,
       "norm_label": "eventpayloadfromenvelope()"
     },
     {
@@ -8758,7 +8788,7 @@
       "source_location": "L395",
       "_origin": "ast",
       "id": "observe_server_writejson",
-      "community": 67,
+      "community": 6,
       "norm_label": "writejson()"
     },
     {
@@ -8768,7 +8798,7 @@
       "source_location": "L401",
       "_origin": "ast",
       "id": "observe_server_writeerror",
-      "community": 67,
+      "community": 6,
       "norm_label": "writeerror()"
     },
     {
@@ -8778,7 +8808,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_server_test",
-      "community": 93,
+      "community": 6,
       "norm_label": "server_test.go"
     },
     {
@@ -8788,7 +8818,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "observe_server_test_testserveracceptssimpleevent",
-      "community": 93,
+      "community": 6,
       "norm_label": "testserveracceptssimpleevent()"
     },
     {
@@ -8798,7 +8828,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_t",
-      "community": 93,
+      "community": 6,
       "norm_label": "t"
     },
     {
@@ -8808,7 +8838,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "observe_server_test_testeventpayloadfromenvelope",
-      "community": 93,
+      "community": 6,
       "norm_label": "testeventpayloadfromenvelope()"
     },
     {
@@ -8818,7 +8848,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "observe_server_test_testservercorrelateseventwithcontainerlogs",
-      "community": 93,
+      "community": 6,
       "norm_label": "testservercorrelateseventwithcontainerlogs()"
     },
     {
@@ -8828,7 +8858,7 @@
       "source_location": "L122",
       "_origin": "ast",
       "id": "observe_server_test_testserverservesobservepanelapi",
-      "community": 93,
+      "community": 6,
       "norm_label": "testserverservesobservepanelapi()"
     },
     {
@@ -8838,7 +8868,7 @@
       "source_location": "L178",
       "_origin": "ast",
       "id": "observe_fakedockerruntime",
-      "community": 94,
+      "community": 6,
       "norm_label": "fakedockerruntime"
     },
     {
@@ -8848,7 +8878,7 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "observe_fakedockerruntime_observedcontainers",
-      "community": 94,
+      "community": 6,
       "norm_label": ".observedcontainers()"
     },
     {
@@ -8858,7 +8888,7 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_context",
-      "community": 94,
+      "community": 6,
       "norm_label": "context"
     },
     {
@@ -8868,7 +8898,7 @@
       "source_location": "L180",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_observedcontainer",
-      "community": 94,
+      "community": 6,
       "norm_label": "observedcontainer"
     },
     {
@@ -8878,7 +8908,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "observe_fakedockerruntime_logsaround",
-      "community": 94,
+      "community": 6,
       "norm_label": ".logsaround()"
     },
     {
@@ -8888,7 +8918,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_time",
-      "community": 94,
+      "community": 6,
       "norm_label": "time"
     },
     {
@@ -8898,7 +8928,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_duration",
-      "community": 94,
+      "community": 6,
       "norm_label": "duration"
     },
     {
@@ -8908,7 +8938,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "internal_observe_server_test_go_containerlog",
-      "community": 94,
+      "community": 6,
       "norm_label": "containerlog"
     },
     {
@@ -8918,7 +8948,7 @@
       "source_location": "L197",
       "_origin": "ast",
       "id": "observe_fakedockerruntime_logsbetween",
-      "community": 94,
+      "community": 6,
       "norm_label": ".logsbetween()"
     },
     {
@@ -9438,7 +9468,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_store_test",
-      "community": 89,
+      "community": 14,
       "norm_label": "store_test.go"
     },
     {
@@ -9448,7 +9478,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_store_test_teststoreeventgroupsissues",
-      "community": 89,
+      "community": 14,
       "norm_label": "teststoreeventgroupsissues()"
     },
     {
@@ -9458,7 +9488,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_store_test_go_t",
-      "community": 89,
+      "community": 14,
       "norm_label": "t"
     },
     {
@@ -9468,7 +9498,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_store_test_teststorecontainersrecordsstatusandrestartevents",
-      "community": 89,
+      "community": 14,
       "norm_label": "teststorecontainersrecordsstatusandrestartevents()"
     },
     {
@@ -9478,7 +9508,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_store_test_teststorecreatesalertdeliveries",
-      "community": 89,
+      "community": 14,
       "norm_label": "teststorecreatesalertdeliveries()"
     },
     {
@@ -9488,7 +9518,7 @@
       "source_location": "L206",
       "_origin": "ast",
       "id": "observe_store_test_testlisteventsandtimelinereturnrawpayload",
-      "community": 89,
+      "community": 14,
       "norm_label": "testlisteventsandtimelinereturnrawpayload()"
     },
     {
@@ -10138,7 +10168,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_bootstrap",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrap.go"
     },
     {
@@ -10148,7 +10178,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxy_bootstrapresult",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapresult"
     },
     {
@@ -10158,7 +10188,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "proxy_bootstrapoptions",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapoptions"
     },
     {
@@ -10168,7 +10198,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxy",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapexternalproxy()"
     },
     {
@@ -10178,7 +10208,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "internal_proxy_bootstrap_go_config",
-      "community": 8,
+      "community": 33,
       "norm_label": "config"
     },
     {
@@ -10188,7 +10218,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxywithoptions",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapexternalproxywithoptions()"
     },
     {
@@ -10198,7 +10228,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "proxy_bootstrap_bootstrapexternalproxysettings",
-      "community": 8,
+      "community": 33,
       "norm_label": "bootstrapexternalproxysettings()"
     },
     {
@@ -10208,7 +10238,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "externalsettingsconfig",
-      "community": 8,
+      "community": 33,
       "norm_label": "externalsettingsconfig"
     },
     {
@@ -10218,7 +10248,7 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "proxy_bootstrap_ensuremanagedfile",
-      "community": 8,
+      "community": 33,
       "norm_label": "ensuremanagedfile()"
     },
     {
@@ -10228,7 +10258,7 @@
       "source_location": "L117",
       "_origin": "ast",
       "id": "proxy_bootstrap_renderembeddedtemplate",
-      "community": 8,
+      "community": 33,
       "norm_label": "renderembeddedtemplate()"
     },
     {
@@ -10238,7 +10268,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy",
-      "community": 10,
+      "community": 8,
       "norm_label": "caddy.go"
     },
     {
@@ -10248,7 +10278,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "proxy_route",
-      "community": 10,
+      "community": 8,
       "norm_label": "route"
     },
     {
@@ -10258,7 +10288,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "proxy_site",
-      "community": 10,
+      "community": 8,
       "norm_label": "site"
     },
     {
@@ -10268,7 +10298,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "proxy_renderer",
-      "community": 10,
+      "community": 8,
       "norm_label": "renderer"
     },
     {
@@ -10278,7 +10308,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_paths",
-      "community": 10,
+      "community": 8,
       "norm_label": "paths"
     },
     {
@@ -10288,7 +10318,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_config",
-      "community": 10,
+      "community": 8,
       "norm_label": "config"
     },
     {
@@ -10298,7 +10328,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "proxy_caddy_newrenderer",
-      "community": 10,
+      "community": 8,
       "norm_label": "newrenderer()"
     },
     {
@@ -10308,7 +10338,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "proxy_renderer_render",
-      "community": 10,
+      "community": 8,
       "norm_label": ".render()"
     },
     {
@@ -10318,7 +10348,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_projectrecord",
-      "community": 10,
+      "community": 8,
       "norm_label": "projectrecord"
     },
     {
@@ -10328,7 +10358,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "proxy_renderer_write",
-      "community": 10,
+      "community": 8,
       "norm_label": ".write()"
     },
     {
@@ -10338,7 +10368,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "proxy_renderer_apply",
-      "community": 10,
+      "community": 8,
       "norm_label": ".apply()"
     },
     {
@@ -10348,7 +10378,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "proxy_renderer_projectsite",
-      "community": 10,
+      "community": 8,
       "norm_label": ".projectsite()"
     },
     {
@@ -10358,7 +10388,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "proxy_caddy_sudovalidate",
-      "community": 10,
+      "community": 8,
       "norm_label": "sudovalidate()"
     },
     {
@@ -10368,7 +10398,7 @@
       "source_location": "L152",
       "_origin": "ast",
       "id": "proxy_caddy_runinteractive",
-      "community": 10,
+      "community": 8,
       "norm_label": "runinteractive()"
     },
     {
@@ -10378,7 +10408,7 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "proxy_caddy_selectprojects",
-      "community": 10,
+      "community": 8,
       "norm_label": "selectprojects()"
     },
     {
@@ -10388,7 +10418,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy_test",
-      "community": 10,
+      "community": 8,
       "norm_label": "caddy_test.go"
     },
     {
@@ -10398,7 +10428,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "proxy_caddy_test_testrendervueflasksite",
-      "community": 10,
+      "community": 8,
       "norm_label": "testrendervueflasksite()"
     },
     {
@@ -10408,7 +10438,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_proxy_caddy_test_go_t",
-      "community": 10,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -10518,7 +10548,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "proxy_external_usesdockerexternal",
-      "community": 10,
+      "community": 8,
       "norm_label": "usesdockerexternal()"
     },
     {
@@ -10848,7 +10878,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_external_test",
-      "community": 8,
+      "community": 33,
       "norm_label": "external_test.go"
     },
     {
@@ -10858,7 +10888,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "proxy_external_test_testbuildexternalprojectusesmanifestproxy",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbuildexternalprojectusesmanifestproxy()"
     },
     {
@@ -10868,7 +10898,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_proxy_external_test_go_t",
-      "community": 8,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -10878,7 +10908,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "proxy_external_test_testbuildexternalprojectusesvueflaskfallback",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbuildexternalprojectusesvueflaskfallback()"
     },
     {
@@ -10888,7 +10918,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "proxy_external_test_testensurecomposeoverridewritesaliases",
-      "community": 8,
+      "community": 33,
       "norm_label": "testensurecomposeoverridewritesaliases()"
     },
     {
@@ -10898,7 +10928,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "proxy_external_test_teststripmanageddomainsreplacesselectedsites",
-      "community": 8,
+      "community": 33,
       "norm_label": "teststripmanageddomainsreplacesselectedsites()"
     },
     {
@@ -10908,7 +10938,7 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "proxy_external_test_testbootstrapexternalproxycreatesandreusesfiles",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbootstrapexternalproxycreatesandreusesfiles()"
     },
     {
@@ -10918,7 +10948,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "proxy_external_test_testbootstrapexternalproxywithforceupdatesmanagedfilesbutpreservesenv",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbootstrapexternalproxywithforceupdatesmanagedfilesbutpreservesenv()"
     },
     {
@@ -10928,7 +10958,7 @@
       "source_location": "L214",
       "_origin": "ast",
       "id": "proxy_external_test_writetestfile",
-      "community": 8,
+      "community": 33,
       "norm_label": "writetestfile()"
     },
     {
@@ -12038,7 +12068,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_manager_test",
-      "community": 8,
+      "community": 33,
       "norm_label": "manager_test.go"
     },
     {
@@ -12048,7 +12078,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "services_manager_test_testbootstrapwritessharedservicescompose",
-      "community": 8,
+      "community": 33,
       "norm_label": "testbootstrapwritessharedservicescompose()"
     },
     {
@@ -12058,7 +12088,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_services_manager_test_go_t",
-      "community": 8,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -12068,7 +12098,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "services_manager_test_testvalidateservicerejectsunknownservice",
-      "community": 8,
+      "community": 33,
       "norm_label": "testvalidateservicerejectsunknownservice()"
     },
     {
@@ -12078,7 +12108,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version",
-      "community": 8,
+      "community": 33,
       "norm_label": "version.go"
     },
     {
@@ -12088,7 +12118,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "version_version_string",
-      "community": 8,
+      "community": 33,
       "norm_label": "string()"
     },
     {
@@ -12098,7 +12128,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "version_version_long",
-      "community": 8,
+      "community": 33,
       "norm_label": "long()"
     },
     {
@@ -12108,7 +12138,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version_test",
-      "community": 8,
+      "community": 33,
       "norm_label": "version_test.go"
     },
     {
@@ -12118,7 +12148,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "version_version_test_teststringreturnsversion",
-      "community": 8,
+      "community": 33,
       "norm_label": "teststringreturnsversion()"
     },
     {
@@ -12128,7 +12158,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_version_version_test_go_t",
-      "community": 8,
+      "community": 33,
       "norm_label": "t"
     },
     {
@@ -12138,7 +12168,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "version_version_test_testlongincludesversioncommitanddate",
-      "community": 8,
+      "community": 33,
       "norm_label": "testlongincludesversioncommitanddate()"
     },
     {
@@ -12148,7 +12178,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "version_version_test_contains",
-      "community": 8,
+      "community": 33,
       "norm_label": "contains()"
     },
     {
@@ -12158,7 +12188,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "version_version_test_indexof",
-      "community": 8,
+      "community": 33,
       "norm_label": "indexof()"
     },
     {
@@ -12279,7 +12309,7 @@
       "label": ".report()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L42",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_report",
       "community": 70,
@@ -12289,7 +12319,7 @@
       "label": "Throwable",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L42",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "throwable",
       "community": 70,
@@ -12299,7 +12329,7 @@
       "label": ".capture()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L73",
+      "source_location": "L78",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_capture",
       "community": 70,
@@ -12309,17 +12339,37 @@
       "label": ".send()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L93",
+      "source_location": "L98",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_send",
       "community": 70,
       "norm_label": ".send()"
     },
     {
+      "label": ".trace()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L160",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_trace",
+      "community": 70,
+      "norm_label": ".trace()"
+    },
+    {
+      "label": ".snippet()",
+      "file_type": "code",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L176",
+      "_origin": "ast",
+      "id": "observe_reporter_laravel_devherdobservereporter_snippet",
+      "community": 70,
+      "norm_label": ".snippet()"
+    },
+    {
       "label": ".endpoint()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L132",
+      "source_location": "L201",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_endpoint",
       "community": 70,
@@ -12329,7 +12379,7 @@
       "label": ".payload()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L164",
+      "source_location": "L233",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_payload",
       "community": 70,
@@ -12339,7 +12389,7 @@
       "label": ".optionalArray()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L203",
+      "source_location": "L272",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_optionalarray",
       "community": 70,
@@ -12349,7 +12399,7 @@
       "label": ".optionalString()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L218",
+      "source_location": "L287",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_optionalstring",
       "community": 70,
@@ -12359,7 +12409,7 @@
       "label": ".caller()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L237",
+      "source_location": "L306",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_caller",
       "community": 70,
@@ -12369,7 +12419,7 @@
       "label": ".relativePath()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L254",
+      "source_location": "L323",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_relativepath",
       "community": 70,
@@ -12379,7 +12429,7 @@
       "label": ".transaction()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L272",
+      "source_location": "L341",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_transaction",
       "community": 70,
@@ -12389,7 +12439,7 @@
       "label": ".stringify()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L291",
+      "source_location": "L360",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_stringify",
       "community": 70,
@@ -12399,7 +12449,7 @@
       "label": ".shortName()",
       "file_type": "code",
       "source_file": "templates/observe/reporter-laravel.php",
-      "source_location": "L303",
+      "source_location": "L372",
       "_origin": "ast",
       "id": "observe_reporter_laravel_devherdobservereporter_shortname",
       "community": 70,
@@ -15292,7 +15342,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "guides_logging_and_logs",
-      "community": 54,
+      "community": 61,
       "norm_label": "logging-and-logs.md"
     },
     {
@@ -19296,9 +19346,9 @@
       "source_file": "internal/cli/coverage.go",
       "source_location": "L311",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage",
-      "target": "cli_coverage_warncoveragereportisstale",
-      "confidence_score": 1.0
+      "target": "cli_coverage_warncoveragereportisstale"
     },
     {
       "relation": "contains",
@@ -19432,9 +19482,9 @@
       "source_file": "internal/cli/coverage.go",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_newcoveragecmd",
-      "target": "cli_coverage_warncoveragereportisstale",
-      "confidence_score": 1.0
+      "target": "cli_coverage_warncoveragereportisstale"
     },
     {
       "relation": "calls",
@@ -19575,9 +19625,9 @@
       "source_location": "L311",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_warncoveragereportisstale",
-      "target": "internal_cli_coverage_go_writer",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_go_writer"
     },
     {
       "relation": "references",
@@ -19806,9 +19856,9 @@
       "source_location": "L311",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_warncoveragereportisstale",
-      "target": "candidate",
-      "confidence_score": 1.0
+      "target": "candidate"
     },
     {
       "relation": "calls",
@@ -19877,9 +19927,9 @@
       "source_file": "internal/cli/coverage_discover_test.go",
       "source_location": "L172",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_discover_test",
-      "target": "cli_coverage_discover_test_testcoveragedoesnotwarnaboutafreshreport",
-      "confidence_score": 1.0
+      "target": "cli_coverage_discover_test_testcoveragedoesnotwarnaboutafreshreport"
     },
     {
       "relation": "contains",
@@ -19897,9 +19947,9 @@
       "source_file": "internal/cli/coverage_discover_test.go",
       "source_location": "L189",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_discover_test",
-      "target": "cli_coverage_discover_test_testcoveragewarnsaboutastaleexplicitreport",
-      "confidence_score": 1.0
+      "target": "cli_coverage_discover_test_testcoveragewarnsaboutastaleexplicitreport"
     },
     {
       "relation": "contains",
@@ -19907,9 +19957,9 @@
       "source_file": "internal/cli/coverage_discover_test.go",
       "source_location": "L142",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_discover_test",
-      "target": "cli_coverage_discover_test_testcoveragewarnsaboutastalereport",
-      "confidence_score": 1.0
+      "target": "cli_coverage_discover_test_testcoveragewarnsaboutastalereport"
     },
     {
       "relation": "references",
@@ -19973,9 +20023,9 @@
       "source_file": "internal/cli/coverage_discover_test.go",
       "source_location": "L173",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_discover_test_testcoveragedoesnotwarnaboutafreshreport",
-      "target": "cli_coverage_discover_test_projectwithreports",
-      "confidence_score": 1.0
+      "target": "cli_coverage_discover_test_projectwithreports"
     },
     {
       "relation": "calls",
@@ -19995,9 +20045,9 @@
       "source_file": "internal/cli/coverage_discover_test.go",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cli_coverage_discover_test_testcoveragewarnsaboutastalereport",
-      "target": "cli_coverage_discover_test_projectwithreports",
-      "confidence_score": 1.0
+      "target": "cli_coverage_discover_test_projectwithreports"
     },
     {
       "relation": "references",
@@ -20050,9 +20100,9 @@
       "source_location": "L172",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_discover_test_testcoveragedoesnotwarnaboutafreshreport",
-      "target": "internal_cli_coverage_discover_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_discover_test_go_t"
     },
     {
       "relation": "references",
@@ -20072,9 +20122,9 @@
       "source_location": "L189",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_discover_test_testcoveragewarnsaboutastaleexplicitreport",
-      "target": "internal_cli_coverage_discover_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_discover_test_go_t"
     },
     {
       "relation": "references",
@@ -20083,9 +20133,9 @@
       "source_location": "L142",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "cli_coverage_discover_test_testcoveragewarnsaboutastalereport",
-      "target": "internal_cli_coverage_discover_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_cli_coverage_discover_test_go_t"
     },
     {
       "relation": "calls",
@@ -39050,6 +39100,39 @@
       "target": "observe_reporter_ensurereporter"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L176",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testreporterchecksthetransportresult",
+      "target": "observe_reporter_ensurereporter"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L115",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testreporterleavesatraceoneverysilentexit",
+      "target": "observe_reporter_ensurereporter"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L151",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testreportertracesthrougherrorlognottheframeworklogger",
+      "target": "observe_reporter_ensurereporter"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/observe/reporter_test.go",
@@ -39098,6 +39181,36 @@
       "confidence_score": 1.0,
       "source": "observe_reporter_test",
       "target": "observe_reporter_test_testensurereporterwritesthelaravelfile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L173",
+      "weight": 1.0,
+      "source": "observe_reporter_test",
+      "target": "observe_reporter_test_testreporterchecksthetransportresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L112",
+      "weight": 1.0,
+      "source": "observe_reporter_test",
+      "target": "observe_reporter_test_testreporterleavesatraceoneverysilentexit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L148",
+      "weight": 1.0,
+      "source": "observe_reporter_test",
+      "target": "observe_reporter_test_testreportertracesthrougherrorlognottheframeworklogger",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -39166,6 +39279,39 @@
       "target": "internal_observe_reporter_test_go_t"
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L173",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_test_testreporterchecksthetransportresult",
+      "target": "internal_observe_reporter_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L112",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_test_testreporterleavesatraceoneverysilentexit",
+      "target": "internal_observe_reporter_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L148",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "observe_reporter_test_testreportertracesthrougherrorlognottheframeworklogger",
+      "target": "internal_observe_reporter_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "INFERRED",
@@ -39185,6 +39331,39 @@
       "source_location": "L87",
       "weight": 1.0,
       "source": "observe_reporter_test_testensurereporteroverwriteswithforce",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testreporterleavesatraceoneverysilentexit",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testreportertracesthrougherrorlognottheframeworklogger",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/observe/reporter_test.go",
+      "source_location": "L184",
+      "weight": 1.0,
+      "source": "observe_reporter_test_testreporterchecksthetransportresult",
       "target": "version_version_string"
     },
     {
@@ -48829,11 +49008,31 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L176",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_snippet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
       "source_location": "L291",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "observe_reporter_laravel_devherdobservereporter",
       "target": "observe_reporter_laravel_devherdobservereporter_stringify"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "templates/observe/reporter-laravel.php",
+      "source_location": "L160",
+      "weight": 1.0,
+      "source": "observe_reporter_laravel_devherdobservereporter",
+      "target": "observe_reporter_laravel_devherdobservereporter_trace",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -51744,9 +51943,9 @@
       "source_file": "docs/coverage.md",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_coverage_encontrar_el_reporte_solo",
-      "target": "docs_coverage_un_reporte_viejo_lleva_aviso",
-      "confidence_score": 1.0
+      "target": "docs_coverage_un_reporte_viejo_lleva_aviso"
     },
     {
       "relation": "contains",
@@ -54734,5 +54933,5 @@
       "source_file": "docs/IMPROVEMENTS.md"
     }
   ],
-  "built_at_commit": "ef5029660c5a0b41d9fc6bf374463df149ed119e"
+  "built_at_commit": "32b9c05296851526c578b0830883c30b1b6560b4"
 }
