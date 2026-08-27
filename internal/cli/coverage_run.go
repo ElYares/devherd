@@ -15,12 +15,13 @@ import (
 )
 
 type coverageRunFlags struct {
-	Target  string
-	Stack   string
-	Service string
-	Explain bool
-	AsJSON  bool
-	View    coverageViewOptions
+	Target    string
+	Stack     string
+	Service   string
+	Explain   bool
+	AsJSON    bool
+	Structure bool
+	View      coverageViewOptions
 }
 
 func runCoverage(cmd *cobra.Command, flags coverageRunFlags) error {
@@ -94,11 +95,22 @@ func runCoverage(cmd *cobra.Command, flags coverageRunFlags) error {
 	}
 
 	fmt.Fprintln(out)
-	if flags.AsJSON {
+	switch {
+	case flags.Structure:
+		flags.View.Source = plan.ReportPath
+		if err := runCoverageStructure(out, result.Report, coverageStructureFlags{
+			Root:   options.ProjectRoot,
+			Source: plan.ReportPath,
+			View:   flags.View,
+			AsJSON: flags.AsJSON,
+		}); err != nil {
+			return err
+		}
+	case flags.AsJSON:
 		if err := writeCoverageJSON(out, result.Report); err != nil {
 			return err
 		}
-	} else {
+	default:
 		flags.View.Source = plan.ReportPath
 		writeCoverageReport(out, result.Report, flags.View)
 	}

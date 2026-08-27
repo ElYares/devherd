@@ -1,0 +1,12 @@
+mode: set
+example.com/app/cmdlike.go:21.29,41.2 2 1
+example.com/app/cmdlike.go:24.34,27.5 20 0
+example.com/app/cmdlike.go:28.4,31.5 20 0
+example.com/app/cmdlike.go:32.4,36.15 20 0
+example.com/app/cmdlike.go:44.24,50.2 9 3
+example.com/app/cmdlike.go:53.42,55.19 8 2
+example.com/app/cmdlike.go:57.2,59.2 4 0
+example.com/app/cmdlike.go:62.20,67.19 4 1
+example.com/app/cmdlike.go:63.30,65.3 4 0
+example.com/app/cmdlike.go:71.18,74.4 4 1
+example.com/app/cmdlike.go:72.14,74.3 5 0

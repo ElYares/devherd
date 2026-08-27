@@ -247,3 +247,109 @@ func TestCoberturaMergesClassesOfTheSameFile(t *testing.T) {
 		t.Fatalf("expected 2/3 lines after merging classes, got %d/%d", views.Covered, views.Total)
 	}
 }
+
+// El perfil de Go es el unico formato que sabe donde vive cada bloque. Sin ese
+// dato no hay atribucion por funcion posible, asi que el parser tiene que
+// conservarlo en vez de colapsarlo al total del archivo.
+func TestGoProfileKeepsBlockSpans(t *testing.T) {
+	report := parseTestdata(t, "sample.gocover")
+	file := fileByPath(t, report, "example.com/app/handler.go")
+
+	if !file.HasBlocks() {
+		t.Fatalf("expected handler.go to carry blocks, got none")
+	}
+
+	expected := []Block{
+		{StartLine: 10, EndLine: 12, Stmts: 2, Count: 1},
+		{StartLine: 14, EndLine: 16, Stmts: 3, Count: 0},
+	}
+	if len(file.Blocks) != len(expected) {
+		t.Fatalf("expected %d blocks, got %d: %#v", len(expected), len(file.Blocks), file.Blocks)
+	}
+	for i, want := range expected {
+		if file.Blocks[i] != want {
+			t.Errorf("block %d: expected %#v, got %#v", i, want, file.Blocks[i])
+		}
+	}
+
+	if file.Blocks[0].Covered() != true || file.Blocks[1].Covered() != false {
+		t.Errorf("Covered() should follow Count > 0, got %v and %v",
+			file.Blocks[0].Covered(), file.Blocks[1].Covered())
+	}
+}
+
+// Los bloques no pueden contradecir al total del archivo: son el mismo dato visto
+// con mas detalle, y si se separan el analisis estructural miente sobre un
+// porcentaje que la tabla ya mostro.
+func TestGoProfileBlocksAddUpToTheFileTotals(t *testing.T) {
+	for _, name := range []string{"sample.gocover", "duplicated.gocover"} {
+		t.Run(name, func(t *testing.T) {
+			report := parseTestdata(t, name)
+			for _, file := range report.Files {
+				total, covered := 0, 0
+				for _, block := range file.Blocks {
+					total += block.Stmts
+					if block.Covered() {
+						covered += block.Stmts
+					}
+				}
+				if total != file.Total {
+					t.Errorf("%s: blocks total %d, file total %d", file.Path, total, file.Total)
+				}
+				if covered != file.Covered {
+					t.Errorf("%s: blocks covered %d, file covered %d", file.Path, covered, file.Covered)
+				}
+			}
+		})
+	}
+}
+
+// Un bloque repetido se fusiona, no se duplica. Es la misma regla que ya protege
+// los totales, comprobada ahora sobre los bloques.
+func TestGoProfileDeduplicatesBlocks(t *testing.T) {
+	report := parseTestdata(t, "duplicated.gocover")
+	file := fileByPath(t, report, "example.com/app/handler.go")
+
+	if len(file.Blocks) != 2 {
+		t.Fatalf("expected the repeated block to be merged into 2 blocks, got %d: %#v",
+			len(file.Blocks), file.Blocks)
+	}
+	// El bloque venia con 4 y con 7 ejecuciones: gana el mayor.
+	if file.Blocks[0].Count != 7 {
+		t.Errorf("expected the merged block to keep the highest count 7, got %d", file.Blocks[0].Count)
+	}
+}
+
+// Los otros cuatro formatos no reportan rangos. Dejar Blocks vacio es lo que
+// despues permite decir "para este stack solo hay agregacion por archivo" en vez
+// de inventar un techo.
+func TestOnlyTheGoProfileReportsBlocks(t *testing.T) {
+	for _, name := range []string{"sample.lcov", "sample-clover.xml", "sample-jacoco.xml", "sample-cobertura.xml"} {
+		t.Run(name, func(t *testing.T) {
+			report := parseTestdata(t, name)
+			if report.HasBlocks() {
+				t.Errorf("%s should not report blocks, got %#v", name, report.Files)
+			}
+		})
+	}
+}
+
+// Un span roto tiene que fallar al parsear, no producir un bloque con lineas en
+// cero que despues se atribuye a la primera funcion del archivo.
+func TestGoProfileRejectsMalformedSpans(t *testing.T) {
+	cases := map[string]string{
+		"sin coma":        "mode: set\nexample.com/app/a.go:10.20 2 1\n",
+		"sin columna":     "mode: set\nexample.com/app/a.go:10,12.3 2 1\n",
+		"linea no numero": "mode: set\nexample.com/app/a.go:x.20,12.3 2 1\n",
+		"linea cero":      "mode: set\nexample.com/app/a.go:0.20,12.3 2 1\n",
+		"fin antes":       "mode: set\nexample.com/app/a.go:14.20,12.3 2 1\n",
+	}
+
+	for name, profile := range cases {
+		t.Run(name, func(t *testing.T) {
+			if _, err := Parse([]byte(profile)); err == nil {
+				t.Fatalf("expected an error for %q", profile)
+			}
+		})
+	}
+}

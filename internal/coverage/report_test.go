@@ -1,6 +1,7 @@
 package coverage
 
 import (
+	"encoding/json"
 	"strings"
 	"testing"
 )
@@ -187,5 +188,32 @@ func TestPercentOfAnEmptyReportDoesNotDivideByZero(t *testing.T) {
 	}
 	if got := (FileReport{}).Percent(); got != 0 {
 		t.Fatalf("expected 0 for an empty file, got %v", got)
+	}
+}
+
+// Los bloques son insumo del analisis estructural, no parte del reporte que se
+// publica. Serializarlos multiplica por 50 la salida de `coverage --json` para
+// dar un detalle que nadie consume crudo.
+func TestReportJSONDoesNotIncludeBlocks(t *testing.T) {
+	report := Report{
+		Format: "go",
+		Unit:   UnitStatements,
+		Files: []FileReport{{
+			Path:    "example.com/app/a.go",
+			Total:   5,
+			Covered: 2,
+			Blocks:  []Block{{StartLine: 1, EndLine: 3, Stmts: 5, Count: 1}},
+		}},
+	}
+
+	encoded, err := json.Marshal(report)
+	if err != nil {
+		t.Fatalf("marshal report: %v", err)
+	}
+	if strings.Contains(string(encoded), "start_line") || strings.Contains(string(encoded), "blocks") {
+		t.Fatalf("blocks leaked into the published JSON: %s", encoded)
+	}
+	if !strings.Contains(string(encoded), `"covered":2`) {
+		t.Fatalf("expected the file totals to survive, got: %s", encoded)
 	}
 }

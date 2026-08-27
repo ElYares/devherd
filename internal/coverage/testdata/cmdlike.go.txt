@@ -1,0 +1,88 @@
+package cmdlike
+
+// Fixture congelado para el analisis estructural. Reproduce la forma de
+// `internal/cli`: constructores delgados cuya masa vive en closures asignados a
+// campos. Se guarda como .txt y no como .go a proposito, para que ni el compilador
+// ni el linter lo traten como codigo del modulo.
+//
+// Congelado quiere decir que sus lineas no se mueven: el perfil que lo acompana
+// referencia numeros de linea de este archivo. Cambiarlo obliga a regenerar
+// cmdlike.gocover.
+
+type Command struct {
+	Use  string
+	RunE func(args []string) error
+}
+
+type Store struct{}
+
+// newThingCmd es el constructor: dos sentencias propias, y todo lo demas dentro
+// del closure que asigna a RunE.
+func newThingCmd() *Command {
+	cmd := &Command{
+		Use: "thing",
+		RunE: func(args []string) error {
+			if len(args) == 0 {
+				return errEmpty
+			}
+			total := 0
+			for _, arg := range args {
+				total += len(arg)
+			}
+			if total > 100 {
+				return errTooLong
+			}
+
+			return nil
+		},
+	}
+
+	return cmd
+}
+
+// helper es una funcion de paquete corriente, probable sin tocar el constructor.
+func helper(n int) int {
+	if n < 0 {
+		return -n
+	}
+
+	return n
+}
+
+// Save es un metodo, para comprobar que el nombre sale calificado por el receptor.
+func (s Store) Save(key string) error {
+	if key == "" {
+		return errEmpty
+	}
+
+	return nil
+}
+
+// withVar tiene un closure nombrado por asignacion, no por campo de struct.
+func withVar() int {
+	double := func(n int) int {
+		return n * 2
+	}
+
+	return double(21)
+}
+
+// anonymous tiene un closure sin nombre posible, que se numera.
+func anonymous() {
+	run(func() {
+		noop()
+	})
+}
+
+var (
+	errEmpty   = &simpleError{"empty"}
+	errTooLong = &simpleError{"too long"}
+)
+
+type simpleError struct{ text string }
+
+func (e *simpleError) Error() string { return e.text }
+
+func run(f func()) { f() }
+
+func noop() {}

@@ -9,8 +9,9 @@ sobre el lo que ninguna herramienta nativa te da: **donde esta la masa sin cubri
 
 ## Estado
 
-**Fases 0 y 1 implementadas.** Lee los cinco formatos y calcula (`--report`), y
-prepara el contenedor, corre las pruebas y lee el resultado (`--run`).
+**Fases 0, 1 y 2 implementadas.** Lee los cinco formatos y calcula (`--report`),
+prepara el contenedor, corre las pruebas y lee el resultado (`--run`), y atribuye
+la cobertura a funciones para decir cual es el techo real (`--structure`, solo Go).
 
 ## Uso rapido
 
@@ -18,6 +19,7 @@ prepara el contenedor, corre las pruebas y lee el resultado (`--run`).
 devherd coverage --run                  # en la raiz del proyecto
 devherd coverage --run --explain        # imprime los comandos, sin ejecutar nada
 devherd coverage --run ~/proyectos/x    # otro proyecto
+devherd coverage --run --structure      # ademas, el techo alcanzable (solo Go)
 ```
 
 `--run` soporta **laravel** y **go**. Para los demas stacks, genera el reporte con
@@ -186,15 +188,81 @@ al comando.
   fuera: el contenedor solo ve el proyecto montado. El comando avisa si no esta en
   el `.gitignore`.
 
+## `--structure`: donde esta el techo
+
+Un porcentaje suelto miente. Este mismo repo lo midio: `internal/cli` marcaba
+21,4%, que parecia abandono, y era el 68,9% de lo que se podia alcanzar sin
+refactorizar antes.
+
+```bash
+devherd coverage --report coverage.out --structure
+```
+
+```text
+coverage.out  ·  go  ·  statements  ·  structure
+
+  covered                                  22.8%     383/1678
+  reachable ceiling                        53.6%     900/1678
+  covered of what is reachable             41.1%      370/900
+
+  778 statements live in closures stored into data structures (RunE and friends).
+  Testing them means wiring the value up, not writing more test cases.
+
+  function                                     kind       missing   covered
+  newProxyApplyCmd.RunE                        stored          54      0.0%
+  runCoverage                                  func            48      0.0%
+  newInitCmd.RunE                              stored          46      0.0%
+```
+
+Los tres numeros de arriba son el comando entero:
+
+- **covered** — lo que reporta cualquier herramienta.
+- **reachable ceiling** — el maximo que puedes alcanzar **sin cambiar la estructura
+  del codigo**. Perseguir un numero por encima de esto es tirar el tiempo.
+- **covered of what is reachable** — cuanto del esfuerzo posible ya esta hecho. Es
+  el numero honesto para juzgar si un paquete esta abandonado o no.
+
+### Que cuenta como inalcanzable
+
+Solo una cosa: un closure **guardado en una estructura de datos** en vez de
+ejecutarse. `RunE: func(...)` dentro de un literal de struct no corre cuando llamas
+al constructor; para probarlo hay que armar el valor y dispararlo, que es un
+refactor, no un test mas.
+
+Lo que **no** cuenta como inalcanzable, aunque tambien sean closures:
+
+- `handler := func(...)` asignado a una variable local — se ejecuta cuando corre su
+  funcion.
+- `run(func(){...})` pasado como argumento — lo ejecuta la llamada que lo recibe.
+
+La distincion no es cosmetica. En el fixture de las pruebas, 69 de 100 sentencias
+viven en closures pero solo 60 estan guardadas: contar las 69 inflaria el techo con
+codigo que ya es probable hoy.
+
+**No es configurable a proposito.** Si el usuario pudiera declarar que cuenta como
+inalcanzable, el techo se convertiria en una excusa para lo que no se quiere
+probar.
+
+### La atribucion es por AST, no por texto
+
+El bloque se le asigna a la funcion **mas interna** que lo contiene, usando
+`go/parser`. La heuristica de "la ultima funcion que empieza antes", que es la que
+sale natural con `grep '^func'`, le carga al constructor la masa de su propio
+closure: exactamente el error que este analisis existe para evitar.
+
+Si el perfil y el fuente se desincronizan, las sentencias que no caen en ninguna
+funcion se cuentan aparte y el comando lo dice. No se reparten a la fuerza.
+
 ## Limites
 
 - **`--run` solo sabe de laravel y go.** Node, Python y Java se agregan como
   adaptadores; mientras tanto, `--report`.
 - **No encuentra un reporte ya existente.** Pasar la ruta a mano sigue siendo
   necesario sin `--run`. Es la fase 3.
-- **No hay analisis estructural todavia.** El techo alcanzable —"el 69% de este
-  paquete vive dentro de los `RunE`, tu maximo real es 31%"— es la fase 2. Necesita
-  un analizador por lenguaje y empezara por Go.
+- **El analisis estructural es solo de Go.** `--structure` necesita los rangos de
+  linea por bloque, y de los cinco formatos solo el perfil de Go los trae. Para los
+  demas el comando lo dice en vez de inventar un techo. Cada lenguaje nuevo pide su
+  propio analizador: para PHP habria que parsear PHP.
 - **No toca Dockerfiles ni imagenes.** Instala en el contenedor vivo.
 - **Solo lineas y sentencias.** No se lee cobertura de ramas, aunque LCOV y JaCoCo
   la traigan.
