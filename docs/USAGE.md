@@ -526,7 +526,41 @@ devherd service stop redis
 ```
 
 Puertos publicados (en `127.0.0.1`): Redis `6379`, Mailpit `1025` (SMTP) y `8025` (UI web),
-Prometheus `9090`.
+Prometheus `9090`, Grafana `3000`, Jupyter `8888`.
+
+#### Dominios locales
+
+Los servicios con interfaz web **tambien se publican en un dominio**, para no tener
+que recordar en que puerto escucha cada uno:
+
+| Servicio | Puerto | Dominio |
+|---|---|---|
+| `mailpit` | 8025 | `mailpit.localhost` |
+| `prometheus` | 9090 | `prometheus.localhost` |
+| `grafana` | 3000 | `grafana.localhost` |
+| `jupyter` | 8888 | `jupyter.localhost` |
+
+El comando imprime los dos al arrancar:
+
+```text
+jupyter: http://127.0.0.1:8888/lab?token=e628…
+  tambien en: http://jupyter.localhost/lab?token=e628…
+```
+
+Notas:
+
+- **El TLD es el mismo que usan tus proyectos** (`local_tld` en la configuracion).
+  Con el driver `caddy-docker-external` es `.localhost`; con los demas, `.test`.
+  Mezclarlos es como se acaba probando en el host equivocado.
+- **El puerto sigue funcionando**, y es lo unico que funciona si el proxy se cae.
+  El dominio es una alternativa, no un sustituto.
+- **Publicar un servicio no toca las rutas de tus proyectos**: cada bloque del
+  Caddyfile va delimitado por sus marcadores y solo se reemplaza el suyo.
+- **Sin el proxy en modo contenedor no hay dominio**, y no es un error: el servicio
+  arranca igual y se accede por su puerto.
+- Por dentro, el contenedor se conecta tambien a la red del proxy (`infra_web`) con
+  un alias, que es como Caddy lo nombra. Es el mismo camino que recorren los
+  proyectos.
 
 #### Prometheus
 

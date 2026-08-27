@@ -198,3 +198,57 @@ func TestJupyterIsPartOfTheCatalog(t *testing.T) {
 		}
 	}
 }
+
+// Solo los servicios con interfaz se publican en un dominio. Redis no tiene nada
+// que enseñar en un navegador.
+func TestOnlyWebServicesGetADomain(t *testing.T) {
+	for service, want := range map[string]int{
+		"mailpit":    8025,
+		"prometheus": 9090,
+		"grafana":    3000,
+		"jupyter":    8888,
+	} {
+		port, ok := WebPort(service)
+		if !ok || port != want {
+			t.Errorf("%s should expose port %d, got %d (%v)", service, want, port, ok)
+		}
+	}
+
+	if _, ok := WebPort("redis"); ok {
+		t.Error("redis has no web interface to publish")
+	}
+}
+
+// El puerto que se publica es el **interno**, no el del host: Caddy habla con el
+// contenedor por la red, donde el mapeo de puertos no existe.
+func TestWebPortIsTheInternalOne(t *testing.T) {
+	// Mailpit publica 8025 en el host y escucha en 8025 dentro; si algun dia
+	// difieren, esta prueba obliga a mirar cual de los dos se esta usando.
+	port, _ := WebPort("mailpit")
+	if !strings.Contains(composeContent, `:`+itoa(port)+`"`) {
+		t.Errorf("port %d does not appear in the compose", port)
+	}
+}
+
+func itoa(n int) string {
+	if n == 0 {
+		return "0"
+	}
+	digits := ""
+	for n > 0 {
+		digits = string(rune('0'+n%10)) + digits
+		n /= 10
+	}
+
+	return digits
+}
+
+// El nombre del contenedor sigue la convencion del compose.
+func TestContainerNameMatchesTheCompose(t *testing.T) {
+	for _, service := range SupportedServices() {
+		name := ContainerName(service)
+		if !strings.Contains(composeContent, "container_name: "+name) {
+			t.Errorf("the compose has no container_name %q", name)
+		}
+	}
+}

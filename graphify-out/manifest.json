@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "internal/cli/service.go": {
-    "mtime": 1787813675.6937997,
-    "ast_hash": "e9f35cb132c36cf6762c7c1efb178cfc",
+    "mtime": 1787814217.4995995,
+    "ast_hash": "ad26720aa1318c5b08019f8a4995b656",
     "semantic_hash": ""
   },
   "internal/cli/stop.go": {
@@ -385,8 +385,8 @@
     "semantic_hash": "b6ad509aaccbb719b8da64eef79b4b6c"
   },
   "internal/services/manager.go": {
-    "mtime": 1787813675.6698563,
-    "ast_hash": "6f1ffca1755e8f6802bbf66e5e3197c6",
+    "mtime": 1787814200.5435169,
+    "ast_hash": "19b139da099eaaed95cd2fabee58579c",
     "semantic_hash": ""
   },
   "internal/services/manager_test.go": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1787813983.3758526,
-    "ast_hash": "ca93f154b5bd2c139ef1621a8770df04",
+    "mtime": 1787814352.0164468,
+    "ast_hash": "4f2d0d0249ee94d37c84d986143ea97d",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -915,8 +915,8 @@
     "semantic_hash": ""
   },
   "internal/cli/service_dependency_test.go": {
-    "mtime": 1787810157.0642664,
-    "ast_hash": "16ddb33ae1de2413d89063cbabf0cb19",
+    "mtime": 1787814287.802659,
+    "ast_hash": "29188a6726b7d87977fab8752c15da41",
     "semantic_hash": ""
   },
   "internal/services/grafana_test.go": {
@@ -940,8 +940,18 @@
     "semantic_hash": ""
   },
   "internal/services/jupyter_test.go": {
-    "mtime": 1787813909.1714778,
-    "ast_hash": "dcbdea4b8e3b2ad70502b663386717e5",
+    "mtime": 1787814287.8036592,
+    "ast_hash": "530d3fade5d26b45b540aee6dc34685c",
+    "semantic_hash": ""
+  },
+  "internal/proxy/shared.go": {
+    "mtime": 1787814176.9971611,
+    "ast_hash": "f4a7de4c8a9779164beca3738023d327",
+    "semantic_hash": ""
+  },
+  "internal/proxy/shared_test.go": {
+    "mtime": 1787814269.6718373,
+    "ast_hash": "edc145070c7e44996efba4238b001b46",
     "semantic_hash": ""
   }
 }

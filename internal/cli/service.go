@@ -2,10 +2,12 @@ package cli
 
 import (
 	"fmt"
+	"net/url"
 	"os"
 
 	"github.com/devherd/devherd/internal/config"
 	"github.com/devherd/devherd/internal/observe"
+	"github.com/devherd/devherd/internal/proxy"
 	"github.com/devherd/devherd/internal/services"
 	"github.com/spf13/cobra"
 )
@@ -55,7 +57,7 @@ func newServiceActionCmd(action string) *cobra.Command {
 
 			output, files, err := runServiceAction(cmd, manager, action, service, force)
 			if err == nil && action == "start" {
-				reportServiceAccess(cmd, manager, service)
+				reportServiceAccess(cmd, manager, service, publishSharedService(cmd, service))
 			}
 			// El aviso de configuracion va por stderr y **antes** de la salida de
 			// docker: escribir dentro del directorio de alguien sin decirlo es como
@@ -245,11 +247,74 @@ func dependencyWarning(service, dependency string) string {
 // reportServiceAccess dice como se entra al servicio recien arrancado. Para
 // Jupyter no es cortesia: sin el token la URL no sirve, y buscarlo en los logs de
 // un contenedor es exactamente la friccion que este comando existe para quitar.
-func reportServiceAccess(cmd *cobra.Command, manager services.Manager, service string) {
+func reportServiceAccess(cmd *cobra.Command, manager services.Manager, service, domain string) {
 	url, err := manager.AccessURL(service)
 	if err != nil || url == "" {
 		return
 	}
 
-	fmt.Fprintf(cmd.OutOrStdout(), "\n%s: %s\n", service, url)
+	out := cmd.OutOrStdout()
+	fmt.Fprintf(out, "\n%s: %s\n", service, url)
+
+	if domain == "" {
+		return
+	}
+	// El dominio se ofrece como alternativa, no como sustituto: el puerto sigue
+	// funcionando y es lo unico que funciona si el proxy se cae.
+	fmt.Fprintf(out, "  tambien en: %s\n", sharedServiceURL(domain, url))
+}
+
+// sharedServiceURL traslada la ruta y el token de la URL de loopback al dominio.
+// Sin eso, "tambien en jupyter.localhost" mandaria a una pagina que pide un token
+// que el usuario acaba de tener delante.
+func sharedServiceURL(domain, loopbackURL string) string {
+	parsed, err := url.Parse(loopbackURL)
+	if err != nil {
+		return "http://" + domain
+	}
+
+	rest := parsed.EscapedPath()
+	if parsed.RawQuery != "" {
+		rest += "?" + parsed.RawQuery
+	}
+
+	return "http://" + domain + rest
+}
+
+// publishSharedService le da un dominio local al servicio recien arrancado, para
+// no tener que recordar en que puerto escucha cada uno.
+//
+// Nunca falla el comando: el servicio ya esta arriba y accesible por su puerto. Un
+// proxy sin arrancar es motivo para no tener dominio, no para dar el arranque por
+// fallido.
+func publishSharedService(cmd *cobra.Command, service string) string {
+	port, ok := services.WebPort(service)
+	if !ok {
+		return ""
+	}
+
+	paths, err := config.ResolvePaths()
+	if err != nil {
+		return ""
+	}
+	cfg, err := config.NewStore(paths.ConfigFile).Load()
+	if err != nil || !proxy.UsesDockerExternal(cfg) {
+		// Sin el proxy en modo contenedor no hay donde publicar. No es un fallo:
+		// el servicio esta arriba y accesible por su puerto.
+		return ""
+	}
+
+	domain, err := proxy.PublishSharedService(cmd.Context(), cfg, proxy.SharedServiceSite{
+		Service:   service,
+		Container: services.ContainerName(service),
+		Port:      port,
+	})
+	if err != nil {
+		fmt.Fprintf(cmd.ErrOrStderr(),
+			"note: %s is up, but it could not be published on a local domain: %v\n", service, err)
+
+		return ""
+	}
+
+	return domain
 }

@@ -107,6 +107,30 @@ func DependsOn(service string) string {
 	return ""
 }
 
+// webPorts son los servicios compartidos que sirven algo en un navegador, con el
+// puerto en el que escuchan **dentro** de la red, no el publicado en el host.
+// Redis no esta porque no tiene interfaz que publicar.
+var webPorts = map[string]int{
+	"mailpit":    8025,
+	"prometheus": 9090,
+	"grafana":    3000,
+	"jupyter":    8888,
+}
+
+// WebPort devuelve el puerto interno de un servicio con interfaz web, y si lo
+// tiene. Es lo que decide si se le puede dar un dominio.
+func WebPort(service string) (int, bool) {
+	port, ok := webPorts[service]
+
+	return port, ok
+}
+
+// ContainerName es el nombre del contenedor de un servicio compartido, que es lo
+// que Docker necesita para conectarlo a otra red.
+func ContainerName(service string) string {
+	return "infra_" + service
+}
+
 // AccessURL es como se entra al servicio desde el navegador. Devuelve vacio para
 // los que no se abren en uno.
 //
