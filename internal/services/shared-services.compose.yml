@@ -18,7 +18,7 @@ services:
       devherd.service: "redis"
 
   mailpit:
-    image: axllent/mailpit:latest
+    image: axllent/mailpit:v1.31.0
     container_name: infra_mailpit
     restart: unless-stopped
     ports:
@@ -33,8 +33,34 @@ services:
       devherd.role: "shared-service"
       devherd.service: "mailpit"
 
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    container_name: infra_prometheus
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      # Una semana. Es un entorno de desarrollo: retencion larga seria disco
+      # gastado en datos que nadie va a mirar.
+      - --storage.tsdb.retention.time=7d
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      # Relativo al compose, que vive en el mismo directorio donde DevHerd escribe
+      # la configuracion administrada.
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      infra_net:
+        aliases:
+          - prometheus
+    labels:
+      devherd.managed: "true"
+      devherd.role: "shared-service"
+      devherd.service: "prometheus"
+
 volumes:
   redis_data:
+  prometheus_data:
 
 networks:
   infra_net:

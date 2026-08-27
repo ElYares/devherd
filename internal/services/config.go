@@ -6,6 +6,9 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"text/template"
+
+	servicestemplates "github.com/devherd/devherd/templates/services"
 )
 
 // ManagedFile es un archivo de configuracion que DevHerd escribe dentro del stack
@@ -23,9 +26,47 @@ type ManagedFile struct {
 	Content string
 }
 
+// ServiceOptions son los datos del entorno que necesitan las plantillas.
+//
+// HU-011 dejo las plantillas parametrizables fuera de alcance a proposito, y
+// Prometheus es el caso que obliga a tenerlas: su unico contenido util es una
+// direccion que solo se conoce en tiempo de ejecucion.
+type ServiceOptions struct {
+	// CollectorAddr es la direccion del collector de Observe **alcanzable desde un
+	// contenedor**. No es 127.0.0.1: desde dentro de un contenedor, loopback es el
+	// propio contenedor, y apuntar ahi deja un target caido sin explicacion.
+	CollectorAddr string
+}
+
 // serviceFiles declara la configuracion de cada servicio. Redis y Mailpit no
-// necesitan ninguna, y por eso el problema no se veia hasta ahora.
-var serviceFiles = map[string][]ManagedFile{}
+// necesitan ninguna, y por eso el problema de las escrituras no se veia hasta que
+// llego Prometheus.
+var serviceFiles = map[string]func(ServiceOptions) ([]ManagedFile, error){
+	"prometheus": prometheusFiles,
+}
+
+// prometheusFiles arma el prometheus.yml con el collector ya apuntado. Escribirlo
+// a mano exige saber que la direccion no es loopback, cual es el gateway de la red
+// compartida y donde va el archivo: justo el trabajo que DevHerd existe para
+// ahorrar, y el unico motivo por el que empaquetar Prometheus tiene sentido.
+func prometheusFiles(opts ServiceOptions) ([]ManagedFile, error) {
+	addr := strings.TrimSpace(opts.CollectorAddr)
+	if addr == "" {
+		return nil, fmt.Errorf("the Observe collector address is required to configure Prometheus")
+	}
+
+	tmpl, err := template.New("prometheus.yml").Parse(servicestemplates.PrometheusConfig)
+	if err != nil {
+		return nil, fmt.Errorf("parse the Prometheus configuration template: %w", err)
+	}
+
+	var rendered strings.Builder
+	if err := tmpl.Execute(&rendered, struct{ CollectorAddr string }{CollectorAddr: addr}); err != nil {
+		return nil, fmt.Errorf("render the Prometheus configuration: %w", err)
+	}
+
+	return []ManagedFile{{Path: "prometheus/prometheus.yml", Content: rendered.String()}}, nil
+}
 
 // FileState dice que se hizo con un archivo administrado, para poder contarlo.
 type FileState int
@@ -55,28 +96,44 @@ type FileResult struct {
 const backupSuffix = ".bak"
 
 // ServiceFiles devuelve la configuracion declarada por un servicio, o nada.
-func ServiceFiles(service string) []ManagedFile {
-	files := serviceFiles[service]
-	out := make([]ManagedFile, len(files))
-	copy(out, files)
-	sort.Slice(out, func(i, j int) bool { return out[i].Path < out[j].Path })
+func ServiceFiles(service string, opts ServiceOptions) ([]ManagedFile, error) {
+	build, ok := serviceFiles[service]
+	if !ok {
+		return nil, nil
+	}
 
-	return out
+	files, err := build(opts)
+	if err != nil {
+		return nil, err
+	}
+	sort.Slice(files, func(i, j int) bool { return files[i].Path < files[j].Path })
+
+	return files, nil
+}
+
+// NeedsCollector dice si un servicio necesita saber donde escucha el collector.
+// Se consulta **antes** de arrancar nada, para poder avisar cuando la direccion no
+// sirve en vez de dejar un target caido que se descubre media hora despues.
+func NeedsCollector(service string) bool {
+	return service == "prometheus"
 }
 
 // ensureServiceFiles escribe la configuracion de un servicio respetando lo que el
 // usuario haya editado. Devuelve que paso con cada archivo para que el comando lo
 // pueda decir: escribir configuracion en silencio dentro del directorio de alguien
 // es como se pierde una tarde buscando por que un servicio no toma sus ajustes.
-func (m Manager) ensureServiceFiles(service string, force bool) ([]FileResult, error) {
-	files := ServiceFiles(service)
+func (m Manager) ensureServiceFiles(service string, opts StartOptions) ([]FileResult, error) {
+	files, err := ServiceFiles(service, ServiceOptions{CollectorAddr: opts.CollectorAddr})
+	if err != nil {
+		return nil, err
+	}
 	if len(files) == 0 {
 		return nil, nil
 	}
 
 	results := make([]FileResult, 0, len(files))
 	for _, file := range files {
-		result, err := m.ensureFile(file, force)
+		result, err := m.ensureFile(file, opts.Force)
 		if err != nil {
 			return nil, err
 		}

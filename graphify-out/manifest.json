@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "internal/cli/service.go": {
-    "mtime": 1787806926.2594874,
-    "ast_hash": "c36c6c33f4c42f8f30f486974d918aeb",
+    "mtime": 1787808132.7083972,
+    "ast_hash": "e8d57e4a528599fa16cb00d9aae82119",
     "semantic_hash": ""
   },
   "internal/cli/stop.go": {
@@ -385,8 +385,8 @@
     "semantic_hash": "b6ad509aaccbb719b8da64eef79b4b6c"
   },
   "internal/services/manager.go": {
-    "mtime": 1787806956.3051023,
-    "ast_hash": "b3709e691ab519970ed427d6aede3e2f",
+    "mtime": 1787807753.22011,
+    "ast_hash": "5c646cd6e94d8f6b209498fc3e6ff6c8",
     "semantic_hash": ""
   },
   "internal/services/manager_test.go": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1787807043.3520792,
-    "ast_hash": "48f6c5e23ba8e8e882a9b5bbdf97c9a8",
+    "mtime": 1787808168.6786253,
+    "ast_hash": "6e9607176a235ae9763c8671c0cb2230",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -570,8 +570,8 @@
     "semantic_hash": ""
   },
   "internal/services/manager_runner_test.go": {
-    "mtime": 1787806956.3189108,
-    "ast_hash": "34692e0e2b83087c674c1b6c39338d3b",
+    "mtime": 1787807776.0194273,
+    "ast_hash": "d8cf4c972b406366aa88ef327bd04e60",
     "semantic_hash": ""
   },
   "docs/guides/logging-and-logs.md": {
@@ -595,8 +595,8 @@
     "semantic_hash": ""
   },
   "internal/services/shared-services.compose.yml": {
-    "mtime": 1781891073.2822595,
-    "ast_hash": "b3423e8e8ab046b9ae3023344bf70ae9",
+    "mtime": 1787807832.8290813,
+    "ast_hash": "a71cd37d4f487769c771fdfaa8e10066",
     "semantic_hash": ""
   },
   "internal/cli/serve.go": {
@@ -885,13 +885,33 @@
     "semantic_hash": ""
   },
   "internal/services/config.go": {
-    "mtime": 1787806891.4541736,
-    "ast_hash": "a78c8005208ab219b6238748331af6b8",
+    "mtime": 1787807743.1044362,
+    "ast_hash": "02f9f06dfb946375b5ebb6c2365297ac",
     "semantic_hash": ""
   },
   "internal/services/config_test.go": {
-    "mtime": 1787807005.793028,
-    "ast_hash": "64938c8b6bad9e0544f7e6cbc61daff3",
+    "mtime": 1787807781.5988843,
+    "ast_hash": "0c291621f54147f4530076653d023c50",
+    "semantic_hash": ""
+  },
+  "internal/cli/service_collector_test.go": {
+    "mtime": 1787808153.7481751,
+    "ast_hash": "bedb321f118ff13d4912be4cd2487780",
+    "semantic_hash": ""
+  },
+  "internal/services/prometheus_test.go": {
+    "mtime": 1787807810.7015524,
+    "ast_hash": "033e3f62bbcea17a4a06a5be73015e46",
+    "semantic_hash": ""
+  },
+  "templates/services/embed.go": {
+    "mtime": 1787807743.095643,
+    "ast_hash": "ff9e5a213f9661b5f5a6160382bab1ba",
+    "semantic_hash": ""
+  },
+  "templates/services/prometheus.yml": {
+    "mtime": 1787807715.8055325,
+    "ast_hash": "bed6cf8592c9c0bef0052c99abcc2256",
     "semantic_hash": ""
   }
 }

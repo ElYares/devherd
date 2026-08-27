@@ -1338,7 +1338,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_doctor",
-      "community": 105,
+      "community": 93,
       "norm_label": "doctor.go"
     },
     {
@@ -1348,7 +1348,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_doctor_newdoctorcmd",
-      "community": 105,
+      "community": 93,
       "norm_label": "newdoctorcmd()"
     },
     {
@@ -1358,7 +1358,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_doctor_go_command",
-      "community": 105,
+      "community": 93,
       "norm_label": "command"
     },
     {
@@ -1368,7 +1368,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "cli_doctor_statuslabel",
-      "community": 105,
+      "community": 93,
       "norm_label": "statuslabel()"
     },
     {
@@ -1378,7 +1378,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "status",
-      "community": 105,
+      "community": 93,
       "norm_label": "status"
     },
     {
@@ -1388,7 +1388,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_domain",
-      "community": 98,
+      "community": 11,
       "norm_label": "domain.go"
     },
     {
@@ -1398,7 +1398,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_domain_newdomaincmd",
-      "community": 98,
+      "community": 11,
       "norm_label": "newdomaincmd()"
     },
     {
@@ -1408,7 +1408,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_cli_domain_go_command",
-      "community": 98,
+      "community": 11,
       "norm_label": "command"
     },
     {
@@ -1418,7 +1418,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "cli_domain_newdomainsetcmd",
-      "community": 98,
+      "community": 11,
       "norm_label": "newdomainsetcmd()"
     },
     {
@@ -1428,7 +1428,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_down",
-      "community": 1,
+      "community": 86,
       "norm_label": "down.go"
     },
     {
@@ -1438,7 +1438,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_down_newdowncmd",
-      "community": 1,
+      "community": 86,
       "norm_label": "newdowncmd()"
     },
     {
@@ -1448,7 +1448,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_down_go_command",
-      "community": 1,
+      "community": 86,
       "norm_label": "command"
     },
     {
@@ -1458,7 +1458,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_formatting_test",
-      "community": 7,
+      "community": 10,
       "norm_label": "formatting_test.go"
     },
     {
@@ -1468,7 +1468,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "cli_formatting_test_testtruncateobservetext",
-      "community": 7,
+      "community": 10,
       "norm_label": "testtruncateobservetext()"
     },
     {
@@ -1478,7 +1478,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "internal_cli_formatting_test_go_t",
-      "community": 7,
+      "community": 10,
       "norm_label": "t"
     },
     {
@@ -1488,7 +1488,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "cli_formatting_test_testsupportedalertkind",
-      "community": 7,
+      "community": 10,
       "norm_label": "testsupportedalertkind()"
     },
     {
@@ -1498,7 +1498,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "cli_formatting_test_testparseobservedurationseconds",
-      "community": 7,
+      "community": 10,
       "norm_label": "testparseobservedurationseconds()"
     },
     {
@@ -1508,7 +1508,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "cli_formatting_test_testobservecooldownacceptszerobutwindowdoesnot",
-      "community": 7,
+      "community": 10,
       "norm_label": "testobservecooldownacceptszerobutwindowdoesnot()"
     },
     {
@@ -1518,7 +1518,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "cli_formatting_test_testemptyasall",
-      "community": 7,
+      "community": 10,
       "norm_label": "testemptyasall()"
     },
     {
@@ -1528,7 +1528,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "cli_formatting_test_testformatobservepayloadvalue",
-      "community": 7,
+      "community": 10,
       "norm_label": "testformatobservepayloadvalue()"
     },
     {
@@ -1538,7 +1538,7 @@
       "source_location": "L114",
       "_origin": "ast",
       "id": "cli_formatting_test_teststatuslabel",
-      "community": 7,
+      "community": 10,
       "norm_label": "teststatuslabel()"
     },
     {
@@ -1548,7 +1548,7 @@
       "source_location": "L128",
       "_origin": "ast",
       "id": "cli_formatting_test_testserviceactionshort",
-      "community": 7,
+      "community": 10,
       "norm_label": "testserviceactionshort()"
     },
     {
@@ -1558,7 +1558,7 @@
       "source_location": "L143",
       "_origin": "ast",
       "id": "cli_formatting_test_testdescribeprojectsource",
-      "community": 7,
+      "community": 10,
       "norm_label": "testdescribeprojectsource()"
     },
     {
@@ -1568,7 +1568,7 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "cli_formatting_test_testdescribeenvfile",
-      "community": 7,
+      "community": 10,
       "norm_label": "testdescribeenvfile()"
     },
     {
@@ -1578,7 +1578,7 @@
       "source_location": "L173",
       "_origin": "ast",
       "id": "cli_formatting_test_testwriteobservetimelinesayswhatismissing",
-      "community": 7,
+      "community": 10,
       "norm_label": "testwriteobservetimelinesayswhatismissing()"
     },
     {
@@ -1588,7 +1588,7 @@
       "source_location": "L196",
       "_origin": "ast",
       "id": "cli_formatting_test_testwriteobservepayloadshowsonlyextrakeys",
-      "community": 7,
+      "community": 10,
       "norm_label": "testwriteobservepayloadshowsonlyextrakeys()"
     },
     {
@@ -1598,7 +1598,7 @@
       "source_location": "L217",
       "_origin": "ast",
       "id": "cli_formatting_test_testwriteobservepayloadstaysquietwhenthereisnothingextra",
-      "community": 7,
+      "community": 10,
       "norm_label": "testwriteobservepayloadstaysquietwhenthereisnothingextra()"
     },
     {
@@ -1608,7 +1608,7 @@
       "source_location": "L231",
       "_origin": "ast",
       "id": "cli_formatting_test_testwritepreflightreporthidesokunlessasked",
-      "community": 7,
+      "community": 10,
       "norm_label": "testwritepreflightreporthidesokunlessasked()"
     },
     {
@@ -1868,7 +1868,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_logs",
-      "community": 93,
+      "community": 84,
       "norm_label": "logs.go"
     },
     {
@@ -1878,7 +1878,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_logs_newlogscmd",
-      "community": 93,
+      "community": 84,
       "norm_label": "newlogscmd()"
     },
     {
@@ -1888,7 +1888,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_logs_go_command",
-      "community": 93,
+      "community": 84,
       "norm_label": "command"
     },
     {
@@ -1898,7 +1898,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_naming",
-      "community": 92,
+      "community": 11,
       "norm_label": "naming.go"
     },
     {
@@ -1908,7 +1908,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "cli_naming_primarydomainlabel",
-      "community": 92,
+      "community": 11,
       "norm_label": "primarydomainlabel()"
     },
     {
@@ -1918,7 +1918,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "cli_naming_primarydomain",
-      "community": 92,
+      "community": 11,
       "norm_label": "primarydomain()"
     },
     {
@@ -1928,7 +1928,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "cli_naming_normalizedomain",
-      "community": 92,
+      "community": 11,
       "norm_label": "normalizedomain()"
     },
     {
@@ -1938,7 +1938,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_naming_test",
-      "community": 92,
+      "community": 11,
       "norm_label": "naming_test.go"
     },
     {
@@ -1948,7 +1948,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "cli_naming_test_testnormalizedomain",
-      "community": 92,
+      "community": 11,
       "norm_label": "testnormalizedomain()"
     },
     {
@@ -1958,7 +1958,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_cli_naming_test_go_t",
-      "community": 92,
+      "community": 11,
       "norm_label": "t"
     },
     {
@@ -2018,7 +2018,7 @@
       "source_location": "L184",
       "_origin": "ast",
       "id": "cli_observe_reportobservecoverage",
-      "community": 7,
+      "community": 98,
       "norm_label": "reportobservecoverage()"
     },
     {
@@ -2028,7 +2028,7 @@
       "source_location": "L184",
       "_origin": "ast",
       "id": "internal_cli_observe_go_duration",
-      "community": 7,
+      "community": 98,
       "norm_label": "duration"
     },
     {
@@ -2038,7 +2038,7 @@
       "source_location": "L238",
       "_origin": "ast",
       "id": "cli_observe_formatgaprange",
-      "community": 7,
+      "community": 98,
       "norm_label": "formatgaprange()"
     },
     {
@@ -2048,7 +2048,7 @@
       "source_location": "L238",
       "_origin": "ast",
       "id": "internal_cli_observe_go_time",
-      "community": 7,
+      "community": 98,
       "norm_label": "time"
     },
     {
@@ -2058,7 +2058,7 @@
       "source_location": "L251",
       "_origin": "ast",
       "id": "cli_observe_shortduration",
-      "community": 7,
+      "community": 98,
       "norm_label": "shortduration()"
     },
     {
@@ -2138,7 +2138,7 @@
       "source_location": "L580",
       "_origin": "ast",
       "id": "cli_observe_newobservetimelinecmd",
-      "community": 7,
+      "community": 10,
       "norm_label": "newobservetimelinecmd()"
     },
     {
@@ -2228,7 +2228,7 @@
       "source_location": "L935",
       "_origin": "ast",
       "id": "cli_observe_writeobservetimeline",
-      "community": 7,
+      "community": 10,
       "norm_label": "writeobservetimeline()"
     },
     {
@@ -2238,7 +2238,7 @@
       "source_location": "L935",
       "_origin": "ast",
       "id": "internal_cli_observe_go_writer",
-      "community": 7,
+      "community": 10,
       "norm_label": "writer"
     },
     {
@@ -2248,7 +2248,7 @@
       "source_location": "L935",
       "_origin": "ast",
       "id": "timeline",
-      "community": 7,
+      "community": 10,
       "norm_label": "timeline"
     },
     {
@@ -2258,7 +2258,7 @@
       "source_location": "L980",
       "_origin": "ast",
       "id": "cli_observe_writeobservepayload",
-      "community": 7,
+      "community": 10,
       "norm_label": "writeobservepayload()"
     },
     {
@@ -2268,7 +2268,7 @@
       "source_location": "L999",
       "_origin": "ast",
       "id": "cli_observe_formatobservepayloadvalue",
-      "community": 7,
+      "community": 10,
       "norm_label": "formatobservepayloadvalue()"
     },
     {
@@ -2368,7 +2368,7 @@
       "source_location": "L1074",
       "_origin": "ast",
       "id": "cli_observeaddrplan",
-      "community": 7,
+      "community": 103,
       "norm_label": "observeaddrplan"
     },
     {
@@ -2378,7 +2378,7 @@
       "source_location": "L1077",
       "_origin": "ast",
       "id": "internal_cli_observe_go_networkinfo",
-      "community": 7,
+      "community": 103,
       "norm_label": "networkinfo"
     },
     {
@@ -2388,7 +2388,7 @@
       "source_location": "L1083",
       "_origin": "ast",
       "id": "internal_cli_observe_go_runner",
-      "community": 7,
+      "community": 103,
       "norm_label": "runner"
     },
     {
@@ -2398,7 +2398,7 @@
       "source_location": "L1086",
       "_origin": "ast",
       "id": "cli_observeaddroptions",
-      "community": 7,
+      "community": 103,
       "norm_label": "observeaddroptions"
     },
     {
@@ -2408,7 +2408,7 @@
       "source_location": "L1100",
       "_origin": "ast",
       "id": "cli_observe_planobserveaddrs",
-      "community": 7,
+      "community": 67,
       "norm_label": "planobserveaddrs()"
     },
     {
@@ -2418,7 +2418,7 @@
       "source_location": "L1141",
       "_origin": "ast",
       "id": "cli_observeaddrplan_selectmatch",
-      "community": 7,
+      "community": 103,
       "norm_label": ".selectmatch()"
     },
     {
@@ -2428,7 +2428,7 @@
       "source_location": "L1175",
       "_origin": "ast",
       "id": "cli_observeaddrplan_networknames",
-      "community": 7,
+      "community": 103,
       "norm_label": ".networknames()"
     },
     {
@@ -2498,7 +2498,7 @@
       "source_location": "L1288",
       "_origin": "ast",
       "id": "cli_observe_parseobservecooldownseconds",
-      "community": 7,
+      "community": 102,
       "norm_label": "parseobservecooldownseconds()"
     },
     {
@@ -2508,7 +2508,7 @@
       "source_location": "L1305",
       "_origin": "ast",
       "id": "cli_observe_parseobservedurationseconds",
-      "community": 7,
+      "community": 10,
       "norm_label": "parseobservedurationseconds()"
     },
     {
@@ -2528,7 +2528,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_addrs_test",
-      "community": 7,
+      "community": 67,
       "norm_label": "observe_addrs_test.go"
     },
     {
@@ -2538,7 +2538,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "cli_routedrunner",
-      "community": 7,
+      "community": 67,
       "norm_label": "routedrunner"
     },
     {
@@ -2548,7 +2548,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "cli_routedrunner_run",
-      "community": 7,
+      "community": 67,
       "norm_label": ".run()"
     },
     {
@@ -2558,7 +2558,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "internal_cli_observe_addrs_test_go_context",
-      "community": 7,
+      "community": 67,
       "norm_label": "context"
     },
     {
@@ -2568,7 +2568,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "cli_observe_addrs_test_demorunner",
-      "community": 7,
+      "community": 67,
       "norm_label": "demorunner()"
     },
     {
@@ -2578,7 +2578,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "cli_observe_addrs_test_testplanobserveaddrsprefersstablenetworkovercoverage",
-      "community": 7,
+      "community": 67,
       "norm_label": "testplanobserveaddrsprefersstablenetworkovercoverage()"
     },
     {
@@ -2588,7 +2588,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "internal_cli_observe_addrs_test_go_t",
-      "community": 7,
+      "community": 67,
       "norm_label": "t"
     },
     {
@@ -2598,7 +2598,7 @@
       "source_location": "L109",
       "_origin": "ast",
       "id": "cli_observe_addrs_test_testplanobserveaddrsfallsbacktoprojectnetworkwhenisolated",
-      "community": 7,
+      "community": 67,
       "norm_label": "testplanobserveaddrsfallsbacktoprojectnetworkwhenisolated()"
     },
     {
@@ -2608,7 +2608,7 @@
       "source_location": "L129",
       "_origin": "ast",
       "id": "cli_observe_addrs_test_testplanobserveaddrsbindseveryresolvednetwork",
-      "community": 7,
+      "community": 67,
       "norm_label": "testplanobserveaddrsbindseveryresolvednetwork()"
     },
     {
@@ -2618,7 +2618,7 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "cli_observe_addrs_test_testplanobserveaddrsexplainsprojectwithoutcontainers",
-      "community": 7,
+      "community": 67,
       "norm_label": "testplanobserveaddrsexplainsprojectwithoutcontainers()"
     },
     {
@@ -2628,7 +2628,7 @@
       "source_location": "L172",
       "_origin": "ast",
       "id": "cli_observe_addrs_test_testplanobserveaddrsrespectsexplicitaddr",
-      "community": 7,
+      "community": 67,
       "norm_label": "testplanobserveaddrsrespectsexplicitaddr()"
     },
     {
@@ -2638,7 +2638,7 @@
       "source_location": "L194",
       "_origin": "ast",
       "id": "cli_observe_addrs_test_testplanobserveaddrsreportswhennonetworkresolves",
-      "community": 7,
+      "community": 67,
       "norm_label": "testplanobserveaddrsreportswhennonetworkresolves()"
     },
     {
@@ -2648,7 +2648,7 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "cli_observe_addrs_test_testobserveaddrplannetworknameslistseverynetwork",
-      "community": 7,
+      "community": 67,
       "norm_label": "testobserveaddrplannetworknameslistseverynetwork()"
     },
     {
@@ -2658,7 +2658,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_cooldown_test",
-      "community": 7,
+      "community": 102,
       "norm_label": "observe_cooldown_test.go"
     },
     {
@@ -2668,7 +2668,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "cli_observe_cooldown_test_testparseobservecooldownsecondsacceptszero",
-      "community": 7,
+      "community": 102,
       "norm_label": "testparseobservecooldownsecondsacceptszero()"
     },
     {
@@ -2678,7 +2678,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_cli_observe_cooldown_test_go_t",
-      "community": 7,
+      "community": 102,
       "norm_label": "t"
     },
     {
@@ -2688,7 +2688,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "cli_observe_cooldown_test_testparseobservecooldownsecondsrejectsnegative",
-      "community": 7,
+      "community": 102,
       "norm_label": "testparseobservecooldownsecondsrejectsnegative()"
     },
     {
@@ -2698,7 +2698,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "cli_observe_cooldown_test_testparseobservecooldownsecondsparsesdurations",
-      "community": 7,
+      "community": 102,
       "norm_label": "testparseobservecooldownsecondsparsesdurations()"
     },
     {
@@ -2708,7 +2708,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "cli_observe_cooldown_test_testdefaultcooldownfollowsthewindowonlyforerrorrate",
-      "community": 7,
+      "community": 102,
       "norm_label": "testdefaultcooldownfollowsthewindowonlyforerrorrate()"
     },
     {
@@ -2718,7 +2718,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_coverage_test",
-      "community": 7,
+      "community": 98,
       "norm_label": "observe_coverage_test.go"
     },
     {
@@ -2728,7 +2728,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "cli_observe_coverage_test_testshortdurationreadslikeaperson",
-      "community": 7,
+      "community": 98,
       "norm_label": "testshortdurationreadslikeaperson()"
     },
     {
@@ -2738,7 +2738,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_cli_observe_coverage_test_go_t",
-      "community": 7,
+      "community": 98,
       "norm_label": "t"
     },
     {
@@ -2748,7 +2748,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "cli_observe_coverage_test_testformatgaprangeshowsthedatewhenthegapcrossesdays",
-      "community": 7,
+      "community": 98,
       "norm_label": "testformatgaprangeshowsthedatewhenthegapcrossesdays()"
     },
     {
@@ -2818,7 +2818,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_firewall",
-      "community": 7,
+      "community": 67,
       "norm_label": "observe_firewall.go"
     },
     {
@@ -2828,7 +2828,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "cli_observe_firewall_newobservefirewallcmd",
-      "community": 7,
+      "community": 67,
       "norm_label": "newobservefirewallcmd()"
     },
     {
@@ -2838,7 +2838,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "internal_cli_observe_firewall_go_command",
-      "community": 7,
+      "community": 67,
       "norm_label": "command"
     },
     {
@@ -3048,7 +3048,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_observe_test",
-      "community": 7,
+      "community": 104,
       "norm_label": "observe_test.go"
     },
     {
@@ -3058,7 +3058,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "cli_observe_test_testobservedsn",
-      "community": 7,
+      "community": 104,
       "norm_label": "testobservedsn()"
     },
     {
@@ -3068,7 +3068,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "internal_cli_observe_test_go_t",
-      "community": 7,
+      "community": 104,
       "norm_label": "t"
     },
     {
@@ -3078,7 +3078,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_open",
-      "community": 96,
+      "community": 8,
       "norm_label": "open.go"
     },
     {
@@ -3088,7 +3088,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_open_newopencmd",
-      "community": 96,
+      "community": 8,
       "norm_label": "newopencmd()"
     },
     {
@@ -3098,7 +3098,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_open_go_command",
-      "community": 96,
+      "community": 8,
       "norm_label": "command"
     },
     {
@@ -3108,7 +3108,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "cli_open_browsercommand",
-      "community": 96,
+      "community": 8,
       "norm_label": "browsercommand()"
     },
     {
@@ -3118,7 +3118,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_open_test",
-      "community": 96,
+      "community": 8,
       "norm_label": "open_test.go"
     },
     {
@@ -3128,7 +3128,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "cli_open_test_testbrowsercommand",
-      "community": 96,
+      "community": 8,
       "norm_label": "testbrowsercommand()"
     },
     {
@@ -3138,7 +3138,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_cli_open_test_go_t",
-      "community": 96,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -3148,7 +3148,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_park",
-      "community": 92,
+      "community": 11,
       "norm_label": "park.go"
     },
     {
@@ -3158,7 +3158,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "cli_park_newparkcmd",
-      "community": 92,
+      "community": 11,
       "norm_label": "newparkcmd()"
     },
     {
@@ -3168,7 +3168,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "internal_cli_park_go_command",
-      "community": 92,
+      "community": 11,
       "norm_label": "command"
     },
     {
@@ -3568,7 +3568,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_serve",
-      "community": 88,
+      "community": 11,
       "norm_label": "serve.go"
     },
     {
@@ -3578,7 +3578,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "cli_serve_newservecmd",
-      "community": 88,
+      "community": 11,
       "norm_label": "newservecmd()"
     },
     {
@@ -3588,7 +3588,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_serve_go_command",
-      "community": 88,
+      "community": 11,
       "norm_label": "command"
     },
     {
@@ -3598,7 +3598,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "cli_serve_runsiblingcommand",
-      "community": 88,
+      "community": 11,
       "norm_label": "runsiblingcommand()"
     },
     {
@@ -3608,7 +3608,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "cli_serve_projectnameforpath",
-      "community": 88,
+      "community": 11,
       "norm_label": "projectnameforpath()"
     },
     {
@@ -3618,7 +3618,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_serve_test",
-      "community": 88,
+      "community": 11,
       "norm_label": "serve_test.go"
     },
     {
@@ -3628,7 +3628,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_serve_test_newtestroot",
-      "community": 88,
+      "community": 11,
       "norm_label": "newtestroot()"
     },
     {
@@ -3638,7 +3638,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_cli_serve_test_go_command",
-      "community": 88,
+      "community": 11,
       "norm_label": "command"
     },
     {
@@ -3648,7 +3648,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "cli_serve_test_testrunsiblingcommandinvokestargetwithargs",
-      "community": 88,
+      "community": 11,
       "norm_label": "testrunsiblingcommandinvokestargetwithargs()"
     },
     {
@@ -3658,7 +3658,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "internal_cli_serve_test_go_t",
-      "community": 88,
+      "community": 11,
       "norm_label": "t"
     },
     {
@@ -3668,7 +3668,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "cli_serve_test_testrunsiblingcommandresolvessubcommand",
-      "community": 88,
+      "community": 11,
       "norm_label": "testrunsiblingcommandresolvessubcommand()"
     },
     {
@@ -3678,7 +3678,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "cli_serve_test_testrunsiblingcommandpropagateserror",
-      "community": 88,
+      "community": 11,
       "norm_label": "testrunsiblingcommandpropagateserror()"
     },
     {
@@ -3688,78 +3688,178 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_service",
-      "community": 2,
+      "community": 47,
       "norm_label": "service.go"
     },
     {
       "label": "newServiceCmd()",
       "file_type": "code",
       "source_file": "internal/cli/service.go",
-      "source_location": "L11",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "cli_service_newservicecmd",
-      "community": 2,
+      "community": 47,
       "norm_label": "newservicecmd()"
     },
     {
       "label": "Command",
       "file_type": "code",
       "source_file": "internal/cli/service.go",
-      "source_location": "L11",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "internal_cli_service_go_command",
-      "community": 2,
+      "community": 47,
       "norm_label": "command"
     },
     {
       "label": "newServiceActionCmd()",
       "file_type": "code",
       "source_file": "internal/cli/service.go",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "cli_service_newserviceactioncmd",
-      "community": 2,
+      "community": 47,
       "norm_label": "newserviceactioncmd()"
     },
     {
       "label": "runServiceAction()",
       "file_type": "code",
       "source_file": "internal/cli/service.go",
-      "source_location": "L77",
+      "source_location": "L78",
       "_origin": "ast",
       "id": "cli_service_runserviceaction",
-      "community": 2,
+      "community": 47,
       "norm_label": "runserviceaction()"
     },
     {
       "label": "Manager",
       "file_type": "code",
       "source_file": "internal/cli/service.go",
-      "source_location": "L77",
+      "source_location": "L78",
       "_origin": "ast",
       "id": "internal_cli_service_go_manager",
-      "community": 2,
+      "community": 47,
       "norm_label": "manager"
     },
     {
       "label": "FileResult",
       "file_type": "code",
       "source_file": "internal/cli/service.go",
-      "source_location": "L77",
+      "source_location": "L78",
       "_origin": "ast",
       "id": "internal_cli_service_go_fileresult",
-      "community": 2,
+      "community": 47,
       "norm_label": "fileresult"
     },
     {
       "label": "serviceActionShort()",
       "file_type": "code",
       "source_file": "internal/cli/service.go",
-      "source_location": "L99",
+      "source_location": "L111",
       "_origin": "ast",
       "id": "cli_service_serviceactionshort",
-      "community": 2,
+      "community": 47,
       "norm_label": "serviceactionshort()"
+    },
+    {
+      "label": "collectorAddrForService()",
+      "file_type": "code",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L131",
+      "_origin": "ast",
+      "id": "cli_service_collectoraddrforservice",
+      "community": 47,
+      "norm_label": "collectoraddrforservice()"
+    },
+    {
+      "label": "collectorAddrFromPlan()",
+      "file_type": "code",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L143",
+      "_origin": "ast",
+      "id": "cli_service_collectoraddrfromplan",
+      "community": 47,
+      "norm_label": "collectoraddrfromplan()"
+    },
+    {
+      "label": "observeAddrPlan",
+      "file_type": "code",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L143",
+      "_origin": "ast",
+      "id": "observeaddrplan",
+      "community": 47,
+      "norm_label": "observeaddrplan"
+    },
+    {
+      "label": "Reachability",
+      "file_type": "code",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L143",
+      "_origin": "ast",
+      "id": "reachability",
+      "community": 47,
+      "norm_label": "reachability"
+    },
+    {
+      "label": "service_collector_test.go",
+      "file_type": "code",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cli_service_collector_test",
+      "community": 47,
+      "norm_label": "service_collector_test.go"
+    },
+    {
+      "label": "TestCollectorAddrUsesTheSharedServicesNetworkGateway()",
+      "file_type": "code",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "cli_service_collector_test_testcollectoraddrusesthesharedservicesnetworkgateway",
+      "community": 47,
+      "norm_label": "testcollectoraddrusesthesharedservicesnetworkgateway()"
+    },
+    {
+      "label": "T",
+      "file_type": "code",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "internal_cli_service_collector_test_go_t",
+      "community": 47,
+      "norm_label": "t"
+    },
+    {
+      "label": "TestCollectorAddrWarnsWhenTheProbeCannotReachIt()",
+      "file_type": "code",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L41",
+      "_origin": "ast",
+      "id": "cli_service_collector_test_testcollectoraddrwarnswhentheprobecannotreachit",
+      "community": 47,
+      "norm_label": "testcollectoraddrwarnswhentheprobecannotreachit()"
+    },
+    {
+      "label": "TestCollectorAddrDoesNotWarnWhenTheProbeWasSkipped()",
+      "file_type": "code",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "cli_service_collector_test_testcollectoraddrdoesnotwarnwhentheprobewasskipped",
+      "community": 47,
+      "norm_label": "testcollectoraddrdoesnotwarnwhentheprobewasskipped()"
+    },
+    {
+      "label": "TestCollectorAddrWarnsWhenTheSharedNetworkIsMissing()",
+      "file_type": "code",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L83",
+      "_origin": "ast",
+      "id": "cli_service_collector_test_testcollectoraddrwarnswhenthesharednetworkismissing",
+      "community": 47,
+      "norm_label": "testcollectoraddrwarnswhenthesharednetworkismissing()"
     },
     {
       "label": "stop.go",
@@ -3768,7 +3868,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_stop",
-      "community": 93,
+      "community": 86,
       "norm_label": "stop.go"
     },
     {
@@ -3778,7 +3878,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "cli_stop_newstopcmd",
-      "community": 93,
+      "community": 86,
       "norm_label": "newstopcmd()"
     },
     {
@@ -3788,7 +3888,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "internal_cli_stop_go_command",
-      "community": 93,
+      "community": 86,
       "norm_label": "command"
     },
     {
@@ -3848,7 +3948,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_logs",
-      "community": 1,
+      "community": 96,
       "norm_label": "logs.go"
     },
     {
@@ -3858,7 +3958,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "compose_logsoptions",
-      "community": 1,
+      "community": 96,
       "norm_label": "logsoptions"
     },
     {
@@ -3868,7 +3968,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "compose_logs_logsargs",
-      "community": 1,
+      "community": 96,
       "norm_label": "logsargs()"
     },
     {
@@ -3878,7 +3978,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "internal_compose_logs_go_project",
-      "community": 1,
+      "community": 96,
       "norm_label": "project"
     },
     {
@@ -3888,7 +3988,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "compose_logs_logsproject",
-      "community": 1,
+      "community": 96,
       "norm_label": "logsproject()"
     },
     {
@@ -3898,7 +3998,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_compose_logs_go_context",
-      "community": 1,
+      "community": 96,
       "norm_label": "context"
     },
     {
@@ -3908,7 +4008,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_compose_logs_go_writer",
-      "community": 1,
+      "community": 96,
       "norm_label": "writer"
     },
     {
@@ -3918,7 +4018,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "compose_logs_logs",
-      "community": 1,
+      "community": 96,
       "norm_label": "logs()"
     },
     {
@@ -3928,7 +4028,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_logs_test",
-      "community": 1,
+      "community": 96,
       "norm_label": "logs_test.go"
     },
     {
@@ -3938,7 +4038,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "compose_logs_test_testlogsargsdefault",
-      "community": 1,
+      "community": 96,
       "norm_label": "testlogsargsdefault()"
     },
     {
@@ -3948,7 +4048,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_compose_logs_test_go_t",
-      "community": 1,
+      "community": 96,
       "norm_label": "t"
     },
     {
@@ -3958,7 +4058,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "compose_logs_test_testlogsargswithfollowtailandservices",
-      "community": 1,
+      "community": 96,
       "norm_label": "testlogsargswithfollowtailandservices()"
     },
     {
@@ -3998,7 +4098,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "compose_manifest",
-      "community": 1,
+      "community": 82,
       "norm_label": "manifest"
     },
     {
@@ -4008,7 +4108,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "manifestcompose",
-      "community": 1,
+      "community": 82,
       "norm_label": "manifestcompose"
     },
     {
@@ -4018,7 +4118,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "manifestproxy",
-      "community": 1,
+      "community": 82,
       "norm_label": "manifestproxy"
     },
     {
@@ -4028,7 +4128,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "manifesttest",
-      "community": 1,
+      "community": 82,
       "norm_label": "manifesttest"
     },
     {
@@ -4088,7 +4188,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "compose_project_resolveproject",
-      "community": 1,
+      "community": 89,
       "norm_label": "resolveproject()"
     },
     {
@@ -4238,7 +4338,7 @@
       "source_location": "L336",
       "_origin": "ast",
       "id": "compose_project_withprojectnames",
-      "community": 1,
+      "community": 89,
       "norm_label": ".withprojectnames()"
     },
     {
@@ -4248,7 +4348,7 @@
       "source_location": "L355",
       "_origin": "ast",
       "id": "compose_project_projectnameforpath",
-      "community": 1,
+      "community": 89,
       "norm_label": "projectnameforpath()"
     },
     {
@@ -4258,7 +4358,7 @@
       "source_location": "L374",
       "_origin": "ast",
       "id": "compose_project_legacyprojectnameforpath",
-      "community": 1,
+      "community": 89,
       "norm_label": "legacyprojectnameforpath()"
     },
     {
@@ -4268,7 +4368,7 @@
       "source_location": "L378",
       "_origin": "ast",
       "id": "compose_project_composeprojectlabel",
-      "community": 1,
+      "community": 89,
       "norm_label": "composeprojectlabel()"
     },
     {
@@ -4288,7 +4388,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "compose_project_test",
-      "community": 1,
+      "community": 89,
       "norm_label": "project_test.go"
     },
     {
@@ -4298,7 +4398,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectdefaultstosinglecomposefile",
-      "community": 1,
+      "community": 89,
       "norm_label": "testresolveprojectdefaultstosinglecomposefile()"
     },
     {
@@ -4308,7 +4408,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_compose_project_test_go_t",
-      "community": 1,
+      "community": 89,
       "norm_label": "t"
     },
     {
@@ -4318,7 +4418,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojectusesmanifestcomposefiles",
-      "community": 1,
+      "community": 89,
       "norm_label": "testresolveprojectusesmanifestcomposefiles()"
     },
     {
@@ -4328,7 +4428,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "compose_project_test_testresolveprojecterrorswhenmanifestcomposefilemissing",
-      "community": 1,
+      "community": 89,
       "norm_label": "testresolveprojecterrorswhenmanifestcomposefilemissing()"
     },
     {
@@ -4338,7 +4438,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "compose_project_test_testcomposeargsincludesenvfileandallcomposefiles",
-      "community": 1,
+      "community": 89,
       "norm_label": "testcomposeargsincludesenvfileandallcomposefiles()"
     },
     {
@@ -4348,7 +4448,7 @@
       "source_location": "L133",
       "_origin": "ast",
       "id": "compose_project_test_testplanreturnsdockercommand",
-      "community": 1,
+      "community": 89,
       "norm_label": "testplanreturnsdockercommand()"
     },
     {
@@ -4358,7 +4458,7 @@
       "source_location": "L155",
       "_origin": "ast",
       "id": "compose_project_test_teststopprojectusescomposestop",
-      "community": 1,
+      "community": 89,
       "norm_label": "teststopprojectusescomposestop()"
     },
     {
@@ -4368,7 +4468,7 @@
       "source_location": "L179",
       "_origin": "ast",
       "id": "compose_project_test_testprojectnameforpathisstableandpathscoped",
-      "community": 1,
+      "community": 89,
       "norm_label": "testprojectnameforpathisstableandpathscoped()"
     },
     {
@@ -5288,7 +5388,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dns_hosts",
-      "community": 8,
+      "community": 92,
       "norm_label": "hosts.go"
     },
     {
@@ -5298,7 +5398,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "dns_hosts_validatedomains",
-      "community": 8,
+      "community": 92,
       "norm_label": "validatedomains()"
     },
     {
@@ -5308,7 +5408,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "dns_hosts_synchosts",
-      "community": 8,
+      "community": 92,
       "norm_label": "synchosts()"
     },
     {
@@ -5318,7 +5418,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "dns_hosts_mergemanagedblock",
-      "community": 8,
+      "community": 92,
       "norm_label": "mergemanagedblock()"
     },
     {
@@ -5328,7 +5428,7 @@
       "source_location": "L114",
       "_origin": "ast",
       "id": "dns_hosts_buildmanagedblock",
-      "community": 8,
+      "community": 92,
       "norm_label": "buildmanagedblock()"
     },
     {
@@ -5338,7 +5438,7 @@
       "source_location": "L126",
       "_origin": "ast",
       "id": "dns_hosts_runinteractive",
-      "community": 8,
+      "community": 92,
       "norm_label": "runinteractive()"
     },
     {
@@ -5348,7 +5448,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dns_hosts_test",
-      "community": 8,
+      "community": 92,
       "norm_label": "hosts_test.go"
     },
     {
@@ -5358,7 +5458,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "dns_hosts_test_testmergemanagedblock",
-      "community": 8,
+      "community": 92,
       "norm_label": "testmergemanagedblock()"
     },
     {
@@ -5368,7 +5468,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_dns_hosts_test_go_t",
-      "community": 8,
+      "community": 92,
       "norm_label": "t"
     },
     {
@@ -5378,7 +5478,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dns_validate_test",
-      "community": 8,
+      "community": 92,
       "norm_label": "validate_test.go"
     },
     {
@@ -5388,7 +5488,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "dns_validate_test_testvalidatedomainsnormalizesanddedupes",
-      "community": 8,
+      "community": 92,
       "norm_label": "testvalidatedomainsnormalizesanddedupes()"
     },
     {
@@ -5398,7 +5498,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_dns_validate_test_go_t",
-      "community": 8,
+      "community": 92,
       "norm_label": "t"
     },
     {
@@ -5408,7 +5508,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "dns_validate_test_testvalidatedomainsrejectsinjection",
-      "community": 8,
+      "community": 92,
       "norm_label": "testvalidatedomainsrejectsinjection()"
     },
     {
@@ -5418,7 +5518,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "dns_validate_test_testvalidatedomainsacceptsvalid",
-      "community": 8,
+      "community": 92,
       "norm_label": "testvalidatedomainsacceptsvalid()"
     },
     {
@@ -6708,7 +6808,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "observe_event",
-      "community": 5,
+      "community": 100,
       "norm_label": "event"
     },
     {
@@ -6718,7 +6818,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "observe_event_normalizeevent",
-      "community": 5,
+      "community": 100,
       "norm_label": "normalizeevent()"
     },
     {
@@ -6728,7 +6828,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "observe_event_extrapayload",
-      "community": 5,
+      "community": 100,
       "norm_label": "extrapayload()"
     },
     {
@@ -6738,7 +6838,7 @@
       "source_location": "L131",
       "_origin": "ast",
       "id": "observe_event_fingerprint",
-      "community": 5,
+      "community": 100,
       "norm_label": "fingerprint()"
     },
     {
@@ -6748,7 +6848,7 @@
       "source_location": "L143",
       "_origin": "ast",
       "id": "observe_event_eventtitle",
-      "community": 5,
+      "community": 100,
       "norm_label": "eventtitle()"
     },
     {
@@ -6758,7 +6858,7 @@
       "source_location": "L159",
       "_origin": "ast",
       "id": "observe_event_compactjson",
-      "community": 5,
+      "community": 100,
       "norm_label": "compactjson()"
     },
     {
@@ -6768,7 +6868,7 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "observe_event_normalizemessage",
-      "community": 5,
+      "community": 100,
       "norm_label": "normalizemessage()"
     },
     {
@@ -6778,7 +6878,7 @@
       "source_location": "L210",
       "_origin": "ast",
       "id": "observe_event_explicitfingerprint",
-      "community": 5,
+      "community": 100,
       "norm_label": "explicitfingerprint()"
     },
     {
@@ -6788,7 +6888,7 @@
       "source_location": "L233",
       "_origin": "ast",
       "id": "observe_event_neweventid",
-      "community": 5,
+      "community": 100,
       "norm_label": "neweventid()"
     },
     {
@@ -6798,7 +6898,7 @@
       "source_location": "L243",
       "_origin": "ast",
       "id": "observe_event_stringvalue",
-      "community": 5,
+      "community": 100,
       "norm_label": "stringvalue()"
     },
     {
@@ -6808,7 +6908,7 @@
       "source_location": "L257",
       "_origin": "ast",
       "id": "observe_event_timestampvalue",
-      "community": 5,
+      "community": 100,
       "norm_label": "timestampvalue()"
     },
     {
@@ -6818,7 +6918,7 @@
       "source_location": "L270",
       "_origin": "ast",
       "id": "observe_event_logentrymessage",
-      "community": 5,
+      "community": 100,
       "norm_label": "logentrymessage()"
     },
     {
@@ -6828,7 +6928,7 @@
       "source_location": "L284",
       "_origin": "ast",
       "id": "observe_event_exceptiondetails",
-      "community": 5,
+      "community": 100,
       "norm_label": "exceptiondetails()"
     },
     {
@@ -6838,7 +6938,7 @@
       "source_location": "L307",
       "_origin": "ast",
       "id": "observe_event_stackculprit",
-      "community": 5,
+      "community": 100,
       "norm_label": "stackculprit()"
     },
     {
@@ -6848,7 +6948,7 @@
       "source_location": "L341",
       "_origin": "ast",
       "id": "observe_event_tagvalue",
-      "community": 5,
+      "community": 100,
       "norm_label": "tagvalue()"
     },
     {
@@ -6858,7 +6958,7 @@
       "source_location": "L365",
       "_origin": "ast",
       "id": "observe_event_mapstring",
-      "community": 5,
+      "community": 100,
       "norm_label": "mapstring()"
     },
     {
@@ -6868,7 +6968,7 @@
       "source_location": "L379",
       "_origin": "ast",
       "id": "observe_event_firstnonempty",
-      "community": 5,
+      "community": 100,
       "norm_label": "firstnonempty()"
     },
     {
@@ -6878,7 +6978,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_event_test",
-      "community": 5,
+      "community": 100,
       "norm_label": "event_test.go"
     },
     {
@@ -6888,7 +6988,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayload",
-      "community": 5,
+      "community": 100,
       "norm_label": "testextrapayload()"
     },
     {
@@ -6898,7 +6998,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_event_test_go_t",
-      "community": 5,
+      "community": 100,
       "norm_label": "t"
     },
     {
@@ -6908,7 +7008,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_event_test_testextrapayloadovernormalizedevent",
-      "community": 5,
+      "community": 100,
       "norm_label": "testextrapayloadovernormalizedevent()"
     },
     {
@@ -7268,7 +7368,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_firewall",
-      "community": 47,
+      "community": 88,
       "norm_label": "firewall.go"
     },
     {
@@ -7278,7 +7378,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "observe_firewallrule",
-      "community": 47,
+      "community": 88,
       "norm_label": "firewallrule"
     },
     {
@@ -7288,7 +7388,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "observe_firewall_firewallrules",
-      "community": 47,
+      "community": 88,
       "norm_label": "firewallrules()"
     },
     {
@@ -7298,7 +7398,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "internal_observe_firewall_go_networkinfo",
-      "community": 47,
+      "community": 88,
       "norm_label": "networkinfo"
     },
     {
@@ -7308,7 +7408,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "observe_firewallrule_ufwargs",
-      "community": 47,
+      "community": 88,
       "norm_label": ".ufwargs()"
     },
     {
@@ -7318,7 +7418,7 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "observe_firewallrule_command",
-      "community": 47,
+      "community": 88,
       "norm_label": ".command()"
     },
     {
@@ -7328,7 +7428,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "observe_firewallrule_comment",
-      "community": 47,
+      "community": 88,
       "norm_label": ".comment()"
     },
     {
@@ -7338,7 +7438,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "observe_firewall_ufwenabled",
-      "community": 47,
+      "community": 88,
       "norm_label": "ufwenabled()"
     },
     {
@@ -7348,7 +7448,7 @@
       "source_location": "L79",
       "_origin": "ast",
       "id": "observe_firewall_ufwavailable",
-      "community": 47,
+      "community": 88,
       "norm_label": "ufwavailable()"
     },
     {
@@ -7358,7 +7458,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "observe_firewall_applyfirewallrules",
-      "community": 47,
+      "community": 88,
       "norm_label": "applyfirewallrules()"
     },
     {
@@ -7368,7 +7468,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "internal_observe_firewall_go_context",
-      "community": 47,
+      "community": 88,
       "norm_label": "context"
     },
     {
@@ -7378,7 +7478,7 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "observe_firewall_runinteractive",
-      "community": 47,
+      "community": 88,
       "norm_label": "runinteractive()"
     },
     {
@@ -7388,7 +7488,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_firewall_test",
-      "community": 47,
+      "community": 88,
       "norm_label": "firewall_test.go"
     },
     {
@@ -7398,7 +7498,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "observe_firewall_test_testfirewallrulesonepernetwork",
-      "community": 47,
+      "community": 88,
       "norm_label": "testfirewallrulesonepernetwork()"
     },
     {
@@ -7408,7 +7508,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "internal_observe_firewall_test_go_t",
-      "community": 47,
+      "community": 88,
       "norm_label": "t"
     },
     {
@@ -7418,7 +7518,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "observe_firewall_test_testfirewallrulesskipsincompletenetworks",
-      "community": 47,
+      "community": 88,
       "norm_label": "testfirewallrulesskipsincompletenetworks()"
     },
     {
@@ -7428,7 +7528,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "observe_firewall_test_testfirewallrulesfallbacktodefaultport",
-      "community": 47,
+      "community": 88,
       "norm_label": "testfirewallrulesfallbacktodefaultport()"
     },
     {
@@ -7438,7 +7538,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_heartbeat",
-      "community": 67,
+      "community": 5,
       "norm_label": "heartbeat.go"
     },
     {
@@ -7448,7 +7548,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "observe_collectorsession",
-      "community": 67,
+      "community": 5,
       "norm_label": "collectorsession"
     },
     {
@@ -7458,7 +7558,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "internal_observe_heartbeat_go_time",
-      "community": 67,
+      "community": 5,
       "norm_label": "time"
     },
     {
@@ -7468,7 +7568,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "observe_collectorsession_duration",
-      "community": 67,
+      "community": 5,
       "norm_label": ".duration()"
     },
     {
@@ -7478,7 +7578,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "internal_observe_heartbeat_go_duration",
-      "community": 67,
+      "community": 5,
       "norm_label": "duration"
     },
     {
@@ -7488,7 +7588,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "observe_coveragegap",
-      "community": 67,
+      "community": 5,
       "norm_label": "coveragegap"
     },
     {
@@ -7498,7 +7598,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "observe_coveragegap_duration",
-      "community": 67,
+      "community": 5,
       "norm_label": ".duration()"
     },
     {
@@ -7508,7 +7608,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "internal_observe_heartbeat_go_observe_store",
-      "community": 67,
+      "community": 5,
       "norm_label": "store"
     },
     {
@@ -7518,7 +7618,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "observe_store_startcollectorsession",
-      "community": 67,
+      "community": 5,
       "norm_label": ".startcollectorsession()"
     },
     {
@@ -7528,7 +7628,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "internal_observe_heartbeat_go_context",
-      "community": 67,
+      "community": 5,
       "norm_label": "context"
     },
     {
@@ -7538,7 +7638,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "observe_store_heartbeat",
-      "community": 67,
+      "community": 5,
       "norm_label": ".heartbeat()"
     },
     {
@@ -7548,7 +7648,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "observe_store_collectorsessions",
-      "community": 67,
+      "community": 5,
       "norm_label": ".collectorsessions()"
     },
     {
@@ -7558,7 +7658,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "observe_store_lastcollectorsession",
-      "community": 67,
+      "community": 5,
       "norm_label": ".lastcollectorsession()"
     },
     {
@@ -7568,7 +7668,7 @@
       "source_location": "L141",
       "_origin": "ast",
       "id": "observe_store_coveragegaps",
-      "community": 67,
+      "community": 5,
       "norm_label": ".coveragegaps()"
     },
     {
@@ -7718,7 +7818,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_listen_test",
-      "community": 6,
+      "community": 99,
       "norm_label": "listen_test.go"
     },
     {
@@ -7728,7 +7828,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "observe_listen_test_newtestserver",
-      "community": 6,
+      "community": 99,
       "norm_label": "newtestserver()"
     },
     {
@@ -7738,7 +7838,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_listen_test_go_t",
-      "community": 6,
+      "community": 99,
       "norm_label": "t"
     },
     {
@@ -7748,7 +7848,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_listen_test_go_server",
-      "community": 6,
+      "community": 99,
       "norm_label": "server"
     },
     {
@@ -7758,7 +7858,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "observe_listen_test_freeloopbackport",
-      "community": 6,
+      "community": 99,
       "norm_label": "freeloopbackport()"
     },
     {
@@ -7768,7 +7868,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "observe_listen_test_waitforhealth",
-      "community": 6,
+      "community": 99,
       "norm_label": "waitforhealth()"
     },
     {
@@ -7778,7 +7878,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveonserveseveryaddress",
-      "community": 6,
+      "community": 99,
       "norm_label": "testlistenandserveonserveseveryaddress()"
     },
     {
@@ -7788,7 +7888,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveontoleratesanunavailableextraaddress",
-      "community": 6,
+      "community": 99,
       "norm_label": "testlistenandserveontoleratesanunavailableextraaddress()"
     },
     {
@@ -7798,7 +7898,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_listen_test_testlistenandserveonfailswhentheprimaryaddressistaken",
-      "community": 6,
+      "community": 99,
       "norm_label": "testlistenandserveonfailswhentheprimaryaddressistaken()"
     },
     {
@@ -8228,7 +8328,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_metrics_http_test",
-      "community": 102,
+      "community": 6,
       "norm_label": "metrics_http_test.go"
     },
     {
@@ -8238,7 +8338,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "observe_metrics_http_test_metricshandler",
-      "community": 102,
+      "community": 6,
       "norm_label": "metricshandler()"
     },
     {
@@ -8248,7 +8348,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_metrics_http_test_go_t",
-      "community": 102,
+      "community": 6,
       "norm_label": "t"
     },
     {
@@ -8258,7 +8358,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "internal_observe_metrics_http_test_go_handler",
-      "community": 102,
+      "community": 6,
       "norm_label": "handler"
     },
     {
@@ -8268,7 +8368,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "observe_metrics_http_test_testmetricsendpointannouncestheprometheusformat",
-      "community": 102,
+      "community": 6,
       "norm_label": "testmetricsendpointannouncestheprometheusformat()"
     },
     {
@@ -8278,7 +8378,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "observe_metrics_http_test_testmetricsendpointonanemptydatabaseisstillavalidscrape",
-      "community": 102,
+      "community": 6,
       "norm_label": "testmetricsendpointonanemptydatabaseisstillavalidscrape()"
     },
     {
@@ -8288,7 +8388,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "observe_metrics_http_test_testmetricsendpointrejectsnonget",
-      "community": 102,
+      "community": 6,
       "norm_label": "testmetricsendpointrejectsnonget()"
     },
     {
@@ -8298,7 +8398,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "observe_metrics_http_test_testmetricsendpointdoesnotshadowtheexistingroutes",
-      "community": 102,
+      "community": 6,
       "norm_label": "testmetricsendpointdoesnotshadowtheexistingroutes()"
     },
     {
@@ -8308,7 +8408,7 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "observe_metrics_http_test_testmetricsendpointreflectsingestedevents",
-      "community": 102,
+      "community": 6,
       "norm_label": "testmetricsendpointreflectsingestedevents()"
     },
     {
@@ -10378,7 +10478,7 @@
       "source_location": "L1121",
       "_origin": "ast",
       "id": "observe_store_parsealertdeliverytime",
-      "community": 67,
+      "community": 5,
       "norm_label": "parsealertdeliverytime()"
     },
     {
@@ -10398,7 +10498,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "observe_store_test",
-      "community": 5,
+      "community": 100,
       "norm_label": "store_test.go"
     },
     {
@@ -10408,7 +10508,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "observe_store_test_teststoreeventgroupsissues",
-      "community": 5,
+      "community": 100,
       "norm_label": "teststoreeventgroupsissues()"
     },
     {
@@ -10418,7 +10518,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "internal_observe_store_test_go_t",
-      "community": 5,
+      "community": 100,
       "norm_label": "t"
     },
     {
@@ -10428,7 +10528,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observe_store_test_teststorecontainersrecordsstatusandrestartevents",
-      "community": 5,
+      "community": 100,
       "norm_label": "teststorecontainersrecordsstatusandrestartevents()"
     },
     {
@@ -10438,7 +10538,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "observe_store_test_teststorecreatesalertdeliveries",
-      "community": 5,
+      "community": 100,
       "norm_label": "teststorecreatesalertdeliveries()"
     },
     {
@@ -10448,7 +10548,7 @@
       "source_location": "L206",
       "_origin": "ast",
       "id": "observe_store_test_testlisteventsandtimelinereturnrawpayload",
-      "community": 5,
+      "community": 100,
       "norm_label": "testlisteventsandtimelinereturnrawpayload()"
     },
     {
@@ -10508,7 +10608,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "preflight_report_hasfailures",
-      "community": 8,
+      "community": 0,
       "norm_label": ".hasfailures()"
     },
     {
@@ -10518,7 +10618,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "preflight_report_haswarnings",
-      "community": 8,
+      "community": 0,
       "norm_label": ".haswarnings()"
     },
     {
@@ -10528,7 +10628,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "preflight_report_count",
-      "community": 8,
+      "community": 0,
       "norm_label": ".count()"
     },
     {
@@ -11198,7 +11298,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy",
-      "community": 10,
+      "community": 8,
       "norm_label": "caddy.go"
     },
     {
@@ -11208,7 +11308,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "proxy_route",
-      "community": 10,
+      "community": 8,
       "norm_label": "route"
     },
     {
@@ -11218,7 +11318,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "proxy_site",
-      "community": 10,
+      "community": 8,
       "norm_label": "site"
     },
     {
@@ -11228,7 +11328,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "proxy_renderer",
-      "community": 10,
+      "community": 8,
       "norm_label": "renderer"
     },
     {
@@ -11238,7 +11338,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_paths",
-      "community": 10,
+      "community": 8,
       "norm_label": "paths"
     },
     {
@@ -11248,7 +11348,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_config",
-      "community": 10,
+      "community": 8,
       "norm_label": "config"
     },
     {
@@ -11258,7 +11358,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "proxy_caddy_newrenderer",
-      "community": 10,
+      "community": 8,
       "norm_label": "newrenderer()"
     },
     {
@@ -11268,7 +11368,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "proxy_renderer_render",
-      "community": 10,
+      "community": 8,
       "norm_label": ".render()"
     },
     {
@@ -11278,7 +11378,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "internal_proxy_caddy_go_projectrecord",
-      "community": 10,
+      "community": 8,
       "norm_label": "projectrecord"
     },
     {
@@ -11288,7 +11388,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "proxy_renderer_write",
-      "community": 10,
+      "community": 8,
       "norm_label": ".write()"
     },
     {
@@ -11298,7 +11398,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "proxy_renderer_apply",
-      "community": 10,
+      "community": 8,
       "norm_label": ".apply()"
     },
     {
@@ -11308,7 +11408,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "proxy_renderer_projectsite",
-      "community": 10,
+      "community": 8,
       "norm_label": ".projectsite()"
     },
     {
@@ -11318,7 +11418,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "proxy_caddy_sudovalidate",
-      "community": 10,
+      "community": 8,
       "norm_label": "sudovalidate()"
     },
     {
@@ -11328,7 +11428,7 @@
       "source_location": "L152",
       "_origin": "ast",
       "id": "proxy_caddy_runinteractive",
-      "community": 10,
+      "community": 8,
       "norm_label": "runinteractive()"
     },
     {
@@ -11338,7 +11438,7 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "proxy_caddy_selectprojects",
-      "community": 10,
+      "community": 8,
       "norm_label": "selectprojects()"
     },
     {
@@ -11348,7 +11448,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "proxy_caddy_test",
-      "community": 10,
+      "community": 8,
       "norm_label": "caddy_test.go"
     },
     {
@@ -11358,7 +11458,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "proxy_caddy_test_testrendervueflasksite",
-      "community": 10,
+      "community": 8,
       "norm_label": "testrendervueflasksite()"
     },
     {
@@ -11368,7 +11468,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_proxy_caddy_test_go_t",
-      "community": 10,
+      "community": 8,
       "norm_label": "t"
     },
     {
@@ -11948,7 +12048,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "runner_runner_test",
-      "community": 97,
+      "community": 87,
       "norm_label": "runner_test.go"
     },
     {
@@ -11958,7 +12058,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdruncapturesoutput",
-      "community": 97,
+      "community": 87,
       "norm_label": "testcmdruncapturesoutput()"
     },
     {
@@ -11968,7 +12068,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "internal_runner_runner_test_go_t",
-      "community": 97,
+      "community": 87,
       "norm_label": "t"
     },
     {
@@ -11978,7 +12078,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunusesoutputaserrormessage",
-      "community": 97,
+      "community": 87,
       "norm_label": "testcmdrunusesoutputaserrormessage()"
     },
     {
@@ -11988,7 +12088,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunrespectstimeout",
-      "community": 97,
+      "community": 87,
       "norm_label": "testcmdrunrespectstimeout()"
     },
     {
@@ -11998,7 +12098,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "runner_runner_test_testcmdrunsetsworkingdir",
-      "community": 97,
+      "community": 87,
       "norm_label": "testcmdrunsetsworkingdir()"
     },
     {
@@ -12735,17 +12835,37 @@
       "label": "ManagedFile",
       "file_type": "code",
       "source_file": "internal/services/config.go",
-      "source_location": "L19",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "services_managedfile",
       "community": 95,
       "norm_label": "managedfile"
     },
     {
+      "label": "ServiceOptions",
+      "file_type": "code",
+      "source_file": "internal/services/config.go",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "services_serviceoptions",
+      "community": 95,
+      "norm_label": "serviceoptions"
+    },
+    {
+      "label": "prometheusFiles()",
+      "file_type": "code",
+      "source_file": "internal/services/config.go",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "services_config_prometheusfiles",
+      "community": 95,
+      "norm_label": "prometheusfiles()"
+    },
+    {
       "label": "FileState",
       "file_type": "code",
       "source_file": "internal/services/config.go",
-      "source_location": "L31",
+      "source_location": "L72",
       "_origin": "ast",
       "id": "services_filestate",
       "community": 95,
@@ -12755,7 +12875,7 @@
       "label": "FileResult",
       "file_type": "code",
       "source_file": "internal/services/config.go",
-      "source_location": "L45",
+      "source_location": "L86",
       "_origin": "ast",
       "id": "services_fileresult",
       "community": 95,
@@ -12765,17 +12885,27 @@
       "label": "ServiceFiles()",
       "file_type": "code",
       "source_file": "internal/services/config.go",
-      "source_location": "L58",
+      "source_location": "L99",
       "_origin": "ast",
       "id": "services_config_servicefiles",
       "community": 95,
       "norm_label": "servicefiles()"
     },
     {
+      "label": "NeedsCollector()",
+      "file_type": "code",
+      "source_file": "internal/services/config.go",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "services_config_needscollector",
+      "community": 47,
+      "norm_label": "needscollector()"
+    },
+    {
       "label": "Manager",
       "file_type": "code",
       "source_file": "internal/services/config.go",
-      "source_location": "L71",
+      "source_location": "L125",
       "_origin": "ast",
       "id": "internal_services_config_go_services_manager",
       "community": 95,
@@ -12785,17 +12915,27 @@
       "label": ".ensureServiceFiles()",
       "file_type": "code",
       "source_file": "internal/services/config.go",
-      "source_location": "L71",
+      "source_location": "L125",
       "_origin": "ast",
       "id": "services_manager_ensureservicefiles",
       "community": 95,
       "norm_label": ".ensureservicefiles()"
     },
     {
+      "label": "StartOptions",
+      "file_type": "code",
+      "source_file": "internal/services/config.go",
+      "source_location": "L125",
+      "_origin": "ast",
+      "id": "startoptions",
+      "community": 95,
+      "norm_label": "startoptions"
+    },
+    {
       "label": ".ensureFile()",
       "file_type": "code",
       "source_file": "internal/services/config.go",
-      "source_location": "L89",
+      "source_location": "L146",
       "_origin": "ast",
       "id": "services_manager_ensurefile",
       "community": 95,
@@ -12805,7 +12945,7 @@
       "label": "DescribeFileResults()",
       "file_type": "code",
       "source_file": "internal/services/config.go",
-      "source_location": "L140",
+      "source_location": "L197",
       "_origin": "ast",
       "id": "services_config_describefileresults",
       "community": 71,
@@ -12955,7 +13095,7 @@
       "label": "Manager",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L31",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "internal_services_manager_go_services_manager",
       "community": 59,
@@ -12965,7 +13105,7 @@
       "label": "Runner",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L34",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "internal_services_manager_go_runner",
       "community": 59,
@@ -12975,7 +13115,7 @@
       "label": "NewManager()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L37",
+      "source_location": "L39",
       "_origin": "ast",
       "id": "services_manager_newmanager",
       "community": 59,
@@ -12985,7 +13125,7 @@
       "label": "Paths",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L37",
+      "source_location": "L39",
       "_origin": "ast",
       "id": "internal_services_manager_go_paths",
       "community": 59,
@@ -12995,7 +13135,7 @@
       "label": "NewManagerWithRunner()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L42",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "services_manager_newmanagerwithrunner",
       "community": 59,
@@ -13005,17 +13145,27 @@
       "label": "SupportedServices()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L51",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "services_manager_supportedservices",
-      "community": 59,
+      "community": 97,
       "norm_label": "supportedservices()"
+    },
+    {
+      "label": "StartOptions",
+      "file_type": "code",
+      "source_file": "internal/services/manager.go",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "services_startoptions",
+      "community": 59,
+      "norm_label": "startoptions"
     },
     {
       "label": ".Start()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L57",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "services_manager_start",
       "community": 59,
@@ -13025,7 +13175,7 @@
       "label": "Context",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L57",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "internal_services_manager_go_context",
       "community": 59,
@@ -13035,7 +13185,7 @@
       "label": "FileResult",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L57",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "internal_services_manager_go_fileresult",
       "community": 59,
@@ -13045,7 +13195,7 @@
       "label": ".Stop()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L80",
+      "source_location": "L93",
       "_origin": "ast",
       "id": "services_manager_stop",
       "community": 59,
@@ -13055,7 +13205,7 @@
       "label": ".Status()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L96",
+      "source_location": "L109",
       "_origin": "ast",
       "id": "services_manager_status",
       "community": 59,
@@ -13065,7 +13215,7 @@
       "label": ".bootstrap()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L127",
+      "source_location": "L140",
       "_origin": "ast",
       "id": "services_manager_bootstrap",
       "community": 59,
@@ -13075,7 +13225,7 @@
       "label": ".stackExists()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L141",
+      "source_location": "L154",
       "_origin": "ast",
       "id": "services_manager_stackexists",
       "community": 59,
@@ -13085,7 +13235,7 @@
       "label": ".compose()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L152",
+      "source_location": "L165",
       "_origin": "ast",
       "id": "services_manager_compose",
       "community": 59,
@@ -13095,7 +13245,7 @@
       "label": "validateService()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L159",
+      "source_location": "L172",
       "_origin": "ast",
       "id": "services_manager_validateservice",
       "community": 59,
@@ -13105,7 +13255,7 @@
       "label": ".ensureNetwork()",
       "file_type": "code",
       "source_file": "internal/services/manager.go",
-      "source_location": "L167",
+      "source_location": "L180",
       "_origin": "ast",
       "id": "services_manager_ensurenetwork",
       "community": 59,
@@ -13118,7 +13268,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "services_manager_runner_test",
-      "community": 89,
+      "community": 71,
       "norm_label": "manager_runner_test.go"
     },
     {
@@ -13128,7 +13278,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "services_fakerunner",
-      "community": 89,
+      "community": 71,
       "norm_label": "fakerunner"
     },
     {
@@ -13138,7 +13288,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "services_fakerunner_run",
-      "community": 89,
+      "community": 71,
       "norm_label": ".run()"
     },
     {
@@ -13148,7 +13298,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_context",
-      "community": 89,
+      "community": 71,
       "norm_label": "context"
     },
     {
@@ -13158,7 +13308,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "services_manager_runner_test_newtestmanager",
-      "community": 89,
+      "community": 71,
       "norm_label": "newtestmanager()"
     },
     {
@@ -13168,7 +13318,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_t",
-      "community": 89,
+      "community": 71,
       "norm_label": "t"
     },
     {
@@ -13178,7 +13328,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "internal_services_manager_runner_test_go_manager",
-      "community": 89,
+      "community": 71,
       "norm_label": "manager"
     },
     {
@@ -13188,7 +13338,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartensuresnetworkandcomposesup",
-      "community": 89,
+      "community": 71,
       "norm_label": "teststartensuresnetworkandcomposesup()"
     },
     {
@@ -13198,7 +13348,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartcreatesnetworkwheninspectfails",
-      "community": 89,
+      "community": 71,
       "norm_label": "teststartcreatesnetworkwheninspectfails()"
     },
     {
@@ -13208,7 +13358,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststartrejectsunsupportedservicewithoutdocker",
-      "community": 89,
+      "community": 71,
       "norm_label": "teststartrejectsunsupportedservicewithoutdocker()"
     },
     {
@@ -13218,7 +13368,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststopcomposesstop",
-      "community": 89,
+      "community": 71,
       "norm_label": "teststopcomposesstop()"
     },
     {
@@ -13228,7 +13378,7 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "services_manager_runner_test_teststatusallservices",
-      "community": 89,
+      "community": 71,
       "norm_label": "teststatusallservices()"
     },
     {
@@ -13272,13 +13422,123 @@
       "norm_label": "testvalidateservicerejectsunknownservice()"
     },
     {
+      "label": "prometheus_test.go",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "services_prometheus_test",
+      "community": 97,
+      "norm_label": "prometheus_test.go"
+    },
+    {
+      "label": "TestPrometheusConfigTargetsTheCollector()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "services_prometheus_test_testprometheusconfigtargetsthecollector",
+      "community": 97,
+      "norm_label": "testprometheusconfigtargetsthecollector()"
+    },
+    {
+      "label": "T",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "internal_services_prometheus_test_go_t",
+      "community": 97,
+      "norm_label": "t"
+    },
+    {
+      "label": "TestPrometheusConfigRequiresTheCollectorAddress()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "services_prometheus_test_testprometheusconfigrequiresthecollectoraddress",
+      "community": 97,
+      "norm_label": "testprometheusconfigrequiresthecollectoraddress()"
+    },
+    {
+      "label": "TestNeedsCollectorOnlyForPrometheus()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "services_prometheus_test_testneedscollectoronlyforprometheus",
+      "community": 97,
+      "norm_label": "testneedscollectoronlyforprometheus()"
+    },
+    {
+      "label": "TestStartPrometheusWritesItsConfiguration()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L62",
+      "_origin": "ast",
+      "id": "services_prometheus_test_teststartprometheuswritesitsconfiguration",
+      "community": 97,
+      "norm_label": "teststartprometheuswritesitsconfiguration()"
+    },
+    {
+      "label": "TestStartPrometheusKeepsTheUserConfiguration()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L87",
+      "_origin": "ast",
+      "id": "services_prometheus_test_teststartprometheuskeepstheuserconfiguration",
+      "community": 97,
+      "norm_label": "teststartprometheuskeepstheuserconfiguration()"
+    },
+    {
+      "label": "TestPrometheusIsPublishedOnLoopbackOnly()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L121",
+      "_origin": "ast",
+      "id": "services_prometheus_test_testprometheusispublishedonloopbackonly",
+      "community": 97,
+      "norm_label": "testprometheusispublishedonloopbackonly()"
+    },
+    {
+      "label": "TestPrometheusImageIsPinned()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L135",
+      "_origin": "ast",
+      "id": "services_prometheus_test_testprometheusimageispinned",
+      "community": 97,
+      "norm_label": "testprometheusimageispinned()"
+    },
+    {
+      "label": "TestPrometheusIsPartOfTheCatalog()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L148",
+      "_origin": "ast",
+      "id": "services_prometheus_test_testprometheusispartofthecatalog",
+      "community": 97,
+      "norm_label": "testprometheusispartofthecatalog()"
+    },
+    {
+      "label": "contains()",
+      "file_type": "code",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L157",
+      "_origin": "ast",
+      "id": "services_prometheus_test_contains",
+      "community": 97,
+      "norm_label": "contains()"
+    },
+    {
       "label": "version.go",
       "file_type": "code",
       "source_file": "internal/version/version.go",
       "source_location": "L1",
       "_origin": "ast",
       "id": "version_version",
-      "community": 33,
+      "community": 86,
       "norm_label": "version.go"
     },
     {
@@ -13298,7 +13558,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "version_version_long",
-      "community": 33,
+      "community": 86,
       "norm_label": "long()"
     },
     {
@@ -13633,6 +13893,16 @@
       "_origin": "ast",
       "id": "proxy_external_embed",
       "community": 41,
+      "norm_label": "embed.go"
+    },
+    {
+      "label": "embed.go",
+      "file_type": "code",
+      "source_file": "templates/services/embed.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "services_embed",
+      "community": 105,
       "norm_label": "embed.go"
     },
     {
@@ -15276,10 +15546,20 @@
       "norm_label": "4.16 `devherd service <start|stop|status> [service]`"
     },
     {
+      "label": "Prometheus",
+      "file_type": "document",
+      "source_file": "docs/USAGE.md",
+      "source_location": "L531",
+      "_origin": "ast",
+      "id": "docs_usage_prometheus",
+      "community": 62,
+      "norm_label": "prometheus"
+    },
+    {
       "label": "4.17 `devherd observe ...`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L548",
+      "source_location": "L573",
       "_origin": "ast",
       "id": "docs_usage_4_17_devherd_observe",
       "community": 45,
@@ -15289,7 +15569,7 @@
       "label": "`observe start`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L554",
+      "source_location": "L579",
       "_origin": "ast",
       "id": "docs_usage_observe_start",
       "community": 45,
@@ -15299,7 +15579,7 @@
       "label": "`observe status [project]`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L588",
+      "source_location": "L613",
       "_origin": "ast",
       "id": "docs_usage_observe_status_project",
       "community": 45,
@@ -15309,7 +15589,7 @@
       "label": "`observe firewall`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L615",
+      "source_location": "L640",
       "_origin": "ast",
       "id": "docs_usage_observe_firewall",
       "community": 45,
@@ -15319,7 +15599,7 @@
       "label": "`observe daemon install|uninstall|status`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L636",
+      "source_location": "L661",
       "_origin": "ast",
       "id": "docs_usage_observe_daemon_install_uninstall_status",
       "community": 45,
@@ -15329,7 +15609,7 @@
       "label": "`observe open`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L654",
+      "source_location": "L679",
       "_origin": "ast",
       "id": "docs_usage_observe_open",
       "community": 45,
@@ -15339,7 +15619,7 @@
       "label": "`observe dsn <project>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L666",
+      "source_location": "L691",
       "_origin": "ast",
       "id": "docs_usage_observe_dsn_project",
       "community": 45,
@@ -15349,7 +15629,7 @@
       "label": "`observe attach <project-or-path> --stack <stack>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L681",
+      "source_location": "L706",
       "_origin": "ast",
       "id": "docs_usage_observe_attach_project_or_path_stack_stack",
       "community": 45,
@@ -15359,7 +15639,7 @@
       "label": "`observe detach <project-or-path>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L737",
+      "source_location": "L762",
       "_origin": "ast",
       "id": "docs_usage_observe_detach_project_or_path",
       "community": 45,
@@ -15369,7 +15649,7 @@
       "label": "`observe scan [project]` / `observe containers [project]`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L745",
+      "source_location": "L770",
       "_origin": "ast",
       "id": "docs_usage_observe_scan_project_observe_containers_project",
       "community": 45,
@@ -15379,7 +15659,7 @@
       "label": "`observe issues [project]` / `observe events [project]` / `observe timeline <event-id>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L759",
+      "source_location": "L784",
       "_origin": "ast",
       "id": "docs_usage_observe_issues_project_observe_events_project_observe_timeline_event_id",
       "community": 45,
@@ -15389,7 +15669,7 @@
       "label": "`observe alert <add|list|remove|deliveries>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L791",
+      "source_location": "L816",
       "_origin": "ast",
       "id": "docs_usage_observe_alert_add_list_remove_deliveries",
       "community": 45,
@@ -15399,7 +15679,7 @@
       "label": "`observe cleanup`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L823",
+      "source_location": "L848",
       "_origin": "ast",
       "id": "docs_usage_observe_cleanup",
       "community": 45,
@@ -15409,7 +15689,7 @@
       "label": "4.18 `devherd coverage`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L839",
+      "source_location": "L864",
       "_origin": "ast",
       "id": "docs_usage_4_18_devherd_coverage",
       "community": 62,
@@ -15419,7 +15699,7 @@
       "label": "4.19 `devherd sentry ...`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L888",
+      "source_location": "L913",
       "_origin": "ast",
       "id": "docs_usage_4_19_devherd_sentry",
       "community": 80,
@@ -15429,7 +15709,7 @@
       "label": "`sentry init <project> --stack <stack>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L894",
+      "source_location": "L919",
       "_origin": "ast",
       "id": "docs_usage_sentry_init_project_stack_stack",
       "community": 80,
@@ -15439,7 +15719,7 @@
       "label": "`sentry set-dsn <project> --dsn <dsn>` / `sentry test <project>`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L908",
+      "source_location": "L933",
       "_origin": "ast",
       "id": "docs_usage_sentry_set_dsn_project_dsn_dsn_sentry_test_project",
       "community": 80,
@@ -15449,7 +15729,7 @@
       "label": "5. El manifiesto `.devherd.yml`",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L913",
+      "source_location": "L938",
       "_origin": "ast",
       "id": "docs_usage_5_el_manifiesto_devherd_yml",
       "community": 72,
@@ -15459,7 +15739,7 @@
       "label": "6. Flujos de trabajo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L952",
+      "source_location": "L977",
       "_origin": "ast",
       "id": "docs_usage_6_flujos_de_trabajo",
       "community": 75,
@@ -15469,7 +15749,7 @@
       "label": "6.1 Modo proxy en Docker externo (recomendado)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L954",
+      "source_location": "L979",
       "_origin": "ast",
       "id": "docs_usage_6_1_modo_proxy_en_docker_externo_recomendado",
       "community": 75,
@@ -15479,7 +15759,7 @@
       "label": "6.2 Modo proxy en host (Caddy + /etc/hosts)",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L977",
+      "source_location": "L1002",
       "_origin": "ast",
       "id": "docs_usage_6_2_modo_proxy_en_host_caddy_etc_hosts",
       "community": 75,
@@ -15489,7 +15769,7 @@
       "label": "6.3 Repositorio sin Docker",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L993",
+      "source_location": "L1018",
       "_origin": "ast",
       "id": "docs_usage_6_3_repositorio_sin_docker",
       "community": 75,
@@ -15499,7 +15779,7 @@
       "label": "6.4 Servicios compartidos + observabilidad",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1002",
+      "source_location": "L1027",
       "_origin": "ast",
       "id": "docs_usage_6_4_servicios_compartidos_observabilidad",
       "community": 75,
@@ -15509,7 +15789,7 @@
       "label": "6.5 Bajar todo",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1016",
+      "source_location": "L1041",
       "_origin": "ast",
       "id": "docs_usage_6_5_bajar_todo",
       "community": 75,
@@ -15519,7 +15799,7 @@
       "label": "7. Donde vive el estado",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1026",
+      "source_location": "L1051",
       "_origin": "ast",
       "id": "docs_usage_7_donde_vive_el_estado",
       "community": 72,
@@ -15529,7 +15809,7 @@
       "label": "8. Patrones recomendados para proyectos Compose",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1047",
+      "source_location": "L1072",
       "_origin": "ast",
       "id": "docs_usage_8_patrones_recomendados_para_proyectos_compose",
       "community": 72,
@@ -15539,7 +15819,7 @@
       "label": "8.1 Aislamiento de nombres de contenedor",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1049",
+      "source_location": "L1074",
       "_origin": "ast",
       "id": "docs_usage_8_1_aislamiento_de_nombres_de_contenedor",
       "community": 72,
@@ -15549,7 +15829,7 @@
       "label": "8.2 Volumenes que sobreviven a cambios de project-name",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1092",
+      "source_location": "L1117",
       "_origin": "ast",
       "id": "docs_usage_8_2_volumenes_que_sobreviven_a_cambios_de_project_name",
       "community": 72,
@@ -15559,7 +15839,7 @@
       "label": "8.3 Probar sin tocar tu configuracion real",
       "file_type": "document",
       "source_file": "docs/USAGE.md",
-      "source_location": "L1113",
+      "source_location": "L1138",
       "_origin": "ast",
       "id": "docs_usage_8_3_probar_sin_tocar_tu_configuracion_real",
       "community": 72,
@@ -16512,7 +16792,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "guides_logging_and_logs",
-      "community": 61,
+      "community": 54,
       "norm_label": "logging-and-logs.md"
     },
     {
@@ -16922,7 +17202,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "guides_vikunja",
-      "community": 60,
+      "community": 61,
       "norm_label": "vikunja.md"
     },
     {
@@ -26602,6 +26882,17 @@
       "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
+      "source_file": "internal/cli/service.go",
+      "source_location": "L132",
+      "weight": 1.0,
+      "source": "cli_service_collectoraddrforservice",
+      "target": "cli_observe_planobserveaddrs"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
       "source_file": "internal/cli/observe.go",
       "source_location": "L1001",
       "weight": 1.0,
@@ -26651,6 +26942,17 @@
       "confidence_score": 1.0,
       "source": "cli_observe_observesharednetwork",
       "target": "cli_observe_observenetworkname"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service.go",
+      "source_location": "L133",
+      "weight": 1.0,
+      "source": "cli_service_collectoraddrforservice",
+      "target": "cli_observe_observesharednetwork"
     },
     {
       "relation": "calls",
@@ -29366,6 +29668,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/service.go",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "cli_service",
+      "target": "cli_service_collectoraddrforservice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "cli_service",
+      "target": "cli_service_collectoraddrfromplan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service.go",
       "source_location": "L26",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -29423,6 +29745,17 @@
       "confidence_score": 1.0,
       "source": "cli_service_newservicecmd",
       "target": "internal_cli_service_go_command"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L131",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_service_collectoraddrforservice",
+      "target": "internal_cli_service_go_command",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -29491,15 +29824,26 @@
       "target": "services_config_describefileresults"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "cli_service_runserviceaction",
+      "target": "cli_service_collectoraddrforservice",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "internal/cli/service.go",
       "source_location": "L77",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "cli_service_runserviceaction",
-      "target": "internal_cli_service_go_fileresult",
-      "confidence_score": 1.0
+      "target": "internal_cli_service_go_fileresult"
     },
     {
       "relation": "references",
@@ -29511,6 +29855,211 @@
       "confidence_score": 1.0,
       "source": "cli_service_runserviceaction",
       "target": "internal_cli_service_go_manager"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service.go",
+      "source_location": "L87",
+      "weight": 1.0,
+      "source": "cli_service_runserviceaction",
+      "target": "services_config_needscollector"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L136",
+      "weight": 1.0,
+      "source": "cli_service_collectoraddrforservice",
+      "target": "cli_service_collectoraddrfromplan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service.go",
+      "source_location": "L137",
+      "weight": 1.0,
+      "source": "cli_service_collectoraddrforservice",
+      "target": "observe_reachability_probefromcontainer"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "cli_service_collector_test_testcollectoraddrdoesnotwarnwhentheprobewasskipped",
+      "target": "cli_service_collectoraddrfromplan"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "cli_service_collector_test_testcollectoraddrusesthesharedservicesnetworkgateway",
+      "target": "cli_service_collectoraddrfromplan"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "cli_service_collector_test_testcollectoraddrwarnswhentheprobecannotreachit",
+      "target": "cli_service_collectoraddrfromplan"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L90",
+      "weight": 1.0,
+      "source": "cli_service_collector_test_testcollectoraddrwarnswhenthesharednetworkismissing",
+      "target": "cli_service_collectoraddrfromplan"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service.go",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "cli_service_collectoraddrfromplan",
+      "target": "observe_network_withhost"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/cli/service.go",
+      "source_location": "L176",
+      "weight": 1.0,
+      "source": "cli_service_collectoraddrfromplan",
+      "target": "observe_reachability_firewallhint"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L143",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_service_collectoraddrfromplan",
+      "target": "observeaddrplan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service.go",
+      "source_location": "L143",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_service_collectoraddrfromplan",
+      "target": "reachability",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "cli_service_collector_test",
+      "target": "cli_service_collector_test_testcollectoraddrdoesnotwarnwhentheprobewasskipped",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "cli_service_collector_test",
+      "target": "cli_service_collector_test_testcollectoraddrusesthesharedservicesnetworkgateway",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "cli_service_collector_test",
+      "target": "cli_service_collector_test_testcollectoraddrwarnswhentheprobecannotreachit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "cli_service_collector_test",
+      "target": "cli_service_collector_test_testcollectoraddrwarnswhenthesharednetworkismissing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_service_collector_test_testcollectoraddrusesthesharedservicesnetworkgateway",
+      "target": "internal_cli_service_collector_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L66",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_service_collector_test_testcollectoraddrdoesnotwarnwhentheprobewasskipped",
+      "target": "internal_cli_service_collector_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_service_collector_test_testcollectoraddrwarnswhentheprobecannotreachit",
+      "target": "internal_cli_service_collector_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/cli/service_collector_test.go",
+      "source_location": "L83",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "cli_service_collector_test_testcollectoraddrwarnswhenthesharednetworkismissing",
+      "target": "internal_cli_service_collector_test_go_t",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -51682,8 +52231,28 @@
       "source_file": "internal/services/config.go",
       "source_location": "L140",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config",
-      "target": "services_config_describefileresults",
+      "target": "services_config_describefileresults"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/config.go",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "services_config",
+      "target": "services_config_needscollector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/config.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "services_config",
+      "target": "services_config_prometheusfiles",
       "confidence_score": 1.0
     },
     {
@@ -51692,9 +52261,9 @@
       "source_file": "internal/services/config.go",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config",
-      "target": "services_config_servicefiles",
-      "confidence_score": 1.0
+      "target": "services_config_servicefiles"
     },
     {
       "relation": "contains",
@@ -51702,9 +52271,9 @@
       "source_file": "internal/services/config.go",
       "source_location": "L45",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config",
-      "target": "services_fileresult",
-      "confidence_score": 1.0
+      "target": "services_fileresult"
     },
     {
       "relation": "contains",
@@ -51712,9 +52281,9 @@
       "source_file": "internal/services/config.go",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config",
-      "target": "services_filestate",
-      "confidence_score": 1.0
+      "target": "services_filestate"
     },
     {
       "relation": "contains",
@@ -51722,7 +52291,28 @@
       "source_file": "internal/services/config.go",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config",
+      "target": "services_managedfile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/config.go",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "services_config",
+      "target": "services_serviceoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/config.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "services_config_prometheusfiles",
       "target": "services_managedfile",
       "confidence_score": 1.0
     },
@@ -51733,9 +52323,9 @@
       "source_location": "L58",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "services_config_servicefiles",
-      "target": "services_managedfile",
-      "confidence_score": 1.0
+      "target": "services_managedfile"
     },
     {
       "relation": "references",
@@ -51744,8 +52334,30 @@
       "source_location": "L89",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_manager_ensurefile",
-      "target": "services_managedfile",
+      "target": "services_managedfile"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/config.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_config_prometheusfiles",
+      "target": "services_serviceoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/config.go",
+      "source_location": "L99",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_config_servicefiles",
+      "target": "services_serviceoptions",
       "confidence_score": 1.0
     },
     {
@@ -51755,9 +52367,9 @@
       "source_location": "L47",
       "weight": 1.0,
       "context": "field",
+      "confidence_score": 1.0,
       "source": "services_fileresult",
-      "target": "services_filestate",
-      "confidence_score": 1.0
+      "target": "services_filestate"
     },
     {
       "relation": "references",
@@ -51766,9 +52378,9 @@
       "source_location": "L140",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_describefileresults",
-      "target": "services_fileresult",
-      "confidence_score": 1.0
+      "target": "services_fileresult"
     },
     {
       "relation": "references",
@@ -51777,9 +52389,9 @@
       "source_location": "L89",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "services_manager_ensurefile",
-      "target": "services_fileresult",
-      "confidence_score": 1.0
+      "target": "services_fileresult"
     },
     {
       "relation": "references",
@@ -51788,9 +52400,9 @@
       "source_location": "L71",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "services_manager_ensureservicefiles",
-      "target": "services_fileresult",
-      "confidence_score": 1.0
+      "target": "services_fileresult"
     },
     {
       "relation": "calls",
@@ -51799,9 +52411,42 @@
       "source_file": "internal/services/config.go",
       "source_location": "L72",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_manager_ensureservicefiles",
-      "target": "services_config_servicefiles",
-      "confidence_score": 1.0
+      "target": "services_config_servicefiles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "services_prometheus_test_testprometheusconfigrequiresthecollectoraddress",
+      "target": "services_config_servicefiles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "services_prometheus_test_testprometheusconfigtargetsthecollector",
+      "target": "services_config_servicefiles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "services_prometheus_test_testneedscollectoronlyforprometheus",
+      "target": "services_config_needscollector"
     },
     {
       "relation": "method",
@@ -51809,9 +52454,9 @@
       "source_file": "internal/services/config.go",
       "source_location": "L89",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_config_go_services_manager",
-      "target": "services_manager_ensurefile",
-      "confidence_score": 1.0
+      "target": "services_manager_ensurefile"
     },
     {
       "relation": "method",
@@ -51819,9 +52464,9 @@
       "source_file": "internal/services/config.go",
       "source_location": "L71",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_config_go_services_manager",
-      "target": "services_manager_ensureservicefiles",
-      "confidence_score": 1.0
+      "target": "services_manager_ensureservicefiles"
     },
     {
       "relation": "calls",
@@ -51830,8 +52475,19 @@
       "source_file": "internal/services/config.go",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_manager_ensureservicefiles",
-      "target": "services_manager_ensurefile",
+      "target": "services_manager_ensurefile"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/config.go",
+      "source_location": "L125",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_manager_ensureservicefiles",
+      "target": "startoptions",
       "confidence_score": 1.0
     },
     {
@@ -51906,9 +52562,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_readfile",
-      "confidence_score": 1.0
+      "target": "services_config_test_readfile"
     },
     {
       "relation": "contains",
@@ -51916,9 +52572,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L117",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_testensurefileforcerestoresandbacksup",
-      "confidence_score": 1.0
+      "target": "services_config_test_testensurefileforcerestoresandbacksup"
     },
     {
       "relation": "contains",
@@ -51926,9 +52582,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_testensurefileissilentwhennothingchanged",
-      "confidence_score": 1.0
+      "target": "services_config_test_testensurefileissilentwhennothingchanged"
     },
     {
       "relation": "contains",
@@ -51936,9 +52592,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_testensurefilekeepstheuseredit",
-      "confidence_score": 1.0
+      "target": "services_config_test_testensurefilekeepstheuseredit"
     },
     {
       "relation": "contains",
@@ -51946,9 +52602,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_testensurefilewritesthetemplatewhenabsent",
-      "confidence_score": 1.0
+      "target": "services_config_test_testensurefilewritesthetemplatewhenabsent"
     },
     {
       "relation": "contains",
@@ -51956,9 +52612,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L239",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_teststartalwaysregeneratesthecompose",
-      "confidence_score": 1.0
+      "target": "services_config_test_teststartalwaysregeneratesthecompose"
     },
     {
       "relation": "contains",
@@ -51966,9 +52622,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L166",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_teststartonaservicewithoutconfigurationreportsnothing",
-      "confidence_score": 1.0
+      "target": "services_config_test_teststartonaservicewithoutconfigurationreportsnothing"
     },
     {
       "relation": "contains",
@@ -51976,9 +52632,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L148",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_teststartwritestheserviceconfiguration",
-      "confidence_score": 1.0
+      "target": "services_config_test_teststartwritestheserviceconfiguration"
     },
     {
       "relation": "contains",
@@ -51986,9 +52642,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L183",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_teststatusdoesnotwriteanything",
-      "confidence_score": 1.0
+      "target": "services_config_test_teststatusdoesnotwriteanything"
     },
     {
       "relation": "contains",
@@ -51996,9 +52652,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L217",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_teststatusonanuntouchedinstallanswersinsteadoffailing",
-      "confidence_score": 1.0
+      "target": "services_config_test_teststatusonanuntouchedinstallanswersinsteadoffailing"
     },
     {
       "relation": "contains",
@@ -52006,9 +52662,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test",
-      "target": "services_config_test_withservicefiles",
-      "confidence_score": 1.0
+      "target": "services_config_test_withservicefiles"
     },
     {
       "relation": "calls",
@@ -52017,9 +52673,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test_teststartwritestheserviceconfiguration",
-      "target": "services_config_test_withservicefiles",
-      "confidence_score": 1.0
+      "target": "services_config_test_withservicefiles"
     },
     {
       "relation": "calls",
@@ -52028,9 +52684,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test_teststatusdoesnotwriteanything",
-      "target": "services_config_test_withservicefiles",
-      "confidence_score": 1.0
+      "target": "services_config_test_withservicefiles"
     },
     {
       "relation": "references",
@@ -52039,9 +52695,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_withservicefiles",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52050,9 +52706,9 @@
       "source_location": "L30",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_readfile",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52061,9 +52717,9 @@
       "source_location": "L117",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_testensurefileforcerestoresandbacksup",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52072,9 +52728,9 @@
       "source_location": "L96",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_testensurefileissilentwhennothingchanged",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52083,9 +52739,9 @@
       "source_location": "L62",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_testensurefilekeepstheuseredit",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52094,9 +52750,9 @@
       "source_location": "L42",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_testensurefilewritesthetemplatewhenabsent",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52105,9 +52761,9 @@
       "source_location": "L239",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_teststartalwaysregeneratesthecompose",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52116,9 +52772,9 @@
       "source_location": "L166",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_teststartonaservicewithoutconfigurationreportsnothing",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52127,9 +52783,9 @@
       "source_location": "L148",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_teststartwritestheserviceconfiguration",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52138,9 +52794,9 @@
       "source_location": "L183",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_teststatusdoesnotwriteanything",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "references",
@@ -52149,9 +52805,9 @@
       "source_location": "L217",
       "weight": 1.0,
       "context": "parameter_type",
+      "confidence_score": 1.0,
       "source": "services_config_test_teststatusonanuntouchedinstallanswersinsteadoffailing",
-      "target": "internal_services_config_test_go_t",
-      "confidence_score": 1.0
+      "target": "internal_services_config_test_go_t"
     },
     {
       "relation": "calls",
@@ -52171,9 +52827,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L136",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test_testensurefileforcerestoresandbacksup",
-      "target": "services_config_test_readfile",
-      "confidence_score": 1.0
+      "target": "services_config_test_readfile"
     },
     {
       "relation": "calls",
@@ -52182,9 +52838,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test_testensurefilekeepstheuseredit",
-      "target": "services_config_test_readfile",
-      "confidence_score": 1.0
+      "target": "services_config_test_readfile"
     },
     {
       "relation": "calls",
@@ -52193,9 +52849,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test_testensurefilewritesthetemplatewhenabsent",
-      "target": "services_config_test_readfile",
-      "confidence_score": 1.0
+      "target": "services_config_test_readfile"
     },
     {
       "relation": "calls",
@@ -52204,9 +52860,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L253",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test_teststartalwaysregeneratesthecompose",
-      "target": "services_config_test_readfile",
-      "confidence_score": 1.0
+      "target": "services_config_test_readfile"
     },
     {
       "relation": "calls",
@@ -52215,9 +52871,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L160",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test_teststartwritestheserviceconfiguration",
-      "target": "services_config_test_readfile",
-      "confidence_score": 1.0
+      "target": "services_config_test_readfile"
     },
     {
       "relation": "calls",
@@ -52226,9 +52882,9 @@
       "source_file": "internal/services/config_test.go",
       "source_location": "L207",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_config_test_teststatusdoesnotwriteanything",
-      "target": "services_config_test_readfile",
-      "confidence_score": 1.0
+      "target": "services_config_test_readfile"
     },
     {
       "relation": "calls",
@@ -52239,6 +52895,28 @@
       "source_location": "L20",
       "weight": 1.0,
       "source": "services_manager_test_testbootstrapwritessharedservicescompose",
+      "target": "services_config_test_readfile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "services_prometheus_test_teststartprometheuskeepstheuserconfiguration",
+      "target": "services_config_test_readfile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "services_prometheus_test_teststartprometheuswritesitsconfiguration",
       "target": "services_config_test_readfile"
     },
     {
@@ -52347,15 +53025,15 @@
       "source_location": "L34",
       "weight": 1.0,
       "context": "field",
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "internal_services_manager_go_runner",
-      "confidence_score": 1.0
+      "target": "internal_services_manager_go_runner"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "internal/services/manager.go",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "internal_services_manager_go_services_manager",
       "target": "internal_services_manager_go_services_manager",
@@ -52367,9 +53045,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L127",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_bootstrap",
-      "confidence_score": 1.0
+      "target": "services_manager_bootstrap"
     },
     {
       "relation": "method",
@@ -52377,9 +53055,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L152",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_compose",
-      "confidence_score": 1.0
+      "target": "services_manager_compose"
     },
     {
       "relation": "method",
@@ -52387,9 +53065,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L167",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_ensurenetwork",
-      "confidence_score": 1.0
+      "target": "services_manager_ensurenetwork"
     },
     {
       "relation": "references",
@@ -52398,9 +53076,9 @@
       "source_location": "L37",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "services_manager_newmanager",
-      "target": "internal_services_manager_go_services_manager",
-      "confidence_score": 1.0
+      "target": "internal_services_manager_go_services_manager"
     },
     {
       "relation": "references",
@@ -52409,9 +53087,9 @@
       "source_location": "L42",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "services_manager_newmanagerwithrunner",
-      "target": "internal_services_manager_go_services_manager",
-      "confidence_score": 1.0
+      "target": "internal_services_manager_go_services_manager"
     },
     {
       "relation": "method",
@@ -52419,9 +53097,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L141",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_stackexists",
-      "confidence_score": 1.0
+      "target": "services_manager_stackexists"
     },
     {
       "relation": "method",
@@ -52429,9 +53107,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_start",
-      "confidence_score": 1.0
+      "target": "services_manager_start"
     },
     {
       "relation": "method",
@@ -52439,9 +53117,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_status",
-      "confidence_score": 1.0
+      "target": "services_manager_status"
     },
     {
       "relation": "method",
@@ -52449,9 +53127,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_stop",
-      "confidence_score": 1.0
+      "target": "services_manager_stop"
     },
     {
       "relation": "contains",
@@ -52459,9 +53137,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_supportedservices",
-      "confidence_score": 1.0
+      "target": "services_manager_supportedservices"
     },
     {
       "relation": "contains",
@@ -52469,8 +53147,18 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L159",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "internal_services_manager_go_services_manager",
-      "target": "services_manager_validateservice",
+      "target": "services_manager_validateservice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/manager.go",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "internal_services_manager_go_services_manager",
+      "target": "services_startoptions",
       "confidence_score": 1.0
     },
     {
@@ -52529,6 +53217,28 @@
       "target": "services_manager_newmanagerwithrunner"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "services_prometheus_test_testprometheusispartofthecatalog",
+      "target": "services_manager_supportedservices"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/manager.go",
+      "source_location": "L70",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_manager_start",
+      "target": "services_startoptions",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "internal/services/manager.go",
@@ -52546,9 +53256,9 @@
       "source_location": "L57",
       "weight": 1.0,
       "context": "return_type",
+      "confidence_score": 1.0,
       "source": "services_manager_start",
-      "target": "internal_services_manager_go_fileresult",
-      "confidence_score": 1.0
+      "target": "internal_services_manager_go_fileresult"
     },
     {
       "relation": "calls",
@@ -52700,9 +53410,9 @@
       "source_file": "internal/services/manager.go",
       "source_location": "L103",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_manager_status",
-      "target": "services_manager_stackexists",
-      "confidence_score": 1.0
+      "target": "services_manager_stackexists"
     },
     {
       "relation": "calls",
@@ -52939,6 +53649,28 @@
       "target": "services_manager_runner_test_newtestmanager"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "services_prometheus_test_teststartprometheuskeepstheuserconfiguration",
+      "target": "services_manager_runner_test_newtestmanager"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "services_prometheus_test_teststartprometheuswritesitsconfiguration",
+      "target": "services_manager_runner_test_newtestmanager"
+    },
+    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "internal/services/manager_runner_test.go",
@@ -53089,6 +53821,217 @@
       "weight": 1.0,
       "source": "services_manager_test_testvalidateservicerejectsunknownservice",
       "target": "version_version_test_contains"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_contains",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_testneedscollectoronlyforprometheus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_testprometheusconfigrequiresthecollectoraddress",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_testprometheusconfigtargetsthecollector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_testprometheusimageispinned",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L148",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_testprometheusispartofthecatalog",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L121",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_testprometheusispublishedonloopbackonly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L87",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_teststartprometheuskeepstheuserconfiguration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "services_prometheus_test",
+      "target": "services_prometheus_test_teststartprometheuswritesitsconfiguration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_prometheus_test_testprometheusconfigtargetsthecollector",
+      "target": "internal_services_prometheus_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L49",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_prometheus_test_testneedscollectoronlyforprometheus",
+      "target": "internal_services_prometheus_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L40",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_prometheus_test_testprometheusconfigrequiresthecollectoraddress",
+      "target": "internal_services_prometheus_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L135",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_prometheus_test_testprometheusimageispinned",
+      "target": "internal_services_prometheus_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L148",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_prometheus_test_testprometheusispartofthecatalog",
+      "target": "internal_services_prometheus_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L121",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_prometheus_test_testprometheusispublishedonloopbackonly",
+      "target": "internal_services_prometheus_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L87",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_prometheus_test_teststartprometheuskeepstheuserconfiguration",
+      "target": "internal_services_prometheus_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L62",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "services_prometheus_test_teststartprometheuswritesitsconfiguration",
+      "target": "internal_services_prometheus_test_go_t",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "services_prometheus_test_teststartprometheuswritesitsconfiguration",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "services_prometheus_test_teststartprometheuskeepstheuserconfiguration",
+      "target": "version_version_string"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "internal/services/prometheus_test.go",
+      "source_location": "L151",
+      "weight": 1.0,
+      "source": "services_prometheus_test_testprometheusispartofthecatalog",
+      "target": "services_prometheus_test_contains",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -55628,6 +56571,16 @@
       "confidence_score": 1.0,
       "source": "docs_usage_4_6_devherd_proxy",
       "target": "docs_usage_devherd_proxy_bootstrap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/USAGE.md",
+      "source_location": "L531",
+      "weight": 1.0,
+      "source": "docs_usage_4_16_devherd_service_start_stop_status_service",
+      "target": "docs_usage_prometheus",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -59335,5 +60288,5 @@
       "source_file": "docs/IMPROVEMENTS.md"
     }
   ],
-  "built_at_commit": "bc5a7786af6187f7b018b34955897e0eb460740a"
+  "built_at_commit": "ebe3fea0be562e775592e470946585e5ae24d5c5"
 }
