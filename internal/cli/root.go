@@ -1,14 +1,25 @@
 package cli
 
 import (
+	"context"
 	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/devherd/devherd/internal/version"
 	"github.com/spf13/cobra"
 )
 
 func Execute() error {
-	return newRootCmd().Execute()
+	// El contexto se cancela con Ctrl-C o SIGTERM. Sin esto, `observe start` moria
+	// de golpe: el apagado ordenado del collector —cerrar el servidor, drenar el
+	// poller, esperar al WaitGroup— nunca llegaba a correr, porque nada cancelaba
+	// su contexto. Estaba escrito y era codigo muerto.
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
+
+	return newRootCmd().ExecuteContext(ctx)
 }
 
 func newRootCmd() *cobra.Command {
