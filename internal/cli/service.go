@@ -29,7 +29,9 @@ func newServiceActionCmd(action string) *cobra.Command {
 		args = cobra.MaximumNArgs(1)
 	}
 
-	return &cobra.Command{
+	var force bool
+
+	cmd := &cobra.Command{
 		Use:   action + " [service]",
 		Short: serviceActionShort(action),
 		Args:  args,
@@ -49,7 +51,13 @@ func newServiceActionCmd(action string) *cobra.Command {
 				service = args[0]
 			}
 
-			output, err := runServiceAction(cmd, manager, action, service)
+			output, files, err := runServiceAction(cmd, manager, action, service, force)
+			// El aviso de configuracion va por stderr y **antes** de la salida de
+			// docker: escribir dentro del directorio de alguien sin decirlo es como
+			// se pierde una tarde buscando por que un servicio no toma sus ajustes.
+			if notice := services.DescribeFileResults(files); notice != "" {
+				fmt.Fprintln(cmd.ErrOrStderr(), notice)
+			}
 			if output != "" {
 				fmt.Fprintln(cmd.OutOrStdout(), output)
 			}
@@ -57,18 +65,34 @@ func newServiceActionCmd(action string) *cobra.Command {
 			return err
 		},
 	}
+
+	if action == "start" {
+		cmd.Flags().BoolVar(&force, "force", false,
+			"Restore managed configuration files from the DevHerd template, keeping a .bak copy")
+	}
+
+	return cmd
 }
 
-func runServiceAction(cmd *cobra.Command, manager services.Manager, action, service string) (string, error) {
+func runServiceAction(
+	cmd *cobra.Command,
+	manager services.Manager,
+	action, service string,
+	force bool,
+) (string, []services.FileResult, error) {
 	switch action {
 	case "start":
-		return manager.Start(cmd.Context(), service)
+		return manager.Start(cmd.Context(), service, force)
 	case "stop":
-		return manager.Stop(cmd.Context(), service)
+		output, err := manager.Stop(cmd.Context(), service)
+
+		return output, nil, err
 	case "status":
-		return manager.Status(cmd.Context(), service)
+		output, err := manager.Status(cmd.Context(), service)
+
+		return output, nil, err
 	default:
-		return "", fmt.Errorf("unsupported service action %q", action)
+		return "", nil, fmt.Errorf("unsupported service action %q", action)
 	}
 }
 

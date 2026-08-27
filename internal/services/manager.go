@@ -52,20 +52,29 @@ func SupportedServices() []string {
 	return append([]string{}, supportedServices...)
 }
 
-func (m Manager) Start(ctx context.Context, service string) (string, error) {
+// Start levanta un servicio compartido. force devuelve sus archivos de
+// configuracion a la plantilla de DevHerd, guardando antes una copia.
+func (m Manager) Start(ctx context.Context, service string, force bool) (string, []FileResult, error) {
 	if err := validateService(service); err != nil {
-		return "", err
+		return "", nil, err
 	}
 
 	if err := m.bootstrap(); err != nil {
-		return "", err
+		return "", nil, err
+	}
+
+	files, err := m.ensureServiceFiles(service, force)
+	if err != nil {
+		return "", nil, err
 	}
 
 	if err := m.ensureNetwork(ctx); err != nil {
-		return "", err
+		return "", files, err
 	}
 
-	return m.compose(ctx, "up", "-d", service)
+	output, err := m.compose(ctx, "up", "-d", service)
+
+	return output, files, err
 }
 
 func (m Manager) Stop(ctx context.Context, service string) (string, error) {
@@ -80,6 +89,10 @@ func (m Manager) Stop(ctx context.Context, service string) (string, error) {
 	return m.compose(ctx, "stop", service)
 }
 
+// Status consulta el estado y **no escribe nada**. Antes llamaba a bootstrap, asi
+// que un comando de consulta reescribia el compose en disco. No se notaba porque
+// el contenido era identico, pero es un efecto que nadie pidio y que rompe en
+// cuanto un servicio tiene configuracion editable.
 func (m Manager) Status(ctx context.Context, service string) (string, error) {
 	if service != "" {
 		if err := validateService(service); err != nil {
@@ -87,8 +100,16 @@ func (m Manager) Status(ctx context.Context, service string) (string, error) {
 		}
 	}
 
-	if err := m.bootstrap(); err != nil {
+	exists, err := m.stackExists()
+	if err != nil {
 		return "", err
+	}
+	if !exists {
+		// Nunca se arranco nada. La respuesta honesta a "que esta corriendo" es
+		// "nada", no un error, y desde luego no crear el compose para que
+		// `docker compose ps` devuelva una tabla vacia.
+		return "no shared services have been started yet; run `devherd service start <service>` (" +
+			strings.Join(supportedServices, ", ") + ")", nil
 	}
 
 	args := []string{"ps"}
@@ -99,6 +120,10 @@ func (m Manager) Status(ctx context.Context, service string) (string, error) {
 	return m.compose(ctx, args...)
 }
 
+// bootstrap prepara el stack para una operacion que va a cambiar algo. El compose
+// se regenera siempre a proposito: es el catalogo de lo que DevHerd ofrece, no la
+// configuracion del usuario. Congelarlo con la edicion de alguien haria que una
+// version nueva del binario no pudiera ofrecer un servicio nuevo.
 func (m Manager) bootstrap() error {
 	if err := os.MkdirAll(m.dir, 0o755); err != nil {
 		return fmt.Errorf("create shared services directory: %w", err)
@@ -109,6 +134,19 @@ func (m Manager) bootstrap() error {
 	}
 
 	return nil
+}
+
+// stackExists dice si el compose ya esta escrito, sin escribirlo. Es lo unico que
+// necesita saber una operacion de solo lectura.
+func (m Manager) stackExists() (bool, error) {
+	switch _, err := os.Stat(m.composeFile); {
+	case err == nil:
+		return true, nil
+	case os.IsNotExist(err):
+		return false, nil
+	default:
+		return false, fmt.Errorf("read shared services compose: %w", err)
+	}
 }
 
 func (m Manager) compose(ctx context.Context, args ...string) (string, error) {
