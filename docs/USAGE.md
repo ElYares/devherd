@@ -508,7 +508,7 @@ devherd logs /ruta/al/proyecto -f --tail 50
 ### 4.16 `devherd service <start|stop|status> [service]`
 
 Administra los servicios compartidos de desarrollo. Servicios soportados: `redis`,
-`mailpit` y `prometheus`.
+`mailpit`, `prometheus`, `grafana` y `jupyter`.
 
 - `service start <service>`: arranca el servicio (`docker compose up -d`), creando la red
   `infra_net` si falta. Argumento obligatorio. Con `--force` devuelve los archivos de
@@ -526,7 +526,41 @@ devherd service stop redis
 ```
 
 Puertos publicados (en `127.0.0.1`): Redis `6379`, Mailpit `1025` (SMTP) y `8025` (UI web),
-Prometheus `9090`.
+Prometheus `9090`, Grafana `3000`, Jupyter `8888`.
+
+#### Dominios locales
+
+Los servicios con interfaz web **tambien se publican en un dominio**, para no tener
+que recordar en que puerto escucha cada uno:
+
+| Servicio | Puerto | Dominio |
+|---|---|---|
+| `mailpit` | 8025 | `mailpit.localhost` |
+| `prometheus` | 9090 | `prometheus.localhost` |
+| `grafana` | 3000 | `grafana.localhost` |
+| `jupyter` | 8888 | `jupyter.localhost` |
+
+El comando imprime los dos al arrancar:
+
+```text
+jupyter: http://127.0.0.1:8888/lab?token=e628…
+  tambien en: http://jupyter.localhost/lab?token=e628…
+```
+
+Notas:
+
+- **El TLD es el mismo que usan tus proyectos** (`local_tld` en la configuracion).
+  Con el driver `caddy-docker-external` es `.localhost`; con los demas, `.test`.
+  Mezclarlos es como se acaba probando en el host equivocado.
+- **El puerto sigue funcionando**, y es lo unico que funciona si el proxy se cae.
+  El dominio es una alternativa, no un sustituto.
+- **Publicar un servicio no toca las rutas de tus proyectos**: cada bloque del
+  Caddyfile va delimitado por sus marcadores y solo se reemplaza el suyo.
+- **Sin el proxy en modo contenedor no hay dominio**, y no es un error: el servicio
+  arranca igual y se accede por su puerto.
+- Por dentro, el contenedor se conecta tambien a la red del proxy (`infra_web`) con
+  un alias, que es como Caddy lo nombra. Es el mismo camino que recorren los
+  proyectos.
 
 #### Prometheus
 
@@ -551,6 +585,81 @@ La causa mas comun es el cortafuegos del host filtrando el trafico de los conten
 `devherd observe firewall --apply` pone las reglas.
 
 Prometheus es **opcional**: nada del producto depende de que este arrancado.
+
+#### Grafana
+
+`devherd service start grafana` lo levanta con el datasource de Prometheus ya
+configurado y un tablero cargado, en `http://127.0.0.1:3000`. **Sin login**: es un
+entorno local, el puerto solo escucha en loopback y un login que nadie recuerda es
+friccion sin seguridad.
+
+El tablero **DevHerd Observe** trae seis paneles sobre las metricas del collector:
+uptime, segundos sin cobertura en 24 h, issues abiertos, eventos por minuto, issues
+por proyecto y nivel, y reinicios de contenedor.
+
+Si Prometheus no esta arrancado, el comando lo dice antes:
+
+```text
+WARNING: prometheus is not running, so grafana will show empty panels.
+  Start it first:  devherd service start prometheus
+  Or point grafana at your own prometheus by editing its datasource.
+```
+
+No lo arranca solo: levantar contenedores que nadie pidio es peor que avisar, y
+puedes tener tu propio Prometheus fuera de DevHerd.
+
+Notas:
+
+- **El datasource apunta a `http://prometheus:9090`**, el alias de red, no una IP.
+  Los dos contenedores comparten `infra_net` y Docker resuelve el nombre; una IP
+  cambiaria al recrear la red.
+- **Las ediciones desde la interfaz sobreviven.** El provisioning declara
+  `allowUiUpdates`, y Grafana guarda tus cambios en su propio volumen. Los archivos
+  de provisioning tambien respetan tus ediciones, como el resto (`--force` los
+  restaura).
+- **Mover el tablero fuera de la carpeta `DevHerd`** puede dejarlo inaccesible con
+  acceso anonimo. Si pasa, `devherd service start grafana --force` y borrar el
+  volumen `devherd_shared_grafana_data` lo devuelve a su sitio.
+
+#### Jupyter
+
+Un JupyterLab **global**, con todos tus proyectos montados a la vez. La idea es
+abrir el notebook de cualquiera sin levantar un entorno por proyecto.
+
+```bash
+devherd service start jupyter
+```
+
+El comando imprime la URL con el token puesto:
+
+```text
+jupyter: http://127.0.0.1:8888/lab?token=1eabda89...
+```
+
+Dentro, tu arbol de trabajo cuelga de `work/`: `work/data-science/…`,
+`work/clients/…`, `work/labs/…`. **Son bind mounts**, asi que los notebooks siguen
+viviendo en su proyecto y se editan en su sitio: lo que guardes desde Jupyter
+aparece en el repo, listo para commitear.
+
+Notas:
+
+- **El token no es opcional, y es la diferencia con Grafana.** Grafana solo lee y
+  muestra; Jupyter es ejecucion de codigo arbitrario con escritura sobre todo lo
+  montado, que aqui es tu codigo entero. DevHerd genera un token aleatorio la
+  primera vez y **no lo regenera**: reiniciar el servicio no invalida la pestana
+  que tengas abierta.
+- **Que directorio monta** sale de `DEVHERD_WORKSPACE` en el `.env` administrado
+  (`~/.local/share/devherd/compose/shared-services/.env`). Por defecto `~/develop`
+  si existe, o tu home si no. Edita ese archivo para apuntarlo a otro sitio;
+  DevHerd lo respeta y no lo pisa.
+- **Los archivos que crees te pertenecen.** El contenedor corre con tu uid y gid,
+  que tambien salen de ese `.env`.
+- **Los paquetes que instales desde el notebook sobreviven** al reinicio: viven en
+  el volumen `devherd_shared_jupyter_data`.
+- **Un solo entorno de Python para todos los proyectos.** Es lo que "global"
+  significa, y tiene su contra: si dos notebooks necesitan versiones distintas de
+  la misma libreria, se pisan. Para eso siguen sirviendo los entornos por
+  proyecto; esto es para explorar, no para fijar dependencias.
 
 Notas:
 

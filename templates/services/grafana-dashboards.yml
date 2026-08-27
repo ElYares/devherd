@@ -1,0 +1,16 @@
+# Escrito por DevHerd la primera vez que arrancaste Grafana.
+#
+# Declara de donde salen los tableros. El tablero en si vive en dashboards/.
+
+apiVersion: 1
+
+providers:
+  - name: devherd
+    orgId: 1
+    folder: DevHerd
+    type: file
+    # Permite editarlos desde la interfaz: es un entorno local y ajustar un panel
+    # a mano tiene que ser posible sin pelearse con el provisioning.
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/devherd

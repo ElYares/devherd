@@ -58,9 +58,82 @@ services:
       devherd.role: "shared-service"
       devherd.service: "prometheus"
 
+  grafana:
+    image: grafana/grafana:11.5.1
+    container_name: infra_grafana
+    restart: unless-stopped
+    environment:
+      # Acceso anonimo con rol de editor: es un entorno local, y un login que
+      # nadie recuerda es friccion sin seguridad. El puerto solo escucha en
+      # loopback, asi que no hay superficie que proteger.
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Editor"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_USERS_DEFAULT_THEME: "dark"
+      # Abre directo en el tablero de DevHerd en vez de en una pagina vacia.
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: "/etc/grafana/provisioning/dashboards/devherd/devherd-observe.json"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    networks:
+      infra_net:
+        aliases:
+          - grafana
+    labels:
+      devherd.managed: "true"
+      devherd.role: "shared-service"
+      devherd.service: "grafana"
+
+  jupyter:
+    image: quay.io/jupyter/scipy-notebook:2024-11-19
+    container_name: infra_jupyter
+    restart: unless-stopped
+    # Arranca como root solo para ajustar permisos y **vuelve a jovyan** antes de
+    # servir nada: el entrypoint de las imagenes de Jupyter lo hace por su cuenta.
+    # Sin esto, el volumen de paquetes lo crea Docker como root y el servidor
+    # muere en bucle con un PermissionError que no dice de donde viene.
+    user: root
+    environment:
+      # El token protege el servidor. Sale del .env administrado, que DevHerd
+      # genera una sola vez: regenerarlo en cada arranque invalidaria la pestana
+      # que ya tenias abierta.
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN:?run devherd service start jupyter to generate it}
+      # El uid del host, para que los notebooks que escribas desde el contenedor
+      # te sigan perteneciendo a ti fuera de el. Fijarlo a 1000 funcionaria en esta
+      # maquina y dejaria archivos de otro dueno en cualquier otra.
+      NB_UID: ${DEVHERD_UID:?run devherd service start jupyter to set it}
+      NB_GID: ${DEVHERD_GID:?run devherd service start jupyter to set it}
+      CHOWN_EXTRA: "/home/jovyan/.local"
+      CHOWN_EXTRA_OPTS: "-R"
+      DOCKER_STACKS_JUPYTER_CMD: "lab"
+    ports:
+      - "127.0.0.1:8888:8888"
+    volumes:
+      # El directorio del host que se ve como /home/jovyan/work. Es un bind mount:
+      # los notebooks siguen viviendo en su proyecto y se editan en su sitio.
+      - ${DEVHERD_WORKSPACE:?run devherd service start jupyter to set it}:/home/jovyan/work
+      # Los paquetes que instales desde el notebook sobreviven al reinicio.
+      - jupyter_data:/home/jovyan/.local
+    working_dir: /home/jovyan/work
+    networks:
+      infra_net:
+        aliases:
+          - jupyter
+    labels:
+      devherd.managed: "true"
+      devherd.role: "shared-service"
+      devherd.service: "jupyter"
+
 volumes:
   redis_data:
   prometheus_data:
+  grafana_data:
+  jupyter_data:
 
 networks:
   infra_net:

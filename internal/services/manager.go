@@ -28,7 +28,7 @@ const (
 
 // supportedServices es el catalogo. Prometheus es opcional como los demas: nada
 // del producto depende de que este arrancado.
-var supportedServices = []string{"redis", "mailpit", "prometheus"}
+var supportedServices = []string{"redis", "mailpit", "prometheus", "grafana", "jupyter"}
 
 type Manager struct {
 	dir         string
@@ -64,6 +64,12 @@ type StartOptions struct {
 	// CollectorAddr es la direccion del collector de Observe alcanzable desde un
 	// contenedor. Solo la usan los servicios que la piden; ver NeedsCollector.
 	CollectorAddr string
+	// Workspace es el directorio del host que monta Jupyter. Ver NeedsWorkspace.
+	Workspace string
+	// UID y GID del usuario del host, para que los archivos que cree el contenedor
+	// le sigan perteneciendo fuera de el.
+	UID int
+	GID int
 }
 
 // Start levanta un servicio compartido.
@@ -88,6 +94,123 @@ func (m Manager) Start(ctx context.Context, service string, opts StartOptions) (
 	output, err := m.compose(ctx, "up", "-d", service)
 
 	return output, files, err
+}
+
+// DependsOn dice que otro servicio compartido necesita este para servir de algo.
+// Grafana sin Prometheus arranca perfectamente y muestra paneles vacios, que es la
+// peor forma de fallar: parece que funciona.
+func DependsOn(service string) string {
+	if service == "grafana" {
+		return "prometheus"
+	}
+
+	return ""
+}
+
+// webPorts son los servicios compartidos que sirven algo en un navegador, con el
+// puerto en el que escuchan **dentro** de la red, no el publicado en el host.
+// Redis no esta porque no tiene interfaz que publicar.
+var webPorts = map[string]int{
+	"mailpit":    8025,
+	"prometheus": 9090,
+	"grafana":    3000,
+	"jupyter":    8888,
+}
+
+// WebPort devuelve el puerto interno de un servicio con interfaz web, y si lo
+// tiene. Es lo que decide si se le puede dar un dominio.
+func WebPort(service string) (int, bool) {
+	port, ok := webPorts[service]
+
+	return port, ok
+}
+
+// ContainerName es el nombre del contenedor de un servicio compartido, que es lo
+// que Docker necesita para conectarlo a otra red.
+func ContainerName(service string) string {
+	return "infra_" + service
+}
+
+// AccessURL es como se entra al servicio desde el navegador. Devuelve vacio para
+// los que no se abren en uno.
+//
+// Jupyter es el caso que la justifica: su URL no sirve sin el token, y el token
+// vive en el .env administrado. Mandar al usuario a buscarlo en los logs de un
+// contenedor es la friccion que este comando existe para quitar.
+func (m Manager) AccessURL(service string) (string, error) {
+	switch service {
+	case "grafana":
+		return "http://127.0.0.1:3000", nil
+	case "prometheus":
+		return "http://127.0.0.1:9090", nil
+	case "mailpit":
+		return "http://127.0.0.1:8025", nil
+	case "jupyter":
+		token, err := m.envValue("JUPYTER_TOKEN")
+		if err != nil || token == "" {
+			return "http://127.0.0.1:8888", err
+		}
+
+		return "http://127.0.0.1:8888/lab?token=" + token, nil
+	}
+
+	return "", nil
+}
+
+// envValue lee una clave del .env administrado del stack compartido.
+func (m Manager) envValue(key string) (string, error) {
+	data, err := os.ReadFile(filepath.Join(m.dir, ".env"))
+	if err != nil {
+		if os.IsNotExist(err) {
+			return "", nil
+		}
+
+		return "", fmt.Errorf("read the shared services env file: %w", err)
+	}
+
+	for _, line := range strings.Split(string(data), "\n") {
+		trimmed := strings.TrimSpace(line)
+		if strings.HasPrefix(trimmed, "#") {
+			continue
+		}
+		name, value, found := strings.Cut(trimmed, "=")
+		if found && strings.TrimSpace(name) == key {
+			return strings.TrimSpace(value), nil
+		}
+	}
+
+	return "", nil
+}
+
+// NeedsWorkspace dice si un servicio necesita saber que directorio del host montar.
+func NeedsWorkspace(service string) bool {
+	return service == "jupyter"
+}
+
+// IsRunning dice si un servicio compartido esta levantado. Se consulta a docker y
+// no al disco: que el compose lo declare no significa que el contenedor viva.
+func (m Manager) IsRunning(ctx context.Context, service string) (bool, error) {
+	if err := validateService(service); err != nil {
+		return false, err
+	}
+
+	exists, err := m.stackExists()
+	if err != nil || !exists {
+		return false, err
+	}
+
+	out, err := m.compose(ctx, "ps", "--status", "running", "--services")
+	if err != nil {
+		return false, err
+	}
+
+	for _, line := range strings.Split(out, "\n") {
+		if strings.TrimSpace(line) == service {
+			return true, nil
+		}
+	}
+
+	return false, nil
 }
 
 func (m Manager) Stop(ctx context.Context, service string) (string, error) {

@@ -2,9 +2,12 @@ package cli
 
 import (
 	"fmt"
+	"net/url"
+	"os"
 
 	"github.com/devherd/devherd/internal/config"
 	"github.com/devherd/devherd/internal/observe"
+	"github.com/devherd/devherd/internal/proxy"
 	"github.com/devherd/devherd/internal/services"
 	"github.com/spf13/cobra"
 )
@@ -53,6 +56,9 @@ func newServiceActionCmd(action string) *cobra.Command {
 			}
 
 			output, files, err := runServiceAction(cmd, manager, action, service, force)
+			if err == nil && action == "start" {
+				reportServiceAccess(cmd, manager, service, publishSharedService(cmd, service))
+			}
 			// El aviso de configuracion va por stderr y **antes** de la salida de
 			// docker: escribir dentro del directorio de alguien sin decirlo es como
 			// se pierde una tarde buscando por que un servicio no toma sus ajustes.
@@ -83,7 +89,23 @@ func runServiceAction(
 ) (string, []services.FileResult, error) {
 	switch action {
 	case "start":
+		// Grafana sin Prometheus arranca y muestra paneles vacios, que es la peor
+		// forma de fallar: parece que funciona. Se dice antes, no despues de que el
+		// usuario abra el tablero y no entienda nada.
+		if warning := missingDependencyWarning(cmd, manager, service); warning != "" {
+			fmt.Fprintln(cmd.ErrOrStderr(), warning)
+		}
+
 		opts := services.StartOptions{Force: force}
+		if services.NeedsWorkspace(service) {
+			home, err := os.UserHomeDir()
+			if err != nil {
+				return "", nil, fmt.Errorf("resolve the home directory: %w", err)
+			}
+			opts.Workspace = services.DefaultWorkspace(home)
+			opts.UID = os.Getuid()
+			opts.GID = os.Getgid()
+		}
 		if services.NeedsCollector(service) {
 			addr, warning := collectorAddrForService(cmd)
 			// El aviso va **antes** de arrancar: un target caido se descubre media
@@ -193,4 +215,106 @@ func collectorAddrFromPlan(
 		"  The devherd-observe target will stay down until it is.\n" +
 		"  Start a shared service first so " + services.NetworkName + " exists, then\n" +
 		"  `devherd service start prometheus --force` to rewrite the target."
+}
+
+// missingDependencyWarning avisa si falta el servicio del que este depende. No
+// falla ni lo arranca solo: levantar contenedores que nadie pidio es peor que
+// avisar, y el usuario puede tener su propio Prometheus fuera de DevHerd.
+func missingDependencyWarning(cmd *cobra.Command, manager services.Manager, service string) string {
+	dependency := services.DependsOn(service)
+	if dependency == "" {
+		return ""
+	}
+
+	running, err := manager.IsRunning(cmd.Context(), dependency)
+	if err != nil || running {
+		// Un fallo al consultar docker no se convierte en un aviso: el propio
+		// `service start` va a fallar a continuacion con un error de verdad.
+		return ""
+	}
+
+	return dependencyWarning(service, dependency)
+}
+
+// dependencyWarning arma el mensaje. Separado de la consulta a docker para poder
+// probar el texto, que es lo unico que ve el usuario.
+func dependencyWarning(service, dependency string) string {
+	return "WARNING: " + dependency + " is not running, so " + service + " will show empty panels.\n" +
+		"  Start it first:  devherd service start " + dependency + "\n" +
+		"  Or point " + service + " at your own " + dependency + " by editing its datasource."
+}
+
+// reportServiceAccess dice como se entra al servicio recien arrancado. Para
+// Jupyter no es cortesia: sin el token la URL no sirve, y buscarlo en los logs de
+// un contenedor es exactamente la friccion que este comando existe para quitar.
+func reportServiceAccess(cmd *cobra.Command, manager services.Manager, service, domain string) {
+	url, err := manager.AccessURL(service)
+	if err != nil || url == "" {
+		return
+	}
+
+	out := cmd.OutOrStdout()
+	fmt.Fprintf(out, "\n%s: %s\n", service, url)
+
+	if domain == "" {
+		return
+	}
+	// El dominio se ofrece como alternativa, no como sustituto: el puerto sigue
+	// funcionando y es lo unico que funciona si el proxy se cae.
+	fmt.Fprintf(out, "  tambien en: %s\n", sharedServiceURL(domain, url))
+}
+
+// sharedServiceURL traslada la ruta y el token de la URL de loopback al dominio.
+// Sin eso, "tambien en jupyter.localhost" mandaria a una pagina que pide un token
+// que el usuario acaba de tener delante.
+func sharedServiceURL(domain, loopbackURL string) string {
+	parsed, err := url.Parse(loopbackURL)
+	if err != nil {
+		return "http://" + domain
+	}
+
+	rest := parsed.EscapedPath()
+	if parsed.RawQuery != "" {
+		rest += "?" + parsed.RawQuery
+	}
+
+	return "http://" + domain + rest
+}
+
+// publishSharedService le da un dominio local al servicio recien arrancado, para
+// no tener que recordar en que puerto escucha cada uno.
+//
+// Nunca falla el comando: el servicio ya esta arriba y accesible por su puerto. Un
+// proxy sin arrancar es motivo para no tener dominio, no para dar el arranque por
+// fallido.
+func publishSharedService(cmd *cobra.Command, service string) string {
+	port, ok := services.WebPort(service)
+	if !ok {
+		return ""
+	}
+
+	paths, err := config.ResolvePaths()
+	if err != nil {
+		return ""
+	}
+	cfg, err := config.NewStore(paths.ConfigFile).Load()
+	if err != nil || !proxy.UsesDockerExternal(cfg) {
+		// Sin el proxy en modo contenedor no hay donde publicar. No es un fallo:
+		// el servicio esta arriba y accesible por su puerto.
+		return ""
+	}
+
+	domain, err := proxy.PublishSharedService(cmd.Context(), cfg, proxy.SharedServiceSite{
+		Service:   service,
+		Container: services.ContainerName(service),
+		Port:      port,
+	})
+	if err != nil {
+		fmt.Fprintf(cmd.ErrOrStderr(),
+			"note: %s is up, but it could not be published on a local domain: %v\n", service, err)
+
+		return ""
+	}
+
+	return domain
 }

@@ -1,10 +1,13 @@
 package services
 
 import (
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"os"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 	"text/template"
 
@@ -24,6 +27,12 @@ type ManagedFile struct {
 	Path string
 	// Content es la plantilla que DevHerd escribe la primera vez.
 	Content string
+	// GeneratedOnce marca un archivo cuyo contenido se genera y **no se puede
+	// comparar** contra una plantilla: un token aleatorio es distinto cada vez que
+	// se construye. Sin esto, cada arranque lo veria como "editado por el usuario"
+	// y soltaria un aviso que no significa nada, que es como se ensena a ignorar
+	// los avisos. Si existe, se deja como esta y en silencio.
+	GeneratedOnce bool
 }
 
 // ServiceOptions son los datos del entorno que necesitan las plantillas.
@@ -36,6 +45,14 @@ type ServiceOptions struct {
 	// contenedor**. No es 127.0.0.1: desde dentro de un contenedor, loopback es el
 	// propio contenedor, y apuntar ahi deja un target caido sin explicacion.
 	CollectorAddr string
+	// Workspace es el directorio del host que ve Jupyter. Uno solo y arriba del
+	// todo: la gracia de un entorno global es abrir el notebook de cualquier
+	// proyecto sin reconfigurar nada.
+	Workspace string
+	// UID y GID son los del usuario del host. Sin ellos, lo que el notebook
+	// escriba en el workspace acabaria perteneciendo a otro dueno.
+	UID int
+	GID int
 }
 
 // serviceFiles declara la configuracion de cada servicio. Redis y Mailpit no
@@ -43,6 +60,88 @@ type ServiceOptions struct {
 // llego Prometheus.
 var serviceFiles = map[string]func(ServiceOptions) ([]ManagedFile, error){
 	"prometheus": prometheusFiles,
+	"grafana":    grafanaFiles,
+	"jupyter":    jupyterFiles,
+}
+
+// jupyterFiles escribe el .env que docker compose lee para saber que directorio
+// montar y con que token proteger el servidor.
+//
+// Va en un .env y no en el compose porque el compose es de DevHerd y se regenera
+// siempre: el directorio de trabajo es de cada quien y su token no se puede volver
+// a generar sin invalidar la sesion abierta.
+func jupyterFiles(opts ServiceOptions) ([]ManagedFile, error) {
+	workspace := strings.TrimSpace(opts.Workspace)
+	if workspace == "" {
+		return nil, fmt.Errorf("a workspace directory is required to configure Jupyter")
+	}
+
+	token, err := generateToken()
+	if err != nil {
+		return nil, err
+	}
+
+	content := "# Escrito por DevHerd la primera vez que arrancaste Jupyter.\n" +
+		"#\n" +
+		"# DEVHERD_WORKSPACE es el directorio del host que Jupyter monta en /home/jovyan/work.\n" +
+		"# Cambialo aqui si quieres ver otro arbol; DevHerd respeta este archivo y no lo pisa.\n" +
+		"#\n" +
+		"# JUPYTER_TOKEN protege el servidor. **No lo quites.** Un Jupyter sin token es\n" +
+		"# ejecucion de codigo arbitrario con escritura sobre todo lo que hay montado, y\n" +
+		"# aqui esta montado tu codigo entero.\n" +
+		"#\n" +
+		"# El uid y el gid del host: lo que escribas desde el notebook te sigue\n" +
+		"# perteneciendo a ti fuera del contenedor.\n" +
+		"DEVHERD_WORKSPACE=" + workspace + "\n" +
+		"DEVHERD_UID=" + strconv.Itoa(opts.UID) + "\n" +
+		"DEVHERD_GID=" + strconv.Itoa(opts.GID) + "\n" +
+		"JUPYTER_TOKEN=" + token + "\n"
+
+	return []ManagedFile{{Path: ".env", Content: content, GeneratedOnce: true}}, nil
+}
+
+// generateToken produce el token del servidor de Jupyter.
+func generateToken() (string, error) {
+	raw := make([]byte, 24)
+	if _, err := rand.Read(raw); err != nil {
+		return "", fmt.Errorf("generate the Jupyter token: %w", err)
+	}
+
+	return hex.EncodeToString(raw), nil
+}
+
+// DefaultWorkspace es el directorio que Jupyter monta si nadie dice otra cosa.
+// `~/develop` cuando existe, porque es donde suele vivir el arbol de proyectos, y
+// el home si no: montar la raiz del sistema seria peor que preguntar.
+func DefaultWorkspace(home string) string {
+	if home == "" {
+		return ""
+	}
+
+	candidate := filepath.Join(home, "develop")
+	if info, err := os.Stat(candidate); err == nil && info.IsDir() {
+		return candidate
+	}
+
+	return home
+}
+
+// grafanaFiles son los tres archivos de provisioning: la fuente de datos, el
+// proveedor de tableros y el tablero.
+//
+// **El tablero es lo que decide si empaquetar Grafana valio la pena.** Con
+// datasource y sin tableros, el usuario se queda exactamente donde estaba: habria
+// cambiado "configura Prometheus a mano" por "construye un tablero a mano".
+//
+// Ninguno lleva plantilla: Grafana alcanza a Prometheus por su alias de red, que
+// no cambia. Una IP si cambiaria al recrear la red, que es la misma trampa que ya
+// costo un falso positivo en Observe.
+func grafanaFiles(ServiceOptions) ([]ManagedFile, error) {
+	return []ManagedFile{
+		{Path: "grafana/datasources/prometheus.yml", Content: servicestemplates.GrafanaDatasource},
+		{Path: "grafana/dashboards/devherd.yml", Content: servicestemplates.GrafanaDashboards},
+		{Path: "grafana/dashboards/devherd/devherd-observe.json", Content: servicestemplates.GrafanaDashboard},
+	}, nil
 }
 
 // prometheusFiles arma el prometheus.yml con el collector ya apuntado. Escribirlo
@@ -123,7 +222,12 @@ func NeedsCollector(service string) bool {
 // pueda decir: escribir configuracion en silencio dentro del directorio de alguien
 // es como se pierde una tarde buscando por que un servicio no toma sus ajustes.
 func (m Manager) ensureServiceFiles(service string, opts StartOptions) ([]FileResult, error) {
-	files, err := ServiceFiles(service, ServiceOptions{CollectorAddr: opts.CollectorAddr})
+	files, err := ServiceFiles(service, ServiceOptions{
+		CollectorAddr: opts.CollectorAddr,
+		Workspace:     opts.Workspace,
+		UID:           opts.UID,
+		GID:           opts.GID,
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -165,7 +269,9 @@ func (m Manager) ensureFile(file ManagedFile, force bool) (FileResult, error) {
 		return FileResult{}, fmt.Errorf("read %s: %w", file.Path, err)
 	}
 
-	if string(existing) == file.Content {
+	// Un archivo generado no se compara: su contenido es distinto en cada
+	// construccion por definicion. Existir ya es la respuesta.
+	if file.GeneratedOnce || string(existing) == file.Content {
 		result.State = FileUnchanged
 
 		return result, nil

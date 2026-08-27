@@ -1,0 +1,184 @@
+{
+  "uid": "devherd-observe",
+  "title": "DevHerd Observe",
+  "tags": ["devherd"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Collector uptime",
+      "description": "Cuanto lleva escuchando la corrida actual. Sin dato significa que no hay ninguna corrida viva, que no es lo mismo que cero.",
+      "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 0 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "noValue": "sin corrida viva",
+          "color": { "mode": "fixed", "fixedColor": "green" }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "none"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+          "expr": "devherd_observe_collector_uptime_seconds",
+          "instant": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Sin cobertura (24 h)",
+      "description": "Segundos del ultimo dia sin nadie escuchando. Dentro de ese hueco no hay issues porque nadie los recibio, no porque nada fallara. Una instalacion nueva marca casi 24 h su primer dia, y es cierto.",
+      "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 0 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 300 },
+              { "color": "red", "value": 3600 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "none"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+          "expr": "devherd_observe_collector_gap_seconds",
+          "instant": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Issues abiertos",
+      "description": "Total agrupado por Observe, sumando todos los proyectos y niveles.",
+      "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+      "gridPos": { "h": 5, "w": 6, "x": 12, "y": 0 },
+      "fieldConfig": {
+        "defaults": { "unit": "short", "noValue": "0" },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+          "expr": "sum(devherd_observe_issues)",
+          "instant": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Eventos por minuto",
+      "description": "Ritmo de llegada, promediado en cinco minutos. Un pico aqui sin issues nuevos significa que algo ya conocido se disparo mucho.",
+      "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+      "gridPos": { "h": 5, "w": 6, "x": 18, "y": 0 },
+      "fieldConfig": {
+        "defaults": { "unit": "short", "decimals": 2, "noValue": "0" },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+          "expr": "sum(rate(devherd_observe_events_total[5m])) * 60",
+          "instant": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Issues por proyecto y nivel",
+      "description": "Donde vive el problema. Ordenado por proyecto, no por severidad: un warning que se multiplica dice mas que un error aislado.",
+      "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 5 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10, "showPoints": "never" }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["lastNotNull"], "showLegend": true },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+          "expr": "devherd_observe_issues",
+          "legendFormat": "{{project}} · {{level}}"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Reinicios de contenedor",
+      "description": "Acumulado por contenedor. Una linea que sube en escalon es un contenedor que se esta reiniciando en bucle.",
+      "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 5 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10, "showPoints": "never" }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["lastNotNull"], "showLegend": true },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "devherd-prometheus" },
+          "expr": "devherd_observe_container_restarts_total",
+          "legendFormat": "{{project}} · {{service}}"
+        }
+      ]
+    }
+  ]
+}
