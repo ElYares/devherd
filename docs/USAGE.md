@@ -508,7 +508,7 @@ devherd logs /ruta/al/proyecto -f --tail 50
 ### 4.16 `devherd service <start|stop|status> [service]`
 
 Administra los servicios compartidos de desarrollo. Servicios soportados: `redis`,
-`mailpit`, `prometheus` y `grafana`.
+`mailpit`, `prometheus`, `grafana` y `jupyter`.
 
 - `service start <service>`: arranca el servicio (`docker compose up -d`), creando la red
   `infra_net` si falta. Argumento obligatorio. Con `--force` devuelve los archivos de
@@ -586,6 +586,46 @@ Notas:
 - **Mover el tablero fuera de la carpeta `DevHerd`** puede dejarlo inaccesible con
   acceso anonimo. Si pasa, `devherd service start grafana --force` y borrar el
   volumen `devherd_shared_grafana_data` lo devuelve a su sitio.
+
+#### Jupyter
+
+Un JupyterLab **global**, con todos tus proyectos montados a la vez. La idea es
+abrir el notebook de cualquiera sin levantar un entorno por proyecto.
+
+```bash
+devherd service start jupyter
+```
+
+El comando imprime la URL con el token puesto:
+
+```text
+jupyter: http://127.0.0.1:8888/lab?token=1eabda89...
+```
+
+Dentro, tu arbol de trabajo cuelga de `work/`: `work/data-science/…`,
+`work/clients/…`, `work/labs/…`. **Son bind mounts**, asi que los notebooks siguen
+viviendo en su proyecto y se editan en su sitio: lo que guardes desde Jupyter
+aparece en el repo, listo para commitear.
+
+Notas:
+
+- **El token no es opcional, y es la diferencia con Grafana.** Grafana solo lee y
+  muestra; Jupyter es ejecucion de codigo arbitrario con escritura sobre todo lo
+  montado, que aqui es tu codigo entero. DevHerd genera un token aleatorio la
+  primera vez y **no lo regenera**: reiniciar el servicio no invalida la pestana
+  que tengas abierta.
+- **Que directorio monta** sale de `DEVHERD_WORKSPACE` en el `.env` administrado
+  (`~/.local/share/devherd/compose/shared-services/.env`). Por defecto `~/develop`
+  si existe, o tu home si no. Edita ese archivo para apuntarlo a otro sitio;
+  DevHerd lo respeta y no lo pisa.
+- **Los archivos que crees te pertenecen.** El contenedor corre con tu uid y gid,
+  que tambien salen de ese `.env`.
+- **Los paquetes que instales desde el notebook sobreviven** al reinicio: viven en
+  el volumen `devherd_shared_jupyter_data`.
+- **Un solo entorno de Python para todos los proyectos.** Es lo que "global"
+  significa, y tiene su contra: si dos notebooks necesitan versiones distintas de
+  la misma libreria, se pisan. Para eso siguen sirviendo los entornos por
+  proyecto; esto es para explorar, no para fijar dependencias.
 
 Notas:
 

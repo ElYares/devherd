@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "internal/cli/service.go": {
-    "mtime": 1787813675.6937997,
-    "ast_hash": "e9f35cb132c36cf6762c7c1efb178cfc",
+    "mtime": 1787810157.075388,
+    "ast_hash": "0dded8db1c1d3bb51e39b645122b4d70",
     "semantic_hash": ""
   },
   "internal/cli/stop.go": {
@@ -385,8 +385,8 @@
     "semantic_hash": "b6ad509aaccbb719b8da64eef79b4b6c"
   },
   "internal/services/manager.go": {
-    "mtime": 1787813675.6698563,
-    "ast_hash": "6f1ffca1755e8f6802bbf66e5e3197c6",
+    "mtime": 1787809729.7431612,
+    "ast_hash": "0ebf8227077250ebc004131760765e98",
     "semantic_hash": ""
   },
   "internal/services/manager_test.go": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "docs/USAGE.md": {
-    "mtime": 1787813983.3758526,
-    "ast_hash": "ca93f154b5bd2c139ef1621a8770df04",
+    "mtime": 1787810232.8754737,
+    "ast_hash": "02c445b2127dc00983025a40b73105c2",
     "semantic_hash": ""
   },
   "docs/branches/devherd-v1-app/README.md": {
@@ -595,8 +595,8 @@
     "semantic_hash": ""
   },
   "internal/services/shared-services.compose.yml": {
-    "mtime": 1787813675.6448495,
-    "ast_hash": "3ad642c106d36a218af21e68e5964a86",
+    "mtime": 1787809701.0424418,
+    "ast_hash": "959dc85db13c42841873adf0abb84d50",
     "semantic_hash": ""
   },
   "internal/cli/serve.go": {
@@ -885,8 +885,8 @@
     "semantic_hash": ""
   },
   "internal/services/config.go": {
-    "mtime": 1787813675.681231,
-    "ast_hash": "6c60177b2909a0be3bbb0c597cd1b8f7",
+    "mtime": 1787809729.724871,
+    "ast_hash": "806b4edc6e28f1b1c7fafc73e38df33f",
     "semantic_hash": ""
   },
   "internal/services/config_test.go": {
@@ -937,11 +937,6 @@
   "templates/services/grafana-datasource.yml": {
     "mtime": 1787809648.542785,
     "ast_hash": "e236454e5eb2d5aa163189cd22700290",
-    "semantic_hash": ""
-  },
-  "internal/services/jupyter_test.go": {
-    "mtime": 1787813909.1714778,
-    "ast_hash": "dcbdea4b8e3b2ad70502b663386717e5",
     "semantic_hash": ""
   }
 }

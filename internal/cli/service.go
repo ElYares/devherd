@@ -2,6 +2,7 @@ package cli
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/devherd/devherd/internal/config"
 	"github.com/devherd/devherd/internal/observe"
@@ -53,6 +54,9 @@ func newServiceActionCmd(action string) *cobra.Command {
 			}
 
 			output, files, err := runServiceAction(cmd, manager, action, service, force)
+			if err == nil && action == "start" {
+				reportServiceAccess(cmd, manager, service)
+			}
 			// El aviso de configuracion va por stderr y **antes** de la salida de
 			// docker: escribir dentro del directorio de alguien sin decirlo es como
 			// se pierde una tarde buscando por que un servicio no toma sus ajustes.
@@ -91,6 +95,15 @@ func runServiceAction(
 		}
 
 		opts := services.StartOptions{Force: force}
+		if services.NeedsWorkspace(service) {
+			home, err := os.UserHomeDir()
+			if err != nil {
+				return "", nil, fmt.Errorf("resolve the home directory: %w", err)
+			}
+			opts.Workspace = services.DefaultWorkspace(home)
+			opts.UID = os.Getuid()
+			opts.GID = os.Getgid()
+		}
 		if services.NeedsCollector(service) {
 			addr, warning := collectorAddrForService(cmd)
 			// El aviso va **antes** de arrancar: un target caido se descubre media
@@ -227,4 +240,16 @@ func dependencyWarning(service, dependency string) string {
 	return "WARNING: " + dependency + " is not running, so " + service + " will show empty panels.\n" +
 		"  Start it first:  devherd service start " + dependency + "\n" +
 		"  Or point " + service + " at your own " + dependency + " by editing its datasource."
+}
+
+// reportServiceAccess dice como se entra al servicio recien arrancado. Para
+// Jupyter no es cortesia: sin el token la URL no sirve, y buscarlo en los logs de
+// un contenedor es exactamente la friccion que este comando existe para quitar.
+func reportServiceAccess(cmd *cobra.Command, manager services.Manager, service string) {
+	url, err := manager.AccessURL(service)
+	if err != nil || url == "" {
+		return
+	}
+
+	fmt.Fprintf(cmd.OutOrStdout(), "\n%s: %s\n", service, url)
 }
