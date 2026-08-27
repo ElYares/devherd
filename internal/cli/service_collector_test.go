@@ -87,7 +87,7 @@ func TestCollectorAddrWarnsWhenTheSharedNetworkIsMissing(t *testing.T) {
 		Reason:   "",
 	}
 
-	addr, warning := collectorAddrFromPlan(plan, func(_, target string) observe.Reachability {
+	addr, warning := collectorAddrFromPlan(plan, func(_, _ string) observe.Reachability {
 		t.Fatal("the probe should not run when there is no gateway to probe")
 
 		return observe.Reachability{}
