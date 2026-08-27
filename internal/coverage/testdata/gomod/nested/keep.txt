@@ -1,0 +1,1 @@
+Un directorio sin go.mod, para comprobar que la busqueda sube.
